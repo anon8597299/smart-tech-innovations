@@ -26,6 +26,18 @@
     .work-summary p + p { margin-top:0.55rem; }
 
     .work-showcase { padding: 0.7rem 0 0; background: linear-gradient(180deg,#ffffff 0%, #f8fbff 45%, #f6f7ff 100%); }
+    .work-showcase h2,
+    .work-showcase h3,
+    .work-showcase h4,
+    .work-showcase p,
+    .work-showcase li {
+      -webkit-hyphens: none;
+      hyphens: none;
+      word-break: normal;
+      overflow-wrap: normal;
+      text-wrap: pretty;
+      line-height: 1.4;
+    }
     .work-toolbar { display:flex; align-items:flex-end; justify-content:space-between; gap:0.55rem; flex-wrap:wrap; margin-bottom:0.75rem; padding-bottom:0.55rem; border-bottom:1px solid #e8edf7; }
     .work-toolbar h2 { margin:0; font-size:1.25rem; }
     .work-toolbar p { margin:0.2rem 0 0; color:#64748b; font-size:0.9rem; }
@@ -38,8 +50,20 @@
     .work-blog-system p { color:#475569; margin:0.25rem 0 0.5rem; }
     .work-blog-system__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0.5rem; }
     .work-blog-system__grid article { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:0.6rem; }
-    .work-blog-system__grid h4 { font-size:0.92rem; margin-bottom:0.2rem; }
-    .work-blog-system__grid p { margin:0; font-size:0.84rem; color:#475569; }
+    .card-icon {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 0.4rem;
+      font-size: 1rem;
+      border: 1px solid #dbe3f3;
+      background: #ffffff;
+      box-shadow: 0 6px 14px rgba(2,6,23,0.08);
+    }
+    .work-blog-system__grid h4 { font-size:0.92rem; margin-bottom:0.2rem; text-align:center; }
+    .work-blog-system__grid p { margin:0; font-size:0.84rem; color:#475569; text-align:center; }
 
     .full-sites {
       margin: 0 0 1rem;
@@ -55,9 +79,9 @@
     .full-sites-card:nth-child(1) { background:#fff7ed; border-color:#fed7aa; }
     .full-sites-card:nth-child(2) { background:#ecfeff; border-color:#a5f3fc; }
     .full-sites-card:nth-child(3) { background:#faf5ff; border-color:#ddd6fe; }
-    .full-sites-card .tag { display:inline-block; width:max-content; padding:0.28rem 0.7rem; border-radius:999px; background:#eef2ff; color:#334155; font-size:0.76rem; font-weight:700; }
-    .full-sites-card h4 { margin:0.12rem 0 0.25rem; }
-    .full-sites-card p { margin:0; font-size:0.86rem; color:#475569; }
+    .full-sites-card .tag { display:inline-block; width:max-content; margin:0 auto; padding:0.28rem 0.7rem; border-radius:999px; background:#eef2ff; color:#334155; font-size:0.76rem; font-weight:700; }
+    .full-sites-card h4 { margin:0.12rem 0 0.25rem; text-align:center; }
+    .full-sites-card p { margin:0; font-size:0.86rem; color:#475569; text-align:center; }
     .full-sites-card a { margin-top:0.55rem; width:100%; }
 
     .work-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:1rem; }
@@ -66,11 +90,11 @@
     .work-card:nth-child(even) { background: linear-gradient(180deg,#ffffff 0%, #f9fafb 100%); }
     .work-card:hover { transform:translateY(-4px); border-color:#cbd5ff; box-shadow:0 18px 34px rgba(31,41,55,0.10); }
     .swatch { height:8px; border-radius:999px; background: linear-gradient(90deg, var(--c1), var(--c2)); }
-    .work-card .tag { display:inline-block; width:max-content; padding:0.28rem 0.7rem; border-radius:999px; background:#f1f5f9; color:#334155; font-size:0.76rem; font-weight:700; }
-    .work-card h3 { margin:0.15rem 0; font-size:1.05rem; }
-    .work-card p { color:#4f5b70; margin:0; }
+    .work-card .tag { display:inline-block; width:max-content; margin:0 auto; padding:0.28rem 0.7rem; border-radius:999px; background:#f1f5f9; color:#334155; font-size:0.76rem; font-weight:700; }
+    .work-card h3 { margin:0.15rem 0; font-size:1.05rem; text-align:center; }
+    .work-card p { color:#4f5b70; margin:0; text-align:center; }
     .work-card__list { list-style:none; margin-top:0.25rem; display:grid; gap:0.35rem; }
-    .work-card__list li { font-size:0.86rem; color:#334155; }
+    .work-card__list li { font-size:0.86rem; color:#334155; text-align:center; }
     .work-card__actions { display:flex; gap:0.55rem; flex-wrap:wrap; margin-top:0.5rem; }
     .work-card__actions .btn { width:100%; }
 
@@ -163,14 +187,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Structured publishing to build rankings and turn traffic into enquiries.</p>
         <div class="work-blog-system__grid">
           <article>
+            <span class="card-icon" aria-hidden="true">🧭</span>
             <h4>1) Topic Mapping</h4>
             <p>High-intent keyword clusters.</p>
           </article>
           <article>
+            <span class="card-icon" aria-hidden="true">📅</span>
             <h4>2) Publishing Flow</h4>
             <p>Consistent pages + internal links.</p>
           </article>
           <article>
+            <span class="card-icon" aria-hidden="true">🎯</span>
             <h4>3) Conversion Layer</h4>
             <p>Each article pushes to enquiry.</p>
           </article>
@@ -182,18 +209,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Complete multi-page samples with concise component-value logic.</p>
         <div class="full-sites-grid">
           <article class="full-sites-card">
+            <span class="card-icon" aria-hidden="true">🔧</span>
             <span class="tag">Trades Style</span>
             <h4>TradesRapid</h4>
             <p>4-page trade-service style site with conversion funnel and component value notes.</p>
             <a class="btn btn--ghost" href="showcase/sites/trades-rapid/index.html">Open Full Trades Site</a>
           </article>
           <article class="full-sites-card">
+            <span class="card-icon" aria-hidden="true">🩺</span>
             <span class="tag">Healthcare Style</span>
             <h4>ClinicTrust</h4>
             <p>4-page clinic booking structure with trust and patient-experience component logic.</p>
             <a class="btn btn--ghost" href="showcase/sites/clinic-trust/index.html">Open Full Clinic Site</a>
           </article>
           <article class="full-sites-card">
+            <span class="card-icon" aria-hidden="true">🛍️</span>
             <span class="tag">Retail Style</span>
             <h4>RetailPulse</h4>
             <p>4-page retail growth site focused on campaign conversion and in-store actions.</p>
@@ -209,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-trades">
           <div class="swatch" style="--c1:#D97706; --c2:#1F2937;"></div>
+          <span class="card-icon" aria-hidden="true">🛠️</span>
           <span class="tag">Trades • Industrial High-Trust</span>
           <h3>Trades Lead Engine</h3>
           <p>Built to convert urgent callouts fast.</p>
@@ -223,6 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-retail">
           <div class="swatch" style="--c1:#DB2777; --c2:#7C3AED;"></div>
+          <span class="card-icon" aria-hidden="true">🛍️</span>
           <span class="tag">Retail • Lifestyle Commerce</span>
           <h3>Retail Shopfront Growth Site</h3>
           <p>Turn social traffic into in-store demand.</p>
@@ -237,6 +269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-health">
           <div class="swatch" style="--c1:#0284C7; --c2:#0F766E;"></div>
+          <span class="card-icon" aria-hidden="true">🏥</span>
           <span class="tag">Healthcare • Clinical Calm + Clarity</span>
           <h3>Clinic Booking Optimizer</h3>
           <p>Reduce missed bookings and admin friction.</p>
@@ -251,6 +284,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-accounting">
           <div class="swatch" style="--c1:#334155; --c2:#B45309;"></div>
+          <span class="card-icon" aria-hidden="true">📊</span>
           <span class="tag">Professional Services • Premium Advisory</span>
           <h3>Accounting Firm Conversion Site</h3>
           <p>Position for higher-value enquiries.</p>
@@ -265,6 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-hospitality">
           <div class="swatch" style="--c1:#6D28D9; --c2:#0891B2;"></div>
+          <span class="card-icon" aria-hidden="true">🎉</span>
           <span class="tag">Hospitality • Energetic Venue Funnel</span>
           <h3>Hospitality Events Funnel</h3>
           <p>Turn event interest into bookings.</p>
@@ -279,6 +314,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="work-card" id="pkg-consulting">
           <div class="swatch" style="--c1:#047857; --c2:#1D4ED8;"></div>
+          <span class="card-icon" aria-hidden="true">🎓</span>
           <span class="tag">Consulting • Strategic Authority</span>
           <h3>Consulting Authority Build</h3>
           <p>Build premium authority before contact.</p>
