@@ -178,47 +178,6 @@ section { padding: 6rem 0; }
 .trust-strip__item { text-align: center; font-size: 0.95rem; }
 .trust-strip__item strong { color: #fff; font-weight: 700; }
 
-/* ===== SCAN CAMPAIGN ===== */
-.scan-campaign { background: #fff; }
-.scan-campaign__inner {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-.scan-campaign__badge {
-  display: inline-block;
-  margin-bottom: 0.75rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  color: var(--brand-primary-dark);
-  background: rgba(108,92,231,0.12);
-  font-weight: 600;
-}
-.scan-campaign h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 0.8rem; }
-.scan-campaign p { color: #555; margin-bottom: 1rem; }
-.scan-campaign ul { margin-bottom: 1.5rem; }
-.scan-campaign li { padding: 0.3rem 0; color: #333; }
-.scan-campaign__qr {
-  background: #f8f7ff;
-  border: 1px solid rgba(108,92,231,0.2);
-  border-radius: 16px;
-  padding: 1.5rem;
-  text-align: center;
-}
-.scan-campaign__qr img {
-  margin: 0 auto 0.9rem;
-  border-radius: 12px;
-  border: 8px solid #fff;
-  box-shadow: 0 14px 35px rgba(0,0,0,0.08);
-}
-.scan-campaign__qr code {
-  font-size: 0.75rem;
-  color: #574ac5;
-  font-weight: 600;
-}
-
 /* ===== PORTFOLIO ===== */
 .portfolio { background: #fff; }
 .portfolio__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
@@ -425,8 +384,6 @@ section { padding: 6rem 0; }
   .portfolio__card { padding: 1.2rem; }
 
   .trust-strip__inner { grid-template-columns: 1fr 1fr; }
-  .scan-campaign__inner { grid-template-columns: 1fr; }
-  .scan-campaign__qr { max-width: 280px; margin: 0 auto; padding: 1rem; }
 
   .contact .form__row:nth-of-type(2),
   .contact select[name="goal"],
