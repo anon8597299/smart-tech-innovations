@@ -138,6 +138,18 @@ section { padding: 6rem 0; }
 .service__card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
 .service__card p { color: #666; font-size: 0.95rem; }
 
+/* ===== POSITIONING ===== */
+.positioning { background: #fff; }
+.positioning__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.positioning__card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.2rem;
+}
+.positioning__card h3 { margin-bottom: 0.45rem; font-size: 1.08rem; }
+.positioning__card p { color: #4b5563; }
+
 /* ===== PROCESS ===== */
 .process-section { background: var(--brand-ink); color: #fff; }
 .process-section .section__title { color: #fff; }
@@ -511,7 +523,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero__content">
         <div class="hero__badge">🚀 Conversion System for Local Service Businesses</div>
         <h1 class="hero__title">Your Website Is Costing You <span class="accent">Customers</span></h1>
-        <p class="hero__subtitle">Outdated website? We rebuild it into a trust-first lead engine with local SEO and tracking baked in.</p>
+        <p class="hero__subtitle">We design and develop high-converting websites for Australian service businesses — built to rank, convert, and scale enquiries.</p>
         <div class="hero__actions">
           <a href="#contact" class="btn btn--primary">Get Free Audit</a>
           <a href="#results" class="btn btn--ghost">See Results</a>
@@ -577,7 +589,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="services" id="services">
     <div class="container">
       <h2 class="section__title">What You Get</h2>
-      <p class="section__subtitle">A complete digital transformation — not just a pretty face.</p>
+      <p class="section__subtitle">Complete website design, development, SEO and conversion systems — not just visuals.</p>
       <div class="services__grid">
         <div class="service__card">
           <div class="service__icon">🎨</div>
@@ -609,6 +621,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h3>Analytics & Reporting</h3>
           <p>Real-time dashboards showing traffic, leads, and conversions. Know what's working.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Positioning -->
+  <section class="positioning" id="positioning">
+    <div class="container">
+      <h2 class="section__title">Why Businesses Choose ImproveYourSite</h2>
+      <p class="section__subtitle">We don’t just make websites look better — we build sales assets that perform in the real world.</p>
+      <div class="positioning__grid">
+        <article class="positioning__card">
+          <h3>Website Strategy That Converts</h3>
+          <p>Clear messaging, strong offers, and page architecture designed to move visitors into enquiries.</p>
+        </article>
+        <article class="positioning__card">
+          <h3>Real Design + Development</h3>
+          <p>Modern, mobile-first UI backed by clean build quality, speed optimization, and practical integrations.</p>
+        </article>
+        <article class="positioning__card">
+          <h3>Tracking + Growth System</h3>
+          <p>GA4/GTM setup, lead events, and conversion reporting so decisions are based on actual performance.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -702,7 +736,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="portfolio__card">
           <div class="portfolio__tag">Trades & Services</div>
           <h3>Local Electrical Company</h3>
-          <p>Rebuilt from a legacy template into a conversion-focused funnel with instant quote flow.</p>
+          <p>Rebuilt from a legacy site into a conversion-focused funnel with instant quote flow.</p>
           <ul>
             <li><strong>+212%</strong> quote requests in 60 days</li>
             <li><strong>2.8s → 0.9s</strong> mobile load time</li>
@@ -809,7 +843,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="blueprint-card__tag">Local SEO Layer</span>
           <h3>Automated Content Rollout</h3>
           <ul>
-            <li>✅ Blog automation system with editorial templates</li>
+            <li>✅ Blog automation system with editorial content framework</li>
             <li>✅ Service + suburb content clusters</li>
             <li>✅ Local service-area rollout based on campaign priorities</li>
           </ul>
@@ -879,8 +913,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="roi__grid">
         <div class="roi__inputs">
           <label>Quick-fill by business type
-            <select class="roi__input" id="roi-template" aria-label="Quick-fill calculator values">
-              <option value="">Choose a template (optional)</option>
+            <select class="roi__input" id="roi-profile" aria-label="Quick-fill calculator values">
+              <option value="">Choose a business profile (optional)</option>
               <option value="trades">Trades / Services</option>
               <option value="clinic">Clinic / Health</option>
               <option value="retail">Retail / Shopfront</option>
@@ -1156,7 +1190,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document
-  .querySelectorAll('.service__card, .problem__card, .process__step, .result__card, .portfolio__card, .faq__item')
+  .querySelectorAll('.service__card, .positioning__card, .problem__card, .process__step, .result__card, .portfolio__card, .faq__item')
   .forEach((el) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
@@ -1278,7 +1312,7 @@ document.getElementById('testimonials-next')?.addEventListener('click', () => {
 // ROI calculator
 const roiCalcBtn = document.getElementById('roi-calc');
 const roiResult = document.getElementById('roi-result');
-const roiTemplate = document.getElementById('roi-template');
+const roiProfile = document.getElementById('roi-profile');
 
 const roiPresets = {
   trades: { visitors: 1200, current: 1.3, target: 3.2, value: 850 },
@@ -1288,8 +1322,8 @@ const roiPresets = {
   consulting: { visitors: 700, current: 1.2, target: 2.6, value: 3200 },
 };
 
-roiTemplate?.addEventListener('change', () => {
-  const preset = roiPresets[roiTemplate.value];
+roiProfile?.addEventListener('change', () => {
+  const preset = roiPresets[roiProfile.value];
   if (!preset) return;
   const setValue = (id, val) => {
     const el = document.getElementById(id);
@@ -1299,7 +1333,7 @@ roiTemplate?.addEventListener('change', () => {
   setValue('roi-current', preset.current);
   setValue('roi-target', preset.target);
   setValue('roi-value', preset.value);
-  window.iysTrackEvent?.('roi_template_selected', { template: roiTemplate.value });
+  window.iysTrackEvent?.('roi_profile_selected', { profile: roiProfile.value });
 });
 
 roiCalcBtn?.addEventListener('click', () => {
@@ -1321,7 +1355,7 @@ roiCalcBtn?.addEventListener('click', () => {
     target_rate: target,
     order_value: value,
     uplift,
-    template: roiTemplate?.value || 'custom',
+    profile: roiProfile?.value || 'custom',
   });
 });
 

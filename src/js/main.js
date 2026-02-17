@@ -33,7 +33,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document
-  .querySelectorAll('.service__card, .problem__card, .process__step, .result__card, .portfolio__card, .faq__item')
+  .querySelectorAll('.service__card, .positioning__card, .problem__card, .process__step, .result__card, .portfolio__card, .faq__item')
   .forEach((el) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
@@ -155,7 +155,7 @@ document.getElementById('testimonials-next')?.addEventListener('click', () => {
 // ROI calculator
 const roiCalcBtn = document.getElementById('roi-calc');
 const roiResult = document.getElementById('roi-result');
-const roiTemplate = document.getElementById('roi-template');
+const roiProfile = document.getElementById('roi-profile');
 
 const roiPresets = {
   trades: { visitors: 1200, current: 1.3, target: 3.2, value: 850 },
@@ -165,8 +165,8 @@ const roiPresets = {
   consulting: { visitors: 700, current: 1.2, target: 2.6, value: 3200 },
 };
 
-roiTemplate?.addEventListener('change', () => {
-  const preset = roiPresets[roiTemplate.value];
+roiProfile?.addEventListener('change', () => {
+  const preset = roiPresets[roiProfile.value];
   if (!preset) return;
   const setValue = (id, val) => {
     const el = document.getElementById(id);
@@ -176,7 +176,7 @@ roiTemplate?.addEventListener('change', () => {
   setValue('roi-current', preset.current);
   setValue('roi-target', preset.target);
   setValue('roi-value', preset.value);
-  window.iysTrackEvent?.('roi_template_selected', { template: roiTemplate.value });
+  window.iysTrackEvent?.('roi_profile_selected', { profile: roiProfile.value });
 });
 
 roiCalcBtn?.addEventListener('click', () => {
@@ -198,7 +198,7 @@ roiCalcBtn?.addEventListener('click', () => {
     target_rate: target,
     order_value: value,
     uplift,
-    template: roiTemplate?.value || 'custom',
+    profile: roiProfile?.value || 'custom',
   });
 });
 

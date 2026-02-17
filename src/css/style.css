@@ -111,6 +111,18 @@ section { padding: 6rem 0; }
 .service__card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
 .service__card p { color: #666; font-size: 0.95rem; }
 
+/* ===== POSITIONING ===== */
+.positioning { background: #fff; }
+.positioning__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.positioning__card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.2rem;
+}
+.positioning__card h3 { margin-bottom: 0.45rem; font-size: 1.08rem; }
+.positioning__card p { color: #4b5563; }
+
 /* ===== PROCESS ===== */
 .process-section { background: var(--brand-ink); color: #fff; }
 .process-section .section__title { color: #fff; }
