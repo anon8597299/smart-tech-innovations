@@ -3,31 +3,44 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Hospitality Events Funnel showcase project by ImproveYourSite.">
-      <title>Hospitality Events Funnel — Our Work</title>
+      <meta name="description" content="Hospitality Events Funnel Template showcase template by ImproveYourSite.">
+      <title>Hospitality Events Funnel Template | ImproveYourSite</title>
       <link rel="stylesheet" href="../src/css/style.css">
       <style>
-        :root { --case-primary: #6D28D9; --case-accent: #0891B2; --case-ink: #1E1B4B; --case-chip: #EDE9FE; }
-        .case-hero { padding: 8.5rem 0 2.6rem; background: linear-gradient(130deg, #EEF2FF 0%, #E0E7FF 100%); }
-        .case-tag { display:inline-block; background: var(--case-chip); color: var(--case-primary); padding:0.35rem 0.8rem; border-radius:999px; font-size:0.8rem; font-weight:700; margin-bottom:0.8rem; }
-        .case-kicker { color:#334155; max-width:760px; margin-top:0.65rem; font-size:1.06rem; }
-        .case-grid { display:grid; grid-template-columns: 1.15fr 1fr; gap:1rem; }
-        .card { background:#fff; border:1px solid #e6eaf2; border-radius:16px; padding:1.1rem; }
-        .card h3 { margin-bottom:0.55rem; color: var(--case-ink); }
-        .card p { color:#475569; }
-        .list { list-style:none; margin-top:0.4rem; }
-        .list li { padding:0.5rem 0; border-bottom:1px dashed #dbe4ef; color:#243244; }
-        .stack { display:flex; flex-wrap:wrap; gap:0.45rem; margin-top:0.65rem; }
-        .stack span { background: var(--case-chip); color: var(--case-ink); border-radius:999px; padding:0.35rem 0.65rem; font-size:0.78rem; font-weight:600; }
-        .visual { border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 20px 45px rgba(15,23,42,0.09); margin-top:1rem; }
-        .quote { border-left:4px solid var(--case-primary); background:#fff; border-radius:14px; padding:1rem 1rem 1rem 1.1rem; margin-top:1rem; box-shadow:0 10px 24px rgba(2,6,23,0.06); }
-        .quote p { font-size:1.03rem; color:#1f2937; }
-        .quote small { display:block; margin-top:0.55rem; color:#64748b; font-weight:600; }
-        .cta-row { display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1rem; }
-        @media (max-width: 900px) {
-          .case-hero { padding: 7rem 0 2rem; }
-          .case-grid { grid-template-columns:1fr; }
-          .card { padding:0.95rem; }
+        :root { --p:#6D28D9; --a:#0891B2; --ink:#1E1B4B; --chip:#EDE9FE; --border:#DDD6FE; }
+        .pkg-hero { padding:8.5rem 0 3rem; background:linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%); }
+        .pkg-badge { display:inline-flex; background:#fff; border:1px solid var(--border); color:var(--p); font-size:.78rem; font-weight:700; padding:.35rem .8rem; border-radius:999px; margin-bottom:.85rem; }
+        .pkg-sub { max-width:760px; color:#334155; margin-top:.7rem; font-size:1.05rem; }
+        .pkg-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:1rem; margin-top:1.2rem; }
+        .pkg-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:1rem; }
+        .pkg-card h3 { margin-bottom:.45rem; color:var(--ink); }
+        .pkg-list { list-style:none; }
+        .pkg-list li { padding:.45rem 0; border-bottom:1px dashed var(--border); color:#334155; }
+        .pkg-list li:last-child { border-bottom:none; }
+        .pkg-main { padding:2.4rem 0; }
+        .block { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:1.1rem; margin-bottom:1rem; }
+        .block h2 { margin-bottom:.45rem; }
+        .page-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.8rem; margin-top:.75rem; }
+        .page-card { border:1px solid #e5e7eb; border-radius:12px; padding:.8rem; background:#f8fafc; }
+        .page-card h3 { font-size:.98rem; margin-bottom:.3rem; }
+        .page-card p { color:#4b5563; font-size:.9rem; }
+        .split { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .calc { background:#fff; border:1px solid var(--border); border-radius:14px; padding:1rem; }
+        .calc label { display:grid; gap:.3rem; margin-bottom:.65rem; font-size:.92rem; color:#374151; }
+        .calc input { border:1px solid #e5e7eb; border-radius:8px; padding:.55rem; font:inherit; }
+        .calc-result { background:var(--ink); color:#fff; border-radius:14px; padding:1rem; }
+        .calc-result h3 { font-size:2rem; margin-bottom:.3rem; }
+        .chips { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.6rem; }
+        .chips span { background:var(--chip); color:var(--ink); border-radius:999px; padding:.35rem .65rem; font-size:.78rem; font-weight:600; }
+        .pricing { border:2px solid var(--p); border-radius:16px; box-shadow:0 14px 35px rgba(2,6,23,.08); background:#fff; padding:1.1rem; margin-top:.9rem; }
+        .pricing .amt { font-size:2.2rem; font-weight:800; color:var(--ink); }
+        .quote { border-left:4px solid var(--p); background:#fff; border-radius:12px; padding:.9rem 1rem; margin-top:.8rem; box-shadow:0 10px 24px rgba(2,6,23,.06); }
+        .quote p { color:#1f2937; }
+        .quote small { display:block; margin-top:.45rem; color:#64748b; font-weight:600; }
+        .cta-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem; }
+        @media (max-width:900px) {
+          .pkg-hero { padding:7rem 0 2.2rem; }
+          .pkg-grid, .split { grid-template-columns:1fr; }
         }
       </style>
   <!-- Google Tag Manager -->
@@ -47,48 +60,101 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav class="nav container">
           <a href="../index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a>
           <ul class="nav__menu" id="nav-menu">
-            <li><a href="../index.html#services" class="nav__link">Services</a></li>
-            <li><a href="../our-work.html" class="nav__link">Our Work</a></li>
-            <li><a href="../index.html#contact" class="nav__link nav__cta">Get Started</a></li>
+            <li><a href="#overview" class="nav__link">Overview</a></li>
+            <li><a href="#pages" class="nav__link">Pages</a></li>
+            <li><a href="#pricing" class="nav__link">Pricing</a></li>
+            <li><a href="../index.html#contact" class="nav__link nav__cta">Get This Build</a></li>
           </ul>
           <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </nav>
       </header>
 
-      <section class="case-hero">
+      <section class="pkg-hero" id="overview">
         <div class="container">
-          <span class="case-tag">Hospitality • Energetic Venue Funnel</span>
-          <h1 class="hero__title">Hospitality Events Funnel</h1>
-          <p class="case-kicker">Convert event interest into confirmed bookings</p>
+          <span class="pkg-badge">🍸 Hospitality Package Template • $5,000 Standard</span>
+          <h1 class="hero__title">Hospitality Events Funnel Template</h1>
+          <p class="pkg-sub">A venue-focused conversion template designed to turn event interest into confirmed function bookings.</p>
+
+          <div class="pkg-grid">
+            <article class="pkg-card">
+              <h3>What this template delivers</h3>
+              <ul class="pkg-list"><li>Events package pages with clear pricing anchors</li><li>Private function enquiry forms with qualifiers</li><li>Fast CTA handoff for weekend and corporate bookings</li><li>Campaign-friendly landing sections for promo bursts</li></ul>
+            </article>
+            <article class="pkg-card">
+              <h3>Best fit businesses</h3>
+              <ul class="pkg-list"><li>Pubs and bars</li><li>Function venues</li><li>Restaurants with events</li><li>Entertainment venues</li></ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section>
-        <div class="container case-grid">
-          <article class="card">
-            <h3>The Challenge</h3>
-            <p>Most event leads were lost in back-and-forth messaging and inconsistent response speed.</p>
-            <h3 style="margin-top:0.9rem;">What We Built</h3>
-            <ul class="list"><li>Package-first pages with pricing anchors and social proof</li><li>Rapid enquiry forms with event type qualifiers</li><li>Clear conversion CTAs for functions, parties and corporate nights</li></ul>
-          </article>
-          <article class="card">
-            <h3>Result Snapshot</h3>
-            <ul class="list"><li>+122% private event enquiries</li><li>76% faster response workflow</li><li>3x page-to-enquiry conversion in campaign periods</li></ul>
-            <h3 style="margin-top:0.9rem;">Stack Used</h3>
-            <div class="stack"><span>High-conversion landing layouts</span><span>Event form automation</span><span>Campaign URL tracking</span><span>Copy tuned for booking intent</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section>
+      <section class="pkg-main">
         <div class="container">
-          <img class="visual" src="../assets/showcase/hospitality-events-funnel.svg" alt="Hospitality Events Funnel preview">
+          <article class="block" id="pages">
+            <h2>Included Page Blueprint</h2>
+            <p>Customer-ready structure you can scroll through and interact with before production launch.</p>
+            <div class="page-grid"><div class="page-card"><h3>1) Homepage</h3><p>Homepage + venue highlights</p></div><div class="page-card"><h3>2) Functions package page</h3><p>Functions package page</p></div><div class="page-card"><h3>3) Corporate events page</h3><p>Corporate events page</p></div><div class="page-card"><h3>4) Private celebrations page</h3><p>Private celebrations page</p></div><div class="page-card"><h3>5) Gallery and social proof page</h3><p>Gallery and social proof page</p></div><div class="page-card"><h3>6) Event enquiry page</h3><p>Event enquiry page</p></div></div>
+          </article>
+
+          <article class="block split">
+            <div>
+              <h2>The Challenge</h2>
+              <p>Event leads were inconsistent and often lost in manual follow-up delays.</p>
+              <h2 style="margin-top:.8rem;">Our Strategy</h2>
+              <ul class="pkg-list"><li>Build package-led landing flows</li><li>Shorten form-to-response path</li><li>Use clear event-specific CTAs and urgency markers</li></ul>
+            </div>
+            <div>
+              <h2>Outcomes</h2>
+              <ul class="pkg-list"><li>+122% private event enquiries</li><li>76% faster response workflow</li><li>3x campaign conversion lift</li></ul>
+              <h2 style="margin-top:.8rem;">Stack Included</h2>
+              <div class="chips"><span>Event funnel UX</span><span>Campaign templates</span><span>Lead routing + tracking</span><span>Conversion-oriented copy</span></div>
+            </div>
+          </article>
+
+          <article class="block split">
+            <form class="calc" id="calc_hospitality_events_funnel">
+              <h2>Interactive ROI Snapshot</h2>
+              <label>Monthly visitors
+                <input type="number" id="v_hospitality_events_funnel" value="2100" min="0">
+              </label>
+              <label>Current conversion (%)
+                <input type="number" id="c_hospitality_events_funnel" value="1.0" step="0.1" min="0">
+              </label>
+              <label>Target conversion (%)
+                <input type="number" id="t_hospitality_events_funnel" value="2.3" step="0.1" min="0">
+              </label>
+              <label>Average customer value (AUD)
+                <input type="number" id="a_hospitality_events_funnel" value="420" min="0">
+              </label>
+              <button type="button" class="btn btn--primary" id="b_hospitality_events_funnel">Calculate Potential</button>
+            </form>
+            <aside class="calc-result" id="r_hospitality_events_funnel">
+              <p>Estimated additional monthly event revenue</p>
+              <h3>$0</h3>
+              <small>Adjust the numbers and calculate.</small>
+            </aside>
+          </article>
+
+          <article class="pricing" id="pricing">
+            <h2>Hospitality Package Pricing</h2>
+            <p>This template maps to our standard build package and is deployment-ready for customer customization.</p>
+            <div class="amt">$5,000</div>
+            <ul class="pkg-list" style="margin-top:.45rem;">
+              <li>Custom design + conversion UX tailored to this vertical</li>
+              <li>Core page set + content architecture</li>
+              <li>GA4/GTM events and lead tracking</li>
+              <li>Performance optimization and launch support</li>
+              <li>3 months post-launch support</li>
+            </ul>
+          </article>
+
           <aside class="quote">
-            <p>“The new pages made event enquiries predictable. Weekends are booked out faster now.”</p>
+            <p>“The new event pages converted better than anything we had before.”</p>
             <small>Alex D. — Venue Manager</small>
           </aside>
+
           <div class="cta-row">
-            <a class="btn btn--primary" href="../index.html#contact">Build This Style for My Business</a>
+            <a class="btn btn--primary" href="../index.html#contact">Get This $5,000 Hospitality Package</a>
             <a class="btn btn--ghost" href="../our-work.html">Back to Showcase</a>
           </div>
         </div>
@@ -99,8 +165,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="footer__bottom"><p>&copy; <span id="year"></span> ImproveYourSite • <a href="mailto:james@improveyoursite.com">james@improveyoursite.com</a></p></div>
         </div>
       </footer>
+
       <script src="../analytics-config.js"></script>
       <script src="../src/js/analytics.js"></script>
       <script src="../src/js/main.js"></script>
+      <script>
+        document.getElementById('b_hospitality_events_funnel')?.addEventListener('click', () => {
+          const v = Number(document.getElementById('v_hospitality_events_funnel')?.value || 0);
+          const c = Number(document.getElementById('c_hospitality_events_funnel')?.value || 0) / 100;
+          const t = Number(document.getElementById('t_hospitality_events_funnel')?.value || 0) / 100;
+          const a = Number(document.getElementById('a_hospitality_events_funnel')?.value || 0);
+          const uplift = Math.max(0, (v * t * a) - (v * c * a));
+          const annual = uplift * 12;
+          const el = document.getElementById('r_hospitality_events_funnel');
+          if (el) el.innerHTML = `<p>Estimated additional monthly event revenue</p><h3>$${Math.round(uplift).toLocaleString()}</h3><small>Estimated annual upside: $${Math.round(annual).toLocaleString()}</small>`;
+          window.iysTrackEvent?.('hospitality_events_funnel_roi_calculated', { visitors: v, current_rate: c, target_rate: t, value: a, uplift });
+        });
+      </script>
     </body>
     </html>

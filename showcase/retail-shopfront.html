@@ -3,31 +3,44 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Retail Shopfront Growth Site showcase project by ImproveYourSite.">
-      <title>Retail Shopfront Growth Site — Our Work</title>
+      <meta name="description" content="Retail Shopfront Growth Template showcase template by ImproveYourSite.">
+      <title>Retail Shopfront Growth Template | ImproveYourSite</title>
       <link rel="stylesheet" href="../src/css/style.css">
       <style>
-        :root { --case-primary: #DB2777; --case-accent: #7C3AED; --case-ink: #3B0764; --case-chip: #FCE7F3; }
-        .case-hero { padding: 8.5rem 0 2.6rem; background: linear-gradient(130deg, #FDF2F8 0%, #FFE4E6 100%); }
-        .case-tag { display:inline-block; background: var(--case-chip); color: var(--case-primary); padding:0.35rem 0.8rem; border-radius:999px; font-size:0.8rem; font-weight:700; margin-bottom:0.8rem; }
-        .case-kicker { color:#334155; max-width:760px; margin-top:0.65rem; font-size:1.06rem; }
-        .case-grid { display:grid; grid-template-columns: 1.15fr 1fr; gap:1rem; }
-        .card { background:#fff; border:1px solid #e6eaf2; border-radius:16px; padding:1.1rem; }
-        .card h3 { margin-bottom:0.55rem; color: var(--case-ink); }
-        .card p { color:#475569; }
-        .list { list-style:none; margin-top:0.4rem; }
-        .list li { padding:0.5rem 0; border-bottom:1px dashed #dbe4ef; color:#243244; }
-        .stack { display:flex; flex-wrap:wrap; gap:0.45rem; margin-top:0.65rem; }
-        .stack span { background: var(--case-chip); color: var(--case-ink); border-radius:999px; padding:0.35rem 0.65rem; font-size:0.78rem; font-weight:600; }
-        .visual { border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 20px 45px rgba(15,23,42,0.09); margin-top:1rem; }
-        .quote { border-left:4px solid var(--case-primary); background:#fff; border-radius:14px; padding:1rem 1rem 1rem 1.1rem; margin-top:1rem; box-shadow:0 10px 24px rgba(2,6,23,0.06); }
-        .quote p { font-size:1.03rem; color:#1f2937; }
-        .quote small { display:block; margin-top:0.55rem; color:#64748b; font-weight:600; }
-        .cta-row { display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1rem; }
-        @media (max-width: 900px) {
-          .case-hero { padding: 7rem 0 2rem; }
-          .case-grid { grid-template-columns:1fr; }
-          .card { padding:0.95rem; }
+        :root { --p:#DB2777; --a:#7C3AED; --ink:#3B0764; --chip:#FCE7F3; --border:#FBCFE8; }
+        .pkg-hero { padding:8.5rem 0 3rem; background:linear-gradient(135deg, #FDF2F8 0%, #FFE4E6 100%); }
+        .pkg-badge { display:inline-flex; background:#fff; border:1px solid var(--border); color:var(--p); font-size:.78rem; font-weight:700; padding:.35rem .8rem; border-radius:999px; margin-bottom:.85rem; }
+        .pkg-sub { max-width:760px; color:#334155; margin-top:.7rem; font-size:1.05rem; }
+        .pkg-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:1rem; margin-top:1.2rem; }
+        .pkg-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:1rem; }
+        .pkg-card h3 { margin-bottom:.45rem; color:var(--ink); }
+        .pkg-list { list-style:none; }
+        .pkg-list li { padding:.45rem 0; border-bottom:1px dashed var(--border); color:#334155; }
+        .pkg-list li:last-child { border-bottom:none; }
+        .pkg-main { padding:2.4rem 0; }
+        .block { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:1.1rem; margin-bottom:1rem; }
+        .block h2 { margin-bottom:.45rem; }
+        .page-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.8rem; margin-top:.75rem; }
+        .page-card { border:1px solid #e5e7eb; border-radius:12px; padding:.8rem; background:#f8fafc; }
+        .page-card h3 { font-size:.98rem; margin-bottom:.3rem; }
+        .page-card p { color:#4b5563; font-size:.9rem; }
+        .split { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .calc { background:#fff; border:1px solid var(--border); border-radius:14px; padding:1rem; }
+        .calc label { display:grid; gap:.3rem; margin-bottom:.65rem; font-size:.92rem; color:#374151; }
+        .calc input { border:1px solid #e5e7eb; border-radius:8px; padding:.55rem; font:inherit; }
+        .calc-result { background:var(--ink); color:#fff; border-radius:14px; padding:1rem; }
+        .calc-result h3 { font-size:2rem; margin-bottom:.3rem; }
+        .chips { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.6rem; }
+        .chips span { background:var(--chip); color:var(--ink); border-radius:999px; padding:.35rem .65rem; font-size:.78rem; font-weight:600; }
+        .pricing { border:2px solid var(--p); border-radius:16px; box-shadow:0 14px 35px rgba(2,6,23,.08); background:#fff; padding:1.1rem; margin-top:.9rem; }
+        .pricing .amt { font-size:2.2rem; font-weight:800; color:var(--ink); }
+        .quote { border-left:4px solid var(--p); background:#fff; border-radius:12px; padding:.9rem 1rem; margin-top:.8rem; box-shadow:0 10px 24px rgba(2,6,23,.06); }
+        .quote p { color:#1f2937; }
+        .quote small { display:block; margin-top:.45rem; color:#64748b; font-weight:600; }
+        .cta-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem; }
+        @media (max-width:900px) {
+          .pkg-hero { padding:7rem 0 2.2rem; }
+          .pkg-grid, .split { grid-template-columns:1fr; }
         }
       </style>
   <!-- Google Tag Manager -->
@@ -47,48 +60,101 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav class="nav container">
           <a href="../index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a>
           <ul class="nav__menu" id="nav-menu">
-            <li><a href="../index.html#services" class="nav__link">Services</a></li>
-            <li><a href="../our-work.html" class="nav__link">Our Work</a></li>
-            <li><a href="../index.html#contact" class="nav__link nav__cta">Get Started</a></li>
+            <li><a href="#overview" class="nav__link">Overview</a></li>
+            <li><a href="#pages" class="nav__link">Pages</a></li>
+            <li><a href="#pricing" class="nav__link">Pricing</a></li>
+            <li><a href="../index.html#contact" class="nav__link nav__cta">Get This Build</a></li>
           </ul>
           <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </nav>
       </header>
 
-      <section class="case-hero">
+      <section class="pkg-hero" id="overview">
         <div class="container">
-          <span class="case-tag">Retail • Lifestyle Commerce</span>
-          <h1 class="hero__title">Retail Shopfront Growth Site</h1>
-          <p class="case-kicker">Turn foot traffic + social clicks into in-store demand</p>
+          <span class="pkg-badge">🛍️ Retail Package Template • $5,000 Standard</span>
+          <h1 class="hero__title">Retail Shopfront Growth Template</h1>
+          <p class="pkg-sub">A conversion-first retail template designed to drive in-store foot traffic, product enquiries and repeat customer demand.</p>
+
+          <div class="pkg-grid">
+            <article class="pkg-card">
+              <h3>What this template delivers</h3>
+              <ul class="pkg-list"><li>Campaign-ready promo sections above the fold</li><li>Product spotlight blocks with clear enquiry buttons</li><li>Map and open-hours UX optimized for mobile buyers</li><li>Seasonal updates without full rebuilds</li></ul>
+            </article>
+            <article class="pkg-card">
+              <h3>Best fit businesses</h3>
+              <ul class="pkg-list"><li>Local stores and boutiques</li><li>Franchise outlets</li><li>Beauty and wellness retailers</li><li>Specialty product showrooms</li></ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section>
-        <div class="container case-grid">
-          <article class="card">
-            <h3>The Challenge</h3>
-            <p>The business relied on social posts but had no conversion path from campaigns to enquiry or store visit intent.</p>
-            <h3 style="margin-top:0.9rem;">What We Built</h3>
-            <ul class="list"><li>Campaign landing blocks for monthly promotions</li><li>Visual product rails with high-intent CTA placement</li><li>Map, opening-hours and direction clicks optimized for mobile</li></ul>
-          </article>
-          <article class="card">
-            <h3>Result Snapshot</h3>
-            <ul class="list"><li>+68% product enquiries</li><li>+39% direction clicks</li><li>2.4x average engagement time</li></ul>
-            <h3 style="margin-top:0.9rem;">Stack Used</h3>
-            <div class="stack"><span>Promotion landing templates</span><span>Local map intent UX</span><span>Offer-led content modules</span><span>Event + seasonal update workflow</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section>
+      <section class="pkg-main">
         <div class="container">
-          <img class="visual" src="../assets/showcase/retail-shopfront.svg" alt="Retail Shopfront Growth Site preview">
+          <article class="block" id="pages">
+            <h2>Included Page Blueprint</h2>
+            <p>Customer-ready structure you can scroll through and interact with before production launch.</p>
+            <div class="page-grid"><div class="page-card"><h3>1) Homepage</h3><p>Homepage + promo carousel</p></div><div class="page-card"><h3>2) Product category landing pages</h3><p>Product category landing pages</p></div><div class="page-card"><h3>3) Seasonal offers page</h3><p>Seasonal offers page</p></div><div class="page-card"><h3>4) Store visit</h3><p>Store visit + map page</p></div><div class="page-card"><h3>5) About</h3><p>About + trust page</p></div><div class="page-card"><h3>6) Enquiry</h3><p>Enquiry + call-to-action page</p></div></div>
+          </article>
+
+          <article class="block split">
+            <div>
+              <h2>The Challenge</h2>
+              <p>Retail traffic from social and search was leaking due to weak on-site conversion pathways and no structured promo flow.</p>
+              <h2 style="margin-top:.8rem;">Our Strategy</h2>
+              <ul class="pkg-list"><li>Introduce conversion-led promo hierarchy</li><li>Align product cards to key customer questions</li><li>Drive phone, map and enquiry actions from every section</li></ul>
+            </div>
+            <div>
+              <h2>Outcomes</h2>
+              <ul class="pkg-list"><li>+68% product enquiries</li><li>+39% direction clicks</li><li>2.4x engagement time</li></ul>
+              <h2 style="margin-top:.8rem;">Stack Included</h2>
+              <div class="chips"><span>Campaign modules</span><span>Promo content architecture</span><span>GA4 + GTM tracking</span><span>Lead attribution</span></div>
+            </div>
+          </article>
+
+          <article class="block split">
+            <form class="calc" id="calc_retail_shopfront">
+              <h2>Interactive ROI Snapshot</h2>
+              <label>Monthly visitors
+                <input type="number" id="v_retail_shopfront" value="1200" min="0">
+              </label>
+              <label>Current conversion (%)
+                <input type="number" id="c_retail_shopfront" value="1.8" step="0.1" min="0">
+              </label>
+              <label>Target conversion (%)
+                <input type="number" id="t_retail_shopfront" value="3.4" step="0.1" min="0">
+              </label>
+              <label>Average customer value (AUD)
+                <input type="number" id="a_retail_shopfront" value="240" min="0">
+              </label>
+              <button type="button" class="btn btn--primary" id="b_retail_shopfront">Calculate Potential</button>
+            </form>
+            <aside class="calc-result" id="r_retail_shopfront">
+              <p>Estimated additional monthly gross revenue</p>
+              <h3>$0</h3>
+              <small>Adjust the numbers and calculate.</small>
+            </aside>
+          </article>
+
+          <article class="pricing" id="pricing">
+            <h2>Retail Package Pricing</h2>
+            <p>This template maps to our standard build package and is deployment-ready for customer customization.</p>
+            <div class="amt">$5,000</div>
+            <ul class="pkg-list" style="margin-top:.45rem;">
+              <li>Custom design + conversion UX tailored to this vertical</li>
+              <li>Core page set + content architecture</li>
+              <li>GA4/GTM events and lead tracking</li>
+              <li>Performance optimization and launch support</li>
+              <li>3 months post-launch support</li>
+            </ul>
+          </article>
+
           <aside class="quote">
-            <p>“Customers now check stock and promos online before they walk in. It’s helped us plan inventory better too.”</p>
+            <p>“Customers now arrive knowing what they want and our promo pages keep working between campaigns.”</p>
             <small>Priya L. — Retail Owner</small>
           </aside>
+
           <div class="cta-row">
-            <a class="btn btn--primary" href="../index.html#contact">Build This Style for My Business</a>
+            <a class="btn btn--primary" href="../index.html#contact">Get This $5,000 Retail Package</a>
             <a class="btn btn--ghost" href="../our-work.html">Back to Showcase</a>
           </div>
         </div>
@@ -99,8 +165,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="footer__bottom"><p>&copy; <span id="year"></span> ImproveYourSite • <a href="mailto:james@improveyoursite.com">james@improveyoursite.com</a></p></div>
         </div>
       </footer>
+
       <script src="../analytics-config.js"></script>
       <script src="../src/js/analytics.js"></script>
       <script src="../src/js/main.js"></script>
+      <script>
+        document.getElementById('b_retail_shopfront')?.addEventListener('click', () => {
+          const v = Number(document.getElementById('v_retail_shopfront')?.value || 0);
+          const c = Number(document.getElementById('c_retail_shopfront')?.value || 0) / 100;
+          const t = Number(document.getElementById('t_retail_shopfront')?.value || 0) / 100;
+          const a = Number(document.getElementById('a_retail_shopfront')?.value || 0);
+          const uplift = Math.max(0, (v * t * a) - (v * c * a));
+          const annual = uplift * 12;
+          const el = document.getElementById('r_retail_shopfront');
+          if (el) el.innerHTML = `<p>Estimated additional monthly gross revenue</p><h3>$${Math.round(uplift).toLocaleString()}</h3><small>Estimated annual upside: $${Math.round(annual).toLocaleString()}</small>`;
+          window.iysTrackEvent?.('retail_shopfront_roi_calculated', { visitors: v, current_rate: c, target_rate: t, value: a, uplift });
+        });
+      </script>
     </body>
     </html>
