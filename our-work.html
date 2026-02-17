@@ -6,20 +6,15 @@
   <meta name="description" content="Our Work — website redesign and conversion-focused transformation showcase by ImproveYourSite.">
   <link rel="canonical" href="https://improveyoursite.com/our-work.html">
   <title>Our Work — ImproveYourSite</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/style.css">
   <style>
     .work-hero { padding: 8.5rem 0 2.5rem; background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 100%); }
     .work-hero p { color: #58617c; max-width: 760px; margin-top: 0.75rem; }
-    .work-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.2rem; }
-    .work-card { background: #fff; border: 1px solid #ececff; border-radius: 16px; padding: 1.2rem; }
-    .work-card .tag { display:inline-block; margin-bottom:0.7rem; padding:0.3rem 0.7rem; border-radius:999px; background:#f0efff; color:#4c40db; font-size:0.78rem; font-weight:600; }
-    .work-card h3 { margin-bottom: 0.5rem; }
-    .work-card p { color: #4f556b; margin-bottom: 0.9rem; }
-    .work-card ul { list-style: none; }
-    .work-card li { padding: 0.35rem 0; border-bottom: 1px dashed #dddff5; color: #2f3448; }
+    .work-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(290px,1fr)); gap: 1rem; }
+    .work-card { background: #fff; border: 1px solid #ececff; border-radius: 16px; padding: 1rem; display:flex; flex-direction:column; gap:0.7rem; }
+    .work-card img { border-radius: 12px; border: 1px solid #e2e8f0; }
+    .work-card .tag { display:inline-block; width:max-content; padding:0.28rem 0.7rem; border-radius:999px; background:#f0efff; color:#4c40db; font-size:0.78rem; font-weight:600; }
+    .work-card p { color: #4f556b; }
     .work-cta { background: #0f172a; color:#fff; border-radius:20px; padding:2rem; margin-top:2rem; display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap; }
     .work-cta p { color:#d5e1ff; margin-top: 0.5rem; }
   </style>
@@ -42,84 +37,73 @@
   <section class="work-hero">
     <div class="container">
       <h1 class="hero__title">Our Work</h1>
-      <p>We build conversion-focused websites for service businesses. These sample transformations show how better UX, faster pages, and smarter lead flows create measurable growth.</p>
+      <p>Industry-specific showcase builds for trades, retail, clinics, consultancies, and venue operators. Each project page demonstrates conversion patterns we can deploy fast for your business.</p>
     </div>
   </section>
 
   <section>
     <div class="container">
       <div class="work-grid">
-        <article class="work-card">
-          <span class="tag">Trades</span>
-          <h3>Electrician Lead Engine</h3>
-          <p>Replaced a brochure-style site with high-intent quote funnels and mobile-first speed optimization.</p>
-          <ul>
-            <li>+212% quote requests</li>
-            <li>0.9s mobile LCP</li>
-            <li>+41% organic traffic</li>
-          </ul>
-        </article>
 
-        <article class="work-card">
-          <span class="tag">Healthcare</span>
-          <h3>Clinic Booking Growth</h3>
-          <p>Unified enquiries, booking, and trust messaging across multiple locations and devices.</p>
-          <ul>
-            <li>34% fewer missed bookings</li>
-            <li>24/7 appointment capture</li>
-            <li>+67% first-page keywords</li>
-          </ul>
-        </article>
+<article class="work-card">
+  <img src="assets/showcase/trades-electrician.svg" alt="Electrician Lead Engine showcase preview">
+  <span class="tag">Trades</span>
+  <h3>Electrician Lead Engine</h3>
+  <p>From brochure site to quote machine</p>
+  <a class="btn btn--ghost" href="showcase/trades-electrician.html">View Project</a>
+</article>
 
-        <article class="work-card">
-          <span class="tag">Consulting</span>
-          <h3>Premium Repositioning Site</h3>
-          <p>Upgraded offer clarity, social proof, and lead qualification to improve close quality.</p>
-          <ul>
-            <li>3.4x qualified leads</li>
-            <li>+58% time on page</li>
-            <li>+29% close rate</li>
-          </ul>
-        </article>
 
-        <article class="work-card">
-          <span class="tag">Hospitality</span>
-          <h3>Venue Events Funnel</h3>
-          <p>Created campaign landing pages and event enquiry automation for local venue operators.</p>
-          <ul>
-            <li>+122% private event enquiries</li>
-            <li>Reduced response time by 76%</li>
-            <li>Improved local search visibility</li>
-          </ul>
-        </article>
+<article class="work-card">
+  <img src="assets/showcase/retail-shopfront.svg" alt="Retail Shopfront Growth Site showcase preview">
+  <span class="tag">Retail</span>
+  <h3>Retail Shopfront Growth Site</h3>
+  <p>Local store traffic + online enquiries</p>
+  <a class="btn btn--ghost" href="showcase/retail-shopfront.html">View Project</a>
+</article>
 
-        <article class="work-card">
-          <span class="tag">Professional Services</span>
-          <h3>Accounting Firm Refresh</h3>
-          <p>Clarified service pages and moved to conversion-first architecture with better trust signals.</p>
-          <ul>
-            <li>+64% consultation bookings</li>
-            <li>2.1x lead form completion</li>
-            <li>+38% branded search growth</li>
-          </ul>
-        </article>
 
-        <article class="work-card">
-          <span class="tag">Retail + Service</span>
-          <h3>Multi-location Service Brand</h3>
-          <p>Merged fractured pages into a unified high-performance web platform with local landing templates.</p>
-          <ul>
-            <li>+49% local page conversions</li>
-            <li>92+ Lighthouse averages</li>
-            <li>Lowered paid CAC by 23%</li>
-          </ul>
-        </article>
+<article class="work-card">
+  <img src="assets/showcase/health-clinic-booking.svg" alt="Clinic Booking Optimizer showcase preview">
+  <span class="tag">Healthcare</span>
+  <h3>Clinic Booking Optimizer</h3>
+  <p>Fewer missed appointments, faster booking</p>
+  <a class="btn btn--ghost" href="showcase/health-clinic-booking.html">View Project</a>
+</article>
+
+
+<article class="work-card">
+  <img src="assets/showcase/accounting-firm-conversion.svg" alt="Accounting Firm Conversion Site showcase preview">
+  <span class="tag">Professional Services</span>
+  <h3>Accounting Firm Conversion Site</h3>
+  <p>Better quality leads, higher close rates</p>
+  <a class="btn btn--ghost" href="showcase/accounting-firm-conversion.html">View Project</a>
+</article>
+
+
+<article class="work-card">
+  <img src="assets/showcase/hospitality-events-funnel.svg" alt="Hospitality Events Funnel showcase preview">
+  <span class="tag">Hospitality</span>
+  <h3>Hospitality Events Funnel</h3>
+  <p>Turn website traffic into event enquiries</p>
+  <a class="btn btn--ghost" href="showcase/hospitality-events-funnel.html">View Project</a>
+</article>
+
+
+<article class="work-card">
+  <img src="assets/showcase/consulting-brand-authority.svg" alt="Consulting Authority Build showcase preview">
+  <span class="tag">Consulting</span>
+  <h3>Consulting Authority Build</h3>
+  <p>Positioning for premium projects</p>
+  <a class="btn btn--ghost" href="showcase/consulting-brand-authority.html">View Project</a>
+</article>
+
       </div>
 
       <div class="work-cta">
         <div>
-          <h2>Want your business in this showcase next?</h2>
-          <p>Get a free website money-leak audit and action plan.</p>
+          <h2>Need a custom build for your industry?</h2>
+          <p>We can launch your conversion-focused site fast and optimize it weekly.</p>
         </div>
         <a href="index.html#contact" class="btn btn--primary">Request Free Audit</a>
       </div>

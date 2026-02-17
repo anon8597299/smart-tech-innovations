@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF2FF"/>
+      <stop offset="1" stop-color="#E6FFFA"/>
+    </linearGradient>
+    <linearGradient id="card" x1="260" y1="150" x2="1360" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B4DFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#2DD4BF" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1300" cy="180" r="180" fill="#5B4DFF" fill-opacity="0.15"/>
+  <circle cx="290" cy="820" r="220" fill="#2DD4BF" fill-opacity="0.18"/>
+  <rect x="220" y="140" width="1160" height="720" rx="32" fill="url(#card)"/>
+  <rect x="280" y="220" width="1040" height="560" rx="20" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="330" y="300" width="340" height="26" rx="8" fill="#D9E1FF"/>
+  <rect x="330" y="344" width="540" height="18" rx="6" fill="#E8EDFF"/>
+  <rect x="330" y="375" width="500" height="18" rx="6" fill="#E8EDFF"/>
+  <rect x="330" y="438" width="220" height="54" rx="14" fill="#5B4DFF"/>
+  <rect x="570" y="438" width="220" height="54" rx="14" fill="#E7ECFF"/>
+  <rect x="900" y="300" width="360" height="210" rx="16" fill="#F0FBF9"/>
+  <rect x="900" y="536" width="360" height="210" rx="16" fill="#F6F3FF"/>
+  <text x="330" y="270" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">Accounting Firm Conversion Site</text>
+  <text x="332" y="540" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="600">Better quality leads, higher close rates</text>
+  <text x="126" y="90" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700">ImproveYourSite Showcase 04</text>
+</svg>
