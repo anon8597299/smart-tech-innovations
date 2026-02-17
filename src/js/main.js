@@ -121,7 +121,7 @@ form?.addEventListener('submit', async (e) => {
     } else {
       const subject = encodeURIComponent('New Website Audit Request');
       const body = encodeURIComponent(lines.join('\n'));
-      window.location.href = `mailto:hello@improveyoursite.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:james@improveyoursite.com?subject=${subject}&body=${body}`;
       statusEl.textContent = 'Thanks! Your email app should open now so you can send your audit request.';
     }
 
@@ -130,6 +130,42 @@ form?.addEventListener('submit', async (e) => {
       leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
     }
   } catch (error) {
-    statusEl.textContent = 'Something went wrong submitting the form. Please email hello@improveyoursite.com directly.';
+    statusEl.textContent = 'Something went wrong submitting the form. Please email james@improveyoursite.com directly.';
   }
+});
+
+// Testimonials horizontal controls
+const testimonialTrack = document.getElementById('testimonials-track');
+document.getElementById('testimonials-prev')?.addEventListener('click', () => {
+  testimonialTrack?.scrollBy({ left: -340, behavior: 'smooth' });
+});
+document.getElementById('testimonials-next')?.addEventListener('click', () => {
+  testimonialTrack?.scrollBy({ left: 340, behavior: 'smooth' });
+});
+
+// ROI calculator
+const roiCalcBtn = document.getElementById('roi-calc');
+const roiResult = document.getElementById('roi-result');
+
+roiCalcBtn?.addEventListener('click', () => {
+  const visitors = Number(document.getElementById('roi-visitors')?.value || 0);
+  const current = Number(document.getElementById('roi-current')?.value || 0) / 100;
+  const target = Number(document.getElementById('roi-target')?.value || 0) / 100;
+  const value = Number(document.getElementById('roi-value')?.value || 0);
+
+  const currentRevenue = visitors * current * value;
+  const targetRevenue = visitors * target * value;
+  const uplift = Math.max(0, targetRevenue - currentRevenue);
+
+  if (roiResult) {
+    roiResult.innerHTML = `<p>Potential additional monthly revenue</p><h3>$${Math.round(uplift).toLocaleString()}</h3><small>Based on your estimates. Annual upside: $${Math.round(uplift * 12).toLocaleString()}</small>`;
+  }
+});
+
+// Sticky CTA show/hide based on scroll depth
+const stickyCta = document.getElementById('sticky-cta');
+window.addEventListener('scroll', () => {
+  if (!stickyCta) return;
+  if (window.scrollY > 700) stickyCta.classList.add('show');
+  else stickyCta.classList.remove('show');
 });

@@ -39,6 +39,7 @@
         <li><a href="#process" class="nav__link">Process</a></li>
         <li><a href="#results" class="nav__link">Results</a></li>
         <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+        <li><a href="our-work.html" class="nav__link">Our Work</a></li>
         <li><a href="#scan" class="nav__link">Scan Offer</a></li>
         <li><a href="#faq" class="nav__link">FAQ</a></li>
         <li><a href="#contact" class="nav__link nav__cta">Get Started</a></li>
@@ -232,6 +233,32 @@
     </div>
   </section>
 
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section__title">What Clients Say</h2>
+      <p class="section__subtitle">Social proof from businesses we helped turn their websites into lead engines.</p>
+      <div class="testimonials__controls">
+        <button class="testimonials__btn" id="testimonials-prev" type="button" aria-label="Previous testimonial">←</button>
+        <button class="testimonials__btn" id="testimonials-next" type="button" aria-label="Next testimonial">→</button>
+      </div>
+      <div class="testimonials__track" id="testimonials-track">
+        <article class="testimonial__card">
+          <p>“We went from random enquiries to a predictable flow of qualified leads every week. Best investment we made this year.”</p>
+          <h3>Sam R. — Trade Services Owner</h3>
+        </article>
+        <article class="testimonial__card">
+          <p>“The new site is faster, cleaner, and finally reflects our quality. Booking automation alone saved our team hours every day.”</p>
+          <h3>Mia T. — Clinic Operations Manager</h3>
+        </article>
+        <article class="testimonial__card">
+          <p>“Their redesign increased conversion rates and improved close quality. We now use the site as our main sales asset.”</p>
+          <h3>Daniel K. — Consultancy Director</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Portfolio -->
   <section class="portfolio" id="portfolio">
     <div class="container">
@@ -269,6 +296,7 @@
           </ul>
         </article>
       </div>
+      <p style="text-align:center; margin-top:1.5rem;"><a class="btn btn--ghost" href="our-work.html">View Full Our Work Showcase</a></p>
     </div>
   </section>
 
@@ -331,6 +359,36 @@
     </div>
   </section>
 
+  <!-- ROI Calculator -->
+  <section class="roi" id="roi">
+    <div class="container">
+      <h2 class="section__title">Estimate Your Website Revenue Leak</h2>
+      <p class="section__subtitle">Quick calculator inspired by conversion-focused agency sites. See your potential monthly upside.</p>
+      <div class="roi__grid">
+        <div class="roi__inputs">
+          <label>Monthly visitors
+            <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200">
+          </label>
+          <label>Current conversion rate (%)
+            <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2">
+          </label>
+          <label>Target conversion rate (%)
+            <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8">
+          </label>
+          <label>Average job/order value ($)
+            <input class="roi__input" id="roi-value" type="number" min="0" value="850">
+          </label>
+          <button type="button" class="btn btn--primary" id="roi-calc">Calculate Opportunity</button>
+        </div>
+        <div class="roi__result" id="roi-result" aria-live="polite">
+          <p>Potential additional monthly revenue</p>
+          <h3>$0</h3>
+          <small>Adjust the fields and press calculate.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact / CTA -->
   <section class="contact" id="contact">
     <div class="container">
@@ -363,6 +421,12 @@
     </div>
   </section>
 
+  <!-- Sticky CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <p><strong>Your website is costing you money.</strong> Get the free audit.</p>
+    <a href="#contact" class="btn btn--primary">Get Audit</a>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -375,7 +439,9 @@
           <a href="#services">Services</a>
           <a href="#process">Process</a>
           <a href="#pricing">Pricing</a>
+          <a href="our-work.html">Our Work</a>
           <a href="#contact">Contact</a>
+          <a href="mailto:james@improveyoursite.com">james@improveyoursite.com</a>
         </div>
       </div>
       <div class="footer__bottom">
