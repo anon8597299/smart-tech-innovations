@@ -121,7 +121,7 @@
   };
 
   initGtm();
-  if (!cfg.gtmId) initGa4();
+  initGa4();
   initMetaPixel();
   initClarity();
 })();
