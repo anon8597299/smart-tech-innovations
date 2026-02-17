@@ -89,6 +89,7 @@ form?.addEventListener('submit', async (e) => {
 
   const formData = new FormData(form);
   const payload = Object.fromEntries(formData.entries());
+  window.iysTrackEvent?.('lead_form_submit_attempt', { source: payload.source || 'website-direct' });
 
   // Simple honeypot spam check
   if (String(payload.company || '').trim()) {
@@ -121,12 +122,14 @@ form?.addEventListener('submit', async (e) => {
 
     if (!res.ok) throw new Error('Submission failed');
     statusEl.textContent = 'Thanks — your audit request has been sent. We will be in touch shortly.';
+    window.iysTrackLead?.(payload);
 
     form.reset();
     if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
       leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
     }
   } catch (error) {
+    window.iysTrackEvent?.('lead_form_submit_fallback', { source: payload.source || 'website-direct' });
     const subject = encodeURIComponent('New Website Audit Request');
     const body = encodeURIComponent(lines.join('\n'));
     window.location.href = `mailto:james@improveyoursite.com?subject=${subject}&body=${body}`;
@@ -160,10 +163,20 @@ roiCalcBtn?.addEventListener('click', () => {
   if (roiResult) {
     roiResult.innerHTML = `<p>Potential additional monthly revenue</p><h3>$${Math.round(uplift).toLocaleString()}</h3><small>Based on your estimates. Annual upside: $${Math.round(uplift * 12).toLocaleString()}</small>`;
   }
+  window.iysTrackEvent?.('roi_calculated', {
+    visitors,
+    current_rate: current,
+    target_rate: target,
+    order_value: value,
+    uplift,
+  });
 });
 
 // Sticky CTA show/hide based on scroll depth
 const stickyCta = document.getElementById('sticky-cta');
+stickyCta?.querySelector('a')?.addEventListener('click', () => {
+  window.iysTrackEvent?.('sticky_cta_click');
+});
 window.addEventListener('scroll', () => {
   if (!stickyCta) return;
   if (window.scrollY > 700) stickyCta.classList.add('show');
