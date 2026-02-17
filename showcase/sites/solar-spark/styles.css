@@ -1,0 +1,137 @@
+:root {
+  --bg: #f6fbff;
+  --surface: #ffffff;
+  --text: #10243d;
+  --muted: #4f647f;
+  --primary: #0ea5a4;
+  --primary-dark: #0f766e;
+  --accent: #2563eb;
+  --line: #d8e6f5;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1120px, 92vw); margin: 0 auto; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+}
+.brand { font-weight: 800; letter-spacing: 0.01em; }
+.nav-links { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: flex-end; }
+.nav-links a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.34rem 0.65rem;
+  font-size: 0.86rem;
+  background: #fff;
+}
+.hero { padding: 4.9rem 0 2rem; }
+.badge {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  background: #dff7f5;
+  border: 1px solid #8fe0d8;
+  color: #0f766e;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+}
+h1 { font-size: clamp(1.8rem, 4.8vw, 2.95rem); line-height: 1.08; margin: 0.8rem 0 0.6rem; }
+.lead { max-width: 780px; color: var(--muted); }
+.hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; margin-top: 1.1rem; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 1rem;
+}
+.card h3 { margin-top: 0; }
+.card ul { margin: 0.5rem 0 0 0; padding-left: 1.05rem; }
+.hero-panel {
+  background: linear-gradient(145deg, #ecfeff 0%, #e0f2fe 45%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: 15px;
+  padding: 0.95rem;
+}
+.hero-panel p { margin: 0.25rem 0 0; color: #1e3a8a; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; }
+.chips span {
+  border-radius: 999px;
+  border: 1px solid #93c5fd;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.24rem 0.55rem;
+}
+.section { padding: 1rem 0 2.1rem; }
+.section h2 { margin-bottom: 0.4rem; }
+.section > .container > p { color: var(--muted); margin-top: 0; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.85rem; }
+.kpi {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.75rem;
+}
+.kpi strong { display: block; }
+.kpi span { color: var(--muted); font-size: 0.84rem; }
+.component-list { display: grid; gap: 0.6rem; margin-top: 0.9rem; }
+.component-list article {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85rem;
+  background: #fff;
+}
+.component-list h3 { margin: 0.05rem 0 0.22rem; font-size: 0.98rem; }
+.component-list p { margin: 0; color: var(--muted); }
+.cta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0.72rem 1rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { border-color: var(--line); background: #fff; }
+footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: 0.88rem; }
+.phone-cta { display: none; }
+@media (max-width: 920px) {
+  body { padding-bottom: 4.6rem; }
+  .hero { padding-top: 4.2rem; }
+  .hero-grid, .kpi-grid { grid-template-columns: 1fr; }
+  .phone-cta {
+    display: flex;
+    position: fixed;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    z-index: 50;
+    border-radius: 12px;
+    background: var(--primary-dark);
+    color: #fff;
+    font-weight: 800;
+    justify-content: center;
+    padding: 0.82rem 1rem;
+    box-shadow: 0 12px 30px rgba(15, 118, 110, 0.35);
+  }
+}
