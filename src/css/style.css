@@ -55,18 +55,20 @@ img, svg, iframe { max-width: 100%; display: block; height: auto; }
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 0.875rem 2rem; border-radius: 12px; font-weight: 700;
+  padding: 0.875rem 2rem; border-radius: 10px; font-weight: 700;
   font-size: 1rem; transition: all 0.22s; cursor: pointer; border: none;
   box-shadow: var(--shadow-soft);
 }
 .btn--primary {
   background: linear-gradient(135deg, #5b4dff 0%, #6d28d9 100%);
   color: #fff;
+  border: 1px solid rgba(199,210,254,0.45);
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.14), 0 16px 34px rgba(91,77,255,0.34);
 }
 .btn--primary:hover {
   background: linear-gradient(135deg, #4c40db 0%, #5b21b6 100%);
   transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(91,77,255,0.38);
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2), 0 18px 36px rgba(91,77,255,0.42);
 }
 .btn--ghost {
   background: #fff;
@@ -81,6 +83,10 @@ img, svg, iframe { max-width: 100%; display: block; height: auto; }
 .btn--spotlight {
   min-width: 320px;
   box-shadow: 0 0 0 2px rgba(91,77,255,0.16), 0 20px 42px rgba(91,77,255,0.44);
+}
+.btn--proof {
+  min-width: 320px;
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.2), 0 20px 44px rgba(79,70,229,0.45);
 }
 .btn--full { width: 100%; }
 
@@ -187,7 +193,15 @@ section { padding: 6rem 0; }
   border: 1px solid rgba(108,92,231,0.18);
   box-shadow: var(--shadow-soft);
 }
-.result__card h3 { font-size: 1rem; margin-bottom: 0.55rem; }
+.result__kicker {
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin-bottom: 0.12rem;
+}
+.result__metric-title { font-size: 1rem; margin-bottom: 0.55rem; }
 .result__icon {
   width: 2rem;
   height: 2rem;
@@ -211,10 +225,12 @@ section { padding: 6rem 0; }
   padding: 0.5rem 0.35rem;
   display: grid;
   gap: 0.08rem;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.08);
 }
 .result__pill span { font-size: 0.72rem; color: #667085; text-transform: uppercase; letter-spacing: 0.04em; }
 .result__pill strong { font-size: 1.05rem; }
 .result__arrow { font-weight: 800; color: #7c3aed; }
+.results__cta { text-align: center; margin-top: 1rem; }
 
 /* ===== PRICING ===== */
 .pricing { background: #fafafa; }
@@ -239,8 +255,27 @@ section { padding: 6rem 0; }
   background: var(--brand-primary); color: #fff; padding: 0.35rem 1rem;
   border-radius: 50px; font-size: 0.78rem; font-weight: 700;
 }
-.pricing__amount { font-size: 2.4rem; font-weight: 800; color: var(--brand-ink); margin: 1.2rem 0 0.4rem; }
-.pricing__period { color: #4b5563; font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+.pricing__amount {
+  display: inline-flex;
+  min-width: 170px;
+  justify-content: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 1.2rem auto 0.45rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid #dbe3ff;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4ff 100%);
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.12), 0 14px 28px rgba(79,70,229,0.16);
+}
+.pricing__card--featured .pricing__amount {
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2), 0 18px 34px rgba(79,70,229,0.26);
+}
+.pricing__card--premium .pricing__amount {
+  box-shadow: 0 0 0 2px rgba(45,212,191,0.2), 0 18px 34px rgba(16,185,129,0.24);
+}
+.pricing__period { color: #4b5563; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
 .pricing__features { text-align: left; margin-bottom: 1.2rem; }
 .pricing__features li { padding: 0.5rem 0; font-size: 0.95rem; color: #334155; border-bottom: 1px solid #f1f5f9; }
 
@@ -520,7 +555,8 @@ section { padding: 6rem 0; }
   .quick-paths__panel { grid-template-columns: 1fr; gap: 0.55rem; }
   .quick-paths__item { padding: 0.8rem; }
   .quick-paths__item p { font-size: 0.84rem; }
-  .btn--spotlight { width: 100%; min-width: 0; }
+  .btn--spotlight,
+  .btn--proof { width: 100%; min-width: 0; }
 
   /* Mobile quick mode: keep page sharp + direct */
   .process-section,
@@ -529,7 +565,7 @@ section { padding: 6rem 0; }
 
   .pricing__grid { grid-template-columns: 1fr; gap: 1rem; }
   .pricing__card { padding: 1.2rem 1rem; }
-  .pricing__amount { font-size: 2rem; }
+  .pricing__amount { font-size: 2rem; min-width: 150px; padding: 0.3rem 0.75rem; }
   .pricing__features li { font-size: 0.9rem; padding: 0.42rem 0; }
   .premium-blueprint__grid { grid-template-columns: 1fr; }
 
