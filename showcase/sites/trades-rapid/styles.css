@@ -36,6 +36,16 @@ h1 { font-size: clamp(1.8rem, 5vw, 3rem); line-height:1.05; margin: .85rem 0 .65
 .card { background: var(--surface); border:1px solid var(--line); border-radius: 16px; padding: 1rem; }
 .card h3 { margin-top:0; }
 .card ul { margin: .5rem 0 0 0; padding-left: 1rem; }
+.hero-visual {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: .9rem;
+  background: linear-gradient(140deg, #fff7ed 0%, #ffedd5 52%, #fed7aa 100%);
+}
+.hero-visual h3 { margin: 0 0 .45rem; }
+.hero-visual p { margin: 0; color: #7c4a16; font-size: .9rem; }
+.hero-visual .chips { margin-top: .6rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+.hero-visual .chips span { font-size: .76rem; font-weight: 700; background: rgba(255,255,255,.8); border: 1px solid #fdba74; padding: .24rem .55rem; border-radius: 999px; }
 .section { padding: 1rem 0 2rem; }
 .section h2 { margin-bottom: .45rem; }
 .section p { color: var(--muted); }
@@ -63,8 +73,29 @@ h1 { font-size: clamp(1.8rem, 5vw, 3rem); line-height:1.05; margin: .85rem 0 .65
 .component-list { display:grid; gap:.6rem; margin-top:.9rem; }
 .component-list article { border:1px solid var(--line); border-radius: 12px; background:#fff; padding:.8rem; }
 .component-list h3 { margin:.05rem 0 .25rem; font-size: .98rem; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
+.kpi { background:#fff; border:1px solid var(--line); border-radius:12px; padding:.7rem; }
+.kpi strong { display:block; font-size: 1rem; }
+.kpi span { color: var(--muted); font-size:.84rem; }
+.phone-cta { display:none; }
 footer { border-top:1px solid var(--line); padding:1rem 0 2rem; color: var(--muted); font-size: .88rem; }
 @media (max-width: 900px) {
+  body { padding-bottom: 4.5rem; }
   .hero { padding-top: 4.2rem; }
-  .hero-grid, .grid-3 { grid-template-columns: 1fr; }
+  .hero-grid, .grid-3, .kpi-grid { grid-template-columns: 1fr; }
+  .phone-cta {
+    display:flex;
+    position: fixed;
+    left: .7rem;
+    right: .7rem;
+    bottom: .7rem;
+    z-index: 50;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 800;
+    justify-content: center;
+    padding: .82rem 1rem;
+    box-shadow: 0 12px 30px rgba(154,52,18,.35);
+  }
 }
