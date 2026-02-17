@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Tech Innovations — Modern website redesign & automation for SMBs. 90%+ performance scores, SEO-optimized, fully automated booking & client portals.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Smart Tech Innovations — Web Redesign & Automation">
+  <meta property="og:description" content="We transform legacy websites into high-performance, SEO-optimized digital experiences with built-in automation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://improveyoursite.com">
+  <title>Smart Tech Innovations — Modern Web Redesign & Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #fafafa;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.accent { color: #6c5ce7; }
+.red { color: #e74c3c; }
+.green { color: #00b894; }
+
+/* ===== HEADER ===== */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s;
+}
+.header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav__logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+.logo-icon { font-size: 1.5rem; }
+.nav__menu { display: flex; align-items: center; gap: 2rem; }
+.nav__link { font-weight: 500; font-size: 0.95rem; color: #555; transition: color 0.2s; }
+.nav__link:hover { color: #6c5ce7; }
+.nav__cta {
+  background: #6c5ce7; color: #fff !important; padding: 0.6rem 1.5rem;
+  border-radius: 8px; transition: background 0.2s;
+}
+.nav__cta:hover { background: #5a4bd1; }
+.nav__toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.nav__toggle span { display: block; width: 24px; height: 2px; background: #1a1a2e; transition: 0.3s; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.875rem 2rem; border-radius: 10px; font-weight: 600;
+  font-size: 1rem; transition: all 0.2s; cursor: pointer; border: none;
+}
+.btn--primary { background: #6c5ce7; color: #fff; }
+.btn--primary:hover { background: #5a4bd1; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(108,92,231,0.3); }
+.btn--ghost { background: transparent; color: #6c5ce7; border: 2px solid #6c5ce7; }
+.btn--ghost:hover { background: #6c5ce7; color: #fff; }
+.btn--full { width: 100%; }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 10rem 0 6rem; background: linear-gradient(135deg, #f8f7ff 0%, #eee8ff 50%, #f0f4ff 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%);
+}
+.hero__badge {
+  display: inline-block; padding: 0.5rem 1rem; background: rgba(108,92,231,0.1);
+  color: #6c5ce7; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem;
+}
+.hero__title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero__subtitle { font-size: 1.2rem; color: #555; max-width: 600px; margin-bottom: 2.5rem; }
+.hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.hero__stats { display: flex; gap: 3rem; }
+.stat { text-align: center; }
+.stat__number { display: block; font-size: 2rem; font-weight: 800; color: #6c5ce7; }
+.stat__label { font-size: 0.85rem; color: #777; }
+
+/* ===== SECTIONS ===== */
+section { padding: 6rem 0; }
+.section__title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; text-align: center; margin-bottom: 1rem; }
+.section__subtitle { text-align: center; color: #666; font-size: 1.1rem; max-width: 600px; margin: 0 auto 3rem; }
+
+/* ===== PROBLEM ===== */
+.problem { background: #fff; }
+.problem__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+.problem__card {
+  padding: 2rem; border-radius: 16px; background: #f8f7ff;
+  border: 1px solid rgba(108,92,231,0.1); transition: transform 0.2s;
+}
+.problem__card:hover { transform: translateY(-4px); }
+.problem__icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+.problem__card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.problem__card p { color: #666; font-size: 0.95rem; }
+
+/* ===== SERVICES ===== */
+.services { background: #fafafa; }
+.services__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.service__card {
+  background: #fff; padding: 2.5rem; border-radius: 16px;
+  border: 1px solid #eee; transition: all 0.2s;
+}
+.service__card:hover { border-color: #6c5ce7; box-shadow: 0 8px 30px rgba(108,92,231,0.1); transform: translateY(-4px); }
+.service__icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.service__card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+.service__card p { color: #666; font-size: 0.95rem; }
+
+/* ===== PROCESS ===== */
+.process-section { background: #1a1a2e; color: #fff; }
+.process-section .section__title { color: #fff; }
+.process-section .section__subtitle { color: #aaa; }
+.process__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+.process__step { padding: 2rem; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+.step__number { font-size: 3rem; font-weight: 800; color: #6c5ce7; margin-bottom: 1rem; }
+.process__step h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.process__step p { color: #aaa; font-size: 0.95rem; }
+
+/* ===== RESULTS ===== */
+.results { background: #fff; }
+.results__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.result__card {
+  text-align: center; padding: 2.5rem; border-radius: 16px;
+  background: #f8f7ff; border: 1px solid rgba(108,92,231,0.1);
+}
+.result__before, .result__after { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+.result__card p { color: #666; margin-top: 1rem; }
+
+/* ===== PRICING ===== */
+.pricing { background: #fafafa; }
+.pricing__card {
+  max-width: 500px; margin: 0 auto; background: #fff; border-radius: 20px;
+  padding: 3rem; text-align: center; border: 2px solid #6c5ce7;
+  box-shadow: 0 20px 60px rgba(108,92,231,0.15); position: relative;
+}
+.pricing__badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: #6c5ce7; color: #fff; padding: 0.4rem 1.5rem;
+  border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+}
+.pricing__amount { font-size: 3.5rem; font-weight: 800; color: #1a1a2e; margin: 1.5rem 0 0.5rem; }
+.pricing__period { color: #666; font-size: 1.1rem; margin-bottom: 2rem; }
+.pricing__features { text-align: left; margin-bottom: 2rem; }
+.pricing__features li { padding: 0.6rem 0; font-size: 1rem; color: #444; border-bottom: 1px solid #f0f0f0; }
+
+/* ===== CONTACT ===== */
+.contact { background: linear-gradient(135deg, #6c5ce7, #a855f7); color: #fff; }
+.contact .section__title { color: #fff; }
+.contact .section__subtitle { color: rgba(255,255,255,0.85); }
+.contact__form { max-width: 600px; margin: 0 auto; }
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form__input {
+  width: 100%; padding: 1rem 1.25rem; border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 10px; background: rgba(255,255,255,0.1); color: #fff;
+  font-size: 1rem; font-family: inherit; margin-bottom: 1rem; transition: border-color 0.2s;
+}
+.form__input::placeholder { color: rgba(255,255,255,0.6); }
+.form__input:focus { outline: none; border-color: #fff; background: rgba(255,255,255,0.15); }
+.contact .btn--primary { background: #fff; color: #6c5ce7; }
+.contact .btn--primary:hover { background: #f0f0f0; }
+
+/* ===== FOOTER ===== */
+.footer { background: #1a1a2e; color: #fff; padding: 3rem 0 1.5rem; }
+.footer__content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem; }
+.footer__brand { font-weight: 800; font-size: 1.2rem; }
+.footer__brand p { font-weight: 400; font-size: 0.9rem; color: #aaa; margin-top: 0.5rem; }
+.footer__links { display: flex; gap: 2rem; }
+.footer__links a { color: #aaa; transition: color 0.2s; }
+.footer__links a:hover { color: #6c5ce7; }
+.footer__bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: #777; font-size: 0.85rem; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav__menu { 
+    position: fixed; top: 72px; right: -100%; width: 280px; height: calc(100vh - 72px);
+    background: #fff; flex-direction: column; padding: 2rem; gap: 1.5rem;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.1); transition: right 0.3s;
+  }
+  .nav__menu.active { right: 0; }
+  .nav__toggle { display: flex; }
+  .hero__stats { gap: 1.5rem; }
+  .form__row { grid-template-columns: 1fr; }
+  .footer__content { flex-direction: column; }
+}
+
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Smart Tech Innovations",
+    "description": "Modern website redesign and automation for small and medium businesses.",
+    "url": "https://improveyoursite.com",
+    "serviceType": ["Web Design", "Web Development", "SEO", "Business Automation"],
+    "areaServed": "AU"
+  }
+  </script>
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <span class="logo-icon">⚡</span> Smart Tech <span class="accent">Innovations</span>
+      </a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#services" class="nav__link">Services</a></li>
+        <li><a href="#process" class="nav__link">Process</a></li>
+        <li><a href="#results" class="nav__link">Results</a></li>
+        <li><a href="#pricing" class="nav__link">Pricing</a></li>
+        <li><a href="#contact" class="nav__link nav__cta">Get Started</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge">🚀 Cutting-edge web technology</div>
+        <h1 class="hero__title">Your Website Is Costing You <span class="accent">Customers</span></h1>
+        <p class="hero__subtitle">We transform outdated websites into high-performance, SEO-optimized digital machines — with built-in automation that runs your business while you sleep.</p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn--primary">Get Your Free Audit</a>
+          <a href="#results" class="btn btn--ghost">See Results</a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__number">90%+</span>
+            <span class="stat__label">Lighthouse Scores</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">3x</span>
+            <span class="stat__label">More Leads</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">24/7</span>
+            <span class="stat__label">Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <h2 class="section__title">Is Your Website Holding You Back?</h2>
+      <div class="problem__grid">
+        <div class="problem__card">
+          <span class="problem__icon">🐌</span>
+          <h3>Slow Load Times</h3>
+          <p>Every second of delay costs you 7% in conversions. Legacy sites are bleeding money.</p>
+        </div>
+        <div class="problem__card">
+          <span class="problem__icon">📱</span>
+          <h3>Not Mobile-First</h3>
+          <p>60% of traffic is mobile. If your site isn't responsive, you're invisible to most customers.</p>
+        </div>
+        <div class="problem__card">
+          <span class="problem__icon">🔍</span>
+          <h3>Buried on Google</h3>
+          <p>Poor SEO means you don't exist. Your competitors are taking your customers right now.</p>
+        </div>
+        <div class="problem__card">
+          <span class="problem__icon">⏰</span>
+          <h3>Manual Everything</h3>
+          <p>Still managing bookings by phone? Sending invoices manually? There's a better way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section__title">What You Get</h2>
+      <p class="section__subtitle">A complete digital transformation — not just a pretty face.</p>
+      <div class="services__grid">
+        <div class="service__card">
+          <div class="service__icon">🎨</div>
+          <h3>Modern Redesign</h3>
+          <p>Custom-designed, mobile-first websites built with the latest tech. Fast, beautiful, accessible.</p>
+        </div>
+        <div class="service__card">
+          <div class="service__icon">🔍</div>
+          <h3>SEO Optimization</h3>
+          <p>Technical SEO, structured data, Core Web Vitals — everything Google wants to see.</p>
+        </div>
+        <div class="service__card">
+          <div class="service__icon">📅</div>
+          <h3>Booking Automation</h3>
+          <p>Integrated calendar booking that lets customers schedule 24/7 — no phone tag required.</p>
+        </div>
+        <div class="service__card">
+          <div class="service__icon">🤖</div>
+          <h3>AI Chatbot</h3>
+          <p>Smart chatbot that answers questions, captures leads, and routes enquiries — even at 3am.</p>
+        </div>
+        <div class="service__card">
+          <div class="service__icon">🔐</div>
+          <h3>Client Portal</h3>
+          <p>Secure portal for project updates, file sharing, and invoices. Professional and effortless.</p>
+        </div>
+        <div class="service__card">
+          <div class="service__icon">📊</div>
+          <h3>Analytics & Reporting</h3>
+          <p>Real-time dashboards showing traffic, leads, and conversions. Know what's working.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <h2 class="section__title">How It Works</h2>
+      <p class="section__subtitle">From outdated to outstanding in 4 steps.</p>
+      <div class="process__grid">
+        <div class="process__step">
+          <div class="step__number">01</div>
+          <h3>Free Audit</h3>
+          <p>We analyse your current site — speed, SEO, mobile, accessibility. You get a detailed report.</p>
+        </div>
+        <div class="process__step">
+          <div class="step__number">02</div>
+          <h3>Strategy & Design</h3>
+          <p>Custom design tailored to your brand and customers. You approve before we build.</p>
+        </div>
+        <div class="process__step">
+          <div class="step__number">03</div>
+          <h3>Build & Automate</h3>
+          <p>We build your site with integrated booking, chatbots, and automation. All tested to 90%+ scores.</p>
+        </div>
+        <div class="process__step">
+          <div class="step__number">04</div>
+          <h3>Launch & Support</h3>
+          <p>Go live with confidence. We handle deployment, monitoring, and ongoing support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="results" id="results">
+    <div class="container">
+      <h2 class="section__title">The Results Speak</h2>
+      <div class="results__grid">
+        <div class="result__card">
+          <div class="result__before">Before: <span class="red">23/100</span></div>
+          <div class="result__after">After: <span class="green">96/100</span></div>
+          <p>Lighthouse Performance Score</p>
+        </div>
+        <div class="result__card">
+          <div class="result__before">Before: <span class="red">Page 5</span></div>
+          <div class="result__after">After: <span class="green">Page 1</span></div>
+          <p>Google Search Ranking</p>
+        </div>
+        <div class="result__card">
+          <div class="result__before">Before: <span class="red">2 leads/week</span></div>
+          <div class="result__after">After: <span class="green">15 leads/week</span></div>
+          <p>Inbound Enquiries</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section__title">Simple Pricing</h2>
+      <p class="section__subtitle">One price. Everything included. No hidden fees.</p>
+      <div class="pricing__card">
+        <div class="pricing__badge">Most Popular</div>
+        <div class="pricing__amount">$5,000</div>
+        <div class="pricing__period">Complete Website Redesign</div>
+        <ul class="pricing__features">
+          <li>✅ Custom modern design (mobile-first)</li>
+          <li>✅ SEO optimization & structured data</li>
+          <li>✅ 90%+ Lighthouse scores guaranteed</li>
+          <li>✅ Booking calendar integration</li>
+          <li>✅ AI chatbot setup</li>
+          <li>✅ Client portal</li>
+          <li>✅ Analytics dashboard</li>
+          <li>✅ Content writing & migration</li>
+          <li>✅ 3 months support included</li>
+        </ul>
+        <a href="#contact" class="btn btn--primary btn--full">Get Started Today</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section__title">Ready to Transform Your Website?</h2>
+      <p class="section__subtitle">Get your free website audit — we'll show you exactly what's holding you back.</p>
+      <form class="contact__form" id="contact-form">
+        <div class="form__row">
+          <input type="text" name="name" placeholder="Your Name" required class="form__input">
+          <input type="email" name="email" placeholder="Your Email" required class="form__input">
+        </div>
+        <input type="url" name="website" placeholder="Your Current Website URL" class="form__input">
+        <textarea name="message" placeholder="Tell us about your business..." rows="4" class="form__input"></textarea>
+        <button type="submit" class="btn btn--primary btn--full">Request Free Audit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <span class="logo-icon">⚡</span> Smart Tech <span class="accent">Innovations</span>
+          <p>Transforming businesses with modern web technology and automation.</p>
+        </div>
+        <div class="footer__links">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Smart Tech Innovations. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+// Mobile nav toggle
+const toggle = document.getElementById('nav-toggle');
+const menu = document.getElementById('nav-menu');
+toggle?.addEventListener('click', () => menu.classList.toggle('active'));
+
+// Close menu on link click
+document.querySelectorAll('.nav__link').forEach(link => {
+  link.addEventListener('click', () => menu.classList.remove('active'));
+});
+
+// Header scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service__card, .problem__card, .process__step, .result__card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s, transform 0.6s';
+  observer.observe(el);
+});
+
+// Form submission
+document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  // TODO: Connect to backend/email service
+  alert('Thanks! We\'ll be in touch within 24 hours with your free audit.');
+  e.target.reset();
+});
+
+</script>
+</body>
+</html>
