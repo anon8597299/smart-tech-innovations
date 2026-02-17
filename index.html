@@ -345,6 +345,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <!-- Premium Growth Blueprint -->
+  <section class="premium-blueprint" id="premium-blueprint">
+    <div class="container">
+      <h2 class="section__title">$10,000 Premium Growth Blueprint</h2>
+      <p class="section__subtitle">Modelled on top-performing authority sites: proof-heavy, locality-driven, and built for long-term ranking growth.</p>
+      <div class="premium-blueprint__grid">
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Authority Layer</span>
+          <h3>Trust + Proof Engine</h3>
+          <ul>
+            <li>✅ Review capture + testimonial wall setup</li>
+            <li>✅ Accreditation/awards proof strip</li>
+            <li>✅ Offer guarantee and risk-reversal framing</li>
+          </ul>
+        </article>
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Local SEO Layer</span>
+          <h3>Automated Content Rollout</h3>
+          <ul>
+            <li>✅ Blog automation system with editorial templates</li>
+            <li>✅ Service + suburb content clusters</li>
+            <li>✅ Initial local focus: Orange NSW, Dubbo, Bathurst</li>
+          </ul>
+        </article>
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Conversion Layer</span>
+          <h3>Campaign + Enquiry Optimization</h3>
+          <ul>
+            <li>✅ Calculator, landing pages, and CTA variants</li>
+            <li>✅ Lead-source tracking for local ads</li>
+            <li>✅ Weekly optimization loop after launch</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">
@@ -394,24 +431,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="section__subtitle">Quick calculator inspired by conversion-focused agency sites. See your potential monthly upside.</p>
       <div class="roi__grid">
         <div class="roi__inputs">
-          <label>Monthly visitors
-            <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200">
+          <label>Quick-fill by business type
+            <select class="roi__input" id="roi-template" aria-label="Quick-fill calculator values">
+              <option value="">Choose a template (optional)</option>
+              <option value="trades">Trades / Services</option>
+              <option value="clinic">Clinic / Health</option>
+              <option value="retail">Retail / Shopfront</option>
+              <option value="hospitality">Hospitality / Venue</option>
+              <option value="consulting">Consulting / Professional Services</option>
+            </select>
+          </label>
+          <label>Estimated monthly website visitors
+            <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200" inputmode="numeric">
           </label>
           <label>Current conversion rate (%)
-            <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2">
+            <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2" inputmode="decimal">
           </label>
           <label>Target conversion rate (%)
-            <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8">
+            <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8" inputmode="decimal">
           </label>
-          <label>Average job/order value ($)
-            <input class="roi__input" id="roi-value" type="number" min="0" value="850">
+          <label>Average customer value (AUD)
+            <input class="roi__input" id="roi-value" type="number" min="0" value="850" inputmode="numeric">
           </label>
+          <p class="roi__hint">Tip: use quick-fill first, then tweak numbers to match your business.</p>
           <button type="button" class="btn btn--primary" id="roi-calc">Calculate Opportunity</button>
         </div>
         <div class="roi__result" id="roi-result" aria-live="polite">
           <p>Potential additional monthly revenue</p>
           <h3>$0</h3>
-          <small>Adjust the fields and press calculate.</small>
+          <small>Adjusted estimate based on your inputs. Annual upside shown after calculation.</small>
         </div>
       </div>
     </div>
@@ -438,6 +486,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <option>Speed up website</option>
           <option>Automate bookings and enquiries</option>
           <option>Complete redesign + rebrand</option>
+          <option>Premium growth + blog automation</option>
         </select>
         <input type="hidden" name="source" id="lead-source" value="website-direct">
         <input type="hidden" name="_subject" value="New Website Audit Request">

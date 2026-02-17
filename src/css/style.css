@@ -290,6 +290,32 @@ section { padding: 6rem 0; }
 .roi__result p { color: #c6d0ea; margin-bottom: 0.5rem; }
 .roi__result h3 { font-size: 2.2rem; margin-bottom: 0.35rem; }
 .roi__result small { color: #b8c6e6; }
+.roi__hint { font-size: 0.82rem; color: #5f5f7c; margin-top: -0.2rem; }
+
+/* ===== PREMIUM BLUEPRINT ===== */
+.premium-blueprint { background: #f8f7ff; }
+.premium-blueprint__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.blueprint-card {
+  background: #fff;
+  border: 1px solid rgba(91,77,255,0.15);
+  border-radius: 14px;
+  padding: 1.1rem;
+}
+.blueprint-card__tag {
+  display: inline-block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5b4dff;
+  background: #eef0ff;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.55rem;
+}
+.blueprint-card h3 { font-size: 1.05rem; margin-bottom: 0.45rem; }
+.blueprint-card ul { list-style: none; display: grid; gap: 0.4rem; }
+.blueprint-card li { color: #41445b; font-size: 0.92rem; }
 
 /* ===== STICKY CTA ===== */
 .sticky-cta {
@@ -373,6 +399,7 @@ section { padding: 6rem 0; }
   .pricing__card { padding: 1.2rem 1rem; }
   .pricing__amount { font-size: 2rem; }
   .pricing__features li { font-size: 0.9rem; padding: 0.42rem 0; }
+  .premium-blueprint__grid { grid-template-columns: 1fr; }
 
   .problem__card:nth-child(n+3),
   .service__card:nth-child(n+4),

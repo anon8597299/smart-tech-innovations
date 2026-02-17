@@ -307,6 +307,32 @@ section { padding: 6rem 0; }
 .roi__result p { color: #c6d0ea; margin-bottom: 0.5rem; }
 .roi__result h3 { font-size: 2.2rem; margin-bottom: 0.35rem; }
 .roi__result small { color: #b8c6e6; }
+.roi__hint { font-size: 0.82rem; color: #5f5f7c; margin-top: -0.2rem; }
+
+/* ===== PREMIUM BLUEPRINT ===== */
+.premium-blueprint { background: #f8f7ff; }
+.premium-blueprint__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.blueprint-card {
+  background: #fff;
+  border: 1px solid rgba(91,77,255,0.15);
+  border-radius: 14px;
+  padding: 1.1rem;
+}
+.blueprint-card__tag {
+  display: inline-block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5b4dff;
+  background: #eef0ff;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.55rem;
+}
+.blueprint-card h3 { font-size: 1.05rem; margin-bottom: 0.45rem; }
+.blueprint-card ul { list-style: none; display: grid; gap: 0.4rem; }
+.blueprint-card li { color: #41445b; font-size: 0.92rem; }
 
 /* ===== STICKY CTA ===== */
 .sticky-cta {
@@ -390,6 +416,7 @@ section { padding: 6rem 0; }
   .pricing__card { padding: 1.2rem 1rem; }
   .pricing__amount { font-size: 2rem; }
   .pricing__features li { font-size: 0.9rem; padding: 0.42rem 0; }
+  .premium-blueprint__grid { grid-template-columns: 1fr; }
 
   .problem__card:nth-child(n+3),
   .service__card:nth-child(n+4),
@@ -753,6 +780,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <!-- Premium Growth Blueprint -->
+  <section class="premium-blueprint" id="premium-blueprint">
+    <div class="container">
+      <h2 class="section__title">$10,000 Premium Growth Blueprint</h2>
+      <p class="section__subtitle">Modelled on top-performing authority sites: proof-heavy, locality-driven, and built for long-term ranking growth.</p>
+      <div class="premium-blueprint__grid">
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Authority Layer</span>
+          <h3>Trust + Proof Engine</h3>
+          <ul>
+            <li>✅ Review capture + testimonial wall setup</li>
+            <li>✅ Accreditation/awards proof strip</li>
+            <li>✅ Offer guarantee and risk-reversal framing</li>
+          </ul>
+        </article>
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Local SEO Layer</span>
+          <h3>Automated Content Rollout</h3>
+          <ul>
+            <li>✅ Blog automation system with editorial templates</li>
+            <li>✅ Service + suburb content clusters</li>
+            <li>✅ Initial local focus: Orange NSW, Dubbo, Bathurst</li>
+          </ul>
+        </article>
+        <article class="blueprint-card">
+          <span class="blueprint-card__tag">Conversion Layer</span>
+          <h3>Campaign + Enquiry Optimization</h3>
+          <ul>
+            <li>✅ Calculator, landing pages, and CTA variants</li>
+            <li>✅ Lead-source tracking for local ads</li>
+            <li>✅ Weekly optimization loop after launch</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">
@@ -802,24 +866,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="section__subtitle">Quick calculator inspired by conversion-focused agency sites. See your potential monthly upside.</p>
       <div class="roi__grid">
         <div class="roi__inputs">
-          <label>Monthly visitors
-            <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200">
+          <label>Quick-fill by business type
+            <select class="roi__input" id="roi-template" aria-label="Quick-fill calculator values">
+              <option value="">Choose a template (optional)</option>
+              <option value="trades">Trades / Services</option>
+              <option value="clinic">Clinic / Health</option>
+              <option value="retail">Retail / Shopfront</option>
+              <option value="hospitality">Hospitality / Venue</option>
+              <option value="consulting">Consulting / Professional Services</option>
+            </select>
+          </label>
+          <label>Estimated monthly website visitors
+            <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200" inputmode="numeric">
           </label>
           <label>Current conversion rate (%)
-            <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2">
+            <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2" inputmode="decimal">
           </label>
           <label>Target conversion rate (%)
-            <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8">
+            <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8" inputmode="decimal">
           </label>
-          <label>Average job/order value ($)
-            <input class="roi__input" id="roi-value" type="number" min="0" value="850">
+          <label>Average customer value (AUD)
+            <input class="roi__input" id="roi-value" type="number" min="0" value="850" inputmode="numeric">
           </label>
+          <p class="roi__hint">Tip: use quick-fill first, then tweak numbers to match your business.</p>
           <button type="button" class="btn btn--primary" id="roi-calc">Calculate Opportunity</button>
         </div>
         <div class="roi__result" id="roi-result" aria-live="polite">
           <p>Potential additional monthly revenue</p>
           <h3>$0</h3>
-          <small>Adjust the fields and press calculate.</small>
+          <small>Adjusted estimate based on your inputs. Annual upside shown after calculation.</small>
         </div>
       </div>
     </div>
@@ -846,6 +921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <option>Speed up website</option>
           <option>Automate bookings and enquiries</option>
           <option>Complete redesign + rebrand</option>
+          <option>Premium growth + blog automation</option>
         </select>
         <input type="hidden" name="source" id="lead-source" value="website-direct">
         <input type="hidden" name="_subject" value="New Website Audit Request">
@@ -1190,6 +1266,29 @@ document.getElementById('testimonials-next')?.addEventListener('click', () => {
 // ROI calculator
 const roiCalcBtn = document.getElementById('roi-calc');
 const roiResult = document.getElementById('roi-result');
+const roiTemplate = document.getElementById('roi-template');
+
+const roiPresets = {
+  trades: { visitors: 1200, current: 1.3, target: 3.2, value: 850 },
+  clinic: { visitors: 1500, current: 2.0, target: 4.0, value: 180 },
+  retail: { visitors: 1100, current: 1.6, target: 3.2, value: 240 },
+  hospitality: { visitors: 2000, current: 1.0, target: 2.4, value: 420 },
+  consulting: { visitors: 700, current: 1.2, target: 2.6, value: 3200 },
+};
+
+roiTemplate?.addEventListener('change', () => {
+  const preset = roiPresets[roiTemplate.value];
+  if (!preset) return;
+  const setValue = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = String(val);
+  };
+  setValue('roi-visitors', preset.visitors);
+  setValue('roi-current', preset.current);
+  setValue('roi-target', preset.target);
+  setValue('roi-value', preset.value);
+  window.iysTrackEvent?.('roi_template_selected', { template: roiTemplate.value });
+});
 
 roiCalcBtn?.addEventListener('click', () => {
   const visitors = Number(document.getElementById('roi-visitors')?.value || 0);
@@ -1210,6 +1309,7 @@ roiCalcBtn?.addEventListener('click', () => {
     target_rate: target,
     order_value: value,
     uplift,
+    template: roiTemplate?.value || 'custom',
   });
 });
 

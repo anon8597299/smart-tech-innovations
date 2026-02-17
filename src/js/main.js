@@ -155,6 +155,29 @@ document.getElementById('testimonials-next')?.addEventListener('click', () => {
 // ROI calculator
 const roiCalcBtn = document.getElementById('roi-calc');
 const roiResult = document.getElementById('roi-result');
+const roiTemplate = document.getElementById('roi-template');
+
+const roiPresets = {
+  trades: { visitors: 1200, current: 1.3, target: 3.2, value: 850 },
+  clinic: { visitors: 1500, current: 2.0, target: 4.0, value: 180 },
+  retail: { visitors: 1100, current: 1.6, target: 3.2, value: 240 },
+  hospitality: { visitors: 2000, current: 1.0, target: 2.4, value: 420 },
+  consulting: { visitors: 700, current: 1.2, target: 2.6, value: 3200 },
+};
+
+roiTemplate?.addEventListener('change', () => {
+  const preset = roiPresets[roiTemplate.value];
+  if (!preset) return;
+  const setValue = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = String(val);
+  };
+  setValue('roi-visitors', preset.visitors);
+  setValue('roi-current', preset.current);
+  setValue('roi-target', preset.target);
+  setValue('roi-value', preset.value);
+  window.iysTrackEvent?.('roi_template_selected', { template: roiTemplate.value });
+});
 
 roiCalcBtn?.addEventListener('click', () => {
   const visitors = Number(document.getElementById('roi-visitors')?.value || 0);
@@ -175,6 +198,7 @@ roiCalcBtn?.addEventListener('click', () => {
     target_rate: target,
     order_value: value,
     uplift,
+    template: roiTemplate?.value || 'custom',
   });
 });
 
