@@ -6,42 +6,35 @@ Images were resized for web performance (max dimension ~1600px) without changing
 
 ## Files and licences
 
-1. **electrician.jpg**
-   - Source file: *Electricians cutting racked wires in a back of house electric pull room. 09-25-2019*
-   - Creator: **MTA C&D - EAST SIDE ACCESS**
-   - Licence: **CC BY 2.0**
-   - Licence URL: https://creativecommons.org/licenses/by/2.0/
-   - Source URL: https://www.flickr.com/photos/59595815@N03/48804750748
-
-2. **retail-storefront.jpg**
+1. **retail-storefront.jpg**
    - Source file: *Parkers-bistro-storefront-sioux-quartzite-iconic-downtown-sioux-falls-restaurant.jpg*
    - Creator: **Sioux Quartzite Historian**
    - Licence: **CC0 (Public Domain Dedication)**
    - Licence URL: http://creativecommons.org/publicdomain/zero/1.0/deed.en
    - Source URL: https://commons.wikimedia.org/wiki/File:Parkers-bistro-storefront-sioux-quartzite-iconic-downtown-sioux-falls-restaurant.jpg
 
-3. **clinic-waiting-room.jpg**
+2. **clinic-waiting-room.jpg**
    - Source file: *A waiting room at a medical healthcare clinic, doctor's office, hospital.jpg*
    - Creator: **Harrison Keely**
    - Licence: **CC BY 4.0**
    - Licence URL: https://creativecommons.org/licenses/by/4.0
    - Source URL: https://commons.wikimedia.org/wiki/File:A_waiting_room_at_a_medical_healthcare_clinic,_doctor's_office,_hospital.jpg
 
-4. **accounting-meeting.jpg**
+3. **accounting-meeting.jpg**
    - Source file: *Meeting with constituent representatives of Thrivent Financial (7112703567).jpg*
    - Creator: **Senator Stabenow**
    - Licence: **CC BY 2.0**
    - Licence URL: https://creativecommons.org/licenses/by/2.0
    - Source URL: https://commons.wikimedia.org/wiki/File:Meeting_with_constituent_representatives_of_Thrivent_Financial_(7112703567).jpg
 
-5. **hospitality-venue.jpg**
+4. **hospitality-venue.jpg**
    - Source file: *The Eiffel Society - Event Venue in New Orleans, March 2020.jpg*
    - Creator: **Tony Webster**
    - Licence: **CC BY 2.0**
    - Licence URL: https://creativecommons.org/licenses/by/2.0
    - Source URL: https://commons.wikimedia.org/wiki/File:The_Eiffel_Society_-_Event_Venue_in_New_Orleans,_March_2020.jpg
 
-6. **consulting-meeting.jpg**
+5. **consulting-meeting.jpg**
    - Source file: *Meeting with a business development representative (7020915683).jpg*
    - Creator: **Senator Stabenow**
    - Licence: **CC BY 2.0**
