@@ -63,6 +63,23 @@ document.querySelectorAll('.faq__question').forEach((button) => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+// Campaign source tracking from URL params
+const params = new URLSearchParams(window.location.search);
+const leadSourceInput = document.getElementById('lead-source');
+const heroBadge = document.querySelector('.hero__badge');
+
+const utmSource = params.get('utm_source');
+const utmMedium = params.get('utm_medium');
+const utmCampaign = params.get('utm_campaign');
+
+if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
+  leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
+}
+
+if (heroBadge && utmSource === 'offline_qr') {
+  heroBadge.textContent = '📍 You scanned the Money-Leak Audit QR';
+}
+
 // Contact form submission
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
@@ -84,6 +101,7 @@ form?.addEventListener('submit', async (e) => {
     `Phone: ${payload.phone || ''}`,
     `Website: ${payload.website || ''}`,
     `Goal: ${payload.goal || ''}`,
+    `Source: ${payload.source || 'website-direct'}`,
     '',
     'Business details:',
     `${payload.message || ''}`,
@@ -108,6 +126,9 @@ form?.addEventListener('submit', async (e) => {
     }
 
     form.reset();
+    if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
+      leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
+    }
   } catch (error) {
     statusEl.textContent = 'Something went wrong submitting the form. Please email hello@improveyoursite.com directly.';
   }

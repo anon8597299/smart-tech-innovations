@@ -179,6 +179,47 @@ section { padding: 6rem 0; }
 .trust-strip__item { text-align: center; font-size: 0.95rem; }
 .trust-strip__item strong { color: #fff; font-weight: 700; }
 
+/* ===== SCAN CAMPAIGN ===== */
+.scan-campaign { background: #fff; }
+.scan-campaign__inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.scan-campaign__badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: #5a4bd1;
+  background: rgba(108,92,231,0.12);
+  font-weight: 600;
+}
+.scan-campaign h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 0.8rem; }
+.scan-campaign p { color: #555; margin-bottom: 1rem; }
+.scan-campaign ul { margin-bottom: 1.5rem; }
+.scan-campaign li { padding: 0.3rem 0; color: #333; }
+.scan-campaign__qr {
+  background: #f8f7ff;
+  border: 1px solid rgba(108,92,231,0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.scan-campaign__qr img {
+  margin: 0 auto 0.9rem;
+  border-radius: 12px;
+  border: 8px solid #fff;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+}
+.scan-campaign__qr code {
+  font-size: 0.75rem;
+  color: #574ac5;
+  font-weight: 600;
+}
+
 /* ===== PORTFOLIO ===== */
 .portfolio { background: #fff; }
 .portfolio__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
@@ -264,6 +305,8 @@ section { padding: 6rem 0; }
   .nav__toggle { display: flex; }
   .hero__stats { gap: 1rem; flex-wrap: wrap; }
   .trust-strip__inner { grid-template-columns: 1fr 1fr; }
+  .scan-campaign__inner { grid-template-columns: 1fr; }
+  .scan-campaign__qr { max-width: 360px; margin: 0 auto; }
   .form__row { grid-template-columns: 1fr; }
   .footer__content { flex-direction: column; }
 }
@@ -293,6 +336,7 @@ section { padding: 6rem 0; }
         <li><a href="#process" class="nav__link">Process</a></li>
         <li><a href="#results" class="nav__link">Results</a></li>
         <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+        <li><a href="#scan" class="nav__link">Scan Offer</a></li>
         <li><a href="#faq" class="nav__link">FAQ</a></li>
         <li><a href="#contact" class="nav__link nav__cta">Get Started</a></li>
       </ul>
@@ -338,6 +382,27 @@ section { padding: 6rem 0; }
       <div class="trust-strip__item"><strong>90+ Lighthouse</strong> performance targets</div>
       <div class="trust-strip__item"><strong>SEO-ready</strong> on launch day</div>
       <div class="trust-strip__item"><strong>Automation-first</strong> workflows</div>
+    </div>
+  </section>
+
+  <!-- Offline Scan Campaign -->
+  <section class="scan-campaign" id="scan">
+    <div class="container scan-campaign__inner">
+      <div class="scan-campaign__copy">
+        <span class="scan-campaign__badge">Offline Campaign Funnel</span>
+        <h2>Your Website Is Costing You Money. Scan to Find Out.</h2>
+        <p>Built for coasters, business cards, flyers, and radio callouts. Every scan lands on your free audit funnel and gets tagged for ROI tracking.</p>
+        <ul>
+          <li>✅ QR-tracked inbound leads</li>
+          <li>✅ UTM source attribution (pubs, cards, radio)</li>
+          <li>✅ Fast mobile landing for instant enquiries</li>
+        </ul>
+        <a class="btn btn--primary" href="https://improveyoursite.com/?utm_source=offline_qr&utm_medium=print&utm_campaign=money_leak_scan#contact">Try the scan landing link</a>
+      </div>
+      <div class="scan-campaign__qr">
+        <img src="assets/qr/scan-money-leak.svg" alt="QR code for free website money leak scan" width="260" height="260">
+        <p>Primary QR: <code>offline_qr / print / money_leak_scan</code></p>
+      </div>
     </div>
   </section>
 
@@ -585,6 +650,7 @@ section { padding: 6rem 0; }
           <option>Automate bookings and enquiries</option>
           <option>Complete redesign + rebrand</option>
         </select>
+        <input type="hidden" name="source" id="lead-source" value="website-direct">
         <input type="text" name="company" class="form__input form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
         <textarea name="message" placeholder="Tell us about your business and what success looks like..." rows="4" class="form__input"></textarea>
         <p class="form__note">By submitting, you agree to be contacted about your website audit.</p>
@@ -681,6 +747,23 @@ document.querySelectorAll('.faq__question').forEach((button) => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+// Campaign source tracking from URL params
+const params = new URLSearchParams(window.location.search);
+const leadSourceInput = document.getElementById('lead-source');
+const heroBadge = document.querySelector('.hero__badge');
+
+const utmSource = params.get('utm_source');
+const utmMedium = params.get('utm_medium');
+const utmCampaign = params.get('utm_campaign');
+
+if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
+  leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
+}
+
+if (heroBadge && utmSource === 'offline_qr') {
+  heroBadge.textContent = '📍 You scanned the Money-Leak Audit QR';
+}
+
 // Contact form submission
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
@@ -702,6 +785,7 @@ form?.addEventListener('submit', async (e) => {
     `Phone: ${payload.phone || ''}`,
     `Website: ${payload.website || ''}`,
     `Goal: ${payload.goal || ''}`,
+    `Source: ${payload.source || 'website-direct'}`,
     '',
     'Business details:',
     `${payload.message || ''}`,
@@ -726,6 +810,9 @@ form?.addEventListener('submit', async (e) => {
     }
 
     form.reset();
+    if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
+      leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
+    }
   } catch (error) {
     statusEl.textContent = 'Something went wrong submitting the form. Please email hello@improveyoursite.com directly.';
   }
