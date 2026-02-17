@@ -107,30 +107,30 @@ form?.addEventListener('submit', async (e) => {
     `${payload.message || ''}`,
   ];
 
-  const endpoint = form.dataset.endpoint;
+  const endpoint = form.dataset.endpoint || 'https://formsubmit.co/ajax/james@improveyoursite.com';
 
   try {
-    if (endpoint) {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error('Submission failed');
-      statusEl.textContent = 'Thanks — your audit request has been sent. We will be in touch shortly.';
-    } else {
-      const subject = encodeURIComponent('New Website Audit Request');
-      const body = encodeURIComponent(lines.join('\n'));
-      window.location.href = `mailto:james@improveyoursite.com?subject=${subject}&body=${body}`;
-      statusEl.textContent = 'Thanks! Your email app should open now so you can send your audit request.';
-    }
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error('Submission failed');
+    statusEl.textContent = 'Thanks — your audit request has been sent. We will be in touch shortly.';
 
     form.reset();
     if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
       leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
     }
   } catch (error) {
-    statusEl.textContent = 'Something went wrong submitting the form. Please email james@improveyoursite.com directly.';
+    const subject = encodeURIComponent('New Website Audit Request');
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = `mailto:james@improveyoursite.com?subject=${subject}&body=${body}`;
+    statusEl.textContent = 'Submission fallback opened your email app. Please send the draft to complete your request.';
   }
 });
 
