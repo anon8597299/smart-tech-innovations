@@ -14,30 +14,30 @@
   <title>Our Work — ImproveYourSite</title>
   <link rel="stylesheet" href="src/css/style.css">
   <style>
-    .work-hero { padding: 8.5rem 0 2.4rem; background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 100%); }
+    .work-hero { padding: 7.2rem 0 1.5rem; background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 100%); }
     .work-hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1rem; align-items: start; }
     .work-hero p { color:#55627b; max-width: 840px; margin-top:0.75rem; }
     .work-meta { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.95rem; }
     .work-meta span { border:1px solid #dbe3f3; background:#fff; color:#334155; border-radius:999px; font-size:0.78rem; font-weight:700; padding:0.32rem 0.7rem; }
 
-    .work-summary { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:0.9rem; box-shadow:0 10px 24px rgba(2,6,23,0.05); }
+    .work-summary { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:0.75rem; box-shadow:0 10px 24px rgba(2,6,23,0.05); }
     .work-summary h3 { font-size:1rem; margin-bottom:0.4rem; }
     .work-summary p { margin:0; color:#475569; font-size:0.9rem; }
     .work-summary p + p { margin-top:0.55rem; }
 
-    .work-showcase { padding: 1.1rem 0 0; background: linear-gradient(180deg,#ffffff 0%, #f8fbff 45%, #f6f7ff 100%); }
-    .work-toolbar { display:flex; align-items:flex-end; justify-content:space-between; gap:0.7rem; flex-wrap:wrap; margin-bottom:1rem; padding-bottom:0.8rem; border-bottom:1px solid #e8edf7; }
+    .work-showcase { padding: 0.7rem 0 0; background: linear-gradient(180deg,#ffffff 0%, #f8fbff 45%, #f6f7ff 100%); }
+    .work-toolbar { display:flex; align-items:flex-end; justify-content:space-between; gap:0.55rem; flex-wrap:wrap; margin-bottom:0.75rem; padding-bottom:0.55rem; border-bottom:1px solid #e8edf7; }
     .work-toolbar h2 { margin:0; font-size:1.25rem; }
     .work-toolbar p { margin:0.2rem 0 0; color:#64748b; font-size:0.9rem; }
     .work-jump { display:flex; flex-wrap:wrap; gap:0.45rem; margin-top:0.7rem; }
     .work-jump a { font-size:0.78rem; font-weight:700; color:#334155; background:#f8fafc; border:1px solid #dce4f4; border-radius:999px; padding:0.32rem 0.62rem; }
     .work-jump a:hover { background:#eef2ff; border-color:#c4d0ff; color:#3730a3; }
 
-    .work-blog-system { margin-bottom:1rem; background:linear-gradient(135deg,#eef2ff 0%, #f8faff 100%); border:1px solid #dbe5ff; border-radius:16px; padding:1rem; }
+    .work-blog-system { margin-bottom:0.75rem; background:linear-gradient(135deg,#eef2ff 0%, #f8faff 100%); border:1px solid #dbe5ff; border-radius:16px; padding:0.8rem; }
     .work-blog-system h3 { margin-bottom:0.35rem; }
-    .work-blog-system p { color:#475569; margin:0.35rem 0 0.65rem; }
-    .work-blog-system__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0.7rem; }
-    .work-blog-system__grid article { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:0.8rem; }
+    .work-blog-system p { color:#475569; margin:0.25rem 0 0.5rem; }
+    .work-blog-system__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0.5rem; }
+    .work-blog-system__grid article { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:0.6rem; }
     .work-blog-system__grid h4 { font-size:0.92rem; margin-bottom:0.2rem; }
     .work-blog-system__grid p { margin:0; font-size:0.84rem; color:#475569; }
 
@@ -46,7 +46,7 @@
       background: linear-gradient(135deg,#f8faff 0%, #f2f7ff 100%);
       border: 1px solid #dbe7ff;
       border-radius: 16px;
-      padding: 1rem;
+      padding: 0.8rem;
     }
     .full-sites h3 { margin-bottom: 0.35rem; }
     .full-sites p { margin: 0; color: #475569; }
@@ -61,7 +61,7 @@
     .full-sites-card a { margin-top:0.55rem; width:100%; }
 
     .work-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:1rem; }
-    .work-card { background:#fff; border:1px solid #e6eaf2; border-radius:18px; padding:1rem; display:flex; flex-direction:column; gap:0.65rem; box-shadow:0 12px 28px rgba(2,6,23,0.04); transition:all .22s ease; }
+    .work-card { background:#fff; border:1px solid #e6eaf2; border-radius:18px; padding:0.8rem; display:flex; flex-direction:column; gap:0.5rem; box-shadow:0 12px 28px rgba(2,6,23,0.04); transition:all .22s ease; }
     .work-card:nth-child(odd) { background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%); }
     .work-card:nth-child(even) { background: linear-gradient(180deg,#ffffff 0%, #f9fafb 100%); }
     .work-card:hover { transform:translateY(-4px); border-color:#cbd5ff; box-shadow:0 18px 34px rgba(31,41,55,0.10); }
@@ -86,7 +86,12 @@
       .work-blog-system__grid { grid-template-columns: 1fr; }
       .full-sites-grid { grid-template-columns: 1fr; }
       .work-grid { grid-template-columns: 1fr; }
-      .work-hero { padding-top: 7.4rem; }
+      .work-hero { padding-top: 6.6rem; padding-bottom: 1rem; }
+      .work-meta { gap: 0.35rem; margin-top: 0.6rem; }
+      .work-summary p + p { margin-top: 0.35rem; }
+      .work-card__list { display: none; }
+      .work-card__actions { margin-top: 0.2rem; }
+      .work-cta { margin-top: 0.9rem; padding: 1rem; border-radius: 14px; }
     }
   </style>
   <!-- Google Tag Manager -->
@@ -119,7 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container work-hero-grid">
       <div>
         <h1 class="hero__title">Our Work</h1>
-        <p>Each showcase highlights a different industry build — because no two business types should use the same website structure.</p>
+        <p>Pick a structure built for your industry, not a generic template.</p>
         <div class="work-meta">
           <span>Industry-specific build logic</span>
           <span>Ranking-focused structure</span>
@@ -129,9 +134,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <aside class="work-summary">
         <h3>Built for Industry-Specific Performance</h3>
-        <p>Trades, service providers, consultants, and local operators all have distinct ranking signals and customer decision journeys.</p>
-        <p>We design around those specifics: service hierarchy, geo-targeting, content depth, schema structure, and conversion flow.</p>
-        <p>When those key elements are aligned correctly, your site has a stronger foundation to rank higher and convert more consistently.</p>
+        <p>Every industry has different ranking signals and buying behaviour.</p>
+        <p>These packages are built around service structure, local intent, and conversion flow.</p>
       </aside>
     </div>
   </section>
@@ -141,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="work-toolbar">
         <div>
           <h2>Choose Your Best-Fit Package Style</h2>
-          <p>Preview the structure that matches your industry and growth goals.</p>
+          <p>Preview by industry.</p>
           <div class="work-jump">
             <a href="#full-sites">Full Sites</a>
             <a href="#pkg-trades">Trades</a>
@@ -155,27 +159,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <section class="work-blog-system" aria-label="Automated blog growth system">
-        <h3>Automated Blog Growth System (Premium)</h3>
-        <p>This is critical because rankings and leads compound over time when content is published consistently. Instead of random blog posts, we build a structured content engine that supports service pages, improves topical authority, and drives conversion-ready traffic.</p>
+        <h3>Premium Blog Growth System</h3>
+        <p>Structured publishing to build rankings and turn traffic into enquiries.</p>
         <div class="work-blog-system__grid">
           <article>
-            <h4>1) Targeted Topic Mapping</h4>
-            <p>We map high-intent service and problem keywords to content clusters aligned to your offer.</p>
+            <h4>1) Topic Mapping</h4>
+            <p>High-intent keyword clusters.</p>
           </article>
           <article>
-            <h4>2) Structured Publishing Flow</h4>
-            <p>Scheduled posts use consistent page format, internal links, and metadata for better crawl clarity.</p>
+            <h4>2) Publishing Flow</h4>
+            <p>Consistent pages + internal links.</p>
           </article>
           <article>
-            <h4>3) Conversion Integration</h4>
-            <p>Each article supports enquiry pathways so traffic growth translates into qualified inbound leads.</p>
+            <h4>3) Conversion Layer</h4>
+            <p>Each article pushes to enquiry.</p>
           </article>
         </div>
       </section>
 
       <section class="full-sites" id="full-sites" aria-label="Full showcase websites">
         <h3>Full Showcase Websites (Multi-Page)</h3>
-        <p>These are complete sample websites so prospects can click through full experiences, not just single-page concepts. Each includes a component breakdown explaining why each section creates value for the business owner and end user.</p>
+        <p>Complete multi-page samples with concise component-value logic.</p>
         <div class="full-sites-grid">
           <article class="full-sites-card">
             <span class="tag">Trades Style</span>
@@ -207,11 +211,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#D97706; --c2:#1F2937;"></div>
           <span class="tag">Trades • Industrial High-Trust</span>
           <h3>Trades Lead Engine</h3>
-          <p>Built to convert urgent callouts into booked jobs.</p>
+          <p>Built to convert urgent callouts fast.</p>
           <ul class="work-card__list">
-            <li>• Emergency-first conversion flow</li>
-            <li>• Local service-area page structure</li>
-            <li>• Quote + call tracking foundations</li>
+            <li>• Emergency-first flow</li>
+            <li>• Local service pages</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/sites/trades-rapid/index.html">Explore Trade Package</a>
@@ -222,11 +225,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#DB2777; --c2:#7C3AED;"></div>
           <span class="tag">Retail • Lifestyle Commerce</span>
           <h3>Retail Shopfront Growth Site</h3>
-          <p>Turn foot traffic and social clicks into in-store demand.</p>
+          <p>Turn social traffic into in-store demand.</p>
           <ul class="work-card__list">
-            <li>• Offer-led promo architecture</li>
-            <li>• Category and enquiry page hierarchy</li>
-            <li>• Campaign tagging ready for tracking</li>
+            <li>• Offer-led promo flow</li>
+            <li>• Category + enquiry pages</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/retail-shopfront.html">Explore Retail Package</a>
@@ -237,11 +239,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#0284C7; --c2:#0F766E;"></div>
           <span class="tag">Healthcare • Clinical Calm + Clarity</span>
           <h3>Clinic Booking Optimizer</h3>
-          <p>Reduce missed bookings and simplify patient intake.</p>
+          <p>Reduce missed bookings and admin friction.</p>
           <ul class="work-card__list">
-            <li>• Clear service-to-booking handoff</li>
-            <li>• Patient trust and clarity blocks</li>
-            <li>• Structured enquiry capture flow</li>
+            <li>• Service-to-booking handoff</li>
+            <li>• Trust + clarity blocks</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/health-clinic-booking.html">Explore Clinic Package</a>
@@ -252,11 +253,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#334155; --c2:#B45309;"></div>
           <span class="tag">Professional Services • Premium Advisory</span>
           <h3>Accounting Firm Conversion Site</h3>
-          <p>Higher-value enquiries from stronger offer positioning.</p>
+          <p>Position for higher-value enquiries.</p>
           <ul class="work-card__list">
-            <li>• Authority-first messaging stack</li>
-            <li>• Service pathway clarity by buyer stage</li>
-            <li>• Lead qualification form strategy</li>
+            <li>• Authority-first messaging</li>
+            <li>• Buyer-stage pathways</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/accounting-firm-conversion.html">Explore Accounting Package</a>
@@ -267,11 +267,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#6D28D9; --c2:#0891B2;"></div>
           <span class="tag">Hospitality • Energetic Venue Funnel</span>
           <h3>Hospitality Events Funnel</h3>
-          <p>Convert event interest into confirmed bookings.</p>
+          <p>Turn event interest into bookings.</p>
           <ul class="work-card__list">
-            <li>• Package-led event enquiry pages</li>
-            <li>• Faster form-to-response workflow</li>
-            <li>• Promotion-ready campaign sections</li>
+            <li>• Package-led enquiry pages</li>
+            <li>• Faster form response flow</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/hospitality-events-funnel.html">Explore Hospitality Package</a>
@@ -282,11 +281,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="swatch" style="--c1:#047857; --c2:#1D4ED8;"></div>
           <span class="tag">Consulting • Strategic Authority</span>
           <h3>Consulting Authority Build</h3>
-          <p>Build premium perception before first contact.</p>
+          <p>Build premium authority before contact.</p>
           <ul class="work-card__list">
-            <li>• Outcome-led positioning framework</li>
-            <li>• Proof and case-study page flow</li>
-            <li>• High-intent consultation capture</li>
+            <li>• Outcome-led positioning</li>
+            <li>• Case-study proof flow</li>
           </ul>
           <div class="work-card__actions">
             <a class="btn btn--ghost" href="showcase/consulting-brand-authority.html">Explore Consulting Package</a>
