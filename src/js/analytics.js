@@ -31,6 +31,8 @@
 
   function initGtm() {
     if (!cfg.gtmId) return;
+    const existing = document.querySelector(`script[src*="googletagmanager.com/gtm.js?id=${cfg.gtmId}"]`);
+    if (existing || (window.google_tag_manager && window.google_tag_manager[cfg.gtmId])) return;
     ensureDataLayer();
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
     loadScript(`https://www.googletagmanager.com/gtm.js?id=${cfg.gtmId}`);

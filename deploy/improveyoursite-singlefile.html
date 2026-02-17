@@ -409,8 +409,19 @@ section { padding: 6rem 0; }
     "areaServed": "AU"
   }
   </script>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <!-- Navigation -->
   <header class="header" id="header">
     <nav class="nav container">
@@ -840,7 +851,7 @@ section { padding: 6rem 0; }
 // Fill these IDs when ready. Leave blank to disable each integration.
 window.__IYS_ANALYTICS__ = {
   ga4MeasurementId: '', // G-XXXXXXXXXX
-  gtmId: '', // GTM-XXXXXXX
+  gtmId: 'GTM-WVV297M5', // Google Tag Manager
   metaPixelId: '', // e.g. 123456789012345
   clarityId: '', // clarity project id
   googleAdsId: '', // AW-XXXXXXXXX
@@ -883,6 +894,8 @@ window.__IYS_ANALYTICS__ = {
 
   function initGtm() {
     if (!cfg.gtmId) return;
+    const existing = document.querySelector(`script[src*="googletagmanager.com/gtm.js?id=${cfg.gtmId}"]`);
+    if (existing || (window.google_tag_manager && window.google_tag_manager[cfg.gtmId])) return;
     ensureDataLayer();
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
     loadScript(`https://www.googletagmanager.com/gtm.js?id=${cfg.gtmId}`);
