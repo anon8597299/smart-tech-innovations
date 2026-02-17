@@ -7,20 +7,21 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--brand-ink);
   background: #fafafa;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
-img { max-width: 100%; display: block; }
+img, svg, iframe { max-width: 100%; display: block; height: auto; }
 
 /* ===== UTILITIES ===== */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 1.5rem; }
 .accent { color: var(--brand-primary); }
 .red { color: #e74c3c; }
 .green { color: var(--brand-accent); }
@@ -372,12 +373,27 @@ section { padding: 6rem 0; }
 @media (max-width: 768px) {
   section { padding: 3.25rem 0; }
 
-  .nav__menu { 
-    position: fixed; top: 72px; right: -100%; width: 280px; height: calc(100vh - 72px);
-    background: #fff; flex-direction: column; padding: 2rem; gap: 1.5rem;
-    box-shadow: -5px 0 30px rgba(0,0,0,0.1); transition: right 0.3s;
+  .container { padding: 0 1rem; }
+
+  .nav__menu {
+    position: fixed;
+    top: 72px;
+    right: -100vw;
+    width: 100vw;
+    max-width: 100vw;
+    height: calc(100vh - 72px);
+    background: #fff;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.7rem;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: none;
+    overflow-y: auto;
+    transition: right 0.25s ease;
   }
   .nav__menu.active { right: 0; }
+  .nav__link { display: block; width: 100%; padding: 0.85rem 0.95rem; border-radius: 10px; background: #f8fafc; }
+  .nav__link.nav__cta { text-align: center; background: var(--brand-primary); }
   .nav__toggle { display: flex; }
 
   .hero { padding: 7rem 0 3rem; }
@@ -421,5 +437,13 @@ section { padding: 6rem 0; }
   .sticky-cta p { font-size: 0.82rem; }
 
   .form__row { grid-template-columns: 1fr; }
+
+  .problem__grid,
+  .services__grid,
+  .portfolio__grid,
+  .pricing__grid,
+  .work-grid,
+  .case-grid { min-width: 0; }
+
   .footer__content { flex-direction: column; }
 }
