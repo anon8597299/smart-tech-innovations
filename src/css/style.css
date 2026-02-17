@@ -293,9 +293,6 @@ section { padding: 6rem 0; }
 .roi__hint { font-size: 0.82rem; color: #5f5f7c; margin-top: -0.2rem; }
 
 /* ===== PREMIUM BLUEPRINT ===== */
-.local-campaign { background:#fff; }
-.local-campaign .blueprint-card p { margin-bottom:.6rem; }
-
 .premium-blueprint { background: #f8f7ff; }
 .premium-blueprint__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .blueprint-card {
