@@ -132,20 +132,28 @@ section { padding: 6rem 0; }
 
 /* ===== PRICING ===== */
 .pricing { background: #fafafa; }
+.pricing__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; align-items: stretch; }
 .pricing__card {
-  max-width: 500px; margin: 0 auto; background: #fff; border-radius: 20px;
-  padding: 3rem; text-align: center; border: 2px solid var(--brand-primary);
-  box-shadow: 0 20px 60px rgba(108,92,231,0.15); position: relative;
+  background: #fff; border-radius: 20px; padding: 2rem 1.4rem 1.5rem;
+  text-align: center; border: 1px solid #e8eaf5; position: relative;
+}
+.pricing__card--featured {
+  border: 2px solid var(--brand-primary);
+  box-shadow: 0 18px 45px rgba(91,77,255,0.16);
+}
+.pricing__card--premium {
+  border: 2px solid rgba(45,212,191,0.45);
+  box-shadow: 0 14px 36px rgba(16,185,129,0.12);
 }
 .pricing__badge {
   position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-  background: var(--brand-primary); color: #fff; padding: 0.4rem 1.5rem;
-  border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+  background: var(--brand-primary); color: #fff; padding: 0.35rem 1rem;
+  border-radius: 50px; font-size: 0.78rem; font-weight: 700;
 }
-.pricing__amount { font-size: 3.5rem; font-weight: 800; color: var(--brand-ink); margin: 1.5rem 0 0.5rem; }
-.pricing__period { color: #666; font-size: 1.1rem; margin-bottom: 2rem; }
-.pricing__features { text-align: left; margin-bottom: 2rem; }
-.pricing__features li { padding: 0.6rem 0; font-size: 1rem; color: #444; border-bottom: 1px solid #f0f0f0; }
+.pricing__amount { font-size: 2.4rem; font-weight: 800; color: var(--brand-ink); margin: 1.2rem 0 0.4rem; }
+.pricing__period { color: #4b5563; font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+.pricing__features { text-align: left; margin-bottom: 1.2rem; }
+.pricing__features li { padding: 0.5rem 0; font-size: 0.95rem; color: #334155; border-bottom: 1px solid #f1f5f9; }
 
 /* ===== CONTACT ===== */
 .contact { background: linear-gradient(135deg, var(--brand-primary), #a855f7); color: #fff; }
@@ -384,8 +392,12 @@ section { padding: 6rem 0; }
   /* Mobile quick mode: keep page sharp + direct */
   .process-section,
   .testimonials,
-  .pricing,
   .roi { display: none; }
+
+  .pricing__grid { grid-template-columns: 1fr; gap: 1rem; }
+  .pricing__card { padding: 1.2rem 1rem; }
+  .pricing__amount { font-size: 2rem; }
+  .pricing__features li { font-size: 0.9rem; padding: 0.42rem 0; }
 
   .problem__card:nth-child(n+3),
   .service__card:nth-child(n+4),
