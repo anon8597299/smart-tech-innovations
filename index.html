@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Smart Tech Innovations — Modern website redesign & automation for SMBs. 90%+ performance scores, SEO-optimized, fully automated booking & client portals.">
+  <meta name="description" content="ImproveYourSite by Smart Tech Innovations — high-converting website redesign, SEO, automation and lead systems for service businesses.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Smart Tech Innovations — Web Redesign & Automation">
-  <meta property="og:description" content="We transform legacy websites into high-performance, SEO-optimized digital experiences with built-in automation.">
+  <link rel="canonical" href="https://improveyoursite.com">
+  <meta property="og:title" content="ImproveYourSite — Web Redesign & Automation That Grows Revenue">
+  <meta property="og:description" content="We transform slow, outdated websites into high-performance lead engines with automation built in.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://improveyoursite.com">
-  <title>Smart Tech Innovations — Modern Web Redesign & Automation</title>
+  <title>ImproveYourSite — Web Redesign & Automation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -37,7 +38,8 @@
         <li><a href="#services" class="nav__link">Services</a></li>
         <li><a href="#process" class="nav__link">Process</a></li>
         <li><a href="#results" class="nav__link">Results</a></li>
-        <li><a href="#pricing" class="nav__link">Pricing</a></li>
+        <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+        <li><a href="#faq" class="nav__link">FAQ</a></li>
         <li><a href="#contact" class="nav__link nav__cta">Get Started</a></li>
       </ul>
       <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
@@ -72,6 +74,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="trust-strip" aria-label="Trust indicators">
+    <div class="container trust-strip__inner">
+      <div class="trust-strip__item"><strong>50+</strong> websites improved</div>
+      <div class="trust-strip__item"><strong>90+ Lighthouse</strong> performance targets</div>
+      <div class="trust-strip__item"><strong>SEO-ready</strong> on launch day</div>
+      <div class="trust-strip__item"><strong>Automation-first</strong> workflows</div>
     </div>
   </section>
 
@@ -198,6 +210,46 @@
     </div>
   </section>
 
+  <!-- Portfolio -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="section__title">Recent Transformation Projects</h2>
+      <p class="section__subtitle">A few examples of how strategic redesign + automation improves real business outcomes.</p>
+      <div class="portfolio__grid">
+        <article class="portfolio__card">
+          <div class="portfolio__tag">Trades & Services</div>
+          <h3>Local Electrical Company</h3>
+          <p>Rebuilt from a legacy template into a conversion-focused funnel with instant quote flow.</p>
+          <ul>
+            <li><strong>+212%</strong> quote requests in 60 days</li>
+            <li><strong>2.8s → 0.9s</strong> mobile load time</li>
+            <li><strong>+41%</strong> organic traffic</li>
+          </ul>
+        </article>
+        <article class="portfolio__card">
+          <div class="portfolio__tag">Healthcare</div>
+          <h3>Private Clinic Group</h3>
+          <p>Streamlined booking and patient enquiry workflows across multiple clinic locations.</p>
+          <ul>
+            <li><strong>34%</strong> fewer missed bookings</li>
+            <li><strong>24/7</strong> appointment capture</li>
+            <li><strong>+67%</strong> first-page keyword wins</li>
+          </ul>
+        </article>
+        <article class="portfolio__card">
+          <div class="portfolio__tag">Professional Services</div>
+          <h3>Consultancy Rebrand</h3>
+          <p>Positioned premium offers with clear authority, social proof and lead qualification flows.</p>
+          <ul>
+            <li><strong>3.4x</strong> qualified lead volume</li>
+            <li><strong>+58%</strong> average time on page</li>
+            <li><strong>+29%</strong> close rate from web leads</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section class="pricing" id="pricing">
     <div class="container">
@@ -223,6 +275,40 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <p class="section__subtitle">Straight answers before you commit.</p>
+      <div class="faq__list" id="faq-list">
+        <article class="faq__item">
+          <button class="faq__question" type="button" aria-expanded="false">
+            How long does a full website transformation take?
+          </button>
+          <div class="faq__answer">
+            <p>Most projects go live in 2–4 weeks depending on page count, copywriting needs, and integrations.</p>
+          </div>
+        </article>
+        <article class="faq__item">
+          <button class="faq__question" type="button" aria-expanded="false">
+            Can you keep our current branding and content?
+          </button>
+          <div class="faq__answer">
+            <p>Yes — we can refine your existing brand and migrate content, then improve messaging for better conversion.</p>
+          </div>
+        </article>
+        <article class="faq__item">
+          <button class="faq__question" type="button" aria-expanded="false">
+            Do you provide support after launch?
+          </button>
+          <div class="faq__answer">
+            <p>Absolutely. Every launch includes post-live support, monitoring, and iterative conversion improvements.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact / CTA -->
   <section class="contact" id="contact">
     <div class="container">
@@ -233,9 +319,23 @@
           <input type="text" name="name" placeholder="Your Name" required class="form__input">
           <input type="email" name="email" placeholder="Your Email" required class="form__input">
         </div>
-        <input type="url" name="website" placeholder="Your Current Website URL" class="form__input">
-        <textarea name="message" placeholder="Tell us about your business..." rows="4" class="form__input"></textarea>
+        <div class="form__row">
+          <input type="tel" name="phone" placeholder="Phone (optional)" class="form__input">
+          <input type="url" name="website" placeholder="Your Current Website URL" class="form__input">
+        </div>
+        <select name="goal" class="form__input" aria-label="Primary goal">
+          <option value="" selected>Primary goal (optional)</option>
+          <option>Get more leads</option>
+          <option>Improve SEO rankings</option>
+          <option>Speed up website</option>
+          <option>Automate bookings and enquiries</option>
+          <option>Complete redesign + rebrand</option>
+        </select>
+        <input type="text" name="company" class="form__input form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
+        <textarea name="message" placeholder="Tell us about your business and what success looks like..." rows="4" class="form__input"></textarea>
+        <p class="form__note">By submitting, you agree to be contacted about your website audit.</p>
         <button type="submit" class="btn btn--primary btn--full">Request Free Audit</button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -256,7 +356,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2026 Smart Tech Innovations. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Smart Tech Innovations. All rights reserved.</p>
       </div>
     </div>
   </footer>
