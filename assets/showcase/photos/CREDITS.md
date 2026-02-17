@@ -7,11 +7,11 @@ Images were resized for web performance (max dimension ~1600px) without changing
 ## Files and licences
 
 1. **electrician.jpg**
-   - Source file: *Electricians working on systems equipment in the back of house area of the future LIRR concourse. 10-03-2019 (48844065291).jpg*
-   - Creator: **MTA Capital Construction Mega Projects**
+   - Source file: *Electricians cutting racked wires in a back of house electric pull room. 09-25-2019*
+   - Creator: **MTA C&D - EAST SIDE ACCESS**
    - Licence: **CC BY 2.0**
-   - Licence URL: https://creativecommons.org/licenses/by/2.0
-   - Source URL: https://commons.wikimedia.org/wiki/File:Electricians_working_on_systems_equipment_in_the_back_of_house_area_of_the_future_LIRR_concourse._10-03-2019_(48844065291).jpg
+   - Licence URL: https://creativecommons.org/licenses/by/2.0/
+   - Source URL: https://www.flickr.com/photos/59595815@N03/48804750748
 
 2. **retail-storefront.jpg**
    - Source file: *Parkers-bistro-storefront-sioux-quartzite-iconic-downtown-sioux-falls-restaurant.jpg*
