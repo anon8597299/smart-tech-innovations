@@ -41,6 +41,22 @@
     .work-blog-system__grid h4 { font-size:0.92rem; margin-bottom:0.2rem; }
     .work-blog-system__grid p { margin:0; font-size:0.84rem; color:#475569; }
 
+    .full-sites {
+      margin: 0 0 1rem;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1rem;
+    }
+    .full-sites h3 { margin-bottom: 0.35rem; }
+    .full-sites p { margin: 0; color: #475569; }
+    .full-sites-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:0.7rem; margin-top:0.8rem; }
+    .full-sites-card { border:1px solid #e2e8f0; border-radius:12px; padding:0.8rem; background:#f8fafc; }
+    .full-sites-card .tag { display:inline-block; width:max-content; padding:0.28rem 0.7rem; border-radius:999px; background:#eef2ff; color:#334155; font-size:0.76rem; font-weight:700; }
+    .full-sites-card h4 { margin:0.12rem 0 0.25rem; }
+    .full-sites-card p { margin:0; font-size:0.86rem; color:#475569; }
+    .full-sites-card a { margin-top:0.55rem; width:100%; }
+
     .work-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:1rem; }
     .work-card { background:#fff; border:1px solid #e6eaf2; border-radius:18px; padding:1rem; display:flex; flex-direction:column; gap:0.65rem; box-shadow:0 12px 28px rgba(2,6,23,0.04); transition:all .22s ease; }
     .work-card:hover { transform:translateY(-4px); border-color:#cbd5ff; box-shadow:0 18px 34px rgba(31,41,55,0.10); }
@@ -63,6 +79,7 @@
     @media (max-width: 940px) {
       .work-hero-grid { grid-template-columns: 1fr; }
       .work-blog-system__grid { grid-template-columns: 1fr; }
+      .full-sites-grid { grid-template-columns: 1fr; }
       .work-grid { grid-template-columns: 1fr; }
       .work-hero { padding-top: 7.4rem; }
     }
@@ -121,6 +138,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h2>Choose Your Best-Fit Package Style</h2>
           <p>Preview the structure that matches your industry and growth goals.</p>
           <div class="work-jump">
+            <a href="#full-sites">Full Sites</a>
             <a href="#pkg-trades">Trades</a>
             <a href="#pkg-retail">Retail</a>
             <a href="#pkg-health">Healthcare</a>
@@ -146,6 +164,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <article>
             <h4>3) Conversion Integration</h4>
             <p>Each article supports enquiry pathways so traffic growth translates into qualified inbound leads.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="full-sites" id="full-sites" aria-label="Full showcase websites">
+        <h3>Full Showcase Websites (Multi-Page)</h3>
+        <p>These are complete sample websites so prospects can click through full experiences, not just single-page concepts. Each includes a component breakdown explaining why each section creates value for the business owner and end user.</p>
+        <div class="full-sites-grid">
+          <article class="full-sites-card">
+            <span class="tag">Trades Style</span>
+            <h4>TradesRapid</h4>
+            <p>4-page electrician-style site with conversion funnel and component value notes.</p>
+            <a class="btn btn--ghost" href="showcase/sites/trades-rapid/index.html">Open Full Trades Site</a>
+          </article>
+          <article class="full-sites-card">
+            <span class="tag">Healthcare Style</span>
+            <h4>ClinicTrust</h4>
+            <p>4-page clinic booking structure with trust and patient-experience component logic.</p>
+            <a class="btn btn--ghost" href="showcase/sites/clinic-trust/index.html">Open Full Clinic Site</a>
+          </article>
+          <article class="full-sites-card">
+            <span class="tag">Retail Style</span>
+            <h4>RetailPulse</h4>
+            <p>4-page retail growth site focused on campaign conversion and in-store actions.</p>
+            <a class="btn btn--ghost" href="showcase/sites/retail-pulse/index.html">Open Full Retail Site</a>
           </article>
         </div>
       </section>

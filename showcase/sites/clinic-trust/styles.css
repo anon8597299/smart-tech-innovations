@@ -1,0 +1,30 @@
+:root {
+  --bg: #f4fbfb;
+  --surface: #ffffff;
+  --text: #16333b;
+  --muted: #4d6970;
+  --primary: #0f766e;
+  --line: #d6e9e7;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{width:min(1080px,92vw);margin:0 auto}
+.site-header{position:sticky;top:0;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0;gap:.8rem}
+.brand{font-weight:800}.nav-links{display:flex;gap:.6rem;flex-wrap:wrap}.nav-links a{border:1px solid var(--line);padding:.34rem .63rem;border-radius:999px;font-size:.86rem}
+.hero{padding:4.6rem 0 2rem}.badge{display:inline-block;border:1px solid #8dd3cb;background:#e7f8f5;color:#0f5d57;font-weight:700;padding:.28rem .66rem;border-radius:999px;font-size:.76rem}
+h1{font-size:clamp(1.8rem,4.7vw,2.8rem);line-height:1.08;margin:.82rem 0 .62rem}.lead{color:var(--muted);max-width:760px}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:.9rem;margin-top:1rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.card h3{margin-top:0}.card p{margin:.3rem 0 0;color:var(--muted)}
+.section{padding:1rem 0 2rem}.section h2{margin-bottom:.35rem}.section p{color:var(--muted)}
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem}
+.values article{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.8rem}
+.values h3{margin:.1rem 0 .26rem;font-size:.97rem}.values p{margin:0;font-size:.9rem;color:var(--muted)}
+.flow{display:grid;gap:.6rem;margin-top:.8rem}.flow article{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.8rem}
+.cta{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.68rem .96rem;border-radius:10px;font-weight:700;border:1px solid transparent}
+.btn-primary{background:var(--primary);color:#fff}.btn-secondary{border-color:var(--line);background:#fff}
+footer{padding:1rem 0 2rem;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+@media (max-width:900px){.hero{padding-top:4rem}.grid,.values{grid-template-columns:1fr}}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | TradesRapid Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    form { margin-top: .9rem; display:grid; gap:.55rem; }
+    input, textarea, select { width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--line); font: inherit; }
+    textarea { min-height: 120px; resize: vertical; }
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container nav"><a class="brand" href="index.html">⚡ TradesRapid</a><nav class="nav-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+  <main class="section">
+    <div class="container">
+      <span class="badge">Lead Funnel Demo</span>
+      <h1>Contact form built for quality enquiries, not spam volume.</h1>
+      <p class="lead">This form asks only what’s needed to triage the job and respond faster. Better form design creates better lead quality.</p>
+      <div class="hero-grid">
+        <article class="card">
+          <h3>Quote Request</h3>
+          <form>
+            <input placeholder="Name" />
+            <input placeholder="Phone" />
+            <input placeholder="Suburb" />
+            <select><option>Service needed</option><option>Emergency</option><option>Residential</option><option>Commercial</option></select>
+            <textarea placeholder="Tell us briefly what you need"></textarea>
+            <button class="btn btn-primary" type="button">Request callback</button>
+          </form>
+        </article>
+        <article class="card">
+          <h3>Why this form works</h3>
+          <ul>
+            <li>Filters low-intent leads with service intent question</li>
+            <li>Collects suburb for faster scheduling and route planning</li>
+            <li>Short enough to complete on mobile quickly</li>
+            <li>Supports source tracking for ad ROI analysis</li>
+          </ul>
+        </article>
+      </div>
+      <div class="cta"><a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a></div>
+    </div>
+  </main>
+  <footer><div class="container">TradesRapid contact demo • ImproveYourSite showcase.</div></footer>
+</body>
+</html>
