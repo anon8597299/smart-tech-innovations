@@ -45,6 +45,7 @@ Edit `analytics-config.js` with:
 - Sticky CTA clicks
 - ROI calculator usage
 - QR campaign source attribution (already embedded via UTMs)
+- Thank-you page views: `https://improveyoursite.com/thanks.html` (for Google Ads conversion URL goal)
 
 ## Next Milestones
 

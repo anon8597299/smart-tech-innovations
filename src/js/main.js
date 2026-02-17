@@ -121,13 +121,19 @@ form?.addEventListener('submit', async (e) => {
     });
 
     if (!res.ok) throw new Error('Submission failed');
-    statusEl.textContent = 'Thanks — your audit request has been sent. We will be in touch shortly.';
+    statusEl.textContent = 'Thanks — your audit request has been sent. Redirecting…';
     window.iysTrackLead?.(payload);
 
     form.reset();
     if (leadSourceInput && (utmSource || utmMedium || utmCampaign)) {
       leadSourceInput.value = `${utmSource || 'direct'}|${utmMedium || 'none'}|${utmCampaign || 'none'}`;
     }
+
+    const source = encodeURIComponent(payload.source || 'website-direct');
+    const goal = encodeURIComponent(payload.goal || '');
+    setTimeout(() => {
+      window.location.href = `/thanks.html?source=${source}&goal=${goal}`;
+    }, 350);
   } catch (error) {
     window.iysTrackEvent?.('lead_form_submit_fallback', { source: payload.source || 'website-direct' });
     const subject = encodeURIComponent('New Website Audit Request');
