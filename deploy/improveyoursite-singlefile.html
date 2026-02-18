@@ -1002,7 +1002,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="#pricing">Pricing</a>
           <a href="our-work.html">Our Work</a>
           <a href="#contact">Contact</a>
-          <a href="mailto:james@improveyoursite.com">james@improveyoursite.com</a>
+          <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a>
         </div>
       </div>
       <div class="footer__bottom">
@@ -1265,7 +1265,7 @@ form?.addEventListener('submit', async (e) => {
     `${payload.message || ''}`,
   ];
 
-  const endpoint = form.dataset.endpoint || 'https://formsubmit.co/ajax/james@improveyoursite.com';
+  const endpoint = form.dataset.endpoint || 'https://formsubmit.co/ajax/admin@improveyoursite.com';
 
   try {
     const res = await fetch(endpoint, {
@@ -1295,7 +1295,7 @@ form?.addEventListener('submit', async (e) => {
     window.iysTrackEvent?.('lead_form_submit_fallback', { source: payload.source || 'website-direct' });
     const subject = encodeURIComponent('New Website Audit Request');
     const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:james@improveyoursite.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:admin@improveyoursite.com?subject=${subject}&body=${body}`;
     statusEl.textContent = 'Submission fallback opened your email app. Please send the draft to complete your request.';
   }
 });
