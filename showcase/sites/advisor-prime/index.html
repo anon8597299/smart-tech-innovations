@@ -3,16 +3,306 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdvisorPrime Demo Site | ImproveYourSite Showcase</title>
+  <title>Pinnacle Financial Advice — Wealth Strategy, Dubbo NSW</title>
+  <meta name="description" content="Independent financial advice for professionals and business owners in Dubbo NSW. Specialising in wealth strategy, SMSF, and retirement planning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .demo-banner {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: .52rem 1rem;
+      font-size: .82rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a {
+      color: #2dd4bf;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: .4rem;
+    }
+    .site-header { top: 36px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+      margin-top: 1.4rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .service-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
+    .trust-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.1rem 0;
+      margin-top: 2rem;
+    }
+    .trust-bar .container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .testimonial-section {
+      padding: 2.4rem 0;
+      background: #eff6ff;
+      margin-top: 2rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    .cta-section { padding: 3rem 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
+    .btn-get-site {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #5b4dff;
+      color: #fff;
+      font-weight: 800;
+      padding: .9rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+    .btn-get-site:hover { background: #4c40db; }
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    /* Advisor-specific: credential badge */
+    .credential-strip {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      margin-top: .9rem;
+    }
+    .credential-strip span {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: .28rem .68rem;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header"><div class="container nav"><a class="brand" href="../../../index.html">⚡ ImproveYourSite</a><nav class="nav-links"><a href="../../../index.html">Main Site</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">📊 Pinnacle Financial Advice</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Book a Call</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <section class="hero"><div class="container"><span class="badge">Full Showcase Site • Advisory Style</span><h1>Professional-services style built to convert high-trust enquiries, not low-fit leads.</h1><p class="lead">This variant is designed for consultants, accounting firms, and advisors who need authority-led messaging, clear offer packaging, and stronger qualification before discovery calls.</p><div class="cta"><a class="btn btn-primary" href="contact.html">Primary CTA: Book Discovery Call</a><a class="btn btn-secondary" href="services.html">View Offer Structure</a></div><div class="trust-strip"><span>✓ Authority positioning</span><span>✓ Outcome-backed proof blocks</span><span>✓ Pre-call qualification flow</span></div><div class="grid"><article class="card"><h3>Core goals</h3><ul><li>Increase qualified call bookings</li><li>Reduce poor-fit enquiries</li><li>Show premium value without overloading copy</li><li>Improve conversion from referral + search traffic</li></ul></article><article class="panel"><h3>Conversion stack</h3><p>Trust-first credibility, then clear offer pathways and pre-call filters.</p><div class="chips"><span>Positioning statement</span><span>Client proof</span><span>Offer tiers</span><span>Qualification form</span></div></article></div></div></section>
-    <section class="section"><div class="container"><h2>Component value for advisory businesses</h2><p>Each section is mapped to either trust, qualification, or booking conversion.</p><div class="kpis"><article class="kpi"><strong>Higher call quality</strong><span>Qualification copy removes poor-fit leads.</span></article><article class="kpi"><strong>Faster trust</strong><span>Authority + proof reduces hesitation.</span></article><article class="kpi"><strong>Better close rates</strong><span>Offer framing sets expectations early.</span></article><article class="kpi"><strong>Less sales friction</strong><span>Clear next-step CTA reduces back-and-forth.</span></article></div><div class="list"><article><h3>Authority-led hero</h3><p>Positions credibility before pitching services.</p></article><article><h3>Offer tier cards</h3><p>Improves self-selection into the right engagement model.</p></article><article><h3>Qualification contact flow</h3><p>Screens fit before booking, protecting team capacity.</p></article></div><div class="cta"><a class="btn btn-primary" href="contact.html">Open Contact Funnel</a><a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a></div></div></section>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="badge">Independent · Fee-for-service · Dubbo NSW</span>
+        <h1>Wealth strategy built around your life, not a product commission</h1>
+        <p class="lead">Pinnacle Financial Advice provides independent, fee-for-service financial planning for business owners, professionals, and pre-retirees across regional NSW. No product bias. Just straightforward advice.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="contact.html">Book a Discovery Call</a>
+          <a class="btn btn-secondary" href="services.html">Explore Our Services</a>
+        </div>
+        <div class="trust-strip" aria-label="Credentials">
+          <span>✓ ASIC licensed AFS 412 890</span>
+          <span>✓ FPA member</span>
+          <span>✓ Fee-for-service only</span>
+          <span>✓ No product commissions</span>
+        </div>
+
+        <div class="grid" style="margin-top:1.4rem;">
+          <article class="card">
+            <h3>Who we work with</h3>
+            <p>We specialise in serving:</p>
+            <ul style="margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.93rem;">
+              <li>Business owners planning an exit</li>
+              <li>Professionals building a wealth base</li>
+              <li>Couples within 10 years of retirement</li>
+              <li>SMSF trustees seeking strategic guidance</li>
+            </ul>
+          </article>
+          <article class="panel" style="background:linear-gradient(140deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #bfdbfe;border-radius:14px;padding:1rem;">
+            <h3 style="margin:0 0 .4rem;">Why independent advice matters</h3>
+            <p style="margin:0;color:#1e40af;font-size:.9rem;">We're not aligned with any bank or insurance company. That means our recommendations are based entirely on what's right for your situation.</p>
+            <div class="chips" style="margin-top:.6rem;display:flex;gap:.4rem;flex-wrap:wrap;">
+              <span style="font-size:.76rem;font-weight:700;background:rgba(255,255,255,.85);border:1px solid #bfdbfe;padding:.24rem .56rem;border-radius:999px;">No conflicts of interest</span>
+              <span style="font-size:.76rem;font-weight:700;background:rgba(255,255,255,.85);border:1px solid #bfdbfe;padding:.24rem .56rem;border-radius:999px;">Transparent fees</span>
+              <span style="font-size:.76rem;font-weight:700;background:rgba(255,255,255,.85);border:1px solid #bfdbfe;padding:.24rem .56rem;border-radius:999px;">Evidence-based</span>
+            </div>
+          </article>
+        </div>
+        <div class="credential-strip">
+          <span>CFP® Certified</span>
+          <span>15+ years experience</span>
+          <span>SMSF specialist</span>
+          <span>Estate planning</span>
+          <span>Business succession</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Our advice areas</h2>
+          <p>Comprehensive financial planning across all life stages and business scenarios.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon">🏦</div>
+            <h3>Wealth Accumulation</h3>
+            <p>Investment strategies, portfolio construction, and asset allocation tailored to your goals and risk profile.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🏖️</div>
+            <h3>Retirement Planning</h3>
+            <p>Transition to retirement, pension strategies, and structuring income streams to sustain your lifestyle.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🏢</div>
+            <h3>SMSF Strategy</h3>
+            <p>Setup, ongoing strategy, and compliance for self-managed super funds. Full trustee support provided.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">💼</div>
+            <h3>Business Exit Planning</h3>
+            <p>Structuring the sale or transition of your business to maximise after-tax proceeds and personal outcomes.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🛡️</div>
+            <h3>Risk &amp; Insurance</h3>
+            <p>Life, TPD, income protection, and business expenses insurance analysis and placement.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">📜</div>
+            <h3>Estate Planning</h3>
+            <p>Wills, powers of attorney, binding death nominations, and intergenerational wealth transfer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">⭐ 5.0 Google rating (94 reviews)</div>
+        <div class="trust-item">🪪 ASIC AFS Lic. 412 890</div>
+        <div class="trust-item">📊 $180M+ assets under advice</div>
+        <div class="trust-item">🗓️ 15+ years in practice</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+      <div class="container">
+        <h2>What our clients say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"After 20 years of bank-aligned advice, switching to Pinnacle was a revelation. Marcus genuinely listens and the strategy he built for us is completely different — and so much better."</p>
+            <div class="reviewer">— David &amp; Carol B., Dubbo NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"We sold our business last year and Pinnacle structured the sale so well we saved over $120k in tax. Worth every cent of the fee. Couldn't recommend them more highly."</p>
+            <div class="reviewer">— Rachel T., Orange NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Finally an adviser who explains things in plain English. I actually understand my SMSF now. The annual reviews are thorough and they're always available when I have questions."</p>
+            <div class="reviewer">— James W., Parkes NSW</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPIs + CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="kpis" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin-top:.9rem;">
+          <article class="kpi"><strong>Discovery call free</strong><span>No obligation 30-min initial consultation.</span></article>
+          <article class="kpi"><strong>Transparent fees</strong><span>Fixed or ongoing fee — no trailing commissions.</span></article>
+          <article class="kpi"><strong>Regional specialists</strong><span>Understanding of rural and regional business needs.</span></article>
+          <article class="kpi"><strong>Ongoing support</strong><span>Annual reviews plus access as your needs change.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="contact.html">Book a Free Discovery Call</a>
+          <a class="btn btn-secondary" href="about.html">About Marcus</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get a site like this -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a professional website like this for your business?</h2>
+        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses starting from $497.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
+      </div>
+    </section>
   </main>
-  <footer><div class="container">AdvisorPrime full-site showcase • ImproveYourSite.</div></footer>
-  <a class="phone-cta" href="contact.html">Book call</a>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© 2025 Pinnacle Financial Advice Pty Ltd · ASIC AFS Lic. 412 890 · 45 Macquarie Street, Dubbo NSW 2830</p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">General advice only. This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="contact.html">📅 Book a free call</a>
 </body>
 </html>

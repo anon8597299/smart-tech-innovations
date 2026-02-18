@@ -3,96 +3,293 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClinicTrust Demo Site | ImproveYourSite Showcase</title>
+  <title>Hillcrest Family Clinic — GP & Allied Health, Orange NSW</title>
+  <meta name="description" content="Caring, professional GP and allied health services in Orange NSW. Book online today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Demo banner */
+    .demo-banner {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: .52rem 1rem;
+      font-size: .82rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a {
+      color: #2dd4bf;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: .4rem;
+    }
+    .site-header { top: 36px; }
+    /* Services section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+      margin-top: 1.4rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .service-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
+    /* Trust strip */
+    .trust-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.1rem 0;
+      margin-top: 2rem;
+    }
+    .trust-bar .container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .trust-bar .trust-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .trust-bar .trust-item span.icon { font-size: 1.1rem; }
+    /* Testimonial */
+    .testimonial-section {
+      padding: 2.4rem 0;
+      background: #f0fdf9;
+      margin-top: 2rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; color: var(--text); }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    /* CTA section */
+    .cta-section {
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
+    .cta-section .btn-get-site {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #5b4dff;
+      color: #fff;
+      font-weight: 800;
+      padding: .9rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+    .cta-section .btn-get-site:hover { background: #4c40db; }
+    /* Section spacing */
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    @media (max-width: 900px) {
+      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Demo banner -->
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="../../../index.html">⚡ ImproveYourSite</a>
+      <a class="brand" href="#">🏥 Hillcrest Family Clinic</a>
       <nav class="nav-links">
-        <a href="../../../index.html">Main Site</a>
         <a href="services.html">Services</a>
-        <a href="team.html">Team</a>
-        <a href="book.html">Book</a>
+        <a href="team.html">Our Team</a>
+        <a href="book.html">Book Online</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Full Showcase Site • Health Style</span>
-        <h1>Help patients feel safe to book on first visit, not after three return sessions.</h1>
-        <p class="lead">This complete health-style site prioritises reassurance, service fit, and booking clarity so clinics can lift appointment volume while reducing admin-heavy pre-booking questions.</p>
+        <span class="badge">Bulk-billing available · Orange NSW</span>
+        <h1>Caring for Orange families since 2008</h1>
+        <p class="lead">Hillcrest Family Clinic provides compassionate GP care, physiotherapy, and allied health services for patients of all ages. Same-day appointments often available.</p>
         <div class="cta cta-hero">
-          <a class="btn btn-primary" href="book.html">Primary CTA: Start Booking</a>
-          <a class="btn btn-secondary" href="services.html">See Service Clarity Layout</a>
+          <a class="btn btn-primary" href="book.html">Book an Appointment</a>
+          <a class="btn btn-secondary" href="services.html">View Our Services</a>
         </div>
-        <div class="trust-strip" aria-label="Trust and proof highlights">
-          <span>✓ Practitioner credibility blocks</span>
-          <span>✓ Eligibility + preparation guidance</span>
-          <span>✓ Appointment expectation framing</span>
+        <div class="trust-strip" aria-label="Trust signals">
+          <span>✓ Bulk billing available</span>
+          <span>✓ Same-day appointments</span>
+          <span>✓ AGPAL accredited</span>
+          <span>✓ Open 7 days</span>
         </div>
 
-        <div class="grid">
+        <div class="grid" style="margin-top:1.4rem;">
           <article class="card">
-            <h3>Core goals</h3>
-            <p>Increase appointment requests while reducing confusion around services, eligibility, and next steps.</p>
+            <h3>📍 Find Us</h3>
+            <p>14 Summer Street, Orange NSW 2800<br>
+               <strong>Mon–Fri:</strong> 8:00am – 6:00pm<br>
+               <strong>Sat–Sun:</strong> 9:00am – 1:00pm</p>
+            <p style="margin-top:.6rem;"><strong>Phone:</strong> (02) 6362 4400<br>
+               <strong>Email:</strong> reception@hillcrestclinic.com.au</p>
           </article>
           <article class="hero-visual">
-            <h3>Patient Journey</h3>
-            <p>Designed around reassurance first, then smooth conversion into booking intent.</p>
+            <h3>New patients welcome</h3>
+            <p>We're accepting new patients across all services. No referral required for GP appointments.</p>
             <div class="chips">
-              <span>Trust-first copy</span>
-              <span>Clear service fit</span>
-              <span>Low-friction booking</span>
-              <span>No-show reduction</span>
+              <span>General Practice</span>
+              <span>Physiotherapy</span>
+              <span>Psychology</span>
+              <span>Dietetics</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Services -->
     <section class="section">
       <div class="container">
-        <h2>Component value for clinic owners</h2>
-        <p>These are not decoration blocks — each component exists to improve patient outcomes and clinic conversion metrics.</p>
-
-        <div class="kpi-grid" aria-label="Expected business impact">
-          <article class="kpi"><strong>More bookings</strong><span>Clear action path from homepage to form.</span></article>
-          <article class="kpi"><strong>Better patient fit</strong><span>Service framing reduces wrong bookings.</span></article>
-          <article class="kpi"><strong>Less admin load</strong><span>Eligibility guidance reduces clarifying calls.</span></article>
-          <article class="kpi"><strong>Higher attendance</strong><span>Prep expectations reduce no-shows.</span></article>
+        <div class="section-head">
+          <h2>Our services</h2>
+          <p>Comprehensive healthcare for individuals and families under one roof.</p>
         </div>
-
-        <div class="values">
-          <article>
-            <h3>Service explainer cards</h3>
-            <p>Lower uncertainty and improve conversion from first-time visitors.</p>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon">🩺</div>
+            <h3>General Practice</h3>
+            <p>Routine checkups, chronic disease management, health plans, and preventive care for all ages.</p>
           </article>
-          <article>
-            <h3>Practitioner profiles</h3>
-            <p>Build familiarity and trust before booking.</p>
+          <article class="service-card">
+            <div class="icon">🧠</div>
+            <h3>Psychology</h3>
+            <p>Evidence-based mental health support. Medicare rebates available under a GP Mental Health Plan.</p>
           </article>
-          <article>
-            <h3>Eligibility + prep checklist</h3>
-            <p>Reduces no-shows and admin back-and-forth.</p>
+          <article class="service-card">
+            <div class="icon">🏃</div>
+            <h3>Physiotherapy</h3>
+            <p>Sports injuries, post-surgical rehab, chronic pain, and movement assessment by qualified physios.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🥗</div>
+            <h3>Dietetics</h3>
+            <p>Personalised nutrition plans for weight management, diabetes, heart health, and more.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">💉</div>
+            <h3>Immunisations</h3>
+            <p>Childhood vaccinations, flu shots, travel vaccines, and catch-up schedules.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">📋</div>
+            <h3>Health Assessments</h3>
+            <p>45+ health assessments, work medicals, pre-employment checks, and insurance medicals.</p>
           </article>
         </div>
+      </div>
+    </section>
 
-        <div class="cta">
-          <a class="btn btn-primary" href="book.html">Open Booking Demo</a>
-          <a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a>
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item"><span class="icon">⭐</span> 4.9 Google rating (280+ reviews)</div>
+        <div class="trust-item"><span class="icon">🏥</span> AGPAL accredited practice</div>
+        <div class="trust-item"><span class="icon">👨‍👩‍👧</span> 3,200+ active patients</div>
+        <div class="trust-item"><span class="icon">📅</span> 15+ years serving Orange</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+      <div class="container">
+        <h2>What our patients say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Dr Nguyen is absolutely brilliant. She takes the time to explain everything and actually listens. I've recommended Hillcrest to all my friends."</p>
+            <div class="reviewer">— Sarah M., Orange NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Got a same-day appointment for my son when he had a bad ear infection. The staff were so kind and efficient. Really impressed by this clinic."</p>
+            <div class="reviewer">— Tom R., Blayney NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Jake the physio sorted out my back in just three sessions. Couldn't be happier. Booked my follow-up online at midnight — super convenient."</p>
+            <div class="reviewer">— Lisa D., Orange NSW</div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid" aria-label="Clinic highlights">
+          <article class="kpi"><strong>Same-day available</strong><span>Call before 10am for same-day GP bookings.</span></article>
+          <article class="kpi"><strong>Bulk billing</strong><span>Available for children under 16 and concession card holders.</span></article>
+          <article class="kpi"><strong>Online booking</strong><span>Book instantly 24/7 via our patient portal.</span></article>
+          <article class="kpi"><strong>Allied health team</strong><span>4 disciplines, one convenient location.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="book.html">Book Online Now</a>
+          <a class="btn btn-secondary" href="team.html">Meet Our Team</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get a site like this CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a website like this for your business?</h2>
+        <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses starting from $497.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">ClinicTrust full-site showcase • ImproveYourSite.</div>
+    <div class="container">
+      <p style="margin:0;">© 2025 Hillcrest Family Clinic · 14 Summer Street, Orange NSW 2800 · (02) 6362 4400</p>
+      <p style="margin:.3rem 0 0; font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a> to show what your finished website will look like.</p>
+    </div>
   </footer>
 
-  <a class="phone-cta" href="book.html">Start booking</a>
+  <a class="phone-cta" href="book.html">📅 Book appointment</a>
 </body>
 </html>

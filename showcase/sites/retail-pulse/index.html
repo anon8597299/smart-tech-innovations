@@ -3,96 +3,331 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RetailPulse Demo Site | ImproveYourSite Showcase</title>
+  <title>The Loft Boutique — Women's Fashion &amp; Homewares, Mudgee NSW</title>
+  <meta name="description" content="Curated women's fashion and unique homewares in Mudgee NSW. Visit us at 23 Market Street or shop our latest arrivals online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .demo-banner {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: .52rem 1rem;
+      font-size: .82rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a {
+      color: #2dd4bf;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: .4rem;
+    }
+    .site-header { top: 36px; }
+    /* Collection grid */
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+      margin-top: 1.4rem;
+    }
+    .collection-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .collection-card .swatch {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .collection-card .info { padding: .8rem 1rem; }
+    .collection-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .collection-card p { margin: 0; font-size: .88rem; color: var(--muted); }
+    /* Trust bar */
+    .trust-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.1rem 0;
+      margin-top: 2rem;
+    }
+    .trust-bar .container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
+    /* Promo banner */
+    .promo-bar {
+      background: #fdf4ff;
+      border: 1px solid #e9d5ff;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-top: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .promo-bar .promo-badge {
+      background: #7c3aed;
+      color: #fff;
+      font-weight: 800;
+      font-size: .85rem;
+      padding: .3rem .7rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .promo-bar .promo-text { flex: 1; font-size: .95rem; }
+    .promo-bar strong { color: #6d28d9; }
+    /* Testimonials */
+    .testimonial-section {
+      padding: 2.4rem 0;
+      background: #faf5ff;
+      margin-top: 2rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    .cta-section { padding: 3rem 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
+    .btn-get-site {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #5b4dff;
+      color: #fff;
+      font-weight: 800;
+      padding: .9rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+    .btn-get-site:hover { background: #4c40db; }
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    @media (max-width: 900px) {
+      .collections-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+      .promo-bar { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
+
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="../../../index.html">⚡ ImproveYourSite</a>
+      <a class="brand" href="#">👗 The Loft Boutique</a>
       <nav class="nav-links">
-        <a href="../../../index.html">Main Site</a>
         <a href="collections.html">Collections</a>
-        <a href="story.html">Story</a>
-        <a href="visit.html">Visit</a>
+        <a href="story.html">Our Story</a>
+        <a href="visit.html">Visit Us</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Hero + promo -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Full Showcase Site • Retail Style</span>
-        <h1>Convert social scroll traffic into store visits, messages, and campaign actions.</h1>
-        <p class="lead">This full-site retail concept gives campaigns a clearer destination: promo-led headlines, category pathways, and high-visibility visit CTAs that keep mobile shoppers moving.</p>
+        <span class="badge">New season arrivals in store now · Mudgee NSW</span>
+        <h1>Discover your style at The Loft — Mudgee's favourite boutique</h1>
+        <p class="lead">The Loft Boutique brings carefully curated women's fashion and unique homewares to the heart of Mudgee. New arrivals weekly, exclusive local brands, and a shopping experience you won't find anywhere else.</p>
         <div class="cta cta-hero">
-          <a class="btn btn-primary" href="visit.html">Primary CTA: Plan Visit</a>
-          <a class="btn btn-secondary" href="collections.html">See Collection Architecture</a>
+          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
+          <a class="btn btn-secondary" href="collections.html">View Collections</a>
         </div>
-        <div class="trust-strip" aria-label="Trust and proof highlights">
-          <span>✓ Offer urgency hierarchy</span>
-          <span>✓ Category-to-ad relevance mapping</span>
-          <span>✓ Story-led trust reinforcement</span>
+        <div class="trust-strip" aria-label="Highlights">
+          <span>✓ New arrivals weekly</span>
+          <span>✓ Exclusive Australian labels</span>
+          <span>✓ Free gift wrapping</span>
+          <span>✓ Layby available</span>
         </div>
 
-        <div class="grid">
+        <div class="promo-bar">
+          <div class="promo-badge">🔥 SALE NOW ON</div>
+          <div class="promo-text">
+            <strong>Winter clearance — up to 40% off selected lines.</strong> New stock arriving weekly. In-store only.
+          </div>
+          <a class="btn btn-primary" href="visit.html" style="white-space:nowrap;">Shop Now</a>
+        </div>
+
+        <div class="grid" style="margin-top:1.4rem;">
           <article class="card">
-            <h3>Primary retail goals</h3>
-            <p>Drive seasonal promotions, new drop visibility, and local shop traffic with cleaner campaign landing flow.</p>
+            <h3>📍 Visit us in Mudgee</h3>
+            <p>23 Market Street, Mudgee NSW 2850<br>
+               <strong>Mon–Fri:</strong> 9:30am – 5:30pm<br>
+               <strong>Saturday:</strong> 9:00am – 4:00pm<br>
+               <strong>Sunday:</strong> 10:00am – 2:00pm</p>
+            <p style="margin-top:.5rem;"><strong>Phone:</strong> (02) 6372 1890<br>
+               <strong>Instagram:</strong> @theloftmudgee</p>
           </article>
           <article class="hero-visual">
-            <h3>Conversion Sequence</h3>
-            <p>Built for mobile-first browsing that needs quick trust, clear categories, and fast contact options.</p>
+            <h3>More than just shopping</h3>
+            <p>We offer personal styling sessions, gift registries, and monthly VIP nights. Join our mailing list for early access to sales and new arrivals.</p>
             <div class="chips">
-              <span>Promo urgency</span>
-              <span>Collection clarity</span>
-              <span>Story-led trust</span>
-              <span>Visit CTA</span>
+              <span>Personal styling</span>
+              <span>Gift registry</span>
+              <span>VIP nights</span>
+              <span>Layby available</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Collections -->
     <section class="section">
       <div class="container">
-        <h2>Component value for retail businesses</h2>
-        <p>These blocks are designed around conversion + campaign performance, not generic brochure content.</p>
-
-        <div class="kpi-grid" aria-label="Expected business impact">
-          <article class="kpi"><strong>More promo actions</strong><span>Urgency blocks lift seasonal campaign response.</span></article>
-          <article class="kpi"><strong>Stronger ad relevance</strong><span>Category structure maps cleanly to ad groups.</span></article>
-          <article class="kpi"><strong>Higher visit intent</strong><span>Fast CTA pathways reduce drop-off.</span></article>
-          <article class="kpi"><strong>Better retention</strong><span>Story + identity increases repeat engagement.</span></article>
+        <div class="section-head">
+          <h2>Shop by category</h2>
+          <p>Curated collections updated every season — always something new in store.</p>
         </div>
-
-        <div class="values">
-          <article>
-            <h3>Promo hero + urgency</h3>
-            <p>Improves conversion during sale windows and ad campaigns.</p>
+        <div class="collections-grid">
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fdf4ff,#e9d5ff);">👗</div>
+            <div class="info">
+              <h3>Women's Fashion</h3>
+              <p>Dresses, knitwear, tops, denim, and outerwear from Australian and international labels.</p>
+            </div>
           </article>
-          <article>
-            <h3>Category landing sections</h3>
-            <p>Makes navigation intent clear and supports better ad relevance.</p>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">👜</div>
+            <div class="info">
+              <h3>Accessories</h3>
+              <p>Bags, jewellery, scarves, hats, and belts to complete any outfit.</p>
+            </div>
           </article>
-          <article>
-            <h3>Visit/contact CTA strip</h3>
-            <p>Converts indecisive users into direct messages or foot traffic.</p>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🏡</div>
+            <div class="info">
+              <h3>Homewares</h3>
+              <p>Candles, ceramics, cushions, and artisan gifts. Perfect for home or gifting.</p>
+            </div>
+          </article>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#eff6ff,#bfdbfe);">🎁</div>
+            <div class="info">
+              <h3>Gift Packs</h3>
+              <p>Curated gift hampers for birthdays, Mother's Day, Christmas, and every occasion.</p>
+            </div>
+          </article>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fefce8,#fef08a);">🔖</div>
+            <div class="info">
+              <h3>Sale Items</h3>
+              <p>End of season deals and selected markdowns. Updated weekly — always worth a look.</p>
+            </div>
+          </article>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fdf4ff,#f0abfc);">✨</div>
+            <div class="info">
+              <h3>New Arrivals</h3>
+              <p>Fresh stock every week. Follow us on Instagram @theloftmudgee to see it first.</p>
+            </div>
           </article>
         </div>
+      </div>
+    </section>
 
-        <div class="cta">
-          <a class="btn btn-primary" href="visit.html">View Visit Funnel</a>
-          <a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a>
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">⭐ 4.9 Google rating (210+ reviews)</div>
+        <div class="trust-item">🛍️ Open 7 days</div>
+        <div class="trust-item">📍 Mudgee town centre</div>
+        <div class="trust-item">🎁 Free gift wrapping</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+      <div class="container">
+        <h2>What our customers say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Every time I'm in Mudgee I make a point of visiting The Loft. The range is beautiful, the staff know their stuff, and I always leave with something I love."</p>
+            <div class="reviewer">— Kate M., Bathurst NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Bought a birthday gift here last month. They wrapped it beautifully and even added a handwritten card. Such a lovely personal touch you just don't get from big stores."</p>
+            <div class="reviewer">— Anna S., Mudgee NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"I've been shopping at The Loft for years. The quality is consistently excellent and they always have something different from everywhere else. Proud to support this local gem."</p>
+            <div class="reviewer">— Michelle P., Gulgong NSW</div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- KPIs + CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid" aria-label="Store highlights">
+          <article class="kpi"><strong>New stock weekly</strong><span>Fresh arrivals every Wednesday in store.</span></article>
+          <article class="kpi"><strong>Layby accepted</strong><span>Spread payments on any purchase over $50.</span></article>
+          <article class="kpi"><strong>Gift wrapping</strong><span>Complimentary gift wrapping on all purchases.</span></article>
+          <article class="kpi"><strong>Personal styling</strong><span>Book a free 30-min personal styling session.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
+          <a class="btn btn-secondary" href="story.html">Our Story</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get a site like this -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a website like this for your retail business?</h2>
+        <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses starting from $497.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">RetailPulse full-site showcase • ImproveYourSite.</div>
+    <div class="container">
+      <p style="margin:0;">© 2025 The Loft Boutique · 23 Market Street, Mudgee NSW 2850 · (02) 6372 1890</p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
   </footer>
 
-  <a class="phone-cta" href="visit.html">Plan visit</a>
+  <a class="phone-cta" href="visit.html">📍 Plan your visit</a>
 </body>
 </html>

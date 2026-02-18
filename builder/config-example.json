@@ -1,0 +1,34 @@
+{
+  "_comment": "Customer config example — fill in after receiving the order form submission.",
+
+  "BUSINESS_NAME": "Smith's Plumbing",
+  "TAGLINE": "Fast, reliable plumbers in Bathurst and surrounds.",
+  "PHONE": "0400 123 456",
+  "EMAIL": "info@smithsplumbing.com.au",
+  "ADDRESS": "42 Main Street",
+  "SUBURB": "Bathurst",
+  "STATE": "NSW",
+  "POSTCODE": "2795",
+
+  "TEMPLATE_ID": "trades-rapid",
+
+  "HERO_HEADLINE": "Trusted plumbers in Bathurst — fast response, fair prices",
+
+  "SERVICE_1_NAME": "Emergency Callouts",
+  "SERVICE_1_DESC": "Available 24/7 for burst pipes, flooding, and urgent repairs.",
+
+  "SERVICE_2_NAME": "Hot Water Systems",
+  "SERVICE_2_DESC": "Supply and install gas, electric, solar, and heat pump systems.",
+
+  "SERVICE_3_NAME": "Blocked Drains",
+  "SERVICE_3_DESC": "CCTV inspection and high-pressure jetting for a permanent fix.",
+
+  "META_TITLE": "Smith's Plumbing — Bathurst NSW",
+  "META_DESCRIPTION": "Licensed plumbers in Bathurst NSW. Emergency callouts, hot water systems, blocked drains & more. Call 0400 123 456.",
+
+  "COLOR_PRIMARY": "#d97706",
+  "COLOR_BG": "#fffaf5",
+
+  "_note_slug": "Optional. If omitted, slug is auto-derived from BUSINESS_NAME.",
+  "SLUG": "smiths-plumbing"
+}

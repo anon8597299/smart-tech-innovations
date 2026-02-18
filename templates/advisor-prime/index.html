@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #fff;
+      --text: #1f2740;
+      --muted: #5a647f;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #dbe5ff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1080px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); z-index: 30; }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: .8rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .nav-links a { border: 1px solid var(--line); border-radius: 999px; padding: .34rem .63rem; font-size: .86rem; background: #fff; }
+    .hero { padding: 4.8rem 0 2rem; }
+    .badge { display: inline-block; border: 1px solid #bcd2ff; background: #e8f0ff; color: #1e40af; font-weight: 700; padding: .28rem .66rem; border-radius: 999px; font-size: .76rem; }
+    h1 { font-size: clamp(1.8rem, 4.8vw, 2.9rem); line-height: 1.1; margin: .8rem 0 .6rem; }
+    .lead { max-width: 760px; color: var(--muted); }
+    .cta { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .9rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .68rem .96rem; border-radius: 10px; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: #fff; border-color: var(--line); }
+    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .75rem; }
+    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: .9rem; margin-top: 1rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .82rem; }
+    .panel { background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid var(--line); border-radius: 12px; padding: .82rem; }
+    .section { padding: 2rem 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .service-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .service-card .icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
+    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .stars { color: #f59e0b; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
+    .kpi strong { display: block; }
+    .kpi span { font-size: .84rem; color: var(--muted); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; }
+    @media (max-width: 900px) {
+      body { padding-bottom: 4.5rem; }
+      .grid, .kpis, .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(30,64,175,.35); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Book a Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge">{{SUBURB}}, {{STATE}}</span>
+        <h1>{{HERO_HEADLINE}}</h1>
+        <p class="lead">{{TAGLINE}}</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="contact.html">Book a Discovery Call</a>
+          <a class="btn btn-secondary" href="services.html">Our Services</a>
+        </div>
+        <div class="trust-strip">
+          <span>✓ Independent advice</span>
+          <span>✓ Fee-for-service</span>
+          <span>✓ Experienced team</span>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>Who we work with</h3>
+            <ul style="margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.93rem;">
+              <li>{{SERVICE_1_NAME}}</li>
+              <li>{{SERVICE_2_NAME}}</li>
+              <li>{{SERVICE_3_NAME}}</li>
+            </ul>
+            <p style="margin-top:.8rem;font-size:.9rem;"><strong>Phone:</strong> {{PHONE}}<br>
+               <strong>Email:</strong> {{EMAIL}}<br>
+               {{ADDRESS}}, {{SUBURB}} {{STATE}}</p>
+          </article>
+          <article class="panel">
+            <h3 style="margin:0 0 .4rem;">{{TAGLINE}}</h3>
+            <p style="margin:0;color:#1e40af;font-size:.9rem;">We provide clear, professional advice tailored to your specific situation and goals.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Our services</h2>
+        <p style="color:var(--muted);">Professional advice across all key areas.</p>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon">💼</div>
+            <h3>{{SERVICE_1_NAME}}</h3>
+            <p>{{SERVICE_1_DESC}}</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">📊</div>
+            <h3>{{SERVICE_2_NAME}}</h3>
+            <p>{{SERVICE_2_DESC}}</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🏦</div>
+            <h3>{{SERVICE_3_NAME}}</h3>
+            <p>{{SERVICE_3_DESC}}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">⭐ 5-star rated</div>
+        <div class="trust-item">🏅 Fully qualified &amp; licensed</div>
+        <div class="trust-item">📍 {{SUBURB}}, {{STATE}}</div>
+        <div class="trust-item">🗓️ Free discovery call</div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h2>What our clients say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"{{BUSINESS_NAME}} gave us clear, practical advice that made a real difference to our situation. Highly recommended."</p>
+            <div class="reviewer">— Client, {{SUBURB}} {{STATE}}</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Finally found someone who explains everything in plain language. Trust them completely with our affairs."</p>
+            <div class="reviewer">— Client, {{SUBURB}} {{STATE}}</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Professional, responsive, and genuinely interested in our outcomes. Couldn't ask for better advice."</p>
+            <div class="reviewer">— Client, {{SUBURB}} {{STATE}}</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kpis">
+          <article class="kpi"><strong>Free consultation</strong><span>No-obligation 30-min initial call.</span></article>
+          <article class="kpi"><strong>Transparent fees</strong><span>Clear pricing, no hidden costs.</span></article>
+          <article class="kpi"><strong>Local experts</strong><span>Understanding regional business needs.</span></article>
+          <article class="kpi"><strong>Ongoing support</strong><span>We're here as your needs evolve.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="contact.html">Book a Free Consultation</a>
+          <a class="btn btn-secondary" href="services.html">View All Services</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · {{PHONE}}</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">📅 Book a call</a>
+</body>
+</html>

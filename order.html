@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Complete Your Order — ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    .order-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 100%);
+    }
+    .order-hero {
+      padding: 6.5rem 0 2rem;
+      text-align: center;
+    }
+    .order-hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: .5rem; }
+    .order-hero p { color: #64748b; font-size: 1rem; max-width: 520px; margin: 0 auto; }
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: .84rem;
+      padding: .35rem .85rem;
+      border-radius: 999px;
+      margin-bottom: .9rem;
+    }
+
+    /* Package summary bar */
+    .pkg-summary-bar {
+      background: #fff;
+      border: 1.5px solid #5b4dff;
+      border-radius: 14px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.4rem 0 2rem;
+    }
+    .pkg-summary-bar .pkg-pill {
+      background: #5b4dff;
+      color: #fff;
+      font-weight: 800;
+      font-size: .88rem;
+      padding: .32rem .8rem;
+      border-radius: 999px;
+      text-transform: capitalize;
+    }
+    .pkg-summary-bar .pkg-details { flex: 1; font-size: .92rem; color: #334155; }
+    .pkg-summary-bar .pkg-details strong { color: #0f172a; }
+
+    /* Form layout */
+    .order-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+    .form-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(15,23,42,.07);
+    }
+    .form-section {
+      margin-bottom: 2rem;
+    }
+    .form-section-title {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .9rem;
+      margin-bottom: .9rem;
+    }
+    .form-row.single { grid-template-columns: 1fr; }
+    .form-row.triple { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; }
+    .form-group label {
+      font-size: .86rem;
+      font-weight: 600;
+      color: #334155;
+    }
+    .form-group label .required { color: #ef4444; margin-left: .15rem; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: .65rem .85rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: .93rem;
+      font-family: Inter, sans-serif;
+      color: #0f172a;
+      background: #fff;
+      transition: border-color .15s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #5b4dff;
+      box-shadow: 0 0 0 3px rgba(91,77,255,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-hint {
+      font-size: .8rem;
+      color: #94a3b8;
+      margin-top: .15rem;
+    }
+
+    /* Template radio cards */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .75rem;
+      margin-top: .5rem;
+    }
+    .template-option { position: relative; }
+    .template-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .template-card {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .85rem 1rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .15s;
+      background: #fff;
+    }
+    .template-option input[type="radio"]:checked + .template-card {
+      border-color: #5b4dff;
+      background: #f8f7ff;
+      box-shadow: 0 0 0 3px rgba(91,77,255,.1);
+    }
+    .template-card:hover { border-color: #5b4dff; }
+    .template-card .icon { font-size: 1.5rem; flex-shrink: 0; }
+    .template-card .info { flex: 1; }
+    .template-card .info strong { display: block; font-size: .92rem; margin-bottom: .1rem; }
+    .template-card .info span { font-size: .8rem; color: #64748b; }
+
+    /* Color picker */
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .color-row input[type="color"] {
+      width: 3rem;
+      height: 3rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: .2rem;
+      cursor: pointer;
+    }
+    .color-presets {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+    }
+    .color-preset {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .12s;
+    }
+    .color-preset:hover { transform: scale(1.15); border-color: #fff; box-shadow: 0 0 0 2px #5b4dff; }
+
+    /* Logo note */
+    .logo-note {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 10px;
+      padding: .75rem 1rem;
+      font-size: .88rem;
+      color: #92400e;
+      margin-top: .5rem;
+    }
+    .logo-note .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .05rem; }
+
+    /* Submit button */
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(135deg, #5b4dff, #4c40db);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all .18s;
+      font-family: Inter, sans-serif;
+      margin-top: 1.4rem;
+    }
+    .submit-btn:hover { background: linear-gradient(135deg, #4c40db, #3d33b8); transform: translateY(-1px); }
+
+    .form-footer-note {
+      text-align: center;
+      font-size: .82rem;
+      color: #94a3b8;
+      margin-top: 1rem;
+    }
+    .form-footer-note a { color: #5b4dff; }
+
+    @media (max-width: 620px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-row.triple { grid-template-columns: 1fr; }
+      .template-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 1.2rem; }
+      .pkg-summary-bar { flex-direction: column; }
+    }
+  </style>
+</head>
+<body class="order-page">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span>
+      </a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="packages.html" class="nav__link">Packages</a></li>
+        <li><a href="mailto:admin@improveyoursite.com" class="nav__link">Help</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="order-hero">
+    <div class="container">
+      <div class="success-badge">✅ Payment confirmed — thank you!</div>
+      <h1>Tell us about your business</h1>
+      <p>Fill in the details below and we'll build your website. You'll receive a live URL within 5 business days.</p>
+    </div>
+  </div>
+
+  <div class="order-container">
+
+    <!-- Package summary -->
+    <div class="pkg-summary-bar" id="pkg-summary">
+      <div class="pkg-pill" id="pkg-pill">Starter</div>
+      <div class="pkg-details" id="pkg-details">
+        <strong>Starter Package</strong> — 4-page website · 1 revision · GitHub Pages hosting
+      </div>
+    </div>
+
+    <!-- formsubmit.co form — notifies James at admin@improveyoursite.com -->
+    <form
+      action="https://formsubmit.co/admin@improveyoursite.com"
+      method="POST"
+      class="form-card"
+    >
+      <!-- formsubmit.co config -->
+      <input type="hidden" name="_subject" value="New Website Order — ImproveYourSite">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://improveyoursite.com/thanks.html">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- Hidden fields populated by JS -->
+      <input type="hidden" name="Package" id="field-package" value="Starter">
+
+      <!-- SECTION 1: Payment reference -->
+      <div class="form-section">
+        <div class="form-section-title">1. Payment reference</div>
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="stripe-ref">Stripe payment reference <span class="required">*</span></label>
+            <input type="text" id="stripe-ref" name="Stripe Payment Reference" required placeholder="e.g. pi_3Qx... (copy from your Stripe receipt email)">
+            <div class="form-hint">Find this in the email receipt Stripe sent you immediately after payment.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Business details -->
+      <div class="form-section">
+        <div class="form-section-title">2. Business details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="biz-name">Business name <span class="required">*</span></label>
+            <input type="text" id="biz-name" name="Business Name" required placeholder="e.g. Smith's Plumbing">
+          </div>
+          <div class="form-group">
+            <label for="biz-tagline">Tagline / slogan</label>
+            <input type="text" id="biz-tagline" name="Tagline" placeholder="e.g. Fast, reliable, local">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="biz-phone">Phone number <span class="required">*</span></label>
+            <input type="tel" id="biz-phone" name="Phone" required placeholder="e.g. 0400 123 456">
+          </div>
+          <div class="form-group">
+            <label for="biz-email">Business email <span class="required">*</span></label>
+            <input type="email" id="biz-email" name="Business Email" required placeholder="e.g. info@smithsplumbing.com.au">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="biz-address">Street address</label>
+            <input type="text" id="biz-address" name="Address" placeholder="e.g. 42 Main Street">
+          </div>
+          <div class="form-group">
+            <label for="biz-suburb">Suburb <span class="required">*</span></label>
+            <input type="text" id="biz-suburb" name="Suburb" required placeholder="e.g. Bathurst">
+          </div>
+        </div>
+
+        <div class="form-row triple">
+          <div class="form-group">
+            <label for="biz-state">State</label>
+            <select id="biz-state" name="State">
+              <option value="">Select state</option>
+              <option value="NSW">NSW</option>
+              <option value="VIC">VIC</option>
+              <option value="QLD">QLD</option>
+              <option value="WA">WA</option>
+              <option value="SA">SA</option>
+              <option value="TAS">TAS</option>
+              <option value="ACT">ACT</option>
+              <option value="NT">NT</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="biz-postcode">Postcode</label>
+            <input type="text" id="biz-postcode" name="Postcode" placeholder="e.g. 2795">
+          </div>
+          <div class="form-group">
+            <label for="biz-industry">Industry</label>
+            <input type="text" id="biz-industry" name="Industry" placeholder="e.g. Plumbing">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: Template choice -->
+      <div class="form-section">
+        <div class="form-section-title">3. Choose your template style <span class="required" style="font-size:.8rem;text-transform:none;letter-spacing:0;font-weight:400;">required</span></div>
+
+        <div class="template-grid">
+
+          <label class="template-option">
+            <input type="radio" name="Template Style" value="Clinic / Healthcare" required>
+            <div class="template-card">
+              <span class="icon">🏥</span>
+              <div class="info">
+                <strong>Clinic / Healthcare</strong>
+                <span>Teal — calm, professional, trust-first</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="template-option">
+            <input type="radio" name="Template Style" value="Trades / Services">
+            <div class="template-card">
+              <span class="icon">🔧</span>
+              <div class="info">
+                <strong>Trades / Services</strong>
+                <span>Amber — urgent, trustworthy, action-first</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="template-option">
+            <input type="radio" name="Template Style" value="Advisor / Professional">
+            <div class="template-card">
+              <span class="icon">📊</span>
+              <div class="info">
+                <strong>Advisor / Professional</strong>
+                <span>Blue — authoritative, premium, consulting-style</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="template-option">
+            <input type="radio" name="Template Style" value="Retail / Boutique">
+            <div class="template-card">
+              <span class="icon">👗</span>
+              <div class="info">
+                <strong>Retail / Boutique</strong>
+                <span>Purple — vibrant, lifestyle, campaign-ready</span>
+              </div>
+            </div>
+          </label>
+
+        </div>
+        <div class="form-hint" style="margin-top:.5rem;">Not sure? View the <a href="our-work.html" target="_blank" style="color:#5b4dff;">demo sites</a> to compare styles.</div>
+      </div>
+
+      <!-- SECTION 4: Branding -->
+      <div class="form-section">
+        <div class="form-section-title">4. Branding preferences</div>
+
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="color-primary">Primary brand colour</label>
+            <div class="color-row">
+              <input type="color" id="color-primary" name="Primary Colour" value="#0f766e">
+              <div class="color-presets">
+                <div class="color-preset" style="background:#0f766e;" title="Teal" onclick="document.getElementById('color-primary').value='#0f766e'"></div>
+                <div class="color-preset" style="background:#d97706;" title="Amber" onclick="document.getElementById('color-primary').value='#d97706'"></div>
+                <div class="color-preset" style="background:#1d4ed8;" title="Blue" onclick="document.getElementById('color-primary').value='#1d4ed8'"></div>
+                <div class="color-preset" style="background:#7c3aed;" title="Purple" onclick="document.getElementById('color-primary').value='#7c3aed'"></div>
+                <div class="color-preset" style="background:#dc2626;" title="Red" onclick="document.getElementById('color-primary').value='#dc2626'"></div>
+                <div class="color-preset" style="background:#059669;" title="Green" onclick="document.getElementById('color-primary').value='#059669'"></div>
+                <div class="color-preset" style="background:#0284c7;" title="Sky blue" onclick="document.getElementById('color-primary').value='#0284c7'"></div>
+                <div class="color-preset" style="background:#334155;" title="Dark navy" onclick="document.getElementById('color-primary').value='#334155'"></div>
+              </div>
+            </div>
+            <div class="form-hint">Pick your brand colour or enter a hex code. If unsure, just leave the default — we'll match it to your template.</div>
+          </div>
+        </div>
+
+        <div class="logo-note">
+          <span class="icon">📎</span>
+          <div>
+            <strong>Logo:</strong> Please email your logo file (PNG or SVG preferred) to
+            <a href="mailto:admin@improveyoursite.com" style="color:#92400e;font-weight:600;">admin@improveyoursite.com</a>
+            after submitting this form. Reference your business name in the subject line.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: Services -->
+      <div class="form-section">
+        <div class="form-section-title">5. Your services</div>
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="services-list">List your main services <span class="required">*</span></label>
+            <textarea id="services-list" name="Services" required placeholder="e.g.&#10;1. Emergency callouts&#10;2. Hot water systems&#10;3. Bathroom renovations&#10;4. Blocked drains&#10;5. General repairs"></textarea>
+            <div class="form-hint">List 3–6 services. We'll use these to build your Services page.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: Notes -->
+      <div class="form-section">
+        <div class="form-section-title">6. Anything else we should know?</div>
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="notes">Special requests or notes</label>
+            <textarea id="notes" name="Notes" placeholder="e.g. Please use images of tools, not people. We operate Monday to Saturday only. Our main suburb areas are Bathurst, Orange, and Blayney."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        ✅ Submit My Order Details
+      </button>
+
+      <div class="form-footer-note">
+        After submitting, we'll confirm receipt by email within 1 business day.<br>
+        Questions? <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a>
+      </div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; <span id="year"></span> ImproveYourSite &nbsp;·&nbsp; <a href="packages.html">Back to packages</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="analytics-config.js"></script>
+  <script src="src/js/analytics.js"></script>
+  <script src="src/js/main.js"></script>
+  <script>
+    // Auto-populate package from URL param (?package=scanfix|build|premium)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const pkg = (params.get('package') || 'build').toLowerCase();
+
+      const pkgData = {
+        scanfix: {
+          label: 'Scan & Fix',
+          details: '<strong>Scan &amp; Fix</strong> — Full audit · Speed &amp; SEO fixes · Conversion improvements · Analytics setup',
+          price: '$3,000'
+        },
+        build: {
+          label: 'Complete Build',
+          details: '<strong>Complete Build</strong> — New website · Custom design · Full SEO · Analytics · 3 revisions · 60-day support',
+          price: '$5,000'
+        },
+        premium: {
+          label: 'Premium Growth',
+          details: '<strong>Premium Growth</strong> — Full site · Automated SEO · Content production days · Media team · 3 months support',
+          price: '$10,000'
+        }
+      };
+
+      const data = pkgData[pkg] || pkgData['build'];
+
+      document.getElementById('pkg-pill').textContent = data.label + ' — ' + data.price;
+      document.getElementById('pkg-details').innerHTML = data.details;
+      document.getElementById('field-package').value = data.label;
+      document.querySelector('input[name="_subject"]').value = 'New Website Order — ' + data.label + ' — ImproveYourSite';
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

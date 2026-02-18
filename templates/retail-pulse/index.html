@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #fff;
+      --text: #1f1e36;
+      --muted: #5f5c7a;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e6e0ff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 25; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: .8rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .nav-links a { font-size: .86rem; border: 1px solid var(--line); padding: .34rem .63rem; border-radius: 999px; }
+    .hero { padding: 4.8rem 0 2rem; }
+    .badge { display: inline-block; background: #ede9fe; border: 1px solid #c4b5fd; color: #5b21b6; font-weight: 700; border-radius: 999px; padding: .28rem .66rem; font-size: .76rem; }
+    h1 { font-size: clamp(1.9rem, 4.8vw, 3rem); line-height: 1.08; margin: .82rem 0 .64rem; }
+    .lead { max-width: 760px; color: var(--muted); }
+    .cta { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 700; padding: .68rem .95rem; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .75rem; }
+    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: .9rem; margin-top: 1rem; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
+    .hero-visual { background: linear-gradient(140deg, #faf5ff 0%, #ede9fe 48%, #ddd6fe 100%); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
+    .section { padding: 2rem 0; }
+    .collections-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .collection-card { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+    .collection-card .swatch { height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .collection-card .info { padding: .8rem 1rem; }
+    .collection-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .collection-card p { margin: 0; font-size: .88rem; color: var(--muted); }
+    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .stars { color: #f59e0b; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
+    .kpi strong { display: block; font-size: .98rem; }
+    .kpi span { font-size: .84rem; color: var(--muted); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; }
+    @media (max-width: 900px) {
+      body { padding-bottom: 4.5rem; }
+      .grid, .collections-grid, .testimonials-grid, .kpi-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(91,33,182,.35); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="collections.html">Collections</a>
+        <a href="story.html">Our Story</a>
+        <a href="visit.html">Visit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge">New arrivals · {{SUBURB}}, {{STATE}}</span>
+        <h1>{{HERO_HEADLINE}}</h1>
+        <p class="lead">{{TAGLINE}}</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
+          <a class="btn btn-secondary" href="collections.html">View Collections</a>
+        </div>
+        <div class="trust-strip">
+          <span>✓ New arrivals weekly</span>
+          <span>✓ Free gift wrapping</span>
+          <span>✓ Layby available</span>
+        </div>
+        <div class="grid" style="margin-top:1.4rem;">
+          <article class="card">
+            <h3>📍 Visit us</h3>
+            <p>{{ADDRESS}}, {{SUBURB}} {{STATE}}<br>
+               <strong>Phone:</strong> {{PHONE}}<br>
+               <strong>Email:</strong> {{EMAIL}}</p>
+          </article>
+          <article class="hero-visual">
+            <h3>{{SERVICE_1_NAME}}</h3>
+            <p style="color:#5b21b6;font-size:.9rem;">{{SERVICE_1_DESC}}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Shop by category</h2>
+        <p style="color:var(--muted);">Updated every season — always something new.</p>
+        <div class="collections-grid">
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fdf4ff,#e9d5ff);">{{SERVICE_1_NAME}}</div>
+            <div class="info">
+              <h3>{{SERVICE_1_NAME}}</h3>
+              <p>{{SERVICE_1_DESC}}</p>
+            </div>
+          </article>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">{{SERVICE_2_NAME}}</div>
+            <div class="info">
+              <h3>{{SERVICE_2_NAME}}</h3>
+              <p>{{SERVICE_2_DESC}}</p>
+            </div>
+          </article>
+          <article class="collection-card">
+            <div class="swatch" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">{{SERVICE_3_NAME}}</div>
+            <div class="info">
+              <h3>{{SERVICE_3_NAME}}</h3>
+              <p>{{SERVICE_3_DESC}}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">⭐ Highly rated on Google</div>
+        <div class="trust-item">🛍️ Open 7 days</div>
+        <div class="trust-item">📍 {{SUBURB}} town centre</div>
+        <div class="trust-item">🎁 Free gift wrapping</div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <h2>What our customers say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Every time I visit {{BUSINESS_NAME}} I find something beautiful. The range is curated perfectly and the staff really know their products."</p>
+            <div class="reviewer">— Customer, {{SUBURB}} {{STATE}}</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Bought a gift here and they wrapped it beautifully. Such a lovely shopping experience — so much better than the big stores."</p>
+            <div class="reviewer">— Customer, {{SUBURB}} {{STATE}}</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Great quality, friendly service, and always something new. This is my go-to for gifts and treats for myself."</p>
+            <div class="reviewer">— Customer, {{SUBURB}} {{STATE}}</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid">
+          <article class="kpi"><strong>New weekly</strong><span>Fresh arrivals every week in store.</span></article>
+          <article class="kpi"><strong>Layby accepted</strong><span>Spread payments on purchases over $50.</span></article>
+          <article class="kpi"><strong>Gift wrapping</strong><span>Free wrapping on all purchases.</span></article>
+          <article class="kpi"><strong>Local business</strong><span>Supporting {{SUBURB}} since day one.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
+          <a class="btn btn-secondary" href="story.html">Our Story</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · {{PHONE}}</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="visit.html">📍 Plan your visit</a>
+</body>
+</html>

@@ -3,15 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trades Package Demo | ImproveYourSite Showcase</title>
+  <title>Bathurst Plumbing Co — Fast, Reliable Plumbers, Bathurst NSW</title>
+  <meta name="description" content="Licensed plumbers in Bathurst NSW. Emergency callouts, hot water, blocked drains & more. Call 0400 123 456 for fast response.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Demo banner */
+    .demo-banner {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: .52rem 1rem;
+      font-size: .82rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a {
+      color: #2dd4bf;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: .4rem;
+    }
+    .site-header { top: 36px; }
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+      margin-top: 1.4rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .service-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
+    /* Trust bar */
+    .trust-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.1rem 0;
+      margin-top: 2rem;
+    }
+    .trust-bar .container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .trust-item span.icon { font-size: 1.1rem; }
+    /* Testimonials */
+    .testimonial-section {
+      padding: 2.4rem 0;
+      background: #fffbf5;
+      margin-top: 2rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .9rem;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+    }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    /* CTA section */
+    .cta-section {
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
+    .btn-get-site {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #5b4dff;
+      color: #fff;
+      font-weight: 800;
+      padding: .9rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+    .btn-get-site:hover { background: #4c40db; }
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    @media (max-width: 900px) {
+      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+    }
+  </style>
 </head>
 <body>
+
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="../../../index.html">⚡ ImproveYourSite</a>
+      <a class="brand" href="#">🔧 Bathurst Plumbing Co.</a>
       <nav class="nav-links">
-        <a href="../../../index.html">Main Site</a>
         <a href="services.html">Services</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
@@ -20,80 +139,153 @@
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Full Showcase Site • Trade Style</span>
-        <h1>Turn urgent trade searches into qualified callbacks in under 60 seconds.</h1>
-        <p class="lead">This full-site demo is structured for high-intent local traffic: clear service fit, trust proof near decision points, and fast call + form pathways that reduce lead drop-off.</p>
+        <span class="badge">Licensed · Insured · Local · Bathurst NSW</span>
+        <h1>Trusted plumbers in Bathurst — fast response, fair prices</h1>
+        <p class="lead">Bathurst Plumbing Co. handles everything from blocked drains and hot water systems to full bathroom renovations. Available 7 days a week with same-day emergency callouts.</p>
         <div class="cta cta-hero">
-          <a class="btn btn-primary" href="contact.html">Primary CTA: Request Callback</a>
-          <a class="btn btn-secondary" href="services.html">See Service Architecture</a>
+          <a class="btn btn-primary" href="contact.html">📞 Request a Callback</a>
+          <a class="btn btn-secondary" href="services.html">View All Services</a>
         </div>
-        <div class="trust-strip" aria-label="Trust and proof highlights">
-          <span>✓ Licensed + insured positioning</span>
-          <span>✓ Review proof placement</span>
-          <span>✓ Suburb + service SEO structure</span>
+        <div class="trust-strip" aria-label="Trust signals">
+          <span>✓ QBCC licensed</span>
+          <span>✓ Fully insured</span>
+          <span>✓ Same-day emergency</span>
+          <span>✓ Upfront pricing</span>
         </div>
-        <div class="hero-grid">
+
+        <div class="hero-grid" style="margin-top:1.4rem;">
           <article class="card">
-            <h3>What this style is optimised for</h3>
-            <ul>
-              <li>Urgent enquiries with fast contact paths</li>
-              <li>Homeowner trust with clear proof and service scope</li>
-              <li>Local SEO structure for suburb + service intent</li>
-              <li>Simple forms that improve enquiry completion rate</li>
-            </ul>
+            <h3>📞 Call us now</h3>
+            <p style="font-size:1.5rem;font-weight:800;color:var(--primary);margin:.3rem 0;">0400 123 456</p>
+            <p>Available Mon–Sat 7am–6pm<br>Emergency callouts 24/7</p>
+            <p style="margin-top:.5rem;"><strong>Office:</strong> 67 Keppel Street, Bathurst NSW 2795</p>
           </article>
           <article class="hero-visual">
-            <h3>Component Stack</h3>
-            <p>Designed for mobile-first users who need a trusted tradie quickly.</p>
+            <h3>No-nonsense service</h3>
+            <p>We show up on time, explain the job clearly, and give you a fixed price before we start. No surprise invoices.</p>
             <div class="chips">
-              <span>Fast-call CTA</span>
-              <span>Trust proof</span>
-              <span>Service clarity</span>
-              <span>Lead triage form</span>
+              <span>Same-day available</span>
+              <span>Fixed-price quotes</span>
+              <span>5-star rated</span>
+              <span>Local family business</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Services -->
     <section class="section">
       <div class="container">
-        <h2>Why these homepage components matter</h2>
-        <p>Each block below exists because it improves a business metric, not because it “looks good”.</p>
-        <div class="kpi-grid" aria-label="Expected business impact">
-          <article class="kpi"><strong>Faster response path</strong><span>Above-fold CTA reduces action delay.</span></article>
-          <article class="kpi"><strong>Higher trust signal</strong><span>Licensing + proof lowers hesitation.</span></article>
-          <article class="kpi"><strong>Better lead quality</strong><span>Service intent filters weak enquiries.</span></article>
-          <article class="kpi"><strong>Local SEO lift</strong><span>Service + area structure supports rankings.</span></article>
+        <div class="section-head">
+          <h2>Our services</h2>
+          <p>Residential and light commercial plumbing across Bathurst and surrounds.</p>
         </div>
-        <div class="component-list">
-          <article>
-            <h3>Primary CTA above the fold → Faster action</h3>
-            <p>Visitors who are ready now should not have to scroll to contact.</p>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon">🚿</div>
+            <h3>Blocked Drains</h3>
+            <p>CCTV drain inspection and high-pressure water jetting. Fast diagnosis, permanent fix.</p>
           </article>
-          <article>
-            <h3>Service-group tiles → Better self-selection</h3>
-            <p>When users quickly find their exact service, bounce drops and qualified enquiries increase.</p>
+          <article class="service-card">
+            <div class="icon">🔥</div>
+            <h3>Hot Water Systems</h3>
+            <p>Supply and install gas, electric, solar, and heat pump systems. Same-day replacement available.</p>
           </article>
-          <article>
-            <h3>Trust strip (licence, response times, reviews) → Lower hesitation</h3>
-            <p>Proof blocks remove uncertainty and reduce comparison-shopping exits.</p>
+          <article class="service-card">
+            <div class="icon">🚽</div>
+            <h3>Bathroom Renovations</h3>
+            <p>Full bathroom and laundry fit-outs from plans to final fixtures. Quality guaranteed.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🏗️</div>
+            <h3>New Construction</h3>
+            <p>Rough-in and fit-out for new builds and major renovations. Builders welcome.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🔧</div>
+            <h3>General Repairs</h3>
+            <p>Leaking taps, burst pipes, toilet repairs, and all general plumbing maintenance.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🚨</div>
+            <h3>Emergency Callouts</h3>
+            <p>Burst pipes don't wait — neither do we. 24/7 emergency response across Bathurst.</p>
           </article>
         </div>
-        <div class="cta">
-          <a class="btn btn-primary" href="contact.html">View Contact Funnel</a>
-          <a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item"><span class="icon">⭐</span> 4.8 Google rating (150+ reviews)</div>
+        <div class="trust-item"><span class="icon">🪪</span> QBCC Lic. 1234567</div>
+        <div class="trust-item"><span class="icon">📍</span> Serving Bathurst, Orange &amp; surrounds</div>
+        <div class="trust-item"><span class="icon">🗓️</span> Open 7 days</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+      <div class="container">
+        <h2>What our customers say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Called at 7am with a burst pipe under the house. Mark arrived within the hour and had it sorted by 9am. Absolute legends. Reasonable price too."</p>
+            <div class="reviewer">— Pete H., Bathurst NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Replaced our old hot water system with a heat pump. The guys were clean, professional, and left the place spotless. Highly recommend."</p>
+            <div class="reviewer">— Jenny K., Orange NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Used Bathurst Plumbing for our full bathroom reno. The quotes were honest and the work was first class. Will be using them again for sure."</p>
+            <div class="reviewer">— Brad S., Kelso NSW</div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- KPIs + CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid" aria-label="Service highlights">
+          <article class="kpi"><strong>60-min response</strong><span>Emergency callouts across greater Bathurst.</span></article>
+          <article class="kpi"><strong>Fixed-price quotes</strong><span>Know your cost before we start work.</span></article>
+          <article class="kpi"><strong>5-year warranty</strong><span>On all workmanship, parts and labour.</span></article>
+          <article class="kpi"><strong>Local since 2011</strong><span>Serving Bathurst families for 13+ years.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="contact.html">📞 Get a Free Quote</a>
+          <a class="btn btn-secondary" href="about.html">About Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get a site like this -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a website like this for your trade business?</h2>
+        <p>This demo was built by ImproveYourSite. We build professional websites for Australian tradies starting from $497.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">Demo for ImproveYourSite showcase • Trades package full-site concept.</div>
+    <div class="container">
+      <p style="margin:0;">© 2025 Bathurst Plumbing Co. · 67 Keppel Street, Bathurst NSW 2795 · 0400 123 456</p>
+      <p style="margin:.3rem 0 0; font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
   </footer>
 
-  <a class="phone-cta" href="contact.html">Get callback</a>
+  <a class="phone-cta" href="tel:0400123456">📞 Call now — 0400 123 456</a>
 </body>
 </html>
