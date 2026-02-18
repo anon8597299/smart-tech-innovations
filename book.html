@@ -17,6 +17,12 @@
     .book-checklist { list-style: none; display: grid; gap: 0.55rem; margin-bottom: 1.4rem; }
     .book-checklist li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.97rem; color: #334155; }
     .book-checklist li::before { content: '✓'; color: #2dd4bf; font-weight: 800; flex-shrink: 0; }
+    .how-steps { display: grid; gap: 1rem; margin-bottom: 1.4rem; }
+    .how-step { display: flex; gap: 0.9rem; align-items: flex-start; }
+    .how-num { flex-shrink: 0; width: 2rem; height: 2rem; background: #5b4dff; color: #fff; border-radius: 999px; display: grid; place-items: center; font-size: 0.78rem; font-weight: 800; }
+    .how-step strong { font-size: 0.97rem; color: #111827; display: block; margin-bottom: 0.15rem; }
+    .how-step p { margin: 0; font-size: 0.88rem; color: #475569; }
+
     .book-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: #f0fdf9; border: 1px solid #a7f3d0; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1rem; }
 
     .book-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 1.8rem; box-shadow: 0 12px 32px rgba(15,23,42,0.08); }
@@ -73,14 +79,38 @@
         <div class="book-left">
           <span class="book-badge">Free · No obligation · 30 minutes</span>
           <h1>Let's talk about your website</h1>
-          <p>Book a free discovery call with our team. We'll look at your current site, understand your business, and show you exactly what is possible. No pressure, no jargon..</p>
-          <ul class="book-checklist">
-            <li>We review your current website before the call</li>
-            <li>You get a clear picture of what's holding you back</li>
-            <li>We recommend the right package for your budget</li>
-            <li>No hard sell. If we are not the right fit, we'll tell you</li>
-            <li>Serving Orange, Dubbo, Bathurst, Mudgee, Forbes &amp; surrounds</li>
-          </ul>
+          <p>A straightforward conversation with no pressure and no jargon. Here's what happens when you book:</p>
+
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-num">01</div>
+              <div>
+                <strong>Book a Call</strong>
+                <p>Schedule a time that works for you. Takes 30 seconds and there is no obligation.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-num">02</div>
+              <div>
+                <strong>Strategy Chat</strong>
+                <p>Speak with one of our advisers about your business, your goals, and your current website. We listen first.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-num">03</div>
+              <div>
+                <strong>Free Website Audit</strong>
+                <p>We review your site's performance, SEO, speed, and lead flow and show you what's working and what's not.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-num">04</div>
+              <div>
+                <strong>Clear Recommendation</strong>
+                <p>If we can genuinely help you grow, we'll present a strategy. If not, we'll tell you honestly.</p>
+              </div>
+            </div>
+          </div>
           <div style="background:#f8f7ff;border:1px solid #ddd6fe;border-radius:14px;padding:1rem 1.2rem;">
             <p style="margin:0;font-size:0.92rem;color:#4c1d95;font-weight:600;">Our packages start at $3,000</p>
             <p style="margin:0.3rem 0 0;font-size:0.88rem;color:#5b21b6;">Scan &amp; Fix · Complete Build · Premium Growth</p>
