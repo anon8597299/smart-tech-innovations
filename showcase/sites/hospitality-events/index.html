@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Stonebridge Estate — Weddings &amp; Events Venue, Orange NSW</title>
+  <meta name="description" content="Stunning weddings and private events in the heart of Orange NSW wine country. Capacity for up to 200 guests. Enquire about your date today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdf8f2;
+      --surface: #ffffff;
+      --text: #1c0f05;
+      --muted: #6b5744;
+      --primary: #92400e;
+      --primary-light: #b45309;
+      --accent: #6d28d9;
+      --line: #e8d5c4;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    .demo-banner {
+      background: #0f172a; color: #e2e8f0; text-align: center;
+      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 100;
+    }
+    .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
+    .site-header {
+      position: sticky; top: 36px; background: rgba(255,252,247,.96);
+      border-bottom: 1px solid var(--line); z-index: 20;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; gap: .8rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .nav-links a { border: 1px solid var(--line); padding: .34rem .65rem; border-radius: 999px; font-size: .86rem; background: #fff; }
+
+    .hero { padding: 5rem 0 2rem; }
+    .badge {
+      display: inline-block; background: #fef3c7; border: 1px solid #fcd34d;
+      color: #92400e; font-weight: 700; padding: .28rem .68rem; border-radius: 999px; font-size: .76rem;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: .8rem 0 .65rem; }
+    .lead { color: var(--muted); max-width: 760px; font-size: 1.05rem; }
+    .cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.15rem; border-radius: 10px; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: #7c2d12; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; color: #78350f; }
+
+    .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; margin-top: 1.4rem; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.1rem; }
+    .hero-panel {
+      background: linear-gradient(140deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+      border: 1px solid #fbbf24; border-radius: 16px; padding: 1.1rem;
+    }
+    .hero-panel h3 { margin: 0 0 .4rem; }
+    .hero-panel p { margin: 0; color: #78350f; font-size: .92rem; }
+    .chips { margin-top: .6rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+    .chips span { font-size: .76rem; font-weight: 700; background: rgba(255,255,255,.8); border: 1px solid #fbbf24; padding: .24rem .55rem; border-radius: 999px; }
+
+    /* Packages */
+    .packages-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .pkg-card {
+      background: #fff; border: 1.5px solid var(--line); border-radius: 16px; padding: 1.3rem;
+      display: flex; flex-direction: column;
+    }
+    .pkg-card.featured { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(146,64,14,.1); }
+    .pkg-price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: .4rem 0 .2rem; }
+    .pkg-card h3 { margin: 0 0 .2rem; font-size: 1.05rem; }
+    .pkg-card .pkg-desc { font-size: .88rem; color: var(--muted); margin: 0 0 .9rem; flex: 1; }
+    .pkg-card ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+    .pkg-card ul li { font-size: .88rem; padding: .28rem 0; border-bottom: 1px solid #f5ece3; display: flex; gap: .4rem; }
+    .pkg-card ul li:last-child { border-bottom: none; }
+    .pkg-card ul li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; }
+
+    /* Gallery strip */
+    .gallery-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .5rem; margin-top: 1.4rem; }
+    .gallery-tile {
+      border-radius: 10px; overflow: hidden; aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    /* Trust bar */
+    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
+
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .stars { color: #f59e0b; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
+    .kpi strong { display: block; font-size: .98rem; }
+    .kpi span { font-size: .84rem; color: var(--muted); }
+
+    .cta-section { padding: 3rem 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem,4vw,2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; }
+    .btn-get-site {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: #5b4dff; color: #fff; font-weight: 800;
+      padding: .9rem 2rem; border-radius: 12px; font-size: 1.05rem; text-decoration: none;
+    }
+    .btn-get-site:hover { background: #4c40db; }
+    .phone-cta { display: none; }
+    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      body { padding-bottom: 4.5rem; }
+      .hero-grid, .packages-grid, .testimonials-grid, .kpi-grid, .gallery-strip { grid-template-columns: 1fr; }
+      .gallery-strip { grid-template-columns: repeat(2,1fr); }
+      .btn { width: 100%; }
+      .trust-bar .container { flex-direction: column; align-items: flex-start; padding: 0 4vw; gap: .9rem; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+      .phone-cta {
+        display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem;
+        z-index: 50; border-radius: 12px; background: var(--primary); color: #fff;
+        font-weight: 800; justify-content: center; padding: .82rem 1rem;
+        box-shadow: 0 12px 30px rgba(146,64,14,.35); text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">🌿 The Stonebridge Estate</a>
+      <nav class="nav-links">
+        <a href="#">Weddings</a>
+        <a href="#">Functions</a>
+        <a href="#">Gallery</a>
+        <a href="#">Enquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="badge">Orange NSW Wine Country · Up to 200 guests · All-inclusive packages</span>
+        <h1>Where love stories begin — and memories are made forever</h1>
+        <p class="lead">Nestled in the rolling vineyards of Orange NSW, The Stonebridge Estate is Central West's most loved wedding and events venue. Award-winning catering, stunning natural settings, and a dedicated events team to handle every detail.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#">💌 Enquire About Your Date</a>
+          <a class="btn btn-secondary" href="#">View Event Packages</a>
+        </div>
+        <div class="trust-strip">
+          <span>✓ 2024 Best Venue — Wedding Central West</span>
+          <span>✓ Up to 200 guests</span>
+          <span>✓ All-inclusive packages available</span>
+          <span>✓ On-site accommodation</span>
+        </div>
+
+        <div class="hero-grid">
+          <article class="card">
+            <h3>📍 Orange Wine Country, NSW</h3>
+            <p>1240 Cargo Road, Orange NSW 2800<br>
+               45 minutes from Bathurst · 3.5 hours from Sydney</p>
+            <p style="margin-top:.6rem;"><strong>Phone:</strong> (02) 6362 9800<br>
+               <strong>Email:</strong> events@stonebridgeestate.com.au</p>
+            <p style="margin-top:.5rem;font-size:.88rem;color:var(--muted);">Open for venue tours Thursday–Sunday 10am–4pm. After-hours by appointment.</p>
+          </article>
+          <article class="hero-panel">
+            <h3>2025 dates still available</h3>
+            <p>We have limited Saturdays remaining for 2025 and are now taking bookings for 2026. Enquire early to secure your preferred date.</p>
+            <div class="chips">
+              <span>Weekday discounts</span>
+              <span>Elopement packages</span>
+              <span>Corporate retreats</span>
+              <span>Private dining</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event packages -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Event packages</h2>
+          <p>Everything you need, with nothing left to chance.</p>
+        </div>
+        <div class="packages-grid">
+          <article class="pkg-card">
+            <h3>🌸 Intimate Ceremony</h3>
+            <div class="pkg-price">From $4,500</div>
+            <p class="pkg-desc">Perfect for elopements and small ceremonies up to 30 guests in our private rose garden.</p>
+            <ul>
+              <li>Ceremony space (up to 30 guests)</li>
+              <li>Floral arrangements included</li>
+              <li>Celebrant coordination</li>
+              <li>Sparkling arrival drinks</li>
+              <li>Post-ceremony photography</li>
+            </ul>
+            <a class="btn btn-secondary" href="#" style="text-align:center;justify-content:center;">Enquire</a>
+          </article>
+          <article class="pkg-card featured">
+            <h3>💍 Full Wedding Day</h3>
+            <div class="pkg-price">From $14,900</div>
+            <p class="pkg-desc">Our most popular package — ceremony, reception, catering and styling for up to 120 guests.</p>
+            <ul>
+              <li>Ceremony + reception spaces</li>
+              <li>3-course dinner &amp; canapés</li>
+              <li>5-hour beverage package</li>
+              <li>Dedicated event coordinator</li>
+              <li>Bridal suite access</li>
+              <li>10% accommodation discount</li>
+            </ul>
+            <a class="btn btn-primary" href="#" style="text-align:center;justify-content:center;">Enquire Now</a>
+          </article>
+          <article class="pkg-card">
+            <h3>🎉 Corporate &amp; Private Events</h3>
+            <div class="pkg-price">From $3,200</div>
+            <p class="pkg-desc">Team retreats, product launches, milestone dinners, and private functions up to 200 guests.</p>
+            <ul>
+              <li>Flexible indoor/outdoor spaces</li>
+              <li>AV equipment included</li>
+              <li>Catering from $85/head</li>
+              <li>Accommodation packages available</li>
+              <li>Tailored menus on request</li>
+            </ul>
+            <a class="btn btn-secondary" href="#" style="text-align:center;justify-content:center;">Enquire</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery strip -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <h2 style="margin-bottom:.5rem;">A venue worth falling in love with</h2>
+        <p style="color:var(--muted);margin-bottom:0;">Every corner of Stonebridge Estate is designed to create beautiful memories.</p>
+        <div class="gallery-strip">
+          <div class="gallery-tile" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">💐</div>
+          <div class="gallery-tile" style="background:linear-gradient(135deg,#fdf2f8,#fce7f3);">🥂</div>
+          <div class="gallery-tile" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">🌿</div>
+          <div class="gallery-tile" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">🎵</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">🏆 Best Venue Award 2024</div>
+        <div class="trust-item">⭐ 5.0 Google rating (190+ reviews)</div>
+        <div class="trust-item">💒 380+ weddings hosted</div>
+        <div class="trust-item">🌿 Orange Wine Country setting</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="section" style="background:#fffbf5;padding:2.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      <div class="container">
+        <h2>From our couples</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"We couldn't have asked for a more perfect day. From the very first site visit to the last dance of the night, the Stonebridge team made every detail feel effortless. Absolutely breathtaking."</p>
+            <div class="reviewer">— Sophie &amp; James R., married May 2024</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Our corporate retreat here was exceptional. The catering was outstanding, the AV setup was seamless, and the team anticipated every need. Our whole board commented on the quality."</p>
+            <div class="reviewer">— Mark T., CEO, Bathurst NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"We chose Stonebridge for our intimate elopement with just 18 guests. It was more magical than we could have imagined. The rose garden ceremony had everyone in tears — the good kind!"</p>
+            <div class="reviewer">— Claire &amp; Nathan M., married Oct 2024</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid">
+          <article class="kpi"><strong>380+ events hosted</strong><span>Weddings, corporate, private dining.</span></article>
+          <article class="kpi"><strong>5-star catering</strong><span>Award-winning kitchen team on site.</span></article>
+          <article class="kpi"><strong>On-site accommodation</strong><span>12 luxury rooms for bridal parties.</span></article>
+          <article class="kpi"><strong>Dedicated coordinator</strong><span>Yours from booking to last dance.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="#">💌 Enquire About Your Date</a>
+          <a class="btn btn-secondary" href="#">Download Venue Brochure</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a website like this for your venue or events business?</h2>
+        <p>This demo was built by ImproveYourSite. Professional websites starting from $3,000.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© 2025 The Stonebridge Estate · 1240 Cargo Road, Orange NSW 2800 · (02) 6362 9800</p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="#">💌 Enquire today</a>
+</body>
+</html>

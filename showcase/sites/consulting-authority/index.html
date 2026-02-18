@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Strategy Group — Business Strategy &amp; Growth Consultants, NSW</title>
+  <meta name="description" content="Strategic business consulting for Australian SMEs. Revenue growth, operational efficiency, and exit planning. Book a confidential strategy call today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f1f2e;
+      --muted: #4a5568;
+      --primary: #047857;
+      --primary-dark: #065f46;
+      --accent: #1d4ed8;
+      --line: #d1e8e0;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    .demo-banner {
+      background: #0f172a; color: #e2e8f0; text-align: center;
+      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 100;
+    }
+    .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
+    .site-header { position: sticky; top: 36px; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); z-index: 20; }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; gap: .8rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .nav-links a { border: 1px solid var(--line); padding: .34rem .65rem; border-radius: 999px; font-size: .86rem; background: #fff; }
+    .nav-book { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+
+    .hero { padding: 5rem 0 2rem; }
+    .badge { display: inline-block; background: #d1fae5; border: 1px solid #6ee7b7; color: #065f46; font-weight: 700; padding: .28rem .68rem; border-radius: 999px; font-size: .76rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: .8rem 0 .65rem; max-width: 800px; }
+    .lead { color: var(--muted); max-width: 760px; font-size: 1.05rem; }
+    .cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.15rem; border-radius: 10px; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; color: #065f46; }
+
+    .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; margin-top: 1.4rem; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.1rem; }
+    .card h3 { margin: 0 0 .4rem; }
+    .hero-panel {
+      background: linear-gradient(140deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+      border: 1px solid #6ee7b7; border-radius: 16px; padding: 1.1rem;
+    }
+    .hero-panel p { margin: 0; color: #065f46; font-size: .9rem; }
+    .chips { margin-top: .6rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+    .chips span { font-size: .76rem; font-weight: 700; background: rgba(255,255,255,.82); border: 1px solid #6ee7b7; padding: .24rem .55rem; border-radius: 999px; }
+
+    /* Outcome cards */
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .outcome-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; border-top: 3px solid var(--primary); }
+    .outcome-card .outcome-icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .outcome-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .outcome-card p { margin: 0; font-size: .9rem; color: var(--muted); }
+    .outcome-card .outcome-stat { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: .5rem 0 .2rem; }
+
+    /* Process */
+    .process-list { display: grid; gap: .7rem; margin-top: 1.4rem; }
+    .process-step { display: flex; gap: 1rem; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; }
+    .step-num { width: 2rem; height: 2rem; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: .9rem; }
+    .step-body h3 { margin: 0 0 .2rem; font-size: .98rem; }
+    .step-body p { margin: 0; font-size: .88rem; color: var(--muted); }
+
+    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
+
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .stars { color: #f59e0b; margin-bottom: .5rem; }
+    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
+    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
+    .reviewer .company { font-style: italic; }
+
+    .section { padding: 2rem 0; }
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 .3rem; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
+    .kpi strong { display: block; font-size: .98rem; }
+    .kpi span { font-size: .84rem; color: var(--muted); }
+
+    .cta-section { padding: 3rem 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem,4vw,2.2rem); margin-bottom: .6rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; }
+    .btn-get-site {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: #5b4dff; color: #fff; font-weight: 800;
+      padding: .9rem 2rem; border-radius: 12px; font-size: 1.05rem; text-decoration: none;
+    }
+    .phone-cta { display: none; }
+    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      body { padding-bottom: 4.5rem; }
+      .hero-grid, .outcomes-grid, .testimonials-grid, .kpi-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .trust-bar .container { flex-direction: column; align-items: flex-start; padding: 0 4vw; gap: .9rem; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+      .phone-cta {
+        display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem;
+        z-index: 50; border-radius: 12px; background: var(--primary); color: #fff;
+        font-weight: 800; justify-content: center; padding: .82rem 1rem;
+        box-shadow: 0 12px 30px rgba(4,120,87,.35); text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">📈 Apex Strategy Group</a>
+      <nav class="nav-links">
+        <a href="#">What We Do</a>
+        <a href="#">Case Studies</a>
+        <a href="#">About</a>
+        <a class="nav-book" href="#">Book a Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge">Strategy · Growth · Exit Planning · NSW</span>
+        <h1>We help Australian SMEs grow revenue, run leaner, and exit on their terms</h1>
+        <p class="lead">Apex Strategy Group works with business owners across NSW who want more than generic advice. We build tailored growth strategies, fix the operational bottlenecks holding you back, and prepare you for a profitable exit when the time comes.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#">📞 Book a Strategy Call</a>
+          <a class="btn btn-secondary" href="#">View Case Studies</a>
+        </div>
+        <div class="trust-strip">
+          <span>✓ 140+ engagements completed</span>
+          <span>✓ $2.1B in client revenue advised</span>
+          <span>✓ Average 31% revenue lift in year 1</span>
+          <span>✓ Confidential first call, no obligation</span>
+        </div>
+
+        <div class="hero-grid">
+          <article class="card">
+            <h3>Who we work with</h3>
+            <ul style="margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.93rem;line-height:1.8;">
+              <li>SMEs with $2M–$50M revenue seeking structured growth</li>
+              <li>Business owners planning an exit in 2–5 years</li>
+              <li>Operators stuck below a revenue ceiling they can't break</li>
+              <li>Companies scaling quickly but struggling with process</li>
+              <li>Boards seeking an independent strategic perspective</li>
+            </ul>
+          </article>
+          <article class="hero-panel">
+            <h3 style="margin:0 0 .4rem;">Not just advice — results</h3>
+            <p>We go in deep, get across your numbers, and build strategies you can actually execute. Our average engagement delivers a 31% revenue lift in the first 12 months.</p>
+            <div class="chips">
+              <span>Revenue growth</span>
+              <span>Exit strategy</span>
+              <span>Operational fix</span>
+              <span>Scaling support</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>What clients achieve</h2>
+          <p>Real outcomes from businesses we've worked with across NSW.</p>
+        </div>
+        <div class="outcomes-grid">
+          <article class="outcome-card">
+            <div class="outcome-icon">📈</div>
+            <div class="outcome-stat">+31%</div>
+            <h3>Average revenue growth in year 1</h3>
+            <p>Across 140+ engagements, our clients average a 31% top-line revenue increase within 12 months of engagement.</p>
+          </article>
+          <article class="outcome-card">
+            <div class="outcome-icon">🏦</div>
+            <div class="outcome-stat">2.8×</div>
+            <h3>Average multiple achieved on exit</h3>
+            <p>Clients who engaged Apex for exit preparation averaged a 2.8× EBITDA multiple above market rate at time of sale.</p>
+          </article>
+          <article class="outcome-card">
+            <div class="outcome-icon">⚙️</div>
+            <div class="outcome-stat">–38%</div>
+            <h3>Average reduction in operational costs</h3>
+            <p>Our operational efficiency engagements identify and eliminate an average 38% waste in process, time, and overhead.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>How an engagement works</h2>
+          <p>A clear, structured process with no surprises.</p>
+        </div>
+        <div class="process-list">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Confidential strategy call (60 min, no obligation)</h3>
+              <p>We learn about your business, your goals, and your challenges. We'll tell you honestly whether we can help and what that might look like.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Deep-dive diagnostic</h3>
+              <p>We analyse your financials, operations, market position, and team structure. This takes 2–3 weeks and forms the basis of your strategy.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Strategy and roadmap delivery</h3>
+              <p>You receive a detailed strategic roadmap with prioritised actions, milestones, and KPIs — presented to your leadership team.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Implementation support (optional)</h3>
+              <p>For clients who want more than a plan, we embed with your team monthly to drive execution, hold accountability, and adjust strategy as conditions change.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">📊 140+ engagements completed</div>
+        <div class="trust-item">💰 $2.1B client revenue advised</div>
+        <div class="trust-item">⭐ 5.0 Google rating (82 reviews)</div>
+        <div class="trust-item">🔒 NDA provided before all engagements</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="section" style="background:#f0fdf8;padding:2.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      <div class="container">
+        <h2>What our clients say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Apex helped us break through a $6M ceiling we'd been stuck at for three years. Within 14 months we were at $9.4M. The methodology is rigorous and the team genuinely understands regional business."</p>
+            <div class="reviewer">— Andrew L., <span class="company">building materials, Bathurst NSW</span></div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"We engaged Apex 18 months before our planned exit. Their preparation added over $1.2M to the sale price we achieved. Worth every cent of the engagement fee, many times over."</p>
+            <div class="reviewer">— Helen &amp; David R., <span class="company">food manufacturing, Orange NSW</span></div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"I was sceptical of consultants until I met the Apex team. They don't give you generic advice — they come to understand your specific situation and build a plan that actually fits how your business works."</p>
+            <div class="reviewer">— Cameron T., <span class="company">logistics, Dubbo NSW</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid">
+          <article class="kpi"><strong>First call free</strong><span>60-min confidential strategy call, no obligation.</span></article>
+          <article class="kpi"><strong>NDA before we start</strong><span>Full confidentiality guaranteed from day one.</span></article>
+          <article class="kpi"><strong>Fixed-fee engagements</strong><span>No hourly billing surprises. Scope agreed upfront.</span></article>
+          <article class="kpi"><strong>Regional specialists</strong><span>We understand NSW regional and rural business.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="#">📞 Book a Free Strategy Call</a>
+          <a class="btn btn-secondary" href="#">View Case Studies</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a professional website like this for your consultancy?</h2>
+        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses starting from $3,000.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© 2025 Apex Strategy Group Pty Ltd · ABN 44 123 456 789 · Sydney &amp; Regional NSW</p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="#">📞 Book a free call</a>
+</body>
+</html>

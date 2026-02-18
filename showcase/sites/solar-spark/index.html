@@ -3,18 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SolarSpark Demo Site | ImproveYourSite Showcase</title>
+  <title>SunVolt Solar — CEC Accredited Installers, Orange NSW</title>
+  <meta name="description" content="CEC accredited solar installers in Orange NSW. Cut your power bill by up to 70%. Free on-site assessment. Call 0412 888 200.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .demo-banner {
+      background: #0f172a; color: #e2e8f0; text-align: center;
+      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 100;
+    }
+    .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
+    .site-header { top: 36px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
+    .service-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.1rem; }
+    .service-card .icon { font-size:1.6rem; margin-bottom:.4rem; }
+    .service-card h3 { margin:0 0 .3rem; font-size:1rem; }
+    .service-card p { margin:0; font-size:.9rem; color:var(--muted); }
+    .savings-box {
+      background: linear-gradient(135deg,#0ea5a4,#2563eb);
+      color:#fff; border-radius:16px; padding:1.4rem 1.6rem;
+      margin-top:1.4rem; display:flex; align-items:center; flex-wrap:wrap; gap:1.2rem;
+    }
+    .savings-box .savings-stat { text-align:center; }
+    .savings-box .savings-stat .num { font-size:2rem; font-weight:800; line-height:1; }
+    .savings-box .savings-stat .lbl { font-size:.82rem; opacity:.85; }
+    .savings-box .savings-divider { width:1px; height:3rem; background:rgba(255,255,255,.3); }
+    .savings-box .savings-cta { margin-left:auto; }
+    .savings-box .savings-cta a {
+      display:inline-flex; align-items:center; gap:.4rem;
+      background:rgba(255,255,255,.18); border:1.5px solid rgba(255,255,255,.5);
+      color:#fff; font-weight:800; padding:.7rem 1.2rem; border-radius:10px;
+      text-decoration:none; font-size:.95rem;
+    }
+    .trust-bar { background:var(--primary); color:#fff; padding:1.1rem 0; margin-top:2rem; }
+    .trust-bar .container { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; align-items:center; }
+    .trust-item { display:flex; align-items:center; gap:.4rem; font-weight:700; font-size:.92rem; }
+    .testimonials-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.9rem; margin-top:1.4rem; }
+    .testimonial-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.1rem; }
+    .stars { color:#f59e0b; margin-bottom:.5rem; }
+    .testimonial-card p { margin:0 0 .8rem; font-size:.93rem; }
+    .reviewer { font-weight:700; font-size:.86rem; color:var(--muted); }
+    .cta-section { padding:3rem 0; text-align:center; }
+    .cta-section h2 { font-size:clamp(1.6rem,4vw,2.2rem); margin-bottom:.6rem; }
+    .cta-section p { color:var(--muted); margin-bottom:1.4rem; font-size:1.05rem; }
+    .btn-get-site {
+      display:inline-flex; align-items:center; gap:.45rem;
+      background:#5b4dff; color:#fff; font-weight:800;
+      padding:.9rem 2rem; border-radius:12px; font-size:1.05rem; text-decoration:none;
+    }
+    .btn-get-site:hover { background:#4c40db; }
+    .section { padding:2rem 0; }
+    .section-head { margin-bottom:1rem; }
+    .section-head h2 { margin:0 0 .3rem; }
+    .section-head p { color:var(--muted); margin:0; }
+    @media (max-width:900px) {
+      .services-grid,.testimonials-grid { grid-template-columns:1fr; }
+      .trust-bar .container { flex-direction:column; align-items:flex-start; padding:0 4vw; gap:.9rem; }
+      .savings-box { flex-direction:column; }
+      .savings-box .savings-divider { display:none; }
+      .savings-box .savings-cta { margin-left:0; width:100%; }
+      .savings-box .savings-cta a { width:100%; justify-content:center; }
+      .site-header { top:0; }
+      .demo-banner { position:relative; }
+    }
+  </style>
 </head>
 <body>
+  <div class="demo-banner">
+    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    <a href="/packages.html">Get a site like this &rarr;</a>
+  </div>
+
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="../../../index.html">⚡ ImproveYourSite</a>
+      <a class="brand" href="#">☀️ SunVolt Solar</a>
       <nav class="nav-links">
-        <a href="../../../index.html">Main Site</a>
         <a href="services.html">Solutions</a>
-        <a href="case-studies.html">Case Studies</a>
-        <a href="contact.html">Contact</a>
+        <a href="case-studies.html">Savings Stories</a>
+        <a href="contact.html">Free Assessment</a>
       </nav>
     </div>
   </header>
@@ -22,37 +89,61 @@
   <main>
     <section class="hero">
       <div class="container">
-        <span class="badge">Full Showcase Site • Solar Installer Style</span>
-        <h1>Turn bill-shock searches into qualified solar assessments with clear trust proof.</h1>
-        <p class="lead">This multi-page concept is tuned for Aussie solar providers who need better lead quality, stronger rebate clarity, and lower drop-off between first click and booked site visit.</p>
+        <span class="badge">CEC Accredited · Orange NSW · STCs &amp; Rebates Available</span>
+        <h1>Cut your power bill by up to 70% with local solar experts</h1>
+        <p class="lead">SunVolt Solar has installed over 620 systems across Orange, Bathurst, and the Central West. CEC accredited, 10-year workmanship warranty, and rebates handled for you.</p>
         <div class="cta cta-hero">
-          <a class="btn btn-primary" href="contact.html">Primary CTA: Start Quote</a>
-          <a class="btn btn-secondary" href="case-studies.html">View Proof Flow</a>
+          <a class="btn btn-primary" href="contact.html">☀️ Get Free Assessment</a>
+          <a class="btn btn-secondary" href="case-studies.html">See Savings Stories</a>
         </div>
-        <div class="trust-strip" aria-label="Trust and proof highlights">
-          <span>✓ Rebate + eligibility clarity</span>
-          <span>✓ Installer credential placement</span>
-          <span>✓ Quote triage to lift lead quality</span>
+        <div class="trust-strip">
+          <span>✓ CEC accredited installers</span>
+          <span>✓ 10-year workmanship warranty</span>
+          <span>✓ STC rebates handled</span>
+          <span>✓ Interest-free finance available</span>
         </div>
 
-        <div class="hero-grid">
+        <div class="savings-box">
+          <div class="savings-stat">
+            <div class="num">$2,400</div>
+            <div class="lbl">Avg annual saving</div>
+          </div>
+          <div class="savings-divider"></div>
+          <div class="savings-stat">
+            <div class="num">3.8yr</div>
+            <div class="lbl">Avg payback period</div>
+          </div>
+          <div class="savings-divider"></div>
+          <div class="savings-stat">
+            <div class="num">620+</div>
+            <div class="lbl">Systems installed</div>
+          </div>
+          <div class="savings-divider"></div>
+          <div class="savings-stat">
+            <div class="num">4.9★</div>
+            <div class="lbl">Google rating</div>
+          </div>
+          <div class="savings-cta">
+            <a href="contact.html">Book free site assessment →</a>
+          </div>
+        </div>
+
+        <div class="hero-grid" style="margin-top:1.2rem;">
           <article class="card">
-            <h3>What this website style is optimised for</h3>
-            <ul>
-              <li>Household + commercial lead qualification before sales calls</li>
-              <li>Confidence through rebates, warranty, and installer proof</li>
-              <li>Local search intent around suburb + bill-saving outcomes</li>
-              <li>Mobile-first quote flow with less form abandonment</li>
-            </ul>
+            <h3>📍 Based in Orange NSW</h3>
+            <p>Unit 4, 18 Phillip Street, Orange NSW 2800<br>
+               <strong>Phone:</strong> 0412 888 200<br>
+               <strong>Email:</strong> info@sunvoltsolar.com.au<br>
+               <strong>Hours:</strong> Mon–Fri 7am–5pm, Sat 8am–12pm</p>
           </article>
           <article class="hero-panel">
-            <h3>Component Stack</h3>
-            <p>Built for research-heavy buyers who compare installers before requesting quotes.</p>
+            <h3>Why Central West families choose SunVolt</h3>
+            <p>We're local — not a national franchise. Every job is done by our own certified team, not subcontractors.</p>
             <div class="chips">
-              <span>Savings estimator CTA</span>
-              <span>Rebate clarity blocks</span>
-              <span>Proof-first trust strip</span>
-              <span>Lead triage form logic</span>
+              <span>Local team</span>
+              <span>No subcontractors</span>
+              <span>STC rebates handled</span>
+              <span>Interest-free options</span>
             </div>
           </article>
         </div>
@@ -61,43 +152,108 @@
 
     <section class="section">
       <div class="container">
-        <h2>Why these homepage components create better business outcomes</h2>
-        <p>Every block supports conversion performance, not just design polish.</p>
-
-        <div class="kpi-grid" aria-label="Expected homepage impact">
-          <article class="kpi"><strong>Higher quote starts</strong><span>Savings-led hero reduces first-click friction.</span></article>
-          <article class="kpi"><strong>Stronger trust rate</strong><span>Installer credentials remove purchase anxiety.</span></article>
-          <article class="kpi"><strong>Better lead quality</strong><span>Usage and roof filters reduce poor-fit enquiries.</span></article>
-          <article class="kpi"><strong>More suburb visibility</strong><span>Location-service architecture supports local rankings.</span></article>
+        <div class="section-head">
+          <h2>Solar solutions for every property</h2>
+          <p>Residential, commercial, and battery storage across the Central West.</p>
         </div>
-
-        <div class="component-list">
-          <article>
-            <h3>Savings-first hero message → More qualified first actions</h3>
-            <p>Leading with bill reduction outcomes aligns with buyer intent and gets higher-quality users into the quote process faster.</p>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon">🏠</div>
+            <h3>Residential Solar</h3>
+            <p>6.6kW to 20kW systems for homes. Fully installed and connected, rebates processed, monitoring app included.</p>
           </article>
-          <article>
-            <h3>Rebate explainer module → Lower confusion and drop-off</h3>
-            <p>Clear incentive context helps visitors understand eligibility and reduces uncertainty.</p>
+          <article class="service-card">
+            <div class="icon">🏭</div>
+            <h3>Commercial Solar</h3>
+            <p>20kW+ systems for small businesses, farms, and commercial premises. Reduce operating costs significantly.</p>
           </article>
-          <article>
-            <h3>Trust strip (CEC, warranties, reviews) → Higher booking confidence</h3>
-            <p>Structured proof near decision points improves enquiry-to-assessment conversion.</p>
+          <article class="service-card">
+            <div class="icon">🔋</div>
+            <h3>Battery Storage</h3>
+            <p>Tesla Powerwall, Sungrow, and Alpha ESS battery solutions. Store excess solar and use it after sunset.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🌾</div>
+            <h3>Farm &amp; Rural Solar</h3>
+            <p>Large-scale solar for properties with high daytime loads — irrigation pumps, cool rooms, workshops.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🔌</div>
+            <h3>EV Charging</h3>
+            <p>Home EV charger installation paired with solar. Charge your car from your roof for near-zero cost.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">🔧</div>
+            <h3>System Upgrades &amp; Repairs</h3>
+            <p>Inverter replacements, panel cleaning, fault diagnosis. We service all brands.</p>
           </article>
         </div>
+      </div>
+    </section>
 
-        <div class="cta">
-          <a class="btn btn-primary" href="services.html">See Solutions Page Logic</a>
-          <a class="btn btn-secondary" href="../../../our-work.html">Back to Our Work</a>
+    <div class="trust-bar">
+      <div class="container">
+        <div class="trust-item">☀️ CEC Accredited Installer #A5032</div>
+        <div class="trust-item">⭐ 4.9 Google rating (310+ reviews)</div>
+        <div class="trust-item">📍 Orange, Bathurst &amp; Central West</div>
+        <div class="trust-item">🔋 620+ systems installed</div>
+      </div>
+    </div>
+
+    <section class="section" style="background:#f0fdf9;padding:2.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      <div class="container">
+        <h2>What our customers say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Our first quarterly bill after installation was $40. Down from $620. The SunVolt team were professional, tidy, and the whole process was seamless. Genuinely life-changing."</p>
+            <div class="reviewer">— Michael T., Orange NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Had quotes from three companies. SunVolt were the most thorough — they actually came out, walked the roof, and explained exactly what we'd get. Happy we chose them."</p>
+            <div class="reviewer">— Fiona D., Bathurst NSW</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Put a 13.2kW system and Powerwall on our farm. Irrigation costs halved overnight. The install crew were fantastic and left the place spotless. Couldn't ask for better."</p>
+            <div class="reviewer">— Rob S., Molong NSW</div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kpi-grid">
+          <article class="kpi"><strong>Free assessment</strong><span>On-site visit, no obligation quote.</span></article>
+          <article class="kpi"><strong>Rebates handled</strong><span>We process all STC paperwork for you.</span></article>
+          <article class="kpi"><strong>10-year warranty</strong><span>On all workmanship, panels, and inverters.</span></article>
+          <article class="kpi"><strong>Interest-free</strong><span>0% finance options available on approved credit.</span></article>
+        </div>
+        <div class="cta" style="margin-top:1.4rem;">
+          <a class="btn btn-primary" href="contact.html">☀️ Book Free Site Assessment</a>
+          <a class="btn btn-secondary" href="case-studies.html">View Savings Stories</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want a website like this for your solar or trade business?</h2>
+        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses starting from $3,000.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">Demo for ImproveYourSite showcase • SolarSpark full-site concept.</div>
+    <div class="container">
+      <p style="margin:0;">© 2025 SunVolt Solar Pty Ltd · CEC Accredited #A5032 · Orange NSW 2800 · 0412 888 200</p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+    </div>
   </footer>
 
-  <a class="phone-cta" href="contact.html">Start quote</a>
+  <a class="phone-cta" href="contact.html">☀️ Book free assessment</a>
 </body>
 </html>
