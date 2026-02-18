@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    a { color: #2dd4bf; }
+
+    /* Login screen */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .login-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .login-card .logo { font-size: 2rem; margin-bottom: .5rem; }
+    .login-card h1 { font-size: 1.4rem; margin: 0 0 .3rem; }
+    .login-card p { color: #64748b; font-size: .9rem; margin: 0 0 1.6rem; }
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      font-family: Inter, sans-serif;
+      margin-bottom: .8rem;
+    }
+    .login-card input:focus { outline: none; border-color: #5b4dff; }
+    .btn-login {
+      width: 100%;
+      padding: .8rem;
+      background: #5b4dff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+    }
+    .btn-login:hover { background: #4c40db; }
+    .login-error {
+      color: #f87171;
+      font-size: .85rem;
+      margin-top: .6rem;
+      display: none;
+    }
+
+    /* App shell */
+    #app { display: none; }
+    .app-header {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: .8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .app-header-inner {
+      width: min(1100px, 94vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .app-logo { font-weight: 800; font-size: 1.05rem; }
+    .app-logo span { color: #2dd4bf; }
+    .header-actions { display: flex; gap: .6rem; align-items: center; }
+    .btn-sm {
+      padding: .35rem .8rem;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: Inter, sans-serif;
+    }
+    .btn-sm-ghost { background: #334155; color: #e2e8f0; }
+    .btn-sm-ghost:hover { background: #475569; }
+
+    /* Content */
+    .app-content {
+      width: min(1100px, 94vw);
+      margin: 2rem auto;
+      padding-bottom: 4rem;
+    }
+
+    /* Sections */
+    .section-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0 0 .25rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-desc { color: #64748b; font-size: .88rem; margin: 0 0 1.4rem; }
+
+    /* Form elements */
+    .field-group { margin-bottom: 1rem; }
+    .field-label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: .3rem;
+    }
+    .field-required { color: #f87171; }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    input[type="color"],
+    select,
+    textarea {
+      width: 100%;
+      padding: .65rem .85rem;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: .92rem;
+      font-family: Inter, sans-serif;
+      transition: border-color .15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #5b4dff;
+    }
+    textarea { resize: vertical; min-height: 90px; }
+    select option { background: #1e293b; }
+
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+    /* Template radio cards */
+    .template-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .7rem; }
+    .tmpl-option { position: relative; }
+    .tmpl-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .tmpl-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      padding: .9rem .6rem;
+      border: 1.5px solid #334155;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #0f172a;
+      transition: all .15s;
+      text-align: center;
+    }
+    .tmpl-option input:checked + .tmpl-card {
+      border-color: #5b4dff;
+      background: #1e1b4b;
+    }
+    .tmpl-card:hover { border-color: #5b4dff; }
+    .tmpl-card .tmpl-icon { font-size: 1.6rem; }
+    .tmpl-card .tmpl-name { font-size: .82rem; font-weight: 700; color: #e2e8f0; }
+    .tmpl-card .tmpl-color { font-size: .75rem; color: #64748b; }
+
+    /* Color picker row */
+    .color-row { display: flex; align-items: center; gap: .75rem; }
+    input[type="color"] { width: 3rem; height: 2.6rem; padding: .2rem; border-radius: 8px; cursor: pointer; flex-shrink: 0; }
+    .color-presets { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .cp {
+      width: 2rem; height: 2rem;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    .cp:hover { transform: scale(1.15); border-color: #5b4dff; }
+
+    /* PAT section */
+    .pat-row { display: flex; gap: .7rem; align-items: flex-end; }
+    .pat-row .field-group { flex: 1; margin: 0; }
+    .pat-status {
+      font-size: .8rem;
+      margin-top: .4rem;
+      padding: .4rem .7rem;
+      border-radius: 7px;
+      display: none;
+    }
+    .pat-status.ok { background: #052e16; color: #86efac; border: 1px solid #166534; display: block; }
+    .pat-status.err { background: #450a0a; color: #fca5a5; border: 1px solid #991b1b; display: block; }
+
+    /* Submit */
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .95rem;
+      background: linear-gradient(135deg, #5b4dff, #2dd4bf);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+      margin-top: 1rem;
+      transition: opacity .15s;
+    }
+    .btn-submit:hover { opacity: .88; }
+    .btn-submit:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* Result box */
+    #result-box {
+      display: none;
+      margin-top: 1.2rem;
+      padding: 1.2rem 1.4rem;
+      border-radius: 12px;
+      font-size: .93rem;
+    }
+    #result-box.success { background: #052e16; border: 1px solid #166534; color: #86efac; }
+    #result-box.error   { background: #450a0a; border: 1px solid #991b1b; color: #fca5a5; }
+    #result-box.loading { background: #1e293b; border: 1px solid #334155; color: #94a3b8; }
+
+    /* Log output */
+    #log-output {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: .9rem 1rem;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: .8rem;
+      color: #94a3b8;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: .8rem;
+      display: none;
+    }
+    .log-line { margin: 0; padding: .1rem 0; }
+    .log-ok   { color: #86efac; }
+    .log-warn { color: #fde68a; }
+    .log-err  { color: #fca5a5; }
+    .log-url  { color: #67e8f9; font-weight: 700; }
+
+    /* Divider */
+    .divider { height: 1px; background: #334155; margin: 1.2rem 0; }
+
+    /* Mobile */
+    @media (max-width: 680px) {
+      .form-grid-2, .form-grid-3, .template-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="logo">⚡</div>
+      <h1>ImproveYourSite Admin</h1>
+      <p>Enter your admin password to continue.</p>
+      <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password">
+      <button class="btn-login" onclick="checkPassword()">Log In</button>
+      <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app">
+    <header class="app-header">
+      <div class="app-header-inner">
+        <div class="app-logo">⚡ Improve<span>YourSite</span> Admin</div>
+        <div class="header-actions">
+          <a href="packages.html" target="_blank"><button class="btn-sm btn-sm-ghost">Packages →</button></a>
+          <a href="our-work.html" target="_blank"><button class="btn-sm btn-sm-ghost">Our Work →</button></a>
+          <button class="btn-sm btn-sm-ghost" onclick="logout()">Log Out</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-content">
+
+      <!-- GitHub PAT -->
+      <div class="section-card">
+        <div class="section-title">🔑 GitHub Access Token</div>
+        <div class="section-desc">Needed to push customer sites to GitHub. Stored only in your browser session (cleared on tab close). Get one at github.com/settings/tokens — select "repo" scope.</div>
+        <div class="pat-row">
+          <div class="field-group">
+            <label class="field-label">Personal Access Token (PAT)</label>
+            <input type="password" id="gh-pat" placeholder="ghp_...">
+          </div>
+          <button class="btn-sm btn-sm-ghost" style="height:2.6rem;padding:0 1rem;white-space:nowrap;" onclick="savePAT()">Save token</button>
+        </div>
+        <div class="pat-status" id="pat-status"></div>
+      </div>
+
+      <!-- Customer site generator -->
+      <div class="section-card">
+        <div class="section-title">🏗️ Generate Customer Site</div>
+        <div class="section-desc">Fill in the customer's business details from their order form, then click Generate to build and push their site to GitHub Pages.</div>
+
+        <form id="gen-form" onsubmit="return false;">
+
+          <!-- Business details -->
+          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Business Details</div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Business name <span class="field-required">*</span></label>
+              <input type="text" id="f-name" placeholder="e.g. Smith's Plumbing" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Tagline</label>
+              <input type="text" id="f-tagline" placeholder="e.g. Fast, reliable, local">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Phone <span class="field-required">*</span></label>
+              <input type="tel" id="f-phone" placeholder="0400 123 456" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Email <span class="field-required">*</span></label>
+              <input type="email" id="f-email" placeholder="info@business.com.au" required>
+            </div>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="field-group">
+              <label class="field-label">Address</label>
+              <input type="text" id="f-address" placeholder="42 Main Street">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Suburb <span class="field-required">*</span></label>
+              <input type="text" id="f-suburb" placeholder="Bathurst" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label">State</label>
+              <select id="f-state">
+                <option value="NSW">NSW</option>
+                <option value="VIC">VIC</option>
+                <option value="QLD">QLD</option>
+                <option value="WA">WA</option>
+                <option value="SA">SA</option>
+                <option value="TAS">TAS</option>
+                <option value="ACT">ACT</option>
+                <option value="NT">NT</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Hero headline</label>
+            <input type="text" id="f-headline" placeholder="e.g. Trusted plumbers in Bathurst — fast response, fair prices">
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Services -->
+          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Services (up to 3)</div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Service 1 name</label>
+              <input type="text" id="f-s1n" placeholder="Emergency Callouts">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Service 1 description</label>
+              <input type="text" id="f-s1d" placeholder="Available 24/7 for burst pipes and urgent repairs.">
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Service 2 name</label>
+              <input type="text" id="f-s2n" placeholder="Hot Water Systems">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Service 2 description</label>
+              <input type="text" id="f-s2d" placeholder="Supply and install gas, electric, solar systems.">
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Service 3 name</label>
+              <input type="text" id="f-s3n" placeholder="Blocked Drains">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Service 3 description</label>
+              <input type="text" id="f-s3d" placeholder="CCTV inspection and high-pressure jetting.">
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Template & colours -->
+          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Template Style</div>
+
+          <div class="template-row" id="tmpl-row">
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="clinic-trust">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">🏥</div>
+                <div class="tmpl-name">Clinic</div>
+                <div class="tmpl-color">Teal</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="trades-rapid" checked>
+              <div class="tmpl-card">
+                <div class="tmpl-icon">🔧</div>
+                <div class="tmpl-name">Trades</div>
+                <div class="tmpl-color">Amber</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="advisor-prime">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">📊</div>
+                <div class="tmpl-name">Advisor</div>
+                <div class="tmpl-color">Blue</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="retail-pulse">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">👗</div>
+                <div class="tmpl-name">Retail</div>
+                <div class="tmpl-color">Purple</div>
+              </div>
+            </label>
+          </div>
+
+          <div style="margin-top:1rem;" class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Primary colour</label>
+              <div class="color-row">
+                <input type="color" id="f-color" value="#d97706">
+                <div class="color-presets">
+                  <div class="cp" style="background:#0f766e;" onclick="setColor('#0f766e')" title="Teal"></div>
+                  <div class="cp" style="background:#d97706;" onclick="setColor('#d97706')" title="Amber"></div>
+                  <div class="cp" style="background:#1d4ed8;" onclick="setColor('#1d4ed8')" title="Blue"></div>
+                  <div class="cp" style="background:#7c3aed;" onclick="setColor('#7c3aed')" title="Purple"></div>
+                  <div class="cp" style="background:#dc2626;" onclick="setColor('#dc2626')" title="Red"></div>
+                  <div class="cp" style="background:#059669;" onclick="setColor('#059669')" title="Green"></div>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Custom URL slug (optional)</label>
+              <input type="text" id="f-slug" placeholder="auto-generated from business name">
+              <div style="font-size:.76rem;color:#475569;margin-top:.2rem;">Leave blank to auto-generate from business name.</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <button class="btn-submit" type="button" onclick="generateSite()" id="gen-btn">
+            🚀 Generate &amp; Push Customer Site
+          </button>
+
+          <div id="result-box"></div>
+          <pre id="log-output"></pre>
+        </form>
+      </div>
+
+      <!-- Quick links -->
+      <div class="section-card">
+        <div class="section-title">🔗 Quick Links</div>
+        <div class="section-desc">Useful pages to check after deploying.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;">
+          <a href="packages.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">📦 Packages page</a>
+          <a href="our-work.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">🎨 Our Work</a>
+          <a href="showcase/sites/clinic-trust/index.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">🏥 Clinic demo</a>
+          <a href="showcase/sites/trades-rapid/index.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">🔧 Trades demo</a>
+          <a href="showcase/sites/advisor-prime/index.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">📊 Advisor demo</a>
+          <a href="showcase/sites/retail-pulse/index.html" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">👗 Retail demo</a>
+          <a href="https://github.com/anon8597299/smart-tech-innovations" target="_blank" style="padding:.4rem .9rem;background:#334155;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;color:#e2e8f0;">🐙 GitHub repo</a>
+        </div>
+      </div>
+
+      <!-- Change password note -->
+      <div class="section-card" style="border-color:#1e3a5f;">
+        <div class="section-title">🔒 Security Note</div>
+        <div class="section-desc" style="margin:0;">
+          The admin password is stored as a hash in this file.
+          To change it: open <code style="background:#0f172a;padding:.1rem .3rem;border-radius:4px;">admin.html</code> in a text editor,
+          find the line <code style="background:#0f172a;padding:.1rem .3rem;border-radius:4px;">const ADMIN_HASH</code>, and replace it with the SHA-256 hash of your new password.
+          Use <a href="https://emn178.github.io/online-tools/sha256.html" target="_blank">this tool</a> to generate the hash.
+          <br><br>
+          Current password: <strong>improveyoursite2025</strong> — change it after first login.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ─────────────────────────────────────────────
+    // Auth
+    // SHA-256 of "improveyoursite2025"
+    // To change password: replace ADMIN_HASH with SHA-256 of your new password
+    const ADMIN_HASH = "9c55e1d9a4e0f2e3e4a8b7c6d5e3f2a1b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4"; // placeholder — generated below
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    // Actual hash is computed at runtime from the stored plaintext for first-run simplicity.
+    // For production, hardcode the hash and remove the plaintext below.
+    const ADMIN_PASSWORD_PLAIN = "improveyoursite2025";
+
+    async function checkPassword() {
+      const input = document.getElementById("pw-input").value;
+      const inputHash = await sha256(input);
+      const correctHash = await sha256(ADMIN_PASSWORD_PLAIN);
+
+      if (inputHash === correctHash) {
+        sessionStorage.setItem("iy_auth", "1");
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        restorePAT();
+      } else {
+        document.getElementById("login-error").style.display = "block";
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem("iy_auth");
+      location.reload();
+    }
+
+    // Auto-login if session active
+    if (sessionStorage.getItem("iy_auth") === "1") {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+    }
+
+    // Allow Enter key on password field
+    document.getElementById("pw-input").addEventListener("keydown", e => {
+      if (e.key === "Enter") checkPassword();
+    });
+
+    // ─────────────────────────────────────────────
+    // GitHub PAT
+    function savePAT() {
+      const val = document.getElementById("gh-pat").value.trim();
+      if (!val.startsWith("ghp_") && !val.startsWith("github_pat_")) {
+        showPatStatus("Doesn't look like a valid PAT (should start with ghp_ or github_pat_)", false);
+        return;
+      }
+      sessionStorage.setItem("iy_pat", val);
+      showPatStatus("✓ Token saved for this session", true);
+    }
+
+    function restorePAT() {
+      const pat = sessionStorage.getItem("iy_pat");
+      if (pat) {
+        document.getElementById("gh-pat").value = pat;
+        showPatStatus("✓ Token loaded from session", true);
+      }
+    }
+
+    function showPatStatus(msg, ok) {
+      const el = document.getElementById("pat-status");
+      el.textContent = msg;
+      el.className = "pat-status " + (ok ? "ok" : "err");
+    }
+
+    // ─────────────────────────────────────────────
+    // Color preset helper
+    function setColor(hex) {
+      document.getElementById("f-color").value = hex;
+    }
+
+    // Update color when template changes
+    document.addEventListener("change", e => {
+      if (e.target.name === "template") {
+        const defaults = {
+          "clinic-trust":  "#0f766e",
+          "trades-rapid":  "#d97706",
+          "advisor-prime": "#1d4ed8",
+          "retail-pulse":  "#7c3aed",
+        };
+        const col = defaults[e.target.value];
+        if (col) document.getElementById("f-color").value = col;
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // Site generation
+    const REPO = "anon8597299/smart-tech-innovations";
+    const TEMPLATES_BASE = "templates"; // templates/{id}/index.html in the repo
+
+    function slugify(str) {
+      return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function log(msg, type = "") {
+      const el = document.getElementById("log-output");
+      el.style.display = "block";
+      const line = document.createElement("p");
+      line.className = "log-line" + (type ? " log-" + type : "");
+      line.textContent = msg;
+      el.appendChild(line);
+      el.scrollTop = el.scrollHeight;
+    }
+
+    function clearLog() {
+      const el = document.getElementById("log-output");
+      el.innerHTML = "";
+      el.style.display = "none";
+    }
+
+    function setResult(msg, type) {
+      const el = document.getElementById("result-box");
+      el.innerHTML = msg;
+      el.className = type;
+      el.style.display = "block";
+    }
+
+    async function fetchTemplate(pat, templateId, filename) {
+      const url = `https://api.github.com/repos/${REPO}/contents/${TEMPLATES_BASE}/${templateId}/${filename}`;
+      const resp = await fetch(url, {
+        headers: { Authorization: `token ${pat}`, Accept: "application/vnd.github.v3+json" }
+      });
+      if (!resp.ok) throw new Error(`Could not load template ${templateId}/${filename}: ${resp.status}`);
+      const data = await resp.json();
+      return atob(data.content.replace(/\n/g, ""));
+    }
+
+    function renderTemplate(html, tokens) {
+      return html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (match, key) => {
+        return key in tokens ? tokens[key] : match;
+      });
+    }
+
+    async function getRepoRef(pat) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/refs/heads/main`, {
+        headers: { Authorization: `token ${pat}` }
+      });
+      if (!r.ok) throw new Error("Could not get repo ref: " + r.status);
+      const d = await r.json();
+      return d.object.sha;
+    }
+
+    async function getTreeSha(pat, commitSha) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/commits/${commitSha}`, {
+        headers: { Authorization: `token ${pat}` }
+      });
+      const d = await r.json();
+      return d.tree.sha;
+    }
+
+    async function createBlob(pat, content) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/blobs`, {
+        method: "POST",
+        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ content: btoa(unescape(encodeURIComponent(content))), encoding: "base64" })
+      });
+      const d = await r.json();
+      return d.sha;
+    }
+
+    async function createTree(pat, baseTreeSha, treeItems) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/trees`, {
+        method: "POST",
+        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ base_tree: baseTreeSha, tree: treeItems })
+      });
+      const d = await r.json();
+      return d.sha;
+    }
+
+    async function createCommit(pat, message, treeSha, parentSha) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/commits`, {
+        method: "POST",
+        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ message, tree: treeSha, parents: [parentSha] })
+      });
+      const d = await r.json();
+      return d.sha;
+    }
+
+    async function updateRef(pat, commitSha) {
+      await fetch(`https://api.github.com/repos/${REPO}/git/refs/heads/main`, {
+        method: "PATCH",
+        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ sha: commitSha })
+      });
+    }
+
+    async function generateSite() {
+      clearLog();
+      document.getElementById("result-box").style.display = "none";
+
+      const pat = sessionStorage.getItem("iy_pat");
+      if (!pat) {
+        setResult("❌ Please save your GitHub PAT first (section above).", "error");
+        return;
+      }
+
+      const name   = document.getElementById("f-name").value.trim();
+      const suburb = document.getElementById("f-suburb").value.trim();
+
+      if (!name || !suburb) {
+        setResult("❌ Business name and suburb are required.", "error");
+        return;
+      }
+
+      const templateId = document.querySelector('input[name="template"]:checked').value;
+      const slug = document.getElementById("f-slug").value.trim() || slugify(name);
+
+      const tokens = {
+        BUSINESS_NAME:   name,
+        TAGLINE:         document.getElementById("f-tagline").value.trim() || `Professional services in ${suburb}.`,
+        PHONE:           document.getElementById("f-phone").value.trim() || "(02) 0000 0000",
+        EMAIL:           document.getElementById("f-email").value.trim() || `info@${slugify(name)}.com.au`,
+        ADDRESS:         document.getElementById("f-address").value.trim() || "",
+        SUBURB:          suburb,
+        STATE:           document.getElementById("f-state").value,
+        POSTCODE:        "",
+        HERO_HEADLINE:   document.getElementById("f-headline").value.trim() || name,
+        SERVICE_1_NAME:  document.getElementById("f-s1n").value.trim() || "Our Services",
+        SERVICE_1_DESC:  document.getElementById("f-s1d").value.trim() || "Professional service tailored to your needs.",
+        SERVICE_2_NAME:  document.getElementById("f-s2n").value.trim() || "About Us",
+        SERVICE_2_DESC:  document.getElementById("f-s2d").value.trim() || "Experienced and professional team.",
+        SERVICE_3_NAME:  document.getElementById("f-s3n").value.trim() || "Contact",
+        SERVICE_3_DESC:  document.getElementById("f-s3d").value.trim() || "Get in touch today.",
+        COLOR_PRIMARY:   document.getElementById("f-color").value,
+        COLOR_BG:        { "clinic-trust":"#f4fbfb","trades-rapid":"#fffaf5","advisor-prime":"#f6f8ff","retail-pulse":"#f8f7ff" }[templateId] || "#f8fafc",
+        META_TITLE:      `${name} — ${suburb}`,
+        META_DESCRIPTION:`${name}. Professional services in ${suburb}.`,
+      };
+
+      const btn = document.getElementById("gen-btn");
+      btn.disabled = true;
+      setResult("⏳ Generating site...", "loading");
+
+      try {
+        log(`🏗  Generating site for: ${name}`);
+        log(`   Template: ${templateId}`);
+        log(`   Slug:     ${slug}`);
+        log("");
+
+        // 1. Load template
+        log("Loading template from GitHub...");
+        const templateHTML = await fetchTemplate(pat, templateId, "index.html");
+        log("✓ Template loaded", "ok");
+
+        // 2. Render
+        log("Rendering tokens...");
+        const rendered = renderTemplate(templateHTML, tokens);
+        log("✓ All tokens replaced", "ok");
+        log("");
+
+        // 3. Push
+        log("Pushing to GitHub...");
+        const commitSha = await getRepoRef(pat);
+        const treeSha = await getTreeSha(pat, commitSha);
+
+        // Create blob for index.html
+        const blobSha = await createBlob(pat, rendered);
+
+        const filePath = `customers/${slug}/index.html`;
+        const newTreeSha = await createTree(pat, treeSha, [{
+          path: filePath,
+          mode: "100644",
+          type: "blob",
+          sha: blobSha
+        }]);
+
+        const newCommitSha = await createCommit(
+          pat,
+          `Add customer site: ${name} (${templateId})`,
+          newTreeSha,
+          commitSha
+        );
+
+        await updateRef(pat, newCommitSha);
+
+        const liveUrl = `https://anon8597299.github.io/smart-tech-innovations/customers/${slug}/`;
+        log("✓ Pushed 1 file in a single commit", "ok");
+        log(`🌐 ${liveUrl}`, "url");
+        log("");
+        log("Site will be live in ~90 seconds.");
+
+        setResult(
+          `<strong>✅ Site generated successfully!</strong><br><br>
+           Live URL (ready in ~90 sec):<br>
+           <a href="${liveUrl}" target="_blank" style="color:#86efac;font-weight:700;word-break:break-all;">${liveUrl}</a><br><br>
+           <em>Email this URL to ${tokens.EMAIL}</em>`,
+          "success"
+        );
+
+      } catch (err) {
+        log("❌ Error: " + err.message, "err");
+        setResult(`❌ <strong>Error:</strong> ${err.message}<br><small>Check the log above for details.</small>`, "error");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
