@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" width="320" height="60">
+  <defs>
+    <linearGradient id="bolt-grad-w" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: rounded square -->
+  <rect x="0" y="4" width="52" height="52" rx="12" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="31,10 20,32 28,32 22,50 38,26 29,26 36,10" fill="#ffffff"/>
+
+  <!-- Wordmark -->
+  <text x="66" y="38" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Improve</text>
+  <text x="178" y="38" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#2dd4bf" letter-spacing="-0.5">YourSite</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5b4dff"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" rx="60" fill="url(#bg-grad)"/>
+
+  <!-- Lightning bolt centred -->
+  <polygon points="230,60 140,210 195,210 165,340 290,175 220,175 265,60" fill="#ffffff"/>
+
+  <!-- Tagline at bottom -->
+  <text x="200" y="375" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="1">IMPROVEYOURSITE</text>
+</svg>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Guide — ImproveYourSite</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, system-ui, sans-serif; background: #f8fafc; color: #0f172a; padding: 2rem; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.4rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.4rem; }
+    .swatch { height: 80px; border-radius: 10px; margin-bottom: 0.75rem; display: flex; align-items: flex-end; padding: 0.5rem 0.75rem; }
+    .swatch span { font-size: 0.78rem; font-weight: 700; color: #fff; opacity: 0.9; }
+    .logo-row { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.2rem; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; }
+    .logo-row.dark { background: #0f172a; }
+    .logo-row.grad { background: linear-gradient(135deg, #5b4dff, #2dd4bf); }
+    .download { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 700; color: #5b4dff; text-decoration: none; border: 1px solid #ddd6fe; border-radius: 8px; padding: 0.35rem 0.75rem; margin: 0.2rem; }
+    .download:hover { background: #f5f3ff; }
+    .type-sample { margin-bottom: 0.6rem; }
+    .meta { font-size: 0.8rem; color: #94a3b8; margin-top: 0.2rem; }
+    .usage-list { list-style: none; display: grid; gap: 0.4rem; }
+    .usage-list li { font-size: 0.88rem; color: #475569; padding-left: 1rem; position: relative; }
+    .usage-list li::before { content: '→'; position: absolute; left: 0; color: #5b4dff; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1 style="margin-bottom:0.2rem;">ImproveYourSite</h1>
+  <p style="color:#64748b;margin-bottom:2rem;">Brand Guide — Internal Reference</p>
+
+  <!-- LOGOS -->
+  <h2>Logo Files</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="logo-row">
+        <img src="logo-primary.svg" alt="Primary logo" style="height:48px;">
+      </div>
+      <strong>Primary Logo</strong>
+      <p class="meta">Use on white or light backgrounds</p>
+      <div style="margin-top:0.6rem;">
+        <a class="download" href="logo-primary.svg" download>Download SVG</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="logo-row dark">
+        <img src="logo-white.svg" alt="White logo" style="height:48px;">
+      </div>
+      <strong>White Logo</strong>
+      <p class="meta">Use on dark or coloured backgrounds</p>
+      <div style="margin-top:0.6rem;">
+        <a class="download" href="logo-white.svg" download>Download SVG</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="logo-row grad" style="gap:1rem;">
+        <img src="logo-icon.svg" alt="Icon" style="height:52px;">
+        <img src="logo-square.svg" alt="Square logo" style="height:52px;">
+      </div>
+      <strong>Icon + Square Logo</strong>
+      <p class="meta">For profile pictures, favicons, app icons</p>
+      <div style="margin-top:0.6rem;">
+        <a class="download" href="logo-icon.svg" download>Icon SVG</a>
+        <a class="download" href="logo-square.svg" download>Square SVG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOURS -->
+  <h2>Brand Colours</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="swatch" style="background:#5b4dff;"><span>#5B4DFF</span></div>
+      <strong>Electric Indigo</strong>
+      <p class="meta">#5B4DFF · RGB(91, 77, 255)</p>
+      <ul class="usage-list" style="margin-top:0.5rem;">
+        <li>Primary buttons</li>
+        <li>Links and highlights</li>
+        <li>"YourSite" in wordmark</li>
+        <li>Step numbers and accents</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="swatch" style="background:#2dd4bf;"><span>#2DD4BF</span></div>
+      <strong>Neon Mint</strong>
+      <p class="meta">#2DD4BF · RGB(45, 212, 191)</p>
+      <ul class="usage-list" style="margin-top:0.5rem;">
+        <li>Gradient end point</li>
+        <li>Trust indicators</li>
+        <li>Hover states</li>
+        <li>Highlight accents</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="swatch" style="background:#0f172a;"><span>#0F172A</span></div>
+      <strong>Deep Navy</strong>
+      <p class="meta">#0F172A · RGB(15, 23, 42)</p>
+      <ul class="usage-list" style="margin-top:0.5rem;">
+        <li>Body text</li>
+        <li>Headings</li>
+        <li>Dark backgrounds</li>
+        <li>"Improve" in wordmark</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="swatch" style="background:linear-gradient(135deg,#5b4dff,#2dd4bf);"><span>Gradient</span></div>
+      <strong>Brand Gradient</strong>
+      <p class="meta">135deg · Indigo → Mint</p>
+      <ul class="usage-list" style="margin-top:0.5rem;">
+        <li>Logo icon background</li>
+        <li>Square profile image</li>
+        <li>Hero accents</li>
+        <li>Social media headers</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <h2>Typography</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="type-sample">
+        <div style="font-size:2rem;font-weight:800;line-height:1.1;">Heading Bold</div>
+        <div class="meta">Inter 800 · Page titles, hero text</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:1.25rem;font-weight:700;">Subheading</div>
+        <div class="meta">Inter 700 · Section headings</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:1rem;font-weight:400;color:#475569;">Body text reads like this. Clear, confident, no jargon.</div>
+        <div class="meta">Inter 400 · Body copy</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#5b4dff;">Label Text</div>
+        <div class="meta">Inter 600 · Labels, tags, badges</div>
+      </div>
+      <p style="font-size:0.82rem;color:#94a3b8;margin-top:0.75rem;">Google Fonts: <strong>Inter</strong> — import from fonts.googleapis.com</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:0.75rem;font-size:0.95rem;">Logo Usage Rules</h3>
+      <ul class="usage-list">
+        <li>Minimum size: 120px wide (horizontal logo)</li>
+        <li>Always use SVG for web, PNG for print/email</li>
+        <li>Never stretch or distort the logo</li>
+        <li>Never change the logo colours</li>
+        <li>Always use white version on dark backgrounds</li>
+        <li>Maintain clear space of at least the icon height on all sides</li>
+        <li>Google Business Profile: use logo-square.svg (400×400)</li>
+        <li>Social media header: use the gradient background</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHERE TO USE -->
+  <h2>Where to Use Each Asset</h2>
+  <div class="grid">
+    <div class="card">
+      <strong style="display:block;margin-bottom:0.6rem;">Google Business Profile</strong>
+      <ul class="usage-list">
+        <li>Profile photo: logo-square.svg (400×400)</li>
+        <li>Cover photo: gradient background + white logo</li>
+        <li>Post images: white logo on indigo background</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong style="display:block;margin-bottom:0.6rem;">Social Media</strong>
+      <ul class="usage-list">
+        <li>Profile picture: logo-square.svg</li>
+        <li>Facebook/LinkedIn cover: 820×312 with gradient</li>
+        <li>Post graphics: white logo on dark or gradient</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong style="display:block;margin-bottom:0.6rem;">Email Signature</strong>
+      <ul class="usage-list">
+        <li>Use logo-primary.svg at 200px wide</li>
+        <li>Name in Inter 700, #0f172a</li>
+        <li>Title + phone in Inter 400, #475569</li>
+        <li>Link: improveyoursite.com in #5b4dff</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong style="display:block;margin-bottom:0.6rem;">Print / Proposals</strong>
+      <ul class="usage-list">
+        <li>Export SVG to PDF in browser for vector quality</li>
+        <li>Use Deep Navy (#0f172a) for text on white</li>
+        <li>Use gradient for cover pages and dividers</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
