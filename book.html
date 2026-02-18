@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Free Discovery Call — ImproveYourSite</title>
+  <meta name="description" content="Book a free 30-minute discovery call with the ImproveYourSite team. We'll review your current site and show you exactly what's possible for your business.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <style>
+    .book-wrap { padding: 7rem 0 4rem; min-height: 80vh; }
+    .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
+    .book-left h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
+    .book-left p { color: #475569; font-size: 1.05rem; margin-bottom: 1.2rem; }
+    .book-checklist { list-style: none; display: grid; gap: 0.55rem; margin-bottom: 1.4rem; }
+    .book-checklist li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.97rem; color: #334155; }
+    .book-checklist li::before { content: '✓'; color: #2dd4bf; font-weight: 800; flex-shrink: 0; }
+    .book-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: #f0fdf9; border: 1px solid #a7f3d0; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 0.4rem 0.85rem; border-radius: 999px; margin-bottom: 1rem; }
+
+    .book-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 1.8rem; box-shadow: 0 12px 32px rgba(15,23,42,0.08); }
+    .book-card h2 { font-size: 1.25rem; margin-bottom: 0.3rem; }
+    .book-card p { color: #64748b; font-size: 0.93rem; margin-bottom: 1.2rem; }
+
+    /* Calendly embed container */
+    .calendly-wrap { min-height: 500px; border-radius: 14px; overflow: hidden; margin-bottom: 1.2rem; background: #f8fafc; display: flex; align-items: center; justify-content: center; border: 1px dashed #cbd5e1; }
+    .calendly-placeholder { text-align: center; padding: 2rem; color: #94a3b8; }
+    .calendly-placeholder p { font-size: 0.9rem; margin: 0; }
+
+    .divider { display: flex; align-items: center; gap: 0.75rem; margin: 1.2rem 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+
+    .enquiry-form { display: grid; gap: 0.85rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: #374151; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea { padding: 0.65rem 0.85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: 0.95rem; font-family: inherit; color: #111827; background: #fff; transition: border-color .18s; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: #5b4dff; box-shadow: 0 0 0 3px rgba(91,77,255,0.08); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-submit { width: 100%; padding: 0.9rem; background: #5b4dff; color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; transition: background .18s; }
+    .btn-submit:hover { background: #4c40db; }
+    .form-note { font-size: 0.8rem; color: #94a3b8; text-align: center; margin-top: 0.3rem; }
+
+    @media (max-width: 860px) {
+      .book-grid { grid-template-columns: 1fr; }
+      .book-wrap { padding: 5.5rem 0 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2934238791702920" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="index.html#services" class="nav__link">Services</a></li>
+        <li><a href="our-work.html" class="nav__link">Our Work</a></li>
+        <li><a href="packages.html" class="nav__link">Packages</a></li>
+        <li><a href="book.html" class="nav__link nav__cta">Book a Call</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <section class="book-wrap">
+    <div class="container">
+      <div class="book-grid">
+
+        <!-- Left: Why book -->
+        <div class="book-left">
+          <span class="book-badge">Free · No obligation · 30 minutes</span>
+          <h1>Let's talk about your website</h1>
+          <p>Book a free discovery call with our team. We'll look at your current site, understand your business, and show you exactly what's possible — no pressure, no jargon.</p>
+          <ul class="book-checklist">
+            <li>We review your current website before the call</li>
+            <li>You get a clear picture of what's holding you back</li>
+            <li>We recommend the right package for your budget</li>
+            <li>No hard sell — if we're not the right fit, we'll tell you</li>
+            <li>Serving Orange, Dubbo, Bathurst, Mudgee, Forbes &amp; surrounds</li>
+          </ul>
+          <div style="background:#f8f7ff;border:1px solid #ddd6fe;border-radius:14px;padding:1rem 1.2rem;">
+            <p style="margin:0;font-size:0.92rem;color:#4c1d95;font-weight:600;">Our packages start at $3,000</p>
+            <p style="margin:0.3rem 0 0;font-size:0.88rem;color:#5b21b6;">Scan &amp; Fix · Complete Build · Premium Growth</p>
+            <a href="packages.html" style="font-size:0.85rem;color:#5b4dff;font-weight:700;text-decoration:underline;">See what's included →</a>
+          </div>
+        </div>
+
+        <!-- Right: Booking options -->
+        <div class="book-card">
+          <h2>Book your free call</h2>
+          <p>Pick a time that suits you — or send us a quick message and we'll call you back.</p>
+
+          <!-- CALENDLY EMBED — replace the div below with your Calendly inline embed code -->
+          <div class="calendly-wrap" id="calendly-container">
+            <div class="calendly-placeholder">
+              <p style="font-size:1.5rem;margin-bottom:0.5rem;">📅</p>
+              <p><strong>Calendar coming soon</strong></p>
+              <p>Use the form below to book your call.</p>
+            </div>
+          </div>
+          <!-- END CALENDLY EMBED -->
+
+          <div class="divider">or send us a message</div>
+
+          <!-- Enquiry form -->
+          <form
+            class="enquiry-form"
+            action="https://formsubmit.co/admin@improveyoursite.com"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New Discovery Call Request — ImproveYourSite">
+            <input type="hidden" name="_next" value="https://improveyoursite.com/thanks.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your name *</label>
+                <input type="text" id="name" name="name" placeholder="James Burke" required>
+              </div>
+              <div class="form-group">
+                <label for="business">Business name</label>
+                <input type="text" id="business" name="business" placeholder="Burke's Plumbing">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone *</label>
+                <input type="tel" id="phone" name="phone" placeholder="0400 123 456" required>
+              </div>
+              <div class="form-group">
+                <label for="town">Town / Suburb</label>
+                <input type="text" id="town" name="town" placeholder="Orange NSW">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="interest">What are you looking for?</label>
+              <select id="interest" name="interest">
+                <option value="">— Select —</option>
+                <option>Scan &amp; Fix my current site ($3,000)</option>
+                <option>Brand new website build ($5,000)</option>
+                <option>Premium Growth package ($10,000)</option>
+                <option>Not sure yet — just want advice</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Anything else we should know?</label>
+              <textarea id="message" name="message" placeholder="Current website URL, what's not working, what you're trying to achieve..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Send My Request →</button>
+            <p class="form-note">We'll call you back within 1 business day. No spam, ever.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; <span id="year"></span> ImproveYourSite. Contact: <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="analytics-config.js"></script>
+  <script src="src/js/analytics.js"></script>
+  <script src="src/js/main.js"></script>
+</body>
+</html>
