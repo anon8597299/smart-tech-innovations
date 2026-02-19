@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Blog | Smith's Plumbing</title>
+  <meta name="description" content="Expert tips and local guides from Smith's Plumbing in Bathurst, NSW.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #d97706;
+      --bg: #fffaf5;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --max-w: 720px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .site-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.25rem;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .page-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .page-heading {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subheading {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .post-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .post-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .post-item:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .post-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      gap: 1rem;
+    }
+
+    .post-title {
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    .post-arrow {
+      color: var(--primary);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .no-posts {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      padding: 1rem 0;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: #fff;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+    .site-footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .page-wrap { padding: 2rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">Smith's Plumbing</a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-wrap">
+      <h1 class="page-heading">Blog</h1>
+      <p class="page-subheading">
+        Expert tips and local guides from Smith's Plumbing
+         in Bathurst, NSW.
+      </p>
+
+      <ul class="post-list">
+      <li class="post-item">
+        <a href="how-to-choose-a-licensed-tradie-in-bathurst-what-to-look-for.html" class="post-link">
+          <span class="post-title">How to Choose a Licensed Tradie in Bathurst: What to Look For</span>
+          <span class="post-arrow">&#8594;</span>
+        </a>
+      </li>
+      <li class="post-item">
+        <a href="how-much-does-a-plumber-cost-in-bathurst-nsw-a-2026-guide.html" class="post-link">
+          <span class="post-title">How Much Does a Plumber Cost in Bathurst, NSW? A 2026 Pricing Guide</span>
+          <span class="post-arrow">&#8594;</span>
+        </a>
+      </li>
+      <li class="post-item">
+        <a href="5-signs-your-plumbing-needs-urgent-attention-in-bathurst.html" class="post-link">
+          <span class="post-title">5 Signs Your Plumbing Needs Urgent Attention in Bathurst</span>
+          <span class="post-arrow">&#8594;</span>
+        </a>
+      </li>
+      <li class="post-item">
+        <a href="test-post-dry-run.html" class="post-link">
+          <span class="post-title">Dry run — no API call made</span>
+          <span class="post-arrow">&#8594;</span>
+        </a>
+      </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      &copy; 2026 Smith's Plumbing.
+      42 Main Street, Bathurst, NSW, 2795 &mdash;
+      <a href="tel:0400123456">0400 123 456</a> &mdash; <a href="mailto:info@smithsplumbing.com.au">info@smithsplumbing.com.au</a>
+    </p>
+  </footer>
+
+</body>
+</html>
