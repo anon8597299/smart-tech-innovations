@@ -275,9 +275,40 @@
     /* Divider */
     .divider { height: 1px; background: #334155; margin: 1.2rem 0; }
 
+    /* Pipeline */
+    .pipeline-empty { color: #475569; font-size: .9rem; }
+    .pipeline-wrap { overflow-x: auto; margin-top: .5rem; }
+    .pipeline-table { width: 100%; border-collapse: collapse; font-size: .83rem; min-width: 680px; }
+    .pipeline-table th { text-align: left; color: #94a3b8; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .4rem .6rem; border-bottom: 1px solid #334155; }
+    .pipeline-table td { padding: .55rem .6rem; border-bottom: 1px solid #1e293b; vertical-align: top; }
+    .pipeline-table tr:last-child td { border-bottom: none; }
+    .status-badge { display: inline-block; padding: .18rem .55rem; border-radius: 999px; font-size: .72rem; font-weight: 700; }
+    .status-sent     { background: #1e3a5f; color: #93c5fd; }
+    .status-approved { background: #052e16; color: #86efac; }
+    .status-changes  { background: #450a0a; color: #fca5a5; }
+    .status-complete { background: #1e293b; color: #64748b; }
+    .pipeline-btn { background: #334155; color: #e2e8f0; border: none; border-radius: 6px; padding: .25rem .55rem; font-size: .74rem; cursor: pointer; font-family: Inter, sans-serif; }
+    .pipeline-btn:hover { background: #475569; }
+    .pipeline-select { background: #334155; color: #e2e8f0; border: none; border-radius: 6px; padding: .22rem .4rem; font-size: .74rem; cursor: pointer; font-family: Inter, sans-serif; }
+
+    /* UAT email panel */
+    .uat-panel { margin-top: 1.2rem; border: 1.5px solid #1e3a5f; border-radius: 12px; padding: 1.2rem; background: #0f1e35; }
+    .uat-title { font-weight: 700; font-size: .92rem; margin-bottom: .6rem; color: #93c5fd; }
+    .uat-meta { font-size: .8rem; color: #64748b; margin-bottom: .5rem; }
+    .uat-email-body { background: #020617; border: 1px solid #1e293b; border-radius: 8px; padding: .8rem; font-size: .82rem; color: #cbd5e1; white-space: pre-wrap; margin-bottom: .7rem; max-height: 180px; overflow-y: auto; font-family: "SF Mono", "Fira Code", monospace; }
+    .uat-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+    .btn-uat { background: #1e3a5f; color: #93c5fd; border: none; border-radius: 8px; padding: .4rem .9rem; font-size: .83rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: .3rem; }
+    .btn-uat:hover { background: #1e4080; }
+
+    /* Collapsible optional fields */
+    .optional-toggle { font-size: .78rem; color: #5b4dff; cursor: pointer; user-select: none; margin-bottom: .6rem; display: inline-block; }
+    .optional-fields { display: none; }
+    .optional-fields.open { display: block; }
+
     /* Mobile */
     @media (max-width: 680px) {
-      .form-grid-2, .form-grid-3, .template-row { grid-template-columns: 1fr; }
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+      .template-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -322,6 +353,28 @@
           <button class="btn-sm btn-sm-ghost" style="height:2.6rem;padding:0 1rem;white-space:nowrap;" onclick="savePAT()">Save token</button>
         </div>
         <div class="pat-status" id="pat-status"></div>
+      </div>
+
+      <!-- Customer Pipeline -->
+      <div class="section-card">
+        <div class="section-title">📋 Customer Pipeline</div>
+        <div class="section-desc">All generated sites. Status updates automatically on each build — or update manually as you communicate with the customer.</div>
+        <div id="pipeline-empty" class="pipeline-empty">No customers yet — generate a site below to see it tracked here.</div>
+        <div id="pipeline-wrap" class="pipeline-wrap" style="display:none;">
+          <table class="pipeline-table">
+            <thead>
+              <tr>
+                <th>Business</th>
+                <th>Live URL</th>
+                <th>Pkg</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pipeline-body"></tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Customer site generator -->
@@ -385,10 +438,41 @@
             <input type="text" id="f-headline" placeholder="e.g. Trusted plumbers in Bathurst — fast response, fair prices">
           </div>
 
+          <span class="optional-toggle" onclick="toggleOptional('owner-fields')">▸ Owner / business details (optional)</span>
+          <div class="optional-fields" id="owner-fields">
+            <div class="form-grid-3">
+              <div class="field-group">
+                <label class="field-label">Owner name</label>
+                <input type="text" id="f-ownername" placeholder="James Smith">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Owner title</label>
+                <input type="text" id="f-ownertitle" placeholder="Licensed Plumber &amp; Owner">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Year established</label>
+                <input type="text" id="f-year" placeholder="2015">
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Package tier -->
+          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Package</div>
+          <div class="field-group">
+            <label class="field-label">Package tier <span class="field-required">*</span></label>
+            <select id="f-package">
+              <option value="starter">Starter — core pages, no blog</option>
+              <option value="growth">Growth — core pages + SEO meta</option>
+              <option value="premium">Premium Growth — all pages + blog (index,follow)</option>
+            </select>
+          </div>
+
           <div class="divider"></div>
 
           <!-- Services -->
-          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Services (up to 3)</div>
+          <div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.75rem;">Services (1–3 required · 4–6 optional)</div>
 
           <div class="form-grid-2">
             <div class="field-group">
@@ -418,6 +502,40 @@
             <div class="field-group">
               <label class="field-label">Service 3 description</label>
               <input type="text" id="f-s3d" placeholder="CCTV inspection and high-pressure jetting.">
+            </div>
+          </div>
+
+          <span class="optional-toggle" onclick="toggleOptional('services-456')">▸ Services 4–6 (optional — used on services page)</span>
+          <div class="optional-fields" id="services-456">
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label">Service 4 name</label>
+                <input type="text" id="f-s4n" placeholder="Bathroom Renovations">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Service 4 description</label>
+                <input type="text" id="f-s4d" placeholder="Full fit-outs including tiling and fixtures.">
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label">Service 5 name</label>
+                <input type="text" id="f-s5n" placeholder="Gas Fitting">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Service 5 description</label>
+                <input type="text" id="f-s5d" placeholder="Licensed gas fitting for appliances and heaters.">
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label">Service 6 name</label>
+                <input type="text" id="f-s6n" placeholder="Roof &amp; Guttering">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Service 6 description</label>
+                <input type="text" id="f-s6d" placeholder="Gutter cleaning, repairs and downpipe replacement.">
+              </div>
             </div>
           </div>
 
@@ -459,6 +577,38 @@
                 <div class="tmpl-color">Purple</div>
               </div>
             </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="solar-spark">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">☀️</div>
+                <div class="tmpl-name">Solar</div>
+                <div class="tmpl-color">Orange</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="accounting-conversion">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">📁</div>
+                <div class="tmpl-name">Accounting</div>
+                <div class="tmpl-color">Slate</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="consulting-authority">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">🏛️</div>
+                <div class="tmpl-name">Consulting</div>
+                <div class="tmpl-color">Navy</div>
+              </div>
+            </label>
+            <label class="tmpl-option">
+              <input type="radio" name="template" value="hospitality-events">
+              <div class="tmpl-card">
+                <div class="tmpl-icon">🥂</div>
+                <div class="tmpl-name">Hospitality</div>
+                <div class="tmpl-color">Gold</div>
+              </div>
+            </label>
           </div>
 
           <div style="margin-top:1rem;" class="form-grid-2">
@@ -490,6 +640,7 @@
           </button>
 
           <div id="result-box"></div>
+          <div id="uat-panel" style="display:none;"></div>
           <pre id="log-output"></pre>
         </form>
       </div>
@@ -528,29 +679,23 @@
   <script>
     // ─────────────────────────────────────────────
     // Auth
-    // SHA-256 of "improveyoursite2025"
-    // To change password: replace ADMIN_HASH with SHA-256 of your new password
-    const ADMIN_HASH = "9c55e1d9a4e0f2e3e4a8b7c6d5e3f2a1b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4"; // placeholder — generated below
+    const ADMIN_PASSWORD_PLAIN = "improveyoursite2025";
 
     async function sha256(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    // Actual hash is computed at runtime from the stored plaintext for first-run simplicity.
-    // For production, hardcode the hash and remove the plaintext below.
-    const ADMIN_PASSWORD_PLAIN = "improveyoursite2025";
-
     async function checkPassword() {
       const input = document.getElementById("pw-input").value;
       const inputHash = await sha256(input);
       const correctHash = await sha256(ADMIN_PASSWORD_PLAIN);
-
       if (inputHash === correctHash) {
         sessionStorage.setItem("iy_auth", "1");
         document.getElementById("login-screen").style.display = "none";
         document.getElementById("app").style.display = "block";
         restorePAT();
+        renderPipeline();
       } else {
         document.getElementById("login-error").style.display = "block";
       }
@@ -561,13 +706,12 @@
       location.reload();
     }
 
-    // Auto-login if session active
     if (sessionStorage.getItem("iy_auth") === "1") {
       document.getElementById("login-screen").style.display = "none";
       document.getElementById("app").style.display = "block";
+      document.addEventListener("DOMContentLoaded", () => { restorePAT(); renderPipeline(); });
     }
 
-    // Allow Enter key on password field
     document.getElementById("pw-input").addEventListener("keydown", e => {
       if (e.key === "Enter") checkPassword();
     });
@@ -599,19 +743,29 @@
     }
 
     // ─────────────────────────────────────────────
-    // Color preset helper
+    // UI helpers
     function setColor(hex) {
       document.getElementById("f-color").value = hex;
     }
 
-    // Update color when template changes
+    function toggleOptional(id) {
+      const el = document.getElementById(id);
+      const tog = el.previousElementSibling;
+      el.classList.toggle("open");
+      tog.textContent = tog.textContent.replace(/[▸▾]/, el.classList.contains("open") ? "▾" : "▸");
+    }
+
     document.addEventListener("change", e => {
       if (e.target.name === "template") {
         const defaults = {
-          "clinic-trust":  "#0f766e",
-          "trades-rapid":  "#d97706",
-          "advisor-prime": "#1d4ed8",
-          "retail-pulse":  "#7c3aed",
+          "clinic-trust":          "#0f766e",
+          "trades-rapid":          "#d97706",
+          "advisor-prime":         "#1d4ed8",
+          "retail-pulse":          "#7c3aed",
+          "solar-spark":           "#ea580c",
+          "accounting-conversion": "#1e3a5f",
+          "consulting-authority":  "#334155",
+          "hospitality-events":    "#92400e",
         };
         const col = defaults[e.target.value];
         if (col) document.getElementById("f-color").value = col;
@@ -619,9 +773,115 @@
     });
 
     // ─────────────────────────────────────────────
+    // Pipeline (localStorage)
+    const STATUS_LABELS = {
+      sent:     { label: "Preview Sent",       cls: "status-sent"     },
+      approved: { label: "Approved ✓",         cls: "status-approved" },
+      changes:  { label: "Changes Requested",  cls: "status-changes"  },
+      complete: { label: "Complete",           cls: "status-complete" },
+    };
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+    }
+
+    function saveToPipeline(entry) {
+      const data = JSON.parse(localStorage.getItem("iy_pipeline") || "[]");
+      const rest = data.filter(e => e.slug !== entry.slug);
+      rest.unshift(entry);
+      localStorage.setItem("iy_pipeline", JSON.stringify(rest));
+      renderPipeline();
+    }
+
+    function updatePipelineStatus(slug, status) {
+      const data = JSON.parse(localStorage.getItem("iy_pipeline") || "[]");
+      const entry = data.find(e => e.slug === slug);
+      if (entry) { entry.status = status; localStorage.setItem("iy_pipeline", JSON.stringify(data)); renderPipeline(); }
+    }
+
+    function deletePipelineEntry(slug) {
+      const data = JSON.parse(localStorage.getItem("iy_pipeline") || "[]").filter(e => e.slug !== slug);
+      localStorage.setItem("iy_pipeline", JSON.stringify(data));
+      renderPipeline();
+    }
+
+    function renderPipeline() {
+      const data = JSON.parse(localStorage.getItem("iy_pipeline") || "[]");
+      document.getElementById("pipeline-empty").style.display = data.length ? "none" : "block";
+      document.getElementById("pipeline-wrap").style.display  = data.length ? "block" : "none";
+      if (!data.length) return;
+
+      document.getElementById("pipeline-body").innerHTML = data.map(e => {
+        const s = STATUS_LABELS[e.status] || STATUS_LABELS.sent;
+        const opts = Object.entries(STATUS_LABELS).map(([v, l]) =>
+          `<option value="${v}" ${e.status===v?"selected":""}>${l.label}</option>`
+        ).join("");
+        return `<tr>
+          <td><strong>${escHtml(e.name)}</strong><br><span style="color:#64748b;font-size:.76rem;">${escHtml(e.template)}</span></td>
+          <td><a href="${escHtml(e.url)}" target="_blank" style="color:#67e8f9;font-size:.78rem;word-break:break-all;">${escHtml(e.url)}</a></td>
+          <td style="color:#94a3b8;text-transform:uppercase;font-size:.76rem;">${escHtml(e.pkg||"—")}</td>
+          <td style="color:#64748b;font-size:.78rem;white-space:nowrap;">${escHtml(e.date)}</td>
+          <td><span class="status-badge ${s.cls}">${s.label}</span></td>
+          <td>
+            <div style="display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;">
+              <button class="pipeline-btn" onclick="openEmailFor('${escHtml(e.slug)}')">✉ Email</button>
+              <button class="pipeline-btn" onclick="navigator.clipboard.writeText('${escHtml(e.url)}').then(()=>this.textContent='Copied!').then(()=>setTimeout(()=>this.textContent='Copy URL',1500))">Copy URL</button>
+              <select class="pipeline-select" onchange="updatePipelineStatus('${escHtml(e.slug)}',this.value)">${opts}</select>
+              <button class="pipeline-btn" onclick="deletePipelineEntry('${escHtml(e.slug)}')" style="color:#fca5a5;" title="Remove">✕</button>
+            </div>
+          </td>
+        </tr>`;
+      }).join("");
+    }
+
+    // ─────────────────────────────────────────────
+    // UAT email panel
+    let _lastEntry = null;
+
+    function buildEmailBody(entry) {
+      return `Hi there,\n\nYour new website is live and ready for your review:\n\n${entry.url}\n\nPlease take a look and let us know if you're happy with everything or if you'd like any adjustments — we'll get changes sorted quickly.\n\nJust reply to this email with your feedback.\n\nLooking forward to hearing from you!\n\nJames\nImproveYourSite\nadmin@improveyoursite.com`;
+    }
+
+    function showUATPanel(entry) {
+      _lastEntry = entry;
+      const body = buildEmailBody(entry);
+      const subject = `Your ${entry.name} website is ready to review`;
+      const mailtoHref = `mailto:${encodeURIComponent(entry.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const panel = document.getElementById("uat-panel");
+      panel.innerHTML = `
+        <div class="uat-panel">
+          <div class="uat-title">📧 Send Preview to Customer</div>
+          <div class="uat-meta"><strong>To:</strong> ${escHtml(entry.email)} &nbsp;·&nbsp; <strong>Subject:</strong> ${escHtml(subject)}</div>
+          <div class="uat-email-body">${escHtml(body)}</div>
+          <div class="uat-actions">
+            <a href="${mailtoHref}" class="btn-uat" target="_blank">✉ Open in Mail App</a>
+            <button class="btn-uat" onclick="copyUATEmail()">📋 Copy Email Text</button>
+            <span id="copy-confirm" style="color:#86efac;font-size:.8rem;display:none;">✓ Copied!</span>
+          </div>
+        </div>`;
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function openEmailFor(slug) {
+      const entry = (JSON.parse(localStorage.getItem("iy_pipeline") || "[]")).find(e => e.slug === slug);
+      if (!entry) return;
+      showUATPanel(entry);
+      document.getElementById("uat-panel").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function copyUATEmail() {
+      if (!_lastEntry) return;
+      navigator.clipboard.writeText(buildEmailBody(_lastEntry)).then(() => {
+        const el = document.getElementById("copy-confirm");
+        if (el) { el.style.display = "inline"; setTimeout(() => el.style.display = "none", 2000); }
+      });
+    }
+
+    // ─────────────────────────────────────────────
     // Site generation
     const REPO = "anon8597299/smart-tech-innovations";
-    const TEMPLATES_BASE = "templates"; // templates/{id}/index.html in the repo
+    const TEMPLATES_BASE = "templates";
 
     function slugify(str) {
       return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -650,66 +910,82 @@
       el.style.display = "block";
     }
 
-    async function fetchTemplate(pat, templateId, filename) {
-      const url = `https://api.github.com/repos/${REPO}/contents/${TEMPLATES_BASE}/${templateId}/${filename}`;
-      const resp = await fetch(url, {
-        headers: { Authorization: `token ${pat}`, Accept: "application/vnd.github.v3+json" }
+    // GitHub API helpers
+    async function ghFetch(pat, path, opts = {}) {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
+        ...opts,
+        headers: { Authorization: `token ${pat}`, Accept: "application/vnd.github.v3+json", ...(opts.headers || {}) }
       });
-      if (!resp.ok) throw new Error(`Could not load template ${templateId}/${filename}: ${resp.status}`);
-      const data = await resp.json();
-      return atob(data.content.replace(/\n/g, ""));
+      if (!r.ok) throw new Error(`GitHub API error ${r.status} on ${path}`);
+      return r.json();
+    }
+
+    async function listContents(pat, repoPath) {
+      return ghFetch(pat, `contents/${repoPath}`);
+    }
+
+    async function fetchAllTemplateFiles(pat, templateId, includeBlog) {
+      const items = await listContents(pat, `${TEMPLATES_BASE}/${templateId}`);
+      const toFetch = [];
+      for (const item of items) {
+        if (item.type === "file" && /\.(html|css|js)$/.test(item.name)) {
+          toFetch.push({ rel: item.name, url: item.download_url });
+        } else if (item.type === "dir" && item.name === "blog" && includeBlog) {
+          const blogItems = await listContents(pat, `${TEMPLATES_BASE}/${templateId}/blog`);
+          for (const bi of blogItems) {
+            if (bi.type === "file" && /\.(html|css|js)$/.test(bi.name)) {
+              toFetch.push({ rel: `blog/${bi.name}`, url: bi.download_url });
+            }
+          }
+        }
+      }
+      const results = {};
+      await Promise.all(toFetch.map(async ({ rel, url }) => {
+        const r = await fetch(url);
+        if (!r.ok) throw new Error(`Could not fetch ${rel}: ${r.status}`);
+        results[rel] = await r.text();
+      }));
+      return results;
     }
 
     function renderTemplate(html, tokens) {
-      return html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (match, key) => {
-        return key in tokens ? tokens[key] : match;
-      });
+      return html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => k in tokens ? tokens[k] : m);
     }
 
     async function getRepoRef(pat) {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/git/refs/heads/main`, {
-        headers: { Authorization: `token ${pat}` }
-      });
-      if (!r.ok) throw new Error("Could not get repo ref: " + r.status);
-      const d = await r.json();
+      const d = await ghFetch(pat, "git/refs/heads/main");
       return d.object.sha;
     }
 
     async function getTreeSha(pat, commitSha) {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/git/commits/${commitSha}`, {
-        headers: { Authorization: `token ${pat}` }
-      });
-      const d = await r.json();
+      const d = await ghFetch(pat, `git/commits/${commitSha}`);
       return d.tree.sha;
     }
 
     async function createBlob(pat, content) {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/git/blobs`, {
+      const d = await ghFetch(pat, "git/blobs", {
         method: "POST",
-        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: btoa(unescape(encodeURIComponent(content))), encoding: "base64" })
       });
-      const d = await r.json();
       return d.sha;
     }
 
     async function createTree(pat, baseTreeSha, treeItems) {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/git/trees`, {
+      const d = await ghFetch(pat, "git/trees", {
         method: "POST",
-        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ base_tree: baseTreeSha, tree: treeItems })
       });
-      const d = await r.json();
       return d.sha;
     }
 
     async function createCommit(pat, message, treeSha, parentSha) {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/git/commits`, {
+      const d = await ghFetch(pat, "git/commits", {
         method: "POST",
-        headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, tree: treeSha, parents: [parentSha] })
       });
-      const d = await r.json();
       return d.sha;
     }
 
@@ -721,47 +997,64 @@
       });
     }
 
+    const COLOR_BG_MAP = {
+      "clinic-trust":          "#f4fbfb",
+      "trades-rapid":          "#fffaf5",
+      "advisor-prime":         "#f6f8ff",
+      "retail-pulse":          "#f8f7ff",
+      "solar-spark":           "#fff8f0",
+      "accounting-conversion": "#f8fafc",
+      "consulting-authority":  "#f8fafc",
+      "hospitality-events":    "#fdf8f0",
+    };
+
     async function generateSite() {
       clearLog();
       document.getElementById("result-box").style.display = "none";
+      document.getElementById("uat-panel").style.display = "none";
 
       const pat = sessionStorage.getItem("iy_pat");
-      if (!pat) {
-        setResult("❌ Please save your GitHub PAT first (section above).", "error");
-        return;
-      }
+      if (!pat) { setResult("❌ Please save your GitHub PAT first (section above).", "error"); return; }
 
       const name   = document.getElementById("f-name").value.trim();
       const suburb = document.getElementById("f-suburb").value.trim();
+      if (!name || !suburb) { setResult("❌ Business name and suburb are required.", "error"); return; }
 
-      if (!name || !suburb) {
-        setResult("❌ Business name and suburb are required.", "error");
-        return;
-      }
-
-      const templateId = document.querySelector('input[name="template"]:checked').value;
-      const slug = document.getElementById("f-slug").value.trim() || slugify(name);
+      const templateId  = document.querySelector('input[name="template"]:checked').value;
+      const packageTier = document.getElementById("f-package").value;
+      const includeBlog = packageTier === "premium";
+      const email       = document.getElementById("f-email").value.trim() || `info@${slugify(name)}.com.au`;
+      const slug        = document.getElementById("f-slug").value.trim() || slugify(name);
 
       const tokens = {
-        BUSINESS_NAME:   name,
-        TAGLINE:         document.getElementById("f-tagline").value.trim() || `Professional services in ${suburb}.`,
-        PHONE:           document.getElementById("f-phone").value.trim() || "(02) 0000 0000",
-        EMAIL:           document.getElementById("f-email").value.trim() || `info@${slugify(name)}.com.au`,
-        ADDRESS:         document.getElementById("f-address").value.trim() || "",
-        SUBURB:          suburb,
-        STATE:           document.getElementById("f-state").value,
-        POSTCODE:        "",
-        HERO_HEADLINE:   document.getElementById("f-headline").value.trim() || name,
-        SERVICE_1_NAME:  document.getElementById("f-s1n").value.trim() || "Our Services",
-        SERVICE_1_DESC:  document.getElementById("f-s1d").value.trim() || "Professional service tailored to your needs.",
-        SERVICE_2_NAME:  document.getElementById("f-s2n").value.trim() || "About Us",
-        SERVICE_2_DESC:  document.getElementById("f-s2d").value.trim() || "Experienced and professional team.",
-        SERVICE_3_NAME:  document.getElementById("f-s3n").value.trim() || "Contact",
-        SERVICE_3_DESC:  document.getElementById("f-s3d").value.trim() || "Get in touch today.",
-        COLOR_PRIMARY:   document.getElementById("f-color").value,
-        COLOR_BG:        { "clinic-trust":"#f4fbfb","trades-rapid":"#fffaf5","advisor-prime":"#f6f8ff","retail-pulse":"#f8f7ff" }[templateId] || "#f8fafc",
-        META_TITLE:      `${name} — ${suburb}`,
-        META_DESCRIPTION:`${name}. Professional services in ${suburb}.`,
+        BUSINESS_NAME:    name,
+        TAGLINE:          document.getElementById("f-tagline").value.trim()    || `Professional services in ${suburb}.`,
+        PHONE:            document.getElementById("f-phone").value.trim()      || "(02) 0000 0000",
+        EMAIL:            email,
+        ADDRESS:          document.getElementById("f-address").value.trim()    || "",
+        SUBURB:           suburb,
+        STATE:            document.getElementById("f-state").value,
+        POSTCODE:         "",
+        HERO_HEADLINE:    document.getElementById("f-headline").value.trim()   || name,
+        OWNER_NAME:       document.getElementById("f-ownername").value.trim()  || name,
+        OWNER_TITLE:      document.getElementById("f-ownertitle").value.trim() || "Owner",
+        YEAR_ESTABLISHED: document.getElementById("f-year").value.trim()       || String(new Date().getFullYear()),
+        SERVICE_1_NAME:   document.getElementById("f-s1n").value.trim() || "Our Services",
+        SERVICE_1_DESC:   document.getElementById("f-s1d").value.trim() || "Professional service tailored to your needs.",
+        SERVICE_2_NAME:   document.getElementById("f-s2n").value.trim() || "About Us",
+        SERVICE_2_DESC:   document.getElementById("f-s2d").value.trim() || "Experienced and professional team.",
+        SERVICE_3_NAME:   document.getElementById("f-s3n").value.trim() || "Contact",
+        SERVICE_3_DESC:   document.getElementById("f-s3d").value.trim() || "Get in touch today.",
+        SERVICE_4_NAME:   document.getElementById("f-s4n").value.trim() || "",
+        SERVICE_4_DESC:   document.getElementById("f-s4d").value.trim() || "",
+        SERVICE_5_NAME:   document.getElementById("f-s5n").value.trim() || "",
+        SERVICE_5_DESC:   document.getElementById("f-s5d").value.trim() || "",
+        SERVICE_6_NAME:   document.getElementById("f-s6n").value.trim() || "",
+        SERVICE_6_DESC:   document.getElementById("f-s6d").value.trim() || "",
+        COLOR_PRIMARY:    document.getElementById("f-color").value,
+        COLOR_BG:         COLOR_BG_MAP[templateId] || "#f8fafc",
+        META_TITLE:       `${name} — ${suburb}`,
+        META_DESCRIPTION: `${name}. Professional services in ${suburb}.`,
       };
 
       const btn = document.getElementById("gen-btn");
@@ -770,59 +1063,58 @@
 
       try {
         log(`🏗  Generating site for: ${name}`);
-        log(`   Template: ${templateId}`);
-        log(`   Slug:     ${slug}`);
+        log(`   Template : ${templateId}`);
+        log(`   Package  : ${packageTier.toUpperCase()}`);
+        log(`   Blog     : ${includeBlog ? "✓ included" : "✗ not included"}`);
+        log(`   Slug     : ${slug}`);
         log("");
 
-        // 1. Load template
-        log("Loading template from GitHub...");
-        const templateHTML = await fetchTemplate(pat, templateId, "index.html");
-        log("✓ Template loaded", "ok");
+        // 1. Fetch all template files
+        log("Loading template files from GitHub...");
+        const templateFiles = await fetchAllTemplateFiles(pat, templateId, includeBlog);
+        const fileNames = Object.keys(templateFiles);
+        log(`✓ Loaded ${fileNames.length} file(s): ${fileNames.join(", ")}`, "ok");
 
-        // 2. Render
+        // 2. Render tokens
         log("Rendering tokens...");
-        const rendered = renderTemplate(templateHTML, tokens);
-        log("✓ All tokens replaced", "ok");
+        const rendered = {};
+        for (const [f, c] of Object.entries(templateFiles)) rendered[f] = renderTemplate(c, tokens);
+        log(`✓ Tokens rendered in all ${fileNames.length} file(s)`, "ok");
         log("");
 
-        // 3. Push
+        // 3. Push as single tree commit
         log("Pushing to GitHub...");
         const commitSha = await getRepoRef(pat);
-        const treeSha = await getTreeSha(pat, commitSha);
+        const treeSha   = await getTreeSha(pat, commitSha);
 
-        // Create blob for index.html
-        const blobSha = await createBlob(pat, rendered);
+        const treeItems = [];
+        for (const [f, c] of Object.entries(rendered)) {
+          log(`  Uploading: customers/${slug}/${f}`);
+          const blobSha = await createBlob(pat, c);
+          treeItems.push({ path: `customers/${slug}/${f}`, mode: "100644", type: "blob", sha: blobSha });
+        }
 
-        const filePath = `customers/${slug}/index.html`;
-        const newTreeSha = await createTree(pat, treeSha, [{
-          path: filePath,
-          mode: "100644",
-          type: "blob",
-          sha: blobSha
-        }]);
-
-        const newCommitSha = await createCommit(
-          pat,
-          `Add customer site: ${name} (${templateId})`,
-          newTreeSha,
-          commitSha
-        );
-
+        const newTreeSha   = await createTree(pat, treeSha, treeItems);
+        const newCommitSha = await createCommit(pat, `Add customer site: ${name} (${templateId})`, newTreeSha, commitSha);
         await updateRef(pat, newCommitSha);
 
         const liveUrl = `https://anon8597299.github.io/smart-tech-innovations/customers/${slug}/`;
-        log("✓ Pushed 1 file in a single commit", "ok");
+        log(`✓ Pushed ${fileNames.length} file(s) in a single commit`, "ok");
         log(`🌐 ${liveUrl}`, "url");
-        log("");
         log("Site will be live in ~90 seconds.");
 
+        // 4. Save to pipeline & show UAT panel
+        const pipelineEntry = { slug, name, url: liveUrl, email, template: templateId, pkg: packageTier, date: new Date().toLocaleDateString("en-AU"), status: "sent" };
+        saveToPipeline(pipelineEntry);
+
         setResult(
-          `<strong>✅ Site generated successfully!</strong><br><br>
-           Live URL (ready in ~90 sec):<br>
+          `<strong>✅ Site generated!</strong><br><br>
+           ${fileNames.length} files pushed · Live in ~90 sec:<br>
            <a href="${liveUrl}" target="_blank" style="color:#86efac;font-weight:700;word-break:break-all;">${liveUrl}</a><br><br>
-           <em>Email this URL to ${tokens.EMAIL}</em>`,
+           <em>Preview email ready below ↓</em>`,
           "success"
         );
+        showUATPanel(pipelineEntry);
 
       } catch (err) {
         log("❌ Error: " + err.message, "err");
@@ -831,6 +1123,9 @@
         btn.disabled = false;
       }
     }
+
+    // Init pipeline on page load if already logged in
+    if (sessionStorage.getItem("iy_auth") === "1") renderPipeline();
   </script>
 </body>
 </html>
