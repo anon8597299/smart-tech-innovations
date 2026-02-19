@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Is Solar Worth It in {{SUBURB}}, {{STATE}}? An Honest 2026 Guide — {{BUSINESS_NAME}}</title>
+  <meta name="description" content="Thinking about solar in {{SUBURB}}? We give you an honest breakdown of costs, savings, payback periods, rebates, and roof suitability for 2026.">
+  <style>
+    :root { --primary: {{COLOR_PRIMARY}}; --bg: {{COLOR_BG}}; --text: #111827; --muted: #6b7280; --line: #e5e7eb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); padding: .75rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .nav-links { display: flex; gap: .75rem; font-size: .88rem; }
+    .nav-links a { color: var(--muted); }
+    .blog-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .blog-hero .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .74rem; font-weight: 700; padding: .2rem .55rem; border-radius: 4px; margin-bottom: .6rem; }
+    .blog-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 .6rem; }
+    .blog-hero .meta { font-size: .85rem; color: var(--muted); }
+    .article-body { max-width: 720px; padding-bottom: 3rem; }
+    .article-body h2 { font-size: 1.35rem; margin: 2rem 0 .5rem; }
+    .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+    .article-body p { margin: 0 0 1rem; }
+    .article-body ul, .article-body ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { color: var(--text); }
+    .cta-box { background: var(--primary); color: #fff; border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+    .cta-box h3 { margin: 0 0 .4rem; color: #fff; }
+    .cta-box p { margin: 0 0 .8rem; opacity: .9; font-size: .95rem; }
+    .cta-box a { display: inline-block; background: #fff; color: var(--primary); font-weight: 700; padding: .6rem 1.1rem; border-radius: 8px; font-size: .92rem; }
+    .related { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; }
+    .related h3 { margin: 0 0 .75rem; font-size: 1rem; }
+    .related-links { display: grid; gap: .4rem; }
+    .related-links a { font-size: .92rem; color: var(--primary); }
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .post-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; }
+    .post-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .18rem .5rem; border-radius: 4px; margin-bottom: .5rem; width: fit-content; }
+    .post-card h3 { font-size: .97rem; margin: 0 0 .4rem; flex-grow: 1; }
+    .post-card p { font-size: .86rem; color: var(--muted); margin: 0 0 .8rem; }
+    .post-card a.read { font-size: .85rem; font-weight: 700; color: var(--primary); }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0; color: var(--muted); font-size: .84rem; }
+    @media (max-width: 860px) { .post-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Is Solar Worth It in {{SUBURB}}, {{STATE}}? An Honest 2026 Guide",
+    "description": "Thinking about solar in {{SUBURB}}? We give you an honest breakdown of costs, savings, payback periods, rebates, and roof suitability for 2026.",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "author": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "publisher": {
+      "@type": "LocalBusiness",
+      "name": "{{BUSINESS_NAME}}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{SUBURB}}",
+        "addressRegion": "{{STATE}}",
+        "addressCountry": "AU"
+      },
+      "telephone": "{{PHONE}}",
+      "email": "{{EMAIL}}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://example.com/blog/post-1.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="../services.html">Services</a>
+      <a href="../case-studies.html">Results</a>
+      <a href="../contact.html">Get a Quote</a>
+      <a href="index.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="blog-hero">
+      <span class="tag">Solar Guide</span>
+      <h1>Is Solar Worth It in {{SUBURB}}, {{STATE}}? An Honest 2026 Guide</h1>
+      <p class="meta">By {{BUSINESS_NAME}} &middot; January 2026 &middot; 6 min read</p>
+    </div>
+
+    <div class="article-body">
+
+      <p>If you are a homeowner in {{SUBURB}} thinking about going solar in 2026, you have probably encountered a lot of numbers thrown around — $30,000 savings over 10 years, payback in three years, panels that pay for themselves. Some of those claims are real. Some are based on the most optimistic scenario possible. This guide gives you an honest picture of what solar actually delivers for a typical {{SUBURB}} home, without the sales pitch.</p>
+
+      <h2>How Much Can You Save?</h2>
+      <p>The headline saving figure for most Australian households with solar is between <strong>$1,200 and $2,400 per year</strong> on electricity bills, with the higher end applying to larger homes with daytime energy usage. In {{SUBURB}}, your actual saving depends on several factors:</p>
+      <ul>
+        <li><strong>How much electricity you use</strong> — a larger household using 25–30 kWh per day will save more in absolute dollar terms than a household using 10–12 kWh.</li>
+        <li><strong>When you use it</strong> — solar only generates during daylight hours. If most of your consumption happens in the evening, your self-consumption rate is lower and so are your savings from avoided grid electricity costs.</li>
+        <li><strong>Your current electricity tariff</strong> — the higher your grid rate, the more valuable each kilowatt-hour of solar you consume directly.</li>
+        <li><strong>Your feed-in tariff</strong> — the rate your retailer pays for excess solar you export to the grid is typically much lower than the rate you pay for grid electricity, which is why using your solar rather than exporting it produces greater savings.</li>
+      </ul>
+
+      <h2>The Real Cost of Solar in {{STATE}}</h2>
+      <p>Panel and inverter prices have continued to fall in 2026. After applying the federal Small-scale Technology Certificate (STC) rebate, a typical installed cost for a residential system in {{STATE}} looks like this:</p>
+      <ul>
+        <li><strong>6.6 kW system</strong> — approximately $5,500–$7,500 fully installed</li>
+        <li><strong>10 kW system</strong> — approximately $8,000–$11,000 fully installed</li>
+        <li><strong>13.2 kW system</strong> — approximately $10,500–$14,000 fully installed</li>
+      </ul>
+      <p>At these price points and with typical savings of $1,400–$2,000 per year for a 6.6 kW system, payback periods for most {{SUBURB}} homes sit between <strong>4 and 7 years</strong>. Systems carry performance warranties of 25 years, meaning the decade or more after payback is essentially free electricity.</p>
+
+      <h2>Government Rebates and Incentives in {{STATE}}</h2>
+      <p>The federal STC scheme is the primary rebate available to all Australian homeowners, including those in {{SUBURB}}. STCs are generated based on your system size and your location's solar rating zone, and they are applied as an upfront discount on the installed price — you never need to lodge a separate claim. Your installer handles all of this for you at the point of sale.</p>
+      <p>In addition to the federal scheme, {{STATE}} has periodically offered state-level incentives including interest-free loan programs and rebates for lower-income households. The availability of these programs changes, so it is worth asking your installer about what is currently active. For a full breakdown of current rebates, see our dedicated <a href="post-2.html">Solar Rebates guide</a>.</p>
+
+      <h2>Is My Roof Suitable?</h2>
+      <p>Most homes in {{SUBURB}} are suitable for solar, but there are a few things that affect how much generation you can expect:</p>
+      <ul>
+        <li><strong>Orientation</strong> — a north-facing roof produces the most solar in Australia. East and west-facing roofs generate around 15–20% less but can be worthwhile, especially if you have high morning or afternoon usage. South-facing panels are generally not recommended.</li>
+        <li><strong>Shading</strong> — trees, neighbouring buildings, or chimneys that cast shade on your panels during peak hours will reduce output significantly. Modern optimisers and microinverters can mitigate partial shading, but significant permanent shade is a real constraint.</li>
+        <li><strong>Available roof area</strong> — a 6.6 kW system requires approximately 25–30 square metres of unobstructed roof space. Most standard homes have this available on a single roof face.</li>
+        <li><strong>Roof condition</strong> — solar panels last 25 years. If your roof is within 5–10 years of needing replacement, it makes sense to factor in a re-roof at the same time rather than remove and reinstall panels later.</li>
+      </ul>
+
+      <h2>Battery Storage — Is It Worth Adding?</h2>
+      <p>Batteries allow you to store excess solar generated during the day and use it in the evening, increasing your self-consumption rate from a typical 30–40% to around 60–70%. The honest assessment for most {{SUBURB}} homeowners in 2026 is this: <strong>batteries improve the solar experience but lengthen the payback period</strong>.</p>
+      <p>A quality home battery adds $8,000–$12,000 to your system cost. The additional savings from the higher self-consumption rate typically run to $400–$700 per year, which means battery payback is currently 12–18 years on its own merits. That said, battery prices continue to fall, state rebate programs can significantly reduce upfront cost, and households with time-of-use tariffs — where peak evening rates are high — see stronger returns. If energy independence and grid resilience during outages matter to you, the value calculation shifts.</p>
+
+      <h2>The Verdict for {{SUBURB}} Homeowners</h2>
+      <p>For most homes in {{SUBURB}}, solar is a sound financial decision in 2026. The upfront cost is lower than it has ever been, the payback period is well within the product warranty life, and you are locking in a significant portion of your electricity cost for the next 25 years regardless of what the grid tariff does. The key is ensuring the system is correctly sized for your actual usage and that your roof is assessed properly before you commit.</p>
+
+      <div class="cta-box">
+        <h3>Get a free site assessment in {{SUBURB}}</h3>
+        <p>{{BUSINESS_NAME}} will assess your roof, review your usage, and give you honest numbers — no pressure, no obligation. CEC-accredited installers serving {{SUBURB}} and surrounds.</p>
+        <a href="tel:{{PHONE}}">Call {{PHONE}}</a>
+      </div>
+
+      <div class="related">
+        <h3>More from the {{BUSINESS_NAME}} blog</h3>
+        <div class="related-links">
+          <a href="post-2.html">Solar Rebates Available to {{SUBURB}} Homeowners in 2026 &rarr;</a>
+          <a href="post-3.html">How Much Can Solar Save You in {{SUBURB}}? Real Numbers for 2026 &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; {{BUSINESS_NAME}} &middot; {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

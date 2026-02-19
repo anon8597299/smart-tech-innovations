@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>How Much Does a Tradie Cost in {{SUBURB}}, {{STATE}}? A 2026 Guide — {{BUSINESS_NAME}}</title>
+  <meta name="description" content="Wondering what tradies charge in {{SUBURB}} in 2026? We break down call-out fees, hourly rates, and how to get a fair quote without being overcharged.">
+  <style>
+    :root { --primary: {{COLOR_PRIMARY}}; --bg: {{COLOR_BG}}; --text: #111827; --muted: #6b7280; --line: #e5e7eb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); padding: .75rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .nav-links { display: flex; gap: .75rem; font-size: .88rem; }
+    .nav-links a { color: var(--muted); }
+    .blog-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .blog-hero .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .74rem; font-weight: 700; padding: .2rem .55rem; border-radius: 4px; margin-bottom: .6rem; }
+    .blog-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 .6rem; }
+    .blog-hero .meta { font-size: .85rem; color: var(--muted); }
+    .article-body { max-width: 720px; padding-bottom: 3rem; }
+    .article-body h2 { font-size: 1.35rem; margin: 2rem 0 .5rem; }
+    .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+    .article-body p { margin: 0 0 1rem; }
+    .article-body ul, .article-body ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { color: var(--text); }
+    .cta-box { background: var(--primary); color: #fff; border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+    .cta-box h3 { margin: 0 0 .4rem; color: #fff; }
+    .cta-box p { margin: 0 0 .8rem; opacity: .9; font-size: .95rem; }
+    .cta-box a { display: inline-block; background: #fff; color: var(--primary); font-weight: 700; padding: .6rem 1.1rem; border-radius: 8px; font-size: .92rem; }
+    .related { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; }
+    .related h3 { margin: 0 0 .75rem; font-size: 1rem; }
+    .related-links { display: grid; gap: .4rem; }
+    .related-links a { font-size: .92rem; color: var(--primary); }
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .post-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; }
+    .post-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .18rem .5rem; border-radius: 4px; margin-bottom: .5rem; width: fit-content; }
+    .post-card h3 { font-size: .97rem; margin: 0 0 .4rem; flex-grow: 1; }
+    .post-card p { font-size: .86rem; color: var(--muted); margin: 0 0 .8rem; }
+    .post-card a.read { font-size: .85rem; font-weight: 700; color: var(--primary); }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0; color: var(--muted); font-size: .84rem; }
+    @media (max-width: 860px) { .post-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Much Does a Tradie Cost in {{SUBURB}}, {{STATE}}? A 2026 Guide",
+    "description": "Wondering what tradies charge in {{SUBURB}} in 2026? We break down call-out fees, hourly rates, and how to get a fair quote without being overcharged.",
+    "datePublished": "2026-01-22",
+    "dateModified": "2026-01-22",
+    "author": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "publisher": {
+      "@type": "LocalBusiness",
+      "name": "{{BUSINESS_NAME}}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{SUBURB}}",
+        "addressRegion": "{{STATE}}",
+        "addressCountry": "AU"
+      },
+      "telephone": "{{PHONE}}",
+      "email": "{{EMAIL}}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://example.com/blog/post-2.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="../services.html">Services</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="index.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="blog-hero">
+      <span class="tag">Pricing Guide</span>
+      <h1>How Much Does a Tradie Cost in {{SUBURB}}, {{STATE}}? A 2026 Guide</h1>
+      <p class="meta">By {{BUSINESS_NAME}} &middot; January 2026 &middot; 5 min read</p>
+    </div>
+
+    <div class="article-body">
+
+      <p>One of the biggest frustrations homeowners in {{SUBURB}} face when hiring a tradie is not knowing what a job should actually cost. Without a benchmark, it is easy to feel unsure — are you paying a fair price, or are you being overcharged? Understanding how tradies price their work empowers you to budget accurately, ask the right questions, and spot a dodgy quote before you sign anything.</p>
+
+      <p>This guide breaks down the real cost of hiring a tradie in {{SUBURB}}, {{STATE}} in 2026, based on how the industry actually works.</p>
+
+      <h2>Call-Out Fees — What to Expect</h2>
+      <p>Most tradies in {{SUBURB}} charge a call-out fee, also called a service fee, for turning up to your property. In 2026, you can typically expect this to fall between <strong>$80 and $150</strong> for standard business hours. After-hours, weekend, and public holiday call-outs can push this to $180–$250 or higher.</p>
+      <p>The call-out fee covers the tradie's travel time, vehicle running costs, and the time spent diagnosing your problem before any work begins. It does not usually include parts or labour for the repair itself. Always ask upfront whether the call-out fee is deducted from the final invoice if you proceed with the job — many reputable tradies in {{SUBURB}} do this as standard practice.</p>
+
+      <h2>Hourly Rates vs Fixed Quotes — Which Is Better?</h2>
+      <p>Tradies generally price work in one of two ways: an hourly rate or a fixed quote. Both have their place, and understanding which suits your job can save you money.</p>
+      <p><strong>Hourly rates</strong> make sense for jobs where the scope is genuinely unknown upfront — for example, fault-finding on an electrical problem or investigating the source of a leak inside a wall. Typical hourly rates in {{SUBURB}} range from <strong>$100 to $160 per hour</strong> for qualified tradies, depending on the trade and the complexity of the work.</p>
+      <p><strong>Fixed quotes</strong> are better for defined jobs: replacing a hot water system, installing a new power point, or laying drainage. When the scope is clear, a fixed quote protects you from the bill blowing out if the job takes longer than expected. Always ask for a fixed price when you can clearly describe what you need done.</p>
+
+      <h2>What Affects the Price</h2>
+      <p>Several factors can push a tradie's quote up or down, and understanding them helps you evaluate what you are being charged:</p>
+      <ul>
+        <li><strong>Time of day and day of week</strong> — after-hours, weekend, and emergency jobs attract significant premiums. If the job is not urgent, booking during business hours will save you money.</li>
+        <li><strong>Job complexity</strong> — straightforward tasks cost less than jobs requiring access behind walls, under floors, or in confined spaces.</li>
+        <li><strong>Parts and materials</strong> — tradies typically mark up parts and materials. Ask for the cost of parts to be itemised separately so you can see what you are paying for.</li>
+        <li><strong>Distance and travel</strong> — a tradie based in {{SUBURB}} will generally charge less for travel than one coming from the other side of the city. Local tradies also respond faster.</li>
+        <li><strong>Permit and inspection fees</strong> — some licensed electrical and plumbing work requires council permits or compliance certificates. These are legitimate costs; make sure they are listed separately in the quote.</li>
+      </ul>
+
+      <h2>How to Get a Fair Quote</h2>
+      <p>The simplest way to protect yourself is to get two or three quotes before committing to any significant job. When comparing quotes, look beyond the bottom-line figure:</p>
+      <ul>
+        <li>Ask for an itemised breakdown showing labour, parts, and any fees separately.</li>
+        <li>Confirm whether GST is included in the quoted price.</li>
+        <li>Ask what happens if additional work is discovered once the job is underway — will they call you before proceeding?</li>
+        <li>Check that the quote is in writing, even if it is just an email.</li>
+      </ul>
+      <p>A tradie who is confident in their pricing will have no problem providing a detailed written quote. Anyone who refuses or gives you a vague verbal number is a risk.</p>
+
+      <h2>Red Flags to Watch For</h2>
+      <p>Not everyone who turns up with a toolkit in {{SUBURB}} is operating legitimately. Watch out for these warning signs:</p>
+      <ul>
+        <li><strong>No licence or registration</strong> — all tradies doing licensed work (plumbing, electrical, gas) must hold a current licence. Ask to see it, or check the relevant state licensing register online.</li>
+        <li><strong>Cash only, no invoice</strong> — legitimate tradies provide a proper invoice and accept payment in traceable ways. Cash-only operators often cannot provide a warranty or come back to fix problems.</li>
+        <li><strong>No written quote</strong> — verbal quotes are unenforceable. If a tradie refuses to put their price in writing, walk away.</li>
+        <li><strong>High-pressure tactics</strong> — genuine urgency is real (a burst pipe is an emergency), but a tradie who pressures you to sign right now or lose the deal is often not looking out for your interests.</li>
+      </ul>
+
+      <h2>Upfront Pricing from a Trusted Local Tradie</h2>
+      <p>{{BUSINESS_NAME}} believes you should know exactly what a job costs before anyone picks up a tool. We offer upfront fixed pricing on most jobs across {{SUBURB}} and the surrounding area, with no surprise charges on your final invoice. Our team is fully licensed, insured, and has been serving the {{SUBURB}} community for years.</p>
+
+      <div class="cta-box">
+        <h3>Get an upfront quote in {{SUBURB}}</h3>
+        <p>{{BUSINESS_NAME}} provides clear, itemised quotes with no hidden fees. Available 7 days across {{SUBURB}} and surrounds.</p>
+        <a href="tel:{{PHONE}}">Call {{PHONE}}</a>
+      </div>
+
+      <div class="related">
+        <h3>More from the {{BUSINESS_NAME}} blog</h3>
+        <div class="related-links">
+          <a href="post-1.html">5 Warning Signs Your Plumbing Needs Urgent Attention in {{SUBURB}} &rarr;</a>
+          <a href="post-3.html">How to Choose a Licensed Tradie in {{SUBURB}}: What to Look For &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; {{BUSINESS_NAME}} &middot; {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

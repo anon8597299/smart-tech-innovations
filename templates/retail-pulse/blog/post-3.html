@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Gift Ideas from {{BUSINESS_NAME}}: Style Picks for Every Occasion | {{SUBURB}}, {{STATE}}</title>
+  <meta name="description" content="Find the perfect fashion gift at {{BUSINESS_NAME}} in {{SUBURB}} — curated picks under $50, under $100, and over $100 for birthdays, anniversaries, and Christmas, with complimentary gift wrapping available.">
+  <style>
+    :root { --primary: {{COLOR_PRIMARY}}; --bg: {{COLOR_BG}}; --text: #111827; --muted: #6b7280; --line: #e5e7eb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); padding: .75rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .nav-links { display: flex; gap: .75rem; font-size: .88rem; }
+    .nav-links a { color: var(--muted); }
+    .blog-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .blog-hero .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .74rem; font-weight: 700; padding: .2rem .55rem; border-radius: 4px; margin-bottom: .6rem; }
+    .blog-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 .6rem; }
+    .blog-hero .meta { font-size: .85rem; color: var(--muted); }
+    .article-body { max-width: 720px; padding-bottom: 3rem; }
+    .article-body h2 { font-size: 1.35rem; margin: 2rem 0 .5rem; }
+    .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+    .article-body p { margin: 0 0 1rem; }
+    .article-body ul, .article-body ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { color: var(--text); }
+    .disclaimer { background: #f9fafb; border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; font-size: .78rem; color: var(--muted); margin-top: 1.5rem; }
+    .cta-box { background: var(--primary); color: #fff; border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+    .cta-box h3 { margin: 0 0 .4rem; color: #fff; }
+    .cta-box p { margin: 0 0 .8rem; opacity: .9; font-size: .95rem; }
+    .cta-box a { display: inline-block; background: #fff; color: var(--primary); font-weight: 700; padding: .6rem 1.1rem; border-radius: 8px; font-size: .92rem; }
+    .related { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; }
+    .related h3 { margin: 0 0 .75rem; font-size: 1rem; color: var(--text); }
+    .related-links { display: grid; gap: .4rem; }
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .post-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; }
+    .post-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .18rem .5rem; border-radius: 4px; margin-bottom: .5rem; width: fit-content; }
+    .post-card h3 { font-size: .97rem; margin: 0 0 .4rem; flex-grow: 1; }
+    .post-card p { font-size: .86rem; color: var(--muted); margin: 0 0 .8rem; }
+    .post-card a.read { font-size: .85rem; font-weight: 700; color: var(--primary); }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0; color: var(--muted); font-size: .84rem; }
+    @media (max-width: 860px) { .post-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+
+    .price-badge { display: inline-block; background: #f3f4f6; border: 1px solid var(--line); color: var(--text); font-size: .78rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px; margin-bottom: .5rem; }
+    .gift-section { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
+    .gift-section h3 { margin-top: 0; margin-bottom: .5rem; font-size: 1.05rem; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Gift Ideas from {{BUSINESS_NAME}}: Style Picks for Every Occasion",
+    "description": "A curated gift guide from {{BUSINESS_NAME}} in {{SUBURB}} — fashion gifts under $50, under $100, and over $100, for her, for him, and for every occasion from birthdays to Christmas.",
+    "author": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-02-01",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "post-3.html"
+    },
+    "keywords": "fashion gift ideas, gift guide, gifts under $50, gifts under $100, gift wrapping, {{SUBURB}}, {{STATE}}, boutique gifts"
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="../collections.html">Collections</a>
+      <a href="../story.html">Our Story</a>
+      <a href="../visit.html">Visit Us</a>
+      <a href="index.html">Style Tips</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="blog-hero">
+      <span class="tag">Gift Guide</span>
+      <h1>Gift Ideas from {{BUSINESS_NAME}}: Style Picks for Every Occasion</h1>
+      <p class="meta">By {{BUSINESS_NAME}} &middot; {{SUBURB}}, {{STATE}} &middot; February 2026</p>
+    </div>
+
+    <div class="article-body">
+      <p>Fashion makes one of the most personal and lasting gifts you can give — but it can also feel like one of the hardest to get right. At {{BUSINESS_NAME}} in {{SUBURB}}, we are here to make that process straightforward. Whether your budget is generous or modest, whether you are shopping for a birthday, an anniversary, a Christmas, or a reason that needs no label at all, this guide will point you toward the right choice. And yes, we wrap beautifully.</p>
+
+      <h2>By Budget</h2>
+
+      <div class="gift-section">
+        <span class="price-badge">Gifts Under $50</span>
+        <h3>Accessories That Deliver</h3>
+        <p>The under-$50 category is where accessories shine. A quality silk-blend scarf is the kind of gift that gets worn — it adds colour and warmth to outfits the recipient already owns, and it works across seasons. Fine jewellery in this range: delicate chain necklaces, small hoop earrings, and minimalist rings are all achievable and perennially wearable.</p>
+        <ul>
+          <li><strong>Silk-blend scarf:</strong> Lightweight, versatile, and packaged beautifully — a failsafe option in a strong print or a seasonal colour.</li>
+          <li><strong>Fine chain necklace:</strong> Simple, elegant, and enduring. Choose gold-toned for warmth or silver-toned for versatility.</li>
+          <li><strong>Patterned socks or tights:</strong> The underrated fashion gift — genuinely useful, available in beautiful patterns, and always the right size.</li>
+          <li><strong>Candle or fragrance gift:</strong> If they are into lifestyle as much as fashion, a beautiful home fragrance from a quality brand rounds out the under-$50 category with ease.</li>
+        </ul>
+      </div>
+
+      <div class="gift-section">
+        <span class="price-badge">Gifts Under $100</span>
+        <h3>A Step Up in Impact</h3>
+        <p>The $50–$100 range opens the door to quality knitwear, handbag accessories, and mid-weight jewellery that feels genuinely considered. This is the sweet spot for birthdays and occasions where you want to give something they will reach for regularly.</p>
+        <ul>
+          <li><strong>Fine-knit beanie or beret:</strong> A quality winter hat in a neutral or a strong seasonal colour — practical, wearable, and something people rarely buy for themselves.</li>
+          <li><strong>Leather card holder or wallet:</strong> A slim leather card wallet in a quality finish is the kind of accessory that quietly elevates an everyday carry.</li>
+          <li><strong>Earrings in a bolder shape:</strong> This budget supports sculptural or semi-precious stone earrings that feel special without entering the fine jewellery category.</li>
+          <li><strong>Gift card:</strong> If you are genuinely unsure about specific taste and size, a {{BUSINESS_NAME}} gift card in this range lets them choose exactly what speaks to them. No compromise required.</li>
+        </ul>
+      </div>
+
+      <div class="gift-section">
+        <span class="price-badge">Gifts Over $100</span>
+        <h3>For the Occasions That Deserve It</h3>
+        <p>Above $100, you are in the realm of garments — pieces that can become wardrobe anchors for years. A quality knit, a well-made pair of trousers, a beautifully cut dress, or a leather bag with genuine longevity all sit comfortably in this range. These are the gifts that get remembered.</p>
+        <ul>
+          <li><strong>Merino or cashmere blend knit:</strong> The gold standard of considered gifts — a quality knit in a timeless cut will be worn every autumn and winter for years. Choose a neutral for versatility or a strong seasonal colour for impact.</li>
+          <li><strong>Structured handbag:</strong> A mid-range structured bag in leather or a quality synthetic — tote, crossbody, or clutch — is the kind of gift that requires knowing the recipient's style well, but gets the biggest reaction when you get it right.</li>
+          <li><strong>A statement piece they would not buy for themselves:</strong> Sometimes the best gift is the piece the recipient noticed, loved, and decided was too indulgent to justify. Come in and describe who you are shopping for — our team knows the floor and will have a strong suggestion.</li>
+        </ul>
+      </div>
+
+      <h2>By Occasion</h2>
+
+      <h3>Birthday</h3>
+      <p>Birthdays call for something personal. If you know their style — their colour preferences, whether they lean classic or contemporary, whether they are a maximalist or a minimalist — a garment or a piece of jewellery is ideal. If you are less certain, a gift card removes any guesswork while still feeling generous and specific. Pair it with a handwritten note and a small accessory from the under-$50 range for a layered gift that feels abundant without being excessive.</p>
+
+      <h3>Anniversary</h3>
+      <p>Anniversaries reward a higher level of care and budget. This is the occasion for the leather bag they have been eyeing, the cashmere knit in the colour they keep reaching for in stores, or a piece of jewellery with some real presence. If the anniversary is a shared one, two gift cards are a genuinely elegant solution — a shared experience at a shop you both trust.</p>
+
+      <h3>Christmas</h3>
+      <p>Christmas gifting at {{BUSINESS_NAME}} benefits from coming in early. Our festive stock moves quickly, and the pieces most likely to make the best gifts — the versatile knitwear, the strong accessory pieces, the statement items — are often the first to go. A gift card is always available and never disappoints, but for those who want something tangible under the tree, we recommend visiting us in November or early December to get the full range of choices.</p>
+
+      <h2>Gifts for Her</h2>
+      <p>Our womenswear range offers the widest selection for gifting — from lightweight scarves and fine jewellery at the accessible end, through to beautifully cut knits, dresses, and quality outerwear at a higher budget. Classic never fails: a great quality knit in her preferred colour family is always the right call. If she has an eye for detail, a sculptural accessory or a beautifully made leather piece will resonate strongly.</p>
+
+      <h2>Gifts for Him</h2>
+      <p>Menswear gifting at {{BUSINESS_NAME}} centres on quality basics elevated to a step above the ordinary — a merino polo in a richer colour than he would typically choose, a well-constructed cap or beanie, a leather belt in a quality finish, or a fine-knit sweater that upgrades the weekday wardrobe. The key with menswear gifting is quality over novelty: the pieces that last and get worn repeatedly are always more appreciated than something clever but fleeting.</p>
+
+      <h2>Gift Wrapping at {{BUSINESS_NAME}}</h2>
+      <p>Every gift purchased at {{BUSINESS_NAME}} in {{SUBURB}} can be beautifully wrapped at the time of purchase — tissue, a quality gift bag, ribbon, and a gift tag are all included at no additional charge. If you would like to add a personal message, simply let us know when you visit. We take the presentation as seriously as the product, because we know that the unwrapping is part of the gift.</p>
+      <p>If you are purchasing ahead of an occasion and would like the item wrapped to hold until a specific date, we are happy to accommodate that too. Just mention it at the time of purchase and we will take care of it.</p>
+
+      <p>{{BUSINESS_NAME}} is {{SUBURB}}'s local fashion destination, and we genuinely love helping people find the right gift. There is no pressure, no rush, and no algorithm involved — just a team that knows the stock, knows good style, and wants to help you give something worth giving. Come and see us.</p>
+
+      <div class="cta-box">
+        <h3>Come in and find the perfect gift</h3>
+        <p>Visit {{BUSINESS_NAME}} in {{SUBURB}} and let us help you choose. We offer complimentary gift wrapping on every purchase.</p>
+        <a href="tel:{{PHONE}}">Call {{PHONE}}</a>
+      </div>
+
+      <div class="related">
+        <h3>More Style Tips</h3>
+        <div class="related-links">
+          <a href="post-1.html">Supporting Local Fashion in {{SUBURB}}: Why It Matters More Than Ever in 2026 &rarr;</a>
+          <a href="post-2.html">Autumn/Winter 2026 Fashion Trends: What to Look For at {{BUSINESS_NAME}} &rarr;</a>
+          <a href="index.html">View all Style Tips &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="text-align:center;">© {{BUSINESS_NAME}} &middot; {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

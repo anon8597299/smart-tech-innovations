@@ -32,7 +32,12 @@ from github_client import push_customer_site
 PROJECT_ROOT = Path(__file__).parent.parent
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
 
-SUPPORTED_TEMPLATES = ["clinic-trust", "trades-rapid", "advisor-prime", "retail-pulse"]
+SUPPORTED_TEMPLATES = [
+    "clinic-trust", "trades-rapid", "advisor-prime", "retail-pulse",
+    "solar-spark", "accounting-conversion", "consulting-authority", "hospitality-events",
+]
+
+PACKAGE_TIERS = ["starter", "growth", "premium"]
 
 
 def slugify(name: str) -> str:
@@ -63,10 +68,16 @@ def validate_config(config: dict) -> None:
         print(f"❌ Unknown TEMPLATE_ID '{config['TEMPLATE_ID']}'. "
               f"Must be one of: {', '.join(SUPPORTED_TEMPLATES)}")
         sys.exit(1)
+    tier = config.get("PACKAGE_TIER", "starter").lower()
+    if tier not in PACKAGE_TIERS:
+        print(f"❌ Unknown PACKAGE_TIER '{tier}'. Must be one of: {', '.join(PACKAGE_TIERS)}")
+        sys.exit(1)
 
 
-def load_template_files(template_id: str) -> dict[str, str]:
-    """Load all HTML/CSS files from the template directory."""
+def load_template_files(template_id: str, include_blog: bool = False) -> dict[str, str]:
+    """Load all HTML/CSS files from the template directory.
+    Blog folder is only included for premium package customers.
+    """
     template_dir = TEMPLATES_DIR / template_id
     if not template_dir.exists():
         print(f"❌ Template directory not found: {template_dir}")
@@ -74,9 +85,15 @@ def load_template_files(template_id: str) -> dict[str, str]:
 
     files = {}
     for filepath in sorted(template_dir.rglob("*")):
-        if filepath.is_file() and filepath.suffix in (".html", ".css", ".js"):
-            rel = filepath.relative_to(template_dir)
-            files[str(rel)] = filepath.read_text(encoding="utf-8")
+        if not filepath.is_file():
+            continue
+        if filepath.suffix not in (".html", ".css", ".js"):
+            continue
+        rel = filepath.relative_to(template_dir)
+        # Skip blog/ unless this is a premium customer
+        if rel.parts[0] == "blog" and not include_blog:
+            continue
+        files[str(rel)] = filepath.read_text(encoding="utf-8")
 
     if not files:
         print(f"❌ No template files found in {template_dir}")
@@ -96,9 +113,13 @@ def generate(config_path: str, dry_run: bool = False) -> None:
     template_id = config["TEMPLATE_ID"]
     business_name = config["BUSINESS_NAME"]
     slug = config.get("SLUG") or slugify(business_name)
+    package_tier = config.get("PACKAGE_TIER", "starter").lower()
+    include_blog = (package_tier == "premium")
 
     print(f"  Business : {business_name}")
     print(f"  Template : {template_id}")
+    print(f"  Package  : {package_tier.upper()}")
+    print(f"  Blog     : {'✓ included' if include_blog else '✗ not included (premium only)'}")
     print(f"  Slug     : {slug}")
     print()
 
@@ -107,7 +128,7 @@ def generate(config_path: str, dry_run: bool = False) -> None:
 
     # 3. Load template files
     print(f"  Loading template: templates/{template_id}/")
-    template_files = load_template_files(template_id)
+    template_files = load_template_files(template_id, include_blog=include_blog)
     print(f"  Found {len(template_files)} template file(s): {', '.join(template_files.keys())}")
     print()
 

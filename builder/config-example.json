@@ -1,5 +1,5 @@
 {
-  "_comment": "Customer config example — fill in after receiving the order form submission.",
+  "_comment": "Customer config — fill in after receiving the order form submission.",
 
   "BUSINESS_NAME": "Smith's Plumbing",
   "TAGLINE": "Fast, reliable plumbers in Bathurst and surrounds.",
@@ -10,7 +10,14 @@
   "STATE": "NSW",
   "POSTCODE": "2795",
 
+  "OWNER_NAME": "James Smith",
+  "OWNER_TITLE": "Licensed Plumber & Owner",
+  "YEAR_ESTABLISHED": "2015",
+
   "TEMPLATE_ID": "trades-rapid",
+
+  "_note_package": "starter = 4 pages | growth = 4 pages + SEO meta | premium = all pages + blog",
+  "PACKAGE_TIER": "starter",
 
   "HERO_HEADLINE": "Trusted plumbers in Bathurst — fast response, fair prices",
 
@@ -22,6 +29,15 @@
 
   "SERVICE_3_NAME": "Blocked Drains",
   "SERVICE_3_DESC": "CCTV inspection and high-pressure jetting for a permanent fix.",
+
+  "SERVICE_4_NAME": "Bathroom Renovations",
+  "SERVICE_4_DESC": "Full bathroom fit-outs including tiling, fixtures, and waterproofing.",
+
+  "SERVICE_5_NAME": "Gas Fitting",
+  "SERVICE_5_DESC": "Licensed gas fitting for appliances, heaters, and outdoor BBQs.",
+
+  "SERVICE_6_NAME": "Roof & Guttering",
+  "SERVICE_6_DESC": "Gutter cleaning, repairs, and downpipe replacement across the region.",
 
   "META_TITLE": "Smith's Plumbing — Bathurst NSW",
   "META_DESCRIPTION": "Licensed plumbers in Bathurst NSW. Emergency callouts, hot water systems, blocked drains & more. Call 0400 123 456.",

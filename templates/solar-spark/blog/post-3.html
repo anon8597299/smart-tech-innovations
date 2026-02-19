@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>How Much Can Solar Save You in {{SUBURB}}? Real Numbers for 2026 — {{BUSINESS_NAME}}</title>
+  <meta name="description" content="Real solar savings figures for {{SUBURB}} homes in 2026. We break down self-consumption, bill reductions, and a 10-year savings projection without the marketing fluff.">
+  <style>
+    :root { --primary: {{COLOR_PRIMARY}}; --bg: {{COLOR_BG}}; --text: #111827; --muted: #6b7280; --line: #e5e7eb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); padding: .75rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .nav-links { display: flex; gap: .75rem; font-size: .88rem; }
+    .nav-links a { color: var(--muted); }
+    .blog-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .blog-hero .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .74rem; font-weight: 700; padding: .2rem .55rem; border-radius: 4px; margin-bottom: .6rem; }
+    .blog-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 .6rem; }
+    .blog-hero .meta { font-size: .85rem; color: var(--muted); }
+    .article-body { max-width: 720px; padding-bottom: 3rem; }
+    .article-body h2 { font-size: 1.35rem; margin: 2rem 0 .5rem; }
+    .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+    .article-body p { margin: 0 0 1rem; }
+    .article-body ul, .article-body ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { color: var(--text); }
+    .cta-box { background: var(--primary); color: #fff; border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+    .cta-box h3 { margin: 0 0 .4rem; color: #fff; }
+    .cta-box p { margin: 0 0 .8rem; opacity: .9; font-size: .95rem; }
+    .cta-box a { display: inline-block; background: #fff; color: var(--primary); font-weight: 700; padding: .6rem 1.1rem; border-radius: 8px; font-size: .92rem; }
+    .related { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; }
+    .related h3 { margin: 0 0 .75rem; font-size: 1rem; }
+    .related-links { display: grid; gap: .4rem; }
+    .related-links a { font-size: .92rem; color: var(--primary); }
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .post-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; }
+    .post-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .18rem .5rem; border-radius: 4px; margin-bottom: .5rem; width: fit-content; }
+    .post-card h3 { font-size: .97rem; margin: 0 0 .4rem; flex-grow: 1; }
+    .post-card p { font-size: .86rem; color: var(--muted); margin: 0 0 .8rem; }
+    .post-card a.read { font-size: .85rem; font-weight: 700; color: var(--primary); }
+    .savings-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: .9rem; }
+    .savings-table th { background: var(--primary); color: #fff; text-align: left; padding: .5rem .75rem; }
+    .savings-table td { padding: .45rem .75rem; border-bottom: 1px solid var(--line); }
+    .savings-table tr:nth-child(even) td { background: #f9fafb; }
+    .savings-table tr:last-child td { font-weight: 700; background: #f0fdf4; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0; color: var(--muted); font-size: .84rem; }
+    @media (max-width: 860px) { .post-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Much Can Solar Save You in {{SUBURB}}? Real Numbers for 2026",
+    "description": "Real solar savings figures for {{SUBURB}} homes in 2026. We break down self-consumption, bill reductions, and a 10-year savings projection without the marketing fluff.",
+    "datePublished": "2026-02-05",
+    "dateModified": "2026-02-05",
+    "author": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "publisher": {
+      "@type": "LocalBusiness",
+      "name": "{{BUSINESS_NAME}}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{SUBURB}}",
+        "addressRegion": "{{STATE}}",
+        "addressCountry": "AU"
+      },
+      "telephone": "{{PHONE}}",
+      "email": "{{EMAIL}}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://example.com/blog/post-3.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="../services.html">Services</a>
+      <a href="../case-studies.html">Results</a>
+      <a href="../contact.html">Get a Quote</a>
+      <a href="index.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="blog-hero">
+      <span class="tag">Savings Calculator</span>
+      <h1>How Much Can Solar Save You in {{SUBURB}}? Real Numbers for 2026</h1>
+      <p class="meta">By {{BUSINESS_NAME}} &middot; February 2026 &middot; 6 min read</p>
+    </div>
+
+    <div class="article-body">
+
+      <p>Every solar company in Australia has a version of the same marketing claim: "Save thousands on your power bills!" The problem is that claim is almost never attached to a specific household, a specific usage pattern, or an honest explanation of the assumptions behind it. This article is different. We are going to use real numbers — based on a typical {{SUBURB}} home with a 6.6 kW solar system — and show you exactly where the savings come from and what a reasonable 10-year projection looks like.</p>
+
+      <h2>Understanding Your Electricity Bill</h2>
+      <p>Before you can calculate solar savings, you need to understand the two key components of your current electricity costs. Your bill is made up of a <strong>daily supply charge</strong> (typically 80 cents to $1.20 per day regardless of how much you use) and a <strong>usage charge</strong> (the rate per kilowatt-hour for the electricity you consume). Solar does not reduce your supply charge — it reduces your usage charge by replacing grid electricity with self-generated power.</p>
+      <p>Most households in {{SUBURB}} are on either a flat-rate tariff (typically 28–38 cents per kWh) or a time-of-use tariff (with peak rates of 40–55 cents in the evening, and off-peak rates around 15–18 cents overnight). The higher your usage tariff, the more valuable each kilowatt-hour of solar you consume directly. If you are on time-of-use pricing with high evening peak rates, self-consumption during the day is particularly valuable.</p>
+
+      <h2>Typical Savings for a {{SUBURB}} Home</h2>
+      <p>A 6.6 kW solar system installed in {{SUBURB}} will generate approximately <strong>9,500–10,500 kWh of electricity per year</strong> depending on roof orientation and panel quality. A typical four-person household uses 18–22 kWh per day, or roughly 6,500–8,000 kWh per year.</p>
+      <p>The critical variable is self-consumption — how much of the solar you generate is actually used inside your home rather than exported to the grid at the much lower feed-in tariff rate. For a household that is home during the day or runs appliances on timers, a self-consumption rate of <strong>35–45%</strong> is realistic without a battery. Here is what that looks like in dollar terms at a grid tariff of 32 cents per kWh and a feed-in tariff of 7 cents per kWh:</p>
+      <ul>
+        <li>Annual solar generation: 10,000 kWh</li>
+        <li>Self-consumed (40%): 4,000 kWh &times; $0.32 = <strong>$1,280 saved on avoided grid purchases</strong></li>
+        <li>Exported (60%): 6,000 kWh &times; $0.07 = <strong>$420 earned as feed-in credits</strong></li>
+        <li><strong>Total annual benefit: approximately $1,700</strong></li>
+      </ul>
+      <p>Households with pool pumps, air conditioning, or electric vehicle charging that can be shifted to daylight hours can comfortably exceed $2,000 per year in savings with the same system.</p>
+
+      <h2>The Self-Consumption Equation</h2>
+      <p>Self-consumption is the single biggest lever you have to improve your solar return, and it costs nothing to optimise. Every extra kilowatt-hour you consume directly from your solar — rather than exporting it for 7 cents and then buying it back for 32 cents — is worth an extra 25 cents in your pocket.</p>
+      <p>Practical steps to maximise self-consumption in a {{SUBURB}} home:</p>
+      <ul>
+        <li>Run the dishwasher, washing machine, and clothes dryer between 10am and 3pm on sunny days using delay-start timers.</li>
+        <li>Set your pool pump to run during solar peak hours rather than overnight.</li>
+        <li>Pre-cool or pre-heat your home using solar power in the afternoon before the evening peak.</li>
+        <li>Charge an electric vehicle at home during the middle of the day.</li>
+        <li>Switch to a solar diverter for your hot water system — excess solar that would otherwise be exported heats your water tank instead.</li>
+      </ul>
+
+      <h2>Adding a Battery — Does It Double Savings?</h2>
+      <p>A home battery captures the solar you would otherwise export during the day and makes it available in the evening, lifting your self-consumption rate from 35–45% to approximately <strong>60–70%</strong>. In dollar terms for our example household above, that shift produces an additional <strong>$400–$600 per year</strong> in savings compared to solar alone.</p>
+      <p>A quality 10 kWh home battery adds approximately $8,000–$10,000 to the installed cost. At $500 per year in additional savings, the battery's own payback period is around 16–20 years on financial grounds alone. This is why we are honest with {{SUBURB}} customers: if your primary goal is maximising financial return, optimise your self-consumption habits first. If you want energy independence, protection from blackouts, or you have a time-of-use tariff with very high peak rates, a battery has a stronger case.</p>
+
+      <h2>10-Year Projection</h2>
+      <p>Using our typical {{SUBURB}} household example — 6.6 kW system, 40% self-consumption, $1,700 first-year saving, and a 3% annual electricity price increase — here is what the 10-year return looks like:</p>
+
+      <table class="savings-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Annual Saving</th>
+            <th>Cumulative Saving</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Year 1</td><td>$1,700</td><td>$1,700</td></tr>
+          <tr><td>Year 2</td><td>$1,751</td><td>$3,451</td></tr>
+          <tr><td>Year 3</td><td>$1,804</td><td>$5,255</td></tr>
+          <tr><td>Year 4</td><td>$1,858</td><td>$7,113</td></tr>
+          <tr><td>Year 5</td><td>$1,914</td><td>$9,027</td></tr>
+          <tr><td>Year 6</td><td>$1,971</td><td>$10,998</td></tr>
+          <tr><td>Year 7</td><td>$2,030</td><td>$13,028</td></tr>
+          <tr><td>Year 8</td><td>$2,091</td><td>$15,119</td></tr>
+          <tr><td>Year 9</td><td>$2,154</td><td>$17,273</td></tr>
+          <tr><td>Year 10</td><td>$2,218</td><td>$19,491</td></tr>
+        </tbody>
+      </table>
+
+      <p>On an installed cost of $6,000–$7,000 after the STC rebate, payback is comfortably achieved between years 4 and 5. The remaining 20-plus years of panel life deliver savings with no further capital outlay beyond routine inverter maintenance.</p>
+
+      <h2>Every Month You Wait Is Money in the Retailer's Pocket</h2>
+      <p>The numbers above represent money that is currently leaving your household and going to your electricity retailer every single quarter. A 6.6 kW solar system paying back $1,700 per year means that each month without solar is costing you approximately $140 in avoidable electricity costs. Over a 25-year panel life, the financial case for acting now rather than waiting is substantial.</p>
+      <p>{{BUSINESS_NAME}} provides free, no-obligation site assessments for {{SUBURB}} homeowners. We will calculate your specific savings based on your actual bills, your roof, and your usage patterns — so you get an honest projection rather than a best-case scenario.</p>
+
+      <div class="cta-box">
+        <h3>Get your personalised savings estimate</h3>
+        <p>{{BUSINESS_NAME}} calculates your savings using your actual electricity bills and usage data — not generic averages. Free assessment for {{SUBURB}} homeowners, no obligation.</p>
+        <a href="tel:{{PHONE}}">Call {{PHONE}}</a>
+      </div>
+
+      <div class="related">
+        <h3>More from the {{BUSINESS_NAME}} blog</h3>
+        <div class="related-links">
+          <a href="post-1.html">Is Solar Worth It in {{SUBURB}}, {{STATE}}? An Honest 2026 Guide &rarr;</a>
+          <a href="post-2.html">Solar Rebates Available to {{SUBURB}} Homeowners in 2026 &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; {{BUSINESS_NAME}} &middot; {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

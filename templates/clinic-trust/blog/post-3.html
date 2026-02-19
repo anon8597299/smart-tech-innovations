@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Understanding Bulk Billing in {{SUBURB}} | {{BUSINESS_NAME}}</title>
+  <meta name="description" content="How does bulk billing actually work in {{SUBURB}}? This guide explains who qualifies, what gap fees mean, when to expect out-of-pocket costs, and how to ask your clinic upfront.">
+  <style>
+    :root { --primary: {{COLOR_PRIMARY}}; --bg: {{COLOR_BG}}; --text: #111827; --muted: #6b7280; --line: #e5e7eb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); padding: .75rem 0; position: sticky; top: 0; z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .nav-links { display: flex; gap: .75rem; font-size: .88rem; }
+    .nav-links a { color: var(--muted); }
+    .blog-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .blog-hero .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .74rem; font-weight: 700; padding: .2rem .55rem; border-radius: 4px; margin-bottom: .6rem; }
+    .blog-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 .6rem; }
+    .blog-hero .meta { font-size: .85rem; color: var(--muted); }
+    .article-body { max-width: 720px; padding-bottom: 3rem; }
+    .article-body h2 { font-size: 1.35rem; margin: 2rem 0 .5rem; }
+    .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+    .article-body p { margin: 0 0 1rem; }
+    .article-body ul, .article-body ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .cta-box { background: var(--primary); color: #fff; border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+    .cta-box h3 { margin: 0 0 .4rem; color: #fff; }
+    .cta-box p { margin: 0 0 .8rem; opacity: .9; font-size: .95rem; }
+    .cta-box a { display: inline-block; background: #fff; color: var(--primary); font-weight: 700; padding: .6rem 1.1rem; border-radius: 8px; font-size: .92rem; }
+    .related { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; }
+    .related h3 { margin: 0 0 .75rem; font-size: 1rem; color: var(--text); }
+    .related-links { display: grid; gap: .4rem; }
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .post-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; display: flex; flex-direction: column; }
+    .post-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .18rem .5rem; border-radius: 4px; margin-bottom: .5rem; width: fit-content; }
+    .post-card h3 { font-size: .97rem; margin: 0 0 .4rem; flex-grow: 1; }
+    .post-card p { font-size: .86rem; color: var(--muted); margin: 0 0 .8rem; }
+    .post-card a.read { font-size: .85rem; font-weight: 700; color: var(--primary); }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0; color: var(--muted); font-size: .84rem; }
+    @media (max-width: 860px) { .post-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Understanding Bulk Billing in {{SUBURB}}: What Patients Need to Know",
+    "description": "How does bulk billing actually work in {{SUBURB}}? This guide explains who qualifies, what gap fees mean, when to expect out-of-pocket costs, and how to ask your clinic upfront.",
+    "author": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{BUSINESS_NAME}}"
+    },
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-02-01",
+    "mainEntityOfPage": {
+      "@type": "WebPage"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="../services.html">Services</a>
+      <a href="../team.html">Our Team</a>
+      <a href="../book.html">Book Online</a>
+      <a href="index.html">Health Tips</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="blog-hero">
+      <span class="tag">Medicare Guide</span>
+      <h1>Understanding Bulk Billing in {{SUBURB}}: What Patients Need to Know</h1>
+      <p class="meta">By {{BUSINESS_NAME}} &nbsp;·&nbsp; {{SUBURB}}, {{STATE}} &nbsp;·&nbsp; Medicare &amp; Billing</p>
+    </div>
+
+    <article class="article-body">
+      <p>Bulk billing is one of the most frequently misunderstood aspects of the Australian healthcare system. Many patients assume all GP visits are free, then feel blindsided when they receive a bill. Others assume they have to pay every time and avoid the doctor for financial reasons. Neither extreme reflects reality. Understanding exactly how bulk billing works — and when it applies — puts you in a much better position as a patient in {{SUBURB}}.</p>
+
+      <h2>What Bulk Billing Actually Means</h2>
+      <p>Bulk billing is an arrangement where a GP (or other Medicare provider) accepts the Medicare rebate as full payment for a consultation. The doctor bills Medicare directly, and the patient pays nothing out of pocket. There is no cash transaction between you and the clinic for a bulk billed appointment.</p>
+      <p>The Medicare rebate is a set amount determined by the government based on the type of consultation (standard, long, after-hours, etc.). It is not the same as the doctor's full fee — in many cases, it is significantly less. When a clinic bulk bills, it absorbs the difference as a cost of providing accessible care. This is why not all practices can afford to bulk bill all patients for all services, and why partial bulk billing is increasingly common.</p>
+
+      <h2>Who Qualifies for Bulk Billing?</h2>
+      <p>There is no universal rule — it depends on the clinic's policy. However, the following groups are most commonly bulk billed by practices that do not bulk bill universally:</p>
+      <ul>
+        <li>Concession card holders (Pensioner Concession, Health Care Card, Commonwealth Seniors Health Card)</li>
+        <li>Children under 16</li>
+        <li>DVA (Department of Veterans' Affairs) card holders</li>
+        <li>Patients with chronic conditions under a care plan (in some circumstances)</li>
+        <li>Mental health plan consultations covered under specific Medicare items</li>
+      </ul>
+      <p>Some practices in {{SUBURB}} bulk bill all patients as a deliberate policy. Others bulk bill selectively. It is entirely reasonable to ask before you book.</p>
+
+      <h2>Gap Fees Explained</h2>
+      <p>A "gap fee" or "out-of-pocket cost" is the difference between a clinic's full consultation fee and the Medicare rebate. For example, if the clinic charges $95 for a standard consultation and the Medicare rebate is $42.85, the gap is $52.15 — which you pay directly.</p>
+      <p>Gap fees vary significantly between clinics and between GPs even within the same clinic. They also vary by consultation type: a brief standard consultation carries a lower gap than a long consultation, a mental health care plan review, or a complex chronic disease management appointment.</p>
+
+      <h2>When to Expect an Out-of-Pocket Cost</h2>
+      <p>Even if a clinic broadly bulk bills, there are situations where a gap may apply:</p>
+      <ul>
+        <li><strong>After-hours consultations</strong> — these often attract a surcharge that is not fully covered by the Medicare after-hours rebate</li>
+        <li><strong>Extended or complex consultations</strong> — where the clinic charges a higher fee for the additional time involved</li>
+        <li><strong>Procedures:</strong> minor procedures like skin lesion removal, wound management, or joint injections typically have fees beyond the standard rebate</li>
+        <li><strong>Pathology and radiology</strong> — these are separate services billed by pathology labs or imaging centres, not your GP, and may carry their own gaps</li>
+        <li><strong>Specialist referrals</strong> — your GP's referral is often bulk billed, but the specialist appointment itself almost always carries a gap</li>
+      </ul>
+
+      <h2>How to Ask Your Clinic Upfront</h2>
+      <p>There should be no embarrassment in asking about fees before you book. A well-run clinic will be completely transparent about their billing policy. Direct questions to ask the receptionist:</p>
+      <ul>
+        <li>"Do you bulk bill? If so, does that apply to all patients?"</li>
+        <li>"I hold a [concession/health care/pension] card — am I bulk billed?"</li>
+        <li>"What is the consultation fee for a standard appointment?"</li>
+        <li>"Are there any services that carry additional fees beyond the consultation?"</li>
+        <li>"Is the procedure I need bulk billed, or will there be an out-of-pocket cost?"</li>
+      </ul>
+      <p>You are also entitled to request an itemised account after any appointment, which will show exactly what was billed and what Medicare rebated.</p>
+
+      <h2>The Medicare Safety Net</h2>
+      <p>If you have significant ongoing out-of-pocket medical costs, it's worth registering for the Medicare Safety Net. Once your annual out-of-pocket costs exceed the threshold, Medicare covers a higher percentage of your fees for the rest of that calendar year. You can register all family members under one Safety Net, and Services Australia tracks your expenses automatically once you're enrolled.</p>
+
+      <p>At <strong>{{BUSINESS_NAME}}</strong> in {{SUBURB}}, we are committed to transparency about fees before every appointment. Our reception team is always happy to explain exactly what applies to your situation before you come in — so there are never any surprises at the desk.</p>
+
+      <div class="cta-box">
+        <h3>Questions about billing at {{BUSINESS_NAME}}?</h3>
+        <p>Call our {{SUBURB}} team and we'll explain exactly what fees apply to your circumstances before your appointment.</p>
+        <a href="tel:{{PHONE}}">Call {{PHONE}}</a>
+      </div>
+
+      <div class="related">
+        <h3>More from our health blog</h3>
+        <div class="related-links">
+          <a href="post-1.html">When to See a GP vs Wait It Out: A Guide for {{SUBURB}} Residents</a>
+          <a href="post-2.html">How to Find the Right GP in {{SUBURB}}: A Practical Guide</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© {{BUSINESS_NAME}} · {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
