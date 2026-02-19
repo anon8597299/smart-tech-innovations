@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Decorative open-quote character -->
+  <text
+    x="540"
+    y="340"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="180"
+    font-weight="800"
+    fill="#5b4dff"
+    opacity="0.3"
+  >&#x201C;</text>
+
+  <!-- Main objection headline -->
+  <text
+    x="540"
+    y="440"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="78"
+    font-weight="700"
+    fill="#ffffff"
+  >I&#x2019;LL JUST USE WIX.</text>
+
+  <!-- Indigo underline bar below headline -->
+  <rect x="290" y="460" width="500" height="5" rx="2" fill="#5b4dff"/>
+
+  <!-- Response line 1 -->
+  <text
+    x="540"
+    y="560"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="44"
+    font-weight="700"
+    fill="#2dd4bf"
+  >Fair call.</text>
+
+  <!-- Response lines 2 & 3 -->
+  <text
+    x="540"
+    y="630"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="36"
+    fill="#ffffff"
+  >But most DIY sites still don&#x2019;t rank</text>
+
+  <text
+    x="540"
+    y="678"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="36"
+    fill="#ffffff"
+  >and still don&#x2019;t convert.</text>
+
+  <!-- Horizontal divider -->
+  <line
+    x1="340" y1="750" x2="740" y2="750"
+    stroke="#ffffff"
+    stroke-width="1"
+    opacity="0.1"
+  />
+
+  <!-- Pricing options -->
+  <text
+    x="540"
+    y="830"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="32"
+    fill="#94a3b8"
+  >Scan &amp; Fix &#x2014; $3,000</text>
+
+  <text
+    x="540"
+    y="878"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="32"
+    fill="#94a3b8"
+  >Complete Build &#x2014; $5,000</text>
+
+  <!-- No monthly fees -->
+  <text
+    x="540"
+    y="930"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="32"
+    font-weight="700"
+    fill="#ffffff"
+  >No monthly fees.</text>
+
+  <!-- Website CTA -->
+  <text
+    x="540"
+    y="1018"
+    text-anchor="middle"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="28"
+    fill="#2dd4bf"
+  >improveyoursite.com</text>
+</svg>

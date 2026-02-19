@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="#0f172a"/>
+
+  <!-- Top indigo bar (4px full width) -->
+  <rect x="0" y="0" width="1080" height="4" fill="#5b4dff"/>
+
+  <!-- Bottom mint bar (4px full width) -->
+  <rect x="0" y="1916" width="1080" height="4" fill="#2dd4bf"/>
+
+  <!-- LIVE IN headline -->
+  <text x="540" y="600" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="700" fill="#ffffff">LIVE IN</text>
+
+  <!-- 24 HOURS headline in Electric Indigo -->
+  <text x="540" y="740" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="700" fill="#5b4dff">24 HOURS</text>
+
+  <!-- Indigo underline bar under 24 HOURS -->
+  <rect x="240" y="780" width="600" height="6" rx="3" fill="#5b4dff"/>
+
+  <!-- Built to rank. in mint -->
+  <text x="540" y="900" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="400" fill="#2dd4bf">Built to rank.</text>
+
+  <!-- Built to convert. in mint -->
+  <text x="540" y="960" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="400" fill="#2dd4bf">Built to convert.</text>
+
+  <!-- Rising bars decorative element centered around y=1500 -->
+  <!-- Bar 1 (shortest, leftmost) -->
+  <rect x="378" y="1460" width="60" height="80" rx="6" fill="#5b4dff" opacity="0.7"/>
+  <!-- Bar 2 (medium) -->
+  <rect x="462" y="1420" width="60" height="120" rx="6" fill="#5b4dff" opacity="0.85"/>
+  <!-- Bar 3 (tallest) -->
+  <rect x="546" y="1370" width="60" height="170" rx="6" fill="#5b4dff"/>
+  <!-- Bar 4 (medium-tall, accent) -->
+  <rect x="630" y="1395" width="60" height="145" rx="6" fill="#2dd4bf" opacity="0.85"/>
+  <!-- Bar 5 (short, rightmost, accent) -->
+  <rect x="714" y="1430" width="60" height="110" rx="6" fill="#2dd4bf" opacity="0.6"/>
+
+  <!-- DM US YOUR URL -->
+  <text x="540" y="1200" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700" fill="#ffffff">DM US YOUR URL</text>
+
+  <!-- FOR A FREE REVIEW -->
+  <text x="540" y="1255" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="400" fill="#94a3b8">FOR A FREE REVIEW</text>
+
+  <!-- Bottom domain -->
+  <text x="540" y="1860" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="30" font-weight="400" fill="#2dd4bf">improveyoursite.com</text>
+</svg>

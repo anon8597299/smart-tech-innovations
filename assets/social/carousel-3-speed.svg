@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo vertical accent bar -->
+  <rect x="0" y="0" width="4" height="1080" fill="#5b4dff"/>
+
+  <!-- Top-right slide counter -->
+  <text
+    x="1020"
+    y="80"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#475569"
+    text-anchor="end"
+    text-rendering="geometricPrecision"
+    letter-spacing="2">03 / 05</text>
+
+  <!-- Mint circle icon background -->
+  <circle cx="166" cy="480" r="80" fill="#2dd4bf"/>
+
+  <!-- Lightning bolt path inside circle -->
+  <path
+    d="M 172 420 L 148 478 L 168 478 L 158 538 L 188 470 L 166 470 Z"
+    fill="#ffffff"
+    stroke="none"/>
+
+  <!-- Headline line 1: SLOW LOAD -->
+  <text
+    x="286"
+    y="464"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="76"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">SLOW LOAD</text>
+
+  <!-- Headline line 2: TIMES -->
+  <text
+    x="286"
+    y="558"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="76"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">TIMES</text>
+
+  <!-- Body text line 1 -->
+  <text
+    x="86"
+    y="660"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="38"
+    font-weight="400"
+    fill="#94a3b8"
+    text-anchor="start"
+    text-rendering="geometricPrecision">Over 3 seconds = lost calls.</text>
+
+  <!-- Body text line 2 -->
+  <text
+    x="86"
+    y="710"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="38"
+    font-weight="400"
+    fill="#94a3b8"
+    text-anchor="start"
+    text-rendering="geometricPrecision">Customers don't wait.</text>
+
+  <!-- Bottom URL -->
+  <text
+    x="540"
+    y="1010"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="26"
+    font-weight="400"
+    fill="#2dd4bf"
+    text-anchor="middle"
+    text-rendering="geometricPrecision"
+    letter-spacing="1">improveyoursite.com</text>
+</svg>

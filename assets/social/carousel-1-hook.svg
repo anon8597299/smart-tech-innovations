@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo vertical accent bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Top-right slide counter -->
+  <text
+    x="1020"
+    y="80"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#475569"
+    text-anchor="end"
+    text-rendering="geometricPrecision"
+    letter-spacing="2">01 / 05</text>
+
+  <!-- Top-left mint label -->
+  <text
+    x="66"
+    y="80"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="22"
+    font-weight="700"
+    fill="#2dd4bf"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="4">FOR AUSTRALIAN TRADIES</text>
+
+  <!-- Main headline line 1 -->
+  <text
+    x="66"
+    y="490"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="90"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">YOUR WEBSITE IS</text>
+
+  <!-- Main headline line 2 -->
+  <text
+    x="66"
+    y="600"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="90"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">LOSING YOU JOBS</text>
+
+  <!-- Indigo horizontal rule under headline -->
+  <rect x="66" y="628" width="220" height="4" fill="#5b4dff"/>
+
+  <!-- Bottom URL -->
+  <text
+    x="540"
+    y="1010"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="26"
+    font-weight="400"
+    fill="#2dd4bf"
+    text-anchor="middle"
+    text-rendering="geometricPrecision"
+    letter-spacing="1">improveyoursite.com</text>
+</svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo vertical accent bar -->
+  <rect x="0" y="0" width="4" height="1080" fill="#5b4dff"/>
+
+  <!-- Top-right slide counter -->
+  <text
+    x="1020"
+    y="80"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#475569"
+    text-anchor="end"
+    text-rendering="geometricPrecision"
+    letter-spacing="2">02 / 05</text>
+
+  <!-- Mint circle icon background -->
+  <circle cx="166" cy="480" r="80" fill="#2dd4bf"/>
+
+  <!-- Magnifying glass: outer circle outline -->
+  <circle cx="155" cy="468" r="30" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Magnifying glass: handle line -->
+  <line x1="177" y1="490" x2="198" y2="511" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Headline: BURIED ON GOOGLE -->
+  <text
+    x="286"
+    y="464"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="76"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">BURIED ON</text>
+
+  <text
+    x="286"
+    y="558"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="76"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="start"
+    text-rendering="geometricPrecision"
+    letter-spacing="-1">GOOGLE</text>
+
+  <!-- Body text line 1 -->
+  <text
+    x="86"
+    y="660"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="38"
+    font-weight="400"
+    fill="#94a3b8"
+    text-anchor="start"
+    text-rendering="geometricPrecision">If you're not in the top 3 results,</text>
+
+  <!-- Body text line 2 -->
+  <text
+    x="86"
+    y="710"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="38"
+    font-weight="400"
+    fill="#94a3b8"
+    text-anchor="start"
+    text-rendering="geometricPrecision">you're invisible.</text>
+
+  <!-- Bottom URL -->
+  <text
+    x="540"
+    y="1010"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="26"
+    font-weight="400"
+    fill="#2dd4bf"
+    text-anchor="middle"
+    text-rendering="geometricPrecision"
+    letter-spacing="1">improveyoursite.com</text>
+</svg>
