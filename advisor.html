@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional websites for financial advisers and planners. ASIC-compliant, client-attracting design built to generate consultations. From $3,000.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://improveyoursite.com/advisor.html">
+  <meta property="og:title" content="Financial Adviser Website Design Australia | ImproveYourSite">
+  <meta property="og:description" content="Professional websites for financial advisers and planners. ASIC-compliant, client-attracting design built to generate consultations. From $3,000.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://improveyoursite.com/advisor.html">
+  <meta property="og:site_name" content="ImproveYourSite">
+  <meta property="og:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Financial adviser website design Australia | ImproveYourSite">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Financial Adviser Website Design Australia | ImproveYourSite">
+  <meta name="twitter:description" content="ASIC-compliant websites for financial advisers and planners. Built to generate consultation bookings. From $3,000.">
+  <meta name="twitter:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <title>Financial Adviser Website Design Australia | ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+  <!-- End Google Tag Manager -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Financial Adviser Website Design",
+    "description": "Professional website design for financial advisers and planners in Australia. ASIC and AFSL compliant design, consultation booking forms, and client-attracting layouts.",
+    "provider": {
+      "@type": "Organization",
+      "name": "ImproveYourSite",
+      "url": "https://improveyoursite.com"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Australia"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "3000",
+      "highPrice": "10000",
+      "priceCurrency": "AUD",
+      "offerCount": "3"
+    },
+    "serviceType": "Website Design",
+    "url": "https://improveyoursite.com/advisor.html"
+  }
+  </script>
+  <style>
+    /* ── Page-specific styles ── */
+    .industry-hero {
+      padding: 9rem 0 5rem;
+      background: linear-gradient(135deg, #f0f4ff 0%, #eef2ff 40%, #f8f7ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .industry-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,77,255,0.08) 0%, transparent 70%);
+    }
+    .industry-hero .hero__badge { background: rgba(91,77,255,0.1); color: #4338ca; }
+
+    /* Trust bar under hero */
+    .trust-bar {
+      background: #0f172a;
+      padding: 1rem 0;
+    }
+    .trust-bar__inner {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .trust-bar__item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #c7d2fe;
+    }
+
+    /* Demo showcase */
+    .demo-showcase { background: var(--surface-2); padding: 5rem 0; }
+    .demo-showcase__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .demo-showcase__copy h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .demo-showcase__copy p { color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .demo-showcase__frame {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.16);
+      border: 1px solid rgba(91,77,255,0.12);
+      aspect-ratio: 4/3;
+    }
+    .demo-showcase__frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Included */
+    .included { background: #fff; padding: 5rem 0; }
+    .included__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .included__card {
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(91,77,255,0.12);
+      background: linear-gradient(180deg, #ffffff 0%, #f8f7ff 100%);
+      box-shadow: var(--shadow-soft);
+    }
+    .included__icon { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+    .included__card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .included__card p { font-size: 0.88rem; color: #555; line-height: 1.55; }
+
+    /* Life stage section */
+    .life-stages { background: #f8f7ff; padding: 5rem 0; }
+    .life-stages__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .life-stage__card {
+      background: #fff;
+      border: 1px solid rgba(91,77,255,0.14);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow-soft);
+    }
+    .life-stage__card .stage-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .life-stage__card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e1b4b; }
+    .life-stage__card ul { list-style: none; }
+    .life-stage__card li { padding: 0.3rem 0; font-size: 0.88rem; color: #4b5563; border-bottom: 1px dashed #e5e7eb; }
+    .life-stage__card li:last-child { border-bottom: none; }
+
+    /* Works-for strip */
+    .works-for { background: #fff; padding: 4rem 0; }
+    .works-for__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .works-for__pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(91,77,255,0.14);
+      border-radius: 10px;
+      background: #f8f7ff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #2f3652;
+    }
+    .works-for__pill span { font-size: 1.2rem; }
+
+    /* Package CTA */
+    .pkg-strip {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      padding: 4rem 0;
+      text-align: center;
+      color: #fff;
+    }
+    .pkg-strip h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .pkg-strip p { color: #a5b4fc; font-size: 1.05rem; margin-bottom: 2rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .pkg-strip__cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+    }
+    .pkg-strip__card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+    }
+    .pkg-strip__card h3 { font-size: 1rem; font-weight: 700; color: #c7d2fe; margin-bottom: 0.3rem; }
+    .pkg-strip__card .price { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; }
+    .pkg-strip__card p { font-size: 0.83rem; color: #94a3b8; margin: 0; }
+
+    @media (max-width: 768px) {
+      .demo-showcase__inner { grid-template-columns: 1fr; }
+      .demo-showcase__frame { display: none; }
+      .life-stages__grid { grid-template-columns: 1fr; }
+      .pkg-strip__cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="index.html" class="nav__logo">
+      <span class="logo-icon">⚡</span>ImproveYourSite
+    </a>
+    <ul class="nav__menu" id="navMenu">
+      <li><a href="our-work.html" class="nav__link">Our Work</a></li>
+      <li><a href="advisor.html" class="nav__link" style="color:var(--brand-primary)">Financial Advisers</a></li>
+      <li><a href="packages.html" class="nav__link">Packages</a></li>
+      <li><a href="packages.html" class="nav__link nav__cta">Get Started</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="industry-hero">
+  <div class="container">
+    <span class="hero__badge">📊 Built for financial planners, advisers and wealth managers</span>
+    <h1 class="hero__title" style="max-width:800px">Website design for financial advisers — built to generate consultation bookings</h1>
+    <p class="hero__subtitle" style="max-width:660px">
+      A professional, ASIC-informed website that builds trust with prospective clients, displays your AFSL credentials clearly, and drives visitors to book a free initial consultation.
+    </p>
+    <div class="hero__actions">
+      <a href="showcase/sites/advisor-prime/index.html" class="btn btn--ghost" target="_blank" rel="noopener">View live adviser demo</a>
+      <a href="packages.html" class="btn btn--primary">See pricing &amp; packages</a>
+    </div>
+    <div class="hero__proof">
+      <span>✔ AFSL &amp; ASIC disclosure section</span>
+      <span>✔ Free consultation booking form</span>
+      <span>✔ Team profiles with credentials</span>
+      <span>✔ Services by life stage</span>
+      <span>✔ Fee transparency section</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar__inner">
+      <div class="trust-bar__item">🛡️ ASIC-informed design</div>
+      <div class="trust-bar__item">📋 AFSL disclosure built in</div>
+      <div class="trust-bar__item">📅 Consultation booking ready</div>
+      <div class="trust-bar__item">🏆 Credentials front and centre</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <h2 class="section__title">Why most financial adviser websites lose clients before hello</h2>
+    <p class="section__subtitle">Trust is everything in financial services. These are the three ways a weak website destroys it instantly.</p>
+    <div class="problem__grid">
+      <div class="problem__card">
+        <span class="problem__icon">🤝</span>
+        <h3>Generic templates don't build trust</h3>
+        <p>A template that could belong to anyone signals to a prospective client that you're not serious about your practice. People entrusting you with their life savings need to see professionalism from the very first click.</p>
+      </div>
+      <div class="problem__card">
+        <span class="problem__icon">⚠️</span>
+        <h3>AFSL and ASIC disclosure is buried or missing</h3>
+        <p>Visible AFSL numbers and ASIC registration details aren't just a compliance checkbox — they're a trust signal. Clients who can't find your credentials quickly assume you have something to hide.</p>
+      </div>
+      <div class="problem__card">
+        <span class="problem__icon">🚪</span>
+        <h3>No clear path from visitor to consultation</h3>
+        <p>Most adviser sites describe services at length but never clearly ask for the next step. If a visitor can't see a "Book a free consultation" button within three seconds, most of them leave without taking action.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SHOWCASE -->
+<section class="demo-showcase">
+  <div class="container">
+    <div class="demo-showcase__inner">
+      <div class="demo-showcase__copy">
+        <span class="hero__badge" style="margin-bottom:1rem">Live financial adviser demo</span>
+        <h2>See what a trust-building adviser website looks like</h2>
+        <p>The Advisor Prime demo shows how we structure a financial services site — AFSL credentials prominently displayed, services organised by life stage, team profiles with CFP qualifications, and a consultation booking CTA at every scroll depth.</p>
+        <a href="showcase/sites/advisor-prime/index.html" class="btn btn--primary" target="_blank" rel="noopener">Open demo in full ↗</a>
+      </div>
+      <div class="demo-showcase__frame">
+        <iframe src="showcase/sites/advisor-prime/index.html" title="Financial adviser website demo" loading="lazy" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE STAGES -->
+<section class="life-stages">
+  <div class="container">
+    <h2 class="section__title">Services structured around your clients' life stages</h2>
+    <p class="section__subtitle">The most effective adviser sites organise services by where the client is in life — not by product category. We build this structure in from day one.</p>
+    <div class="life-stages__grid">
+      <div class="life-stage__card">
+        <span class="stage-icon">💼</span>
+        <h3>Young professionals (25–40)</h3>
+        <ul>
+          <li>Starting to invest</li>
+          <li>Superannuation optimisation</li>
+          <li>First home buyer strategy</li>
+          <li>Debt management &amp; budgeting</li>
+          <li>Income protection insurance</li>
+        </ul>
+      </div>
+      <div class="life-stage__card">
+        <span class="stage-icon">🏠</span>
+        <h3>Pre-retirement (40–60)</h3>
+        <ul>
+          <li>Wealth accumulation strategy</li>
+          <li>Salary sacrifice &amp; super contributions</li>
+          <li>Investment portfolio review</li>
+          <li>SMSF setup &amp; management</li>
+          <li>Business succession planning</li>
+        </ul>
+      </div>
+      <div class="life-stage__card">
+        <span class="stage-icon">🌅</span>
+        <h3>Retirees (60+)</h3>
+        <ul>
+          <li>Retirement income planning</li>
+          <li>Account-based pensions</li>
+          <li>Age pension entitlements</li>
+          <li>Estate planning &amp; wills</li>
+          <li>Aged care financial planning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="container">
+    <h2 class="section__title">What's included for financial adviser clients</h2>
+    <p class="section__subtitle">Built to meet the specific trust, compliance, and conversion requirements of Australian financial services.</p>
+    <div class="included__grid">
+      <div class="included__card">
+        <span class="included__icon">🛡️</span>
+        <h3>AFSL number &amp; ASIC disclosure</h3>
+        <p>Your AFSL number, authorised representative details, and required ASIC disclosures are clearly displayed in the footer, about page, and wherever services are described.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📅</span>
+        <h3>Free consultation booking form</h3>
+        <p>A structured booking form that captures the prospective client's situation before you meet — saving you time and letting you prepare a genuinely useful first conversation.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">👔</span>
+        <h3>Team profiles with credentials</h3>
+        <p>Professional adviser profiles featuring CFP designation, AFP membership, years of experience, and areas of specialisation — the details that convert browsers into callers.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">💬</span>
+        <h3>Testimonials (ASIC-compliant wording)</h3>
+        <p>We write and structure client testimonials to avoid prohibited claims under ASIC's financial advice advertising guidance — genuine social proof without compliance risk.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">💰</span>
+        <h3>Fee transparency section</h3>
+        <p>A clear fee structure page or section explaining your engagement model — initial consultation fee (if any), ongoing advice fee, and how fees are charged. Transparency builds trust.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📚</span>
+        <h3>Blog-ready for financial guides</h3>
+        <p>Premium package includes a blog structure ready for educational content — superannuation guides, investment explainers, and budget tips that attract organic search traffic.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📄</span>
+        <h3>FSG &amp; document library</h3>
+        <p>A dedicated documents section where clients can download your Financial Services Guide, Statements of Advice templates, and privacy policy — keeping everything in one place.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">🎯</span>
+        <h3>Lead magnet &amp; resource offer</h3>
+        <p>An optional free resource (retirement checklist, budget template) in exchange for an email address — building your prospect list while demonstrating expertise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS FOR -->
+<section class="works-for">
+  <div class="container">
+    <h2 class="section__title">Who we build financial services websites for</h2>
+    <p class="section__subtitle">From sole-practice advisers to boutique wealth management firms.</p>
+    <div class="works-for__grid">
+      <div class="works-for__pill"><span>📊</span> Financial advisers</div>
+      <div class="works-for__pill"><span>📋</span> Financial planners</div>
+      <div class="works-for__pill"><span>🏦</span> Mortgage brokers</div>
+      <div class="works-for__pill"><span>🏛️</span> SMSF advisers</div>
+      <div class="works-for__pill"><span>📈</span> Investment advisers</div>
+      <div class="works-for__pill"><span>💎</span> Wealth managers</div>
+      <div class="works-for__pill"><span>🌅</span> Retirement planners</div>
+      <div class="works-for__pill"><span>🤝</span> Accountant-advisers</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="pkg-strip">
+  <div class="container">
+    <h2>Choose your financial adviser website package</h2>
+    <p>All packages include ASIC-informed compliance sections and consultation booking. Pick the level that suits your practice.</p>
+    <div class="pkg-strip__cards">
+      <div class="pkg-strip__card">
+        <h3>Scan &amp; Fix</h3>
+        <div class="price">$3,000</div>
+        <p>Audit &amp; fix your existing site — add AFSL disclosure, booking form, trust signals, and speed improvements.</p>
+      </div>
+      <div class="pkg-strip__card" style="border-color:rgba(91,77,255,0.45);">
+        <h3>Complete Build</h3>
+        <div class="price">$5,000</div>
+        <p>Full adviser website with life-stage services, team profiles, FSG library, testimonials, and consultation booking.</p>
+      </div>
+      <div class="pkg-strip__card" style="border-color:rgba(45,212,191,0.35);">
+        <h3>Premium Growth</h3>
+        <div class="price">$10,000</div>
+        <p>Full site plus blog, SEO content strategy, lead magnet funnel, and ongoing optimisation targeting HNW clients.</p>
+      </div>
+    </div>
+    <a href="packages.html" class="btn btn--primary" style="min-width:220px">View full package details</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2 class="section__title">Frequently asked questions</h2>
+    <p class="section__subtitle">Common questions from financial advisers before they started.</p>
+    <div class="faq__list">
+      <div class="faq__item">
+        <button class="faq__question">How much does a financial adviser website cost?</button>
+        <div class="faq__answer"><p>Our financial adviser websites start at $3,000 for the Scan &amp; Fix package (auditing and improving an existing site) and go up to $5,000 for a Complete Build and $10,000 for the Premium Growth package with ongoing SEO and lead generation. All packages include ASIC-compliant disclosure sections, AFSL credentials display, and a consultation booking form.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Is it ASIC and AFSL compliant?</button>
+        <div class="faq__answer"><p>We build your site with ASIC's financial services advertising guidance in mind — avoiding prohibited statements, structuring testimonials appropriately, and ensuring your AFSL number and authorised representative status are clearly displayed. We're web designers, not compliance lawyers, so we strongly recommend your compliance officer reviews all copy before launch. We make that easy by providing a clean draft for review.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Can it help me attract higher-net-worth clients?</button>
+        <div class="faq__answer"><p>Yes — this is one of the main goals of a well-built adviser site. HNW clients do significant research before engaging an adviser, and your website is often the first and most scrutinised touchpoint. We position your credentials, specialisations, and client outcomes prominently, and we can tailor the messaging and design to signal that you work with sophisticated investors rather than general retail clients.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Can I add financial calculators or tools?</button>
+        <div class="faq__answer"><p>Yes. We can embed third-party calculators (retirement income, superannuation projection, mortgage repayment) from reputable providers like MoneySmart or licensed tool vendors. These tools increase time-on-site, demonstrate expertise, and give prospective clients a reason to engage before they're ready to book. Available on the Complete Build and Premium Growth packages.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">How do I get my FSG and other documents on the site?</button>
+        <div class="faq__answer"><p>We create a dedicated documents section (or a discreet footer link, depending on your preference) where you can host your Financial Services Guide, sample Statements of Advice, Privacy Policy, and Terms of Engagement as downloadable PDFs. Updating documents in future just means replacing the PDF file — no developer needed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section__title">Get a free adviser website review</h2>
+    <p class="section__subtitle">Share your current site and we'll identify exactly what's stopping prospective clients from booking a consultation.</p>
+    <div class="contact__form">
+      <form action="https://formsubmit.co/admin@improveyoursite.com" method="POST">
+        <input type="hidden" name="_subject" value="Financial adviser website enquiry — advisor.html">
+        <input type="hidden" name="_next" value="https://improveyoursite.com/thanks.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off">
+        <div class="form__row">
+          <input type="text" name="name" class="form__input" placeholder="Your name" required>
+          <input type="email" name="email" class="form__input" placeholder="Email address" required>
+        </div>
+        <input type="text" name="practice" class="form__input" placeholder="Practice name &amp; location">
+        <input type="url" name="website" class="form__input" placeholder="Current website URL (if you have one)">
+        <textarea name="message" class="form__input" rows="4" placeholder="Tell us about your practice — your target clients, your specialisation, and what you'd like your website to do better."></textarea>
+        <p class="form__note">No obligation. We respond within one business day.</p>
+        <button type="submit" class="btn btn--primary btn--full">Send enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__content">
+      <div class="footer__brand">
+        ⚡ ImproveYourSite
+        <p>Professional websites for Australian financial advisers.<br>From $3,000. Pay online — we get to work.</p>
+      </div>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="our-work.html">Our Work</a>
+        <a href="packages.html">Packages</a>
+        <a href="clinic.html">Healthcare</a>
+        <a href="consulting.html">Consultants</a>
+        <a href="hospitality.html">Hospitality</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2026 ImproveYourSite. ABN pending. All prices in AUD. We are not financial advisers and do not provide financial or legal advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq__item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

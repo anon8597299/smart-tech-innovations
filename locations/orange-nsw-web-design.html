@@ -3,90 +3,428 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Orange NSW high-converting website redesign and local SEO by ImproveYourSite.">
-  <title>Orange NSW Website Redesign + SEO | ImproveYourSite</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Professional web design in Orange NSW. Industry-specific websites for trades, healthcare, solar, accounting and more. Transparent pricing from $3,000.">
+  <title>Web Design Orange NSW | Small Business Websites | ImproveYourSite</title>
+  <link rel="canonical" href="https://improveyoursite.com/locations/orange-nsw-web-design.html">
   <link rel="stylesheet" href="../src/css/style.css">
-  <style>
-    .local-hero { padding: 8rem 0 3rem; background: linear-gradient(135deg,#f8f7ff 0%,#eef2ff 100%); }
-    .local-hero p { color:#475569; max-width:760px; }
-    .local-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:1rem; margin-top:1rem; }
-    .local-card { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:1rem; }
-    .local-card ul { list-style:none; display:grid; gap:.45rem; }
-    .local-card li { color:#334155; }
-    @media (max-width: 900px) { .local-grid{grid-template-columns:1fr;} }
-  </style>
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+
+  <style>
+    /* ── Hero ── */
+    .loc-hero {
+      padding: 7rem 0 4rem;
+      background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 60%, #f0fdf9 100%);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .loc-hero h1 { font-size: clamp(2rem, 4vw, 2.85rem); line-height: 1.18; color: #1e1b4b; max-width: 720px; margin: .75rem 0 1.1rem; }
+    .loc-hero .lead { color: #475569; font-size: 1.075rem; max-width: 640px; line-height: 1.65; margin-bottom: 2rem; }
+    .loc-hero__actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+    /* ── Trust strip ── */
+    .trust-strip { background: #1e1b4b; padding: 1.4rem 0; }
+    .trust-strip__inner { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .trust-stat { color: #fff; text-align: center; }
+    .trust-stat strong { display: block; font-size: 1.3rem; color: #2dd4bf; }
+    .trust-stat span { font-size: .82rem; opacity: .8; }
+
+    /* ── Section defaults ── */
+    .loc-section { padding: 5rem 0; }
+    .loc-section--alt { background: #f8f7ff; }
+
+    /* ── Industry grid ── */
+    .industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .industry-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem 1.25rem; text-align: center; transition: box-shadow .2s, transform .2s; text-decoration: none; color: inherit; }
+    .industry-card:hover { box-shadow: 0 8px 24px rgba(91,77,255,.12); transform: translateY(-3px); }
+    .industry-card__icon { font-size: 2rem; margin-bottom: .6rem; display: block; }
+    .industry-card__name { font-weight: 700; color: #1e1b4b; margin-bottom: .4rem; font-size: .95rem; }
+    .industry-card__link { font-size: .8rem; color: #5b4dff; text-decoration: underline; }
+
+    /* ── How it works ── */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .step { background: #fff; border-radius: 14px; padding: 2rem 1.5rem; border: 1px solid #e2e8f0; }
+    .step__num { width: 40px; height: 40px; background: #5b4dff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+    .step h3 { color: #1e1b4b; font-size: 1rem; margin-bottom: .5rem; }
+    .step p { color: #64748b; font-size: .9rem; line-height: 1.55; }
+
+    /* ── Demo chips ── */
+    .demo-chips { display: flex; gap: .85rem; flex-wrap: wrap; margin-top: 2rem; }
+    .demo-chip { display: inline-flex; align-items: center; gap: .4rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: .55rem 1rem; font-size: .85rem; font-weight: 600; color: #1e1b4b; text-decoration: none; transition: border-color .2s, box-shadow .2s; }
+    .demo-chip:hover { border-color: #5b4dff; box-shadow: 0 2px 10px rgba(91,77,255,.12); }
+    .demo-chip__dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Package cards ── */
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .pkg-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 2rem 1.5rem; display: flex; flex-direction: column; }
+    .pkg-card--featured { border-color: #5b4dff; box-shadow: 0 8px 32px rgba(91,77,255,.14); }
+    .pkg-card__badge { display: inline-block; background: #5b4dff; color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .25rem .65rem; border-radius: 99px; margin-bottom: .75rem; }
+    .pkg-card__name { font-size: 1.2rem; font-weight: 800; color: #1e1b4b; margin-bottom: .25rem; }
+    .pkg-card__price { font-size: 2rem; font-weight: 800; color: #5b4dff; margin-bottom: 1rem; }
+    .pkg-card ul { list-style: none; display: grid; gap: .5rem; margin-bottom: 1.5rem; flex: 1; }
+    .pkg-card li { font-size: .88rem; color: #475569; padding-left: 1.3rem; position: relative; }
+    .pkg-card li::before { content: '✓'; position: absolute; left: 0; color: #2dd4bf; font-weight: 700; }
+    .pkg-card .btn { margin-top: auto; }
+
+    /* ── Comparison table ── */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 2rem; font-size: .9rem; }
+    .compare-table th, .compare-table td { padding: .85rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .compare-table th { background: #f8f7ff; color: #1e1b4b; font-weight: 700; }
+    .compare-table td:nth-child(2), .compare-table td:nth-child(3) { text-align: center; font-size: 1.1rem; }
+    .compare-table tr:hover td { background: #fafafa; }
+    .yes { color: #2dd4bf; font-weight: 700; }
+    .no  { color: #ef4444; font-weight: 700; }
+
+    /* ── FAQ ── */
+    .faq-list { display: grid; gap: 1rem; margin-top: 2rem; }
+    .faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+    .faq-item summary { padding: 1.15rem 1.25rem; font-weight: 700; color: #1e1b4b; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: .95rem; }
+    .faq-item summary::after { content: '+'; font-size: 1.3rem; color: #5b4dff; flex-shrink: 0; }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item__body { padding: 0 1.25rem 1.25rem; color: #475569; line-height: 1.7; font-size: .9rem; }
+    .faq-item__body a { color: #5b4dff; }
+
+    /* ── Contact ── */
+    .form__hp { display: none !important; }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .trust-strip__inner { gap: 1.25rem; }
+    }
+    @media (max-width: 520px) {
+      .industry-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ImproveYourSite",
+    "url": "https://improveyoursite.com",
+    "email": "admin@improveyoursite.com",
+    "areaServed": {"@type": "City", "name": "Orange", "addressRegion": "NSW", "addressCountry": "AU"},
+    "serviceType": "Web Design",
+    "description": "Professional web design for Orange NSW small businesses. Industry-specific websites from $3,000.",
+    "priceRange": "$3,000 - $10,000"
+  }
+  </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <header class="header" id="header"><nav class="nav container"><a href="../index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a><ul class="nav__menu" id="nav-menu"><li><a href="#contact" class="nav__link nav__cta">Get Local Audit</a></li></ul><button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></nav></header>
 
-  <section class="local-hero">
+  <!-- ── Header ── -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="../index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="../packages.html" class="nav__link">Packages</a></li>
+        <li><a href="../our-work.html" class="nav__link">Our Work</a></li>
+        <li><a href="#contact" class="nav__link nav__cta">Get Started</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="loc-hero">
     <div class="container">
-      <div class="hero__badge">📍 Local Growth Focus: Orange NSW</div>
-      <h1 class="hero__title">Orange NSW Website Redesigns That Convert</h1>
-      <p>Built for local service businesses who want better lead quality, stronger Google visibility, and clear ROI tracking from every ad click.</p>
-      <div class="hero__actions">
-        <a href="#contact" class="btn btn--primary">Request Orange NSW Audit</a>
-        <a href="../blog/index.html" class="btn btn--ghost">View Local SEO Articles</a>
+      <div class="hero__badge">📍 Serving Orange &amp; Central Tablelands NSW</div>
+      <h1>Web design in Orange, NSW — built for a region that means business</h1>
+      <p class="lead">Orange is more than wine country. It is a regional hub for healthcare, agriculture, professional services, and hospitality — and every one of those businesses needs a website that does real work. We build fast, industry-specific sites that rank on Google and convert visitors into bookings and calls. Live within 24 hours, pricing published upfront.</p>
+      <div class="loc-hero__actions">
+        <a href="../packages.html" class="btn btn--primary">See our packages</a>
+        <a href="../our-work.html" class="btn btn--ghost">View demo sites</a>
       </div>
+    </div>
+  </section>
 
-      <div class="local-grid">
-        <div class="local-card">
-          <h3>What we set up</h3>
-          <ul>
-            <li>✅ Conversion-focused website structure</li>
-            <li>✅ Location page + service cluster rollout</li>
-            <li>✅ Blog automation framework for ranking growth</li>
-            <li>✅ GA4 + GTM lead tracking from day one</li>
-          </ul>
+  <!-- ── Trust strip ── -->
+  <div class="trust-strip">
+    <div class="trust-strip__inner container">
+      <div class="trust-stat"><strong>24 hours</strong><span>Site live after you submit your details</span></div>
+      <div class="trust-stat"><strong>From $3,000</strong><span>Transparent pricing — no surprises</span></div>
+      <div class="trust-stat"><strong>8 templates</strong><span>Industry-specific, ready to customise</span></div>
+    </div>
+  </div>
+
+  <!-- ── Industries ── -->
+  <section class="loc-section loc-section--alt">
+    <div class="container">
+      <h2 class="section__title">Industries we build for in Orange</h2>
+      <p class="section__subtitle">From the busy Allied Health practices near Orange Health Service to the cellar doors and restaurants along the wine trail — every template is purpose-built for how that industry wins customers online.</p>
+      <div class="industry-grid">
+        <a href="../showcase/sites/trades-rapid/index.html" class="industry-card">
+          <span class="industry-card__icon">🔧</span>
+          <div class="industry-card__name">Trades &amp; Construction</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+        <a href="../showcase/sites/clinic-trust/index.html" class="industry-card">
+          <span class="industry-card__icon">🏥</span>
+          <div class="industry-card__name">Healthcare &amp; Allied Health</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+        <a href="../showcase/sites/solar-spark/index.html" class="industry-card">
+          <span class="industry-card__icon">☀️</span>
+          <div class="industry-card__name">Solar &amp; Energy</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+        <a href="../showcase/sites/accounting-conversion/index.html" class="industry-card">
+          <span class="industry-card__icon">📊</span>
+          <div class="industry-card__name">Accounting &amp; Finance</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+        <a href="../showcase/sites/hospitality-events/index.html" class="industry-card">
+          <span class="industry-card__icon">🍷</span>
+          <div class="industry-card__name">Hospitality &amp; Wine</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+        <a href="../showcase/sites/consulting-authority/index.html" class="industry-card">
+          <span class="industry-card__icon">💼</span>
+          <div class="industry-card__name">Business Consulting</div>
+          <span class="industry-card__link">View demo →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ── -->
+  <section class="loc-section">
+    <div class="container">
+      <h2 class="section__title">How it works</h2>
+      <p class="section__subtitle">Three steps from decision to live website — no lengthy discovery calls, no waiting weeks for a quote.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <h3>Pick your package &amp; pay online</h3>
+          <p>Choose Scan &amp; Fix, Complete Build, or Premium Growth. Pay securely via Stripe — no invoice chasing, no ambiguity about what you are getting.</p>
         </div>
-        <div class="local-card">
-          <h3>Best fit package</h3>
-          <p><strong>$10,000 Premium Growth Package</strong> — includes copy, visuals, blog system, and local SEO rollout.</p>
-          <p style="margin-top:.5rem;"><a class="btn btn--ghost" href="../index.html#pricing">See full package options</a></p>
+        <div class="step">
+          <div class="step__num">2</div>
+          <h3>Fill in your business details form</h3>
+          <p>A short form covering your services, location, contact details, and any existing content. Takes about 10 minutes from anywhere — no need to be in Orange or on a call.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <h3>Site live within 24 hours</h3>
+          <p>We build on your chosen template, apply your branding and copy, and publish. You review and approve before anything goes live.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
+  <!-- ── Demo showcase ── -->
+  <section class="loc-section loc-section--alt">
     <div class="container">
-      <h2 class="section__title">Get your Orange NSW growth audit</h2>
-      <p class="section__subtitle">Tell us your goals and we’ll map your best next moves.</p>
-      <form class="contact__form" id="contact-form" data-endpoint="https://formsubmit.co/ajax/admin@improveyoursite.com">
+      <h2 class="section__title">See what your site could look like</h2>
+      <p class="section__subtitle">Click any demo to explore a fully built example — purpose-built for the types of businesses that thrive in the Orange region.</p>
+      <div class="demo-chips">
+        <a href="../showcase/sites/clinic-trust/index.html" class="demo-chip"><span class="demo-chip__dot" style="background:#14b8a6;"></span>Healthcare (Teal)</a>
+        <a href="../showcase/sites/hospitality-events/index.html" class="demo-chip"><span class="demo-chip__dot" style="background:#d97706;"></span>Hospitality (Gold)</a>
+        <a href="../showcase/sites/trades-rapid/index.html" class="demo-chip"><span class="demo-chip__dot" style="background:#f59e0b;"></span>Trades (Amber)</a>
+        <a href="../showcase/sites/accounting-conversion/index.html" class="demo-chip"><span class="demo-chip__dot" style="background:#64748b;"></span>Accounting (Slate)</a>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="../our-work.html" class="btn btn--ghost">View all 8 demos</a></p>
+    </div>
+  </section>
+
+  <!-- ── Packages ── -->
+  <section class="loc-section" id="packages">
+    <div class="container">
+      <h2 class="section__title">Straightforward pricing for Orange NSW businesses</h2>
+      <p class="section__subtitle">No quotes that drag on for weeks. Pick the package that matches where your business is right now.</p>
+      <div class="packages-grid">
+        <div class="pkg-card">
+          <div class="pkg-card__name">Scan &amp; Fix</div>
+          <div class="pkg-card__price">$3,000</div>
+          <ul>
+            <li>Full website audit &amp; speed fixes</li>
+            <li>On-page SEO corrections</li>
+            <li>Contact &amp; conversion review</li>
+            <li>Google Business Profile check</li>
+            <li>Delivered in 24 hours</li>
+          </ul>
+          <a href="../packages.html" class="btn btn--ghost">Learn more</a>
+        </div>
+        <div class="pkg-card pkg-card--featured">
+          <div class="pkg-card__badge">Most popular</div>
+          <div class="pkg-card__name">Complete Build</div>
+          <div class="pkg-card__price">$5,000</div>
+          <ul>
+            <li>Full new website on your industry template</li>
+            <li>Copy written for your business</li>
+            <li>Local SEO meta &amp; schema markup</li>
+            <li>GA4 + GTM lead tracking</li>
+            <li>Mobile-first, fast-loading</li>
+            <li>Live within 24 hours</li>
+          </ul>
+          <a href="../packages.html" class="btn btn--primary">Learn more</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-card__name">Premium Growth</div>
+          <div class="pkg-card__price">$10,000</div>
+          <ul>
+            <li>Everything in Complete Build</li>
+            <li>Automated SEO blog system</li>
+            <li>Google Ads landing page</li>
+            <li>Monthly ranking reports</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="../packages.html" class="btn btn--ghost">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Comparison ── -->
+  <section class="loc-section loc-section--alt">
+    <div class="container">
+      <h2 class="section__title">ImproveYourSite vs a typical Orange agency</h2>
+      <p class="section__subtitle">Orange has a small number of web agencies serving the region. Here is how we compare on the things that actually matter to small business owners.</p>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>ImproveYourSite</th>
+            <th>Typical Orange agency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Transparent, published pricing</td><td class="yes">✓</td><td class="no">✗</td></tr>
+          <tr><td>Live demos you can browse before buying</td><td class="yes">✓</td><td class="no">✗</td></tr>
+          <tr><td>Site live within 24 hours</td><td class="yes">✓</td><td class="no">✗</td></tr>
+          <tr><td>Industry-specific templates</td><td class="yes">✓</td><td class="no">✗</td></tr>
+          <tr><td>Automated SEO blog system</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:1.25rem;font-size:.85rem;color:#94a3b8;">Agencies referenced include Out West Online, Web Designs Orange, and Riot Digital. Comparison based on publicly available information, February 2026.</p>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="loc-section">
+    <div class="container">
+      <h2 class="section__title">Frequently asked questions — Orange NSW web design</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>How much does a website cost for an Orange NSW small business?</summary>
+          <div class="faq-item__body">
+            <p>Our packages start at <strong>$3,000 for Scan &amp; Fix</strong> (audit and repair of an existing site), <strong>$5,000 for a Complete Build</strong> (a brand-new industry-specific website with copy and local SEO), and <strong>$10,000 for Premium Growth</strong> (the full build plus an automated blog system, Google Ads landing page, and monthly reporting).</p>
+            <p>All prices are listed on our <a href="../packages.html">packages page</a> — no "contact us for a quote" delays. Whether you run an allied health practice near Orange Health Service or a boutique hospitality business on the wine trail, there is a package for where you are right now.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How long does it take to get a website built in Orange?</summary>
+          <div class="faq-item__body">
+            <p>Once you complete the business details form after payment, your site is live within <strong>24 hours</strong>. Because we work from proven industry templates, we are not building from scratch. You fill in your business details, we apply them to the right template, and publish. You review and approve before it goes live.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you work with healthcare businesses in Orange?</summary>
+          <div class="faq-item__body">
+            <p>Yes. Healthcare and allied health is one of our most requested industries — particularly given Orange's role as a major medical hub for the Central Tablelands. We have a dedicated <strong>Clinic Trust template</strong> built for GP clinics, physiotherapy practices, dental practices, and other allied health businesses. It includes an online booking prompt, trust signals (qualifications, accreditations), a clear services list, and local schema markup. <a href="../showcase/sites/clinic-trust/index.html">Browse the healthcare demo here</a>.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can you help my Orange hospitality or wine business?</summary>
+          <div class="faq-item__body">
+            <p>Absolutely. Orange's food and wine scene — from the Central Tablelands Wine Trail to cellar doors around Millthorpe and Canobolas — deserves a website that matches the quality of the experience on offer. Our <strong>Hospitality &amp; Events template</strong> is built for restaurants, venues, cellar doors, and event spaces. It features a hero gallery, function inquiry form, events calendar section, and a strong visual layout that works beautifully on mobile. <a href="../showcase/sites/hospitality-events/index.html">See the hospitality demo here</a>.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Will my Orange business website show up on Google?</summary>
+          <div class="faq-item__body">
+            <p>Every site we build includes <strong>on-page SEO meta tags, local schema markup, and a Google Business Profile checklist</strong>. The schema tells Google your business name, location (Orange NSW), service type, and price range — which contributes to local pack rankings when someone searches for your service in Orange. The Premium Growth package adds an automated blog that publishes fresh, relevant content on a schedule — compounding your organic visibility over time without you writing a word.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="contact loc-section loc-section--alt" id="contact">
+    <div class="container">
+      <h2 class="section__title">Get started — Orange NSW</h2>
+      <p class="section__subtitle">Tell us about your business and we will recommend the right package. No pressure, no obligation.</p>
+      <form class="contact__form" id="contact-form" action="https://formsubmit.co/ajax/admin@improveyoursite.com" method="POST">
         <div class="form__row">
           <input type="text" name="name" placeholder="Your Name" required class="form__input">
           <input type="email" name="email" placeholder="Your Email" required class="form__input">
         </div>
         <div class="form__row">
-          <input type="tel" name="phone" placeholder="Phone" class="form__input">
-          <input type="url" name="website" placeholder="Current Website URL" class="form__input">
+          <input type="tel" name="phone" placeholder="Phone Number" class="form__input">
+          <select name="package" class="form__input" aria-label="Package interest">
+            <option value="">Package interest</option>
+            <option>Scan &amp; Fix — $3,000</option>
+            <option>Complete Build — $5,000</option>
+            <option>Premium Growth — $10,000</option>
+            <option>Not sure yet</option>
+          </select>
         </div>
-        <select name="goal" class="form__input" aria-label="Primary goal">
-          <option value="" selected>Primary goal</option>
-          <option>Get more leads</option>
-          <option>Improve local rankings</option>
-          <option>Premium growth + blog automation</option>
-        </select>
-        <input type="hidden" name="source" id="lead-source" value="orange_nsw_ads|landing|orange_nsw">
+        <textarea name="message" placeholder="Tell us about your business — what you do, who your customers are, and what you need from your website." rows="4" class="form__input"></textarea>
+        <input type="hidden" name="source" value="orange_location_page">
         <input type="hidden" name="location" value="Orange NSW">
-        <input type="hidden" name="_subject" value="New Local Audit Request (Orange NSW)">
+        <input type="hidden" name="_subject" value="New enquiry — Orange NSW">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="company" class="form__input form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
-        <textarea name="message" placeholder="Tell us what success looks like in Orange NSW..." rows="4" class="form__input"></textarea>
-        <button type="submit" class="btn btn--primary btn--full">Request Local Audit</button>
-        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+        <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn--primary btn--full">Send enquiry</button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite" style="margin-top:.75rem;font-size:.875rem;text-align:center;"></p>
       </form>
     </div>
   </section>
 
-  <footer class="footer"><div class="container"><div class="footer__bottom"><p>&copy; <span id="year"></span> ImproveYourSite • <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a></p></div></div></footer>
-  <script src="../analytics-config.js"></script>
-  <script src="../src/js/analytics.js"></script>
-  <script src="../src/js/main.js"></script>
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; <span id="year"></span> ImproveYourSite &bull; <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a> &bull; <a href="../packages.html">Packages</a> &bull; <a href="../our-work.html">Our Work</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const menu   = document.getElementById('nav-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => menu.classList.toggle('nav__menu--open'));
+    }
+
+    // Contact form AJAX
+    const form   = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = 'Sending…';
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (res.ok) {
+            status.textContent = 'Thanks! We will be in touch within one business day.';
+            form.reset();
+          } else {
+            status.textContent = 'Something went wrong — please email admin@improveyoursite.com directly.';
+          }
+        } catch {
+          status.textContent = 'Something went wrong — please email admin@improveyoursite.com directly.';
+        }
+      });
+    }
+  </script>
+  <script src="../src/js/main.js" defer></script>
 </body>
 </html>

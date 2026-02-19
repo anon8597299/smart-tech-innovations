@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Professional websites for GP clinics, allied health and medical practices in Australia. Built to generate patient enquiries and bookings. From $3,000.">
+  <title>Healthcare &amp; Medical Website Design Australia | ImproveYourSite</title>
+  <link rel="canonical" href="https://improveyoursite.com/healthcare.html">
+  <meta property="og:title" content="Healthcare &amp; Medical Website Design Australia | ImproveYourSite">
+  <meta property="og:description" content="Professional websites for GP clinics, allied health and medical practices in Australia. Built to generate patient enquiries and bookings. From $3,000.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://improveyoursite.com/healthcare.html">
+  <meta property="og:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    .ind-hero { padding: 8rem 0 4rem; background: linear-gradient(135deg, #f8f7ff 0%, #f0fdf4 60%, #eef2ff 100%); }
+    .ind-hero p { color: #475569; max-width: 720px; font-size: 1.1rem; margin: 1rem 0 1.8rem; line-height: 1.7; }
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    .section { padding: 4.5rem 0; }
+    .section--alt { background: #f8f7ff; }
+
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .problem-card { background: #fff; border: 1px solid #fecaca; border-radius: 14px; padding: 1.5rem; }
+    .problem-card__icon { font-size: 2rem; margin-bottom: .6rem; }
+    .problem-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin: 0 0 .5rem; }
+    .problem-card p { font-size: .88rem; color: #64748b; margin: 0; line-height: 1.6; }
+
+    .demo-spotlight { margin-top: 2.5rem; background: #fff; border: 2px solid #5b4dff; border-radius: 16px; padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .demo-spotlight__label { font-size: .78rem; font-weight: 700; color: #5b4dff; text-transform: uppercase; letter-spacing: .07em; }
+    .demo-spotlight h3 { font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0; }
+    .demo-spotlight p { font-size: 1rem; color: #475569; margin: 0; line-height: 1.65; max-width: 640px; }
+    .demo-spotlight__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; margin-top: 2.5rem; }
+    .feature-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .feature-item__icon { font-size: 1.6rem; flex-shrink: 0; }
+    .feature-item h3 { font-size: .95rem; font-weight: 700; color: #0f172a; margin: 0 0 .3rem; }
+    .feature-item p { font-size: .85rem; color: #64748b; margin: 0; line-height: 1.55; }
+
+    .compliance-note { background: #fffbeb; border: 1.5px solid #fbbf24; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+    .compliance-note h3 { font-size: .95rem; font-weight: 700; color: #92400e; margin: 0 0 .5rem; }
+    .compliance-note p { font-size: .88rem; color: #78350f; margin: 0; line-height: 1.6; }
+
+    .industry-tags { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+    .industry-tag { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 99px; padding: .4rem 1rem; font-size: .88rem; font-weight: 600; color: #334155; }
+
+    .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .pkg-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 2rem; position: relative; }
+    .pkg-card--featured { border-color: #5b4dff; }
+    .pkg-card__badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #5b4dff; color: #fff; font-size: .75rem; font-weight: 700; padding: .3rem .9rem; border-radius: 99px; white-space: nowrap; }
+    .pkg-card__price { font-size: 2.2rem; font-weight: 800; color: #0f172a; margin: .5rem 0 .3rem; }
+    .pkg-card__price span { font-size: 1rem; font-weight: 500; color: #64748b; }
+    .pkg-card h3 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0; }
+    .pkg-card p { font-size: .88rem; color: #64748b; margin: .5rem 0 1.2rem; }
+    .pkg-card ul { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: .5rem; }
+    .pkg-card ul li { font-size: .88rem; color: #334155; padding-left: 1.4rem; position: relative; }
+    .pkg-card ul li::before { content: "✓"; position: absolute; left: 0; color: #2dd4bf; font-weight: 700; }
+
+    .faq-list { margin-top: 2rem; display: grid; gap: 1rem; }
+    .faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; }
+    .faq-item h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin: 0 0 .6rem; }
+    .faq-item p { font-size: .9rem; color: #475569; margin: 0; line-height: 1.65; }
+
+    .cta-band { background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%); padding: 4rem 0; text-align: center; }
+    .cta-band h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 .8rem; }
+    .cta-band p { color: rgba(255,255,255,.85); font-size: 1rem; margin: 0 0 2rem; }
+    .cta-band__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn--white { background: #fff; color: #0d9488; font-weight: 700; border-radius: 8px; padding: .8rem 1.8rem; text-decoration: none; font-size: .95rem; display: inline-block; transition: opacity .2s; }
+    .btn--white:hover { opacity: .9; }
+    .btn--outline-white { border: 2px solid rgba(255,255,255,.7); color: #fff; font-weight: 700; border-radius: 8px; padding: .8rem 1.8rem; text-decoration: none; font-size: .95rem; display: inline-block; transition: background .2s; }
+    .btn--outline-white:hover { background: rgba(255,255,255,.1); }
+
+    @media (max-width: 900px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pkg-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Service","name":"Healthcare Website Design","provider":{"@type":"Organization","name":"ImproveYourSite","url":"https://improveyoursite.com"},"serviceType":"Web Design","description":"Industry-specific website design for GP clinics, allied health practices and medical professionals across Australia.","areaServed":"Australia","offers":{"@type":"AggregateOffer","lowPrice":"3000","highPrice":"10000","priceCurrency":"AUD"}}
+  </script>
+</head>
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo"><span class="logo-icon">⚡</span> Improve<span class="accent">YourSite</span></a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="our-work.html" class="nav__link">Our Work</a></li>
+        <li><a href="packages.html" class="nav__link">Packages</a></li>
+        <li><a href="packages.html" class="nav__link nav__cta">Get Started</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <!-- 1. HERO -->
+  <section class="ind-hero">
+    <div class="container">
+      <div class="hero__badge">🏥 Built for GP clinics, allied health and medical practices</div>
+      <h1>Website design for healthcare practices — built to build patient trust and fill your books</h1>
+      <p>Healthcare is the industry where website trust matters most. Patients are choosing someone they'll share their health with. We build clinical, professional websites that communicate competence, make booking effortless, and comply with AHPRA advertising guidelines — without looking sterile or cold.</p>
+      <div class="hero__actions">
+        <a href="showcase/sites/clinic-trust/index.html" target="_blank" rel="noopener" class="btn btn--primary">See the live clinic demo</a>
+        <a href="packages.html" class="btn btn--ghost">View packages</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PROBLEM SECTION -->
+  <section class="section" id="problems">
+    <div class="container">
+      <h2 class="section__title">What most healthcare websites get wrong</h2>
+      <p class="section__subtitle">Patients are more informed than ever and research their healthcare providers online before booking. These three problems are turning away new patients every week.</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-card__icon">👨‍⚕️</div>
+          <h3>No practitioner profiles — patients can't connect</h3>
+          <p>Patients don't book a clinic — they book a person. If your website doesn't show who they'll be seeing, what their qualifications are and what their approach is, many will choose a competitor whose practitioners felt more familiar and trustworthy before the first appointment.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card__icon">📲</div>
+          <h3>No online booking or click-to-call above the fold</h3>
+          <p>A patient searching for a GP or physio at 9pm can't call you. If online booking isn't immediately visible and accessible — especially on mobile — you're losing those after-hours enquiries to practices that made it easier. Every friction point costs new patients.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card__icon">📢</div>
+          <h3>AHPRA non-compliant content creating risk</h3>
+          <p>Many healthcare websites inadvertently breach AHPRA advertising guidelines — using testimonials, making comparative claims or implying guaranteed outcomes. A non-compliant site is a professional liability. We build healthcare websites with AHPRA guidelines built into the content framework from day one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DEMO SHOWCASE -->
+  <section class="section section--alt" id="demo">
+    <div class="container">
+      <h2 class="section__title">See a healthcare website that works</h2>
+      <p class="section__subtitle">A complete, live clinic website — explore every page to see how patient trust is built at each step.</p>
+      <div class="demo-spotlight">
+        <div class="demo-spotlight__label">Live demo — Healthcare</div>
+        <h3>Hillcrest Family Clinic</h3>
+        <p>Walk through a complete GP clinic website — practitioner profiles with qualifications and approach, prominent online booking prompt, bulk billing status display, services by patient need, and a warm but professional design that builds confidence before the first appointment. See how the right structure removes hesitation and converts browsers into booked patients.</p>
+        <div class="demo-spotlight__actions">
+          <a href="showcase/sites/clinic-trust/index.html" target="_blank" rel="noopener" class="btn btn--primary">View the live demo</a>
+          <a href="our-work.html" class="btn btn--ghost">See all industry demos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WHAT'S INCLUDED -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2 class="section__title">What's built into every healthcare website</h2>
+      <p class="section__subtitle">Every element is chosen because it moves patients from "searching" to "booked" — without creating compliance risk for your practice.</p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-item__icon">👤</div>
+          <div>
+            <h3>Practitioner profiles with qualifications and approach</h3>
+            <p>Individual pages or cards for each practitioner — photo, qualifications, AHPRA registration details, clinical interests and a short personal statement. The single most important trust-builder on a healthcare website.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">📅</div>
+          <div>
+            <h3>Online booking integration</h3>
+            <p>Integration with HotDoc, HealthEngine, Calendly or your existing PMS booking system. Prominent on the homepage, contact page and every practitioner profile — reducing the friction to zero for new patients.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">💊</div>
+          <div>
+            <h3>Services organised by patient need</h3>
+            <p>Services presented the way patients think about them — not by discipline, but by need. "I need to see someone about my knee" not "Musculoskeletal services". This dramatically reduces the cognitive load for new patients navigating an unfamiliar practice.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">💰</div>
+          <div>
+            <h3>Billing and fees information</h3>
+            <p>Clear, prominently placed bulk billing status, fee information and Medicare coverage details. One of the top questions new patients have — answering it on the website reduces phone calls and removes a decision barrier.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">🕐</div>
+          <div>
+            <h3>Opening hours and after-hours information</h3>
+            <p>Clear operating hours with after-hours referral information (urgent care, emergency contacts). Particularly important for GP clinics — this is information patients urgently need and often can't find quickly.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">📋</div>
+          <div>
+            <h3>New patient information section</h3>
+            <p>A dedicated section for new patients — what to bring, how registration works, what to expect at their first appointment. Reduces no-shows and first-appointment anxiety while setting professional expectations.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">⚖️</div>
+          <div>
+            <h3>AHPRA-aware content framework</h3>
+            <p>Content written and structured to comply with AHPRA advertising guidelines — no patient testimonials, no comparative claims, no guarantee language. Compliance is built in, not bolted on after the fact.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">📍</div>
+          <div>
+            <h3>Local SEO and Google Maps integration</h3>
+            <p>Location schema, embedded map with directions, and local SEO structure that helps your practice rank for "[suburb] GP" or "[suburb] physio" searches — the highest-intent queries for a new patient choosing a local provider.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="compliance-note">
+        <h3>A note on AHPRA compliance</h3>
+        <p>AHPRA's advertising guidelines are specific and frequently updated. We build healthcare websites with these guidelines in mind — avoiding restricted testimonial formats, ensuring claims are substantiated, and structuring content in a way that represents practitioners accurately. We recommend all content is reviewed by your practice principal before launch. We are not legal advisors and this is not legal advice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WORKS FOR -->
+  <section class="section section--alt" id="industries">
+    <div class="container">
+      <h2 class="section__title">Healthcare disciplines this works for</h2>
+      <p class="section__subtitle">From large multi-practitioner clinics to single-practitioner allied health practices — our healthcare template adapts to your practice type, size and patient mix.</p>
+      <div class="industry-tags">
+        <span class="industry-tag">🏥 GP clinics</span>
+        <span class="industry-tag">🦴 Physiotherapy</span>
+        <span class="industry-tag">🦷 Dentistry</span>
+        <span class="industry-tag">👁️ Optometry</span>
+        <span class="industry-tag">🧠 Psychology &amp; counselling</span>
+        <span class="industry-tag">🤝 Occupational therapy</span>
+        <span class="industry-tag">💉 Specialist clinics</span>
+        <span class="industry-tag">🌿 Naturopathy &amp; allied health</span>
+        <span class="industry-tag">👶 Paediatric health</span>
+        <span class="industry-tag">🏃 Sports medicine</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PACKAGES -->
+  <section class="section" id="packages">
+    <div class="container">
+      <h2 class="section__title">Healthcare website packages — transparent pricing</h2>
+      <p class="section__subtitle">Fixed one-time pricing with no ongoing platform fees or lock-in contracts. Invest once; your site works for you indefinitely.</p>
+      <div class="pkg-grid">
+        <div class="pkg-card">
+          <h3>Scan &amp; Fix</h3>
+          <div class="pkg-card__price">$3,000<span> AUD</span></div>
+          <p>Have a healthcare site but it's not converting new patient searches into bookings? We'll audit and fix the key issues.</p>
+          <ul>
+            <li>Mobile &amp; speed optimisation</li>
+            <li>Booking flow improvements</li>
+            <li>Practitioner profile review</li>
+            <li>Local SEO audit</li>
+            <li>AHPRA content review flag</li>
+          </ul>
+          <a href="packages.html" class="btn btn--ghost" style="width:100%;text-align:center;">Get started</a>
+        </div>
+        <div class="pkg-card pkg-card--featured">
+          <div class="pkg-card__badge">Most popular</div>
+          <h3>Complete Build</h3>
+          <div class="pkg-card__price">$5,000<span> AUD</span></div>
+          <p>A complete, professional healthcare website — practitioner profiles, booking integration, patient information and full local SEO setup.</p>
+          <ul>
+            <li>Industry-specific design</li>
+            <li>Up to 6 pages</li>
+            <li>Copywriting included</li>
+            <li>Practitioner profiles</li>
+            <li>Booking system integration</li>
+            <li>GA4 + conversion tracking</li>
+          </ul>
+          <a href="packages.html" class="btn btn--primary" style="width:100%;text-align:center;">Get started</a>
+        </div>
+        <div class="pkg-card">
+          <h3>Premium Growth</h3>
+          <div class="pkg-card__price">$10,000<span> AUD</span></div>
+          <p>Become the go-to healthcare practice in your local area — through consistent content, suburb targeting and a long-term SEO strategy.</p>
+          <ul>
+            <li>Everything in Complete Build</li>
+            <li>Service-specific landing pages</li>
+            <li>Blog + health content strategy</li>
+            <li>Suburb &amp; condition pages</li>
+            <li>Competitor gap analysis</li>
+            <li>3-month growth plan</li>
+          </ul>
+          <a href="packages.html" class="btn btn--ghost" style="width:100%;text-align:center;">Get started</a>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:1.5rem;"><a href="packages.html" class="btn btn--primary">See full package details &rarr;</a></p>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="section section--alt" id="faq">
+    <div class="container">
+      <h2 class="section__title">Healthcare website — frequently asked questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>How much does a healthcare or medical practice website cost?</h3>
+          <p>Our healthcare websites start at $3,000 for a Scan &amp; Fix on an existing site, $5,000 for a Complete Build, and $10,000 for the Premium Growth package which includes content strategy, suburb targeting pages and an ongoing SEO framework. All prices are fixed — you see the full cost before paying, with no hidden charges or ongoing platform fees.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is the website AHPRA compliant?</h3>
+          <p>We build healthcare websites with AHPRA advertising guidelines in mind — this means no restricted testimonial formats (we use patient stories structured to comply), no comparative or superiority claims, and no guarantees of outcomes. We flag content for your review before launch. That said, we're web professionals, not regulatory advisors — we strongly recommend your practice principal or a healthcare legal advisor reviews all final content before the site goes live.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you integrate with HotDoc, HealthEngine or our existing booking system?</h3>
+          <p>Yes. We integrate with HotDoc, HealthEngine, Calendly, HubSpot Meetings and most common practice management booking systems. We build the booking prompt prominently into the site structure — not buried in the contact page — so new patients can book from wherever they are on the site. If you use a less common system, let us know and we'll assess compatibility.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can we add multiple practitioner profiles?</h3>
+          <p>Yes — practitioner profiles are a core part of our healthcare template. The Complete Build supports up to 6 practitioner profiles. If you have more practitioners, the Premium Growth package accommodates a larger team. Each profile includes a photo, qualifications, AHPRA registration area, clinical interests and a short personal statement. We can also create individual URLs for each practitioner if they want to be findable by name on Google.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Will the website help us rank on Google for "[suburb] GP" or "[suburb] physio"?</h3>
+          <p>Local SEO is built into every package — this includes location schema markup, suburb-specific meta tags, Google Business Profile optimisation guidance and a properly structured contact/location page. The Premium Growth package goes further with dedicated suburb and service-condition pages (e.g. "physiotherapy for back pain in [suburb]") that target high-intent local searches at scale. These pages compound in value over time and are one of the most effective long-term strategies for healthcare practices in competitive local markets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Ready for a healthcare website that fills your appointment book?</h2>
+      <p>See the live clinic demo, then choose the package that fits your practice.</p>
+      <div class="cta-band__actions">
+        <a href="showcase/sites/clinic-trust/index.html" target="_blank" rel="noopener" class="btn--white">See the clinic demo</a>
+        <a href="packages.html" class="btn--outline-white">View packages &amp; pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; <span id="year"></span> ImproveYourSite &bull; <a href="mailto:admin@improveyoursite.com">admin@improveyoursite.com</a> &bull; <a href="packages.html">Packages</a> &bull; <a href="our-work.html">Our Work</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="analytics-config.js"></script>
+  <script src="src/js/main.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

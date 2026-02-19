@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beautiful websites for restaurants, cafes, wedding venues and event spaces. Built to fill bookings and capture enquiries. From $3,000.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://improveyoursite.com/hospitality.html">
+  <meta property="og:title" content="Hospitality &amp; Events Website Design Australia | ImproveYourSite">
+  <meta property="og:description" content="Beautiful websites for restaurants, cafes, wedding venues and event spaces. Built to fill bookings and capture enquiries. From $3,000.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://improveyoursite.com/hospitality.html">
+  <meta property="og:site_name" content="ImproveYourSite">
+  <meta property="og:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hospitality and events website design Australia | ImproveYourSite">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hospitality &amp; Events Website Design Australia | ImproveYourSite">
+  <meta name="twitter:description" content="Beautiful websites for restaurants, cafes, wedding venues and event spaces. Built to fill bookings. From $3,000.">
+  <meta name="twitter:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <title>Hospitality &amp; Events Website Design Australia | ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+  <!-- End Google Tag Manager -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Hospitality & Events Website Design",
+    "description": "Website design for restaurants, cafes, wedding venues, function centres, and event spaces in Australia. Full-screen venue imagery, booking calendar integration, menus, and events enquiry forms.",
+    "provider": {
+      "@type": "Organization",
+      "name": "ImproveYourSite",
+      "url": "https://improveyoursite.com"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Australia"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "3000",
+      "highPrice": "10000",
+      "priceCurrency": "AUD",
+      "offerCount": "3"
+    },
+    "serviceType": "Website Design",
+    "url": "https://improveyoursite.com/hospitality.html"
+  }
+  </script>
+  <style>
+    /* ── Page-specific styles ── */
+    .industry-hero {
+      padding: 9rem 0 5rem;
+      background: linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #1a1040 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .industry-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,212,191,0.10) 0%, transparent 70%);
+    }
+    .industry-hero .hero__title { color: #fff; }
+    .industry-hero .hero__subtitle { color: #cbd5e1; }
+    .industry-hero .hero__badge { background: rgba(45,212,191,0.15); color: #5eead4; }
+    .industry-hero .hero__proof span { color: #2f3652; }
+
+    /* Visual grid — what it looks like */
+    .visual-grid-section { background: #fff; padding: 5rem 0; }
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .visual-grid__cell {
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(160deg, #2d1200, #1e1b4b);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+    }
+    .visual-grid__cell--tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .visual-grid__cell .cell-emoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      font-size: 3rem;
+      opacity: 0.5;
+    }
+    .visual-grid__label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Demo showcase */
+    .demo-showcase { background: var(--surface-2); padding: 5rem 0; }
+    .demo-showcase__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .demo-showcase__copy h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .demo-showcase__copy p { color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .demo-showcase__frame {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.16);
+      border: 1px solid rgba(91,77,255,0.12);
+      aspect-ratio: 4/3;
+    }
+    .demo-showcase__frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Included */
+    .included { background: #fff; padding: 5rem 0; }
+    .included__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .included__card {
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(91,77,255,0.12);
+      background: linear-gradient(180deg, #ffffff 0%, #f8f7ff 100%);
+      box-shadow: var(--shadow-soft);
+    }
+    .included__icon { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+    .included__card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .included__card p { font-size: 0.88rem; color: #555; line-height: 1.55; }
+
+    /* Event types section */
+    .event-types { background: #f8f7ff; padding: 5rem 0; }
+    .event-types__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .event-type__card {
+      background: #fff;
+      border: 1px solid rgba(91,77,255,0.12);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .event-type__icon { font-size: 2rem; }
+    .event-type__card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .event-type__card p { font-size: 0.88rem; color: #4b5563; line-height: 1.55; }
+
+    /* Works-for strip */
+    .works-for { background: #fff; padding: 4rem 0; }
+    .works-for__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .works-for__pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(91,77,255,0.14);
+      border-radius: 10px;
+      background: #f8f7ff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #2f3652;
+    }
+    .works-for__pill span { font-size: 1.2rem; }
+
+    /* Speed callout */
+    .speed-callout {
+      background: linear-gradient(135deg, #0f172a 0%, #0d2a2a 100%);
+      padding: 3.5rem 0;
+      color: #fff;
+    }
+    .speed-callout__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .speed-callout h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; }
+    .speed-callout p { color: #94a3b8; margin-top: 0.5rem; }
+    .speed-stat { text-align: center; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 2rem; }
+    .speed-stat .big { font-size: 2.5rem; font-weight: 800; color: #2dd4bf; }
+    .speed-stat p { font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem; }
+
+    /* Package CTA */
+    .pkg-strip {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      padding: 4rem 0;
+      text-align: center;
+      color: #fff;
+    }
+    .pkg-strip h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .pkg-strip p { color: #a5b4fc; font-size: 1.05rem; margin-bottom: 2rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .pkg-strip__cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+    }
+    .pkg-strip__card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+    }
+    .pkg-strip__card h3 { font-size: 1rem; font-weight: 700; color: #c7d2fe; margin-bottom: 0.3rem; }
+    .pkg-strip__card .price { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; }
+    .pkg-strip__card p { font-size: 0.83rem; color: #94a3b8; margin: 0; }
+
+    @media (max-width: 768px) {
+      .industry-hero { background: linear-gradient(160deg, #1a0a00 0%, #1a1040 100%); }
+      .demo-showcase__inner { grid-template-columns: 1fr; }
+      .demo-showcase__frame { display: none; }
+      .visual-grid { grid-template-columns: 1fr 1fr; }
+      .visual-grid__cell--tall { grid-row: span 1; }
+      .event-types__grid { grid-template-columns: 1fr; }
+      .speed-callout__inner { grid-template-columns: 1fr; }
+      .speed-stat { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 0 0; }
+      .pkg-strip__cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="index.html" class="nav__logo">
+      <span class="logo-icon">⚡</span>ImproveYourSite
+    </a>
+    <ul class="nav__menu" id="navMenu">
+      <li><a href="our-work.html" class="nav__link">Our Work</a></li>
+      <li><a href="hospitality.html" class="nav__link" style="color:var(--brand-primary)">Hospitality</a></li>
+      <li><a href="packages.html" class="nav__link">Packages</a></li>
+      <li><a href="packages.html" class="nav__link nav__cta">Get Started</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="industry-hero">
+  <div class="container">
+    <span class="hero__badge">🥂 Built for venues, restaurants, cafes and event spaces</span>
+    <h1 class="hero__title" style="max-width:800px">Website design for hospitality and events businesses — built to fill your bookings</h1>
+    <p class="hero__subtitle" style="max-width:660px">
+      A stunning, fast-loading website that shows off your venue, puts your booking CTA above the fold, and converts mobile searchers into confirmed reservations and event enquiries.
+    </p>
+    <div class="hero__actions">
+      <a href="showcase/sites/hospitality-events/index.html" class="btn btn--ghost" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:#fff" target="_blank" rel="noopener">View live venue demo</a>
+      <a href="packages.html" class="btn btn--primary">See pricing &amp; packages</a>
+    </div>
+    <div class="hero__proof">
+      <span>✔ Full-screen venue imagery</span>
+      <span>✔ Booking calendar integration</span>
+      <span>✔ Menus &amp; packages download</span>
+      <span>✔ Events enquiry form</span>
+      <span>✔ Mobile-first — fast loading</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <h2 class="section__title">What most hospitality websites get badly wrong</h2>
+    <p class="section__subtitle">Venues lose bookings every day to these three avoidable problems — especially on mobile.</p>
+    <div class="problem__grid">
+      <div class="problem__card">
+        <span class="problem__icon">🐌</span>
+        <h3>Too slow — unoptimised images</h3>
+        <p>Beautiful venue photography is essential — but if those images aren't optimised for web, your site takes 8+ seconds to load. On mobile, most visitors leave after 3 seconds. Slow sites mean empty seats.</p>
+      </div>
+      <div class="problem__card">
+        <span class="problem__icon">📵</span>
+        <h3>No booking CTA above the fold</h3>
+        <p>"Book a Table" or "Enquire about your event" needs to be the first thing a visitor sees — not buried after a full-screen video essay about your head chef. Every scroll depth that passes without a CTA costs you reservations.</p>
+      </div>
+      <div class="problem__card">
+        <span class="problem__icon">📋</span>
+        <h3>Menus and packages buried or unreadable</h3>
+        <p>Menus saved as tiny PDFs, packages hidden three clicks deep, event information scattered across multiple pages. People planning events and dinners on mobile need to find this information instantly — or they call your competitor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SHOWCASE -->
+<section class="demo-showcase">
+  <div class="container">
+    <div class="demo-showcase__inner">
+      <div class="demo-showcase__copy">
+        <span class="hero__badge" style="margin-bottom:1rem">Live hospitality demo</span>
+        <h2>See what a booking-focused venue website looks like</h2>
+        <p>The Hospitality Events demo shows how we structure a venue site — full-screen hero with immediate booking CTA, visual menu sections, wedding and corporate event enquiry forms, optimised photo gallery, and fast load times on mobile.</p>
+        <a href="showcase/sites/hospitality-events/index.html" class="btn btn--primary" target="_blank" rel="noopener">Open demo in full ↗</a>
+      </div>
+      <div class="demo-showcase__frame">
+        <iframe src="showcase/sites/hospitality-events/index.html" title="Hospitality venue website demo" loading="lazy" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEED CALLOUT -->
+<div class="speed-callout">
+  <div class="container">
+    <div class="speed-callout__inner">
+      <div>
+        <h2>Speed is the silent killer of hospitality bookings</h2>
+        <p>Most venue searches happen on mobile, often in the moment of decision. A slow site doesn't just frustrate visitors — it destroys your Google rankings and your conversion rate simultaneously. We fix both.</p>
+      </div>
+      <div class="speed-stat">
+        <div class="big">70%+</div>
+        <p>of venue and restaurant searches are on mobile devices</p>
+      </div>
+      <div class="speed-stat">
+        <div class="big">53%</div>
+        <p>of mobile visitors abandon a site that takes more than 3 seconds to load</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="container">
+    <h2 class="section__title">What's included for hospitality &amp; events clients</h2>
+    <p class="section__subtitle">Every feature you need to fill tables, book events, and capture enquiries — built into your site from the start.</p>
+    <div class="included__grid">
+      <div class="included__card">
+        <span class="included__icon">🖼️</span>
+        <h3>Full-screen hero with venue imagery</h3>
+        <p>A stunning full-viewport hero section that showcases your venue at its best — with image optimisation built in so it loads fast on mobile without sacrificing visual impact.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">🍽️</span>
+        <h3>Menus &amp; packages section</h3>
+        <p>Clearly structured menus with seasonal and dietary filter options, plus downloadable PDF versions — so guests can browse on mobile and share with their group before they visit.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📋</span>
+        <h3>Events &amp; functions enquiry form</h3>
+        <p>A structured enquiry form that captures date, guest numbers, event type, dietary requirements, and budget — giving you everything you need to quote without a back-and-forth email chain.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📸</span>
+        <h3>Optimised photo gallery</h3>
+        <p>A beautiful, fast-loading photo gallery with lazy loading and modern image formats (WebP) — so your venue photography loads instantly even on mobile connections.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📅</span>
+        <h3>Booking calendar integration</h3>
+        <p>Integration with OpenTable, ResDiary, SevenRooms, or a custom booking form — with prominent placement in the hero, navigation, and footer so guests can book at any point on the page.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">⭐</span>
+        <h3>Reviews &amp; testimonials</h3>
+        <p>A curated testimonials section drawing on Google and TripAdvisor reviews, plus a Google Reviews badge — giving new visitors the social proof they need to commit to a booking.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">📍</span>
+        <h3>Location, parking &amp; access</h3>
+        <p>Clear directions, embedded Google Map, parking information, and public transport options — the practical details guests look for in the final moments before deciding to visit.</p>
+      </div>
+      <div class="included__card">
+        <span class="included__icon">🎊</span>
+        <h3>Separate sections for event types</h3>
+        <p>Distinct content sections for weddings, corporate events, private dining, and general bookings — so every visitor immediately sees content relevant to their occasion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT TYPES -->
+<section class="event-types">
+  <div class="container">
+    <h2 class="section__title">One venue, multiple audiences — we design for all of them</h2>
+    <p class="section__subtitle">Your venue looks different to a bride, a corporate event planner, and a birthday group. We build site structures that speak to each audience without confusing any of them.</p>
+    <div class="event-types__grid">
+      <div class="event-type__card">
+        <div class="event-type__icon">💍</div>
+        <div>
+          <h3>Weddings</h3>
+          <p>Full wedding package detail page with ceremony and reception capacity, catering options, preferred supplier list, photo gallery of past weddings, and a wedding enquiry form that captures the key details. Couples spend months researching — give them everything they need on your site.</p>
+        </div>
+      </div>
+      <div class="event-type__card">
+        <div class="event-type__icon">🏢</div>
+        <div>
+          <h3>Corporate events</h3>
+          <p>A dedicated corporate functions page with room configurations (theatre, boardroom, banquet, cocktail), AV and equipment list, catering packages, and a streamlined enquiry form that a PA or EA can complete quickly. Speed matters in corporate enquiries.</p>
+        </div>
+      </div>
+      <div class="event-type__card">
+        <div class="event-type__icon">🥂</div>
+        <div>
+          <h3>Private dining &amp; celebrations</h3>
+          <p>Private dining room details, set menu options, minimum spend requirements, and booking process — plus a gallery showing beautifully set tables for milestone celebrations, so guests can picture their event before they enquire.</p>
+        </div>
+      </div>
+      <div class="event-type__card">
+        <div class="event-type__icon">🍺</div>
+        <div>
+          <h3>Walk-in dining &amp; bar</h3>
+          <p>Current menus, daily specials, trading hours, and a prominent reservations CTA for diners who want to guarantee a table. Plus a drink and cocktail menu that's readable on mobile — not a 4MB PDF that takes ten seconds to open.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS FOR -->
+<section class="works-for">
+  <div class="container">
+    <h2 class="section__title">Who we build hospitality websites for</h2>
+    <p class="section__subtitle">From boutique restaurants to large-scale function centres — we've structured sites for all of them.</p>
+    <div class="works-for__grid">
+      <div class="works-for__pill"><span>💍</span> Wedding venues</div>
+      <div class="works-for__pill"><span>🏛️</span> Function centres</div>
+      <div class="works-for__pill"><span>🍽️</span> Restaurants</div>
+      <div class="works-for__pill"><span>☕</span> Cafes</div>
+      <div class="works-for__pill"><span>🍺</span> Pubs and bars</div>
+      <div class="works-for__pill"><span>🧑‍🍳</span> Caterers</div>
+      <div class="works-for__pill"><span>🎉</span> Event planners</div>
+      <div class="works-for__pill"><span>🛎️</span> Accommodation</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="pkg-strip">
+  <div class="container">
+    <h2>Choose your hospitality website package</h2>
+    <p>All packages include booking CTA, gallery, and event enquiry forms. Pick the level that suits your venue.</p>
+    <div class="pkg-strip__cards">
+      <div class="pkg-strip__card">
+        <h3>Scan &amp; Fix</h3>
+        <div class="price">$3,000</div>
+        <p>Audit &amp; fix your existing site — speed, booking CTA placement, menu accessibility, and mobile performance.</p>
+      </div>
+      <div class="pkg-strip__card" style="border-color:rgba(91,77,255,0.45);">
+        <h3>Complete Build</h3>
+        <div class="price">$5,000</div>
+        <p>Full venue website with separate wedding, corporate, and dining sections, gallery, menus, and booking integration.</p>
+      </div>
+      <div class="pkg-strip__card" style="border-color:rgba(45,212,191,0.35);">
+        <h3>Premium Growth</h3>
+        <div class="price">$10,000</div>
+        <p>Full site plus local SEO, Google Business Profile optimisation, review strategy, and ongoing content for seasonal menus and events.</p>
+      </div>
+    </div>
+    <a href="packages.html" class="btn btn--primary" style="min-width:220px">View full package details</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2 class="section__title">Frequently asked questions</h2>
+    <p class="section__subtitle">Questions from venue owners and hospitality operators before they started.</p>
+    <div class="faq__list">
+      <div class="faq__item">
+        <button class="faq__question">How much does a hospitality website cost?</button>
+        <div class="faq__answer"><p>Our hospitality websites start at $3,000 for the Scan &amp; Fix package (improving an existing site's speed, booking CTA, and mobile experience) and go up to $5,000 for a Complete Build and $10,000 for the Premium Growth package with ongoing local SEO and content strategy. All packages include booking integration, a photo gallery, and event enquiry forms. The right package depends on whether you need a new site or improvements, and how many distinct event categories you need to market.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Can I update my menu myself?</button>
+        <div class="faq__answer"><p>Yes. We build your site so menus can be updated in two ways: for simple PDF menus, you just replace the PDF file and the download link automatically serves the updated version. For HTML menus (which we recommend for mobile readability), we provide a simple content management approach so you or a staff member can update items, prices, and seasonal specials without needing a developer. Seasonal menu updates should take less than 15 minutes.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Can it integrate with my reservation system?</button>
+        <div class="faq__answer"><p>Yes. We integrate with OpenTable, ResDiary, SevenRooms, Nowbookit, and any other reservation platform that provides an embeddable widget or direct booking link. We place the booking CTA in your navigation, hero section, and throughout the page so it's visible at every scroll depth. If you're not currently using a reservation system, we can advise on which one suits your venue size and type.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">How do I show my venue for weddings vs corporate events?</button>
+        <div class="faq__answer"><p>We build separate landing sections or pages for each major event type — typically Weddings, Corporate Events, and Private Dining — each with tailored imagery, specific capacity and layout information, relevant package details, and a targeted enquiry form. This means a bride browsing for wedding venues and a PA looking for a corporate offsite location both immediately see content relevant to them, which significantly increases enquiry rates from both audiences.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__question">Will it work on mobile? Most of my venue searches are mobile.</button>
+        <div class="faq__answer"><p>Mobile performance is our top priority for hospitality sites. We build mobile-first: every page is designed on mobile screen size first, then scaled up to desktop. All images are compressed and served in modern WebP format with lazy loading. We test on real mobile devices before launch. A fast, responsive mobile experience also directly improves your Google local search ranking — so a better mobile site means more organic bookings, not just happier visitors once they arrive.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section__title">Get a free venue website review</h2>
+    <p class="section__subtitle">Share your venue details and we'll review your current site (or your competitors') and come back with specific recommendations for more bookings.</p>
+    <div class="contact__form">
+      <form action="https://formsubmit.co/admin@improveyoursite.com" method="POST">
+        <input type="hidden" name="_subject" value="Hospitality website enquiry — hospitality.html">
+        <input type="hidden" name="_next" value="https://improveyoursite.com/thanks.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off">
+        <div class="form__row">
+          <input type="text" name="name" class="form__input" placeholder="Your name" required>
+          <input type="email" name="email" class="form__input" placeholder="Email address" required>
+        </div>
+        <input type="text" name="venue" class="form__input" placeholder="Venue name &amp; suburb">
+        <input type="url" name="website" class="form__input" placeholder="Current website URL (if you have one)">
+        <textarea name="message" class="form__input" rows="4" placeholder="Tell us about your venue — what types of events you host, what's working on your current site, and what you'd like more of (bookings, event enquiries, walk-ins)."></textarea>
+        <p class="form__note">No obligation. We respond within one business day.</p>
+        <button type="submit" class="btn btn--primary btn--full">Send enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__content">
+      <div class="footer__brand">
+        ⚡ ImproveYourSite
+        <p>Beautiful, fast websites for Australian hospitality and events businesses.<br>From $3,000. Pay online — we get to work.</p>
+      </div>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="our-work.html">Our Work</a>
+        <a href="packages.html">Packages</a>
+        <a href="clinic.html">Healthcare</a>
+        <a href="advisor.html">Financial Advisers</a>
+        <a href="consulting.html">Consultants</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2026 ImproveYourSite. ABN pending. All prices in AUD.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq__item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
