@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: #fef9c3; color: #713f12; border: 1px solid #fde047; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.05; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .75rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .section-label { font-size: .82rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.4rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.2rem; }
+    .card .icon { font-size: 1.8rem; margin-bottom: .5rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; margin-top: 1.2rem; }
+    .stat { background: var(--primary); color: #fff; border-radius: 14px; padding: 1rem; text-align: center; }
+    .stat strong { display: block; font-size: 1.8rem; font-weight: 800; }
+    .stat span { font-size: .82rem; opacity: .9; }
+    .trust-bar { background: var(--primary); color: #fff; padding: 1rem 0; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .9rem; }
+    .cta-banner { background: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%); color: #fff; padding: 3rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.4rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .8rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+
+    /* Page-specific */
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+    .contact-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem; }
+    .contact-card h3 { font-size: 1rem; margin-bottom: .75rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .6rem; font-size: .92rem; color: var(--muted); }
+    .contact-row .ci { font-size: 1.1rem; flex-shrink: 0; margin-top: .05rem; }
+    .contact-row a { color: var(--primary); font-weight: 600; }
+    .why-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem; }
+    .why-card h3 { font-size: 1rem; margin-bottom: .75rem; }
+    .why-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+    .why-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--muted); }
+    .why-list li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; margin-top: .05rem; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.4rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.3rem; display: flex; flex-direction: column; gap: .6rem; }
+    .stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; }
+    .testimonial-text { font-size: .92rem; color: var(--muted); line-height: 1.55; font-style: italic; flex: 1; }
+    .reviewer { font-size: .82rem; font-weight: 700; color: var(--text); }
+    .reviewer span { font-weight: 400; color: var(--muted); }
+
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .stat-grid, .hero-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.25); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html" class="nav-cta">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">☀️ CEC Accredited &middot; {{SUBURB}}, {{STATE}}</div>
+      <h1>{{HERO_HEADLINE}}</h1>
+      <p class="lead">{{TAGLINE}}</p>
+      <div class="cta">
+        <a href="contact.html" class="btn btn-primary">Get a Free Quote &rarr;</a>
+        <a href="case-studies.html" class="btn btn-secondary">See Our Results</a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="contact-card">
+          <h3>Get in Touch</h3>
+          <div class="contact-row">
+            <span class="ci">📞</span>
+            <span><a href="tel:{{PHONE}}">{{PHONE}}</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="ci">✉️</span>
+            <span><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="ci">📍</span>
+            <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+          </div>
+          <div style="margin-top:1rem;">
+            <a href="contact.html" class="btn btn-primary" style="width:100%; justify-content:center;">Book a Free Consultation</a>
+          </div>
+        </div>
+        <div class="why-card">
+          <h3>Why Go Solar?</h3>
+          <ul class="why-list">
+            <li><strong>Slash your power bills</strong> &mdash; most households save $1,500&ndash;$3,000+ per year with a quality solar system.</li>
+            <li><strong>Reduce your carbon footprint</strong> &mdash; clean, renewable energy that helps protect Australia's environment for future generations.</li>
+            <li><strong>Government rebates available</strong> &mdash; take advantage of current STCs and state-based incentives to lower your upfront cost.</li>
+            <li><strong>Energy independence</strong> &mdash; generate your own power and protect yourself from rising electricity prices.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="container">
+      <span class="trust-item">⭐ 5-Star Rated</span>
+      <span class="trust-item">✅ CEC Accredited</span>
+      <span class="trust-item">⚡ Licensed Electricians</span>
+      <span class="trust-item">📍 Serving {{SUBURB}} &amp; Surrounds</span>
+      <span class="trust-item">🛡️ Fully Insured</span>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">What We Do</div>
+      <h2>Our Solar Services</h2>
+      <p class="lead">Professional solar solutions tailored for homes and businesses across {{SUBURB}} and surrounding areas.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">☀️</div>
+          <h3>{{SERVICE_1_NAME}}</h3>
+          <p>{{SERVICE_1_DESC}}</p>
+          <div style="margin-top:.9rem;">
+            <a href="services.html" style="font-size:.85rem; font-weight:700; color:var(--primary);">Learn more &rarr;</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">🔋</div>
+          <h3>{{SERVICE_2_NAME}}</h3>
+          <p>{{SERVICE_2_DESC}}</p>
+          <div style="margin-top:.9rem;">
+            <a href="services.html" style="font-size:.85rem; font-weight:700; color:var(--primary);">Learn more &rarr;</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">🏠</div>
+          <h3>{{SERVICE_3_NAME}}</h3>
+          <p>{{SERVICE_3_DESC}}</p>
+          <div style="margin-top:.9rem;">
+            <a href="services.html" style="font-size:.85rem; font-weight:700; color:var(--primary);">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem; text-align:center;">
+        <a href="services.html" class="btn btn-secondary">View All Services &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat">
+          <strong>250+</strong>
+          <span>Installs Completed</span>
+        </div>
+        <div class="stat">
+          <strong>15yr</strong>
+          <span>Workmanship Warranty</span>
+        </div>
+        <div class="stat">
+          <strong>$0</strong>
+          <span>Deposit Options</span>
+        </div>
+        <div class="stat">
+          <strong>5&#9733;</strong>
+          <span>Customer Rating</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" style="background:#f8fafc; padding: 2.5rem 0;">
+    <div class="container">
+      <div class="section-label">What Our Customers Say</div>
+      <h2>Real Results, Real People</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"We were nervous about the upfront cost, but the team made the whole process easy. Our electricity bill went from $480 to under $60 a quarter. Couldn't be happier with the install quality."</p>
+          <div class="reviewer">Sarah &amp; Mark T. <span>&mdash; {{SUBURB}}, {{STATE}}</span></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Professional, punctual, and knowledgeable. They explained every step and the system has been working flawlessly for two years. Our solar savings have already paid off a huge chunk of the system cost."</p>
+          <div class="reviewer">David K. <span>&mdash; {{SUBURB}}, {{STATE}}</span></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Got three quotes — these guys were competitive on price and streets ahead on service. The battery storage they recommended means we're basically off-grid during the day. Highly recommend."</p>
+          <div class="reviewer">Leanne P. <span>&mdash; {{SUBURB}}, {{STATE}}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Ready to Start Saving with Solar?</h2>
+        <p>Get a no-obligation free quote from {{SUBURB}}'s trusted solar specialists. CEC Accredited installers, competitive pricing, and a warranty you can count on.</p>
+        <div class="cta" style="justify-content:center;">
+          <a href="contact.html" class="btn btn-primary">Get My Free Quote &rarr;</a>
+          <a href="tel:{{PHONE}}" class="btn" style="border-color:rgba(255,255,255,.4); color:#fff;">Call {{PHONE}}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">&copy; {{BUSINESS_NAME}} &middot; {{ADDRESS}}, {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a> &middot; <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">&#9728;&#65039; Free quote &mdash; {{PHONE}}</a>
+
+</body>
+</html>

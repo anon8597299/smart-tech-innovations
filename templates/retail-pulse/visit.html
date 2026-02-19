@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e7e5e4;
+      --warm: #fef3c7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .01em; }
+    .nav-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; text-align: center; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .badge { display: inline-block; background: var(--warm); color: #92400e; border: 1px solid #fde68a; font-weight: 700; padding: .28rem .65rem; border-radius: 999px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .72rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center; }
+    .section { padding: 2.5rem 0; }
+    .section-header { text-align: center; margin-bottom: 1.4rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .address-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; }
+    .address-card h3 { font-size: 1rem; margin: 0 0 1rem; }
+    .address-row { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; border-bottom: 1px solid var(--line); font-size: .91rem; }
+    .address-row:last-child { border-bottom: none; }
+    .address-row .row-label { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); min-width: 4rem; padding-top: .15rem; }
+    .map-placeholder { background: #f5f5f4; border: 1px solid var(--line); border-radius: 12px; padding: 3rem 1rem; text-align: center; margin-top: 1rem; }
+    .map-placeholder .map-icon { font-size: 2rem; margin-bottom: .4rem; }
+    .map-placeholder p { font-size: .85rem; color: var(--muted); margin: 0; }
+    .map-placeholder a { color: var(--primary); font-weight: 700; font-size: .85rem; display: inline-block; margin-top: .5rem; }
+    .hours-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; }
+    .hours-card h3 { font-size: 1rem; margin: 0 0 1rem; }
+    .hours-row { display: flex; justify-content: space-between; padding: .42rem 0; border-bottom: 1px solid var(--line); font-size: .91rem; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    .hours-row .time { font-weight: 600; }
+    .hours-row .closed { font-weight: 600; color: #dc2626; }
+    .info-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .info-card .icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .info-card h3 { font-size: 1rem; margin: 0 0 .3rem; }
+    .info-card p { font-size: .88rem; color: var(--muted); margin: 0; line-height: 1.55; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .4rem; }
+    .cta-banner p { margin: 0 0 1.1rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; text-align: center; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="collections.html">Collections</a>
+        <a href="story.html">Our Story</a>
+        <a href="visit.html" class="nav-cta">Visit Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">{{SUBURB}} {{STATE}}</span>
+      <h1>Visit Us</h1>
+      <p class="lead">We would love to see you in store. Find us at {{ADDRESS}}, {{SUBURB}} — come in, browse, and say hello.</p>
+      <div class="cta">
+        <a href="tel:{{PHONE}}" class="btn btn-primary">Call Us</a>
+        <a href="collections.html" class="btn btn-secondary">View Collections</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="grid-2">
+
+        <div>
+          <div class="address-card">
+            <h3>Find Us</h3>
+            <div class="address-row">
+              <span class="row-label">Address</span>
+              <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+            </div>
+            <div class="address-row">
+              <span class="row-label">Phone</span>
+              <a href="tel:{{PHONE}}" style="color:var(--primary);font-weight:600;">{{PHONE}}</a>
+            </div>
+            <div class="address-row">
+              <span class="row-label">Email</span>
+              <a href="mailto:{{EMAIL}}" style="color:var(--primary);font-weight:600;">{{EMAIL}}</a>
+            </div>
+            <div class="map-placeholder">
+              <div class="map-icon">📍</div>
+              <p>{{ADDRESS}}, {{SUBURB}} {{STATE}}</p>
+              <a href="https://maps.google.com/?q={{ADDRESS}},{{SUBURB}},{{STATE}}" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="hours-card">
+            <h3>Opening Hours</h3>
+            <div class="hours-row">
+              <span class="day">Monday</span>
+              <span class="time">9:00 am – 5:30 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Tuesday</span>
+              <span class="time">9:00 am – 5:30 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Wednesday</span>
+              <span class="time">9:00 am – 5:30 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Thursday</span>
+              <span class="time">9:00 am – 5:30 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Friday</span>
+              <span class="time">9:00 am – 5:30 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Saturday</span>
+              <span class="time">9:00 am – 4:00 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Sunday</span>
+              <span class="time">10:00 am – 3:00 pm</span>
+            </div>
+          </div>
+          <p style="font-size:.82rem;color:var(--muted);margin:.7rem 0 0;padding:0 .2rem;">Hours may vary on public holidays. Please call ahead to confirm. <a href="tel:{{PHONE}}" style="color:var(--primary);font-weight:600;">{{PHONE}}</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f9f8f7; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Getting Here</h2>
+        <p class="lead">{{BUSINESS_NAME}} is conveniently located in {{SUBURB}} with easy access by car, public transport, and on foot.</p>
+      </div>
+      <div class="grid-3">
+        <div class="info-card">
+          <div class="icon">🅿️</div>
+          <h3>Parking</h3>
+          <p>Free street parking is available on {{ADDRESS}} and surrounding streets. A public car park is located within a short walk of the store. Disabled parking bays are available nearby.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">🚌</div>
+          <h3>Public Transport</h3>
+          <p>Bus services run regularly to {{SUBURB}} town centre with stops close to the store. Check your local transit authority app for current timetables and route information.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">♿</div>
+          <h3>Accessibility</h3>
+          <p>Our store is wheelchair accessible with level entry from the street. Wide aisles throughout the store allow easy navigation. Please contact us if you have any specific accessibility requirements and we will do our best to assist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>New arrivals in store now</h2>
+      <p>Pop in and see what is new. Our team is ready to help you find something you will love.</p>
+      <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:{{PHONE}}" class="btn btn-primary">Call {{PHONE}}</a>
+        <a href="collections.html" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4);">Browse Collections</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">🛍️ Call us — {{PHONE}}</a>
+
+</body>
+</html>

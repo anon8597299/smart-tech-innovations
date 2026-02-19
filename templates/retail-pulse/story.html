@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e7e5e4;
+      --warm: #fef3c7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .01em; }
+    .nav-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; text-align: center; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .badge { display: inline-block; background: var(--warm); color: #92400e; border: 1px solid #fde68a; font-weight: 700; padding: .28rem .65rem; border-radius: 999px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .72rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center; }
+    .section { padding: 2.5rem 0; }
+    .section-header { text-align: center; margin-bottom: 1.4rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .story-block { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.8rem 2rem; max-width: 780px; margin: 0 auto; }
+    .story-block .founder-tag { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.2rem; }
+    .story-block .founder-avatar { width: 3.2rem; height: 3.2rem; background: var(--warm); border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; border: 2px solid #fde68a; }
+    .story-block .founder-info .name { font-weight: 800; font-size: 1rem; margin: 0 0 .1rem; }
+    .story-block .founder-info .role { font-size: .8rem; color: var(--muted); margin: 0; }
+    .story-block p { font-size: .94rem; color: var(--muted); line-height: 1.7; margin: 0 0 .85rem; }
+    .story-block p:last-of-type { margin-bottom: 0; }
+    .value-list { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: .5rem; }
+    .value-list li { display: flex; gap: .5rem; font-size: .93rem; }
+    .value-list li::before { content: "✓"; color: var(--primary); font-weight: 800; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .testimonial-card .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .4rem; letter-spacing: .05em; }
+    .testimonial-card .quote { font-size: .9rem; color: var(--text); line-height: 1.6; margin: 0 0 .7rem; font-style: italic; }
+    .testimonial-card .reviewer { font-size: .8rem; font-weight: 700; color: var(--muted); }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .4rem; }
+    .cta-banner p { margin: 0 0 1.1rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; text-align: center; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .story-block { padding: 1.3rem; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="collections.html">Collections</a>
+        <a href="story.html">Our Story</a>
+        <a href="visit.html" class="nav-cta">Visit Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">Est. {{YEAR_ESTABLISHED}}</span>
+      <h1>Our Story</h1>
+      <p class="lead">How {{BUSINESS_NAME}} became {{SUBURB}}'s favourite boutique — and the values that guide everything we do.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="story-block">
+        <div class="founder-tag">
+          <div class="founder-avatar">🛍️</div>
+          <div class="founder-info">
+            <p class="name">{{OWNER_NAME}}</p>
+            <p class="role">Founder, {{BUSINESS_NAME}} — Est. {{YEAR_ESTABLISHED}}</p>
+          </div>
+        </div>
+        <p>{{BUSINESS_NAME}} was born out of a simple frustration: {{OWNER_NAME}} couldn't find a local boutique that offered quality, carefully selected pieces without the pressure of a big retailer. So in {{YEAR_ESTABLISHED}}, they opened their own — right here in {{SUBURB}}.</p>
+        <p>What started as a small collection has grown into a much-loved local destination, offering a carefully curated range of fashion, accessories, and homewares. Every item in the store is personally selected by {{OWNER_NAME}} with one question in mind: would I love wearing or owning this?</p>
+        <p>Today, {{BUSINESS_NAME}} is more than a shop — it is a community space where locals come not just to shop, but to get styling advice, discover new brands, and feel genuinely welcomed. We know many of our customers by name, and that is exactly how we like it.</p>
+
+        <h3 style="margin-top:1.3rem;font-size:1rem;">What We Stand For</h3>
+        <ul class="value-list">
+          <li>Thoughtfully curated quality over quantity — every piece is chosen with care</li>
+          <li>Genuine, no-pressure service from people who actually love fashion</li>
+          <li>Supporting independent and emerging designers whenever possible</li>
+          <li>A welcoming, inclusive space where everyone feels at home</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f9f8f7; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Customers Say</h2>
+        <p class="lead">We are proud to have built a loyal community of customers who keep coming back.</p>
+      </div>
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"I have been shopping at {{BUSINESS_NAME}} since it first opened. The range is always fresh, the quality is excellent, and the team genuinely remembers what I like. There is nowhere else like it in {{SUBURB}}."</p>
+          <p class="reviewer">— Local customer, {{SUBURB}}</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"Every time I walk in I find something I didn't know I needed. The styling advice is always spot-on and never pushy. It is my favourite place to find a gift — for others and for myself!"</p>
+          <p class="reviewer">— Regular shopper</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"The team at {{BUSINESS_NAME}} went above and beyond to help me find an outfit for a special event. The personal attention and genuine knowledge of their products made all the difference."</p>
+          <p class="reviewer">— First-time visitor, now a regular</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Come in and say hello</h2>
+      <p>We would love to meet you. Find us in {{SUBURB}} — new arrivals in store now.</p>
+      <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;">
+        <a href="visit.html" class="btn btn-primary">Find the Store</a>
+        <a href="collections.html" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4);">View Collections</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">🛍️ Call us — {{PHONE}}</a>
+
+</body>
+</html>

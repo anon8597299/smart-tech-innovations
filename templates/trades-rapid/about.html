@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #58627a;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e9dfd2;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .3rem; }
+    .lead { color: var(--muted); max-width: 700px; margin: 0; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .7rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; color: var(--text); }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .9rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; margin: 2rem 0; border-radius: 16px; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .contact-info { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .contact-info h3 { margin: 0 0 .8rem; }
+    .contact-row { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .6rem; font-size: .95rem; }
+    .contact-row span:first-child { font-size: 1.1rem; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .bio-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .bio-card .owner-name { font-size: 1.2rem; font-weight: 800; margin: 0 0 .15rem; }
+    .bio-card .owner-title { font-size: .9rem; color: var(--muted); font-weight: 600; margin: 0 0 .8rem; }
+    .bio-card .established { display: inline-block; font-size: .82rem; font-weight: 700; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: .25rem .75rem; margin-bottom: .85rem; color: var(--muted); }
+    .bio-card p { font-size: .95rem; color: var(--muted); margin: 0; }
+    .why-card { background: var(--primary); border-radius: 14px; padding: 1.4rem; color: #fff; }
+    .why-card h3 { color: #fff; font-size: 1.05rem; margin: 0 0 .85rem; }
+    .why-item { display: flex; gap: .6rem; align-items: flex-start; margin-bottom: .7rem; font-size: .93rem; }
+    .why-item:last-child { margin-bottom: 0; }
+    .why-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .05rem; }
+    .why-item p { margin: 0; opacity: .92; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.25); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <h1>About {{BUSINESS_NAME}}</h1>
+      <p class="lead">We're a locally owned and operated trades business serving {{SUBURB}} and the surrounding region. Quality workmanship and honest service — every time.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+
+        <div class="bio-card">
+          <p class="owner-name">{{OWNER_NAME}}</p>
+          <p class="owner-title">{{OWNER_TITLE}}</p>
+          <span class="established">Est. {{YEAR_ESTABLISHED}}</span>
+          <p>{{BUSINESS_NAME}} was founded with one goal in mind: to provide {{SUBURB}} and regional {{STATE}} with a trades service they can genuinely rely on. {{OWNER_NAME}} brings years of hands-on experience to every job, whether it's a small repair or a major project.</p>
+          <p style="margin-top:.75rem;">We believe in showing up on time, communicating clearly, and leaving every job site clean and tidy. No hidden costs, no shortcuts — just solid, professional work you can count on.</p>
+        </div>
+
+        <div class="why-card">
+          <h3>Why choose us?</h3>
+          <div class="why-item">
+            <span class="why-icon">✅</span>
+            <p>Fully licensed and insured — you're covered from start to finish.</p>
+          </div>
+          <div class="why-item">
+            <span class="why-icon">📍</span>
+            <p>Based right here in {{SUBURB}}, so we know the area and can get to you fast.</p>
+          </div>
+          <div class="why-item">
+            <span class="why-icon">💬</span>
+            <p>Upfront, fixed-price quotes with no surprise charges on completion.</p>
+          </div>
+          <div class="why-item">
+            <span class="why-icon">⭐</span>
+            <p>Five-star reputation built on word of mouth and repeat customers across the region.</p>
+          </div>
+          <div class="why-item">
+            <span class="why-icon">🕐</span>
+            <p>We turn up when we say we will — your time matters.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <h2 style="margin-bottom:1rem;">Why locals trust us</h2>
+      <div class="grid-4">
+
+        <div class="card">
+          <div class="icon">🪪</div>
+          <h3>Licensed &amp; Insured</h3>
+          <p>All work is carried out by fully licensed tradespeople. We're insured for your peace of mind.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📍</div>
+          <h3>Local to {{SUBURB}}</h3>
+          <p>We live and work in your community. We understand local conditions and local needs.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>Years of Experience</h3>
+          <p>Trading since {{YEAR_ESTABLISHED}}, we bring deep expertise and a proven track record to every job.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">⭐</div>
+          <h3>5-Star Rated</h3>
+          <p>Our reputation speaks for itself. Consistently top-rated by customers across the region.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Ready to get started?</h2>
+      <p>Get in touch today for a fast, no-obligation quote. We'd love to help.</p>
+      <a class="btn btn-primary" href="contact.html">Get a free quote</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">📞 Call now — {{PHONE}}</a>
+
+</body>
+</html>

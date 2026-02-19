@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .brand { font-weight: 800; font-size: 1.05rem; }
+    .nav-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 680px; }
+    .badge { display: inline-block; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; font-weight: 700; padding: .28rem .65rem; border-radius: 999px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .7rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .section { padding: 2rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; align-items: start; }
+    .form-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem; }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; width: 100%; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); outline-offset: -1px; border-color: transparent; }
+    textarea { resize: vertical; min-height: 90px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; margin-top: .4rem; }
+    .submit-btn:hover { opacity: .92; }
+    .info-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; }
+    .info-card h3 { font-size: 1rem; margin: 0 0 .8rem; }
+    .bring-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+    .bring-list li { display: flex; gap: .55rem; font-size: .91rem; align-items: flex-start; }
+    .bring-list li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; margin-top: .1rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row .label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; min-width: 4.5rem; padding-top: .1rem; }
+    .note-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: .85rem 1rem; font-size: .88rem; color: #15803d; display: flex; gap: .5rem; align-items: flex-start; margin-top: .8rem; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="team.html">Our Team</a>
+        <a href="book.html" class="nav-cta">Book Online</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">Online Bookings</span>
+      <h1>Book an Appointment</h1>
+      <p class="lead">Fill in the form below and our team will confirm your booking within 1 business day. Prefer to call? We are happy to help over the phone.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="grid-2">
+
+        <div>
+          <div class="form-card">
+            <h2 style="font-size:1.2rem;margin:0 0 1.1rem;">Your Details</h2>
+            <form action="https://formsubmit.co/{{EMAIL}}" method="POST">
+              <input type="hidden" name="_subject" value="Appointment Request — {{BUSINESS_NAME}}" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="thank-you.html" />
+
+              <div class="form-group">
+                <label for="full-name">Full Name *</label>
+                <input type="text" id="full-name" name="full_name" placeholder="Your full name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="date_of_birth" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 04xx xxx xxx" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="visit-type">Visit Type *</label>
+                <select id="visit-type" name="visit_type" required>
+                  <option value="" disabled selected>Select a visit type</option>
+                  <option value="General consult">General consult</option>
+                  <option value="Chronic care">Chronic care</option>
+                  <option value="Skin check">Skin check</option>
+                  <option value="Vaccinations">Vaccinations</option>
+                  <option value="Mental health">Mental health</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Additional Information</label>
+                <textarea id="message" name="message" placeholder="Please share anything that will help us prepare for your visit..."></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">Request Appointment</button>
+            </form>
+          </div>
+          <div class="note-box">
+            <span>✅</span>
+            <span>Our team will confirm your booking within 1 business day. For urgent matters, please call us directly on <a href="tel:{{PHONE}}" style="font-weight:700;color:inherit;">{{PHONE}}</a>.</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <h3>What to Bring</h3>
+            <ul class="bring-list">
+              <li>Medicare card and any concession or health care cards</li>
+              <li>A list of current medications and dosages</li>
+              <li>Any relevant test results or specialist letters</li>
+              <li>Referral letter (if applicable)</li>
+              <li>Private health insurance card (if applicable)</li>
+              <li>Previous immunisation records (for vaccination appointments)</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Contact Us Directly</h3>
+            <div class="contact-row">
+              <span class="label">Phone</span>
+              <a href="tel:{{PHONE}}" style="color:var(--primary);font-weight:600;">{{PHONE}}</a>
+            </div>
+            <div class="contact-row">
+              <span class="label">Email</span>
+              <a href="mailto:{{EMAIL}}" style="color:var(--primary);font-weight:600;">{{EMAIL}}</a>
+            </div>
+            <div class="contact-row">
+              <span class="label">Address</span>
+              <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+            </div>
+          </div>
+
+          <div class="info-card" style="background:#f8fafc;">
+            <h3 style="font-size:.95rem;">Good to Know</h3>
+            <ul class="bring-list">
+              <li>Longer appointments are available for complex or multiple issues — please mention this when booking.</li>
+              <li>After-hours care information will be provided upon confirmation of your appointment.</li>
+              <li>Cancellations within 2 hours of your appointment may incur a fee.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">📞 Book — {{PHONE}}</a>
+
+</body>
+</html>

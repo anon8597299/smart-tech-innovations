@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #58627a;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e9dfd2;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .3rem; }
+    .lead { color: var(--muted); max-width: 700px; margin: 0; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .7rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; color: var(--text); }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; margin: 2rem 0; border-radius: 16px; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .contact-info { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .contact-info h3 { margin: 0 0 .8rem; }
+    .contact-row { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .6rem; font-size: .95rem; }
+    .contact-row span:first-child { font-size: 1.1rem; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .form-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .form-card h2 { font-size: 1.15rem; margin: 0 0 1rem; }
+    .direct-call { margin-top: 1rem; padding: .85rem 1rem; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; text-align: center; font-size: .93rem; color: var(--muted); }
+    .direct-call a { font-weight: 800; color: var(--primary); }
+    .contact-info-sidebar { display: flex; flex-direction: column; gap: .9rem; }
+    .hours-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .hours-card h3 { margin: 0 0 .8rem; }
+    .hours-row { display: flex; justify-content: space-between; font-size: .9rem; padding: .3rem 0; border-bottom: 1px solid var(--line); }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.25); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <h1>Contact {{BUSINESS_NAME}}</h1>
+      <p class="lead">Get in touch for a fast, no-obligation quote. We typically respond within a few hours on business days.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;">
+
+        <div>
+          <div class="form-card">
+            <h2>Send us an enquiry</h2>
+            <form action="https://formsubmit.co/{{EMAIL}}" method="POST">
+              <input type="hidden" name="_subject" value="New enquiry — {{BUSINESS_NAME}}">
+              <input type="hidden" name="_captcha" value="false">
+
+              <div class="form-group">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="message">How can we help?</label>
+                <textarea id="message" name="message" placeholder="Briefly describe what you need done, including your location if relevant..." required></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">Send enquiry</button>
+            </form>
+          </div>
+
+          <div class="direct-call">
+            Or call us directly: <a href="tel:{{PHONE}}">{{PHONE}}</a>
+          </div>
+        </div>
+
+        <div class="contact-info-sidebar">
+          <div class="contact-info">
+            <h3>Contact details</h3>
+
+            <div class="contact-row">
+              <span>📞</span>
+              <span><a href="tel:{{PHONE}}" style="font-weight:700; color:var(--primary);">{{PHONE}}</a></span>
+            </div>
+
+            <div class="contact-row">
+              <span>✉️</span>
+              <span><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></span>
+            </div>
+
+            <div class="contact-row">
+              <span>📍</span>
+              <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+            </div>
+          </div>
+
+          <div class="hours-card">
+            <h3>Business hours</h3>
+            <div class="hours-row">
+              <span class="day">Monday – Friday</span>
+              <span>7:00 am – 5:00 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Saturday</span>
+              <span>8:00 am – 12:00 pm</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Sunday</span>
+              <span>Closed</span>
+            </div>
+            <p style="margin:.8rem 0 0; font-size:.85rem; color:var(--muted);">Emergency callouts available — call for availability.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Fast response</h3>
+            <p>We aim to respond to all enquiries within a few hours. For urgent jobs, please call us directly.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">📞 Call now — {{PHONE}}</a>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packages — {{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --gold: #b45309;
+      --gold-light: #fef3c7;
+      --line: #e7e5e4;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: var(--gold-light); color: var(--gold); border: 1px solid #fde68a; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+    h3 { margin: 0 0 .4rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .75rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; margin-top: 1.4rem; }
+    .package-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem; position: relative; display: flex; flex-direction: column; }
+    .package-card.featured { border-color: var(--primary); box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .package-card .tag { display: inline-block; background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; margin-bottom: .8rem; }
+    .package-card .tag.gold-tag { background: var(--gold); }
+    .package-card h3 { font-size: 1.2rem; margin: 0 0 .3rem; }
+    .package-card .package-desc { font-size: .88rem; color: var(--muted); margin: 0 0 .8rem; }
+    .package-card ul { padding-left: 1.1rem; margin: 0 0 1.2rem; color: var(--muted); font-size: .9rem; flex: 1; }
+    .package-card ul li { margin-bottom: .4rem; }
+    .package-card .pkg-cta { display: block; text-align: center; background: var(--primary); color: #fff; border-radius: 10px; padding: .7rem 1rem; font-weight: 700; font-size: .95rem; margin-top: auto; }
+    .package-card.featured .pkg-cta { background: var(--primary); }
+    .package-card:not(.featured) .pkg-cta { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    .inclusions-note { background: var(--gold-light); border: 1px solid #fde68a; border-radius: 12px; padding: 1rem 1.2rem; margin-top: 1.5rem; font-size: .9rem; color: var(--gold); font-weight: 600; display: flex; align-items: flex-start; gap: .6rem; }
+    .inclusions-note span { font-size: 1.1rem; flex-shrink: 0; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 3rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-white { background: #fff; color: var(--primary); border-color: #fff; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .phone-cta { display: none; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="packages.html">Packages</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" class="nav-cta">Enquire Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">Tailored for every budget &amp; occasion</div>
+    <h1>Event Packages</h1>
+    <p class="lead">Choose the package that suits your celebration. Every option includes our personal touch and commitment to making your event unforgettable.</p>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Packages -->
+<section class="section">
+  <div class="container">
+    <p style="font-size:.82rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;">Choose your package</p>
+    <h2>Our Event Packages</h2>
+    <p class="lead">Three carefully designed packages to suit a range of occasions and guest counts. All pricing is available on enquiry.</p>
+
+    <div class="grid-3">
+
+      <!-- Essentials -->
+      <div class="package-card">
+        <div class="tag" style="background:#6b7280;">Essentials</div>
+        <h3>{{SERVICE_1_NAME}}</h3>
+        <p class="package-desc">{{SERVICE_1_DESC}}</p>
+        <ul>
+          <li>Exclusive use of main function room</li>
+          <li>Standard table setting &amp; linen</li>
+          <li>2-course set menu from our kitchen</li>
+          <li>Arrival welcome drinks (1 hour)</li>
+          <li>Bar service throughout the event</li>
+          <li>Basic audio/visual setup</li>
+        </ul>
+        <a href="contact.html" class="pkg-cta">Enquire About This Package</a>
+      </div>
+
+      <!-- Signature (featured) -->
+      <div class="package-card featured">
+        <div class="tag">★ Signature — Most Popular</div>
+        <h3>{{SERVICE_2_NAME}}</h3>
+        <p class="package-desc">{{SERVICE_2_DESC}}</p>
+        <ul>
+          <li>Everything in Essentials, plus:</li>
+          <li>Dedicated event coordinator on the day</li>
+          <li>3-course alternate drop menu</li>
+          <li>Canape selection on arrival (1.5 hours)</li>
+          <li>Premium table centrepieces &amp; styling</li>
+          <li>Full audio/visual system with microphone</li>
+          <li>Complimentary wedding cake cutting</li>
+        </ul>
+        <a href="contact.html" class="pkg-cta">Enquire About This Package</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="package-card">
+        <div class="tag gold-tag">Premium</div>
+        <h3>{{SERVICE_3_NAME}}</h3>
+        <p class="package-desc">{{SERVICE_3_DESC}}</p>
+        <ul>
+          <li>Everything in Signature, plus:</li>
+          <li>Venue exclusively yours all day</li>
+          <li>Chef's banquet menu with dietary options</li>
+          <li>Grazing &amp; cocktail hour (2 hours)</li>
+          <li>Custom floral arrangements &amp; decor</li>
+          <li>Professional MC coordination support</li>
+          <li>Complimentary night-before rehearsal access</li>
+          <li>Preferred supplier network access</li>
+        </ul>
+        <a href="contact.html" class="pkg-cta">Enquire About This Package</a>
+      </div>
+
+    </div>
+
+    <div class="inclusions-note">
+      <span>🌟</span>
+      <span>All packages include a dedicated event coordinator, full setup &amp; pack-down, and complimentary consultation with our events team. Pricing available on enquiry — contact us to discuss your specific needs and guest numbers.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Additional Services -->
+<section class="section">
+  <div class="container">
+    <p style="font-size:.82rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;">Extras &amp; add-ons</p>
+    <h2>Additional Services</h2>
+    <p class="lead">Enhance your event with optional extras tailored to your celebration.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.2rem;" class="extras-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:1.4rem;margin-bottom:.4rem;">🎵</div>
+        <h3 style="font-size:.95rem;margin:0 0 .25rem;">{{SERVICE_4_NAME}}</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">{{SERVICE_4_DESC}}</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:1.4rem;margin-bottom:.4rem;">📸</div>
+        <h3 style="font-size:.95rem;margin:0 0 .25rem;">{{SERVICE_5_NAME}}</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">{{SERVICE_5_DESC}}</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:1.4rem;margin-bottom:.4rem;">🌸</div>
+        <h3 style="font-size:.95rem;margin:0 0 .25rem;">{{SERVICE_6_NAME}}</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">{{SERVICE_6_DESC}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CTA Banner -->
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Ready to start planning?</h2>
+      <p>Reach out to our events team to discuss your date, guest numbers, and the perfect package for your celebration.</p>
+      <a href="contact.html" class="btn btn-white">Enquire Now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">🥂 Enquire — {{PHONE}}</a>
+
+</body>
+</html>

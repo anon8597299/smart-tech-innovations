@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .brand { font-weight: 800; font-size: 1.05rem; }
+    .nav-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 680px; }
+    .badge { display: inline-block; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; font-weight: 700; padding: .28rem .65rem; border-radius: 999px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .7rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .card .icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .step-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem; position: relative; }
+    .step-number { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--primary); color: #fff; border-radius: 999px; font-weight: 800; font-size: .85rem; margin-bottom: .6rem; }
+    .step-card h3 { font-size: 1rem; margin: 0 0 .3rem; }
+    .step-card p { font-size: .88rem; color: var(--muted); margin: 0; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .4rem; }
+    .cta-banner p { margin: 0 0 1.1rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="team.html">Our Team</a>
+        <a href="book.html" class="nav-cta">Book Online</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">{{SUBURB}} {{STATE}}</span>
+      <h1>Our Services</h1>
+      <p class="lead">We offer a full range of healthcare services designed to support your wellbeing at every stage of life. Our experienced team is here to help.</p>
+      <div class="cta">
+        <a href="book.html" class="btn btn-primary">Book an Appointment</a>
+        <a href="team.html" class="btn btn-secondary">Meet Our Team</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <h2>What We Offer</h2>
+      <p class="lead">Comprehensive care for individuals and families across {{SUBURB}} and surrounding areas.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🩺</div>
+          <h3>{{SERVICE_1_NAME}}</h3>
+          <p>{{SERVICE_1_DESC}}</p>
+        </div>
+        <div class="card">
+          <div class="icon">💉</div>
+          <h3>{{SERVICE_2_NAME}}</h3>
+          <p>{{SERVICE_2_DESC}}</p>
+        </div>
+        <div class="card">
+          <div class="icon">🫁</div>
+          <h3>{{SERVICE_3_NAME}}</h3>
+          <p>{{SERVICE_3_DESC}}</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>{{SERVICE_4_NAME}}</h3>
+          <p>{{SERVICE_4_DESC}}</p>
+        </div>
+        <div class="card">
+          <div class="icon">🩻</div>
+          <h3>{{SERVICE_5_NAME}}</h3>
+          <p>{{SERVICE_5_DESC}}</p>
+        </div>
+        <div class="card">
+          <div class="icon">❤️</div>
+          <h3>{{SERVICE_6_NAME}}</h3>
+          <p>{{SERVICE_6_DESC}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f8fafc; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="container">
+      <h2>What to Expect</h2>
+      <p class="lead">We make every visit straightforward and stress-free. Here is what happens when you book with us.</p>
+      <div class="grid-3" style="grid-template-columns: repeat(4, minmax(0,1fr));">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Book</h3>
+          <p>Book online or call us directly. Choose a time that suits you — we offer early morning and after-hours appointments.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Arrive</h3>
+          <p>Check in at reception when you arrive. Please bring any referrals, test results, or a list of current medications.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Consult</h3>
+          <p>Meet with your practitioner in a private, comfortable consultation room. Take your time — we listen carefully.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Care Plan</h3>
+          <p>Leave with a clear care plan tailored to your needs, including any referrals, prescriptions, or follow-up steps.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Book your appointment today</h2>
+      <p>Our friendly team is ready to help. Appointments available online or by phone.</p>
+      <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;">
+        <a href="book.html" class="btn btn-primary">Book Online</a>
+        <a href="tel:{{PHONE}}" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4);">{{PHONE}}</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">📞 Book — {{PHONE}}</a>
+
+</body>
+</html>

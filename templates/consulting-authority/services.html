@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — {{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: .75rem; }
+    .nav-links a { padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 8px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5.5rem 0 2.5rem; }
+    .eyebrow { font-size: .82rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .6rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; margin: 0 0 .8rem; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; letter-spacing: -.01em; }
+    h3 { margin: 0 0 .4rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 640px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 8px; padding: .75rem 1.3rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    .section { padding: 3rem 0; }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.3rem; }
+    .card .num { font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: .4rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .cta-banner { border: 2px solid var(--primary); border-radius: 16px; padding: 2.5rem; text-align: center; margin: 2rem 0; }
+    .cta-banner h2 { margin-bottom: .5rem; }
+    .cta-banner p { color: var(--muted); margin: 0 0 1.2rem; }
+    .service-full-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .service-full-card .icon { font-size: 1.8rem; flex-shrink: 0; margin-top: .1rem; }
+    .service-full-card h3 { font-size: 1.05rem; margin: 0 0 .3rem; }
+    .service-full-card p { font-size: .9rem; color: var(--muted); margin: 0; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.2rem; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .phone-cta { display: none; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .services-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 10px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Start a Conversation</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">What we offer</p>
+    <h1>How We Help</h1>
+    <p class="lead">Practical, results-driven consulting across every stage of your business journey — from strategy and growth through to operational excellence and exit planning.</p>
+    <div class="cta">
+      <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- All Services -->
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Our services</p>
+    <h2>What We Specialise In</h2>
+    <p class="lead">Six core service areas designed to address the challenges growing businesses face at every stage.</p>
+    <div class="services-grid">
+      <div class="service-full-card">
+        <div class="icon">📈</div>
+        <div>
+          <h3>{{SERVICE_1_NAME}}</h3>
+          <p>{{SERVICE_1_DESC}}</p>
+        </div>
+      </div>
+      <div class="service-full-card">
+        <div class="icon">🎯</div>
+        <div>
+          <h3>{{SERVICE_2_NAME}}</h3>
+          <p>{{SERVICE_2_DESC}}</p>
+        </div>
+      </div>
+      <div class="service-full-card">
+        <div class="icon">⚙️</div>
+        <div>
+          <h3>{{SERVICE_3_NAME}}</h3>
+          <p>{{SERVICE_3_DESC}}</p>
+        </div>
+      </div>
+      <div class="service-full-card">
+        <div class="icon">💡</div>
+        <div>
+          <h3>{{SERVICE_4_NAME}}</h3>
+          <p>{{SERVICE_4_DESC}}</p>
+        </div>
+      </div>
+      <div class="service-full-card">
+        <div class="icon">🤝</div>
+        <div>
+          <h3>{{SERVICE_5_NAME}}</h3>
+          <p>{{SERVICE_5_DESC}}</p>
+        </div>
+      </div>
+      <div class="service-full-card">
+        <div class="icon">🏆</div>
+        <div>
+          <h3>{{SERVICE_6_NAME}}</h3>
+          <p>{{SERVICE_6_DESC}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Approach -->
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Our approach</p>
+    <h2>How Every Engagement Works</h2>
+    <p class="lead">We follow a structured three-phase approach so you always know where you are, what's next, and what success looks like.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Discovery &amp; Diagnosis</h3>
+        <p>We invest time upfront to truly understand your business — your goals, your constraints, and the levers that will drive the greatest impact.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Strategy &amp; Planning</h3>
+        <p>We co-create a focused plan with clear priorities, defined milestones, and the metrics we'll use to measure progress along the way.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Execution &amp; Optimisation</h3>
+        <p>We work alongside your team to implement, test, and refine — keeping you on track and adjusting course when the situation demands it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CTA Banner -->
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Not sure which service is right for you?</h2>
+      <p>Book a free 30-minute call and we'll help you identify where to start for maximum impact.</p>
+      <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">📞 Talk to us — {{PHONE}}</a>
+
+</body>
+</html>

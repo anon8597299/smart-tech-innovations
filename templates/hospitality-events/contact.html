@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — {{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --gold: #b45309;
+      --gold-light: #fef3c7;
+      --line: #e7e5e4;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: var(--gold-light); color: var(--gold); border: 1px solid #fde68a; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+    h3 { margin: 0 0 .4rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 680px; }
+    .section { padding: 2.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; width: 100%; }
+    select { cursor: pointer; }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; margin-top: .25rem; }
+    .submit-btn:hover { opacity: .92; }
+    .form-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.8rem; }
+    .sidebar-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
+    .sidebar-card h3 { font-size: 1rem; margin: 0 0 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: .7rem; margin-bottom: .85rem; }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+    .contact-label { font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 .1rem; }
+    .contact-value { font-size: .92rem; font-weight: 600; margin: 0; }
+    .contact-value a { color: var(--primary); }
+    .next-step { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .9rem; }
+    .next-step:last-child { margin-bottom: 0; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: .78rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+    .step-text h4 { font-size: .9rem; margin: 0 0 .15rem; }
+    .step-text p { font-size: .85rem; color: var(--muted); margin: 0; }
+    .date-note { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .phone-cta { display: none; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="packages.html">Packages</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" class="nav-cta">Enquire Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">We'd love to hear from you</div>
+    <h1>Make an Enquiry</h1>
+    <p class="lead">Tell us about your event and we'll get back to you within one business day to discuss availability, packages, and everything your celebration needs.</p>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Contact Section -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2">
+
+      <!-- Form -->
+      <div class="form-card">
+        <h2 style="font-size:1.2rem;margin:0 0 1.2rem;">Event Enquiry Form</h2>
+        <form action="https://formsubmit.co/{{EMAIL}}" method="POST">
+          <input type="hidden" name="_subject" value="Event Enquiry — {{BUSINESS_NAME}}" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="index.html" />
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="event_type">Event Type</label>
+            <select id="event_type" name="event_type" required>
+              <option value="" disabled selected>Select event type…</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Birthday">Birthday</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Engagement">Engagement</option>
+              <option value="Anniversary">Anniversary</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Estimated Guest Numbers</label>
+            <select id="guests" name="guests" required>
+              <option value="" disabled selected>Select guest numbers…</option>
+              <option value="Up to 50">Up to 50</option>
+              <option value="50-100">50–100</option>
+              <option value="100-150">100–150</option>
+              <option value="150-200">150–200</option>
+              <option value="200+">200+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="event_date">Preferred Event Date</label>
+            <input type="date" id="event_date" name="event_date" />
+            <p class="date-note">Don't have a date yet? That's fine — leave blank and we can discuss options.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Tell us about your event</label>
+            <textarea id="message" name="message" placeholder="Share any details about your event, special requests, or questions you have for us…"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Enquiry</button>
+        </form>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="sidebar-card">
+          <h3>Contact Us Directly</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <p class="contact-label">Phone</p>
+              <p class="contact-value"><a href="tel:{{PHONE}}">{{PHONE}}</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <p class="contact-label">Email</p>
+              <p class="contact-value"><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <p class="contact-label">Address</p>
+              <p class="contact-value">{{ADDRESS}}, {{SUBURB}} {{STATE}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>What Happens Next</h3>
+          <div class="next-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>We review your enquiry</h4>
+              <p>Our events team reads every enquiry and will respond within one business day.</p>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>We check your date</h4>
+              <p>We'll confirm availability for your preferred date and discuss the best package options for your event.</p>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Venue tour &amp; proposal</h4>
+              <p>We invite you to tour the venue in person and present a tailored proposal for your celebration — no obligation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--gold-light);border:1px solid #fde68a;border-radius:14px;padding:1.2rem;">
+          <p style="font-size:.9rem;color:var(--gold);font-weight:700;margin:0 0 .3rem;">Book early to secure your date</p>
+          <p style="font-size:.85rem;color:var(--gold);margin:0;opacity:.85;">Popular dates — particularly weekends and holiday periods — fill months in advance. We recommend enquiring as early as possible to avoid disappointment.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">🥂 Enquire — {{PHONE}}</a>
+
+</body>
+</html>

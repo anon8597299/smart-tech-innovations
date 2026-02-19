@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --navy: #1e3a5f;
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .85rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .7rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 8px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 680px; }
+    .badge { display: inline-block; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-weight: 700; padding: .28rem .65rem; border-radius: 8px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 8px; padding: .72rem 1.1rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; }
+    .card .icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .bio-block { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem; }
+    .bio-block .advisor-avatar { width: 4.5rem; height: 4.5rem; background: var(--navy); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1rem; }
+    .bio-block .advisor-name { font-size: 1.25rem; font-weight: 800; margin: 0 0 .15rem; }
+    .bio-block .advisor-title { font-size: .85rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 1rem; }
+    .bio-block p { font-size: .93rem; color: var(--muted); line-height: 1.65; margin: 0 0 .8rem; }
+    .bio-block p:last-child { margin-bottom: 0; }
+    .credentials-card { background: var(--navy); color: #fff; border-radius: 14px; padding: 1.5rem; }
+    .credentials-card h3 { color: #fff; font-size: 1rem; margin: 0 0 1rem; }
+    .cred-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .65rem; }
+    .cred-list li { display: flex; gap: .6rem; font-size: .88rem; line-height: 1.5; align-items: flex-start; }
+    .cred-list li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; margin-top: .1rem; }
+    .est-tag { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 6px; font-size: .78rem; font-weight: 700; padding: .22rem .55rem; margin-top: 1rem; color: rgba(255,255,255,.85); }
+    .disclaimer { background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1.1rem; font-size: .8rem; color: var(--muted); margin-top: 1rem; line-height: 1.55; }
+    .cta-banner { background: var(--navy); color: #fff; padding: 2.5rem 1rem; text-align: center; border-radius: 14px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .4rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .85; }
+    .cta-banner .btn-primary { background: var(--primary); color: #fff; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 10px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="nav-cta">Book a Meeting</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">Established {{YEAR_ESTABLISHED}}</span>
+      <h1>About {{OWNER_NAME}}</h1>
+      <p class="lead">Independent financial adviser serving {{SUBURB}} and surrounding communities with honest, practical advice since {{YEAR_ESTABLISHED}}.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="grid-2">
+
+        <div class="bio-block">
+          <div class="advisor-avatar">👔</div>
+          <p class="advisor-name">{{OWNER_NAME}}</p>
+          <p class="advisor-title">{{OWNER_TITLE}}</p>
+          <p>With a career spanning more than a decade in financial services, {{OWNER_NAME}} established {{BUSINESS_NAME}} in {{YEAR_ESTABLISHED}} with a clear mission: to provide {{SUBURB}} residents and business owners with the same calibre of financial guidance that was once only available to the very wealthy.</p>
+          <p>{{OWNER_NAME}} takes the time to truly understand each client's situation before making any recommendation. This means looking beyond the numbers to understand your values, your family, your plans, and your fears — because great financial advice has to fit your life, not the other way around.</p>
+          <p>Outside of work, {{OWNER_NAME}} is deeply connected to the local {{SUBURB}} community and believes that financial wellbeing is a foundation for a fulfilling life — not just a number on a spreadsheet.</p>
+          <div class="cta">
+            <a href="contact.html" class="btn btn-primary">Book a Meeting</a>
+            <a href="services.html" class="btn btn-secondary">View Services</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="credentials-card">
+            <h3>Qualifications &amp; Credentials</h3>
+            <ul class="cred-list">
+              <li>Bachelor of Commerce (Financial Planning) — fully accredited</li>
+              <li>Certified Financial Planner (CFP) designation — ongoing professional development</li>
+              <li>Authorised Representative of a licensed Australian Financial Services group</li>
+              <li>Member of the Financial Advice Association Australia (FAAA)</li>
+            </ul>
+            <div class="est-tag">Serving clients since {{YEAR_ESTABLISHED}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f8fafc; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="container">
+      <h2>Our Values</h2>
+      <p class="lead">Three principles guide every client relationship at {{BUSINESS_NAME}}.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🤝</div>
+          <h3>Client-First</h3>
+          <p>Your interests come before everything else. We are independent advisers — our only obligation is to you, not to product providers or commissions.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>Long-Term Focus</h3>
+          <p>We are not interested in quick wins. We build strategies designed to serve you over decades, with regular reviews to keep you on track as life changes.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>Plain English</h3>
+          <p>Financial advice should be understandable. We cut through the jargon and explain every recommendation so you can make confident, informed decisions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Start the conversation</h2>
+      <p>Book a complimentary initial meeting with {{OWNER_NAME}} — no obligation, no pressure.</p>
+      <a href="contact.html" class="btn btn-primary">Book a Free Meeting</a>
+    </div>
+    <div class="disclaimer">
+      <strong>General Advice Warning:</strong> The information on this page is general in nature and does not take into account your personal objectives, financial situation, or needs. Before acting on any advice, consider whether it is appropriate for your circumstances. {{BUSINESS_NAME}} is an authorised representative. A Financial Services Guide is available on request.
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+      <p style="margin:.3rem 0 0;font-size:.78rem;">{{BUSINESS_NAME}} is an authorised representative. General advice only — consider your own circumstances before acting.</p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">📞 Book a meeting — {{PHONE}}</a>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e7e5e4;
+      --warm: #fef3c7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .01em; }
+    .nav-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .nav-links a { padding: .32rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; text-align: center; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; margin: 0 0 .6rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .badge { display: inline-block; background: var(--warm); color: #92400e; border: 1px solid #fde68a; font-weight: 700; padding: .28rem .65rem; border-radius: 999px; font-size: .76rem; margin-bottom: .5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .72rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center; }
+    .section { padding: 2.5rem 0; }
+    .section-header { text-align: center; margin-bottom: 1.4rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; }
+    .collection-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: box-shadow .15s, transform .15s; }
+    .collection-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.09); transform: translateY(-2px); }
+    .collection-thumb { background: var(--warm); padding: 2.5rem 1rem; text-align: center; font-size: 3rem; border-bottom: 1px solid var(--line); }
+    .collection-body { padding: 1rem 1.1rem 1.2rem; }
+    .collection-body h3 { font-size: 1rem; margin: 0 0 .3rem; }
+    .collection-body p { font-size: .88rem; color: var(--muted); margin: 0; line-height: 1.5; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.5rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .4rem; }
+    .cta-banner p { margin: 0 0 1.1rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; text-align: center; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="collections.html">Collections</a>
+        <a href="story.html">Our Story</a>
+        <a href="visit.html" class="nav-cta">Visit Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge">{{SUBURB}} {{STATE}}</span>
+      <h1>Our Collections</h1>
+      <p class="lead">Carefully curated pieces for every style and occasion. Discover what is new in store at {{BUSINESS_NAME}}.</p>
+      <div class="cta">
+        <a href="visit.html" class="btn btn-primary">Visit Us In Store</a>
+        <a href="story.html" class="btn btn-secondary">Our Story</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Browse Our Range</h2>
+        <p class="lead">From everyday essentials to statement pieces, our collections are updated regularly with new arrivals.</p>
+      </div>
+      <div class="grid-3">
+
+        <div class="collection-card">
+          <div class="collection-thumb">👗</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_1_NAME}}</h3>
+            <p>{{SERVICE_1_DESC}}</p>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-thumb">👟</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_2_NAME}}</h3>
+            <p>{{SERVICE_2_DESC}}</p>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-thumb">👜</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_3_NAME}}</h3>
+            <p>{{SERVICE_3_DESC}}</p>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-thumb">🧣</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_4_NAME}}</h3>
+            <p>{{SERVICE_4_DESC}}</p>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-thumb">💍</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_5_NAME}}</h3>
+            <p>{{SERVICE_5_DESC}}</p>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-thumb">🕶️</div>
+          <div class="collection-body">
+            <h3>{{SERVICE_6_NAME}}</h3>
+            <p>{{SERVICE_6_DESC}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Visit us in store</h2>
+      <p>See and feel the quality for yourself. Our team in {{SUBURB}} is ready to help you find the perfect piece.</p>
+      <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;">
+        <a href="visit.html" class="btn btn-primary">Get Directions</a>
+        <a href="tel:{{PHONE}}" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4);">{{PHONE}}</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">🛍️ Call us — {{PHONE}}</a>
+
+</body>
+</html>

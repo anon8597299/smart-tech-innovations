@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Products &amp; Services | {{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: #fef9c3; color: #713f12; border: 1px solid #fde047; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.05; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .75rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .section-label { font-size: .82rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.4rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.2rem; }
+    .card .icon { font-size: 1.8rem; margin-bottom: .5rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; margin-top: 1.2rem; }
+    .stat { background: var(--primary); color: #fff; border-radius: 14px; padding: 1rem; text-align: center; }
+    .stat strong { display: block; font-size: 1.8rem; font-weight: 800; }
+    .stat span { font-size: .82rem; opacity: .9; }
+    .trust-bar { background: var(--primary); color: #fff; padding: 1rem 0; }
+    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .9rem; }
+    .cta-banner { background: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%); color: #fff; padding: 3rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.4rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .8rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+
+    /* Page-specific */
+    .page-hero { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; margin-top: 1.6rem; }
+    .service-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; gap: .4rem; transition: box-shadow .2s; }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+    .service-icon { font-size: 2.2rem; margin-bottom: .3rem; }
+    .service-card h3 { font-size: 1.05rem; margin: 0; }
+    .service-card p { font-size: .9rem; color: var(--muted); margin: .3rem 0 0; line-height: 1.55; }
+    .service-tag { display: inline-block; background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; font-size: .75rem; font-weight: 700; padding: .15rem .55rem; border-radius: 999px; margin-top: .5rem; align-self: flex-start; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; margin-top: 1.6rem; position: relative; }
+    .step-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem 1.2rem; text-align: center; position: relative; }
+    .step-number { width: 2.4rem; height: 2.4rem; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; margin: 0 auto .75rem; }
+    .step-card h3 { font-size: .95rem; margin-bottom: .3rem; }
+    .step-card p { font-size: .85rem; color: var(--muted); margin: 0; line-height: 1.5; }
+    .step-connector { display: none; }
+
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .stat-grid, .services-grid, .steps-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.25); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+      <nav class="nav-links">
+        <a href="services.html">Services</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html" class="nav-cta">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="badge">☀️ CEC Accredited Installers</div>
+      <h1>Solar Products &amp; Services</h1>
+      <p class="lead">From residential rooftop systems to commercial installations and battery storage, we deliver complete solar solutions backed by expert workmanship and industry-leading warranties.</p>
+      <div class="cta">
+        <a href="contact.html" class="btn btn-primary">Get a Free Quote &rarr;</a>
+        <a href="tel:{{PHONE}}" class="btn btn-secondary">Call {{PHONE}}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Everything Solar</div>
+      <h2>What We Offer</h2>
+      <p class="lead">Quality products, professional installation, and ongoing support &mdash; all in one place.</p>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">☀️</div>
+          <h3>{{SERVICE_1_NAME}}</h3>
+          <p>{{SERVICE_1_DESC}}</p>
+          <span class="service-tag">Most Popular</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔋</div>
+          <h3>{{SERVICE_2_NAME}}</h3>
+          <p>{{SERVICE_2_DESC}}</p>
+          <span class="service-tag">Store &amp; Save</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>{{SERVICE_3_NAME}}</h3>
+          <p>{{SERVICE_3_DESC}}</p>
+          <span class="service-tag">Residential</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏭</div>
+          <h3>{{SERVICE_4_NAME}}</h3>
+          <p>{{SERVICE_4_DESC}}</p>
+          <span class="service-tag">Commercial</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>{{SERVICE_5_NAME}}</h3>
+          <p>{{SERVICE_5_DESC}}</p>
+          <span class="service-tag">Maintenance</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>{{SERVICE_6_NAME}}</h3>
+          <p>{{SERVICE_6_DESC}}</p>
+          <span class="service-tag">Monitoring</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" style="background:#f8fafc; padding:2.5rem 0;">
+    <div class="container">
+      <div class="section-label">Simple Process</div>
+      <h2>How It Works</h2>
+      <p class="lead">Getting solar shouldn't be complicated. Our streamlined four-step process gets you from enquiry to energy savings as quickly as possible.</p>
+      <div class="steps-grid">
+
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Site Assessment</h3>
+          <p>Our accredited consultant visits your property, assesses your roof, energy usage, and goals to design the ideal system for your needs.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>System Design</h3>
+          <p>We model your custom solar solution, optimising panel layout, inverter sizing, and battery options to maximise your return on investment.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Professional Install</h3>
+          <p>Our licensed electricians complete the installation to the highest standards, handling all paperwork, grid connection, and safety checks.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Ongoing Support</h3>
+          <p>We don't disappear after install. Enjoy ongoing monitoring, annual health checks, and dedicated after-sales support for the life of your system.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust indicators -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Why Choose Us</div>
+      <h2>Quality You Can Count On</h2>
+      <div class="grid-3" style="margin-top:1.2rem;">
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>15-Year Workmanship Warranty</h3>
+          <p>We stand behind every install with an industry-leading workmanship warranty &mdash; because we build systems that last.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✅</div>
+          <h3>CEC Accredited Installers</h3>
+          <p>All installs are carried out by Clean Energy Council accredited professionals, ensuring safety and eligibility for rebates.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💰</div>
+          <h3>Flexible Finance Options</h3>
+          <p>$0 deposit and low-rate finance available. Start saving on day one, with repayments often less than your current power bill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Find the Right Solar Solution for Your Property</h2>
+        <p>Talk to a specialist today for a personalised quote with no pressure, no obligation, and no hidden fees.</p>
+        <div class="cta" style="justify-content:center;">
+          <a href="contact.html" class="btn btn-primary">Get My Free Quote &rarr;</a>
+          <a href="tel:{{PHONE}}" class="btn" style="border-color:rgba(255,255,255,.4); color:#fff;">Call {{PHONE}}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">&copy; {{BUSINESS_NAME}} &middot; {{ADDRESS}}, {{SUBURB}} {{STATE}} &middot; <a href="tel:{{PHONE}}">{{PHONE}}</a> &middot; <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+    </div>
+  </footer>
+
+  <a class="phone-cta" href="tel:{{PHONE}}">&#9728;&#65039; Free quote &mdash; {{PHONE}}</a>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --accent: #b45309;
+      --accent-light: #fef3c7;
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; border-radius: 999px; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: var(--accent-light); color: var(--accent); border: 1px solid #fde68a; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.1; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .72rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .accent-panel { background: var(--accent-light); border: 1px solid #fde68a; border-radius: 14px; padding: 1.2rem; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; margin-top: 1rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .8rem; }
+    .kpi strong { display: block; font-size: 1rem; }
+    .kpi span { color: var(--muted); font-size: .84rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .stars { color: #f59e0b; margin-bottom: .4rem; }
+    .reviewer { font-weight: 700; font-size: .84rem; color: var(--muted); margin-top: .6rem; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.8rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .contact-info { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .contact-row { display: flex; gap: .5rem; margin-bottom: .6rem; font-size: .95rem; align-items: flex-start; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+
+    /* Page-specific styles */
+    .page-hero { padding: 3.5rem 0 2rem; border-bottom: 1px solid var(--line); background: #fff; }
+    .section-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: .5rem; }
+    .form-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem; }
+    .form-card h2 { font-size: 1.2rem; margin-bottom: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
+    .form-note { font-size: .82rem; color: var(--muted); text-align: center; margin-top: .6rem; }
+    .form-note strong { color: var(--text); }
+    .expect-list { list-style: none; margin: .8rem 0 0; padding: 0; }
+    .expect-list li { display: flex; gap: .5rem; margin-bottom: .55rem; font-size: .9rem; align-items: flex-start; }
+    .expect-list li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; margin-top: .1rem; }
+    .contact-info h3 { font-size: 1rem; margin-bottom: .9rem; color: var(--primary); }
+    .contact-row a { color: var(--primary); }
+    .contact-row a:hover { text-decoration: underline; }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 1.2rem 0; }
+
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Book a Consult</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="badge">Free · No obligation</div>
+      <h1>Book a Free Consultation</h1>
+      <p class="lead">Tell us a little about your situation and we'll be in touch to arrange a time. The first consultation is completely free.</p>
+    </div>
+  </section>
+
+  <!-- Contact section: two-column -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items: start;">
+
+        <!-- Left: enquiry form -->
+        <div class="form-card">
+          <h2>Send us an enquiry</h2>
+          <form action="https://formsubmit.co/{{EMAIL}}" method="POST">
+            <!-- FormSubmit config -->
+            <input type="hidden" name="_subject" value="New Enquiry — {{BUSINESS_NAME}}" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="thank-you.html" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full name *</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address *</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com.au" required />
+            </div>
+
+            <div class="form-group">
+              <label for="business">Business name</label>
+              <input type="text" id="business" name="business_name" placeholder="Your business name (if applicable)" />
+            </div>
+
+            <div class="form-group">
+              <label for="enquiry">Enquiry type *</label>
+              <select id="enquiry" name="enquiry_type" required>
+                <option value="" disabled selected>Select an enquiry type…</option>
+                <option value="Tax return">Tax return</option>
+                <option value="BAS / bookkeeping">BAS / bookkeeping</option>
+                <option value="Business advisory">Business advisory</option>
+                <option value="New business setup">New business setup</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us a bit about what you need help with…"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send enquiry →</button>
+          </form>
+          <p class="form-note"><strong>First consultation is free.</strong> No obligation — we'll respond within one business day.</p>
+        </div>
+
+        <!-- Right: contact info + what to expect -->
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="contact-info">
+            <h3>Contact details</h3>
+            <div class="contact-row">
+              <span>📞</span>
+              <span><a href="tel:{{PHONE}}">{{PHONE}}</a></span>
+            </div>
+            <div class="contact-row">
+              <span>✉️</span>
+              <span><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></span>
+            </div>
+            <div class="contact-row">
+              <span>📍</span>
+              <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+            </div>
+            <hr class="divider" />
+            <p style="font-size: .85rem; color: var(--muted); margin: 0;"><strong style="color: var(--text);">Office hours</strong><br />Monday – Friday: 9:00am – 5:30pm<br />Appointments available outside hours on request.</p>
+          </div>
+
+          <div class="contact-info">
+            <h3>What to expect</h3>
+            <p style="font-size: .88rem; color: var(--muted); margin: 0 0 .4rem;">Here's what happens after you get in touch:</p>
+            <ul class="expect-list">
+              <li>We'll respond within one business day to confirm your enquiry</li>
+              <li>We'll arrange a free 30-minute consultation at a time that suits you</li>
+              <li>We'll review your current situation and discuss your goals</li>
+              <li>We'll recommend the right services and provide a clear, fixed-fee quote</li>
+              <li>No pressure — you decide if and when you'd like to proceed</li>
+            </ul>
+          </div>
+
+          <div class="accent-panel">
+            <p style="font-size: .9rem; font-weight: 700; color: var(--accent); margin: 0 0 .3rem;">First consult is completely free</p>
+            <p style="font-size: .85rem; color: var(--muted); margin: 0;">No charge to meet with us. We'll give you our honest assessment and a fixed-fee quote — with no obligation to proceed.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">📞 Book a consult — {{PHONE}}</a>
+
+</body>
+</html>

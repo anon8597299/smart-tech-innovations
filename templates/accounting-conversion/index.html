@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: {{COLOR_PRIMARY}};
+      --accent: #b45309;
+      --accent-light: #fef3c7;
+      --line: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; gap: 1rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; border-radius: 999px; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: var(--accent-light); color: var(--accent); border: 1px solid #fde68a; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.1; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .35rem; }
+    .lead { color: var(--muted); font-size: 1rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .72rem 1.1rem; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .card h3 { font-size: 1rem; }
+    .card p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
+    .accent-panel { background: var(--accent-light); border: 1px solid #fde68a; border-radius: 14px; padding: 1.2rem; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; margin-top: 1rem; }
+    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .8rem; }
+    .kpi strong { display: block; font-size: 1rem; }
+    .kpi span { color: var(--muted); font-size: .84rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .stars { color: #f59e0b; margin-bottom: .4rem; }
+    .reviewer { font-weight: 700; font-size: .84rem; color: var(--muted); margin-top: .6rem; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 2.8rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-primary { background: #fff; color: var(--primary); }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    label { font-size: .85rem; font-weight: 600; color: #374151; }
+    input, select, textarea { padding: .65rem .85rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: .95rem; font-family: inherit; color: var(--text); background: #fff; }
+    textarea { resize: vertical; min-height: 100px; }
+    .submit-btn { width: 100%; padding: .85rem; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+    .contact-info { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .contact-row { display: flex; gap: .5rem; margin-bottom: .6rem; font-size: .95rem; align-items: flex-start; }
+    .phone-cta { display: none; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+
+    /* Page-specific styles */
+    .trust-strip { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.4rem; padding: 1rem 1.2rem; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+    .trust-item { display: flex; align-items: center; gap: .4rem; font-size: .88rem; font-weight: 600; color: var(--muted); }
+    .trust-item::before { content: "✓"; color: var(--primary); font-weight: 800; }
+    .hero-contact-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .free-badge { display: inline-block; background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; font-weight: 700; padding: .25rem .65rem; border-radius: 999px; font-size: .78rem; margin-top: .8rem; }
+    .hero-contact-card .contact-row { font-size: .92rem; }
+    .why-list { list-style: none; margin: .6rem 0 0; padding: 0; }
+    .why-list li { display: flex; gap: .5rem; margin-bottom: .5rem; font-size: .92rem; }
+    .why-list li::before { content: "→"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .section-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: .5rem; }
+
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3, .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .btn { width: 100%; }
+      .trust-strip { gap: .8rem; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Book a Consult</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">Registered Tax Agent · {{SUBURB}}, {{STATE}}</div>
+      <h1>{{HERO_HEADLINE}}</h1>
+      <p class="lead">{{TAGLINE}}</p>
+      <div class="cta">
+        <a href="contact.html" class="btn btn-primary">Book a Free Consult</a>
+        <a href="services.html" class="btn btn-secondary">View Services</a>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="trust-strip">
+        <span class="trust-item">Fixed-fee pricing</span>
+        <span class="trust-item">BAS registered</span>
+        <span class="trust-item">Same-week bookings</span>
+        <span class="trust-item">Proactive advice</span>
+      </div>
+
+      <!-- Hero grid -->
+      <div class="grid-2" style="margin-top: 2rem;">
+        <!-- Left: contact details -->
+        <div class="hero-contact-card">
+          <h3 style="margin-bottom: .8rem;">Get in touch</h3>
+          <div class="contact-row">
+            <span>📞</span>
+            <span><a href="tel:{{PHONE}}" style="color: var(--primary); font-weight: 700;">{{PHONE}}</a></span>
+          </div>
+          <div class="contact-row">
+            <span>✉️</span>
+            <span><a href="mailto:{{EMAIL}}" style="color: var(--primary);">{{EMAIL}}</a></span>
+          </div>
+          <div class="contact-row">
+            <span>📍</span>
+            <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+          </div>
+          <div class="free-badge">First consult free — no obligation</div>
+          <div style="margin-top: 1rem;">
+            <a href="contact.html" class="btn btn-primary" style="width: 100%; justify-content: center;">Book your free consult →</a>
+          </div>
+        </div>
+
+        <!-- Right: why switch accountants -->
+        <div class="accent-panel">
+          <h3 style="color: var(--accent); margin-bottom: .3rem;">Why switch accountants?</h3>
+          <p style="font-size: .88rem; color: var(--muted); margin: 0 0 .6rem;">Many business owners stay with the wrong accountant for years. Here's what you should expect:</p>
+          <ul class="why-list">
+            <li>Clear, fixed fees quoted upfront — no surprise invoices</li>
+            <li>Proactive tax planning, not just end-of-year compliance</li>
+            <li>An accountant who knows your business and calls you first</li>
+            <li>Fast turnaround and same-week availability when you need it</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" style="background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="container">
+      <div class="section-label">What we do</div>
+      <h2>Services built for Australian businesses</h2>
+      <p class="lead">From tax returns to ongoing bookkeeping, we handle the numbers so you can focus on growth.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>{{SERVICE_1_NAME}}</h3>
+          <p>{{SERVICE_1_DESC}}</p>
+          <a href="services.html" style="display: inline-block; margin-top: .8rem; font-size: .85rem; color: var(--primary); font-weight: 700;">Learn more →</a>
+        </div>
+        <div class="card">
+          <div class="icon">📋</div>
+          <h3>{{SERVICE_2_NAME}}</h3>
+          <p>{{SERVICE_2_DESC}}</p>
+          <a href="services.html" style="display: inline-block; margin-top: .8rem; font-size: .85rem; color: var(--primary); font-weight: 700;">Learn more →</a>
+        </div>
+        <div class="card">
+          <div class="icon">💼</div>
+          <h3>{{SERVICE_3_NAME}}</h3>
+          <p>{{SERVICE_3_DESC}}</p>
+          <a href="services.html" style="display: inline-block; margin-top: .8rem; font-size: .85rem; color: var(--primary); font-weight: 700;">Learn more →</a>
+        </div>
+      </div>
+      <div style="margin-top: 1.2rem; text-align: center;">
+        <a href="services.html" class="btn btn-secondary">See all services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Why clients choose us</div>
+      <h2>A better accounting experience</h2>
+      <div class="kpi-grid">
+        <div class="kpi">
+          <strong>Free first consult</strong>
+          <span>No charge to meet and discuss your needs</span>
+        </div>
+        <div class="kpi">
+          <strong>Fixed-fee pricing</strong>
+          <span>Know your cost before we start — always</span>
+        </div>
+        <div class="kpi">
+          <strong>Proactive reviews</strong>
+          <span>We reach out to you, not the other way around</span>
+        </div>
+        <div class="kpi">
+          <strong>Same-week bookings</strong>
+          <span>Get seen quickly when deadlines are pressing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" style="background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="container">
+      <div class="section-label">Client reviews</div>
+      <h2>Trusted by business owners in {{SUBURB}}</h2>
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p style="font-size: .92rem; margin: 0;">"Switching to {{BUSINESS_NAME}} was the best decision I made for my business. They found deductions my old accountant never mentioned and the fixed-fee pricing means no surprises."</p>
+          <div class="reviewer">— Sarah T., Small Business Owner · {{SUBURB}}, {{STATE}}</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p style="font-size: .92rem; margin: 0;">"Finally an accountant who actually calls me before EOFY to talk strategy. The whole team is responsive, knowledgeable and genuinely care about helping my business grow."</p>
+          <div class="reviewer">— Mark D., Tradie &amp; Sole Trader · {{SUBURB}}, {{STATE}}</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p style="font-size: .92rem; margin: 0;">"BAS lodgements are always on time and the advice I get is practical and relevant. I refer everyone in {{SUBURB}} who needs an accountant — genuinely great service."</p>
+          <div class="reviewer">— Priya M., Retail Business Owner · {{SUBURB}}, {{STATE}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Stop overpaying tax</h2>
+        <p>Book a free consultation with {{BUSINESS_NAME}} and discover how much you could be saving.</p>
+        <a href="contact.html" class="btn btn-primary">Book your free consult today</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">📞 Book a consult — {{PHONE}}</a>
+
+</body>
+</html>

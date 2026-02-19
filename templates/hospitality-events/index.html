@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{META_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <style>
+    :root {
+      --bg: {{COLOR_BG}};
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --primary: {{COLOR_PRIMARY}};
+      --gold: #b45309;
+      --gold-light: #fef3c7;
+      --line: #e7e5e4;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
+    .hero { padding: 5rem 0 2.5rem; }
+    .badge { display: inline-block; background: var(--gold-light); color: var(--gold); border: 1px solid #fde68a; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; font-size: .78rem; margin-bottom: .8rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 .7rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+    h3 { margin: 0 0 .4rem; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 680px; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; padding: .75rem 1.2rem; font-weight: 700; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { border-color: var(--line); background: #fff; }
+    .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; }
+    .stars { color: #f59e0b; margin-bottom: .4rem; }
+    .reviewer { font-weight: 700; font-size: .84rem; color: var(--muted); margin-top: .6rem; }
+    .testimonial-card p { font-size: .95rem; margin: 0; font-style: italic; }
+    .cta-banner { background: var(--primary); color: #fff; padding: 3rem 1rem; text-align: center; border-radius: 16px; margin: 2rem 0; }
+    .cta-banner h2 { color: #fff; margin-bottom: .5rem; }
+    .cta-banner p { margin: 0 0 1.2rem; opacity: .9; }
+    .cta-banner .btn-white { background: #fff; color: var(--primary); border-color: #fff; }
+    .trust-strip { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0; padding: 1rem 1.2rem; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+    .trust-item { display: flex; align-items: center; gap: .5rem; font-size: .88rem; font-weight: 600; color: var(--muted); }
+    .trust-item span { font-size: 1.1rem; }
+    .hero-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem; }
+    .hero-card h3 { font-size: 1rem; margin: 0 0 .8rem; }
+    .hero-card .contact-row { display: flex; align-items: center; gap: .6rem; margin-bottom: .6rem; font-size: .9rem; }
+    .hero-card .contact-row .icon { font-size: 1rem; }
+    .hero-card .contact-row a { color: var(--primary); font-weight: 700; }
+    .enquire-note { font-size: .8rem; color: var(--muted); margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--line); }
+    .occasions-list { list-style: none; padding: 0; margin: 0; }
+    .occasions-list li { display: flex; align-items: center; gap: .6rem; padding: .4rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; font-weight: 600; }
+    .occasions-list li:last-child { border-bottom: none; }
+    .occasions-list li .occ-icon { font-size: 1.1rem; }
+    .service-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem; }
+    .service-card .svc-icon { font-size: 1.7rem; margin-bottom: .5rem; }
+    .service-card h3 { font-size: 1rem; margin: 0 0 .3rem; }
+    .service-card p { font-size: .9rem; color: var(--muted); margin: 0; }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--muted); font-size: .88rem; margin-top: 2rem; }
+    .phone-cta { display: none; }
+    @media (max-width: 860px) {
+      body { padding-bottom: 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .trust-strip { gap: .8rem; }
+      .btn { width: 100%; }
+      .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(0,0,0,.2); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">{{BUSINESS_NAME}}</a>
+    <nav class="nav-links">
+      <a href="packages.html">Packages</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" class="nav-cta">Enquire Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">Weddings · Events · Celebrations · {{SUBURB}}, {{STATE}}</div>
+    <h1>{{HERO_HEADLINE}}</h1>
+    <p class="lead">{{TAGLINE}}</p>
+    <div class="cta">
+      <a href="packages.html" class="btn btn-primary">View Packages</a>
+      <a href="contact.html" class="btn btn-secondary">Enquire Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="container">
+  <div class="trust-strip">
+    <div class="trust-item"><span>✅</span> Licensed Venue</div>
+    <div class="trust-item"><span>🍽️</span> In-House Catering</div>
+    <div class="trust-item"><span>🚗</span> Ample Parking</div>
+    <div class="trust-item"><span>👥</span> Capacity up to 200</div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- Hero Grid -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2">
+      <div class="hero-card">
+        <h3>Get in Touch</h3>
+        <div class="contact-row">
+          <span class="icon">📞</span>
+          <span>Call us: <a href="tel:{{PHONE}}">{{PHONE}}</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="icon">✉️</span>
+          <span>Email: <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="icon">📍</span>
+          <span>{{ADDRESS}}, {{SUBURB}} {{STATE}}</span>
+        </div>
+        <div class="cta" style="margin-top:.9rem;">
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center;">Enquire for Availability</a>
+        </div>
+        <p class="enquire-note">We recommend enquiring early — popular dates fill quickly. Reach out to check availability for your event date.</p>
+      </div>
+      <div class="hero-card">
+        <h3>Perfect for Every Occasion</h3>
+        <ul class="occasions-list">
+          <li><span class="occ-icon">💍</span> Weddings &amp; Receptions</li>
+          <li><span class="occ-icon">🏢</span> Corporate Events &amp; Conferences</li>
+          <li><span class="occ-icon">🎂</span> Birthday Milestones</li>
+          <li><span class="occ-icon">💑</span> Engagement Parties</li>
+          <li><span class="occ-icon">🥂</span> Anniversary Celebrations</li>
+          <li><span class="occ-icon">🎓</span> Graduations &amp; Formals</li>
+          <li><span class="occ-icon">🌟</span> Private Dining &amp; Functions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Services / Occasions -->
+<section class="section">
+  <div class="container">
+    <p style="font-size:.82rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;">What we offer</p>
+    <h2>Our Specialities</h2>
+    <p class="lead">From intimate gatherings to grand celebrations, we bring your vision to life with exceptional attention to detail.</p>
+    <div class="grid-3">
+      <div class="service-card">
+        <div class="svc-icon">💍</div>
+        <h3>{{SERVICE_1_NAME}}</h3>
+        <p>{{SERVICE_1_DESC}}</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">🍽️</div>
+        <h3>{{SERVICE_2_NAME}}</h3>
+        <p>{{SERVICE_2_DESC}}</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">🏢</div>
+        <h3>{{SERVICE_3_NAME}}</h3>
+        <p>{{SERVICE_3_DESC}}</p>
+      </div>
+    </div>
+    <div class="cta">
+      <a href="packages.html" class="btn btn-secondary">View Packages</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Testimonials -->
+<section class="section">
+  <div class="container">
+    <p style="font-size:.82rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;">Happy couples &amp; clients</p>
+    <h2>What Our Guests Are Saying</h2>
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Our wedding day was everything we dreamed of and more. The team went above and beyond in every detail — the food, the setting, the service. Truly magical."</p>
+        <div class="reviewer">— Emma &amp; Liam R. · {{SUBURB}}, {{STATE}}</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"We hosted our corporate gala here and received nothing but compliments. The catering team was outstanding and the room looked stunning. Will absolutely return."</p>
+        <div class="reviewer">— David K., Events Manager · {{SUBURB}}, {{STATE}}</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"From the first enquiry to the last dance, {{BUSINESS_NAME}} made planning our celebration effortless. The dedicated coordinator made all the difference."</p>
+        <div class="reviewer">— Natalie &amp; Chris T. · {{SUBURB}}, {{STATE}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CTA Banner -->
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Your special day deserves the perfect setting</h2>
+      <p>Contact our events team today to check availability and begin planning your celebration.</p>
+      <a href="contact.html" class="btn btn-white">Enquire Now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="margin:0;">© {{BUSINESS_NAME}} · {{ADDRESS}}, {{SUBURB}} {{STATE}} · <a href="tel:{{PHONE}}">{{PHONE}}</a> · <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+</footer>
+<a class="phone-cta" href="tel:{{PHONE}}">🥂 Enquire — {{PHONE}}</a>
+
+</body>
+</html>
