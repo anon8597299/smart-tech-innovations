@@ -838,7 +838,7 @@ def main():
     # Load environment variables
     # ------------------------------------------------------------------
     env_path = Path(__file__).parent / ".env"
-    load_dotenv(dotenv_path=env_path)
+    load_dotenv(dotenv_path=env_path, override=True)
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key and not args.dry_run:
