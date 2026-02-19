@@ -1,128 +1,93 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 608" width="1080" height="608" role="img" aria-label="ImproveYourSite — Google Business Profile Cover">
   <defs>
-    <!-- Background: subtle depth, dark navy -->
-    <radialGradient id="bg" cx="38%" cy="50%" r="70%">
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
       <stop offset="0%"   stop-color="#141d35"/>
-      <stop offset="100%" stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#080d1a"/>
     </radialGradient>
-
-    <!-- Bar / accent gradient: indigo → mint -->
-    <linearGradient id="bar-g" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#5b4dff"/>
-      <stop offset="100%" stop-color="#2dd4bf"/>
-    </linearGradient>
-
-    <!-- Top line gradient -->
-    <linearGradient id="top-line" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#5b4dff"/>
-      <stop offset="60%"  stop-color="#2dd4bf"/>
-      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
-    </linearGradient>
-
-    <!-- Glow behind bars -->
-    <radialGradient id="glow" cx="50%" cy="60%" r="50%">
-      <stop offset="0%"   stop-color="#5b4dff" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#5b4dff" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Bar gradient using userSpaceOnUse so all bars share same colour sweep -->
     <linearGradient id="bar-us" x1="680" y1="0" x2="990" y2="0" gradientUnits="userSpaceOnUse">
       <stop offset="0%"   stop-color="#5b4dff"/>
       <stop offset="100%" stop-color="#2dd4bf"/>
     </linearGradient>
+    <linearGradient id="accent-line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#5b4dff"/>
+      <stop offset="60%"  stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="55%" r="40%">
+      <stop offset="0%"   stop-color="#5b4dff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#5b4dff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <!-- ── Background ── -->
+  <!-- Background -->
   <rect width="1080" height="608" fill="url(#bg)"/>
+  <rect width="1080" height="608" fill="url(#glow)"/>
 
-  <!-- Subtle glow behind right-side bars -->
-  <ellipse cx="840" cy="380" rx="280" ry="260" fill="url(#glow)"/>
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1080" height="5" fill="url(#accent-line)"/>
 
-  <!-- ── Top accent line ── -->
-  <rect x="0" y="0" width="1080" height="5" fill="url(#top-line)"/>
+  <!-- Decorative rising bars (right side) -->
+  <rect x="688" y="358" width="74" height="170" rx="14" fill="url(#bar-us)" opacity="0.9"/>
+  <rect x="782" y="258" width="74" height="270" rx="14" fill="url(#bar-us)" opacity="0.9"/>
+  <rect x="876" y="138" width="74" height="390" rx="14" fill="url(#bar-us)" opacity="0.9"/>
 
-  <!-- ── Decorative large bars (right side) ── -->
-  <!-- Bar 1: short, indigo -->
-  <rect x="688" y="348" width="74" height="180" rx="14" fill="url(#bar-us)" opacity="0.92"/>
-  <!-- Bar 2: medium -->
-  <rect x="782" y="248" width="74" height="280" rx="14" fill="url(#bar-us)" opacity="0.92"/>
-  <!-- Bar 3: tall, mint -->
-  <rect x="876" y="128" width="74" height="400" rx="14" fill="url(#bar-us)" opacity="0.92"/>
+  <!-- Thin baseline under bars -->
+  <rect x="680" y="528" width="290" height="2" rx="1" fill="url(#bar-us)" opacity="0.25"/>
 
-  <!-- Subtle baseline rule under bars -->
-  <rect x="680" y="528" width="290" height="2" rx="1" fill="url(#bar-us)" opacity="0.3"/>
+  <!-- Vertical separator -->
+  <rect x="630" y="100" width="1" height="408" fill="#ffffff" opacity="0.05"/>
 
-  <!-- ── Vertical divider ── -->
-  <rect x="620" y="80" width="1" height="448" fill="#ffffff" opacity="0.06"/>
+  <!-- ─────────────────────────────────────── -->
+  <!-- CENTRED LEFT CONTENT BLOCK             -->
+  <!-- Content block: x=80–600, centre y=304  -->
+  <!-- ─────────────────────────────────────── -->
 
-  <!-- ══════════════════════════════════════════ -->
-  <!-- LEFT CONTENT BLOCK                        -->
-  <!-- ══════════════════════════════════════════ -->
-
-  <!-- Mini logo mark (inline bars) -->
-  <rect x="90" y="88"  width="18" height="12" rx="3" fill="url(#bar-g)"/>
-  <rect x="114" y="82" width="18" height="18" rx="3" fill="url(#bar-g)"/>
-  <rect x="138" y="75" width="18" height="25" rx="3" fill="url(#bar-g)"/>
-
-  <!-- Brand name beside mini bars -->
-  <text x="168" y="103"
+  <!-- Mini logo mark -->
+  <rect x="90"  y="170" width="16" height="11" rx="2.5" fill="url(#accent-line)"/>
+  <rect x="112" y="164" width="16" height="17" rx="2.5" fill="url(#accent-line)"/>
+  <rect x="134" y="158" width="16" height="23" rx="2.5" fill="url(#accent-line)"/>
+  <text x="160" y="181"
         font-family="Inter, system-ui, -apple-system, sans-serif"
-        font-size="22" font-weight="800" letter-spacing="-0.5">
+        font-size="19" font-weight="700" letter-spacing="-0.3">
     <tspan fill="#ffffff">Improve</tspan><tspan fill="#5b4dff">YourSite</tspan>
   </text>
 
-  <!-- ── Main headline ── -->
-  <text x="90" y="210"
+  <!-- Main headline — 2 lines, large -->
+  <text x="90" y="272"
         font-family="Inter, system-ui, -apple-system, sans-serif"
-        font-size="64" font-weight="800" letter-spacing="-2" fill="#ffffff">
+        font-size="66" font-weight="800" letter-spacing="-2.5" fill="#ffffff">
     Websites that
   </text>
-  <text x="90" y="284"
+  <text x="90" y="352"
         font-family="Inter, system-ui, -apple-system, sans-serif"
-        font-size="64" font-weight="800" letter-spacing="-2">
-    <!-- "rank, convert" in gradient via two tspans -->
+        font-size="66" font-weight="800" letter-spacing="-2.5">
     <tspan fill="#5b4dff">rank</tspan><tspan fill="#ffffff">, </tspan><tspan fill="#2dd4bf">convert</tspan><tspan fill="#ffffff"> &amp; grow.</tspan>
   </text>
 
-  <!-- ── Subheadline ── -->
-  <text x="90" y="334"
+  <!-- Single sub-line — clean and tight -->
+  <text x="90" y="400"
         font-family="Inter, system-ui, sans-serif"
-        font-size="20" font-weight="400" fill="#94a3b8" letter-spacing="0">
-    For Australian service businesses — tradies, clinics, advisers &amp; more.
+        font-size="19" font-weight="400" fill="#64748b" letter-spacing="0">
+    For Australian tradies, clinics, advisers &amp; service businesses.
   </text>
 
-  <!-- ── USP row ── -->
-  <!-- USP 1 pill -->
-  <rect x="90" y="374" width="178" height="40" rx="8" fill="#5b4dff" opacity="0.18"/>
-  <rect x="90" y="374" width="178" height="40" rx="8" fill="none" stroke="#5b4dff" stroke-width="1" opacity="0.5"/>
-  <text x="104" y="399" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#a5b4fc">⚡ Live in 24 hours</text>
+  <!-- Divider -->
+  <rect x="90" y="432" width="460" height="1" fill="#ffffff" opacity="0.07"/>
 
-  <!-- USP 2 pill -->
-  <rect x="280" y="374" width="196" height="40" rx="8" fill="#5b4dff" opacity="0.18"/>
-  <rect x="280" y="374" width="196" height="40" rx="8" fill="none" stroke="#5b4dff" stroke-width="1" opacity="0.5"/>
-  <text x="294" y="399" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#a5b4fc">✓ Transparent pricing</text>
-
-  <!-- USP 3 pill -->
-  <rect x="488" y="374" width="114" height="40" rx="8" fill="#5b4dff" opacity="0.18"/>
-  <rect x="488" y="374" width="114" height="40" rx="8" fill="none" stroke="#5b4dff" stroke-width="1" opacity="0.5"/>
-  <text x="502" y="399" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#a5b4fc">No lock-in</text>
-
-  <!-- ── Divider ── -->
-  <rect x="90" y="438" width="480" height="1" fill="#ffffff" opacity="0.08"/>
-
-  <!-- ── Bottom: packages & URL ── -->
-  <text x="90" y="472"
+  <!-- URL — prominent -->
+  <text x="90" y="500"
         font-family="Inter, system-ui, sans-serif"
-        font-size="16" font-weight="500" fill="#64748b">
-    Scan &amp; Fix $3,000  ·  Complete Build $5,000  ·  Premium Growth $10,000
-  </text>
-
-  <text x="90" y="536"
-        font-family="Inter, system-ui, sans-serif"
-        font-size="22" font-weight="700" fill="#2dd4bf" letter-spacing="-0.3">
+        font-size="24" font-weight="700" fill="#2dd4bf" letter-spacing="-0.3">
     improveyoursite.com
   </text>
 
+  <!-- Pricing line — small, understated -->
+  <text x="90" y="536"
+        font-family="Inter, system-ui, sans-serif"
+        font-size="15" font-weight="400" fill="#475569">
+    Scan &amp; Fix $3,000  ·  Complete Build $5,000  ·  Premium Growth $10,000
+  </text>
+
   <!-- Bottom accent line -->
-  <rect x="0" y="603" width="1080" height="5" fill="url(#top-line)"/>
+  <rect x="0" y="603" width="1080" height="5" fill="url(#accent-line)"/>
 </svg>
