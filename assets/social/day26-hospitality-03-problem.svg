@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Counter top-right -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" text-rendering="geometricPrecision">03 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- Calendar/booking icon inside circle -->
+  <!-- Calendar body -->
+  <rect x="100" y="402" width="60" height="50" rx="4" fill="none" stroke="white" stroke-width="5"/>
+  <!-- Top header bar of calendar -->
+  <rect x="100" y="402" width="60" height="16" rx="4" fill="white"/>
+  <!-- Booking tab lines (top of rect — two vertical bumps) -->
+  <rect x="114" y="394" width="6" height="14" rx="3" fill="white"/>
+  <rect x="140" y="394" width="6" height="14" rx="3" fill="white"/>
+  <!-- Grid lines inside calendar -->
+  <rect x="108" y="428" width="10" height="8" rx="1" fill="white" opacity="0.7"/>
+  <rect x="125" y="428" width="10" height="8" rx="1" fill="white" opacity="0.7"/>
+  <rect x="142" y="428" width="10" height="8" rx="1" fill="white" opacity="0.7"/>
+
+  <!-- Headline -->
+  <text x="236" y="380" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">NO ONLINE BOOKING</text>
+  <text x="236" y="458" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">= LOST RESERVATIONS</text>
+
+  <!-- Body text -->
+  <text x="236" y="530" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">If customers can't book online at 9pm,</text>
+  <text x="236" y="572" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">they'll find a venue that lets them.</text>
+
+  <!-- Footer URL -->
+  <text x="540" y="1042" font-size="22" text-anchor="middle" fill="#2dd4bf" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

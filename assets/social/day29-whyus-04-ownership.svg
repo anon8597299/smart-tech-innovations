@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Counter top-right -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" text-rendering="geometricPrecision">04 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- Key icon inside circle -->
+  <!-- Key bow (circle at left) -->
+  <circle cx="110" cy="415" r="20" fill="none" stroke="white" stroke-width="6"/>
+  <!-- Key blade (horizontal shaft) -->
+  <line x1="128" y1="415" x2="165" y2="415" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Tooth 1 -->
+  <line x1="148" y1="415" x2="148" y2="428" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Tooth 2 -->
+  <line x1="158" y1="415" x2="158" y2="428" stroke="white" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Headline -->
+  <text x="236" y="380" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">YOU OWN YOUR SITE.</text>
+  <text x="236" y="458" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">OUTRIGHT. FOREVER.</text>
+
+  <!-- Body text -->
+  <text x="236" y="530" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">No monthly platform fees. No lock-in.</text>
+  <text x="236" y="572" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">No subscriptions. It's yours.</text>
+
+  <!-- Footer URL -->
+  <text x="540" y="1042" font-size="22" text-anchor="middle" fill="#2dd4bf" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

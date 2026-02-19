@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1042" y="58" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="28" fill="#475569" letter-spacing="2" text-rendering="geometricPrecision">03 / 05</text>
+
+  <!-- Mint filled circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- White phone/mobile icon: simple rounded rect suggesting a phone -->
+  <rect x="109" y="365" width="42" height="72" rx="6" ry="6" fill="#ffffff"/>
+  <!-- screen area (dark cutout suggestion) -->
+  <rect x="114" y="374" width="32" height="50" rx="2" ry="2" fill="#2dd4bf"/>
+  <!-- home button dot -->
+  <circle cx="130" cy="430" r="4" fill="#ffffff"/>
+
+  <!-- Headline white 70px bold at x=230 -->
+  <text x="230" y="390" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">YOUR SITE ISN'T</text>
+  <text x="230" y="470" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">MOBILE-OPTIMISED</text>
+
+  <!-- Body text #94a3b8 38px at x=230 -->
+  <text x="230" y="560" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#94a3b8" text-rendering="geometricPrecision">60% of customers search on their phone.</text>
+  <text x="230" y="610" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#94a3b8" text-rendering="geometricPrecision">A non-mobile site loses them instantly.</text>
+
+  <!-- Bottom URL -->
+  <text x="540" y="1042" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#2dd4bf" font-weight="600" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

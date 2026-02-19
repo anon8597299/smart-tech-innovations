@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1042" y="58" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="28" fill="#475569" letter-spacing="2" text-rendering="geometricPrecision">04 / 05</text>
+
+  <!-- Headline centered white 70px bold -->
+  <text x="540" y="320" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">BUILT FOR PATIENT</text>
+  <text x="540" y="410" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">TRUST &amp; GOOGLE</text>
+
+  <!-- Bullet 1 -->
+  <circle cx="80" cy="540" r="9" fill="#2dd4bf"/>
+  <text x="114" y="554" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#ffffff" text-rendering="geometricPrecision">Online booking CTA above the fold</text>
+
+  <!-- Bullet 2 -->
+  <circle cx="80" cy="636" r="9" fill="#2dd4bf"/>
+  <text x="114" y="650" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#ffffff" text-rendering="geometricPrecision">Bulk billing badge prominently displayed</text>
+
+  <!-- Bullet 3 -->
+  <circle cx="80" cy="732" r="9" fill="#2dd4bf"/>
+  <text x="114" y="746" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#ffffff" text-rendering="geometricPrecision">Doctor profiles with credentials</text>
+
+  <!-- Bottom URL -->
+  <text x="540" y="1042" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#2dd4bf" font-weight="600" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

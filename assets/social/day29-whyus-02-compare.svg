@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Counter top-right -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" text-rendering="geometricPrecision">02 / 05</text>
+
+  <!-- Vertical centre divider -->
+  <rect x="534" y="120" width="2" height="820" fill="#1e293b"/>
+
+  <!-- Column headers -->
+  <text x="267" y="160" font-size="32" font-weight="700" fill="white" text-anchor="middle" text-rendering="geometricPrecision">THEM</text>
+  <text x="757" y="160" font-size="32" font-weight="700" fill="#2dd4bf" text-anchor="middle" text-rendering="geometricPrecision">US</text>
+
+  <!-- Header underline -->
+  <rect x="80" y="175" width="920" height="1" fill="#1e293b"/>
+
+  <!-- Row 1 — y=260 -->
+  <text x="267" y="260" font-size="32" fill="#64748b" text-anchor="middle" text-rendering="geometricPrecision">Hidden pricing</text>
+  <text x="757" y="260" font-size="32" fill="#2dd4bf" text-anchor="middle" text-rendering="geometricPrecision">Public pricing</text>
+  <rect x="80" y="315" width="920" height="1" fill="#1e293b"/>
+
+  <!-- Row 2 — y=370 -->
+  <text x="267" y="370" font-size="32" fill="#64748b" text-anchor="middle" text-rendering="geometricPrecision">Weeks to deliver</text>
+  <text x="757" y="370" font-size="32" fill="#2dd4bf" text-anchor="middle" text-rendering="geometricPrecision">1–3 weeks</text>
+  <rect x="80" y="425" width="920" height="1" fill="#1e293b"/>
+
+  <!-- Row 3 — y=480 -->
+  <text x="267" y="480" font-size="32" fill="#64748b" text-anchor="middle" text-rendering="geometricPrecision">Generic templates</text>
+  <text x="757" y="480" font-size="32" fill="#2dd4bf" text-anchor="middle" text-rendering="geometricPrecision">Industry-built</text>
+  <rect x="80" y="535" width="920" height="1" fill="#1e293b"/>
+
+  <!-- Row 4 — y=590 -->
+  <text x="267" y="590" font-size="32" fill="#64748b" text-anchor="middle" text-rendering="geometricPrecision">Monthly fees</text>
+  <text x="757" y="590" font-size="32" fill="#2dd4bf" text-anchor="middle" text-rendering="geometricPrecision">You own it</text>
+
+  <!-- Footer URL -->
+  <text x="540" y="1042" font-size="22" text-anchor="middle" fill="#2dd4bf" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

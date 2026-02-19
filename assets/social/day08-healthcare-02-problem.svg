@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1042" y="58" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="28" fill="#475569" letter-spacing="2" text-rendering="geometricPrecision">02 / 05</text>
+
+  <!-- Mint filled circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- White calendar/booking icon: rect body with grid lines -->
+  <!-- Calendar outer rect -->
+  <rect x="95" y="370" width="70" height="62" rx="4" ry="4" fill="#ffffff"/>
+  <!-- Calendar header bar -->
+  <rect x="95" y="370" width="70" height="16" rx="4" ry="4" fill="#0f172a"/>
+  <!-- Calendar binding pegs -->
+  <rect x="111" y="364" width="8" height="14" rx="3" ry="3" fill="#0f172a"/>
+  <rect x="141" y="364" width="8" height="14" rx="3" ry="3" fill="#0f172a"/>
+  <!-- Grid lines to suggest date cells -->
+  <line x1="118" y1="396" x2="118" y2="432" stroke="#2dd4bf" stroke-width="2"/>
+  <line x1="141" y1="396" x2="141" y2="432" stroke="#2dd4bf" stroke-width="2"/>
+  <line x1="95" y1="410" x2="165" y2="410" stroke="#2dd4bf" stroke-width="2"/>
+
+  <!-- Headline white 70px bold at x=230 -->
+  <text x="230" y="390" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">NO ONLINE BOOKING</text>
+  <text x="230" y="470" font-family="Inter, system-ui, sans-serif" font-size="70" font-weight="700" fill="#ffffff" text-rendering="geometricPrecision">ON YOUR WEBSITE</text>
+
+  <!-- Body text #94a3b8 38px at x=230 -->
+  <text x="230" y="560" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#94a3b8" text-rendering="geometricPrecision">Patients expect to book online in 2026.</text>
+  <text x="230" y="610" font-family="Inter, system-ui, sans-serif" font-size="38" fill="#94a3b8" text-rendering="geometricPrecision">No booking button = lost appointment.</text>
+
+  <!-- Bottom URL -->
+  <text x="540" y="1042" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#2dd4bf" font-weight="600" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+  <!-- Left bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1044" y="54" text-anchor="end" font-size="24" fill="#475569" font-weight="500">03 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- White 5-point star icon inside circle -->
+  <polygon
+    points="130,368 140,400 174,400 148,420 158,452 130,434 102,452 112,420 86,400 120,400"
+    fill="#ffffff"/>
+
+  <!-- Headline line 1 -->
+  <text x="230" y="390" font-size="70" font-weight="800" fill="#ffffff">YOUR CREDENTIALS</text>
+  <!-- Headline line 2 -->
+  <text x="230" y="475" font-size="70" font-weight="800" fill="#ffffff">AREN'T FRONT &amp; CENTRE</text>
+
+  <!-- Body line 1 -->
+  <text x="230" y="560" font-size="36" fill="#94a3b8">If a client can't see your qualifications</text>
+  <!-- Body line 2 -->
+  <text x="230" y="608" font-size="36" fill="#94a3b8">in 5 seconds, they move on.</text>
+
+  <!-- Brand URL bottom-center -->
+  <text x="540" y="1040" text-anchor="middle" font-size="22" fill="#2dd4bf" font-weight="500">improveyoursite.com</text>
+</svg>

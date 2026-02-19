@@ -1,0 +1,35 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+  <!-- Left bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1044" y="54" text-anchor="end" font-size="24" fill="#475569" font-weight="500">02 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- White document/paper icon inside circle -->
+  <!-- Document body rect -->
+  <rect x="102" y="378" width="50" height="64" rx="4" fill="none" stroke="#ffffff" stroke-width="5"/>
+  <!-- Folded corner (top-right) -->
+  <polyline points="138,378 152,378 152,394" fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Document lines suggesting text -->
+  <line x1="112" y1="408" x2="142" y2="408" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="112" y1="421" x2="142" y2="421" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="112" y1="434" x2="130" y2="434" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Headline line 1 -->
+  <text x="230" y="390" font-size="70" font-weight="800" fill="#ffffff">NO COMPLIANCE</text>
+  <!-- Headline line 2 -->
+  <text x="230" y="475" font-size="70" font-weight="800" fill="#ffffff">STATEMENT VISIBLE</text>
+
+  <!-- Body line 1 -->
+  <text x="230" y="560" font-size="36" fill="#94a3b8">High-value clients look for your AFSL/ASIC</text>
+  <!-- Body line 2 -->
+  <text x="230" y="608" font-size="36" fill="#94a3b8">details before they ever call you.</text>
+
+  <!-- Brand URL bottom-center -->
+  <text x="540" y="1040" text-anchor="middle" font-size="22" fill="#2dd4bf" font-weight="500">improveyoursite.com</text>
+</svg>

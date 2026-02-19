@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <rect width="1080" height="1080" fill="#0f172a"/>
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+  <!-- Slide counter -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">01 / 05</text>
+  <!-- Mint label -->
+  <text x="28" y="80" fill="#2dd4bf" font-size="18" font-family="Inter, system-ui, sans-serif" font-weight="600" letter-spacing="3" text-rendering="geometricPrecision">FOR ACCOUNTANTS &amp; BOOKKEEPERS</text>
+  <!-- Headline -->
+  <text x="28" y="260" fill="#ffffff" font-size="80" font-weight="800" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">TAX SEASON IS COMING.</text>
+  <text x="28" y="356" fill="#ffffff" font-size="80" font-weight="800" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">IS YOUR SITE READY?</text>
+  <!-- Indigo accent rule -->
+  <rect x="28" y="378" width="240" height="4" fill="#5b4dff"/>
+  <!-- Footer -->
+  <text x="540" y="1042" text-anchor="middle" fill="#2dd4bf" font-size="22" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

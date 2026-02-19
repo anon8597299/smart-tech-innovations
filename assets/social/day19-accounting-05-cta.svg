@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <rect width="1080" height="1080" fill="#0f172a"/>
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+  <!-- Slide counter -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">05 / 05</text>
+  <!-- Headline -->
+  <text x="540" y="320" text-anchor="middle" fill="#ffffff" font-size="88" font-weight="800" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">READY TO FIX IT?</text>
+  <!-- Indigo rule -->
+  <rect x="240" y="348" width="600" height="4" fill="#5b4dff"/>
+  <!-- Price tiers -->
+  <text x="540" y="430" text-anchor="middle" fill="#2dd4bf" font-size="42" font-weight="700" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">$3,000 · $5,000 · $10,000</text>
+  <!-- Sub-copy -->
+  <text x="540" y="496" text-anchor="middle" fill="#64748b" font-size="32" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">No lock-in. You own it.</text>
+  <!-- CTA button -->
+  <rect x="160" y="580" width="760" height="90" rx="12" fill="#5b4dff"/>
+  <text x="540" y="634" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="700" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">IMPROVEYOURSITE.COM/ACCOUNTING.HTML</text>
+  <!-- Footer -->
+  <text x="540" y="1042" text-anchor="middle" fill="#2dd4bf" font-size="22" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

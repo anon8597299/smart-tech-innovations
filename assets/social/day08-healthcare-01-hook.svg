@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left indigo bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1042" y="58" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="28" fill="#475569" letter-spacing="2" text-rendering="geometricPrecision">01 / 05</text>
+
+  <!-- Mint industry label top-left -->
+  <text x="48" y="120" font-family="Inter, system-ui, sans-serif" font-size="20" fill="#2dd4bf" font-weight="600" letter-spacing="4" text-rendering="geometricPrecision">FOR GP CLINICS &amp; HEALTHCARE</text>
+
+  <!-- Huge white headline -->
+  <text x="48" y="330" font-family="Inter, system-ui, sans-serif" font-size="86" font-weight="800" fill="#ffffff" text-rendering="geometricPrecision">IS YOUR CLINIC LOSING</text>
+  <text x="48" y="430" font-family="Inter, system-ui, sans-serif" font-size="86" font-weight="800" fill="#ffffff" text-rendering="geometricPrecision">PATIENTS ONLINE?</text>
+
+  <!-- Indigo underline bar 220px wide, 4px tall -->
+  <rect x="48" y="460" width="220" height="4" fill="#5b4dff"/>
+
+  <!-- Bottom URL -->
+  <text x="540" y="1042" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" fill="#2dd4bf" font-weight="600" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

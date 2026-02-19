@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Mint label -->
+  <text x="28" y="80" font-size="20" font-weight="600" letter-spacing="3" fill="#2dd4bf" text-rendering="geometricPrecision">FOR RESTAURANTS, CAFES &amp; VENUES</text>
+
+  <!-- Counter top-right -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" text-rendering="geometricPrecision">01 / 05</text>
+
+  <!-- Headline -->
+  <text x="28" y="250" font-size="78" font-weight="800" fill="white" text-rendering="geometricPrecision">YOUR WEBSITE IS YOUR</text>
+  <text x="28" y="338" font-size="78" font-weight="800" fill="white" text-rendering="geometricPrecision">FRONT OF HOUSE.</text>
+  <text x="28" y="426" font-size="78" font-weight="800" fill="white" text-rendering="geometricPrecision">DOES IT IMPRESS?</text>
+
+  <!-- Indigo divider -->
+  <rect x="28" y="448" width="220" height="4" fill="#5b4dff"/>
+
+  <!-- Footer URL -->
+  <text x="540" y="1042" font-size="22" text-anchor="middle" fill="#2dd4bf" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

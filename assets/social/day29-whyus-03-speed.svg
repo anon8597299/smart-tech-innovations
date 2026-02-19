@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <style>text { font-family: Inter, system-ui, sans-serif; text-rendering: geometricPrecision; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+
+  <!-- Left vertical bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Counter top-right -->
+  <text x="1020" y="72" text-anchor="end" fill="#475569" font-size="24" text-rendering="geometricPrecision">03 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- Lightning bolt polygon inside circle -->
+  <polygon points="140,352 118,415 132,415 120,488 152,410 136,410" fill="white"/>
+
+  <!-- Headline -->
+  <text x="236" y="380" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">LIVE IN WEEKS.</text>
+  <text x="236" y="458" font-size="68" font-weight="800" fill="white" text-rendering="geometricPrecision">NOT MONTHS.</text>
+
+  <!-- Body text -->
+  <text x="236" y="530" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">Once you fill in your business details,</text>
+  <text x="236" y="572" font-size="34" fill="#94a3b8" text-rendering="geometricPrecision">your site is live within 1–3 weeks.</text>
+
+  <!-- Footer URL -->
+  <text x="540" y="1042" font-size="22" text-anchor="middle" fill="#2dd4bf" text-rendering="geometricPrecision">improveyoursite.com</text>
+</svg>

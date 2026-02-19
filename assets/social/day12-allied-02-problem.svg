@@ -1,0 +1,31 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" text-rendering="geometricPrecision">
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0f172a"/>
+  <!-- Left bar -->
+  <rect x="0" y="0" width="6" height="1080" fill="#5b4dff"/>
+
+  <!-- Slide counter top-right -->
+  <text x="1044" y="54" text-anchor="end" font-size="24" fill="#475569" font-weight="500">02 / 05</text>
+
+  <!-- Mint circle -->
+  <circle cx="130" cy="420" r="72" fill="#2dd4bf"/>
+
+  <!-- White shield/checkmark icon inside circle -->
+  <!-- Shield outline -->
+  <path d="M130 358 L158 372 L158 414 Q158 438 130 452 Q102 438 102 414 L102 372 Z" fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Bold tick/checkmark inside shield -->
+  <polyline points="115,418 126,430 148,406" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Headline line 1 -->
+  <text x="230" y="390" font-size="70" font-weight="800" fill="#ffffff">AHPRA COMPLIANCE</text>
+  <!-- Headline line 2 -->
+  <text x="230" y="475" font-size="70" font-weight="800" fill="#ffffff">IS NON-NEGOTIABLE</text>
+
+  <!-- Body line 1 -->
+  <text x="230" y="560" font-size="36" fill="#94a3b8">Most generic sites have testimonials that</text>
+  <!-- Body line 2 -->
+  <text x="230" y="608" font-size="36" fill="#94a3b8">breach AHPRA advertising guidelines.</text>
+
+  <!-- Brand URL bottom-center -->
+  <text x="540" y="1040" text-anchor="middle" font-size="22" fill="#2dd4bf" font-weight="500">improveyoursite.com</text>
+</svg>
