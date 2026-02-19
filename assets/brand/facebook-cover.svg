@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="312" viewBox="0 0 820 312">
+  <defs>
+    <style>text { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="312" fill="#0f172a"/>
+
+  <!-- Top indigo accent bar -->
+  <rect x="0" y="0" width="820" height="5" fill="#5b4dff"/>
+
+  <!-- Bottom mint accent bar -->
+  <rect x="0" y="308" width="820" height="4" fill="#2dd4bf"/>
+
+  <!-- Left decorative mini-bars (profile pic zone — adds texture behind the pic) -->
+  <rect x="44" y="198" width="18" height="114" rx="4" fill="#5b4dff" opacity="0.25"/>
+  <rect x="70" y="168" width="18" height="144" rx="4" fill="#5b4dff" opacity="0.35"/>
+  <rect x="96" y="132" width="18" height="180" rx="4" fill="#5b4dff" opacity="0.45"/>
+
+  <!-- Rising bars — right side -->
+  <rect x="604" y="197" width="32" height="115" rx="5" fill="#5b4dff" opacity="0.45"/>
+  <rect x="646" y="157" width="32" height="155" rx="5" fill="#5b4dff" opacity="0.62"/>
+  <rect x="688" y="97" width="32" height="215" rx="5" fill="#5b4dff" opacity="0.87"/>
+  <rect x="730" y="117" width="32" height="195" rx="5" fill="#2dd4bf" opacity="0.80"/>
+  <rect x="772" y="152" width="32" height="160" rx="5" fill="#2dd4bf" opacity="0.55"/>
+
+  <!-- ── Content (x=220 = safe zone clear of Facebook profile pic) ── -->
+
+  <!-- Brand name -->
+  <text
+    x="220" y="110"
+    font-size="46" font-weight="800"
+    fill="#ffffff"
+    letter-spacing="-1"
+  >Improve<tspan fill="#5b4dff">YourSite</tspan></text>
+
+  <!-- Indigo underline -->
+  <rect x="220" y="120" width="330" height="3" rx="1.5" fill="#5b4dff"/>
+
+  <!-- Tagline -->
+  <text
+    x="220" y="153"
+    font-size="20"
+    fill="#94a3b8"
+  >Websites that rank, convert &amp; grow.</text>
+
+  <!-- Differentiators -->
+  <text
+    x="220" y="184"
+    font-size="13"
+    fill="#475569"
+    letter-spacing="0.4"
+  >From $3,000  ·  No monthly fees  ·  8 industry templates</text>
+
+  <!-- URL -->
+  <text
+    x="220" y="240"
+    font-size="18" font-weight="700"
+    fill="#2dd4bf"
+    letter-spacing="0.3"
+  >improveyoursite.com</text>
+
+</svg>

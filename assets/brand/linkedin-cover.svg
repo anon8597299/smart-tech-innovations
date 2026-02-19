@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="396" viewBox="0 0 1584 396">
+  <defs>
+    <style>text { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="#0f172a"/>
+
+  <!-- Left vertical accent bar -->
+  <rect x="0" y="0" width="6" height="396" fill="#5b4dff"/>
+
+  <!-- Top indigo bar -->
+  <rect x="0" y="0" width="1584" height="6" fill="#5b4dff"/>
+
+  <!-- Bottom mint bar -->
+  <rect x="0" y="391" width="1584" height="5" fill="#2dd4bf"/>
+
+  <!-- Rising bars — right quarter -->
+  <rect x="1094" y="196" width="64" height="200" rx="7" fill="#5b4dff" opacity="0.40"/>
+  <rect x="1174" y="156" width="64" height="240" rx="7" fill="#5b4dff" opacity="0.55"/>
+  <rect x="1254" y="96"  width="64" height="300" rx="7" fill="#5b4dff" opacity="0.80"/>
+  <rect x="1334" y="116" width="64" height="280" rx="7" fill="#2dd4bf" opacity="0.75"/>
+  <rect x="1414" y="156" width="64" height="240" rx="7" fill="#2dd4bf" opacity="0.50"/>
+
+  <!-- ── Left block — brand identity ── -->
+
+  <!-- Brand name -->
+  <text
+    x="200" y="148"
+    font-size="70" font-weight="800"
+    fill="#ffffff"
+    letter-spacing="-2"
+  >Improve<tspan fill="#5b4dff">YourSite</tspan></text>
+
+  <!-- Underline -->
+  <rect x="200" y="160" width="460" height="4" rx="2" fill="#5b4dff"/>
+
+  <!-- Tagline -->
+  <text
+    x="200" y="200"
+    font-size="22"
+    fill="#94a3b8"
+  >Websites that rank, convert &amp; grow.</text>
+
+  <!-- Industry sub-line -->
+  <text
+    x="200" y="236"
+    font-size="14"
+    fill="#475569"
+    letter-spacing="0.3"
+  >Regional NSW · Tradies · Clinics · Advisers · Solar · Accounting</text>
+
+  <!-- URL -->
+  <text
+    x="200" y="284"
+    font-size="24" font-weight="700"
+    fill="#2dd4bf"
+    letter-spacing="0.4"
+  >improveyoursite.com</text>
+
+  <!-- ── Vertical divider ── -->
+  <rect x="752" y="80" width="2" height="240" fill="#1e293b"/>
+
+  <!-- ── Centre value props ── -->
+
+  <!-- Prop 1 — Pricing -->
+  <text x="810" y="135" font-size="42" font-weight="800" fill="#ffffff">From $3,000</text>
+  <text x="810" y="162" font-size="18" fill="#475569">Transparent pricing, published upfront</text>
+  <rect x="810" y="180" width="260" height="1" fill="#1e293b"/>
+
+  <!-- Prop 2 — Industries -->
+  <text x="810" y="220" font-size="42" font-weight="800" fill="#ffffff">8 Industries</text>
+  <text x="810" y="247" font-size="18" fill="#475569">Built for your specific business type</text>
+  <rect x="810" y="265" width="260" height="1" fill="#1e293b"/>
+
+  <!-- Prop 3 — No lock-in -->
+  <text x="810" y="305" font-size="42" font-weight="800" fill="#ffffff">No lock-in</text>
+  <text x="810" y="332" font-size="18" fill="#475569">You own your site outright</text>
+
+</svg>
