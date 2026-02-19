@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="g-i" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="g-y" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b4dff"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="g-s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#5b4dff"/>
+    </linearGradient>
+    <linearGradient id="g-arrow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#5b4dff"/>
+    </linearGradient>
+    <linearGradient id="g-circuit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b4dff"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!-- IYS LETTERMARK                                               -->
+  <!-- ============================================================ -->
+
+  <!-- I — Deep Navy, bold rectangle with white inset stripe -->
+  <rect x="12" y="28" width="62" height="210" rx="5" fill="url(#g-i)" filter="url(#shadow)"/>
+  <rect x="24" y="42" width="18" height="182" rx="2" fill="white" opacity="0.15"/>
+
+  <!-- Y — Indigo to Mint gradient, two arms + stem -->
+  <!-- Left arm -->
+  <polygon points="86,28 130,28 176,128 143,128" fill="url(#g-y)" filter="url(#shadow)"/>
+  <!-- Right arm -->
+  <polygon points="240,28 197,28 176,128 210,128" fill="url(#g-i)" filter="url(#shadow)"/>
+  <!-- Stem -->
+  <rect x="153" y="126" width="48" height="112" rx="3" fill="url(#g-y)" filter="url(#shadow)"/>
+
+  <!-- S — Mint to Indigo, clean bold S shape -->
+  <!-- Top bar -->
+  <path d="M 268,28 L 348,28 C 370,28 382,38 382,58 C 382,76 370,88 348,95 L 282,112 C 260,120 250,132 250,152 C 250,173 263,185 285,185 L 370,185 L 370,238 L 285,238 C 248,238 220,212 220,180 C 220,150 238,132 270,120 L 338,103 C 354,97 358,88 358,75 C 358,62 350,56 336,56 L 268,56 Z" fill="url(#g-s)" filter="url(#shadow)"/>
+  <!-- Bottom finish bar -->
+  <rect x="220" y="210" width="150" height="28" rx="3" fill="url(#g-s)"/>
+
+  <!-- ============================================================ -->
+  <!-- UPWARD ARROW — overlaid across IYS                          -->
+  <!-- ============================================================ -->
+  <!-- Arrow shaft -->
+  <line x1="118" y1="248" x2="295" y2="18" stroke="url(#g-arrow)" stroke-width="13" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Arrowhead -->
+  <polygon points="295,10 265,48 308,52" fill="#2dd4bf" filter="url(#glow)"/>
+
+  <!-- ============================================================ -->
+  <!-- SEPARATOR                                                    -->
+  <!-- ============================================================ -->
+  <line x1="408" y1="45" x2="408" y2="248" stroke="#dde1ef" stroke-width="1.5"/>
+
+  <!-- ============================================================ -->
+  <!-- CIRCUIT ICON — top right corner of wordmark                 -->
+  <!-- ============================================================ -->
+  <!-- Background arc (half globe shape) -->
+  <path d="M 870,18 C 910,18 950,42 970,78" fill="none" stroke="url(#g-circuit)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 880,28 C 910,28 940,46 955,70" fill="none" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Circuit nodes -->
+  <circle cx="876" cy="42" r="5" fill="#5b4dff"/>
+  <circle cx="900" cy="30" r="4" fill="#2dd4bf"/>
+  <circle cx="924" cy="36" r="5" fill="#5b4dff"/>
+  <circle cx="942" cy="54" r="4" fill="#2dd4bf"/>
+  <circle cx="948" cy="76" r="5" fill="#5b4dff"/>
+  <circle cx="930" cy="68" r="3" fill="#2dd4bf"/>
+  <!-- Circuit traces -->
+  <polyline points="876,42 900,30 924,36 942,54 930,68 948,76" fill="none" stroke="url(#g-circuit)" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- Pixel scatter -->
+  <rect x="958" y="20" width="8" height="8" rx="2" fill="#2dd4bf" opacity="0.9"/>
+  <rect x="970" y="34" width="6" height="6" rx="1.5" fill="#5b4dff" opacity="0.75"/>
+  <rect x="963" y="48" width="5" height="5" rx="1.5" fill="#2dd4bf" opacity="0.6"/>
+  <rect x="976" y="22" width="5" height="5" rx="1.5" fill="#5b4dff" opacity="0.55"/>
+  <rect x="982" y="42" width="4" height="4" rx="1" fill="#2dd4bf" opacity="0.45"/>
+  <rect x="990" y="30" width="3" height="3" rx="1" fill="#5b4dff" opacity="0.4"/>
+
+  <!-- ============================================================ -->
+  <!-- WORDMARK                                                     -->
+  <!-- ============================================================ -->
+  <!-- IMPROVE -->
+  <text x="430" y="148" font-family="'Arial Black', Impact, 'Arial Bold', sans-serif" font-size="58" font-weight="900" fill="#0f172a" letter-spacing="-1">IMPROVE</text>
+  <!-- YOUR SITE -->
+  <text x="430" y="215" font-family="'Arial Black', Impact, 'Arial Bold', sans-serif" font-size="58" font-weight="900" fill="#5b4dff" letter-spacing="-1">YOUR SITE</text>
+  <!-- Separator rule -->
+  <line x1="430" y1="228" x2="990" y2="228" stroke="#dde1ef" stroke-width="1.5"/>
+  <!-- Tagline -->
+  <text x="430" y="256" font-family="Arial, sans-serif" font-size="21" font-weight="600" fill="#475569" letter-spacing="1">Websites. SEO. Results.</text>
+</svg>

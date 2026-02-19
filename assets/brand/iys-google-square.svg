@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b4dff"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" rx="80" fill="url(#bg-grad)"/>
+
+  <!-- Accent bar top -->
+  <rect x="0" y="0" width="500" height="8" rx="0" fill="url(#accent-grad)" opacity="0.9"/>
+  <rect x="0" y="0" width="500" height="8" rx="80"/>
+
+  <!-- IYS text - large and bold, centred -->
+  <text
+    x="250"
+    y="260"
+    font-family="Inter, Arial Black, system-ui, sans-serif"
+    font-size="180"
+    font-weight="800"
+    fill="url(#accent-grad)"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="-6"
+  >IYS</text>
+
+  <!-- Tagline below -->
+  <text
+    x="250"
+    y="355"
+    font-family="Inter, Arial, system-ui, sans-serif"
+    font-size="30"
+    font-weight="600"
+    fill="#94a3b8"
+    text-anchor="middle"
+    letter-spacing="4"
+  >IMPROVEYOURSITE</text>
+
+  <!-- Thin rule above tagline -->
+  <line x1="100" y1="330" x2="400" y2="330" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Accent dot bottom-right -->
+  <circle cx="420" cy="420" r="18" fill="#2dd4bf" opacity="0.25"/>
+  <circle cx="420" cy="420" r="10" fill="#2dd4bf" opacity="0.5"/>
+  <circle cx="420" cy="420" r="4" fill="#2dd4bf"/>
+</svg>
