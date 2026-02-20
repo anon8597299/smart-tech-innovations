@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/style.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
     .book-wrap { padding: 7rem 0 4rem; min-height: 80vh; }
     .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
@@ -124,10 +125,12 @@
           <h2>Book your free call</h2>
           <p>Pick a time that suits you, or send a quick message and James will call you back.</p>
 
-          <!-- Calendly inline embed -->
-          <div class="calendly-inline-widget" data-url="https://calendly.com/admin-improveyoursite/new-meeting?hide_gdpr_banner=1" data-resize="true" style="min-width:100%;height:630px;"></div>
+          <!-- Calendly popup button -->
+          <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-improveyoursite/new-meeting?hide_gdpr_banner=1'});return false;" style="width:100%;padding:1rem;background:#5b4dff;color:#fff;font-weight:800;font-size:1.05rem;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:background .18s;" onmouseover="this.style.background='#4c40db'" onmouseout="this.style.background='#5b4dff'">
+            Book a Free 15-Minute Call →
+          </button>
           <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-          <!-- End Calendly embed -->
+          <!-- End Calendly -->
 
           <div class="divider">or send us a message</div>
 
