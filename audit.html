@@ -228,6 +228,8 @@
     }
     .btn-save { background: #5b4dff; color: #fff; }
     .btn-save:hover { background: #4c40db; }
+    .btn-implement { background: linear-gradient(135deg, #5b4dff, #2dd4bf); color: #fff; font-size: .88rem; }
+    .btn-implement:hover { opacity: .88; }
     .btn-print { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
     .btn-print:hover { background: #e2e8f0; }
     .btn-copy { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
@@ -616,6 +618,7 @@
       <button class="btn-action btn-save" onclick="saveAudit()">Save to History</button>
       <button class="btn-action btn-copy" onclick="copyTalkingPoints()">Copy Talking Points</button>
       <button class="btn-action btn-print" onclick="window.print()">Print Report</button>
+      <button class="btn-action btn-implement" id="implement-btn" onclick="openImplement()" style="display:none">⚡ Implement Changes →</button>
       <span class="save-confirm" id="save-confirm">✓ Saved</span>
     </div>
 
@@ -715,6 +718,7 @@
 
   // ── Audit runner ────────────────────────────────────────────
   let lastAudit = null;
+  let _lastPageData = null;
 
   async function runAudit() {
     const rawUrl = document.getElementById('url-input').value.trim();
@@ -910,7 +914,9 @@
     };
 
     const pageData = extractPageData(pageHtml);
+    _lastPageData = pageData;
     lastAudit = { url, area, biz, date: new Date().toLocaleDateString('en-AU'), scores, vitals, issues };
+    document.getElementById('implement-btn').style.display = 'inline-flex';
 
     // Meta bar
     const rUrl = document.getElementById('r-url');
@@ -1693,6 +1699,23 @@
     history.splice(i, 1);
     localStorage.setItem('iy_audits', JSON.stringify(history));
     renderHistory();
+  }
+
+  // ── Implement Changes ────────────────────────────────────────
+  function openImplement() {
+    if (!lastAudit) return;
+    // Store everything fix.html needs
+    const fixData = {
+      url:      lastAudit.url,
+      biz:      lastAudit.biz,
+      area:     lastAudit.area,
+      scores:   lastAudit.scores,
+      vitals:   lastAudit.vitals,
+      issues:   lastAudit.issues,
+      pageData: _lastPageData || null,
+    };
+    sessionStorage.setItem('iy_audit_fix', JSON.stringify(fixData));
+    window.open('fix.html', '_blank');
   }
 
   // ── Enter key on form ───────────────────────────────────────

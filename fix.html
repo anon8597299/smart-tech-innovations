@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Quick Implement — IYS</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, sans-serif; background: #f1f5f9; color: #0f172a; font-size: 15px; line-height: 1.5; }
+
+    /* ── Login ── */
+    #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: #0f172a; }
+    .login-card { background: #1e293b; border: 1px solid #334155; border-radius: 20px; padding: 2.5rem 2rem; width: 100%; max-width: 360px; text-align: center; color: #e2e8f0; }
+    .login-card h1 { font-size: 1.2rem; margin: 0 0 .3rem; }
+    .login-card p { color: #64748b; font-size: .85rem; margin: 0 0 1.4rem; }
+    .login-card input[type="password"] { width: 100%; padding: .7rem 1rem; background: #0f172a; border: 1.5px solid #334155; border-radius: 10px; color: #e2e8f0; font-size: 1rem; font-family: Inter, sans-serif; margin-bottom: .75rem; }
+    .login-card input:focus { outline: none; border-color: #5b4dff; }
+    .btn-login { width: 100%; padding: .75rem; background: #5b4dff; color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif; }
+    .btn-login:hover { background: #4c40db; }
+    .login-error { color: #f87171; font-size: .82rem; margin-top: .5rem; display: none; }
+
+    /* ── App ── */
+    #app { display: none; }
+
+    /* ── Header ── */
+    .tool-header { background: #0f172a; padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid #2dd4bf; }
+    .tool-logo { color: #fff; font-weight: 800; font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+    .tool-logo span { color: #2dd4bf; }
+    .tool-badge { background: #2dd4bf; color: #0f172a; font-size: .67rem; font-weight: 800; padding: .18rem .55rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .07em; }
+    .btn-back { background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 7px; padding: .28rem .75rem; font-size: .76rem; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: .3rem; }
+    .btn-back:hover { color: #e2e8f0; }
+
+    /* ── Page body ── */
+    .page-body { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+
+    /* ── Audit summary strip ── */
+    .audit-strip { background: #0f172a; border-radius: 16px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .audit-strip-url { color: #2dd4bf; font-weight: 700; font-size: .9rem; word-break: break-all; }
+    .audit-strip-meta { color: #64748b; font-size: .8rem; }
+    .score-chip { display: inline-flex; align-items: center; gap: .25rem; font-size: .75rem; font-weight: 800; padding: .2rem .55rem; border-radius: 999px; }
+    .chip-red   { background: #fee2e2; color: #dc2626; }
+    .chip-amber { background: #fef3c7; color: #d97706; }
+    .chip-green { background: #dcfce7; color: #16a34a; }
+    .platform-chip { background: #1e293b; color: #94a3b8; font-size: .72rem; font-weight: 700; padding: .18rem .55rem; border-radius: 999px; }
+
+    /* ── Section card ── */
+    .section-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.4rem; margin-bottom: 1.25rem; }
+    .section-head { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+    .section-num { width: 28px; height: 28px; background: #5b4dff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 800; flex-shrink: 0; }
+    .section-title { font-size: 1rem; font-weight: 800; color: #0f172a; }
+    .section-desc { font-size: .82rem; color: #64748b; margin-top: .15rem; }
+
+    /* ── Form elements ── */
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .85rem; }
+    @media (max-width: 600px) { .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; } }
+    .field-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .7rem; }
+    .field-label { font-size: .8rem; font-weight: 700; color: #374151; }
+    .field-req { color: #dc2626; }
+    .field-hint { font-size: .73rem; color: #94a3b8; }
+    .fi { padding: .65rem .9rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: Inter, sans-serif; font-size: .9rem; color: #0f172a; background: #f8fafc; width: 100%; }
+    .fi:focus { outline: none; border-color: #5b4dff; background: #fff; }
+    .fi-prefilled { background: #f0f4ff; border-color: #c7d2fe; }
+    select.fi option { background: #fff; }
+    .divider { height: 1px; background: #f1f5f9; margin: 1rem 0; }
+
+    /* ── Template cards ── */
+    .tmpl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+    @media (max-width: 640px) { .tmpl-grid { grid-template-columns: repeat(2, 1fr); } }
+    .tmpl-option { position: relative; }
+    .tmpl-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .tmpl-card { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: .9rem .5rem; border: 1.5px solid #e2e8f0; border-radius: 12px; cursor: pointer; background: #f8fafc; transition: all .15s; text-align: center; }
+    .tmpl-option input:checked + .tmpl-card { border-color: #5b4dff; background: #f0f4ff; }
+    .tmpl-card:hover { border-color: #5b4dff; }
+    .tmpl-icon { font-size: 1.5rem; }
+    .tmpl-name { font-size: .8rem; font-weight: 700; color: #0f172a; }
+    .tmpl-sub  { font-size: .7rem; color: #94a3b8; }
+    .tmpl-rec  { font-size: .65rem; font-weight: 800; color: #5b4dff; background: #ede9fe; padding: .1rem .35rem; border-radius: 999px; margin-top: .1rem; }
+
+    /* ── Colour picker ── */
+    .color-row { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; }
+    input[type="color"] { width: 2.8rem; height: 2.4rem; padding: .15rem; border-radius: 8px; border: 1.5px solid #e2e8f0; cursor: pointer; flex-shrink: 0; }
+    .cp { width: 2rem; height: 2rem; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: transform .12s; }
+    .cp:hover { transform: scale(1.2); border-color: #5b4dff; }
+
+    /* ── Fix checklist ── */
+    .fix-list { display: flex; flex-direction: column; gap: .45rem; }
+    .fix-item { display: flex; align-items: flex-start; gap: .65rem; padding: .6rem .85rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; font-size: .87rem; color: #166534; }
+    .fix-icon { flex-shrink: 0; font-size: .95rem; margin-top: .05rem; }
+    .fix-note { display: flex; align-items: flex-start; gap: .65rem; padding: .6rem .85rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; font-size: .87rem; color: #92400e; }
+
+    /* ── Delivery notes ── */
+    .delivery-list { display: flex; flex-direction: column; gap: .75rem; }
+    .delivery-item { border-radius: 12px; padding: .9rem 1.1rem; }
+    .delivery-item.warn  { background: #fff7ed; border: 1px solid #fed7aa; }
+    .delivery-item.info  { background: #f0f4ff; border: 1px solid #c7d2fe; }
+    .delivery-item.tip   { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .delivery-item.note  { background: #f8fafc; border: 1px solid #e2e8f0; }
+    .delivery-tag { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .35rem; }
+    .delivery-item.warn  .delivery-tag { color: #c2410c; }
+    .delivery-item.info  .delivery-tag { color: #3730a3; }
+    .delivery-item.tip   .delivery-tag { color: #166534; }
+    .delivery-item.note  .delivery-tag { color: #475569; }
+    .delivery-body { font-size: .87rem; line-height: 1.65; color: #374151; }
+    .delivery-body strong { color: #0f172a; }
+    .delivery-body code { background: #e2e8f0; padding: .1rem .3rem; border-radius: 4px; font-size: .8rem; font-family: 'SF Mono', 'Fira Code', monospace; }
+
+    /* ── PAT + Deploy ── */
+    .pat-wrap { display: flex; gap: .7rem; align-items: flex-end; }
+    .pat-wrap .field-group { flex: 1; margin: 0; }
+    .pat-status { font-size: .79rem; margin-top: .4rem; padding: .4rem .7rem; border-radius: 7px; display: none; }
+    .pat-ok  { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; display: block !important; }
+    .pat-err { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; display: block !important; }
+    .btn-verify { padding: .65rem 1rem; background: #f1f5f9; color: #374151; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: .85rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif; white-space: nowrap; }
+    .btn-verify:hover { background: #e2e8f0; }
+    .btn-deploy { width: 100%; padding: 1rem; background: linear-gradient(135deg, #5b4dff, #2dd4bf); color: #fff; border: none; border-radius: 14px; font-size: 1.05rem; font-weight: 900; cursor: pointer; font-family: Inter, sans-serif; margin-top: 1rem; transition: opacity .15s; letter-spacing: .01em; }
+    .btn-deploy:hover { opacity: .88; }
+    .btn-deploy:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Log output ── */
+    #log-output { background: #0f172a; border-radius: 12px; padding: .9rem 1rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: .8rem; color: #94a3b8; max-height: 240px; overflow-y: auto; margin-top: .85rem; display: none; }
+    .log-line { margin: 0; padding: .1rem 0; }
+    .log-ok   { color: #86efac; }
+    .log-warn { color: #fde68a; }
+    .log-err  { color: #fca5a5; }
+    .log-url  { color: #67e8f9; font-weight: 700; }
+
+    /* ── Result box ── */
+    #result-box { display: none; margin-top: 1rem; padding: 1.2rem 1.4rem; border-radius: 14px; font-size: .93rem; line-height: 1.6; }
+    #result-box.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    #result-box.error   { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+    #result-box.loading { background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; }
+
+    /* ── Services grid ── */
+    .service-pair { display: grid; grid-template-columns: 1fr 2fr; gap: .85rem; margin-bottom: .65rem; align-items: start; }
+    @media (max-width: 580px) { .service-pair { grid-template-columns: 1fr; } }
+    .service-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; padding-top: .75rem; }
+
+    /* ── No audit data warning ── */
+    .no-audit-warn { background: #fffbeb; border: 1px solid #fde68a; border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-size: .88rem; color: #92400e; }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-card">
+    <div style="font-size:1.5rem;margin-bottom:.4rem">⚡</div>
+    <h1>Quick Implement</h1>
+    <p>Internal tool — enter password to continue.</p>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password">
+    <button class="btn-login" onclick="checkPassword()">Enter</button>
+    <div class="login-error" id="login-error">Incorrect password.</div>
+  </div>
+</div>
+
+<!-- App -->
+<div id="app">
+
+  <div class="tool-header">
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <div class="tool-logo">Improve<span>YourSite</span></div>
+      <span class="tool-badge">Quick Implement</span>
+    </div>
+    <a class="btn-back" href="audit.html">← Back to Audit Tool</a>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Audit summary strip -->
+    <div class="audit-strip" id="audit-strip" style="display:none">
+      <div>
+        <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#475569;margin-bottom:.25rem;">Scanned from audit</div>
+        <div class="audit-strip-url" id="strip-url"></div>
+      </div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center" id="strip-chips"></div>
+    </div>
+
+    <div class="no-audit-warn" id="no-audit-warn" style="display:none">
+      No audit data found. Go to <a href="audit.html" style="color:#5b4dff;font-weight:600;">audit.html</a>, run a scan, then click "Implement Changes →".
+      You can still fill in all fields below manually.
+    </div>
+
+    <!-- ── 1. Business Details ── -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Business Details</div>
+          <div class="section-desc">Pre-filled from the audit scan — check and complete any missing fields.</div>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="field-group">
+          <label class="field-label">Business name <span class="field-req">*</span></label>
+          <input class="fi" type="text" id="f-name" placeholder="e.g. Smith's Plumbing">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Tagline</label>
+          <input class="fi" type="text" id="f-tagline" placeholder="e.g. Fast, reliable, local">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="field-group">
+          <label class="field-label">Phone <span class="field-req">*</span></label>
+          <input class="fi" type="tel" id="f-phone" placeholder="0400 123 456">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email <span class="field-req">*</span></label>
+          <input class="fi" type="email" id="f-email" placeholder="info@business.com.au">
+          <span class="field-hint">Will be on the contact form — confirm with customer before deploying.</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Hero headline</label>
+        <input class="fi" type="text" id="f-headline" placeholder="e.g. Trusted plumbers in Bathurst — fast response, fair prices">
+        <span class="field-hint">Pre-filled from H1 if found — make it punchy and location-specific.</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-grid-3">
+        <div class="field-group">
+          <label class="field-label">Address</label>
+          <input class="fi" type="text" id="f-address" placeholder="42 Main Street">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Suburb <span class="field-req">*</span></label>
+          <input class="fi" type="text" id="f-suburb" placeholder="Bathurst">
+        </div>
+        <div class="field-group">
+          <label class="field-label">State</label>
+          <select class="fi" id="f-state">
+            <option value="NSW">NSW</option><option value="VIC">VIC</option>
+            <option value="QLD">QLD</option><option value="WA">WA</option>
+            <option value="SA">SA</option><option value="TAS">TAS</option>
+            <option value="ACT">ACT</option><option value="NT">NT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="field-group">
+          <label class="field-label">Custom URL slug</label>
+          <input class="fi" type="text" id="f-slug" placeholder="auto-generated from business name">
+          <span class="field-hint">Leave blank to auto-generate (e.g. smiths-plumbing).</span>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Package tier</label>
+          <select class="fi" id="f-package">
+            <option value="starter">Starter — core pages, no blog</option>
+            <option value="growth">Growth — core pages + full SEO meta</option>
+            <option value="premium">Premium — all pages + blog</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2. Template & Brand ── -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Template & Brand</div>
+          <div class="section-desc">Recommended template auto-selected based on business type. Adjust if needed.</div>
+        </div>
+      </div>
+
+      <div class="tmpl-grid" id="tmpl-grid">
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="trades-rapid">
+          <div class="tmpl-card"><div class="tmpl-icon">🔧</div><div class="tmpl-name">Trades</div><div class="tmpl-sub">Amber · Clean</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="clinic-trust">
+          <div class="tmpl-card"><div class="tmpl-icon">🏥</div><div class="tmpl-name">Clinic</div><div class="tmpl-sub">Teal · Trust</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="advisor-prime">
+          <div class="tmpl-card"><div class="tmpl-icon">📊</div><div class="tmpl-name">Advisor</div><div class="tmpl-sub">Blue · Authority</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="retail-pulse">
+          <div class="tmpl-card"><div class="tmpl-icon">👗</div><div class="tmpl-name">Retail</div><div class="tmpl-sub">Purple · Bold</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="solar-spark">
+          <div class="tmpl-card"><div class="tmpl-icon">☀️</div><div class="tmpl-name">Solar</div><div class="tmpl-sub">Orange · Energy</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="accounting-conversion">
+          <div class="tmpl-card"><div class="tmpl-icon">📁</div><div class="tmpl-name">Accounting</div><div class="tmpl-sub">Slate · Professional</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="consulting-authority">
+          <div class="tmpl-card"><div class="tmpl-icon">🏛️</div><div class="tmpl-name">Consulting</div><div class="tmpl-sub">Navy · Premium</div></div>
+        </label>
+        <label class="tmpl-option">
+          <input type="radio" name="template" value="hospitality-events">
+          <div class="tmpl-card"><div class="tmpl-icon">🥂</div><div class="tmpl-name">Hospitality</div><div class="tmpl-sub">Gold · Elegant</div></div>
+        </label>
+      </div>
+
+      <div style="margin-top:1.1rem">
+        <label class="field-label" style="margin-bottom:.45rem;display:block">Primary colour</label>
+        <div class="color-row">
+          <input type="color" id="f-color" value="#d97706">
+          <div class="cp" style="background:#0f766e" onclick="setColor('#0f766e')" title="Teal"></div>
+          <div class="cp" style="background:#d97706" onclick="setColor('#d97706')" title="Amber"></div>
+          <div class="cp" style="background:#1d4ed8" onclick="setColor('#1d4ed8')" title="Blue"></div>
+          <div class="cp" style="background:#7c3aed" onclick="setColor('#7c3aed')" title="Purple"></div>
+          <div class="cp" style="background:#ea580c" onclick="setColor('#ea580c')" title="Orange"></div>
+          <div class="cp" style="background:#dc2626" onclick="setColor('#dc2626')" title="Red"></div>
+          <div class="cp" style="background:#059669" onclick="setColor('#059669')" title="Green"></div>
+          <div class="cp" style="background:#334155" onclick="setColor('#334155')" title="Slate"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. Services ── -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Services</div>
+          <div class="section-desc">Auto-suggested based on business type — edit to match the customer's actual offerings.</div>
+        </div>
+      </div>
+
+      <div id="services-wrap">
+        <div class="service-pair">
+          <div class="service-label">Service 1</div>
+          <div class="form-grid-2" style="margin:0">
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s1n" placeholder="Emergency Callouts"></div>
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s1d" placeholder="Available 24/7 for urgent repairs."></div>
+          </div>
+        </div>
+        <div class="service-pair">
+          <div class="service-label">Service 2</div>
+          <div class="form-grid-2" style="margin:0">
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s2n" placeholder="Residential Services"></div>
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s2d" placeholder="Professional work for homeowners."></div>
+          </div>
+        </div>
+        <div class="service-pair">
+          <div class="service-label">Service 3</div>
+          <div class="form-grid-2" style="margin:0">
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s3n" placeholder="Commercial Work"></div>
+            <div class="field-group" style="margin:0"><input class="fi" type="text" id="f-s3d" placeholder="Reliable service for commercial properties."></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. What We're Fixing ── -->
+    <div class="section-card" id="fixes-card" style="display:none">
+      <div class="section-head">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">What This Build Fixes</div>
+          <div class="section-desc">Derived from the audit results — every green item is addressed by the new site.</div>
+        </div>
+      </div>
+      <div class="fix-list" id="fix-list"></div>
+    </div>
+
+    <!-- ── 5. Delivery Notes ── -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-num" id="delivery-num">4</div>
+        <div>
+          <div class="section-title">Delivery Notes — Before & After Going Live</div>
+          <div class="section-desc">Action items for you — not for the customer. Work through these before and after DNS cutover.</div>
+        </div>
+      </div>
+      <div class="delivery-list" id="delivery-list">
+
+        <div class="delivery-item warn">
+          <div class="delivery-tag">⚠ Imagery — Read Before Deploying</div>
+          <div class="delivery-body">
+            The new template uses <strong>minimal imagery above the fold</strong> by design — this is intentional and is the single biggest factor in achieving a fast LCP score on mobile. Before deploying:<br><br>
+            • <strong>Hero image:</strong> compress to under <strong>150KB</strong>, convert to <strong>WebP format</strong>. Use <a href="https://squoosh.app" target="_blank" style="color:#5b4dff">squoosh.app</a> (free, in-browser).<br>
+            • <strong>Body images:</strong> under 200KB each, lazy-loaded (the template does this automatically).<br>
+            • <strong>Avoid full-width photo heroes</strong> if the score is critical — a CSS gradient or solid colour above the fold can add 15–25 points to Lighthouse performance.<br>
+            • If the client supplies a high-res logo, resize to max 300px wide before embedding.
+          </div>
+        </div>
+
+        <div class="delivery-item info" id="platform-cancel-note" style="display:none">
+          <div class="delivery-tag" id="platform-cancel-tag">🗑 Platform Cancellation</div>
+          <div class="delivery-body" id="platform-cancel-body"></div>
+        </div>
+
+        <div class="delivery-item info">
+          <div class="delivery-tag">🌐 DNS — After Customer Provides Domain Access</div>
+          <div class="delivery-body">
+            <strong>Pointing their domain to the new site:</strong><br><br>
+            1. Log into their domain registrar (GoDaddy / Crazy Domains / VentraIP etc.)<br>
+            2. Set <strong>A records</strong> to GitHub Pages IPs:<br>
+            &nbsp;&nbsp;<code>185.199.108.153</code> &nbsp;<code>185.199.109.153</code> &nbsp;<code>185.199.110.153</code> &nbsp;<code>185.199.111.153</code><br>
+            3. Add a <strong>CNAME record</strong>: <code>www</code> → <code>anon8597299.github.io</code><br>
+            4. In the GitHub repo settings → Pages → add their custom domain<br>
+            5. SSL certificate activates automatically within ~24 hours.<br><br>
+            <strong>Do not cancel their current site until DNS has been live and verified for at least 7 days.</strong>
+          </div>
+        </div>
+
+        <div class="delivery-item tip">
+          <div class="delivery-tag">📍 Google Business Profile — Do This First, It's the Fastest Win</div>
+          <div class="delivery-body">
+            Google Business Profile often delivers Page 1 visibility faster than SEO alone:<br><br>
+            1. Search <strong>"[business name] [suburb]"</strong> in Google — if a listing exists, claim or update it<br>
+            2. If no listing: go to <a href="https://business.google.com" target="_blank" style="color:#5b4dff">business.google.com</a> → Add business<br>
+            3. Update the website URL to the new site URL once live<br>
+            4. Add <strong>photos, hours, services, and a description</strong> — fully filled profiles rank significantly better<br>
+            5. Ask the customer to request reviews from 3–5 existing happy clients — this is the #1 local ranking factor<br><br>
+            <strong>Tip:</strong> A fully completed GBP with 5+ reviews can outrank paid ads in local searches.
+          </div>
+        </div>
+
+        <div class="delivery-item info">
+          <div class="delivery-tag">🔍 Google Search Console — Submit After DNS Is Live</div>
+          <div class="delivery-body">
+            1. Go to <a href="https://search.google.com/search-console" target="_blank" style="color:#5b4dff">search.google.com/search-console</a><br>
+            2. Add property → URL prefix → enter their domain<br>
+            3. Verify using <strong>HTML tag method</strong> (copy the code, re-run the site generator with <code>GSC_VERIFICATION_CODE</code> filled in)<br>
+            4. Submit sitemap: <code>https://theirdomain.com.au/sitemap.xml</code><br>
+            5. First indexing typically takes 1–4 weeks. Monitoring → Coverage will show any crawl errors.<br><br>
+            <strong>Note:</strong> The generated site already includes <code>sitemap.xml</code> and <code>robots.txt</code> — nothing extra needed there.
+          </div>
+        </div>
+
+        <div class="delivery-item note">
+          <div class="delivery-tag">📧 Customer Handover Email</div>
+          <div class="delivery-body">
+            Once the site is live and DNS verified, send the customer:<br><br>
+            • Their live URL<br>
+            • A screenshot of the Lighthouse scores (before and after if possible)<br>
+            • Instructions for updating their Google Business Profile<br>
+            • Note: "Your site includes a sitemap — once DNS settles, we'll submit it to Google to kick off indexing."<br>
+            • Next step options: GSC setup, review requests, ongoing SEO if applicable<br><br>
+            Use the <strong>Admin panel → Pipeline → Email button</strong> to send the templated preview email.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 6. Deploy ── -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-num" id="deploy-num">5</div>
+        <div>
+          <div class="section-title">Deploy to GitHub Pages</div>
+          <div class="section-desc">Enter your GitHub PAT, verify it, then deploy. Site goes live in ~90 seconds.</div>
+        </div>
+      </div>
+
+      <div class="pat-wrap">
+        <div class="field-group">
+          <label class="field-label">GitHub Personal Access Token (repo scope)</label>
+          <input class="fi" type="password" id="gh-pat" placeholder="ghp_..." autocomplete="off">
+        </div>
+        <button class="btn-verify" onclick="verifyPAT()">Verify →</button>
+      </div>
+      <div class="pat-status" id="pat-status"></div>
+      <div style="margin-top:.5rem;font-size:.76rem;color:#94a3b8">
+        Get a token at <a href="https://github.com/settings/tokens" target="_blank" style="color:#5b4dff">github.com/settings/tokens</a> — select "repo" scope. Token is stored in your browser session only.
+      </div>
+
+      <button class="btn-deploy" id="deploy-btn" onclick="deploy()">
+        🚀 Generate &amp; Deploy Customer Site
+      </button>
+
+      <div id="result-box"></div>
+      <pre id="log-output"></pre>
+    </div>
+
+  </div><!-- /.page-body -->
+</div><!-- /#app -->
+
+<script>
+  // ── Auth ──────────────────────────────────────────────────────
+  async function sha256(s) {
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,'0')).join('');
+  }
+  async function checkPassword() {
+    const v = document.getElementById('pw-input').value;
+    const [a, b] = await Promise.all([sha256(v), sha256('improveyoursite2025')]);
+    if (a === b) {
+      sessionStorage.setItem('iy_audit', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      init();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+  document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); });
+  if (sessionStorage.getItem('iy_audit') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.addEventListener('DOMContentLoaded', init);
+  }
+
+  // ── Template defaults ──────────────────────────────────────────
+  const COLOR_PRIMARY_MAP = {
+    'clinic-trust':          '#0f766e',
+    'trades-rapid':          '#d97706',
+    'advisor-prime':         '#1d4ed8',
+    'retail-pulse':          '#7c3aed',
+    'solar-spark':           '#ea580c',
+    'accounting-conversion': '#1e3a5f',
+    'consulting-authority':  '#334155',
+    'hospitality-events':    '#92400e',
+  };
+  const COLOR_BG_MAP = {
+    'clinic-trust':          '#f4fbfb',
+    'trades-rapid':          '#fffaf5',
+    'advisor-prime':         '#f6f8ff',
+    'retail-pulse':          '#f8f7ff',
+    'solar-spark':           '#fff8f0',
+    'accounting-conversion': '#f8fafc',
+    'consulting-authority':  '#f8fafc',
+    'hospitality-events':    '#fdf8f0',
+  };
+
+  // ── Template recommendation ────────────────────────────────────
+  function recommendTemplate(biz) {
+    const b = (biz || '').toLowerCase();
+    if (/plumb|electric|trade|builder|handyman|hvac|heat|cool|air.con|carpet|paint|fence|concrete|landscap|garden|mow|clean|tiler|roofing|pest/.test(b)) return 'trades-rapid';
+    if (/doctor|dentist|physio|clinic|health|gp|medical|allied|hospital|chiro|osteo|optom|vet|psych|nurse|aged.care|disability/.test(b)) return 'clinic-trust';
+    if (/accountant|tax|bookkeep|financial.plan|wealth|invest|insuranc|mortgage|finance|broker|lending/.test(b)) return 'accounting-conversion';
+    if (/advisor|consult|coach|strategy|manag|hr|legal|law|solicit|audit|recruit/.test(b)) return 'advisor-prime';
+    if (/shop|retail|boutique|fashion|cloth|gift|jewel|toy|book|sport|hardware|furniture/.test(b)) return 'retail-pulse';
+    if (/solar|energy|panel|batter|renew|green|sustain/.test(b)) return 'solar-spark';
+    if (/restaurant|cafe|coffee|bakery|wedding|event|cater|venue|hotel|hospitality|bar|pub|winery/.test(b)) return 'hospitality-events';
+    return 'trades-rapid';
+  }
+
+  // ── Service suggestions ────────────────────────────────────────
+  const SERVICE_SUGGESTIONS = {
+    'trades-rapid': [
+      { n: 'Emergency Callouts',   d: 'Available 24/7 for urgent repairs and emergency jobs across the region.' },
+      { n: 'Residential Services', d: 'Professional workmanship for homeowners — done right the first time.' },
+      { n: 'Commercial Work',      d: 'Reliable, insured service for businesses and commercial properties.' },
+    ],
+    'clinic-trust': [
+      { n: 'General Consultations',       d: 'Comprehensive care for patients of all ages — same-day appointments available.' },
+      { n: 'Preventive Health Checks',    d: 'Health screenings, immunisations, and wellness plans tailored to you.' },
+      { n: 'Chronic Disease Management',  d: 'Ongoing care and support for long-term conditions.' },
+    ],
+    'accounting-conversion': [
+      { n: 'Tax Returns & Advice',    d: 'Individual and business tax lodgements with maximum legal deductions.' },
+      { n: 'Bookkeeping Services',    d: 'Accurate, timely bookkeeping so your numbers are always up to date.' },
+      { n: 'Business Advisory',       d: 'Strategic advice to grow your business and protect your profits.' },
+    ],
+    'advisor-prime': [
+      { n: 'Strategy & Planning',    d: 'Clarity on where your business is going and how to get there.' },
+      { n: 'Operations Consulting',  d: 'Streamline your processes and reduce waste across the business.' },
+      { n: 'Performance Coaching',   d: 'One-on-one support to accelerate results for you and your team.' },
+    ],
+    'retail-pulse': [
+      { n: 'New Arrivals',       d: 'Fresh collections added regularly — be the first to see what\'s new.' },
+      { n: 'In-Store Experience', d: 'Visit us in-store for personalised styling advice and exclusive pieces.' },
+      { n: 'Gift Cards',         d: 'The perfect gift — available in any amount, never expires.' },
+    ],
+    'solar-spark': [
+      { n: 'Solar Panel Installation', d: 'Quality panels installed by CEC-accredited electricians.' },
+      { n: 'Battery Storage',           d: 'Store your solar energy and use it after dark with home battery systems.' },
+      { n: 'System Monitoring',         d: 'Real-time monitoring so you always know how your system is performing.' },
+    ],
+    'hospitality-events': [
+      { n: 'Weddings & Ceremonies', d: 'Unforgettable weddings in a stunning setting — capacity up to 200 guests.' },
+      { n: 'Corporate Events',      d: 'Conferences, team days, and product launches done properly.' },
+      { n: 'Private Dining',        d: 'Intimate private dining experiences with seasonal menus crafted in-house.' },
+    ],
+    'consulting-authority': [
+      { n: 'Business Consulting',  d: 'Hands-on advice to solve your biggest business challenges.' },
+      { n: 'Leadership Coaching',  d: 'Develop the skills and mindset to lead with confidence.' },
+      { n: 'Project Management',   d: 'End-to-end management of complex projects, delivered on time and budget.' },
+    ],
+  };
+
+  // ── Business name extraction from page title ───────────────────
+  function extractBizName(title) {
+    if (!title) return '';
+    const skipWords = /^(home|about|contact|services|welcome|index|page)$/i;
+    const parts = title.split(/\s*[\|\-—]\s*/);
+    for (const p of parts) {
+      const t = p.trim();
+      if (t && !skipWords.test(t) && t.length > 2 && t.length < 60) return t;
+    }
+    return parts[0]?.trim() || '';
+  }
+
+  // ── Score chip HTML ────────────────────────────────────────────
+  function chipClass(s) { return s >= 90 ? 'chip-green' : s >= 50 ? 'chip-amber' : 'chip-red'; }
+
+  // ── Build fix checklist from audit data ───────────────────────
+  function buildFixList(auditData) {
+    const { scores, vitals, issues, pageData } = auditData;
+    const items = [];
+    const platform = pageData?.platform;
+
+    if (platform?.warn) {
+      items.push({ icon: '🏗', text: `Rebuilt from ${platform.name} — platform performance ceiling completely removed. A ${platform.name} site cannot reliably break 65/100; this build targets 90+.` });
+    }
+    if (scores.performance < 90) {
+      items.push({ icon: '⚡', text: `Performance rebuilt to 90+ Lighthouse target (scanned score was ${scores.performance}/100). Clean, hand-optimised code with no platform bloat.` });
+    }
+    if (vitals?.lcp > 2500) {
+      items.push({ icon: '🖼', text: `LCP optimised — hero image compressed, WebP served, lazy loading applied for all below-fold images. (Scanned LCP: ${vitals.lcpDisplay})` });
+    }
+    if (vitals?.tbt > 200) {
+      items.push({ icon: '🚀', text: `Total Blocking Time eliminated — all JavaScript deferred and minimised. (Scanned TBT: ${vitals.tbtDisplay})` });
+    }
+    if (!issues.metaDesc) {
+      items.push({ icon: '📝', text: 'Meta description written for every page — you control what appears in Google search results.' });
+    }
+    if (!issues.structuredData) {
+      items.push({ icon: '📋', text: 'Structured data (Schema) added — business name, phone, address, services. Enables star ratings and rich snippets in Google.' });
+    }
+    if (!issues.robotsTxt) {
+      items.push({ icon: '🗺', text: 'sitemap.xml + robots.txt auto-generated and included. Ready to submit to Google Search Console.' });
+    }
+    if (!issues.imageAlt) {
+      items.push({ icon: '🏷', text: `Alt text added to all images — ${issues.imageAltCount || 'multiple'} images were missing it. Google Images visibility restored.` });
+    }
+    if (!issues.renderBlocking) {
+      items.push({ icon: '🎨', text: 'Render-blocking CSS/JS eliminated — critical styles inline, everything else deferred. Visitors see content immediately.' });
+    }
+    if (!issues.textCompression) {
+      items.push({ icon: '📦', text: 'Text compression (gzip) enabled at delivery — all HTML, CSS, and JS served compressed.' });
+    }
+    if (!issues.canonical) {
+      items.push({ icon: '🔗', text: 'Canonical tags added to every page — no duplicate content confusion for Google.' });
+    }
+    if (!issues.httpsOk) {
+      items.push({ icon: '🔒', text: 'HTTPS/SSL fully configured via GitHub Pages — Chrome "Not Secure" warning gone.' });
+    }
+    if (scores.seo < 90) {
+      items.push({ icon: '🔍', text: `SEO rebuilt from ${scores.seo}/100 toward 90+ — full technical SEO: title tags, headings structure, Open Graph, viewport, canonical.` });
+    }
+    // Always included
+    items.push({ icon: '📱', text: 'Mobile-first responsive design — every page tested across phone, tablet, and desktop breakpoints.' });
+    items.push({ icon: '🎯', text: 'Clear calls-to-action on every page — phone, contact form, and service CTAs placed for conversion.' });
+    items.push({ icon: '🌐', text: 'GitHub Pages deployment — reliable, fast, globally distributed CDN. Zero monthly hosting fees.' });
+
+    return items;
+  }
+
+  // ── Init — read sessionStorage and pre-fill ───────────────────
+  function init() {
+    // Restore PAT if saved
+    const savedPAT = sessionStorage.getItem('iy_pat');
+    if (savedPAT) document.getElementById('gh-pat').value = savedPAT;
+
+    const raw = sessionStorage.getItem('iy_audit_fix');
+    if (!raw) {
+      document.getElementById('no-audit-warn').style.display = 'block';
+      selectTemplate('trades-rapid');
+      fillServiceSuggestions('trades-rapid');
+      return;
+    }
+
+    let auditData;
+    try { auditData = JSON.parse(raw); } catch { document.getElementById('no-audit-warn').style.display = 'block'; return; }
+
+    const { url, biz, area, scores, vitals, issues, pageData } = auditData;
+
+    // Audit strip
+    if (url) {
+      document.getElementById('audit-strip').style.display = 'flex';
+      document.getElementById('strip-url').textContent = url;
+      const chips = document.getElementById('strip-chips');
+      if (scores) {
+        chips.innerHTML =
+          `<span class="score-chip ${chipClass(scores.performance)}">Perf ${scores.performance}</span>` +
+          `<span class="score-chip ${chipClass(scores.seo)}">SEO ${scores.seo}</span>`;
+      }
+      if (pageData?.platform) {
+        chips.innerHTML += `<span class="platform-chip">${pageData.platform.name}</span>`;
+      }
+    }
+
+    // Pre-fill business details
+    const bizName = extractBizName(pageData?.title);
+    if (bizName) { setField('f-name', bizName, true); }
+    if (pageData?.metaDesc) { setField('f-tagline', pageData.metaDesc.substring(0, 120).replace(/\.$/, ''), true); }
+    if (pageData?.phones?.[0]) { setField('f-phone', pageData.phones[0], true); }
+    if (pageData?.h1) { setField('f-headline', pageData.h1.substring(0, 120), true); }
+
+    // Suburb from area (e.g. "Bathurst NSW" → "Bathurst", "NSW")
+    if (area) {
+      const areaMatch = area.match(/^(.+?)\s+(NSW|VIC|QLD|WA|SA|TAS|ACT|NT)$/i);
+      if (areaMatch) {
+        setField('f-suburb', areaMatch[1].trim(), true);
+        document.getElementById('f-state').value = areaMatch[2].toUpperCase();
+      } else {
+        setField('f-suburb', area, true);
+      }
+    }
+
+    // Template
+    const tmpl = recommendTemplate(biz);
+    selectTemplate(tmpl);
+    fillServiceSuggestions(tmpl);
+
+    // Fix checklist
+    if (issues) {
+      const fixItems = buildFixList(auditData);
+      const list = document.getElementById('fix-list');
+      list.innerHTML = fixItems.map(i => `
+        <div class="fix-item">
+          <span class="fix-icon">${i.icon}</span>
+          <span>${i.text}</span>
+        </div>`).join('');
+      document.getElementById('fixes-card').style.display = 'block';
+      document.getElementById('delivery-num').textContent = '5';
+      document.getElementById('deploy-num').textContent = '6';
+    }
+
+    // Platform cancellation note
+    const platform = pageData?.platform;
+    if (platform?.warn) {
+      const noteEl = document.getElementById('platform-cancel-note');
+      document.getElementById('platform-cancel-tag').textContent = `🗑 Cancel ${platform.name} After DNS Is Live`;
+      document.getElementById('platform-cancel-body').innerHTML =
+        `<strong>Do not cancel the ${platform.name} subscription until the new site is fully live and DNS has been pointing correctly for at least 7 days.</strong><br><br>
+        Once confirmed: log into ${platform.name} → Account → Cancel subscription. Make sure the customer has downloaded any existing content (images, text) they want to keep before the account closes.<br><br>
+        Estimated ${platform.name} saving: ~$300–$600/year in platform fees, plus the performance ranking benefits from removing the platform ceiling.`;
+      noteEl.style.display = 'block';
+    }
+  }
+
+  function setField(id, val, prefilled) {
+    const el = document.getElementById(id);
+    if (el && val) {
+      el.value = val;
+      if (prefilled) el.classList.add('fi-prefilled');
+    }
+  }
+
+  function selectTemplate(tmpl) {
+    const radio = document.querySelector(`input[name="template"][value="${tmpl}"]`);
+    if (radio) { radio.checked = true; }
+    const col = COLOR_PRIMARY_MAP[tmpl];
+    if (col) document.getElementById('f-color').value = col;
+    // Add "Recommended" tag
+    document.querySelectorAll('.tmpl-rec').forEach(e => e.remove());
+    const card = document.querySelector(`input[name="template"][value="${tmpl}"] + .tmpl-card`);
+    if (card) { const rec = document.createElement('div'); rec.className = 'tmpl-rec'; rec.textContent = 'Recommended'; card.appendChild(rec); }
+  }
+
+  function fillServiceSuggestions(tmpl) {
+    const sugs = SERVICE_SUGGESTIONS[tmpl] || SERVICE_SUGGESTIONS['trades-rapid'];
+    sugs.forEach((s, i) => {
+      const n = document.getElementById(`f-s${i+1}n`);
+      const d = document.getElementById(`f-s${i+1}d`);
+      if (n && !n.value) { n.value = s.n; n.classList.add('fi-prefilled'); }
+      if (d && !d.value) { d.value = s.d; d.classList.add('fi-prefilled'); }
+    });
+  }
+
+  // Update template and services when template radio changes
+  document.addEventListener('change', e => {
+    if (e.target.name === 'template') {
+      const tmpl = e.target.value;
+      const col  = COLOR_PRIMARY_MAP[tmpl];
+      if (col) document.getElementById('f-color').value = col;
+      document.querySelectorAll('.tmpl-rec').forEach(el => el.remove());
+    }
+  });
+
+  function setColor(hex) { document.getElementById('f-color').value = hex; }
+
+  // ── GitHub API (identical to admin.html) ──────────────────────
+  const REPO = 'anon8597299/smart-tech-innovations';
+  const TEMPLATES_BASE = 'templates';
+  const GH_PAGES_BASE  = 'https://anon8597299.github.io/smart-tech-innovations/customers';
+
+  function slugify(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+  function log(msg, type = '') {
+    const el = document.getElementById('log-output');
+    el.style.display = 'block';
+    const p = document.createElement('p');
+    p.className = 'log-line' + (type ? ' log-' + type : '');
+    p.textContent = msg;
+    el.appendChild(p);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function clearLog() { const el = document.getElementById('log-output'); el.innerHTML = ''; el.style.display = 'none'; }
+
+  function setResult(html, type) {
+    const el = document.getElementById('result-box');
+    el.innerHTML = html;
+    el.className = type;
+    el.style.display = 'block';
+  }
+
+  async function ghFetch(pat, path, opts = {}) {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
+      ...opts,
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', ...(opts.headers || {}) }
+    });
+    if (!r.ok) throw new Error(`GitHub API ${r.status} — ${path}`);
+    return r.json();
+  }
+
+  async function verifyPAT() {
+    const pat = document.getElementById('gh-pat').value.trim();
+    const el  = document.getElementById('pat-status');
+    el.className = 'pat-status';
+    el.style.display = 'none';
+    if (!pat.startsWith('ghp_') && !pat.startsWith('github_pat_')) {
+      el.textContent = '✗ Doesn\'t look like a valid PAT — should start with ghp_ or github_pat_';
+      el.className = 'pat-status pat-err';
+      return;
+    }
+    try {
+      const res = await fetch('https://api.github.com/user', { headers: { Authorization: `token ${pat}` } });
+      if (!res.ok) throw new Error('auth failed');
+      const user = await res.json();
+      sessionStorage.setItem('iy_pat', pat);
+      el.textContent = `✓ Verified — logged in as ${user.login}`;
+      el.className = 'pat-status pat-ok';
+    } catch {
+      el.textContent = '✗ Token invalid or no internet access. Check and try again.';
+      el.className = 'pat-status pat-err';
+    }
+  }
+
+  async function fetchAllTemplateFiles(pat, templateId, includeBlog) {
+    const items = await ghFetch(pat, `contents/${TEMPLATES_BASE}/${templateId}`);
+    const toFetch = [];
+    for (const item of items) {
+      if (item.type === 'file' && /\.(html|css|js)$/.test(item.name)) {
+        toFetch.push({ rel: item.name, url: item.download_url });
+      } else if (item.type === 'dir' && item.name === 'blog' && includeBlog) {
+        const blogItems = await ghFetch(pat, `contents/${TEMPLATES_BASE}/${templateId}/blog`);
+        for (const bi of blogItems) {
+          if (bi.type === 'file' && /\.(html|css|js)$/.test(bi.name))
+            toFetch.push({ rel: `blog/${bi.name}`, url: bi.download_url });
+        }
+      }
+    }
+    const results = {};
+    await Promise.all(toFetch.map(async ({ rel, url }) => {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`Could not load template file: ${rel}`);
+      results[rel] = await r.text();
+    }));
+    return results;
+  }
+
+  function renderTemplate(html, tokens) {
+    return html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => (k in tokens ? tokens[k] : m));
+  }
+
+  function generateSitemap(siteUrl, htmlFiles) {
+    const today = new Date().toISOString().split('T')[0];
+    const sorted = [...htmlFiles].sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)));
+    const urls = sorted.map(f => {
+      const loc = f === 'index.html' ? `${siteUrl}/` : `${siteUrl}/${f}`;
+      return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${f === 'index.html' ? '1.0' : '0.8'}</priority>\n  </url>`;
+    }).join('\n');
+    return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  }
+
+  async function createBlob(pat, content) {
+    const d = await ghFetch(pat, 'git/blobs', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: btoa(unescape(encodeURIComponent(content))), encoding: 'base64' })
+    });
+    return d.sha;
+  }
+
+  async function deploy() {
+    clearLog();
+    document.getElementById('result-box').style.display = 'none';
+
+    const pat = document.getElementById('gh-pat').value.trim() || sessionStorage.getItem('iy_pat');
+    if (!pat) { setResult('❌ Enter and verify your GitHub PAT above first.', 'error'); return; }
+
+    const name   = document.getElementById('f-name').value.trim();
+    const suburb = document.getElementById('f-suburb').value.trim();
+    if (!name) { setResult('❌ Business name is required.', 'error'); return; }
+    if (!suburb) { setResult('❌ Suburb is required.', 'error'); return; }
+
+    const templateId  = document.querySelector('input[name="template"]:checked')?.value || 'trades-rapid';
+    const packageTier = document.getElementById('f-package').value;
+    const includeBlog = packageTier === 'premium';
+    const email       = document.getElementById('f-email').value.trim() || `info@${slugify(name)}.com.au`;
+    const slug        = document.getElementById('f-slug').value.trim()  || slugify(name);
+    const siteUrl     = `${GH_PAGES_BASE}/${slug}`;
+
+    const tokens = {
+      BUSINESS_NAME:    name,
+      TAGLINE:          document.getElementById('f-tagline').value.trim()  || `Professional services in ${suburb}.`,
+      PHONE:            document.getElementById('f-phone').value.trim()    || '',
+      EMAIL:            email,
+      ADDRESS:          document.getElementById('f-address').value.trim()  || '',
+      SUBURB:           suburb,
+      STATE:            document.getElementById('f-state').value,
+      POSTCODE:         '',
+      HERO_HEADLINE:    document.getElementById('f-headline').value.trim() || name,
+      SERVICE_1_NAME:   document.getElementById('f-s1n').value.trim() || 'Our Services',
+      SERVICE_1_DESC:   document.getElementById('f-s1d').value.trim() || 'Professional service tailored to your needs.',
+      SERVICE_2_NAME:   document.getElementById('f-s2n').value.trim() || 'About Us',
+      SERVICE_2_DESC:   document.getElementById('f-s2d').value.trim() || 'Experienced and trusted.',
+      SERVICE_3_NAME:   document.getElementById('f-s3n').value.trim() || 'Contact',
+      SERVICE_3_DESC:   document.getElementById('f-s3d').value.trim() || 'Get in touch today.',
+      COLOR_PRIMARY:    document.getElementById('f-color').value,
+      COLOR_BG:         COLOR_BG_MAP[templateId] || '#f8fafc',
+      META_TITLE:       `${name} — ${suburb}`,
+      META_DESCRIPTION: document.getElementById('f-tagline').value.trim() || `${name}. Professional services in ${suburb}.`,
+      SITE_URL:         siteUrl,
+      GSC_VERIFICATION_META: '',
+      TEMPLATE_ID:      templateId,
+    };
+
+    const btn = document.getElementById('deploy-btn');
+    btn.disabled = true;
+    setResult('⏳ Building site...', 'loading');
+
+    try {
+      log(`🏗  Quick Implement — ${name}`);
+      log(`   Template : ${templateId}  |  Package: ${packageTier.toUpperCase()}  |  Slug: ${slug}`);
+      log('');
+
+      log('Loading template files from GitHub...');
+      const templateFiles = await fetchAllTemplateFiles(pat, templateId, includeBlog);
+      const fileNames = Object.keys(templateFiles);
+      log(`✓ ${fileNames.length} template file(s): ${fileNames.join(', ')}`, 'ok');
+
+      log('Rendering tokens...');
+      const rendered = {};
+      for (const [f, c] of Object.entries(templateFiles)) rendered[f] = renderTemplate(c, tokens);
+      log('✓ All tokens rendered', 'ok');
+
+      const htmlPages = fileNames.filter(f => f.endsWith('.html'));
+      rendered['sitemap.xml'] = generateSitemap(siteUrl, htmlPages);
+      rendered['robots.txt'] = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
+      log(`✓ Generated sitemap.xml (${htmlPages.length} pages) + robots.txt`, 'ok');
+      log('');
+
+      log('Pushing to GitHub...');
+      const refData    = await ghFetch(pat, 'git/refs/heads/main');
+      const commitSha  = refData.object.sha;
+      const commitData = await ghFetch(pat, `git/commits/${commitSha}`);
+      const treeSha    = commitData.tree.sha;
+
+      const treeItems = [];
+      for (const [f, c] of Object.entries(rendered)) {
+        log(`  Uploading: customers/${slug}/${f}`);
+        const blobSha = await createBlob(pat, c);
+        treeItems.push({ path: `customers/${slug}/${f}`, mode: '100644', type: 'blob', sha: blobSha });
+      }
+
+      const newTreeData = await ghFetch(pat, 'git/trees', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base_tree: treeSha, tree: treeItems })
+      });
+      const newCommitData = await ghFetch(pat, 'git/commits', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `Quick Implement: ${name} (${templateId})`, tree: newTreeData.sha, parents: [commitSha] })
+      });
+      await fetch(`https://api.github.com/repos/${REPO}/git/refs/heads/main`, {
+        method: 'PATCH',
+        headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sha: newCommitData.sha })
+      });
+
+      log(`✓ ${Object.keys(rendered).length} files committed in a single push`, 'ok');
+      log(`🌐 ${siteUrl}/`, 'url');
+      log('Site will be live in ~90 seconds. Share URL with customer for review.');
+      log('');
+      log('Next steps:', 'warn');
+      log('  1. Verify live at the URL above (~90 sec)', 'warn');
+      log('  2. Complete delivery notes above (DNS, GBP, GSC)', 'warn');
+      log('  3. Email customer via Admin → Pipeline', 'warn');
+
+      // Save to admin pipeline
+      const pipeline = JSON.parse(localStorage.getItem('iy_pipeline') || '[]').filter(e => e.slug !== slug);
+      pipeline.unshift({ slug, name, url: `${siteUrl}/`, email, template: templateId, pkg: packageTier, date: new Date().toLocaleDateString('en-AU'), status: 'sent' });
+      localStorage.setItem('iy_pipeline', JSON.stringify(pipeline));
+
+      setResult(
+        `<strong>✅ Site deployed!</strong><br><br>
+         Live in ~90 seconds:<br>
+         <a href="${siteUrl}/" target="_blank" style="color:#16a34a;font-weight:700;word-break:break-all;">${siteUrl}/</a><br><br>
+         Customer email ready in <a href="admin.html" style="color:#16a34a;font-weight:700;">Admin → Pipeline</a>`,
+        'success'
+      );
+
+    } catch (err) {
+      log('❌ ' + err.message, 'err');
+      setResult(`❌ <strong>Deploy failed:</strong> ${err.message}<br><small>Check the log above.</small>`, 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
