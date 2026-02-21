@@ -234,6 +234,9 @@
       color: #fff; font-family: Inter, sans-serif; white-space: nowrap; letter-spacing: .01em;
     }
     .btn-implement:hover { opacity: .88; }
+    .audit-select { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 7px; padding: .28rem .6rem .28rem .55rem; font-size: .75rem; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer; max-width: 210px; }
+    .audit-select option { background: #1e293b; }
+    .audit-select:focus { outline: none; border-color: #2dd4bf; }
     .btn-print { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
     .btn-print:hover { background: #e2e8f0; }
     .btn-copy { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
@@ -432,6 +435,9 @@
       <span class="tool-badge">Audit Tool</span>
     </div>
     <div style="display:flex;gap:.5rem;align-items:center">
+      <select class="audit-select" id="saved-audit-select" onchange="loadSavedAuditFromSelect(this)" title="Load a previously saved audit without re-scanning">
+        <option value="">📂 Load saved audit…</option>
+      </select>
       <button class="btn-implement" id="implement-btn" onclick="openImplement()">⚡ Implement Changes →</button>
       <button class="btn-pres" id="pres-btn" onclick="togglePresMode()">📺 Presentation Mode</button>
       <button class="btn-logout" onclick="logout()">Log out</button>
@@ -1719,7 +1725,7 @@
     const confidence = document.getElementById('confidence').value;
     const notes      = document.getElementById('call-notes').value;
     const email      = document.getElementById('prospect-email').value;
-    const entry = { ...lastAudit, pkg, confidence, notes, email, savedAt: Date.now() };
+    const entry = { ...lastAudit, pkg, confidence, notes, email, pageData: _lastPageData || null, savedAt: Date.now() };
     const history = getHistory();
     // Remove if URL already saved, then prepend
     const filtered = history.filter(h => h.url !== entry.url);
@@ -1734,10 +1740,36 @@
     catch { return []; }
   }
 
+  function loadSavedAuditFromSelect(sel) {
+    const idx = sel.value;
+    if (idx === '') return;
+    const h = getHistory()[parseInt(idx)];
+    if (!h) return;
+    lastAudit     = { url: h.url, biz: h.biz, area: h.area, date: h.date, scores: h.scores, vitals: h.vitals, issues: h.issues };
+    _lastPageData = h.pageData || null;
+    // Flash the Implement button to confirm it's loaded
+    const btn = document.getElementById('implement-btn');
+    btn.style.outline = '2.5px solid #2dd4bf';
+    btn.style.outlineOffset = '2px';
+    setTimeout(() => { btn.style.outline = ''; btn.style.outlineOffset = ''; }, 1800);
+    sel.value = ''; // reset dropdown label
+  }
+
   function renderHistory() {
     const history = getHistory();
     const section = document.getElementById('history-section');
     const list    = document.getElementById('history-list');
+    // Populate header dropdown
+    const sel = document.getElementById('saved-audit-select');
+    if (sel) {
+      sel.innerHTML = '<option value="">📂 Load saved audit…</option>' +
+        history.map((h, i) => {
+          const label = h.biz || h.url;
+          const perf  = h.scores?.performance ?? '—';
+          const date  = h.date || '';
+          return `<option value="${i}">${label} — ${perf}/100 (${date})</option>`;
+        }).join('');
+    }
     if (!history.length) { section.style.display = 'none'; return; }
     section.style.display = 'block';
     list.innerHTML = history.map((h, i) => {
