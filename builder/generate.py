@@ -20,6 +20,7 @@ Requirements:
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 # Ensure builder/ is on the path when run from project root
@@ -31,6 +32,7 @@ from github_client import push_customer_site
 # Templates live at project_root/templates/
 PROJECT_ROOT = Path(__file__).parent.parent
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
+GITHUB_PAGES_BASE = "https://anon8597299.github.io/smart-tech-innovations/customers"
 
 SUPPORTED_TEMPLATES = [
     "clinic-trust", "trades-rapid", "advisor-prime", "retail-pulse",
@@ -38,6 +40,45 @@ SUPPORTED_TEMPLATES = [
 ]
 
 PACKAGE_TIERS = ["starter", "growth", "premium"]
+
+
+def generate_sitemap(site_url: str, html_files: list) -> str:
+    """Generate a sitemap.xml listing all HTML pages in the customer site."""
+    today = date.today().strftime("%Y-%m-%d")
+    # index.html gets priority 1.0, everything else 0.8
+    sorted_files = sorted(html_files, key=lambda f: (0 if f == "index.html" else 1, f))
+    urls = []
+    for filename in sorted_files:
+        if filename == "index.html":
+            loc = f"{site_url}/"
+            priority = "1.0"
+        else:
+            loc = f"{site_url}/{filename}"
+            priority = "0.8"
+        urls.append(
+            f"  <url>\n"
+            f"    <loc>{loc}</loc>\n"
+            f"    <lastmod>{today}</lastmod>\n"
+            f"    <changefreq>monthly</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
+            f"  </url>"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(urls)
+        + "\n</urlset>\n"
+    )
+
+
+def generate_robots(site_url: str) -> str:
+    """Generate a robots.txt for the customer site."""
+    return (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "\n"
+        f"Sitemap: {site_url}/sitemap.xml\n"
+    )
 
 
 def slugify(name: str) -> str:
@@ -115,12 +156,14 @@ def generate(config_path: str, dry_run: bool = False) -> None:
     slug = config.get("SLUG") or slugify(business_name)
     package_tier = config.get("PACKAGE_TIER", "starter").lower()
     include_blog = (package_tier == "premium")
+    site_url = config.get("SITE_URL", f"{GITHUB_PAGES_BASE}/{slug}").rstrip("/")
 
     print(f"  Business : {business_name}")
     print(f"  Template : {template_id}")
     print(f"  Package  : {package_tier.upper()}")
     print(f"  Blog     : {'✓ included' if include_blog else '✗ not included (premium only)'}")
     print(f"  Slug     : {slug}")
+    print(f"  Site URL : {site_url}")
     print()
 
     # 2. Derive all tokens from config
@@ -141,6 +184,14 @@ def generate(config_path: str, dry_run: bool = False) -> None:
         print(f"    ✓ {filename}")
     print()
 
+    # 5. Generate sitemap.xml and robots.txt
+    html_pages = [f for f in rendered_files if f.endswith(".html")]
+    rendered_files["sitemap.xml"] = generate_sitemap(site_url, html_pages)
+    rendered_files["robots.txt"] = generate_robots(site_url)
+    print(f"  Generated sitemap.xml ({len(html_pages)} page(s))")
+    print(f"  Generated robots.txt")
+    print()
+
     if dry_run:
         print("  [DRY RUN] — files rendered but not pushed.")
         output_dir = PROJECT_ROOT / "customers" / slug
@@ -153,7 +204,7 @@ def generate(config_path: str, dry_run: bool = False) -> None:
         print(f"\n  Files saved to: customers/{slug}/")
         return
 
-    # 5. Push to GitHub
+    # 6. Push to GitHub
     print("  Pushing to GitHub...")
     live_url = push_customer_site(
         slug=slug,
@@ -170,7 +221,10 @@ def generate(config_path: str, dry_run: bool = False) -> None:
     print("  Next steps:")
     print("  1. Wait ~90 seconds for GitHub Pages to deploy")
     print("  2. Visit the URL above to verify the site")
-    print(f"  3. Email the customer: {config.get('EMAIL', '—')}")
+    print(f"  3. Email the customer their URL: {config.get('EMAIL', '—')}")
+    print(f"  4. GSC: search.google.com/search-console → Add property → HTML tag method")
+    print(f"     Copy verification code → add GSC_VERIFICATION_CODE to config → re-run generator")
+    print(f"     Then submit: {site_url}/sitemap.xml")
     print()
 
 

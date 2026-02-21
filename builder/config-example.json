@@ -46,5 +46,11 @@
   "COLOR_BG": "#fffaf5",
 
   "_note_slug": "Optional. If omitted, slug is auto-derived from BUSINESS_NAME.",
-  "SLUG": "smiths-plumbing"
+  "SLUG": "smiths-plumbing",
+
+  "_note_site_url": "Optional. Defaults to GitHub Pages URL. Set to custom domain once live.",
+  "SITE_URL": "https://smithsplumbing.com.au",
+
+  "_note_gsc": "Optional. Paste the code from Google Search Console HTML tag verification. Re-run generator after adding.",
+  "GSC_VERIFICATION_CODE": ""
 }

@@ -30,6 +30,8 @@ KNOWN_TOKENS = [
     "META_DESCRIPTION",
     "COLOR_PRIMARY",
     "COLOR_BG",
+    "GSC_VERIFICATION_META",
+    "SITE_URL",
 ]
 
 TOKEN_PATTERN = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
@@ -112,5 +114,13 @@ def derive_tokens(config: dict) -> dict:
         }
         template_id = tokens.get("TEMPLATE_ID", "")
         tokens["COLOR_PRIMARY"] = primary_defaults.get(template_id, "#5b4dff")
+
+    # Derive GSC_VERIFICATION_META from code (renders as meta tag or empty string)
+    if "GSC_VERIFICATION_META" not in tokens:
+        code = tokens.get("GSC_VERIFICATION_CODE", "").strip()
+        tokens["GSC_VERIFICATION_META"] = (
+            f'  <meta name="google-site-verification" content="{code}">'
+            if code else ""
+        )
 
     return tokens
