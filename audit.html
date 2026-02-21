@@ -524,6 +524,12 @@
       <div class="issues-list" id="issues-list"></div>
     </div>
 
+    <!-- Plain-English Summary -->
+    <div class="panel" id="summary-panel" style="display:none">
+      <div class="panel-title">What This Means — Plain English</div>
+      <p id="summary-para" style="font-size:.95rem;line-height:1.75;color:#374151"></p>
+    </div>
+
     <!-- What We'd Fix -->
     <div class="panel" id="improvements-panel" style="display:none">
       <div class="panel-title">What We'd Fix — Specific to This Site</div>
@@ -561,7 +567,7 @@
           <button class="btn-calc" onclick="calcRevenue()">Calculate →</button>
         </div>
         <div class="revenue-result">
-          <div class="revenue-label">Estimated monthly revenue gap</div>
+          <div class="revenue-label">Estimated annual revenue being left on the table</div>
           <div class="revenue-number" id="rev-number">$0</div>
           <div class="revenue-period" id="rev-annual"></div>
           <div style="margin-top:.75rem;font-size:.78rem;color:#94a3b8" id="rev-note">Enter visitors and click Calculate</div>
@@ -983,6 +989,9 @@
     renderRealUserData(cruxData);
     renderSiteIntelligence(pageData);
 
+    // Plain-English summary
+    renderSummary(scores, vitals, issues, biz, area, pageData);
+
     // Improvements + Proposal
     renderImprovements(scores, vitals, issues);
     renderProposal(scores, issues, biz);
@@ -1192,6 +1201,66 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  // ── Plain-English summary ────────────────────────────────────
+  function renderSummary(scores, vitals, issues, biz, area, pageData) {
+    const panel = document.getElementById('summary-panel');
+    const para  = document.getElementById('summary-para');
+
+    const failCount  = Object.values(issues).filter(v => v === false).length;
+    const bizLabel   = biz  ? `a ${biz.toLowerCase()} business` : 'this business';
+    const areaLabel  = area ? ` in ${area}` : '';
+    const platform   = pageData?.platform;
+
+    // Performance sentence
+    let perfSentence;
+    if (scores.performance >= 90) {
+      perfSentence = `The site currently scores ${scores.performance}/100 for mobile performance — solid, but there are still areas where a rebuild would push rankings and conversions higher.`;
+    } else if (scores.performance >= 60) {
+      perfSentence = `The site scores ${scores.performance}/100 for mobile performance. Google's benchmark for a fast, trustworthy site is 90 or above — this site is in the "needs improvement" zone, which means slower load times and lower rankings than sites that hit the mark.`;
+    } else {
+      perfSentence = `The site scores ${scores.performance}/100 for mobile performance — Google classifies anything under 50 as "poor". Most mobile visitors are waiting several seconds for the page to load, and research consistently shows that over half of people abandon a site if it takes longer than 3 seconds. That's real enquiries walking away before reading a single word.`;
+    }
+
+    // Platform sentence
+    let platformSentence = '';
+    if (platform?.warn) {
+      platformSentence = ` It's built on ${platform.name}, which has a hard performance ceiling built into the platform itself — no amount of tweaking the current site will break through it. A rebuild on clean, optimised code is the only real fix.`;
+    } else if (platform) {
+      platformSentence = ` It's built on ${platform.name}.`;
+    }
+
+    // Issues sentence
+    let issueSentence;
+    if (failCount === 0) {
+      issueSentence = ' All technical checks passed — the site is well configured from a technical SEO perspective.';
+    } else if (failCount <= 3) {
+      issueSentence = ` ${failCount} technical issue${failCount > 1 ? 's were' : ' was'} found — fixable without a full rebuild in most cases.`;
+    } else {
+      const keyIssues = [];
+      if (!issues.metaDesc)       keyIssues.push('no meta description');
+      if (!issues.structuredData) keyIssues.push('no structured data');
+      if (!issues.robotsTxt)      keyIssues.push('no sitemap or robots.txt');
+      if (!issues.httpsOk)        keyIssues.push('no HTTPS');
+      if (!issues.renderBlocking) keyIssues.push('render-blocking resources');
+      const issueList = keyIssues.length ? ` — including ${keyIssues.slice(0,3).join(', ')}` : '';
+      issueSentence = ` ${failCount} out of 14 technical checks failed${issueList}. These aren't cosmetic — they directly affect how Google ranks the site and how many visitors turn into enquiries.`;
+    }
+
+    // SEO sentence
+    let seoSentence = '';
+    if (scores.seo < 75) {
+      seoSentence = ` The SEO score of ${scores.seo}/100 means Google is having difficulty properly reading and ranking this site — several fundamental signals are missing that competitors with well-built sites already have in place.`;
+    } else if (scores.seo < 90) {
+      seoSentence = ` The SEO score is ${scores.seo}/100 — workable, but short of the 90+ that gives a site its best chance of ranking for competitive searches${areaLabel ? ' in ' + area : ''}.`;
+    }
+
+    // Closing sentence
+    const closeSentence = ` For ${bizLabel}${areaLabel}, a site running at this level is likely converting less than it should — and every month it stays this way is another month of enquiries going to a competitor whose site loads faster and ranks higher.`;
+
+    para.textContent = perfSentence + platformSentence + issueSentence + seoSentence + closeSentence;
+    panel.style.display = 'block';
+  }
+
   // ── Revenue calculator ──────────────────────────────────────
   function calcRevenue() {
     const visitors = +document.getElementById('rev-visitors').value || 0;
@@ -1205,8 +1274,8 @@
     const annEl  = document.getElementById('rev-annual');
     const noteEl = document.getElementById('rev-note');
     if (monthly > 0) {
-      numEl.textContent  = `$${monthly.toLocaleString('en-AU')}`;
-      annEl.textContent  = `per month · ~$${(monthly * 12).toLocaleString('en-AU')} per year`;
+      numEl.textContent  = `$${(monthly * 12).toLocaleString('en-AU')}`;
+      annEl.textContent  = `per year · $${monthly.toLocaleString('en-AU')} per month`;
       noteEl.textContent = `Based on improving conversion from ${(current * 100).toFixed(1)}% → ${(targetRate * 100).toFixed(1)}% (realistic post-rebuild target).`;
     } else {
       numEl.textContent  = '$0';
