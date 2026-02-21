@@ -61,6 +61,15 @@ def load_registry() -> list:
     return json.loads(REGISTRY.read_text(encoding="utf-8"))
 
 
+def md_to_html(text: str) -> str:
+    """Convert residual markdown bold/italic to HTML, in case Perplexity ignores the prompt."""
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    text = re.sub(r'\*(.+?)\*',     r'<em>\1</em>', text)
+    text = re.sub(r'__(.+?)__',     r'<strong>\1</strong>', text)
+    text = re.sub(r'_(.+?)_',       r'<em>\1</em>', text)
+    return text
+
+
 def post_slug(title: str, max_len: int = 60) -> str:
     """Convert a title to a URL-safe slug, capped at max_len chars."""
     s = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
@@ -217,7 +226,7 @@ def generate_for_customer(customer: dict, template_html: str, month_year: str) -
     excerpt  = post_data["excerpt"]
     category = post_data.get("category", CATEGORY_MAP.get(customer.get("template", ""), "Local Tips"))
     cta_text = post_data.get("cta_text", f"Get in touch with {name} today.")
-    content  = post_data["content_html"]
+    content  = md_to_html(post_data["content_html"])  # sanitise any residual markdown
 
     print(f'  [{slug}] ✓ "{title}"')
 
