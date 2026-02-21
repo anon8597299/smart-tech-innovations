@@ -309,17 +309,22 @@
       </div>
 
       <div style="margin-top:1.1rem">
-        <label class="field-label" style="margin-bottom:.45rem;display:block">Primary colour</label>
-        <div class="color-row">
+        <label class="field-label" style="margin-bottom:.35rem;display:block">Primary colour</label>
+        <div id="brand-colour-note" style="display:none;font-size:.78rem;color:#16a34a;font-weight:600;margin-bottom:.45rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.35rem .7rem;"></div>
+        <div class="color-row" id="color-row">
           <input type="color" id="f-color" value="#d97706">
-          <div class="cp" style="background:#0f766e" onclick="setColor('#0f766e')" title="Teal"></div>
-          <div class="cp" style="background:#d97706" onclick="setColor('#d97706')" title="Amber"></div>
-          <div class="cp" style="background:#1d4ed8" onclick="setColor('#1d4ed8')" title="Blue"></div>
-          <div class="cp" style="background:#7c3aed" onclick="setColor('#7c3aed')" title="Purple"></div>
-          <div class="cp" style="background:#ea580c" onclick="setColor('#ea580c')" title="Orange"></div>
-          <div class="cp" style="background:#dc2626" onclick="setColor('#dc2626')" title="Red"></div>
-          <div class="cp" style="background:#059669" onclick="setColor('#059669')" title="Green"></div>
-          <div class="cp" style="background:#334155" onclick="setColor('#334155')" title="Slate"></div>
+          <div id="brand-swatches"></div>
+          <div style="width:1px;height:1.8rem;background:#e2e8f0;margin:0 .1rem;flex-shrink:0" id="swatch-divider" style="display:none"></div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap" id="preset-swatches">
+            <div class="cp" style="background:#0f766e" onclick="setColor('#0f766e')" title="Teal"></div>
+            <div class="cp" style="background:#d97706" onclick="setColor('#d97706')" title="Amber"></div>
+            <div class="cp" style="background:#1d4ed8" onclick="setColor('#1d4ed8')" title="Blue"></div>
+            <div class="cp" style="background:#7c3aed" onclick="setColor('#7c3aed')" title="Purple"></div>
+            <div class="cp" style="background:#ea580c" onclick="setColor('#ea580c')" title="Orange"></div>
+            <div class="cp" style="background:#dc2626" onclick="setColor('#dc2626')" title="Red"></div>
+            <div class="cp" style="background:#059669" onclick="setColor('#059669')" title="Green"></div>
+            <div class="cp" style="background:#334155" onclick="setColor('#334155')" title="Slate"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -714,6 +719,29 @@
     const tmpl = recommendTemplate(biz);
     selectTemplate(tmpl);
     fillServiceSuggestions(tmpl);
+
+    // Brand colours — override template defaults with actual detected colours
+    const bc = pageData?.brandColours;
+    if (bc?.primary) {
+      document.getElementById('f-color').value = bc.primary;
+      const noteEl = document.getElementById('brand-colour-note');
+      noteEl.textContent = `✓ Primary colour detected from their site: ${bc.primary} — applied automatically.`;
+      noteEl.style.display = 'block';
+    }
+    if (bc?.palette?.length) {
+      const swatchWrap = document.getElementById('brand-swatches');
+      const divider = document.getElementById('swatch-divider');
+      const allSwatches = bc.primary
+        ? [bc.primary, ...bc.palette.filter(c => c !== bc.primary)].slice(0,6)
+        : bc.palette.slice(0,6);
+      swatchWrap.innerHTML = allSwatches.map((c, i) =>
+        `<div class="cp" style="background:${c};outline:${i===0?'2px solid #5b4dff':'none'};outline-offset:2px"
+          onclick="setColor('${c}')" title="${c}${i===0?' (detected primary)':''}"></div>`
+      ).join('');
+      swatchWrap.style.display = 'flex';
+      swatchWrap.style.gap = '.4rem';
+      if (divider) divider.style.display = 'block';
+    }
 
     // Fix checklist
     if (issues) {

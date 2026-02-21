@@ -851,6 +851,61 @@
     return null; // custom / unknown
   }
 
+  // ── Brand colour extraction ─────────────────────────────────
+  function normaliseHex(hex) {
+    hex = hex.toLowerCase().trim();
+    if (hex.length === 4) hex = '#' + hex[1]+hex[1]+hex[2]+hex[2]+hex[3]+hex[3];
+    return hex.length === 7 ? hex : null;
+  }
+
+  function isNeutralColour(hex) {
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    if (r > 235 && g > 235 && b > 235) return true;  // near white
+    if (r < 20  && g < 20  && b < 20 ) return true;  // near black
+    const max = Math.max(r,g,b), min = Math.min(r,g,b);
+    if ((max - min) < 28 && r > 55 && r < 215) return true; // grey
+    return false;
+  }
+
+  function extractBrandColours(html) {
+    if (!html) return { primary: null, palette: [] };
+
+    // 1. Meta theme-color — most explicit brand signal
+    const themeColor = normaliseHex(
+      html.match(/<meta[^>]+name=["']theme-color["'][^>]+content=["']\s*(#[0-9a-fA-F]{3,6})/i)?.[1] ||
+      html.match(/<meta[^>]+content=["']\s*(#[0-9a-fA-F]{3,6})["'][^>]+name=["']theme-color["']/i)?.[1] || ''
+    );
+
+    // 2. Extract all CSS text: <style> blocks + inline style= attributes
+    const cssParts = [];
+    for (const m of html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) cssParts.push(m[1]);
+    for (const m of html.matchAll(/style=["']([^"']{1,400})/gi)) cssParts.push(m[1]);
+    const cssText = cssParts.join('\n');
+
+    // 3. CSS custom property — primary / brand / accent / button
+    const varMatch = cssText.match(
+      /--(?:color-?primary|primary(?:-color)?|brand(?:-color)?|accent|highlight|cta|btn|button|link)[^:]*:\s*(#[0-9a-fA-F]{3,6})/i
+    );
+    const varColour = varMatch ? normaliseHex(varMatch[1]) : null;
+
+    // 4. Frequency count of all hex colours in CSS (non-neutral only)
+    const freq = {};
+    for (const m of cssText.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)) {
+      const norm = normaliseHex('#' + m[1]);
+      if (!norm || isNeutralColour(norm)) continue;
+      freq[norm] = (freq[norm] || 0) + 1;
+    }
+    const palette = Object.entries(freq).sort((a,b) => b[1]-a[1]).slice(0,6).map(([c]) => c);
+
+    // Best primary: theme-color → CSS var → most frequent non-neutral
+    const primary = (themeColor && !isNeutralColour(themeColor) ? themeColor : null)
+                 || varColour
+                 || palette[0]
+                 || null;
+
+    return { primary, palette };
+  }
+
   function extractPageData(html) {
     if (!html) return null;
     const get = re => html.match(re)?.[1]?.trim() || null;
@@ -865,7 +920,8 @@
     const yearMatch = html.match(/(?:©|&copy;|copyright)\s*(?:copyright\s+)?(\d{4})/i);
     const copyrightYear = yearMatch ? parseInt(yearMatch[1]) : null;
     const platform  = detectPlatform(html);
-    return { title, metaDesc, h1, hasForm, hasPhone, phones, copyrightYear, platform };
+    const brandColours = extractBrandColours(html);
+    return { title, metaDesc, h1, hasForm, hasPhone, phones, copyrightYear, platform, brandColours };
   }
 
   // ── Render results ──────────────────────────────────────────
@@ -1140,6 +1196,23 @@
       html += `<span class="platform-badge" style="background:${badgeColor};color:${badgeText}">${p.name}</span>`;
       html += `<div class="platform-note ${p.warn ? '' : 'neutral'}">${p.note}</div>`;
       html += `</div>`;
+    }
+
+    // Brand colours
+    const bc = pageData.brandColours;
+    if (bc && (bc.primary || bc.palette?.length)) {
+      html += `<div style="margin-bottom:.85rem">
+        <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:.5rem;">Detected Brand Colours</div>
+        <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">`;
+      const swatches = bc.primary
+        ? [bc.primary, ...(bc.palette || []).filter(c => c !== bc.primary)].slice(0,6)
+        : (bc.palette || []).slice(0,6);
+      swatches.forEach((c, i) => {
+        const label = i === 0 ? 'Primary →' : '';
+        html += `<div title="${c}" style="width:2.2rem;height:2.2rem;border-radius:8px;background:${c};border:2px solid rgba(0,0,0,.08);flex-shrink:0;cursor:default;" title="${c}"></div>`;
+      });
+      if (bc.primary) html += `<span style="font-size:.78rem;font-weight:700;color:#374151;margin-left:.25rem">${bc.primary} &nbsp;<span style="color:#94a3b8;font-weight:400">detected primary</span></span>`;
+      html += `</div></div>`;
     }
 
     // Grid of intel items
