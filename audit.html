@@ -228,7 +228,11 @@
     }
     .btn-save { background: #5b4dff; color: #fff; }
     .btn-save:hover { background: #4c40db; }
-    .btn-implement { background: linear-gradient(135deg, #5b4dff, #2dd4bf); color: #fff; font-size: .88rem; }
+    .btn-implement {
+      padding: .28rem .85rem; border-radius: 7px; font-size: .76rem; font-weight: 700;
+      cursor: pointer; border: none; background: linear-gradient(135deg, #5b4dff, #2dd4bf);
+      color: #fff; font-family: Inter, sans-serif; white-space: nowrap; letter-spacing: .01em;
+    }
     .btn-implement:hover { opacity: .88; }
     .btn-print { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
     .btn-print:hover { background: #e2e8f0; }
@@ -428,6 +432,7 @@
       <span class="tool-badge">Audit Tool</span>
     </div>
     <div style="display:flex;gap:.5rem;align-items:center">
+      <button class="btn-implement" id="implement-btn" onclick="openImplement()">⚡ Implement Changes →</button>
       <button class="btn-pres" id="pres-btn" onclick="togglePresMode()">📺 Presentation Mode</button>
       <button class="btn-logout" onclick="logout()">Log out</button>
     </div>
@@ -618,7 +623,6 @@
       <button class="btn-action btn-save" onclick="saveAudit()">Save to History</button>
       <button class="btn-action btn-copy" onclick="copyTalkingPoints()">Copy Talking Points</button>
       <button class="btn-action btn-print" onclick="window.print()">Print Report</button>
-      <button class="btn-action btn-implement" id="implement-btn" onclick="openImplement()" style="display:none">⚡ Implement Changes →</button>
       <span class="save-confirm" id="save-confirm">✓ Saved</span>
     </div>
 
@@ -916,7 +920,6 @@
     const pageData = extractPageData(pageHtml);
     _lastPageData = pageData;
     lastAudit = { url, area, biz, date: new Date().toLocaleDateString('en-AU'), scores, vitals, issues };
-    document.getElementById('implement-btn').style.display = 'inline-flex';
 
     // Meta bar
     const rUrl = document.getElementById('r-url');
