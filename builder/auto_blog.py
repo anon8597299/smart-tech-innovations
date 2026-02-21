@@ -93,20 +93,30 @@ def call_perplexity(customer: dict, month_year: str) -> dict:
     template = customer.get("template", "trades-rapid")
     category = CATEGORY_MAP.get(template, "Local Tips")
 
-    prompt = f"""Write a helpful, SEO-optimised blog post for {name}, a {biz} based in {suburb}, {state}, Australia.
+    prompt = f"""Write a Google SEO-optimised blog post for {name}, a {biz} based in {suburb}, {state}, Australia.
+
+The PRIMARY goal is to rank on Google for local search terms like "{biz} {suburb}", "{biz} {state}", and related questions people search for.
 
 The post is for {month_year}. Requirements:
-- 600–800 words of genuinely useful, specific, practical content
-- Naturally mention {suburb} or the local region at least twice
-- 3–4 subheadings using h2 tags only
-- End with a call-to-action paragraph encouraging readers to contact {name}
-- Reflect current trends, seasonal relevance, or newsworthy angles for {month_year}
-- Write in a friendly, helpful Australian voice — not salesy
-{f'- Also consider these specific topics the business has requested: {extras}' if extras else ''}
+
+SEO requirements (most important):
+- Choose a title targeting a specific search query people actually Google — e.g. "How Much Does a Solar System Cost on the Gold Coast in 2026?" or "Best Plumber in Bathurst: What to Look For"
+- Include the primary keyword ({biz} + {suburb} or {state}) naturally in the first paragraph
+- Each h2 subheading should target a related search question (e.g. "How long does solar installation take in {suburb}?")
+- Use specific local details — street names, landmarks, local councils, regional weather, local regulations — so Google recognises it as genuinely local content
+- Include real numbers, costs, timeframes, or stats where relevant (use current {month_year} data from your web search)
+- 700–900 words — longer posts rank better for competitive local keywords
+
+Content requirements:
+- Answer the question the title asks — genuinely useful, not waffle
+- Reflect current trends or news relevant to {biz} in {state} for {month_year}
+- Friendly, trustworthy Australian voice — not salesy, not generic
+- End with a natural call-to-action mentioning {name} and {suburb}
+{f'- Prioritise these specific topics/services: {extras}' if extras else ''}
 
 Return ONLY a JSON object with no markdown code fences and no extra text before or after:
 {{
-  "title": "Specific, compelling SEO title naturally including {suburb} or {state}",
+  "title": "Keyword-targeted title a {suburb} resident would actually Google",
   "excerpt": "1-2 sentence summary suitable for a blog listing card.",
   "category": "{category}",
   "cta_text": "One sentence specific to this {biz}, encouraging the reader to call or book.",
