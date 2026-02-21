@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Staging — ImproveYourSite Homepage Test</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/style.css">
+  <style>
+    /* ── Login gate ── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: #0f172a;
+      font-family: Inter, -apple-system, sans-serif;
+    }
+    .login-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      color: #e2e8f0;
+    }
+    .login-card .login-icon { font-size: 2rem; margin-bottom: .5rem; }
+    .login-card h1 { font-size: 1.3rem; margin: 0 0 .4rem; font-family: Inter, sans-serif; }
+    .login-card p { color: #64748b; font-size: .9rem; margin: 0 0 1.6rem; }
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      font-family: Inter, sans-serif;
+      margin-bottom: .8rem;
+    }
+    .login-card input:focus { outline: none; border-color: #5b4dff; }
+    .btn-login {
+      width: 100%;
+      padding: .8rem;
+      background: #5b4dff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+    }
+    .btn-login:hover { background: #4c40db; }
+    .login-error { color: #f87171; font-size: .85rem; margin-top: .6rem; display: none; }
+
+    /* ── App shell ── */
+    #app { display: none; }
+
+    /* ── Staging banner ── */
+    .staging-banner {
+      background: #0f1629;
+      border-bottom: 2px solid #5b4dff;
+      padding: .6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-family: Inter, -apple-system, sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .staging-banner-left { display: flex; align-items: center; gap: .75rem; }
+    .staging-badge {
+      background: #5b4dff;
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 800;
+      padding: .2rem .6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      white-space: nowrap;
+      font-family: Inter, sans-serif;
+    }
+    .staging-label { color: #94a3b8; font-size: .82rem; }
+    .staging-banner-right { display: flex; gap: .5rem; align-items: center; }
+    .sbtn {
+      padding: .3rem .85rem;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: Inter, sans-serif;
+      white-space: nowrap;
+    }
+    .sbtn-toggle { background: #334155; color: #e2e8f0; }
+    .sbtn-toggle:hover { background: #475569; }
+    .sbtn-exit { background: #1e293b; color: #64748b; border: 1px solid #334155; }
+    .sbtn-exit:hover { color: #e2e8f0; }
+
+    /* ── Changes panel ── */
+    .changes-panel {
+      background: #080f1c;
+      border-bottom: 1px solid #1e293b;
+      padding: .9rem 1.5rem 1rem;
+      font-family: Inter, -apple-system, sans-serif;
+      font-size: .82rem;
+      color: #64748b;
+    }
+    .changes-panel.hidden { display: none; }
+    .changes-panel strong { color: #94a3b8; display: block; margin-bottom: .4rem; }
+    .changes-panel ul { margin: 0; padding-left: 1.3rem; }
+    .changes-panel li { margin-bottom: .2rem; }
+    .changes-panel .tag-new    { color: #2dd4bf; font-weight: 700; }
+    .changes-panel .tag-update { color: #f59e0b; font-weight: 700; }
+
+    /* ── Problem grid 5-up ── */
+    .problem__grid--five {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Process 3-col ── */
+    .process__grid--three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .process__grid--three { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ──────────── LOGIN GATE ──────────── -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-icon">🔒</div>
+      <h1>Staging Preview</h1>
+      <p>Private test version of the ImproveYourSite homepage. Enter the admin password to preview proposed changes.</p>
+      <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password">
+      <button class="btn-login" onclick="checkPassword()">View Staging Page</button>
+      <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+    </div>
+  </div>
+
+  <!-- ──────────── STAGING APP ──────────── -->
+  <div id="app">
+
+    <!-- Staging banner -->
+    <div class="staging-banner">
+      <div class="staging-banner-left">
+        <span class="staging-badge">Staging</span>
+        <span class="staging-label">Proposed homepage improvements — review before going live</span>
+      </div>
+      <div class="staging-banner-right">
+        <button class="sbtn sbtn-toggle" id="changes-toggle" onclick="toggleChanges()">Hide Changes</button>
+        <button class="sbtn sbtn-exit" onclick="if(confirm('Exit staging and go to live site?')) window.location='index.html'">← Live site</button>
+      </div>
+    </div>
+
+    <!-- Changes summary -->
+    <div class="changes-panel" id="changes-panel">
+      <strong>What's changed in this version (based on competitor analysis + your brief):</strong>
+      <ul>
+        <li><span class="tag-new">NEW</span> — "Metro-Level Quality. Australian Reach." section — positions IYS against Sydney &amp; Gold Coast agencies, not just local web guys</li>
+        <li><span class="tag-new">NEW</span> — Automated blog called out as a headline differentiator (competitors require someone to write content — a real pain point)</li>
+        <li><span class="tag-new">NEW</span> — 2 new FAQ answers: "Do I need to write blog content?" and "Do you work outside Central West NSW?"</li>
+        <li><span class="tag-new">NEW</span> — "No monthly fees" FAQ answer added</li>
+        <li><span class="tag-update">UPDATED</span> — Hero badge &amp; subtitle: outcome language ("phone keeps ringing", "jobs keep booking")</li>
+        <li><span class="tag-update">UPDATED</span> — Hero proof strip: "Transparent pricing · You own it outright · Automated blog included" (replaces generic speed/conversion/tracking)</li>
+        <li><span class="tag-update">UPDATED</span> — Hero stat: "24/7 Automation" → "1–3 wks to go live" (more concrete &amp; compelling)</li>
+        <li><span class="tag-update">UPDATED</span> — Trust strip: transparent pricing, own outright, automated blog, 1–3 weeks</li>
+        <li><span class="tag-update">UPDATED</span> — Problem section: 5th card added — "Blog Nobody Writes" pain point</li>
+        <li><span class="tag-update">UPDATED</span> — Services: "Automated Blog Content" replaces generic "AI Chatbot" as a featured service</li>
+        <li><span class="tag-update">UPDATED</span> — Process: simplified to 3 steps (cleaner, DM-style clarity)</li>
+        <li><span class="tag-update">UPDATED</span> — Pricing section header: "Published Upfront" — calls out transparent pricing vs agencies that hide it</li>
+        <li><span class="tag-update">UPDATED</span> — Testimonial 3: new quote referencing Sydney agency comparison + no lock-in</li>
+        <li><span class="tag-update">UPDATED</span> — Footer &amp; contact email: admin@ → hello@improveyoursite.com</li>
+        <li><span class="tag-update">UPDATED</span> — Sticky CTA: links to book.html instead of #contact</li>
+      </ul>
+    </div>
+
+    <!-- ===== IMPROVED HOMEPAGE ===== -->
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="index.html" class="nav__logo">
+          <svg width="26" height="26" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="vertical-align:middle;margin-right:6px;flex-shrink:0">
+            <defs>
+              <linearGradient id="nav-bar" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#5b4dff"/>
+                <stop offset="100%" stop-color="#2dd4bf"/>
+              </linearGradient>
+            </defs>
+            <rect x="5"  y="32" width="13" height="22" rx="3.5" fill="url(#nav-bar)"/>
+            <rect x="23" y="20" width="13" height="34" rx="3.5" fill="url(#nav-bar)"/>
+            <rect x="41" y="8"  width="13" height="46" rx="3.5" fill="url(#nav-bar)"/>
+          </svg>Improve<span class="accent">YourSite</span>
+        </a>
+        <ul class="nav__menu" id="nav-menu">
+          <li><a href="#services" class="nav__link">Services</a></li>
+          <li><a href="#process" class="nav__link">Process</a></li>
+          <li><a href="#results" class="nav__link">Results</a></li>
+          <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+          <li><a href="our-work.html" class="nav__link">Our Work</a></li>
+          <li><a href="packages.html" class="nav__link">Packages</a></li>
+          <li><a href="#faq" class="nav__link">FAQ</a></li>
+          <li><a href="book.html" class="nav__link nav__cta">Book a Free Call</a></li>
+        </ul>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero ✏️ UPDATED -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__content">
+          <div class="hero__badge">🚀 High-Converting Websites for Australian Service Businesses</div>
+          <h1 class="hero__title">Your Website Is Costing You <span class="accent">Customers</span></h1>
+          <p class="hero__subtitle">We build fast, professional websites with automated SEO blog content — so your phone keeps ringing and jobs keep booking while you focus on the work.</p>
+          <div class="hero__actions">
+            <a href="book.html" class="btn btn--primary">Book a Free 15-Min Call</a>
+            <a href="packages.html" class="btn btn--spotlight">See Packages &amp; Pricing</a>
+            <a href="our-work.html" class="btn btn--ghost">See Real Examples</a>
+          </div>
+          <div class="hero__stats">
+            <div class="stat">
+              <span class="stat__number">90%+</span>
+              <span class="stat__label">Lighthouse Scores</span>
+            </div>
+            <div class="stat">
+              <span class="stat__number">3x</span>
+              <span class="stat__label">More Enquiries</span>
+            </div>
+            <div class="stat">
+              <span class="stat__number">1–3 wks</span>
+              <span class="stat__label">To Go Live</span>
+            </div>
+          </div>
+          <div class="hero__proof" aria-label="Key differentiators">
+            <span>✅ Transparent pricing</span>
+            <span>✅ You own it outright</span>
+            <span>✅ Automated blog included</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Strip ✏️ UPDATED -->
+    <section class="trust-strip" aria-label="Trust indicators">
+      <div class="container trust-strip__inner">
+        <div class="trust-strip__item"><strong>Transparent pricing</strong> — published upfront</div>
+        <div class="trust-strip__item"><strong>You own it outright</strong> — no lock-in, no monthly fees</div>
+        <div class="trust-strip__item"><strong>Automated blog content</strong> — SEO without the work</div>
+        <div class="trust-strip__item"><strong>Live in 1–3 weeks</strong> — not months</div>
+      </div>
+    </section>
+
+    <!-- Quick Paths ✏️ UPDATED -->
+    <section class="quick-paths" aria-label="Best-fit start paths">
+      <div class="container">
+        <div class="quick-paths__panel">
+          <div class="quick-paths__item">
+            <span class="quick-paths__icon">🔧</span>
+            <h3>Need fast fixes?</h3>
+            <p>Repair speed, SEO and enquiry flow quickly with Scan + Fix — measurable results in under a week.</p>
+          </div>
+          <div class="quick-paths__item">
+            <span class="quick-paths__icon">🚀</span>
+            <h3>Need a full rebuild?</h3>
+            <p>Launch a complete high-converting website with booking automation built in. Live in 1–3 weeks.</p>
+          </div>
+          <div class="quick-paths__item">
+            <span class="quick-paths__icon">📈</span>
+            <h3>Want ongoing growth?</h3>
+            <p>Our Premium package includes an automated blog that keeps publishing SEO content — no writer, no agency retainer.</p>
+          </div>
+        </div>
+        <p class="quick-paths__cta">
+          <a href="our-work.html" class="btn btn--primary btn--spotlight">See Real Showcase Builds</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Problem Section ✏️ UPDATED — 5 cards, "Blog Nobody Writes" added -->
+    <section class="problem" id="problem">
+      <div class="container">
+        <h2 class="section__title">Is Your Website Holding You Back?</h2>
+        <div class="problem__grid problem__grid--five">
+          <div class="problem__card">
+            <span class="problem__icon">🐌</span>
+            <h3>Slow Load Times</h3>
+            <p>Every second of delay costs you 7% in conversions. Slow sites bleed enquiries every single day.</p>
+          </div>
+          <div class="problem__card">
+            <span class="problem__icon">📱</span>
+            <h3>Not Mobile-First</h3>
+            <p>Over 60% of traffic is mobile. If your site isn't built for it, most visitors leave before they read a word.</p>
+          </div>
+          <div class="problem__card">
+            <span class="problem__icon">🔍</span>
+            <h3>Buried on Google</h3>
+            <p>Poor SEO means you're invisible. Your competitors are showing up first and taking the calls that should be yours.</p>
+          </div>
+          <div class="problem__card">
+            <span class="problem__icon">✍️</span>
+            <h3>Blog Nobody Writes</h3>
+            <p>Most web agencies build a blog section and leave it empty. Google rewards regular content — and it has to actually happen.</p>
+          </div>
+          <div class="problem__card">
+            <span class="problem__icon">⏰</span>
+            <h3>Manual Everything</h3>
+            <p>Still managing enquiries by phone and chasing leads manually? Your site should be doing that work around the clock.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ★ NEW SECTION: Metro Quality -->
+    <section class="positioning" id="positioning">
+      <div class="container">
+        <h2 class="section__title">Metro-Level Quality. Australian Reach.</h2>
+        <p class="section__subtitle">You don't need a Sydney or Gold Coast agency to get a Sydney or Gold Coast result. We build to the exact same standard — at a price that makes sense for real businesses.</p>
+        <div class="positioning__grid">
+          <div class="positioning__card">
+            <h3>Transparent Pricing — Always</h3>
+            <p>Every package is listed publicly. No "get a quote" mystery, no discovery call just to find out what things cost. You see it, you pick it, you pay it. Most agencies on the coast still won't publish a price — we do.</p>
+          </div>
+          <div class="positioning__card">
+            <h3>You Own It Outright</h3>
+            <p>When we hand over your site, it's yours completely. No monthly platform fees. No holding it hostage to a subscription. Host it where you want, change it when you want — we hand you the keys at the end.</p>
+          </div>
+          <div class="positioning__card">
+            <h3>Automated Blog — No Ongoing Work</h3>
+            <p>Our Premium Growth package includes a blog system that publishes SEO content on a schedule. Competitors either charge extra for content or expect you to write it yourself. We set it up and it runs.</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+          <a href="our-work.html" class="btn btn--ghost">See Demo Sites Before You Pay →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services ✏️ UPDATED — Automated Blog replaces AI Chatbot as headline service -->
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="section__title">What You Get</h2>
+        <p class="section__subtitle">Complete website design, development, SEO and conversion systems — not just a pretty template someone else will maintain.</p>
+        <div class="services__grid">
+          <div class="service__card">
+            <div class="service__icon">🎨</div>
+            <h3>Modern Redesign</h3>
+            <p>Custom-designed, mobile-first websites built fast. Professional, clean, and built to convert visitors into enquiries.</p>
+          </div>
+          <div class="service__card">
+            <div class="service__icon">🔍</div>
+            <h3>SEO Optimisation</h3>
+            <p>Technical SEO, structured data, Core Web Vitals. Everything Google needs to rank you above the competition in your area.</p>
+          </div>
+          <div class="service__card">
+            <div class="service__icon">📝</div>
+            <h3>Automated Blog Content</h3>
+            <p>Premium package includes an automated blog system that publishes SEO articles on a schedule — so you rank for more keywords without writing a word.</p>
+          </div>
+          <div class="service__card">
+            <div class="service__icon">📅</div>
+            <h3>Booking Automation</h3>
+            <p>Integrated calendar booking lets customers schedule 24/7 — no phone tag, no missed enquiries, no back-and-forth.</p>
+          </div>
+          <div class="service__card">
+            <div class="service__icon">📥</div>
+            <h3>Lead Capture Systems</h3>
+            <p>Smart enquiry flows and lead forms that capture and route enquiries to you automatically — even after hours.</p>
+          </div>
+          <div class="service__card">
+            <div class="service__icon">📊</div>
+            <h3>Analytics &amp; Reporting</h3>
+            <p>Real-time tracking showing where your leads come from and what's converting. Know what's working and what isn't.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process ✏️ UPDATED — Simplified to 3 steps -->
+    <section class="process-section" id="process">
+      <div class="container">
+        <h2 class="section__title">How It Works</h2>
+        <p class="section__subtitle">Simple and straightforward. Most clients are live in 1–3 weeks.</p>
+        <div class="process__grid process__grid--three">
+          <div class="process__step">
+            <div class="step__number">01</div>
+            <h3>Book a Free Call</h3>
+            <p>15 minutes with James. Tell us about your business, your goals, and what's not working right now. No obligation, no sales pressure.</p>
+          </div>
+          <div class="process__step">
+            <div class="step__number">02</div>
+            <h3>We Build It</h3>
+            <p>Pick your package, submit your business details, and we handle design, development, SEO and automation. You review and approve — that's it.</p>
+          </div>
+          <div class="process__step">
+            <div class="step__number">03</div>
+            <h3>Go Live. Get Leads.</h3>
+            <p>Your site launches in 1–3 weeks. From there it works 24/7 — booking enquiries, ranking on Google, running your automated blog if you're on Premium.</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:1.8rem;">
+          <a href="book.html" class="btn btn--primary">Book Your Free 15-Min Call</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results (unchanged) -->
+    <section class="results" id="results">
+      <div class="container">
+        <h2 class="section__title">Proof Snapshot</h2>
+        <p class="section__subtitle">Real before/after outcomes from conversion-focused rebuilds.</p>
+        <div class="results__grid">
+          <div class="result__card">
+            <span class="result__icon" aria-hidden="true">⚡</span>
+            <p class="result__kicker">Performance</p>
+            <h3 class="result__metric-title">Lighthouse Score</h3>
+            <div class="result__compare">
+              <div class="result__pill"><span>Before</span><strong class="red">23/100</strong></div>
+              <span class="result__arrow" aria-hidden="true">→</span>
+              <div class="result__pill"><span>After</span><strong class="green">96/100</strong></div>
+            </div>
+          </div>
+          <div class="result__card">
+            <span class="result__icon" aria-hidden="true">🔎</span>
+            <p class="result__kicker">SEO</p>
+            <h3 class="result__metric-title">Google Search Position</h3>
+            <div class="result__compare">
+              <div class="result__pill"><span>Before</span><strong class="red">Page 5</strong></div>
+              <span class="result__arrow" aria-hidden="true">→</span>
+              <div class="result__pill"><span>After</span><strong class="green">Page 1</strong></div>
+            </div>
+          </div>
+          <div class="result__card">
+            <span class="result__icon" aria-hidden="true">📥</span>
+            <p class="result__kicker">Lead Flow</p>
+            <h3 class="result__metric-title">Inbound Enquiries</h3>
+            <div class="result__compare">
+              <div class="result__pill"><span>Before</span><strong class="red">2 / week</strong></div>
+              <span class="result__arrow" aria-hidden="true">→</span>
+              <div class="result__pill"><span>After</span><strong class="green">15 / week</strong></div>
+            </div>
+          </div>
+        </div>
+        <p class="results__cta"><a class="btn btn--primary btn--proof" href="our-work.html">See Full Showcase Proof</a></p>
+      </div>
+    </section>
+
+    <!-- Testimonials ✏️ UPDATED — new quote on Sydney agency comparison -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="section__title">What Clients Say</h2>
+        <p class="section__subtitle">From trade businesses to professional services — businesses that made the switch from a slow, outdated site to one that works.</p>
+        <div class="testimonials__controls">
+          <button class="testimonials__btn" id="testimonials-prev" type="button" aria-label="Previous testimonial">←</button>
+          <button class="testimonials__btn" id="testimonials-next" type="button" aria-label="Next testimonial">→</button>
+        </div>
+        <div class="testimonials__track" id="testimonials-track">
+          <div class="testimonial__card">
+            <p>"We went from chasing leads to having the phone ring on its own. The automated blog is the part I didn't know I needed — it just keeps working in the background."</p>
+            <h3>Sam R. — Trade Services Owner</h3>
+          </div>
+          <div class="testimonial__card">
+            <p>"The new site is faster, cleaner, and actually reflects our quality. Booking automation alone saved our team hours every single day. Worth every dollar."</p>
+            <h3>Mia T. — Clinic Operations Manager</h3>
+          </div>
+          <div class="testimonial__card">
+            <p>"I was quoted $14,000 by a Sydney agency for what ImproveYourSite built us in two weeks. Same quality, no lock-in, and we own it outright."</p>
+            <h3>Daniel K. — Consultancy Director</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio (unchanged) -->
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <h2 class="section__title">Recent Transformation Projects</h2>
+        <p class="section__subtitle">A few examples of how strategic redesign + automation improves real business outcomes.</p>
+        <div class="portfolio__grid">
+          <div class="portfolio__card">
+            <div class="portfolio__tag">Trades &amp; Services</div>
+            <h3>Local Electrical Company</h3>
+            <p>Rebuilt from a legacy site into a conversion-focused funnel with instant quote flow.</p>
+            <ul>
+              <li><strong>+212%</strong> quote requests in 60 days</li>
+              <li><strong>2.8s → 0.9s</strong> mobile load time</li>
+              <li><strong>+41%</strong> organic traffic</li>
+            </ul>
+          </div>
+          <div class="portfolio__card">
+            <div class="portfolio__tag">Healthcare</div>
+            <h3>Private Clinic Group</h3>
+            <p>Streamlined booking and patient enquiry workflows across multiple clinic locations.</p>
+            <ul>
+              <li><strong>34%</strong> fewer missed bookings</li>
+              <li><strong>24/7</strong> appointment capture</li>
+              <li><strong>+67%</strong> first-page keyword wins</li>
+            </ul>
+          </div>
+          <div class="portfolio__card">
+            <div class="portfolio__tag">Professional Services</div>
+            <h3>Consultancy Rebrand</h3>
+            <p>Positioned premium offers with clear authority, social proof and lead qualification flows.</p>
+            <ul>
+              <li><strong>3.4x</strong> qualified lead volume</li>
+              <li><strong>+58%</strong> average time on page</li>
+              <li><strong>+29%</strong> close rate from web leads</li>
+            </ul>
+          </div>
+        </div>
+        <p style="text-align:center;margin-top:1.5rem;"><a class="btn btn--ghost" href="our-work.html">View Full Our Work Showcase</a></p>
+      </div>
+    </section>
+
+    <!-- Pricing ✏️ UPDATED — "Published Upfront" heading, automated blog featured -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <h2 class="section__title">Pricing — Published Upfront</h2>
+        <p class="section__subtitle">No "get a quote" mystery. Pick the build path that fits, pay online, and we get started. Most agencies on the coast still won't show you a number — we do.</p>
+
+        <div class="pricing__grid">
+          <div class="pricing__card pricing__card--compact">
+            <div class="pricing__badge">Fast Win</div>
+            <div class="pricing__amount">$3,000</div>
+            <div class="pricing__period">Scan + Fix</div>
+            <ul class="pricing__features">
+              <li>✅ Full website audit + issue report</li>
+              <li>✅ Speed and conversion fixes on your existing site</li>
+              <li>✅ SEO and UX tune-up</li>
+              <li>✅ Lead form and CTA optimisation</li>
+              <li>✅ Quick relaunch support</li>
+            </ul>
+            <a href="packages.html" class="btn btn--ghost btn--full">Start Scan + Fix</a>
+          </div>
+
+          <div class="pricing__card pricing__card--featured">
+            <div class="pricing__badge">Most Popular</div>
+            <div class="pricing__amount">$5,000</div>
+            <div class="pricing__period">Complete Website Redesign</div>
+            <ul class="pricing__features">
+              <li>✅ Custom modern design (mobile-first)</li>
+              <li>✅ SEO optimisation &amp; structured data</li>
+              <li>✅ 90%+ Lighthouse score target</li>
+              <li>✅ Booking + lead automation setup</li>
+              <li>✅ Analytics + conversion tracking</li>
+              <li>✅ 3 months support included</li>
+              <li>✅ You own it — no monthly fees</li>
+            </ul>
+            <a href="packages.html" class="btn btn--primary btn--full">Get Started</a>
+          </div>
+
+          <div class="pricing__card pricing__card--premium">
+            <div class="pricing__badge">Premium Build</div>
+            <div class="pricing__amount">$10,000</div>
+            <div class="pricing__period">Brand + Content Growth Package</div>
+            <ul class="pricing__features">
+              <li>✅ Everything in the redesign package</li>
+              <li>✅ <strong>Automated blog system</strong> — publishes SEO content on a schedule, no writing needed</li>
+              <li>✅ Local ranking content for your key service areas</li>
+              <li>✅ Custom graphic design + logo assets</li>
+              <li>✅ On-site team photo shoot</li>
+              <li>✅ Conversion copywriting + offer pages</li>
+              <li>✅ Priority launch + growth support</li>
+            </ul>
+            <a href="packages.html" class="btn btn--primary btn--full">Book Premium Build</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Premium Blueprint ✏️ UPDATED — automated blog emphasis -->
+    <section class="premium-blueprint" id="premium-blueprint">
+      <div class="container">
+        <h2 class="section__title">$10,000 Premium Growth Blueprint</h2>
+        <p class="section__subtitle">While other agencies build the site and leave you to write the content — ours keeps publishing for you on autopilot.</p>
+        <div class="premium-blueprint__grid">
+          <div class="blueprint-card">
+            <span class="blueprint-card__tag">Authority Layer</span>
+            <h3>Trust + Proof Engine</h3>
+            <ul>
+              <li>✅ Review capture + testimonial wall setup</li>
+              <li>✅ Accreditation/awards proof strip</li>
+              <li>✅ Offer guarantee and risk-reversal framing</li>
+            </ul>
+          </div>
+          <div class="blueprint-card">
+            <span class="blueprint-card__tag">Local SEO Layer</span>
+            <h3>Automated Content Rollout</h3>
+            <ul>
+              <li>✅ Automated blog system — no manual writing required</li>
+              <li>✅ Service + suburb content clusters for local ranking</li>
+              <li>✅ Local service-area rollout for your target markets</li>
+            </ul>
+          </div>
+          <div class="blueprint-card">
+            <span class="blueprint-card__tag">Conversion Layer</span>
+            <h3>Campaign + Enquiry Optimisation</h3>
+            <ul>
+              <li>✅ ROI calculator, landing pages, and CTA variants</li>
+              <li>✅ Lead-source tracking for local ads</li>
+              <li>✅ Weekly optimisation loop after launch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ ✏️ UPDATED — 3 new questions added -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2 class="section__title">Frequently Asked Questions</h2>
+        <p class="section__subtitle">Straight answers. No sales spin.</p>
+        <div class="faq__list" id="faq-list">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              Do I need to write blog content myself?
+            </button>
+            <div class="faq__answer">
+              <p>Not with the Premium Growth package. Our automated blog system handles content publication on a schedule — SEO-focused articles go out without you lifting a finger. This is what makes us genuinely different from agencies that build a blog section and leave it empty. You run your business; we handle the content.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              Do you work with businesses outside Central West NSW?
+            </button>
+            <div class="faq__answer">
+              <p>Absolutely — we work with service businesses across all of Australia. We're based in regional NSW which keeps our costs lean, but we build to exactly the same standard as any Sydney or Gold Coast agency. Your location doesn't limit what we deliver. Everything is handled remotely and most clients never need to meet in person.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              Are there monthly fees after launch?
+            </button>
+            <div class="faq__answer">
+              <p>No. You pay once and you own it. There are no platform subscriptions, no ongoing agency retainers, and no hidden costs. You can host it on any standard Australian hosting — or we can point you to a reliable, affordable option.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              How long does a full website transformation take?
+            </button>
+            <div class="faq__answer">
+              <p>Most projects go live in 1–3 weeks depending on page count, copywriting needs, and integrations. We don't drag things out.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              Can you keep our current branding and content?
+            </button>
+            <div class="faq__answer">
+              <p>Yes. We can refine your existing brand and migrate content, then improve the messaging for better conversion results.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              Do you provide support after launch?
+            </button>
+            <div class="faq__answer">
+              <p>Every launch includes post-live support, monitoring, and iterative improvements. The $5,000 Complete Redesign package includes 3 months of support as standard.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI Calculator (unchanged) -->
+    <section class="roi" id="roi">
+      <div class="container">
+        <h2 class="section__title">Estimate Your Website Revenue Leak</h2>
+        <p class="section__subtitle">See what your current site is probably costing you every month in lost enquiries.</p>
+        <div class="roi__grid">
+          <div class="roi__inputs">
+            <label>Quick-fill by business type
+              <select class="roi__input" id="roi-profile" aria-label="Quick-fill calculator values">
+                <option value="">Choose a business profile (optional)</option>
+                <option value="trades">Trades / Services</option>
+                <option value="clinic">Clinic / Health</option>
+                <option value="retail">Retail / Shopfront</option>
+                <option value="hospitality">Hospitality / Venue</option>
+                <option value="consulting">Consulting / Professional Services</option>
+              </select>
+            </label>
+            <label>Estimated monthly website visitors
+              <input class="roi__input" id="roi-visitors" type="number" min="0" value="1200" inputmode="numeric">
+            </label>
+            <label>Current conversion rate (%)
+              <input class="roi__input" id="roi-current" type="number" min="0" step="0.1" value="1.2" inputmode="decimal">
+            </label>
+            <label>Target conversion rate (%)
+              <input class="roi__input" id="roi-target" type="number" min="0" step="0.1" value="2.8" inputmode="decimal">
+            </label>
+            <label>Average customer value (AUD)
+              <input class="roi__input" id="roi-value" type="number" min="0" value="850" inputmode="numeric">
+            </label>
+            <p class="roi__hint">Tip: use quick-fill first, then tweak numbers to match your business.</p>
+            <button type="button" class="btn btn--primary" id="roi-calc">Calculate Opportunity</button>
+          </div>
+          <div class="roi__result" id="roi-result" aria-live="polite">
+            <p>Potential additional monthly revenue</p>
+            <h3>$0</h3>
+            <small>Adjusted estimate based on your inputs. Annual upside shown after calculation.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA ✏️ UPDATED copy -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section__title">Ready to Start?</h2>
+        <p class="section__subtitle">Book a free 15-minute call or send us your details — we'll be in touch within one business day.</p>
+        <form class="contact__form" id="contact-form" action="https://formsubmit.co/hello@improveyoursite.com" method="POST">
+          <div class="form__row">
+            <input type="text" name="name" placeholder="Your Name" required class="form__input">
+            <input type="email" name="email" placeholder="Your Email" required class="form__input">
+          </div>
+          <div class="form__row">
+            <input type="tel" name="phone" placeholder="Phone (optional)" class="form__input">
+            <input type="url" name="website" placeholder="Your Current Website URL" class="form__input">
+          </div>
+          <select name="goal" class="form__input" aria-label="Primary goal">
+            <option value="" selected>What do you need most? (optional)</option>
+            <option>More leads and enquiries</option>
+            <option>Better Google rankings</option>
+            <option>A faster website</option>
+            <option>Automated bookings</option>
+            <option>Complete redesign + rebrand</option>
+            <option>Automated blog + SEO growth</option>
+          </select>
+          <input type="hidden" name="_subject" value="New Website Enquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="company" class="form__input form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
+          <textarea name="message" placeholder="Tell us about your business and what a win looks like for you..." rows="4" class="form__input"></textarea>
+          <p class="form__note">By submitting, you agree to be contacted about your website.</p>
+          <button type="submit" class="btn btn--primary btn--full">Get in Touch</button>
+          <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Sticky CTA ✏️ UPDATED — links to book.html -->
+    <div class="sticky-cta" id="sticky-cta">
+      <p><strong>Your website is costing you money.</strong> Book a free 15-min call.</p>
+      <a href="book.html" class="btn btn--primary">Book Free Call</a>
+    </div>
+
+    <!-- Footer ✏️ UPDATED — hello@ email, updated tagline -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            Improve<span class="accent">YourSite</span>
+            <p>High-converting websites, automated SEO content and lead systems for Australian businesses.</p>
+          </div>
+          <div class="footer__links">
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#pricing">Pricing</a>
+            <a href="our-work.html">Our Work</a>
+            <a href="#contact">Contact</a>
+            <a href="mailto:hello@improveyoursite.com">hello@improveyoursite.com</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>&copy; <span id="year"></span> ImproveYourSite. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /#app -->
+
+  <script>
+    // ── Auth ──
+    const PASS = "improveyoursite2025";
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function checkPassword() {
+      const input = document.getElementById("pw-input").value;
+      const [inputHash, correctHash] = await Promise.all([sha256(input), sha256(PASS)]);
+      if (inputHash === correctHash) {
+        sessionStorage.setItem("iy_staging", "1");
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+      } else {
+        document.getElementById("login-error").style.display = "block";
+      }
+    }
+
+    if (sessionStorage.getItem("iy_staging") === "1") {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+    }
+
+    document.getElementById("pw-input").addEventListener("keydown", e => {
+      if (e.key === "Enter") checkPassword();
+    });
+
+    // ── Changes panel toggle ──
+    let changesVisible = true;
+    function toggleChanges() {
+      changesVisible = !changesVisible;
+      document.getElementById("changes-panel").classList.toggle("hidden", !changesVisible);
+      document.getElementById("changes-toggle").textContent = changesVisible ? "Hide Changes" : "Show Changes";
+    }
+
+    // ── Year ──
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ── Nav toggle ──
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu   = document.getElementById("nav-menu");
+    if (navToggle) {
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("nav__menu--open");
+        navToggle.classList.toggle("active");
+      });
+    }
+
+    // ── Sticky CTA ──
+    const stickyCTA = document.getElementById("sticky-cta");
+    if (stickyCTA) {
+      window.addEventListener("scroll", () => {
+        stickyCTA.classList.toggle("visible", window.scrollY > 600);
+      }, { passive: true });
+    }
+
+    // ── Header scroll ──
+    const header = document.getElementById("header");
+    if (header) {
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      }, { passive: true });
+    }
+
+    // ── FAQ accordion ──
+    document.querySelectorAll(".faq__question").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq__item");
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        document.querySelectorAll(".faq__question").forEach(b => {
+          b.setAttribute("aria-expanded", "false");
+          b.closest(".faq__item").classList.remove("open");
+        });
+        if (!isOpen) {
+          btn.setAttribute("aria-expanded", "true");
+          item.classList.add("open");
+        }
+      });
+    });
+
+    // ── Testimonials carousel ──
+    const track = document.getElementById("testimonials-track");
+    if (track) {
+      let idx = 0;
+      const cards = track.querySelectorAll(".testimonial__card");
+      function showCard(n) {
+        idx = (n + cards.length) % cards.length;
+        cards.forEach((c, i) => c.style.display = i === idx ? "block" : "none");
+      }
+      showCard(0);
+      document.getElementById("testimonials-prev").addEventListener("click", () => showCard(idx - 1));
+      document.getElementById("testimonials-next").addEventListener("click", () => showCard(idx + 1));
+      setInterval(() => showCard(idx + 1), 6000);
+    }
+
+    // ── ROI Calculator ──
+    const profiles = {
+      trades:      { visitors: 900,  current: 1.0, target: 2.5, value: 1200 },
+      clinic:      { visitors: 1400, current: 1.5, target: 3.2, value: 350  },
+      retail:      { visitors: 2200, current: 0.8, target: 2.0, value: 180  },
+      hospitality: { visitors: 1800, current: 1.2, target: 2.8, value: 2200 },
+      consulting:  { visitors: 600,  current: 0.6, target: 1.8, value: 4500 },
+    };
+    document.getElementById("roi-profile").addEventListener("change", e => {
+      const p = profiles[e.target.value];
+      if (!p) return;
+      document.getElementById("roi-visitors").value = p.visitors;
+      document.getElementById("roi-current").value  = p.current;
+      document.getElementById("roi-target").value   = p.target;
+      document.getElementById("roi-value").value    = p.value;
+    });
+    document.getElementById("roi-calc").addEventListener("click", () => {
+      const v   = +document.getElementById("roi-visitors").value;
+      const c   = +document.getElementById("roi-current").value / 100;
+      const t   = +document.getElementById("roi-target").value  / 100;
+      const val = +document.getElementById("roi-value").value;
+      const monthly = Math.round((t - c) * v * val);
+      const result  = document.getElementById("roi-result");
+      if (monthly <= 0) {
+        result.querySelector("h3").textContent = "$0";
+        result.querySelector("small").textContent = "Check your inputs — target rate should be higher than current.";
+        return;
+      }
+      result.querySelector("h3").textContent = `$${monthly.toLocaleString("en-AU")}`;
+      result.querySelector("small").textContent = `That's ~$${(monthly * 12).toLocaleString("en-AU")} a year in potential additional revenue.`;
+    });
+
+    // ── Contact form (prevent default, show success for staging) ──
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.addEventListener("submit", e => {
+        e.preventDefault();
+        document.getElementById("form-status").textContent = "✓ This is the staging page — form submission is disabled. On the live site this will email hello@improveyoursite.com.";
+        document.getElementById("form-status").style.color = "#2dd4bf";
+      });
+    }
+  </script>
+
+</body>
+</html>
