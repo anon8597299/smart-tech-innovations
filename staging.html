@@ -230,6 +230,86 @@
     }
     @media (max-width: 700px) { .process-grid-3 { grid-template-columns: 1fr; } }
 
+    /* ── Hero dark override ── */
+    .hero {
+      background: linear-gradient(135deg, #0a0f1e 0%, #130d2e 50%, #0a0f1e 100%) !important;
+    }
+    .hero::before {
+      background: radial-gradient(circle, rgba(91,77,255,0.15) 0%, transparent 70%) !important;
+    }
+    .hero__badge {
+      background: rgba(91,77,255,0.2) !important;
+      color: #a5b4fc !important;
+      border: 1px solid rgba(91,77,255,0.3);
+    }
+    .hero__title { color: #f1f5f9 !important; }
+    .hero__subtitle { color: #94a3b8 !important; }
+    .hero__subtitle strong { color: #2dd4bf !important; }
+    .stat__number { color: #a5b4fc !important; }
+    .stat__label  { color: #475569 !important; }
+    .btn--ghost {
+      background: transparent !important;
+      color: #a5b4fc !important;
+      border: 2px solid rgba(165,180,252,0.4) !important;
+    }
+    .btn--ghost:hover {
+      background: rgba(91,77,255,0.2) !important;
+      color: #fff !important;
+    }
+
+    /* ── Quiet cards — gradient accent + stronger contrast ── */
+    .went-quiet { background: #060c18; }
+    .quiet-card {
+      background: #0f172a;
+      border: 1px solid #1e3a5f;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiet-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #5b4dff, #2dd4bf);
+    }
+    .quiet-card__num { color: #2dd4bf !important; }
+    .quiet-card h3   { color: #e2e8f0 !important; }
+    .quiet-card p    { color: #64748b !important; }
+    .went-quiet__intro h2 { color: #f1f5f9; }
+    .went-quiet__intro p  { color: #64748b; }
+
+    /* ── Sound Familiar — redesigned ── */
+    .familiar-strip { background: #0f172a; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
+    .familiar-strip h2 { color: #f1f5f9; }
+    .familiar-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: .75rem; }
+    .familiar-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #0a0f1e;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      transition: border-color .15s;
+    }
+    .familiar-item:hover { border-color: #5b4dff; }
+    .fi-check {
+      width: 2rem;
+      height: 2rem;
+      background: rgba(91,77,255,0.15);
+      border: 1px solid rgba(91,77,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      color: #a5b4fc;
+      flex-shrink: 0;
+      font-style: normal;
+    }
+    .familiar-item p { color: #94a3b8; font-size: .92rem; margin: 0; line-height: 1.5; }
+    .familiar-cta { color: #475569; font-size: .88rem; }
+
     /* ── Mobile tweaks ── */
     @media (max-width: 600px) {
       .familiar-list { grid-template-columns: 1fr; }
@@ -331,7 +411,7 @@
           <div class="hero__badge">For Australian service businesses with a site that used to work</div>
           <h1 class="hero__title">Your Website Is <span class="accent">Costing You</span> Customers</h1>
           <p class="hero__subtitle">It looked good at launch. Enquiries came in. Then slowly — the phone went quiet, Google rankings slipped, and the agency that built it moved on to their next client.</p>
-          <p class="hero__subtitle" style="margin-top:.75rem;">You're not imagining it. <strong style="color:#3730a3;">80% of Australian small business websites fail to return a positive ROI.</strong> We fix that.</p>
+          <p class="hero__subtitle" style="margin-top:.75rem;">You're not imagining it. <strong>80% of Australian small business websites fail to return a positive ROI.</strong> We fix that.</p>
           <div class="hero__actions">
             <a href="book.html" class="btn btn--primary">Book a Free 15-Min Call</a>
             <a href="our-work.html" class="btn btn--spotlight">See Live Demo Sites</a>
@@ -383,31 +463,31 @@
         <h2>Sound familiar?</h2>
         <div class="familiar-list">
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
+            <div class="fi-check">✓</div>
             <p>You Google your own business and a competitor shows up above you</p>
           </div>
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
+            <div class="fi-check">✓</div>
             <p>You hesitate before sharing your website URL — or add a disclaimer when you do</p>
           </div>
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
+            <div class="fi-check">✓</div>
             <p>The agency that built your site hasn't been in contact since it went live</p>
           </div>
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
+            <div class="fi-check">✓</div>
             <p>Enquiries come through word-of-mouth — almost never from the website</p>
           </div>
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
-            <p>You're not sure what you're actually getting for what you paid</p>
+            <div class="fi-check">✓</div>
+            <p>You're paying for hosting or a retainer with nothing to show for it</p>
           </div>
           <div class="familiar-item">
-            <span class="fi-check">✓</span>
+            <div class="fi-check">✓</div>
             <p>You've been meaning to do something about it for over a year</p>
           </div>
         </div>
-        <p class="familiar-cta">If you're nodding at more than two of those — your site isn't working hard enough for your business.</p>
+        <p class="familiar-cta" style="text-align:center;margin-top:1.5rem;">If two or more of those hit home — your site isn't working hard enough for your business.</p>
       </div>
     </section>
 
