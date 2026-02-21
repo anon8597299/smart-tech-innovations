@@ -1,0 +1,54 @@
+name: Auto-generate blog posts
+
+on:
+  schedule:
+    # 8:00 AM AEST every Monday (22:00 UTC Sunday)
+    - cron: '0 22 * * 0'
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Customer slug to target (leave empty for all blog-enabled customers)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          # Use GH_PAT so the push triggers deploy-pages.yml
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate blog posts
+        env:
+          PERPLEXITY_KEY: ${{ secrets.PERPLEXITY_KEY }}
+          TARGET_SLUG: ${{ github.event.inputs.slug }}
+        run: python builder/auto_blog.py
+
+      - name: Commit and push new posts
+        run: |
+          git config user.name "IYS Blog Bot"
+          git config user.email "bot@improveyoursite.com"
+          git add customers/
+          if git diff --staged --quiet; then
+            echo "No new posts to commit — nothing changed."
+          else
+            git commit -m "Auto-blog: weekly posts $(date +%Y-%m-%d)"
+            # Push with GH_PAT — this triggers deploy-pages.yml to rebuild GitHub Pages
+            git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/anon8597299/smart-tech-innovations.git HEAD:main
+            echo "✅ Posts committed and pushed. GitHub Pages will redeploy in ~90 seconds."
+          fi

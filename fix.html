@@ -747,6 +747,7 @@
     try { auditData = JSON.parse(raw); } catch { document.getElementById('no-audit-warn').style.display = 'block'; return; }
 
     const { url, biz, area, scores, vitals, issues, pageData } = auditData;
+    if (biz) _auditBiz = biz;
 
     // Audit strip
     if (url) {
@@ -877,6 +878,9 @@
 
   function setColor(hex) { document.getElementById('f-color').value = hex; }
 
+  // Stores the business-type string from the audit scan (used in registry)
+  let _auditBiz = '';
+
   // ── Platform toggle ──────────────────────────────────────────
   function onPlatformChange() {
     const p = document.querySelector('input[name="deploy-platform"]:checked')?.value || 'github';
@@ -983,6 +987,34 @@
     const url = `https://${site.default_domain}`;
     log(`  [Netlify] Deploy in progress — will be live shortly`, 'warn');
     return { url, siteId: site.id };
+  }
+
+  // ── Customer registry (customers/registry.json) ──────────────
+  async function updateRegistry(pat, entry) {
+    const path = 'customers/registry.json';
+    let sha, entries = [];
+    try {
+      const data = await ghFetch(pat, `contents/${path}`);
+      sha = data.sha;
+      entries = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    } catch { /* file doesn't exist yet — will be created */ }
+
+    const idx = entries.findIndex(e => e.slug === entry.slug);
+    if (idx >= 0) entries[idx] = { ...entries[idx], ...entry };
+    else entries.unshift(entry);
+
+    const content = JSON.stringify(entries, null, 2) + '\n';
+    const body = {
+      message: `Registry: ${entry.name}`,
+      content: btoa(unescape(encodeURIComponent(content))),
+    };
+    if (sha) body.sha = sha;
+
+    await ghFetch(pat, `contents/${path}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
   }
 
   // ── GitHub API (identical to admin.html) ──────────────────────
@@ -1222,6 +1254,29 @@
       const pipeline = JSON.parse(localStorage.getItem('iy_pipeline') || '[]').filter(e => e.slug !== slug);
       pipeline.unshift({ slug, name, url: netlifyUrl || ghUrl, email, template: templateId, pkg: packageTier, date: new Date().toLocaleDateString('en-AU'), status: 'sent' });
       localStorage.setItem('iy_pipeline', JSON.stringify(pipeline));
+
+      // Update customers/registry.json so the auto-blog system knows about this customer
+      try {
+        log('Updating customer registry...');
+        await updateRegistry(pat, {
+          slug,
+          name,
+          email,
+          phone:         document.getElementById('f-phone').value.trim()   || '',
+          suburb,
+          state:         document.getElementById('f-state').value,
+          template:      templateId,
+          color_primary: document.getElementById('f-color').value,
+          color_bg:      COLOR_BG_MAP[templateId] || '#f8fafc',
+          biz:           _auditBiz || '',
+          blog:          includeBlog,
+          site_url:      ghSiteUrl,
+          deployed:      new Date().toISOString(),
+        });
+        log(`✓ Registry updated${includeBlog ? ' — blog auto-generation enabled' : ' — set "blog": true to enable auto-posts'}`, 'ok');
+      } catch (regErr) {
+        log('⚠ Registry update failed — add manually to customers/registry.json if needed', 'warn');
+      }
 
       const urlLinks = [
         ghUrl      && `GitHub Pages: <a href="${ghUrl}" target="_blank" style="color:#16a34a;font-weight:700;word-break:break-all">${ghUrl}</a>`,
