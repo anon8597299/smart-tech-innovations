@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Site Audit Tool — IYS</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, sans-serif; background: #f1f5f9; color: #0f172a; font-size: 15px; line-height: 1.5; }
+
+    /* ── Login ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; padding: 2rem; background: #0f172a;
+    }
+    .login-card {
+      background: #1e293b; border: 1px solid #334155; border-radius: 20px;
+      padding: 2.5rem 2rem; width: 100%; max-width: 360px; text-align: center; color: #e2e8f0;
+    }
+    .login-card h1 { font-size: 1.2rem; margin: 0 0 .3rem; }
+    .login-card p { color: #64748b; font-size: .85rem; margin: 0 0 1.4rem; }
+    .login-card input[type="password"] {
+      width: 100%; padding: .7rem 1rem; background: #0f172a; border: 1.5px solid #334155;
+      border-radius: 10px; color: #e2e8f0; font-size: 1rem; font-family: Inter, sans-serif;
+      margin-bottom: .75rem;
+    }
+    .login-card input:focus { outline: none; border-color: #5b4dff; }
+    .btn-login {
+      width: 100%; padding: .75rem; background: #5b4dff; color: #fff; border: none;
+      border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif;
+    }
+    .btn-login:hover { background: #4c40db; }
+    .login-error { color: #f87171; font-size: .82rem; margin-top: .5rem; display: none; }
+
+    /* ── App ── */
+    #app { display: none; min-height: 100vh; }
+
+    /* ── Tool header ── */
+    .tool-header {
+      background: #0f172a; padding: .75rem 1.5rem; display: flex;
+      align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100; border-bottom: 2px solid #5b4dff;
+    }
+    .tool-logo { color: #fff; font-weight: 800; font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+    .tool-logo span { color: #2dd4bf; }
+    .tool-badge {
+      background: #5b4dff; color: #fff; font-size: .67rem; font-weight: 800;
+      padding: .18rem .55rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .07em;
+    }
+    .btn-logout {
+      background: #1e293b; color: #64748b; border: 1px solid #334155; border-radius: 7px;
+      padding: .28rem .75rem; font-size: .76rem; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif;
+    }
+    .btn-logout:hover { color: #94a3b8; }
+
+    /* ── Audit form ── */
+    .audit-form-section {
+      background: #fff; border-bottom: 1px solid #e2e8f0; padding: 1.25rem 1.5rem;
+    }
+    .audit-form {
+      display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: .75rem; max-width: 900px;
+    }
+    .audit-input {
+      padding: .65rem 1rem; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      font-family: Inter, sans-serif; font-size: .9rem; color: #0f172a; background: #f8fafc;
+    }
+    .audit-input:focus { outline: none; border-color: #5b4dff; background: #fff; }
+    .btn-audit {
+      padding: .65rem 1.4rem; background: linear-gradient(135deg, #5b4dff, #4c40db);
+      color: #fff; border: none; border-radius: 10px; font-size: .9rem; font-weight: 800;
+      cursor: pointer; font-family: Inter, sans-serif; white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(91,77,255,.3);
+    }
+    .btn-audit:hover { background: linear-gradient(135deg, #4c40db, #3d33b8); }
+    .btn-audit:disabled { opacity: .6; cursor: not-allowed; }
+    @media (max-width: 700px) { .audit-form { grid-template-columns: 1fr; } }
+
+    /* ── API key hint ── */
+    .api-hint { font-size: .78rem; color: #94a3b8; margin-top: .5rem; }
+    .api-hint a { color: #5b4dff; }
+
+    /* ── Loading ── */
+    #loading {
+      display: none; padding: 4rem 1.5rem; text-align: center;
+    }
+    .spinner {
+      width: 44px; height: 44px; border: 3px solid #e2e8f0;
+      border-top-color: #5b4dff; border-radius: 50%;
+      animation: spin .8s linear infinite; margin: 0 auto 1.25rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-status { color: #64748b; font-size: .95rem; }
+    .loading-url { color: #0f172a; font-weight: 700; margin-top: .25rem; font-size: .9rem; }
+
+    /* ── Error banner ── */
+    .error-banner {
+      display: none; background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1.5rem; color: #991b1b; font-size: .9rem;
+    }
+
+    /* ── Results ── */
+    #results { display: none; padding: 1.5rem; max-width: 980px; margin: 0 auto; }
+
+    .result-meta {
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+      margin-bottom: 1.25rem; background: #fff; border: 1px solid #e2e8f0;
+      border-radius: 12px; padding: .85rem 1.1rem; font-size: .85rem; color: #64748b;
+    }
+    .result-meta strong { color: #0f172a; }
+    .result-meta a { color: #5b4dff; text-decoration: none; font-weight: 600; }
+    .result-meta a:hover { text-decoration: underline; }
+
+    /* ── Scores ── */
+    .scores-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem;
+    }
+    @media (max-width: 600px) { .scores-grid { grid-template-columns: repeat(2, 1fr); } }
+    .score-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 16px;
+      padding: 1.25rem 1rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .score-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--score-color, #e2e8f0);
+    }
+    .score-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #94a3b8; margin-bottom: .5rem; }
+    .score-num { font-size: 2.8rem; font-weight: 900; color: var(--score-color, #94a3b8); line-height: 1; margin-bottom: .3rem; }
+    .score-target { font-size: .73rem; color: #94a3b8; }
+    .score-delta { font-size: .78rem; font-weight: 700; margin-top: .2rem; }
+
+    /* ── Vitals ── */
+    .panel { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.25rem 1.4rem; margin-bottom: 1rem; }
+    .panel-title { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; margin-bottom: 1rem; }
+    .vitals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .65rem; }
+    @media (max-width: 500px) { .vitals-grid { grid-template-columns: 1fr; } }
+    .vital-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: .7rem .9rem;
+    }
+    .vital-name { font-size: .82rem; font-weight: 600; color: #374151; }
+    .vital-desc { font-size: .72rem; color: #94a3b8; }
+    .vital-right { text-align: right; }
+    .vital-value { font-size: 1.1rem; font-weight: 800; color: var(--vital-color, #0f172a); }
+    .vital-status { font-size: .7rem; font-weight: 700; }
+    .pass { color: #16a34a; }
+    .warn { color: #d97706; }
+    .fail { color: #dc2626; }
+
+    /* ── Issues checklist ── */
+    .issues-list { display: flex; flex-direction: column; gap: .45rem; }
+    .issue-item {
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding: .65rem .85rem; border-radius: 10px; font-size: .88rem;
+    }
+    .issue-item.ok { background: #f0fdf4; }
+    .issue-item.bad { background: #fff7ed; }
+    .issue-item.warn-item { background: #fffbeb; }
+    .issue-icon { flex-shrink: 0; font-size: 1rem; margin-top: .05rem; }
+    .issue-text { flex: 1; color: #374151; }
+    .issue-text strong { color: #0f172a; display: block; margin-bottom: .1rem; }
+    .issue-text span { font-size: .8rem; color: #64748b; }
+
+    /* ── Revenue impact ── */
+    .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .revenue-grid { grid-template-columns: 1fr; } }
+    .revenue-input-group { display: flex; flex-direction: column; gap: .5rem; }
+    .revenue-input-group label { font-size: .82rem; font-weight: 600; color: #374151; }
+    .revenue-input {
+      padding: .55rem .85rem; border: 1.5px solid #e2e8f0; border-radius: 8px;
+      font-family: Inter, sans-serif; font-size: .9rem; background: #f8fafc;
+    }
+    .revenue-input:focus { outline: none; border-color: #5b4dff; }
+    .revenue-result {
+      background: linear-gradient(135deg, #f0f4ff, #f0fdf9); border: 1.5px solid #c7d2fe;
+      border-radius: 14px; padding: 1.25rem; text-align: center; display: flex;
+      flex-direction: column; justify-content: center;
+    }
+    .revenue-label { font-size: .78rem; color: #64748b; margin-bottom: .35rem; }
+    .revenue-number { font-size: 2.2rem; font-weight: 900; color: #5b4dff; line-height: 1; }
+    .revenue-period { font-size: .78rem; color: #94a3b8; margin-top: .25rem; }
+    .btn-calc {
+      margin-top: .75rem; padding: .55rem 1.1rem; background: #5b4dff; color: #fff;
+      border: none; border-radius: 8px; font-size: .85rem; font-weight: 700;
+      cursor: pointer; font-family: Inter, sans-serif;
+    }
+
+    /* ── Notes & package rec ── */
+    .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .notes-grid { grid-template-columns: 1fr; } }
+    .notes-grid textarea {
+      width: 100%; padding: .75rem 1rem; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      font-family: Inter, sans-serif; font-size: .88rem; resize: vertical; min-height: 110px;
+      background: #f8fafc; color: #0f172a;
+    }
+    .notes-grid textarea:focus { outline: none; border-color: #5b4dff; }
+    .pkg-select-wrap { display: flex; flex-direction: column; gap: .75rem; }
+    .pkg-select-wrap label { font-size: .82rem; font-weight: 600; color: #374151; }
+    .pkg-select {
+      padding: .65rem 1rem; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      font-family: Inter, sans-serif; font-size: .9rem; background: #f8fafc; color: #0f172a;
+    }
+    .pkg-select:focus { outline: none; border-color: #5b4dff; }
+
+    /* ── Talking points ── */
+    .talking-points { display: flex; flex-direction: column; gap: .6rem; }
+    .tp-item {
+      background: #f8f7ff; border: 1px solid #e0e7ff; border-left: 3px solid #5b4dff;
+      border-radius: 0 10px 10px 0; padding: .75rem 1rem;
+    }
+    .tp-item.critical { border-left-color: #dc2626; background: #fff5f5; border-color: #fecaca; }
+    .tp-item.high { border-left-color: #f59e0b; background: #fffbeb; border-color: #fde68a; }
+    .tp-cat { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #5b4dff; margin-bottom: .2rem; }
+    .tp-item.critical .tp-cat { color: #dc2626; }
+    .tp-item.high .tp-cat { color: #d97706; }
+    .tp-text { font-size: .88rem; color: #374151; line-height: 1.55; }
+
+    /* ── Action bar ── */
+    .action-bar {
+      display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; margin-bottom: 1rem;
+    }
+    .btn-action {
+      padding: .6rem 1.1rem; border-radius: 10px; font-size: .85rem; font-weight: 700;
+      cursor: pointer; font-family: Inter, sans-serif; border: none; transition: all .15s;
+    }
+    .btn-save { background: #5b4dff; color: #fff; }
+    .btn-save:hover { background: #4c40db; }
+    .btn-print { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
+    .btn-print:hover { background: #e2e8f0; }
+    .btn-copy { background: #f1f5f9; color: #334155; border: 1.5px solid #e2e8f0; }
+    .btn-copy:hover { background: #e2e8f0; }
+    .save-confirm { font-size: .8rem; color: #16a34a; font-weight: 600; display: none; }
+
+    /* ── History ── */
+    #history-section { max-width: 980px; margin: 0 auto 2rem; padding: 0 1.5rem; }
+    .history-title { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; margin-bottom: .75rem; }
+    .history-list { display: flex; flex-direction: column; gap: .5rem; }
+    .history-item {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap; cursor: pointer; transition: border-color .15s;
+    }
+    .history-item:hover { border-color: #5b4dff; }
+    .history-url { font-size: .88rem; font-weight: 700; color: #0f172a; }
+    .history-meta { font-size: .78rem; color: #94a3b8; }
+    .history-scores { display: flex; gap: .4rem; }
+    .hs { font-size: .72rem; font-weight: 800; padding: .15rem .4rem; border-radius: 5px; }
+    .hs-red { background: #fee2e2; color: #dc2626; }
+    .hs-amber { background: #fef3c7; color: #d97706; }
+    .hs-green { background: #dcfce7; color: #16a34a; }
+    .btn-del { background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 1rem; padding: .1rem .3rem; }
+    .btn-del:hover { color: #dc2626; }
+
+    /* ── Strategy note ── */
+    .strategy-note {
+      background: #f0f4ff; border: 1px solid #c7d2fe; border-left: 3px solid #5b4dff;
+      border-radius: 0 12px 12px 0; padding: .85rem 1rem; margin-top: 1rem;
+      font-size: .82rem; color: #374151; line-height: 1.6;
+    }
+    .strategy-note strong { color: #3730a3; display: block; margin-bottom: .2rem; }
+
+    /* ── Presentation mode ── */
+    .btn-pres {
+      padding: .28rem .75rem; border-radius: 7px; font-size: .76rem; font-weight: 700;
+      cursor: pointer; border: 1.5px solid #5b4dff; background: transparent; color: #5b4dff;
+      font-family: Inter, sans-serif; transition: all .15s;
+    }
+    .btn-pres:hover, body.pres-mode .btn-pres { background: #5b4dff; color: #fff; }
+    body.pres-mode .api-hint,
+    body.pres-mode #history-section,
+    body.pres-mode .action-bar,
+    body.pres-mode .panel-internal,
+    body.pres-mode .btn-logout { display: none !important; }
+    body.pres-mode .audit-form-section { display: none; }
+    body.pres-mode .score-num { font-size: 3.4rem; }
+    body.pres-mode .panel { padding: 1.5rem 1.75rem; }
+    body.pres-mode #results { padding: 1.75rem 2rem; }
+
+    /* ── Improvements table ── */
+    .improvements-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .improvements-table th {
+      text-align: left; padding: .5rem .75rem; font-size: .72rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .07em; color: #94a3b8;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .improvements-table td {
+      padding: .65rem .75rem; border-bottom: 1px solid #f8fafc; vertical-align: top;
+    }
+    .improvements-table tr:last-child td { border-bottom: none; }
+    .imp-issue { color: #64748b; }
+    .imp-fix { color: #0f172a; font-weight: 600; }
+    .imp-outcome { color: #16a34a; font-weight: 600; }
+    .imp-priority {
+      display: inline-block; font-size: .68rem; font-weight: 800; padding: .12rem .45rem;
+      border-radius: 999px; text-transform: uppercase; letter-spacing: .05em;
+    }
+    .imp-critical { background: #fee2e2; color: #dc2626; }
+    .imp-high { background: #fef3c7; color: #d97706; }
+    .imp-medium { background: #eff6ff; color: #2563eb; }
+    @media (max-width: 600px) {
+      .improvements-table thead { display: none; }
+      .improvements-table td { display: block; padding: .3rem .5rem; }
+      .improvements-table tr { display: block; background: #f8fafc; border-radius: 10px; margin-bottom: .5rem; padding: .3rem; }
+    }
+
+    /* ── Proposal card ── */
+    .proposal-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      border-radius: 20px; padding: 2rem; color: #fff; margin-bottom: 1rem;
+    }
+    .proposal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .proposal-eyebrow { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #2dd4bf; margin-bottom: .4rem; }
+    .proposal-pkg-name { font-size: 1.6rem; font-weight: 900; color: #fff; }
+    .proposal-timeline {
+      background: rgba(45,212,191,.15); border: 1px solid rgba(45,212,191,.3);
+      color: #2dd4bf; font-size: .85rem; font-weight: 700; padding: .5rem 1rem;
+      border-radius: 10px; white-space: nowrap; align-self: flex-start;
+    }
+    .proposal-ba {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.25rem;
+      align-items: start; margin-bottom: 1.5rem;
+    }
+    @media (max-width: 580px) { .proposal-ba { grid-template-columns: 1fr; } }
+    .ba-col-label {
+      font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: .6rem;
+    }
+    .ba-col-label.before { color: #f87171; }
+    .ba-col-label.after  { color: #2dd4bf; }
+    .ba-row {
+      display: flex; align-items: center; gap: .5rem; font-size: .88rem;
+      padding: .3rem 0; border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .ba-row:last-child { border-bottom: none; }
+    .ba-arrow-col { text-align: center; font-size: 1.5rem; color: rgba(255,255,255,.3); padding-top: 1.5rem; }
+    .proposal-includes {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: .45rem .75rem;
+      margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.1);
+    }
+    @media (max-width: 580px) { .proposal-includes { grid-template-columns: 1fr 1fr; } }
+    .prop-inc { font-size: .82rem; color: rgba(255,255,255,.8); display: flex; gap: .4rem; align-items: flex-start; }
+    .prop-inc span { color: #2dd4bf; font-weight: 800; flex-shrink: 0; }
+
+    /* ── Print ── */
+    @media print {
+      .tool-header, .audit-form-section, .action-bar, #history-section,
+      .btn-logout, .btn-del, #loading, .panel-internal { display: none !important; }
+      #app { display: block !important; }
+      #results { display: block !important; padding: 0; }
+      body { background: #fff; }
+      .panel, .score-card, .proposal-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Login ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div style="font-size:1.6rem;margin-bottom:.4rem">🔍</div>
+    <h1>Site Audit Tool</h1>
+    <p>Internal use only. Enter password to continue.</p>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password">
+    <button class="btn-login" onclick="checkPassword()">Enter</button>
+    <div class="login-error" id="login-error">Incorrect password.</div>
+  </div>
+</div>
+
+<!-- ── App ── -->
+<div id="app">
+
+  <!-- Header -->
+  <div class="tool-header">
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <div class="tool-logo">Improve<span>YourSite</span></div>
+      <span class="tool-badge">Audit Tool</span>
+    </div>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <button class="btn-pres" id="pres-btn" onclick="togglePresMode()">📺 Presentation Mode</button>
+      <button class="btn-logout" onclick="logout()">Log out</button>
+    </div>
+  </div>
+
+  <!-- Audit form -->
+  <div class="audit-form-section">
+    <div class="audit-form">
+      <input class="audit-input" id="url-input" type="url" placeholder="https://competitorsite.com.au" autocomplete="off">
+      <input class="audit-input" id="area-input" type="text" placeholder="Area e.g. Bathurst NSW" autocomplete="off">
+      <input class="audit-input" id="biz-input" type="text" placeholder="Business type e.g. Plumber" autocomplete="off">
+      <button class="btn-audit" id="run-btn" onclick="runAudit()">Run Audit →</button>
+    </div>
+    <p class="api-hint">
+      Runs Google Lighthouse via PageSpeed Insights API (free, no key needed for occasional use).
+      For high-volume use, add a free key at
+      <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a>
+      and set <code>API_KEY</code> below.
+    </p>
+  </div>
+
+  <!-- Error -->
+  <div class="error-banner" id="error-banner"></div>
+
+  <!-- Loading -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <p class="loading-status" id="loading-status">Running Lighthouse audit (mobile)…</p>
+    <p class="loading-url" id="loading-url"></p>
+    <p style="font-size:.8rem;color:#94a3b8;margin-top:.5rem;">Usually takes 20–40 seconds</p>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+
+    <!-- Meta bar -->
+    <div class="result-meta">
+      <div><strong>URL:</strong> <a id="r-url" href="#" target="_blank"></a></div>
+      <div><strong>Area:</strong> <span id="r-area">—</span></div>
+      <div><strong>Type:</strong> <span id="r-biz">—</span></div>
+      <div style="margin-left:auto;color:#94a3b8" id="r-date"></div>
+    </div>
+
+    <!-- Score cards -->
+    <div class="scores-grid" id="scores-grid">
+      <div class="score-card" id="sc-perf">
+        <div class="score-label">Performance</div>
+        <div class="score-num">—</div>
+        <div class="score-target">IYS target: 90+</div>
+        <div class="score-delta"></div>
+      </div>
+      <div class="score-card" id="sc-seo">
+        <div class="score-label">SEO</div>
+        <div class="score-num">—</div>
+        <div class="score-target">IYS target: 90+</div>
+        <div class="score-delta"></div>
+      </div>
+      <div class="score-card" id="sc-a11y">
+        <div class="score-label">Accessibility</div>
+        <div class="score-num">—</div>
+        <div class="score-target">IYS target: 90+</div>
+        <div class="score-delta"></div>
+      </div>
+      <div class="score-card" id="sc-bp">
+        <div class="score-label">Best Practices</div>
+        <div class="score-num">—</div>
+        <div class="score-target">IYS target: 90+</div>
+        <div class="score-delta"></div>
+      </div>
+    </div>
+
+    <!-- Core Web Vitals -->
+    <div class="panel">
+      <div class="panel-title">Core Web Vitals (Mobile)</div>
+      <div class="vitals-grid" id="vitals-grid"></div>
+    </div>
+
+    <!-- Issues -->
+    <div class="panel">
+      <div class="panel-title">SEO & Technical Issues</div>
+      <div class="issues-list" id="issues-list"></div>
+    </div>
+
+    <!-- What We'd Fix -->
+    <div class="panel" id="improvements-panel" style="display:none">
+      <div class="panel-title">What We'd Fix — Specific to This Site</div>
+      <div style="overflow-x:auto">
+        <table class="improvements-table" id="improvements-table">
+          <thead>
+            <tr>
+              <th>Current Issue</th>
+              <th>What IYS Does</th>
+              <th>What You Gain</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody id="improvements-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Proposed Solution -->
+    <div id="proposal-section" style="display:none">
+      <div class="proposal-card" id="proposal-card"></div>
+    </div>
+
+    <!-- Revenue impact -->
+    <div class="panel panel-internal">
+      <div class="panel-title">Revenue Impact Estimate</div>
+      <div class="revenue-grid">
+        <div class="revenue-input-group">
+          <label>Est. monthly visitors</label>
+          <input class="revenue-input" id="rev-visitors" type="number" value="800">
+          <label style="margin-top:.5rem">Current conversion rate (%)</label>
+          <input class="revenue-input" id="rev-current" type="number" value="1.2" step="0.1">
+          <label style="margin-top:.5rem">Average customer value (AUD)</label>
+          <input class="revenue-input" id="rev-value" type="number" value="850">
+          <button class="btn-calc" onclick="calcRevenue()">Calculate →</button>
+        </div>
+        <div class="revenue-result">
+          <div class="revenue-label">Estimated monthly revenue gap</div>
+          <div class="revenue-number" id="rev-number">$0</div>
+          <div class="revenue-period" id="rev-annual"></div>
+          <div style="margin-top:.75rem;font-size:.78rem;color:#94a3b8" id="rev-note">Enter visitors and click Calculate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talking points -->
+    <div class="panel panel-internal">
+      <div class="panel-title">Call Talking Points (internal)</div>
+      <div class="talking-points" id="talking-points"></div>
+      <div class="strategy-note" id="strategy-note" style="display:none"></div>
+    </div>
+
+    <!-- Notes + Package -->
+    <div class="panel panel-internal">
+      <div class="panel-title">Call Notes & Recommendation (internal)</div>
+      <div class="notes-grid">
+        <div>
+          <p style="font-size:.82rem;font-weight:600;color:#374151;margin-bottom:.4rem">Your pre-call notes</p>
+          <textarea id="call-notes" placeholder="Competitor names, Google rankings you found, things to mention on the call…"></textarea>
+        </div>
+        <div class="pkg-select-wrap">
+          <label>Recommended package</label>
+          <select class="pkg-select" id="pkg-rec">
+            <option value="">— Choose after audit —</option>
+            <option value="scanfix">Scan & Fix — $3,000</option>
+            <option value="build">Complete Build — $5,000</option>
+            <option value="premium">Premium Growth — $10,000</option>
+          </select>
+          <label style="margin-top:.25rem">Confidence level</label>
+          <select class="pkg-select" id="confidence">
+            <option value="">—</option>
+            <option value="high">High — will close on call</option>
+            <option value="med">Medium — needs follow-up</option>
+            <option value="low">Low — just gathering info</option>
+          </select>
+          <label style="margin-top:.25rem">Prospect email</label>
+          <input class="audit-input" id="prospect-email" type="email" placeholder="client@example.com.au">
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-bar">
+      <button class="btn-action btn-save" onclick="saveAudit()">Save to History</button>
+      <button class="btn-action btn-copy" onclick="copyTalkingPoints()">Copy Talking Points</button>
+      <button class="btn-action btn-print" onclick="window.print()">Print Report</button>
+      <span class="save-confirm" id="save-confirm">✓ Saved</span>
+    </div>
+
+  </div><!-- /#results -->
+
+  <!-- History -->
+  <div id="history-section" style="display:none">
+    <div class="history-title">Recent Audits</div>
+    <div class="history-list" id="history-list"></div>
+  </div>
+
+</div><!-- /#app -->
+
+<script>
+  // ── Config ──────────────────────────────────────────────────
+  // Add a free Google API key here to increase rate limits:
+  const API_KEY = '';
+  const PSI_BASE = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+
+  // ── Auth ────────────────────────────────────────────────────
+  async function sha256(s) {
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,'0')).join('');
+  }
+  async function checkPassword() {
+    const v = document.getElementById('pw-input').value;
+    const [a, b] = await Promise.all([sha256(v), sha256('improveyoursite2025')]);
+    if (a === b) {
+      sessionStorage.setItem('iy_audit', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderHistory();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+  function logout() {
+    sessionStorage.removeItem('iy_audit');
+    location.reload();
+  }
+  if (sessionStorage.getItem('iy_audit') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    setTimeout(renderHistory, 100);
+  }
+  document.getElementById('pw-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // ── Colour helpers ──────────────────────────────────────────
+  function scoreColor(s) {
+    return s >= 90 ? '#16a34a' : s >= 50 ? '#d97706' : '#dc2626';
+  }
+  function scoreClass(s) {
+    return s >= 90 ? 'pass' : s >= 50 ? 'warn' : 'fail';
+  }
+  function vitalColor(key, val) {
+    const thresholds = {
+      lcp:  { good: 2500, poor: 4000 },
+      fcp:  { good: 1800, poor: 3000 },
+      tbt:  { good: 200,  poor: 600  },
+      cls:  { good: 0.1,  poor: 0.25 },
+      si:   { good: 3400, poor: 5800 },
+      tti:  { good: 3800, poor: 7300 },
+    };
+    const t = thresholds[key];
+    if (!t) return '#64748b';
+    return val <= t.good ? '#16a34a' : val <= t.poor ? '#d97706' : '#dc2626';
+  }
+  function vitalLabel(key, val) {
+    const thresholds = {
+      lcp:  { good: 2500, poor: 4000 },
+      fcp:  { good: 1800, poor: 3000 },
+      tbt:  { good: 200,  poor: 600  },
+      cls:  { good: 0.1,  poor: 0.25 },
+      si:   { good: 3400, poor: 5800 },
+      tti:  { good: 3800, poor: 7300 },
+    };
+    const t = thresholds[key];
+    if (!t) return '';
+    return val <= t.good ? '✓ Good' : val <= t.poor ? '⚠ Needs work' : '✗ Poor';
+  }
+  function vitalLabelClass(key, val) {
+    const thresholds = {
+      lcp:  { good: 2500, poor: 4000 },
+      fcp:  { good: 1800, poor: 3000 },
+      tbt:  { good: 200,  poor: 600  },
+      cls:  { good: 0.1,  poor: 0.25 },
+      si:   { good: 3400, poor: 5800 },
+      tti:  { good: 3800, poor: 7300 },
+    };
+    const t = thresholds[key];
+    if (!t) return '';
+    return val <= t.good ? 'pass' : val <= t.poor ? 'warn' : 'fail';
+  }
+
+  // ── Audit runner ────────────────────────────────────────────
+  let lastAudit = null;
+
+  async function runAudit() {
+    const rawUrl = document.getElementById('url-input').value.trim();
+    const area   = document.getElementById('area-input').value.trim();
+    const biz    = document.getElementById('biz-input').value.trim();
+
+    if (!rawUrl) { alert('Enter a URL to audit.'); return; }
+    const url = rawUrl.startsWith('http') ? rawUrl : 'https://' + rawUrl;
+
+    // Reset UI
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('error-banner').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loading-url').textContent = url;
+    document.getElementById('loading-status').textContent = 'Running Lighthouse audit (mobile)…';
+    document.getElementById('run-btn').disabled = true;
+    document.getElementById('save-confirm').style.display = 'none';
+
+    try {
+      const data = await fetchPageSpeed(url);
+      renderResults(data, url, area, biz);
+    } catch (err) {
+      document.getElementById('loading').style.display = 'none';
+      const eb = document.getElementById('error-banner');
+      eb.style.display = 'block';
+      eb.innerHTML = `<strong>Audit failed.</strong> ${err.message || 'Check the URL is publicly accessible and try again.'}`;
+    } finally {
+      document.getElementById('run-btn').disabled = false;
+    }
+  }
+
+  async function fetchPageSpeed(url) {
+    const cats = 'category=performance&category=seo&category=accessibility&category=best-practices';
+    const key  = API_KEY ? `&key=${API_KEY}` : '';
+    const apiUrl = `${PSI_BASE}?url=${encodeURIComponent(url)}&strategy=mobile&${cats}${key}`;
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      const json = await res.json().catch(() => ({}));
+      const msg = json?.error?.message || `API error ${res.status}`;
+      throw new Error(msg);
+    }
+    return res.json();
+  }
+
+  // ── Render results ──────────────────────────────────────────
+  function renderResults(data, url, area, biz) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+
+    const lhr      = data.lighthouseResult;
+    const cats     = lhr.categories;
+    const audits   = lhr.audits;
+
+    const scores = {
+      performance:    Math.round((cats.performance?.score ?? 0) * 100),
+      seo:            Math.round((cats.seo?.score ?? 0) * 100),
+      accessibility:  Math.round((cats.accessibility?.score ?? 0) * 100),
+      bp:             Math.round((cats['best-practices']?.score ?? 0) * 100),
+    };
+
+    const vitals = {
+      lcp: audits['largest-contentful-paint']?.numericValue ?? null,
+      fcp: audits['first-contentful-paint']?.numericValue ?? null,
+      tbt: audits['total-blocking-time']?.numericValue ?? null,
+      cls: audits['cumulative-layout-shift']?.numericValue ?? null,
+      si:  audits['speed-index']?.numericValue ?? null,
+      tti: audits['interactive']?.numericValue ?? null,
+      lcpDisplay: audits['largest-contentful-paint']?.displayValue ?? '—',
+      fcpDisplay: audits['first-contentful-paint']?.displayValue ?? '—',
+      tbtDisplay: audits['total-blocking-time']?.displayValue ?? '—',
+      clsDisplay: audits['cumulative-layout-shift']?.displayValue ?? '—',
+      siDisplay:  audits['speed-index']?.displayValue ?? '—',
+      ttiDisplay: audits['interactive']?.displayValue ?? '—',
+    };
+
+    const issues = {
+      metaDesc:       (audits['meta-description']?.score ?? 0) === 1,
+      title:          (audits['document-title']?.score ?? 0) === 1,
+      viewport:       (audits['viewport']?.score ?? 0) === 1,
+      httpsOk:        (audits['is-on-https']?.score ?? 1) === 1,
+      robotsTxt:      (audits['robots-txt']?.score ?? 0) === 1,
+      canonical:      (audits['canonical']?.score ?? null) === 1,
+      imageAlt:       (audits['image-alt']?.score ?? 0) === 1,
+      imageAltCount:  audits['image-alt']?.details?.items?.length ?? 0,
+      structuredData: (audits['structured-data']?.score ?? null) === 1,
+      renderBlocking: (audits['render-blocking-resources']?.score ?? 1) === 1,
+      unusedJS:       (audits['unused-javascript']?.score ?? 1) >= 0.9,
+      unusedCSS:      (audits['unused-css-rules']?.score ?? 1) >= 0.9,
+      textCompression:(audits['uses-text-compression']?.score ?? 1) === 1,
+      responsiveImg:  (audits['uses-responsive-images']?.score ?? 1) === 1,
+      linkText:       (audits['link-text']?.score ?? 1) === 1,
+    };
+
+    lastAudit = { url, area, biz, date: new Date().toLocaleDateString('en-AU'), scores, vitals, issues };
+
+    // Meta bar
+    const rUrl = document.getElementById('r-url');
+    rUrl.textContent = url; rUrl.href = url;
+    document.getElementById('r-area').textContent = area || '—';
+    document.getElementById('r-biz').textContent  = biz  || '—';
+    document.getElementById('r-date').textContent = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric' });
+
+    // Score cards
+    renderScoreCard('sc-perf', scores.performance, 'Performance');
+    renderScoreCard('sc-seo',  scores.seo,         'SEO');
+    renderScoreCard('sc-a11y', scores.accessibility,'Accessibility');
+    renderScoreCard('sc-bp',   scores.bp,           'Best Practices');
+
+    // Vitals
+    const vg = document.getElementById('vitals-grid');
+    vg.innerHTML = '';
+    const vitalItems = [
+      { key: 'lcp', name: 'Largest Contentful Paint', desc: 'Main content load time', val: vitals.lcp, disp: vitals.lcpDisplay },
+      { key: 'fcp', name: 'First Contentful Paint',   desc: 'Time to first pixel',    val: vitals.fcp, disp: vitals.fcpDisplay },
+      { key: 'tbt', name: 'Total Blocking Time',      desc: 'Interaction delay',       val: vitals.tbt, disp: vitals.tbtDisplay },
+      { key: 'cls', name: 'Layout Shift (CLS)',        desc: 'Visual stability',        val: vitals.cls, disp: vitals.clsDisplay },
+      { key: 'si',  name: 'Speed Index',               desc: 'Perceived load speed',    val: vitals.si,  disp: vitals.siDisplay  },
+      { key: 'tti', name: 'Time to Interactive',       desc: 'Fully usable',            val: vitals.tti, disp: vitals.ttiDisplay },
+    ];
+    vitalItems.forEach(v => {
+      const color = vitalColor(v.key, v.val);
+      const label = vitalLabel(v.key, v.val);
+      const cls   = vitalLabelClass(v.key, v.val);
+      vg.innerHTML += `
+        <div class="vital-item">
+          <div>
+            <div class="vital-name">${v.name}</div>
+            <div class="vital-desc">${v.desc}</div>
+          </div>
+          <div class="vital-right">
+            <div class="vital-value" style="--vital-color:${color}">${v.disp}</div>
+            <div class="vital-status ${cls}">${label}</div>
+          </div>
+        </div>`;
+    });
+
+    // Issues
+    const il = document.getElementById('issues-list');
+    il.innerHTML = '';
+    const issueItems = [
+      { ok: issues.httpsOk,        label: 'HTTPS / SSL',              good: 'Secure connection — good.',                    bad: 'No HTTPS — a security flag for Google and visitors.' },
+      { ok: issues.title,          label: 'Page title tag',           good: 'Title tag present.',                           bad: 'No title tag — Google uses this as your search headline.' },
+      { ok: issues.metaDesc,       label: 'Meta description',         good: 'Meta description found.',                      bad: 'No meta description — Google writes your search snippet itself.' },
+      { ok: issues.viewport,       label: 'Mobile viewport',          good: 'Mobile-friendly viewport set.',                bad: 'No mobile viewport — site is not configured for phones.' },
+      { ok: issues.imageAlt,       label: `Image alt text`,           good: 'All images have alt text.',                    bad: `${issues.imageAltCount || 'Some'} image${issues.imageAltCount !== 1 ? 's' : ''} missing alt text — invisible to Google Images.` },
+      { ok: issues.structuredData, label: 'Structured data',          good: 'Schema markup found.',                         bad: 'No structured data — missing rich result opportunities.' },
+      { ok: issues.robotsTxt,      label: 'Robots.txt',               good: 'Robots.txt found.',                            bad: 'No robots.txt — Google has no crawl guidance.' },
+      { ok: issues.canonical,      label: 'Canonical tag',            good: 'Canonical URL set.',                           bad: 'No canonical tag — potential duplicate content issues.' },
+      { ok: issues.renderBlocking, label: 'Render-blocking resources',good: 'No render-blocking resources.',                bad: 'Render-blocking CSS/JS is slowing first paint.' },
+      { ok: issues.unusedJS,       label: 'Unused JavaScript',        good: 'JavaScript is lean.',                          bad: 'Significant unused JavaScript is slowing load.' },
+      { ok: issues.unusedCSS,      label: 'Unused CSS',               good: 'CSS is lean.',                                 bad: 'Unused CSS is adding unnecessary file weight.' },
+      { ok: issues.textCompression,label: 'Text compression (gzip)',  good: 'Compression enabled.',                         bad: 'No text compression — files are larger than necessary.' },
+      { ok: issues.responsiveImg,  label: 'Responsive images',        good: 'Images properly sized.',                       bad: 'Images served too large for mobile — wasting bandwidth.' },
+      { ok: issues.linkText,       label: 'Descriptive link text',    good: 'Links have descriptive text.',                 bad: 'Some links use generic text ("click here") — bad for SEO.' },
+    ];
+    issueItems.forEach(i => {
+      if (i.ok === null) return; // skip if no data
+      il.innerHTML += `
+        <div class="issue-item ${i.ok ? 'ok' : 'bad'}">
+          <div class="issue-icon">${i.ok ? '✅' : '❌'}</div>
+          <div class="issue-text">
+            <strong>${i.label}</strong>
+            <span>${i.ok ? i.good : i.bad}</span>
+          </div>
+        </div>`;
+    });
+
+    // Improvements + Proposal
+    renderImprovements(scores, vitals, issues);
+    renderProposal(scores, issues, biz);
+
+    // Talking points
+    renderTalkingPoints(scores, vitals, issues, biz, area);
+
+    // Auto-set package recommendation
+    const pkgRec = document.getElementById('pkg-rec');
+    if (scores.performance < 60 || Object.values(issues).filter(v => v === false).length > 5) {
+      pkgRec.value = 'build';
+    } else if (scores.performance < 85 || !issues.structuredData || !issues.metaDesc) {
+      pkgRec.value = 'scanfix';
+    }
+
+    // Revenue calc with defaults
+    calcRevenue();
+
+    // Scroll to results
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderScoreCard(id, score, label) {
+    const card  = document.getElementById(id);
+    const color = scoreColor(score);
+    card.style.setProperty('--score-color', color);
+    const delta = 90 - score;
+    card.querySelector('.score-num').textContent   = score;
+    card.querySelector('.score-num').style.color   = color;
+    const deltaEl = card.querySelector('.score-delta');
+    if (delta > 0) {
+      deltaEl.textContent = `+${delta} pts to IYS target`;
+      deltaEl.style.color = '#94a3b8';
+    } else {
+      deltaEl.textContent = '✓ Meets IYS target';
+      deltaEl.style.color = '#16a34a';
+    }
+  }
+
+  // ── Revenue calculator ──────────────────────────────────────
+  function calcRevenue() {
+    const visitors = +document.getElementById('rev-visitors').value || 0;
+    const current  = (+document.getElementById('rev-current').value || 1.2) / 100;
+    const value    = +document.getElementById('rev-value').value || 850;
+    // Target rate: improvement based on performance score
+    const perfScore = lastAudit?.scores?.performance ?? 50;
+    const targetRate = perfScore < 50 ? 0.03 : perfScore < 80 ? 0.025 : 0.022;
+    const monthly = Math.round((targetRate - current) * visitors * value);
+    const numEl  = document.getElementById('rev-number');
+    const annEl  = document.getElementById('rev-annual');
+    const noteEl = document.getElementById('rev-note');
+    if (monthly > 0) {
+      numEl.textContent  = `$${monthly.toLocaleString('en-AU')}`;
+      annEl.textContent  = `per month · ~$${(monthly * 12).toLocaleString('en-AU')} per year`;
+      noteEl.textContent = `Based on improving conversion from ${(current * 100).toFixed(1)}% → ${(targetRate * 100).toFixed(1)}% (realistic post-rebuild target).`;
+    } else {
+      numEl.textContent  = '$0';
+      annEl.textContent  = '';
+      noteEl.textContent = 'Adjust inputs and recalculate.';
+    }
+  }
+
+  // ── Presentation mode ───────────────────────────────────────
+  let presMode = false;
+  function togglePresMode() {
+    presMode = !presMode;
+    document.body.classList.toggle('pres-mode', presMode);
+    document.getElementById('pres-btn').textContent = presMode ? '✕ Exit Presentation' : '📺 Presentation Mode';
+  }
+
+  // ── Improvements table ───────────────────────────────────────
+  function renderImprovements(scores, vitals, issues) {
+    const rows = [];
+
+    if (scores.performance < 90) {
+      rows.push({
+        issue: `Performance score ${scores.performance}/100`,
+        fix: 'Rebuilt on clean, optimised code — no bloat, no legacy scripts',
+        outcome: '90+ Lighthouse on mobile — Google\'s top performance tier',
+        level: scores.performance < 50 ? 'critical' : 'high',
+      });
+    }
+    if (vitals.lcp && vitals.lcp > 2500) {
+      rows.push({
+        issue: `Main content loads in ${vitals.lcpDisplay} (LCP)`,
+        fix: 'Image compression, lazy loading, server-side caching',
+        outcome: 'LCP under 2.5 seconds — passes Google\'s Core Web Vitals',
+        level: vitals.lcp > 4000 ? 'critical' : 'high',
+      });
+    }
+    if (vitals.tbt && vitals.tbt > 200) {
+      rows.push({
+        issue: `Page freezes for ${vitals.tbtDisplay} (TBT) on load`,
+        fix: 'JavaScript deferred, split, and minimised',
+        outcome: 'Site responds instantly — no freezing while loading',
+        level: vitals.tbt > 600 ? 'critical' : 'high',
+      });
+    }
+    if (!issues.metaDesc) {
+      rows.push({
+        issue: 'No meta description — Google writes the search snippet',
+        fix: 'Professional SEO copywriting for every page',
+        outcome: 'You control what potential customers see before clicking',
+        level: 'high',
+      });
+    }
+    if (!issues.structuredData) {
+      rows.push({
+        issue: 'No structured data (Schema markup)',
+        fix: 'Business Schema — name, address, phone, services, reviews',
+        outcome: 'Rich result eligibility: star ratings & hours in Google Search',
+        level: 'high',
+      });
+    }
+    if (!issues.imageAlt) {
+      rows.push({
+        issue: `${issues.imageAltCount || 'Multiple'} images with no alt text`,
+        fix: 'Full image audit — every image described for Google',
+        outcome: 'Google Images visibility + improved accessibility ranking',
+        level: 'medium',
+      });
+    }
+    if (!issues.renderBlocking) {
+      rows.push({
+        issue: 'Render-blocking CSS/JS — page delays before anything shows',
+        fix: 'Asset loading restructured — critical CSS inline, JS deferred',
+        outcome: 'Visitors see content immediately — fewer early drop-offs',
+        level: 'high',
+      });
+    }
+    if (!issues.textCompression) {
+      rows.push({
+        issue: 'No text compression — files served at full size',
+        fix: 'Gzip/Brotli compression enabled at delivery level',
+        outcome: 'Smaller files — faster on all connections including 4G mobile',
+        level: 'medium',
+      });
+    }
+    if (!issues.robotsTxt) {
+      rows.push({
+        issue: 'No robots.txt or XML sitemap',
+        fix: 'robots.txt + sitemap generated and submitted to Search Console',
+        outcome: 'Google crawls and indexes every page correctly from day one',
+        level: 'medium',
+      });
+    }
+    if (!issues.httpsOk) {
+      rows.push({
+        issue: 'Site not on HTTPS — Chrome shows "Not Secure"',
+        fix: 'SSL certificate setup and full HTTPS migration',
+        outcome: 'Trust restored — no security warning before visitors read a word',
+        level: 'critical',
+      });
+    }
+    if (!issues.responsiveImg) {
+      rows.push({
+        issue: 'Images oversized for mobile — wasting bandwidth',
+        fix: 'Responsive image srcsets — right size for every device',
+        outcome: 'Faster mobile load without sacrificing image quality',
+        level: 'medium',
+      });
+    }
+    if (scores.seo < 90) {
+      rows.push({
+        issue: `Overall SEO score ${scores.seo}/100`,
+        fix: 'Full technical SEO setup: headings, canonical, Open Graph, GSC',
+        outcome: 'Google understands and trusts the site — rankings improve',
+        level: scores.seo < 70 ? 'critical' : 'high',
+      });
+    }
+
+    const panel = document.getElementById('improvements-panel');
+    const tbody = document.getElementById('improvements-body');
+
+    if (!rows.length) {
+      panel.style.display = 'none';
+      return;
+    }
+
+    panel.style.display = 'block';
+    const levelLabel = { critical: 'Critical', high: 'High', medium: 'Medium' };
+    tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td class="imp-issue">${r.issue}</td>
+        <td class="imp-fix">${r.fix}</td>
+        <td class="imp-outcome">${r.outcome}</td>
+        <td><span class="imp-priority imp-${r.level}">${levelLabel[r.level]}</span></td>
+      </tr>`).join('');
+  }
+
+  // ── Proposal card ────────────────────────────────────────────
+  function renderProposal(scores, issues, biz) {
+    const section = document.getElementById('proposal-section');
+    const card    = document.getElementById('proposal-card');
+
+    const failCount = Object.values(issues).filter(v => v === false).length;
+    let pkgName, pkgPrice, pkgIncludes;
+
+    if (scores.performance < 60 || failCount >= 5) {
+      pkgName  = 'Complete Build';
+      pkgPrice = '$5,000';
+      pkgIncludes = [
+        'Custom mobile-first design', 'Full SEO setup + Search Console',
+        '90%+ Lighthouse target', 'Booking + lead automation',
+        'Analytics + conversion tracking', '3 months support included',
+        'You own it — no monthly fees', 'Live in 2–4 weeks',
+      ];
+    } else {
+      pkgName  = 'Scan & Fix';
+      pkgPrice = '$3,000';
+      pkgIncludes = [
+        'Full site audit + issue report', 'Speed + conversion fixes',
+        'SEO and UX improvements', 'Lead form + CTA optimisation',
+        'Before/after Lighthouse report', 'Quick turnaround',
+      ];
+    }
+
+    // Build before/after rows
+    const baRows = [
+      { before: `Performance: ${scores.performance}`, after: 'Performance: 90+' },
+      { before: `SEO: ${scores.seo}`, after: 'SEO: 90+' },
+    ];
+    if (!issues.metaDesc)       baRows.push({ before: '❌ No meta description',  after: '✅ SEO copy on every page' });
+    if (!issues.structuredData) baRows.push({ before: '❌ No structured data',   after: '✅ Full Schema markup' });
+    if (!issues.robotsTxt)      baRows.push({ before: '❌ No sitemap / robots',  after: '✅ Submitted to Google Search Console' });
+    if (!issues.imageAlt)       baRows.push({ before: `❌ ${issues.imageAltCount} images untagged`, after: '✅ Full image SEO' });
+    if (!issues.httpsOk)        baRows.push({ before: '❌ No HTTPS', after: '✅ Secure SSL connection' });
+    if (!issues.renderBlocking) baRows.push({ before: '❌ Render-blocking assets', after: '✅ Optimised asset delivery' });
+
+    section.style.display = 'block';
+    card.innerHTML = `
+      <div class="proposal-header">
+        <div>
+          <div class="proposal-eyebrow">ImproveYourSite — Recommended Solution</div>
+          <div class="proposal-pkg-name">${pkgName} &nbsp;<span style="color:#2dd4bf">${pkgPrice}</span></div>
+        </div>
+        <div class="proposal-timeline">⚡ Live in 2–4 weeks</div>
+      </div>
+      <div class="proposal-ba">
+        <div>
+          <div class="ba-col-label before">Current site${biz ? ' — ' + biz : ''}</div>
+          ${baRows.map(r => `<div class="ba-row" style="color:rgba(255,255,255,.65)">${r.before}</div>`).join('')}
+        </div>
+        <div class="ba-arrow-col">→</div>
+        <div>
+          <div class="ba-col-label after">After ImproveYourSite</div>
+          ${baRows.map(r => `<div class="ba-row" style="color:#2dd4bf;font-weight:600">${r.after}</div>`).join('')}
+        </div>
+      </div>
+      <div class="proposal-includes">
+        ${pkgIncludes.map(i => `<div class="prop-inc"><span>✓</span>${i}</div>`).join('')}
+      </div>`;
+  }
+
+  // ── Talking points ──────────────────────────────────────────
+  function renderTalkingPoints(scores, vitals, issues, biz, area) {
+    const tp   = document.getElementById('talking-points');
+    const sn   = document.getElementById('strategy-note');
+    const pts  = [];
+
+    // Performance
+    if (scores.performance < 50) {
+      pts.push({ level: 'critical', cat: 'Speed — Critical',
+        text: `Their site scored ${scores.performance}/100 for performance — Google classifies this as "poor". With an LCP of ${vitals.lcpDisplay}, most mobile visitors are waiting over 4 seconds for the main content to appear. Industry data shows 53% of mobile users abandon a page that takes longer than 3 seconds to load.` });
+    } else if (scores.performance < 80) {
+      pts.push({ level: 'high', cat: 'Speed — Needs Work',
+        text: `Performance score of ${scores.performance}/100 — below the 90+ threshold Google rewards. Mobile visitors are experiencing unnecessary delays that are costing enquiries. This is fully fixable.` });
+    }
+
+    // SEO score
+    if (scores.seo < 75) {
+      pts.push({ level: 'critical', cat: 'SEO — Significant Issues',
+        text: `Their SEO score is ${scores.seo}/100. Google cannot properly understand or rank this site. Several technical fixes are needed before the site can compete for the first page.` });
+    } else if (scores.seo < 90) {
+      pts.push({ level: 'high', cat: 'SEO — Improvable',
+        text: `SEO score of ${scores.seo}/100. There are clear technical gaps that are limiting their Google rankings — fixable without a full rebuild in some cases.` });
+    }
+
+    // Specific issues
+    if (!issues.metaDesc) {
+      pts.push({ level: 'high', cat: 'Search Appearance',
+        text: 'No meta description — Google is writing their own search listing snippet, usually with random text from the page. They have no control over what potential customers read before clicking.' });
+    }
+    if (!issues.imageAlt) {
+      pts.push({ level: 'medium', cat: 'Image SEO',
+        text: `${issues.imageAltCount || 'Multiple'} images have no alt text. These are invisible to Google — no Google Images traffic, and a missed ranking signal for every product or service photo on the page.` });
+    }
+    if (!issues.structuredData) {
+      pts.push({ level: 'medium', cat: 'Rich Results',
+        text: 'No structured data (Schema markup). This means no star ratings, business hours, or rich snippets in Google — competitor sites with Schema can appear more prominent in the same search results.' });
+    }
+    if (!issues.renderBlocking) {
+      pts.push({ level: 'high', cat: 'Load Speed',
+        text: 'Render-blocking resources are delaying the first paint of the page. Visitors see a blank screen for longer than necessary — a known cause of high bounce rates on mobile.' });
+    }
+    if (!issues.textCompression) {
+      pts.push({ level: 'medium', cat: 'File Size',
+        text: 'No text compression enabled. Pages are being served at full file size instead of compressed — unnecessarily slow on mobile connections.' });
+    }
+    if (!issues.robotsTxt) {
+      pts.push({ level: 'medium', cat: 'Crawl Configuration',
+        text: 'No robots.txt file. Google has no crawl guidance for this site — a basic technical gap that every properly-set-up site should have.' });
+    }
+    if (!issues.httpsOk) {
+      pts.push({ level: 'critical', cat: 'Security',
+        text: 'The site is not on HTTPS. Google marks non-HTTPS sites as "Not Secure" in Chrome — a trust flag that visibly puts visitors off before they even read the page.' });
+    }
+
+    tp.innerHTML = pts.length
+      ? pts.map(p => `
+          <div class="tp-item ${p.level}">
+            <div class="tp-cat">${p.cat}</div>
+            <div class="tp-text">${p.text}</div>
+          </div>`).join('')
+      : '<p style="color:#64748b;font-size:.88rem">No major issues found — this site is in reasonable shape.</p>';
+
+    // Strategy note
+    const failCount = Object.values({ ...issues }).filter(v => v === false).length;
+    if (scores.performance < 60 || failCount >= 5) {
+      sn.style.display = 'block';
+      sn.innerHTML = `<strong>📋 Recommended talking point to close:</strong>
+        "Based on what I'm seeing here, a Scan & Fix won't be enough — there are ${failCount} technical issues and a performance score of ${scores.performance}.
+        A Complete Build on a clean foundation will fix all of this in one go. You'll own it outright, no ongoing fees, and we'll have it live in 2–4 weeks."`;
+    } else {
+      sn.style.display = 'none';
+    }
+  }
+
+  // ── Copy talking points ─────────────────────────────────────
+  function copyTalkingPoints() {
+    const items = document.querySelectorAll('.tp-item');
+    const text  = Array.from(items).map(el => {
+      const cat  = el.querySelector('.tp-cat')?.textContent ?? '';
+      const body = el.querySelector('.tp-text')?.textContent ?? '';
+      return `[${cat}]\n${body}`;
+    }).join('\n\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      btn.textContent = '✓ Copied';
+      setTimeout(() => { btn.textContent = 'Copy Talking Points'; }, 2000);
+    });
+  }
+
+  // ── Save / History ──────────────────────────────────────────
+  function saveAudit() {
+    if (!lastAudit) return;
+    const pkg        = document.getElementById('pkg-rec').value;
+    const confidence = document.getElementById('confidence').value;
+    const notes      = document.getElementById('call-notes').value;
+    const email      = document.getElementById('prospect-email').value;
+    const entry = { ...lastAudit, pkg, confidence, notes, email, savedAt: Date.now() };
+    const history = getHistory();
+    // Remove if URL already saved, then prepend
+    const filtered = history.filter(h => h.url !== entry.url);
+    filtered.unshift(entry);
+    localStorage.setItem('iy_audits', JSON.stringify(filtered.slice(0, 30)));
+    document.getElementById('save-confirm').style.display = 'inline';
+    renderHistory();
+  }
+
+  function getHistory() {
+    try { return JSON.parse(localStorage.getItem('iy_audits') || '[]'); }
+    catch { return []; }
+  }
+
+  function renderHistory() {
+    const history = getHistory();
+    const section = document.getElementById('history-section');
+    const list    = document.getElementById('history-list');
+    if (!history.length) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    list.innerHTML = history.map((h, i) => {
+      const sc = (s, label) => {
+        const cls = s >= 90 ? 'hs-green' : s >= 50 ? 'hs-amber' : 'hs-red';
+        return `<span class="hs ${cls}">${label} ${s}</span>`;
+      };
+      return `
+        <div class="history-item" onclick="loadHistory(${i})">
+          <div>
+            <div class="history-url">${h.url}</div>
+            <div class="history-meta">${h.area || ''}${h.biz ? ' · ' + h.biz : ''} · ${h.date || ''}</div>
+          </div>
+          <div class="history-scores">
+            ${sc(h.scores.performance, 'Perf')}
+            ${sc(h.scores.seo, 'SEO')}
+          </div>
+          <button class="btn-del" onclick="deleteHistory(event, ${i})" title="Delete">×</button>
+        </div>`;
+    }).join('');
+  }
+
+  function loadHistory(i) {
+    const h = getHistory()[i];
+    if (!h) return;
+    document.getElementById('url-input').value  = h.url;
+    document.getElementById('area-input').value = h.area  || '';
+    document.getElementById('biz-input').value  = h.biz   || '';
+    alert(`History loaded for ${h.url}\n\nClick "Run Audit →" to re-run a fresh scan.`);
+  }
+
+  function deleteHistory(e, i) {
+    e.stopPropagation();
+    const history = getHistory();
+    history.splice(i, 1);
+    localStorage.setItem('iy_audits', JSON.stringify(history));
+    renderHistory();
+  }
+
+  // ── Enter key on form ───────────────────────────────────────
+  ['url-input', 'area-input', 'biz-input'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => {
+      if (e.key === 'Enter') runAudit();
+    });
+  });
+</script>
+
+</body>
+</html>
