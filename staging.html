@@ -310,6 +310,17 @@
     .familiar-item p { color: #94a3b8; font-size: .92rem; margin: 0; line-height: 1.5; }
     .familiar-cta { color: #475569; font-size: .88rem; }
 
+    /* ── Footer links — no word-wrap ── */
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.75rem;
+    }
+    .footer__links a {
+      white-space: nowrap;
+      font-size: .9rem;
+    }
+
     /* ── Mobile tweaks ── */
     @media (max-width: 600px) {
       .familiar-list { grid-template-columns: 1fr; }
