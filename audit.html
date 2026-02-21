@@ -347,6 +347,50 @@
     .prop-inc { font-size: .82rem; color: rgba(255,255,255,.8); display: flex; gap: .4rem; align-items: flex-start; }
     .prop-inc span { color: #2dd4bf; font-weight: 800; flex-shrink: 0; }
 
+    /* ── CrUX panel ── */
+    .crux-note {
+      background: #f8f7ff; border: 1px solid #e0e7ff; border-radius: 10px;
+      padding: .65rem 1rem; margin-bottom: .85rem; font-size: .82rem; color: #374151;
+    }
+    .crux-metric {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: .7rem .9rem;
+    }
+    .crux-source { font-size: .68rem; color: #94a3b8; margin-top: .3rem; }
+
+    /* ── Site Intelligence ── */
+    .intel-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: .65rem; margin-bottom: .85rem;
+    }
+    @media (max-width: 540px) { .intel-grid { grid-template-columns: 1fr; } }
+    .intel-item {
+      display: flex; align-items: flex-start; gap: .55rem; padding: .6rem .8rem;
+      border-radius: 10px; font-size: .84rem;
+    }
+    .intel-ok  { background: #f0fdf4; }
+    .intel-bad { background: #fff7ed; }
+    .intel-neu { background: #f8fafc; border: 1px solid #e2e8f0; }
+    .intel-label { font-weight: 700; color: #0f172a; display: block; margin-bottom: .1rem; }
+    .intel-value { color: #374151; font-size: .8rem; word-break: break-word; }
+    .platform-badge {
+      display: inline-block; padding: .2rem .65rem; border-radius: 999px; font-size: .72rem;
+      font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+      background: #fee2e2; color: #dc2626; margin-bottom: .6rem;
+    }
+    .platform-note {
+      font-size: .82rem; color: #374151; line-height: 1.55;
+      background: #fff5f5; border: 1px solid #fecaca; border-left: 3px solid #dc2626;
+      border-radius: 0 10px 10px 0; padding: .65rem .9rem; margin-bottom: .85rem;
+    }
+    .platform-note.neutral { background: #f8fafc; border-color: #e2e8f0; border-left-color: #94a3b8; }
+    .sb-badge {
+      display: inline-flex; align-items: center; gap: .35rem; font-size: .78rem; font-weight: 700;
+      padding: .2rem .6rem; border-radius: 999px;
+    }
+    .sb-clean   { background: #dcfce7; color: #16a34a; }
+    .sb-flagged { background: #fee2e2; color: #dc2626; }
+    .sb-unknown { background: #f1f5f9; color: #94a3b8; }
+
     /* ── Print ── */
     @media print {
       .tool-header, .audit-form-section, .action-bar, #history-section,
@@ -422,6 +466,7 @@
       <div><strong>URL:</strong> <a id="r-url" href="#" target="_blank"></a></div>
       <div><strong>Area:</strong> <span id="r-area">—</span></div>
       <div><strong>Type:</strong> <span id="r-biz">—</span></div>
+      <span id="sb-badge" class="sb-badge" style="display:none"></span>
       <div style="margin-left:auto;color:#94a3b8" id="r-date"></div>
     </div>
 
@@ -457,6 +502,20 @@
     <div class="panel">
       <div class="panel-title">Core Web Vitals (Mobile)</div>
       <div class="vitals-grid" id="vitals-grid"></div>
+    </div>
+
+    <!-- Real User Data (CrUX) -->
+    <div class="panel" id="crux-panel" style="display:none">
+      <div class="panel-title">Real User Data — Field Performance (Chrome Users, Mobile)</div>
+      <div id="crux-note"></div>
+      <div class="vitals-grid" id="crux-grid"></div>
+      <p class="crux-source">Source: Chrome UX Report (p75 — actual Chrome users on mobile, last 28 days)</p>
+    </div>
+
+    <!-- Site Intelligence -->
+    <div class="panel" id="intel-panel" style="display:none">
+      <div class="panel-title">Site Intelligence</div>
+      <div id="intel-content"></div>
     </div>
 
     <!-- Issues -->
@@ -566,9 +625,10 @@
 
 <script>
   // ── Config ──────────────────────────────────────────────────
-  // Add a free Google API key here to increase rate limits:
-  const API_KEY = 'AIzaSyCCvJYpENWHwZcCGfCfCLxJDn07NXPXwUs';
+  const API_KEY  = 'AIzaSyCCvJYpENWHwZcCGfCfCLxJDn07NXPXwUs';
   const PSI_BASE = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+  const CRUX_BASE = 'https://chromeuxreport.googleapis.com/v1/records:queryRecord';
+  const SB_BASE   = 'https://safebrowsing.googleapis.com/v4/threatMatches:find';
 
   // ── Auth ────────────────────────────────────────────────────
   async function sha256(s) {
@@ -668,8 +728,21 @@
     document.getElementById('save-confirm').style.display = 'none';
 
     try {
-      const data = await fetchPageSpeed(url);
-      renderResults(data, url, area, biz);
+      document.getElementById('loading-status').textContent = 'Running 4 checks in parallel…';
+      const [psiR, cruxR, sbR, contentR] = await Promise.allSettled([
+        fetchPageSpeed(url),
+        fetchCrux(url),
+        checkSafeBrowsing(url),
+        fetchPageContent(url),
+      ]);
+      if (psiR.status === 'rejected') throw psiR.reason;
+      renderResults(
+        psiR.value,
+        cruxR.status   === 'fulfilled' ? cruxR.value   : null,
+        sbR.status     === 'fulfilled' ? sbR.value     : null,
+        contentR.status === 'fulfilled' ? contentR.value : null,
+        url, area, biz
+      );
     } catch (err) {
       document.getElementById('loading').style.display = 'none';
       const eb = document.getElementById('error-banner');
@@ -693,8 +766,96 @@
     return res.json();
   }
 
+  // ── CrUX ────────────────────────────────────────────────────
+  async function fetchCrux(url) {
+    const res = await fetch(`${CRUX_BASE}?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, formFactor: 'PHONE' }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (res.status === 404) return null; // not enough real-user data
+    if (!res.ok) return null;
+    return res.json();
+  }
+
+  // ── Safe Browsing ────────────────────────────────────────────
+  async function checkSafeBrowsing(url) {
+    const res = await fetch(`${SB_BASE}?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client: { clientId: 'iy-audit', clientVersion: '1.0' },
+        threatInfo: {
+          threatTypes: ['MALWARE','SOCIAL_ENGINEERING','UNWANTED_SOFTWARE','POTENTIALLY_HARMFUL_APPLICATION'],
+          platformTypes: ['ANY_PLATFORM'],
+          threatEntryTypes: ['URL'],
+          threatEntries: [{ url }],
+        },
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return (data.matches?.length > 0) ? 'flagged' : 'clean';
+  }
+
+  // ── Page content scraper ─────────────────────────────────────
+  async function fetchPageContent(url) {
+    const res = await fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+      { signal: AbortSignal.timeout(10000) }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.contents || null;
+  }
+
+  const PLATFORMS = [
+    { name: 'Wix', re: /wix\.com|wixstatic\.com/i, warn: true,
+      note: 'Wix has a hard performance ceiling around 65/100. The platform itself is the bottleneck — a rebuild on clean code is the only way past it.' },
+    { name: 'Squarespace', re: /squarespace\.com|sqsp\.net/i, warn: true,
+      note: 'Squarespace typically scores 40–65/100. Template-based with limited optimisation control.' },
+    { name: 'Shopify', re: /cdn\.shopify\.com|shopify\.com\/s/i, warn: false,
+      note: 'Shopify is reasonable for ecommerce but often carries performance bloat from apps and themes.' },
+    { name: 'Webflow', re: /webflow\.com|\.webflow\.io/i, warn: false,
+      note: 'Webflow generally performs better than Wix/Squarespace but is still template-limited.' },
+    { name: 'GoDaddy', re: /godaddy\.com|websitebuilder\.godaddy/i, warn: true,
+      note: 'GoDaddy Website Builder has a low performance ceiling, similar to Wix. A rebuild is the right fix.' },
+    { name: 'WordPress', re: /wp-content|wp-includes/i, warn: false,
+      note: 'WordPress — performance depends on hosting, theme and plugins. Often improvable with a targeted Scan & Fix.' },
+    { name: 'Duda', re: /dudaone\.com|irp\.cdn-website\.com/i, warn: false,
+      note: 'Duda — used by some agencies. Moderate performance ceiling.' },
+  ];
+
+  function detectPlatform(html) {
+    for (const p of PLATFORMS) {
+      if (p.re.test(html)) return p;
+    }
+    const gen = html.match(/<meta[^>]+name=["']generator["'][^>]+content=["']([^"']+)/i)?.[1];
+    if (gen) return { name: gen.split(' ')[0], warn: false, note: 'CMS detected via generator tag.' };
+    return null; // custom / unknown
+  }
+
+  function extractPageData(html) {
+    if (!html) return null;
+    const get = re => html.match(re)?.[1]?.trim() || null;
+    const title     = get(/<title[^>]*>([^<]+)<\/title>/i);
+    const metaDesc  = get(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']{1,250})/i)
+                   || get(/<meta[^>]+content=["']([^"']{1,250})["'][^>]+name=["']description["']/i);
+    const h1        = get(/<h1[^>]*>([^<]{1,120})/i);
+    const hasForm   = /<form[\s>]/i.test(html);
+    const hasPhone  = /href=["']tel:/i.test(html);
+    const phoneRe   = /\b(0[45]\d{2}[\s.\-]?\d{3}[\s.\-]?\d{3}|0[2-8][\s.\-]?\d{4}[\s.\-]?\d{4}|1[38]00[\s.\-]?\d{3}[\s.\-]?\d{3})\b/g;
+    const phones    = [...new Set(html.match(phoneRe) || [])].slice(0, 2);
+    const yearMatch = html.match(/(?:©|&copy;|copyright)\s*(?:copyright\s+)?(\d{4})/i);
+    const copyrightYear = yearMatch ? parseInt(yearMatch[1]) : null;
+    const platform  = detectPlatform(html);
+    return { title, metaDesc, h1, hasForm, hasPhone, phones, copyrightYear, platform };
+  }
+
   // ── Render results ──────────────────────────────────────────
-  function renderResults(data, url, area, biz) {
+  function renderResults(data, cruxData, sbResult, pageHtml, url, area, biz) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('results').style.display = 'block';
 
@@ -742,6 +903,7 @@
       linkText:       (audits['link-text']?.score ?? 1) === 1,
     };
 
+    const pageData = extractPageData(pageHtml);
     lastAudit = { url, area, biz, date: new Date().toLocaleDateString('en-AU'), scores, vitals, issues };
 
     // Meta bar
@@ -750,6 +912,7 @@
     document.getElementById('r-area').textContent = area || '—';
     document.getElementById('r-biz').textContent  = biz  || '—';
     document.getElementById('r-date').textContent = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric' });
+    renderSafeBrowsing(sbResult);
 
     // Score cards
     renderScoreCard('sc-perf', scores.performance, 'Performance');
@@ -816,6 +979,10 @@
         </div>`;
     });
 
+    // CrUX + Site Intelligence (new panels)
+    renderRealUserData(cruxData);
+    renderSiteIntelligence(pageData);
+
     // Improvements + Proposal
     renderImprovements(scores, vitals, issues);
     renderProposal(scores, issues, biz);
@@ -853,6 +1020,176 @@
       deltaEl.textContent = '✓ Meets IYS target';
       deltaEl.style.color = '#16a34a';
     }
+  }
+
+  // ── Safe Browsing badge ──────────────────────────────────────
+  function renderSafeBrowsing(result) {
+    const el = document.getElementById('sb-badge');
+    if (result === 'clean') {
+      el.className = 'sb-badge sb-clean';
+      el.textContent = '✅ No security warnings';
+      el.style.display = 'inline-flex';
+    } else if (result === 'flagged') {
+      el.className = 'sb-badge sb-flagged';
+      el.textContent = '🚨 Google safety warning';
+      el.style.display = 'inline-flex';
+    } else {
+      el.className = 'sb-badge sb-unknown';
+      el.textContent = 'Safety check unavailable';
+      el.style.display = 'inline-flex';
+    }
+  }
+
+  // ── Real User Data (CrUX) ────────────────────────────────────
+  function renderRealUserData(cruxData) {
+    const panel = document.getElementById('crux-panel');
+    const grid  = document.getElementById('crux-grid');
+    const note  = document.getElementById('crux-note');
+
+    if (!cruxData) {
+      note.className = 'crux-note';
+      note.innerHTML = '⚠ No field data available — this site doesn\'t have enough Chrome traffic in the last 28 days for Google to report real-user metrics. The Lighthouse lab scores above are the best available signal.';
+      note.style.display = 'block';
+      grid.innerHTML = '';
+      panel.style.display = 'block';
+      return;
+    }
+
+    const metrics = cruxData.record?.metrics || {};
+    const cruxThresholds = {
+      largest_contentful_paint:   { good: 2500,  poor: 4000,  unit: 'ms',  label: 'LCP (Real Users)' },
+      first_contentful_paint:     { good: 1800,  poor: 3000,  unit: 'ms',  label: 'FCP (Real Users)' },
+      cumulative_layout_shift:    { good: 0.1,   poor: 0.25,  unit: '',    label: 'CLS (Real Users)' },
+      interaction_to_next_paint:  { good: 200,   poor: 500,   unit: 'ms',  label: 'INP (Real Users)' },
+      experimental_time_to_first_byte: { good: 800, poor: 1800, unit: 'ms', label: 'TTFB (Real Users)' },
+    };
+
+    note.style.display = 'none';
+    grid.innerHTML = '';
+
+    let hasAny = false;
+    for (const [key, t] of Object.entries(cruxThresholds)) {
+      const m = metrics[key];
+      if (!m) continue;
+      hasAny = true;
+      const p75 = m.percentiles?.p75 ?? null;
+      if (p75 === null) continue;
+      const displayVal = t.unit === 'ms' ? (p75 >= 1000 ? (p75/1000).toFixed(1) + ' s' : Math.round(p75) + ' ms') : p75.toFixed(3);
+      const color = p75 <= t.good ? '#16a34a' : p75 <= t.poor ? '#d97706' : '#dc2626';
+      const status = p75 <= t.good ? '✓ Good' : p75 <= t.poor ? '⚠ Needs work' : '✗ Poor';
+      const cls    = p75 <= t.good ? 'pass' : p75 <= t.poor ? 'warn' : 'fail';
+      grid.innerHTML += `
+        <div class="vital-item">
+          <div>
+            <div class="vital-name">${t.label}</div>
+            <div class="vital-desc">p75 — 75th percentile real users</div>
+          </div>
+          <div class="vital-right">
+            <div class="vital-value" style="--vital-color:${color}">${displayVal}</div>
+            <div class="vital-status ${cls}">${status}</div>
+          </div>
+        </div>`;
+    }
+
+    if (!hasAny) {
+      note.className = 'crux-note';
+      note.innerHTML = 'Field data received but no individual metrics were available for this URL.';
+      note.style.display = 'block';
+    }
+
+    panel.style.display = 'block';
+  }
+
+  // ── Site Intelligence ────────────────────────────────────────
+  function renderSiteIntelligence(pageData) {
+    const panel   = document.getElementById('intel-panel');
+    const content = document.getElementById('intel-content');
+
+    if (!pageData) {
+      content.innerHTML = '<p style="font-size:.84rem;color:#94a3b8">Could not fetch page content — site may block external requests.</p>';
+      panel.style.display = 'block';
+      return;
+    }
+
+    let html = '';
+
+    // Platform
+    if (pageData.platform) {
+      const p = pageData.platform;
+      const badgeColor = p.warn ? '#fee2e2' : '#f0f4ff';
+      const badgeText  = p.warn ? '#dc2626' : '#3730a3';
+      html += `<div style="margin-bottom:.85rem">`;
+      html += `<span class="platform-badge" style="background:${badgeColor};color:${badgeText}">${p.name}</span>`;
+      html += `<div class="platform-note ${p.warn ? '' : 'neutral'}">${p.note}</div>`;
+      html += `</div>`;
+    }
+
+    // Grid of intel items
+    html += '<div class="intel-grid">';
+
+    // Title
+    html += `<div class="intel-item ${pageData.title ? 'intel-ok' : 'intel-bad'}">
+      <div>
+        <span class="intel-label">${pageData.title ? '✅' : '❌'} Page Title</span>
+        <span class="intel-value">${pageData.title ? escHtml(pageData.title) : 'Not found'}</span>
+      </div>
+    </div>`;
+
+    // Meta description
+    html += `<div class="intel-item ${pageData.metaDesc ? 'intel-ok' : 'intel-bad'}">
+      <div>
+        <span class="intel-label">${pageData.metaDesc ? '✅' : '❌'} Meta Description</span>
+        <span class="intel-value">${pageData.metaDesc ? escHtml(pageData.metaDesc.substring(0,120)) + (pageData.metaDesc.length > 120 ? '…' : '') : 'Missing'}</span>
+      </div>
+    </div>`;
+
+    // H1
+    html += `<div class="intel-item ${pageData.h1 ? 'intel-ok' : 'intel-bad'}">
+      <div>
+        <span class="intel-label">${pageData.h1 ? '✅' : '❌'} H1 Heading</span>
+        <span class="intel-value">${pageData.h1 ? escHtml(pageData.h1) : 'No H1 found'}</span>
+      </div>
+    </div>`;
+
+    // Contact form
+    html += `<div class="intel-item ${pageData.hasForm ? 'intel-ok' : 'intel-bad'}">
+      <div>
+        <span class="intel-label">${pageData.hasForm ? '✅' : '❌'} Contact / Lead Form</span>
+        <span class="intel-value">${pageData.hasForm ? 'Form detected on page' : 'No form found — may be missing leads'}</span>
+      </div>
+    </div>`;
+
+    // Phone
+    const phoneText = pageData.phones?.length ? pageData.phones.join(', ') : (pageData.hasPhone ? 'Found (tel: link)' : 'No phone detected');
+    const phoneOk   = pageData.phones?.length > 0 || pageData.hasPhone;
+    html += `<div class="intel-item ${phoneOk ? 'intel-ok' : 'intel-bad'}">
+      <div>
+        <span class="intel-label">${phoneOk ? '✅' : '❌'} Phone Number</span>
+        <span class="intel-value">${escHtml(phoneText)}</span>
+      </div>
+    </div>`;
+
+    // Copyright year
+    const thisYear = new Date().getFullYear();
+    const yearOk   = pageData.copyrightYear && pageData.copyrightYear >= thisYear - 1;
+    const yearText = pageData.copyrightYear
+      ? (pageData.copyrightYear < thisYear - 1 ? `© ${pageData.copyrightYear} — possibly outdated` : `© ${pageData.copyrightYear}`)
+      : 'No copyright year found';
+    html += `<div class="intel-item ${yearOk ? 'intel-ok' : 'intel-neu'}">
+      <div>
+        <span class="intel-label">${yearOk ? '✅' : '⚠'} Copyright Year</span>
+        <span class="intel-value">${yearText}</span>
+      </div>
+    </div>`;
+
+    html += '</div>'; // /intel-grid
+
+    content.innerHTML = html;
+    panel.style.display = 'block';
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
   // ── Revenue calculator ──────────────────────────────────────
