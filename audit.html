@@ -996,8 +996,8 @@
     renderImprovements(scores, vitals, issues);
     renderProposal(scores, issues, biz);
 
-    // Talking points
-    renderTalkingPoints(scores, vitals, issues, biz, area);
+    // Talking points (pass pageData for platform-specific points)
+    renderTalkingPoints(scores, vitals, issues, biz, area, pageData);
 
     // Auto-set package recommendation
     const pkgRec = document.getElementById('pkg-rec');
@@ -1477,10 +1477,67 @@
   }
 
   // ── Talking points ──────────────────────────────────────────
-  function renderTalkingPoints(scores, vitals, issues, biz, area) {
+  function renderTalkingPoints(scores, vitals, issues, biz, area, pageData) {
     const tp   = document.getElementById('talking-points');
     const sn   = document.getElementById('strategy-note');
     const pts  = [];
+
+    // ── Platform talking point (goes first if detected) ──────
+    const platform = pageData?.platform;
+    if (platform) {
+      const PLATFORM_SCRIPTS = {
+        'Wix': {
+          level: 'critical',
+          why: `Their site is on Wix. Wix has a hard performance ceiling — independent testing consistently puts Wix sites between 40 and 65/100 on mobile, regardless of how well the site is designed. This isn't a content problem, it's a platform problem. Google uses Core Web Vitals as a direct ranking signal, and no Wix site can reliably hit the 90+ threshold that clean-coded sites achieve.`,
+          cost: `They're also paying Wix a monthly subscription (typically $25–$50/month, ~$300–$600/year) to be on a platform that's actively limiting their Google rankings. That money is going to a platform they don't own and can't export.`,
+          options: `What to offer on the call:\n  → Complete Build ($5,000) — the right solution. Clean custom code, 90+ Lighthouse target, they own it outright, zero monthly platform fees. We can typically have it live in 2–4 weeks.\n  → If budget is the objection: frame it as "$5,000 once vs $600/year forever on a platform that's costing them ranking position". Most clients pay the site back inside a year from new enquiries.\n  → Do NOT offer Scan & Fix for a Wix site — there's a ceiling we literally cannot break through without a rebuild.`,
+        },
+        'GoDaddy': {
+          level: 'critical',
+          why: `Their site is on GoDaddy Website Builder — one of the worst-performing platforms for Google rankings. GoDaddy Builder sites typically score 30–60/100 on mobile Lighthouse. The platform generates bloated, template-locked code that no amount of tweaking will fix. Google has been explicitly using Core Web Vitals as a ranking factor since 2021, and GoDaddy sites are structurally at a disadvantage.`,
+          cost: `They're paying GoDaddy monthly fees for a platform that's costing them ranking position. GoDaddy's upsell model often has businesses paying $50–$100+/month across hosting, domain, and add-ons — for a product that's hurting their Google presence.`,
+          options: `What to offer on the call:\n  → Complete Build ($5,000) — only real fix. Custom code, 90+ Lighthouse target, full SEO setup, they own the site permanently. No GoDaddy fees, no lock-in.\n  → Angle: "We build it once, you own it forever. No monthly platform bill, and you'll actually rank." This lands well with GoDaddy customers who are already frustrated with their costs.\n  → Do NOT recommend Scan & Fix — the problem is the platform, not the content.`,
+        },
+        'Squarespace': {
+          level: 'high',
+          why: `Their site is on Squarespace. Squarespace typically scores 45–70/100 on mobile — better than Wix but still well below the 90+ threshold Google rewards. The platform generates template-locked HTML with heavy JavaScript payloads that slow down every page regardless of content. Squarespace also limits control over technical SEO elements like structured data and canonical tags.`,
+          cost: `Squarespace plans typically run $25–$50/month ($300–$600/year). Like Wix, they're paying for a platform they don't own, can't fully customise, and that's holding their performance score below the competitive threshold.`,
+          options: `What to offer on the call:\n  → Complete Build ($5,000) — clean code, 90+ Lighthouse, full technical SEO, they own it outright. Two to four weeks to live.\n  → Scan & Fix ($3,000) is worth discussing if the client is resistant to a full rebuild — it won't fully resolve the platform ceiling but can improve their score and fix every SEO issue within what Squarespace allows. Be honest: they'll likely hit a wall around 70–75/100.\n  → Key close: "Squarespace will always be capped. A clean build removes that ceiling permanently."`,
+        },
+        'WordPress': {
+          level: 'medium',
+          why: `Their site is on WordPress. WordPress itself is fine — the problem is usually the theme, plugins, or hosting. Heavy page builders (Elementor, Divi, WPBakery) and poor hosting are the most common causes of low WordPress scores. This is often fixable without a full rebuild, depending on how bloated the current setup is.`,
+          cost: `WordPress hosting varies widely — cheap shared hosting is often the performance bottleneck. If they're on a $10/month shared host, that alone can cut 15–20 points off their Lighthouse score.`,
+          options: `What to offer on the call:\n  → Scan & Fix ($3,000) — often the right starting point for WordPress sites. We audit the theme, remove plugin bloat, implement caching, optimise images, and fix technical SEO. Most WP sites can reach 85–95/100 with targeted work.\n  → Complete Build ($5,000) — worth recommending if the theme is a heavy page builder or the site structure needs a rethink. Cleaner foundation, better long-term result.\n  → Ask on the call: "Who built the site and what theme is it on?" — this helps qualify which package fits.`,
+        },
+        'Webflow': {
+          level: 'medium',
+          why: `Their site is on Webflow. Webflow generally performs better than Wix or Squarespace — scores of 60–80/100 are typical. However, it still generates template-based code with Webflow's own JavaScript overhead, which creates a ceiling below what custom-coded sites can achieve.`,
+          cost: `Webflow plans run $23–$39+/month for business sites (~$300–$500/year). Clients are paying for a platform they don't fully own and can't host independently.`,
+          options: `What to offer on the call:\n  → Scan & Fix ($3,000) if the score is above 65 — targeted improvements may push them past 80.\n  → Complete Build ($5,000) if they're below 65 or want to reach 90+. The only way to fully break the Webflow ceiling.\n  → Frame: "Webflow is a step up from Wix, but it still has a ceiling. If you want to compete at the top of Google, clean custom code is the answer."`,
+        },
+        'Duda': {
+          level: 'medium',
+          why: `Their site is on Duda — a platform used by some agencies for quick builds. Duda sites typically score 50–75/100 on mobile. Like most hosted website builders, it generates template-locked code with limited ability to optimise performance beyond a point.`,
+          cost: `Duda is usually agency-managed, meaning the client is often paying ongoing retainer fees to an agency that built them a templated site on a capped platform.`,
+          options: `What to offer on the call:\n  → Complete Build ($5,000) — clean code, 90+ Lighthouse, full ownership, no ongoing platform fees.\n  → Scan & Fix ($3,000) if the score is above 65 — improvements within the platform's limits are possible.\n  → Ask: "Who manages your current site and what are you paying monthly?" — good discovery question.`,
+        },
+      };
+
+      const script = PLATFORM_SCRIPTS[platform.name];
+      if (script) {
+        pts.push({
+          level: script.level,
+          cat: `Platform — ${platform.name} Detected`,
+          text: `${script.why}\n\n${script.cost}`,
+        });
+        pts.push({
+          level: 'medium',
+          cat: `Options to Present — ${platform.name}`,
+          text: script.options,
+        });
+      }
+    }
 
     // Performance
     if (scores.performance < 50) {
@@ -1534,13 +1591,21 @@
       ? pts.map(p => `
           <div class="tp-item ${p.level}">
             <div class="tp-cat">${p.cat}</div>
-            <div class="tp-text">${p.text}</div>
+            <div class="tp-text" style="white-space:pre-line">${p.text}</div>
           </div>`).join('')
       : '<p style="color:#64748b;font-size:.88rem">No major issues found — this site is in reasonable shape.</p>';
 
     // Strategy note
     const failCount = Object.values({ ...issues }).filter(v => v === false).length;
-    if (scores.performance < 60 || failCount >= 5) {
+    const detectedPlatform = pageData?.platform;
+    const platformIsWalled = detectedPlatform?.warn === true;
+
+    if (platformIsWalled) {
+      sn.style.display = 'block';
+      sn.innerHTML = `<strong>📋 Close — ${detectedPlatform.name} rebuild angle:</strong>
+        "The audit has confirmed this site is on ${detectedPlatform.name}. I want to be straight with you — no matter what we do to the current site, ${detectedPlatform.name} has a hard ceiling around 60–65/100 on mobile. Google uses these scores as a ranking signal, so right now you're structurally disadvantaged versus competitors on faster platforms.
+        The only way past that ceiling is a complete rebuild on clean code. We do that for $5,000, live in 2–4 weeks, and you own it outright — no monthly ${detectedPlatform.name} fees, no lock-in, ever."`;
+    } else if (scores.performance < 60 || failCount >= 5) {
       sn.style.display = 'block';
       sn.innerHTML = `<strong>📋 Recommended talking point to close:</strong>
         "Based on what I'm seeing here, a Scan & Fix won't be enough — there are ${failCount} technical issues and a performance score of ${scores.performance}.
