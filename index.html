@@ -64,9 +64,10 @@
     .went-quiet__intro p { color: #94a3b8; font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
     .quiet-reasons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
     }
+    @media (max-width: 700px) { .quiet-reasons { grid-template-columns: 1fr; } }
     .quiet-card {
       background: #1e293b;
       border: 1px solid #334155;
@@ -267,7 +268,6 @@
       .familiar-list { grid-template-columns: 1fr; }
       .diff-grid      { grid-template-columns: 1fr; }
       .demo-grid      { grid-template-columns: 1fr 1fr; }
-      .quiet-reasons  { grid-template-columns: 1fr; }
     }
     @media (max-width: 420px) {
       .demo-grid { grid-template-columns: 1fr; }
@@ -359,6 +359,16 @@
           <div class="quiet-card__num">Reason 04</div>
           <h3>Content went stale</h3>
           <p>Google's ranking system now rewards fresh, relevant content. 42% of small business owners update their website once a year or less. A static site is a slowly sinking ship.</p>
+        </div>
+        <div class="quiet-card">
+          <div class="quiet-card__num">Reason 05</div>
+          <h3>It was built to look good, not convert</h3>
+          <p>Most small business sites were designed to impress, not to generate enquiries. No clear call to action, no lead capture, no tracking. Visitors land, look around, and leave — and no one even set up the tools to tell you it was happening.</p>
+        </div>
+        <div class="quiet-card">
+          <div class="quiet-card__num">Reason 06</div>
+          <h3>Your trust signals aged out</h3>
+          <p>Customers research online before they call. An outdated design, old testimonials, or a copyright year from years ago signals a business that's fallen behind — even if your work is excellent. Telstra Business research found 72% of consumers are less likely to engage with a business whose site looks outdated.</p>
         </div>
       </div>
     </div>
