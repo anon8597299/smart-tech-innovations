@@ -156,6 +156,29 @@
 
     /* ── No audit data warning ── */
     .no-audit-warn { background: #fffbeb; border: 1px solid #fde68a; border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-size: .88rem; color: #92400e; }
+
+    /* ── AI Brief Generator ── */
+    .brief-card { background: linear-gradient(135deg, #0f172a, #1e293b); border: 1px solid #334155; border-radius: 16px; padding: 1.25rem 1.4rem; margin-bottom: 1.25rem; }
+    .brief-header { color: #fff; font-size: 1rem; font-weight: 800; display: flex; align-items: center; gap: .6rem; margin-bottom: .3rem; }
+    .brief-ai-badge { background: #5b4dff; color: #fff; font-size: .62rem; font-weight: 800; padding: .15rem .5rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .06em; }
+    .brief-sub { color: #64748b; font-size: .82rem; margin-bottom: .9rem; }
+    .brief-textarea { width: 100%; padding: .75rem 1rem; background: #0f172a; border: 1.5px solid #334155; border-radius: 10px; color: #e2e8f0; font-family: Inter, sans-serif; font-size: .88rem; line-height: 1.6; resize: vertical; min-height: 68px; }
+    .brief-textarea:focus { outline: none; border-color: #5b4dff; }
+    .brief-row { display: flex; gap: .65rem; align-items: flex-end; margin-top: .65rem; flex-wrap: wrap; }
+    .brief-key-wrap { flex: 1; min-width: 200px; }
+    .brief-key-label { font-size: .74rem; font-weight: 700; color: #64748b; margin-bottom: .3rem; }
+    .brief-key-input { width: 100%; padding: .55rem .9rem; background: #0f172a; border: 1.5px solid #334155; border-radius: 8px; color: #e2e8f0; font-family: Inter, sans-serif; font-size: .84rem; }
+    .brief-key-input:focus { outline: none; border-color: #5b4dff; }
+    .btn-generate { padding: .65rem 1.25rem; background: linear-gradient(135deg, #5b4dff, #2dd4bf); color: #fff; border: none; border-radius: 10px; font-size: .88rem; font-weight: 800; cursor: pointer; font-family: Inter, sans-serif; white-space: nowrap; transition: opacity .15s; }
+    .btn-generate:hover { opacity: .85; }
+    .btn-generate:disabled { opacity: .4; cursor: not-allowed; }
+    .brief-status { font-size: .82rem; margin-top: .55rem; display: none; padding: .4rem .7rem; border-radius: 7px; }
+    .brief-status.ok  { display: block; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .brief-status.err { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .brief-status.loading { display: block; background: #f0f4ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .dns-reg-btn { padding: .45rem 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .82rem; font-weight: 700; color: #334155; cursor: pointer; transition: all .15s; font-family: Inter, sans-serif; }
+    .dns-reg-btn:hover { background: #5b4dff; color: #fff; border-color: #5b4dff; }
+    .dns-reg-btn.active { background: #5b4dff; color: #fff; border-color: #5b4dff; }
   </style>
 </head>
 <body>
@@ -197,6 +220,38 @@
     <div class="no-audit-warn" id="no-audit-warn" style="display:none">
       No audit data found. Go to <a href="audit.html" style="color:#5b4dff;font-weight:600;">audit.html</a>, run a scan, then click "Implement Changes →".
       You can still fill in all fields below manually.
+    </div>
+
+    <!-- ── AI Brief Generator ── -->
+    <div class="brief-card">
+      <div class="brief-header">
+        <span>AI Brief Generator</span>
+        <span class="brief-ai-badge">Claude AI</span>
+      </div>
+      <p style="font-size:.82rem;color:#94a3b8;margin:0 0 1rem;line-height:1.55">
+        Paste a quick description of the customer's business and we'll write their site brief — hero headline, tagline, services, and meta copy — ready to paste into the fields below.
+      </p>
+
+      <div style="display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.6rem">
+        <div style="flex:1">
+          <label class="field-label" style="color:#94a3b8">Claude API Key</label>
+          <input class="fi" type="password" id="claude-key" placeholder="sk-ant-…" autocomplete="off"
+            style="background:#0f172a;border-color:#334155;color:#e2e8f0;margin-bottom:.5rem"
+            oninput="sessionStorage.setItem('claude-key',this.value)">
+        </div>
+      </div>
+
+      <div style="display:flex;gap:.5rem;align-items:flex-end">
+        <div style="flex:1">
+          <label class="field-label" style="color:#94a3b8">Describe the customer's business</label>
+          <textarea id="brief-prompt" rows="3" class="fi"
+            style="background:#0f172a;border-color:#334155;color:#e2e8f0;resize:vertical;width:100%;box-sizing:border-box"
+            placeholder="e.g. Local plumber in Bathurst, 15 years experience, specialises in emergency callouts and renovations, family-owned, wants to get more enquiries from locals."></textarea>
+        </div>
+        <button class="btn-generate" id="brief-btn" onclick="generateFromBrief()">Generate Brief ✦</button>
+      </div>
+
+      <div class="brief-status" id="brief-status"></div>
     </div>
 
     <!-- ── 1. Business Details ── -->
@@ -550,6 +605,61 @@
 
       <div id="result-box"></div>
       <pre id="log-output"></pre>
+    </div>
+
+    <!-- ── DNS Wizard ── -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-icon">🌐</span>
+        DNS Wizard — Point the Customer's Domain
+      </div>
+
+      <p style="font-size:.84rem;color:#64748b;margin:0 0 1rem;line-height:1.6">
+        After deploying, use this to guide your customer through pointing their domain — whether it's on GoDaddy, Cloudflare, Squarespace or anywhere else.
+        The propagation checker confirms when the DNS has gone live worldwide.
+      </p>
+
+      <div class="field-group" style="margin-bottom:1rem">
+        <label class="field-label">Customer's domain (without www)</label>
+        <input class="fi" type="text" id="dns-domain" placeholder="smithsplumbing.com.au"
+          oninput="document.getElementById('dns-domain-label').textContent=this.value||'their domain'">
+      </div>
+
+      <div class="field-group" style="margin-bottom:1.25rem">
+        <label class="field-label">Where is the domain registered?</label>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem" id="dns-registrar-btns">
+          <button class="dns-reg-btn" onclick="showDnsSteps('godaddy')">GoDaddy</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('cloudflare')">Cloudflare</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('namecheap')">Namecheap</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('bluehost')">Bluehost</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('squarespace')">Squarespace</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('wix')">Wix</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('netlifydns')">Netlify DNS</button>
+          <button class="dns-reg-btn" onclick="showDnsSteps('other')">Other / cPanel</button>
+        </div>
+      </div>
+
+      <div id="dns-steps" style="display:none;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem">
+        <div style="font-weight:800;font-size:.9rem;color:#0369a1;margin-bottom:.6rem" id="dns-steps-title"></div>
+        <div id="dns-steps-body" style="font-size:.83rem;color:#0c4a6e;line-height:1.75"></div>
+      </div>
+
+      <!-- Subdomain-first tip -->
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:.8rem 1rem;font-size:.8rem;color:#92400e;line-height:1.6;margin-bottom:1.25rem">
+        <strong>💡 Tip — avoid the wait:</strong> Launch on <code style="background:#fef3c7;padding:.05rem .3rem;border-radius:3px">new.<span class="dns-domain-inline" id="dns-domain-label">their domain</span></code> first.
+        Add a CNAME record for <code style="background:#fef3c7;padding:.05rem .3rem;border-radius:3px">new</code> pointing to their deployed URL.
+        Propagates in minutes while you wait for the main domain switch to complete.
+      </div>
+
+      <!-- Propagation checker -->
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1rem 1.25rem">
+        <div style="font-weight:800;font-size:.88rem;color:#334155;margin-bottom:.5rem">Live propagation checker</div>
+        <p style="font-size:.78rem;color:#64748b;margin:0 0 .75rem">Checks Google DNS to confirm the A record for the domain has updated worldwide.</p>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <button class="btn-verify" onclick="checkPropagation()" style="white-space:nowrap">Check DNS →</button>
+          <div id="dns-prop-status" style="font-size:.82rem;color:#64748b"></div>
+        </div>
+      </div>
     </div>
 
   </div><!-- /.page-body -->
@@ -1296,6 +1406,242 @@
       btn.disabled = false;
     }
   }
+
+  // ── AI Brief Generator ─────────────────────────────────────────────────────
+
+  function setBriefStatus(msg, type) {
+    const el = document.getElementById('brief-status');
+    el.className = 'brief-status ' + (type || '');
+    el.innerHTML = msg;
+  }
+
+  async function generateFromBrief() {
+    const key    = document.getElementById('claude-key').value.trim();
+    const prompt = document.getElementById('brief-prompt').value.trim();
+    const btn    = document.getElementById('brief-btn');
+
+    if (!key)    { setBriefStatus('⚠ Enter your Claude API key above.', 'err'); return; }
+    if (!prompt) { setBriefStatus('⚠ Describe the customer\'s business first.', 'err'); return; }
+
+    btn.disabled = true;
+    setBriefStatus('⏳ Generating brief…', 'loading');
+
+    const systemPrompt = `You are a web copywriter for an Australian web design agency.
+Given a short description of a small business, produce a site brief as valid JSON with these exact keys:
+{
+  "BUSINESS_NAME": "",
+  "TAGLINE": "",
+  "HERO_HEADLINE": "",
+  "SERVICE_1_NAME": "", "SERVICE_1_DESC": "",
+  "SERVICE_2_NAME": "", "SERVICE_2_DESC": "",
+  "SERVICE_3_NAME": "", "SERVICE_3_DESC": "",
+  "META_TITLE": "",
+  "META_DESCRIPTION": ""
+}
+Rules: tagline max 8 words; hero headline max 12 words; meta description 140-155 chars; all copy in Australian English.
+Return ONLY the JSON object — no markdown, no explanation.`;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 600,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `API error ${res.status}`);
+      }
+
+      const data = await res.json();
+      const json = JSON.parse(data.content[0].text);
+
+      // Fill in form fields
+      const map = {
+        'f-name':        json.BUSINESS_NAME,
+        'f-tagline':     json.TAGLINE,
+        'f-hero':        json.HERO_HEADLINE,
+        'f-svc1-name':   json.SERVICE_1_NAME,
+        'f-svc1-desc':   json.SERVICE_1_DESC,
+        'f-svc2-name':   json.SERVICE_2_NAME,
+        'f-svc2-desc':   json.SERVICE_2_DESC,
+        'f-svc3-name':   json.SERVICE_3_NAME,
+        'f-svc3-desc':   json.SERVICE_3_DESC,
+        'f-meta-title':  json.META_TITLE,
+        'f-meta-desc':   json.META_DESCRIPTION,
+      };
+
+      let filled = 0;
+      for (const [id, val] of Object.entries(map)) {
+        const el = document.getElementById(id);
+        if (el && val) { el.value = val; filled++; }
+      }
+
+      setBriefStatus(`✅ Brief generated — ${filled} fields filled. Review and adjust below, then deploy.`, 'ok');
+
+    } catch (err) {
+      setBriefStatus(`❌ ${err.message}`, 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ── DNS Wizard ─────────────────────────────────────────────────────────────
+
+  const DNS_STEPS = {
+    godaddy: {
+      title: 'GoDaddy — DNS Manager',
+      steps: [
+        'Log in to <strong>godaddy.com</strong> → My Products → DNS button next to the domain.',
+        'Delete any existing A records for <code>@</code> (root).',
+        'Add <strong>4 × A records</strong> — Host: <code>@</code> — Points to:',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        'Add/update <strong>CNAME</strong> — Host: <code>www</code> — Points to: <code>anon8597299.github.io</code>',
+        'TTL: 600 seconds (or default). Save. DNS typically propagates within 30–60 min.',
+      ]
+    },
+    cloudflare: {
+      title: 'Cloudflare — DNS Records',
+      steps: [
+        'Log in to <strong>dash.cloudflare.com</strong> → select the domain → DNS → Records.',
+        'Add <strong>4 × A records</strong> — Name: <code>@</code> — Content:',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        '⚠ Set Proxy status to <strong>DNS only</strong> (grey cloud) — NOT proxied.',
+        'Add <strong>CNAME</strong> — Name: <code>www</code> — Target: <code>anon8597299.github.io</code> — DNS only.',
+        'GitHub Pages will auto-issue the SSL cert. Propagation: usually under 5 min on Cloudflare.',
+      ]
+    },
+    namecheap: {
+      title: 'Namecheap — Advanced DNS',
+      steps: [
+        'Log in to <strong>namecheap.com</strong> → Domain List → Manage → Advanced DNS tab.',
+        'Remove all existing A / CNAME records for <code>@</code> and <code>www</code>.',
+        'Add <strong>4 × A Records</strong> — Host: <code>@</code> — Value (one per line):',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        'Add <strong>CNAME Record</strong> — Host: <code>www</code> — Value: <code>anon8597299.github.io</code>',
+        'TTL: Automatic. Save changes. Allow 30–60 minutes.',
+      ]
+    },
+    bluehost: {
+      title: 'Bluehost — Zone Editor',
+      steps: [
+        'Log in → Domains → Zone Editor (or Hosting → cPanel → Zone Editor).',
+        'Find the <code>A</code> record for <code>@</code> and update it — or delete and add 4 new ones.',
+        'Add <strong>4 × A records</strong> — Host: <code>@</code>:',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        'Add or update <strong>CNAME</strong> — Host: <code>www</code> → <code>anon8597299.github.io</code>',
+        'Changes can take 1–4 hours on Bluehost. Set TTL to 300 if available.',
+      ]
+    },
+    squarespace: {
+      title: 'Squarespace — DNS Settings',
+      steps: [
+        'Log in → Settings → Domains → click the domain → DNS Settings.',
+        'Squarespace locks the DNS if you\'re hosting a Squarespace site. <strong>First cancel/remove the Squarespace hosting</strong> or transfer DNS management.',
+        'Under Custom Records, add <strong>4 × A records</strong> — Host: <code>@</code>:',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        'Add <strong>CNAME</strong> — Host: <code>www</code> — Data: <code>anon8597299.github.io</code>',
+        '💡 Tip: If they\'re still paying for Squarespace, consider transferring the domain registrar to Cloudflare for easier future management.',
+      ]
+    },
+    wix: {
+      title: 'Wix — Domain Advanced Settings',
+      steps: [
+        'Log in to <strong>wix.com</strong> → Domains → … next to the domain → Manage DNS Records.',
+        'Wix premium plans host the site on wix.com — you need to <strong>disconnect the domain from Wix hosting</strong> first, or transfer the domain out of Wix to a registrar like Cloudflare.',
+        'Recommended: Transfer domain to <strong>Cloudflare Registrar</strong> (free, cost-price renewal). Then point DNS in Cloudflare.',
+        'If staying on Wix DNS: Add 4 × A records for <code>@</code> + CNAME www → anon8597299.github.io',
+        '⚠ Wix DNS can be slow to propagate (up to 48 hours). Cloudflare transfer is faster long-term.',
+      ]
+    },
+    netlifydns: {
+      title: 'Netlify DNS (when site deployed to Netlify)',
+      steps: [
+        'In Netlify → Site Settings → Domain Management → Add custom domain.',
+        'Netlify will prompt you to <strong>set up Netlify DNS</strong> — click Set up Netlify DNS for this domain.',
+        'Netlify gives you 4 nameservers (e.g. <code>dns1.p05.nsone.net</code>). Copy all 4.',
+        'Go to the domain registrar (GoDaddy / Namecheap / etc) and replace their default nameservers with Netlify\'s 4.',
+        'Once nameservers propagate (30 min–24 hrs), all DNS is managed in Netlify. SSL auto-provisions.',
+        '💡 This is the cleanest setup for Netlify-hosted sites — HTTPS, www redirect, and apex all handled automatically.',
+      ]
+    },
+    other: {
+      title: 'Other / cPanel — DNS Zone Editor',
+      steps: [
+        'Log in to your host\'s control panel (cPanel, Plesk, or similar) → Zone Editor / DNS Management.',
+        'Find or create <strong>A records</strong> for the root domain (<code>@</code> or the domain itself):',
+        '&nbsp;&nbsp;&nbsp;185.199.108.153<br>&nbsp;&nbsp;&nbsp;185.199.109.153<br>&nbsp;&nbsp;&nbsp;185.199.110.153<br>&nbsp;&nbsp;&nbsp;185.199.111.153',
+        'Find or create a <strong>CNAME record</strong> for <code>www</code> → <code>anon8597299.github.io</code>',
+        'Delete any conflicting records (old IP addresses, Parked page records).',
+        'If you can\'t find DNS settings, the registrar may be different from the hosting company — check domain WHOIS to find the registrar.',
+      ]
+    },
+  };
+
+  function showDnsSteps(registrar) {
+    // Highlight active button
+    document.querySelectorAll('.dns-reg-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const data  = DNS_STEPS[registrar];
+    const panel = document.getElementById('dns-steps');
+    document.getElementById('dns-steps-title').textContent = data.title;
+    document.getElementById('dns-steps-body').innerHTML =
+      data.steps.map((s, i) => `<div style="margin-bottom:.35rem"><strong>${i+1}.</strong> ${s}</div>`).join('');
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  async function checkPropagation() {
+    const domain = document.getElementById('dns-domain').value.trim();
+    const status = document.getElementById('dns-prop-status');
+
+    if (!domain) { status.textContent = '⚠ Enter the customer\'s domain above first.'; return; }
+
+    status.innerHTML = '⏳ Checking…';
+
+    try {
+      const url = `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=A`;
+      const res  = await fetch(url);
+      const data = await res.json();
+
+      const GH_IPS = ['185.199.108.153','185.199.109.153','185.199.110.153','185.199.111.153'];
+      const answers = (data.Answer || []).filter(a => a.type === 1).map(a => a.data);
+
+      if (!answers.length) {
+        status.innerHTML = `⚠ No A records found yet for <strong>${domain}</strong> — DNS hasn't propagated. Try again in a few minutes.`;
+        return;
+      }
+
+      const matched = answers.filter(ip => GH_IPS.includes(ip));
+
+      if (matched.length > 0) {
+        status.innerHTML = `✅ <strong>${domain}</strong> → ${answers.join(', ')} — pointing to GitHub Pages. `;
+        if (matched.length < 4) status.innerHTML += `(${4 - matched.length} of 4 IPs still propagating)`;
+      } else {
+        status.innerHTML = `🔴 <strong>${domain}</strong> → ${answers.join(', ')} — NOT pointing to GitHub Pages yet. Current IP may be old host.`;
+      }
+
+    } catch (err) {
+      status.textContent = '❌ DNS check failed: ' + err.message;
+    }
+  }
+
+  // Restore Claude key from session on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = sessionStorage.getItem('claude-key');
+    if (saved) document.getElementById('claude-key').value = saved;
+  });
 </script>
 </body>
 </html>
