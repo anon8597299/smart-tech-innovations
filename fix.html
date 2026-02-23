@@ -176,6 +176,24 @@
     .brief-status.ok  { display: block; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
     .brief-status.err { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .brief-status.loading { display: block; background: #f0f4ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    /* ── Generate Full Site ── */
+    .gen-site-card { background: linear-gradient(135deg, #0f172a, #1a1f3c); border: 2px solid #5b4dff; border-radius: 16px; padding: 1.25rem 1.4rem; margin-bottom: 1.25rem; }
+    .gen-site-header { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+    .gen-site-title { font-weight: 800; font-size: 1rem; color: #f8fafc; }
+    .gen-site-badge { font-size: .7rem; font-weight: 700; background: linear-gradient(135deg,#5b4dff,#2dd4bf); color: #fff; padding: .18rem .55rem; border-radius: 999px; }
+    .btn-gen-site { width: 100%; padding: .8rem 1.5rem; background: linear-gradient(135deg, #5b4dff, #2dd4bf); color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: 800; cursor: pointer; font-family: Inter, sans-serif; transition: opacity .15s; margin-top: .8rem; }
+    .btn-gen-site:hover { opacity: .88; }
+    .btn-gen-site:disabled { opacity: .35; cursor: not-allowed; }
+    .gen-site-status { font-size: .82rem; margin-top: .55rem; display: none; padding: .4rem .7rem; border-radius: 7px; }
+    .gen-site-status.ok  { display: block; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .gen-site-status.err { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .gen-site-status.loading { display: block; background: #f0f4ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .gen-site-output { margin-top: 1rem; display: none; }
+    .gen-site-output textarea { width: 100%; height: 380px; font-family: 'Monaco','Menlo','Fira Code',monospace; font-size: .75rem; background: #020817; border: 1px solid #334155; border-radius: 10px; padding: .85rem; color: #94a3b8; resize: vertical; box-sizing: border-box; line-height: 1.5; }
+    .gen-site-actions { display: flex; gap: .6rem; margin-top: .65rem; flex-wrap: wrap; }
+    .btn-copy-html { padding: .55rem 1.1rem; background: #10b981; color: #fff; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif; transition: opacity .15s; }
+    .btn-copy-html:hover { opacity: .85; }
+    .btn-token-count { padding: .55rem 1.1rem; background: #0f172a; color: #94a3b8; border: 1px solid #334155; border-radius: 8px; font-size: .82rem; font-weight: 600; cursor: default; font-family: Inter, sans-serif; }
     .dns-reg-btn { padding: .45rem 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .82rem; font-weight: 700; color: #334155; cursor: pointer; transition: all .15s; font-family: Inter, sans-serif; }
     .dns-reg-btn:hover { background: #5b4dff; color: #fff; border-color: #5b4dff; }
     .dns-reg-btn.active { background: #5b4dff; color: #fff; border-color: #5b4dff; }
@@ -252,6 +270,27 @@
       </div>
 
       <div class="brief-status" id="brief-status"></div>
+    </div>
+
+    <!-- ── Generate Full Site ── -->
+    <div class="gen-site-card">
+      <div class="gen-site-header">
+        <span class="gen-site-title">⚡ Generate Full Site</span>
+        <span class="gen-site-badge">Claude Sonnet</span>
+      </div>
+      <p style="font-size:.82rem;color:#94a3b8;margin:0 0 .4rem;line-height:1.55">
+        Fill in the business details below, then click Generate — Claude writes a complete, production-ready <code style="color:#2dd4bf;font-size:.78rem">index.html</code> for the selected template. Not a token substitution — a fully authored page specific to this business. Copy the HTML or push directly to GitHub.
+      </p>
+      <p style="font-size:.78rem;color:#64748b;margin:0;line-height:1.5">Requires the Claude API key above. Uses ~8,000 output tokens (~2–3 minutes). Sonnet 4.6 recommended.</p>
+      <button class="btn-gen-site" id="gen-site-btn" onclick="generateFullSite()">⚡ Generate Complete Site HTML</button>
+      <div class="gen-site-status" id="gen-site-status"></div>
+      <div class="gen-site-output" id="gen-site-output">
+        <textarea id="gen-site-html" spellcheck="false" readonly placeholder="Generated HTML will appear here…"></textarea>
+        <div class="gen-site-actions">
+          <button class="btn-copy-html" onclick="copyGeneratedHtml()">📋 Copy HTML</button>
+          <span class="btn-token-count" id="gen-token-count"></span>
+        </div>
+      </div>
     </div>
 
     <!-- ── 1. Business Details ── -->
@@ -1491,6 +1530,162 @@ Return ONLY the JSON object — no markdown, no explanation.`;
 
     } catch (err) {
       setBriefStatus(`❌ ${err.message}`, 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ── Generate Full Site ─────────────────────────────────────────────────────
+
+  function setGenStatus(msg, type) {
+    const el = document.getElementById('gen-site-status');
+    el.className = 'gen-site-status ' + (type || '');
+    el.innerHTML = msg;
+  }
+
+  function copyGeneratedHtml() {
+    const ta = document.getElementById('gen-site-html');
+    if (!ta.value) return;
+    navigator.clipboard.writeText(ta.value).then(() => {
+      const btn = document.querySelector('.btn-copy-html');
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = orig, 2000);
+    });
+  }
+
+  async function generateFullSite() {
+    const key = document.getElementById('claude-key').value.trim();
+    if (!key) { setGenStatus('⚠ Enter your Claude API key in the AI Brief Generator above.', 'err'); return; }
+
+    const name     = document.getElementById('f-name').value.trim();
+    const phone    = document.getElementById('f-phone').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const address  = document.getElementById('f-address').value.trim();
+    const suburb   = document.getElementById('f-suburb').value.trim();
+    const state    = document.getElementById('f-state').value.trim();
+    const tagline  = document.getElementById('f-tagline')?.value.trim() || '';
+    const hero     = document.getElementById('f-hero')?.value.trim() || '';
+    const color    = document.getElementById('f-color')?.value || '#2563eb';
+    const svc1n    = document.getElementById('f-svc1-name')?.value.trim() || '';
+    const svc1d    = document.getElementById('f-svc1-desc')?.value.trim() || '';
+    const svc2n    = document.getElementById('f-svc2-name')?.value.trim() || '';
+    const svc2d    = document.getElementById('f-svc2-desc')?.value.trim() || '';
+    const svc3n    = document.getElementById('f-svc3-name')?.value.trim() || '';
+    const svc3d    = document.getElementById('f-svc3-desc')?.value.trim() || '';
+    const tmplEl   = document.querySelector('input[name="template"]:checked');
+    const template = tmplEl ? tmplEl.value : 'trades-rapid';
+
+    if (!name || !phone || !suburb) {
+      setGenStatus('⚠ Fill in at least Business Name, Phone, and Suburb before generating.', 'err');
+      return;
+    }
+
+    const industryMap = {
+      'trades-rapid':          { industry: 'Trades / Plumbing', tool: 'Job Cost Estimator: dropdown of 6 job types (blocked drain, hot water replacement, tap/toilet repair, burst pipe, bathroom renovation, emergency callout) → shows a realistic price range and brief note for that job type → "Call for your free fixed quote" CTA button' },
+      'clinic-trust':          { industry: 'Medical Clinic / Healthcare', tool: 'Appointment Request Widget: service selector (6 GP/allied health services), preferred doctor dropdown, time preference radio tiles (Morning/Afternoon/Evening/Saturday), name + phone + reason textarea → JS success state "We\'ll call within 2 business hours to confirm your time"' },
+      'advisor-prime':         { industry: 'Financial Planning / Wealth Advisory', tool: 'Retirement Savings Estimator: current age, retirement age, current super balance, annual contributions → projects balance at 7% compound growth, calculates 4% drawdown monthly income, compares to ASFA $72k/yr standard, shows On track/Planning needed/See adviser badge' },
+      'retail-pulse':          { industry: 'Retail / Fashion Boutique', tool: 'Size Guide Finder: height (cm) + weight (kg) + body type (Petite/Regular/Tall) → BMI calculation → recommended AU size range (6–16) + body-type note + full size table with bust/waist/hips measurements' },
+      'solar-spark':           { industry: 'Solar Energy Installation', tool: 'Solar Savings Calculator: monthly electricity bill + roof orientation (North/NE/EW/South) + household size (1-2/3-4/5+) → calculates system kW, annual savings (72% of bill × orientation factor), STC government rebate, net cost, payback years, CO2 offset tonnes/year' },
+      'accounting-conversion': { industry: 'Accounting / Tax Services', tool: 'Tax Return Estimator: employment type dropdown (Employee/Sole Trader/Small Business) + annual income + WFH checkbox + investment income checkbox → shows tax bracket/rate, list of likely deductions for their type, estimated fee range starting from ($220/$550/$1,200)' },
+      'consulting-authority':  { industry: 'Business Consulting / Strategy', tool: '5-Question Business Health Check Quiz: show one question at a time with progress bar — Does your business have a 3-year plan? / Review financials monthly? / Can it run 2 weeks without you? / Clear exit plan? / Consistent revenue growth? → scored result (0-5 Yes) with colour-coded outcome (green/amber/orange/red) and 2 specific recommendations' },
+      'hospitality-events':    { industry: 'Wedding Venue / Events', tool: 'Wedding Budget Calculator: guest count slider (20-150) + season toggle (Peak Oct-Apr / Off-peak May-Sep) + day toggle (Saturday/Friday+Sunday/Weekday) → shows venue hire range, catering range per head, total range, cottage rate note. With "Get your personalised quote" CTA' },
+    };
+
+    const { industry, tool } = industryMap[template] || industryMap['trades-rapid'];
+    const svcBlock = [svc1n && `Service 1: ${svc1n} — ${svc1d}`, svc2n && `Service 2: ${svc2n} — ${svc2d}`, svc3n && `Service 3: ${svc3n} — ${svc3d}`].filter(Boolean).join('\n') || '(use 6 typical services for this industry)';
+
+    const masterPrompt = `You are an expert Australian web developer building high-converting small business websites. Your sites win clients, rank well on Google, and look nothing like templates.
+
+Write a COMPLETE, self-contained index.html for this business. No placeholders. No generic filler. Every word must be specific, credible, and conversion-focused.
+
+## Business Details
+- Name: ${name}
+- Industry: ${industry}
+- Tagline: ${tagline || '(write a compelling tagline for this industry)'}
+- Phone: ${phone}
+- Email: ${email || '(invent a realistic email)'}
+- Address: ${address ? address + ', ' : ''}${suburb} ${state}
+- Primary colour: ${color}
+- Key services: ${svcBlock}
+${hero ? `- Hero headline to use: ${hero}` : ''}
+
+## Required sections (in this order)
+1. Demo banner — dark sticky bar "This is a demo site by ImproveYourSite — showing what your finished site looks like." with link to /packages.html
+2. Sticky header — business name with relevant emoji, 3 nav links (relevant to industry), phone pill button in primary colour
+3. Hero — gradient background using primary colour, dynamic open/closed badge (Sydney timezone JS), compelling H1 (benefit-led, no generic "welcome"), lead paragraph specific to their local market and customer, 2 CTA buttons, 4–5 trust strip chips relevant to industry credentials
+4. INTERACTIVE TOOL SECTION — ${tool}. Give it a proper section heading and intro text. Make it visually enticing — not just a plain form. Include a disclaimer line.
+5. Services grid — 6 cards with emoji icons, specific descriptions mentioning local area, realistic detail (no generic copy)
+6. How it works — 4 numbered steps specific to this business type
+7. Trust/KPI strip — 4 stats in a coloured bar (years in business, Google rating, key metric, local credential)
+8. Testimonials — 3 cards with 5 stars, quotes mentioning specific outcomes (dollar amounts saved, time saved, specific results), reviewer name + suburb + service type
+9. Contact section — ID="contact-form", response-promise strip above, 2-column layout (form + contact info panel), JS fake submit with success state
+10. FAQ — 4 accordion items that pre-handle real objections for this industry
+11. ImproveYourSite CTA — "Want a website like this for your ${industry} business?" → /packages.html with indigo button
+12. Footer — full contact details, ABN (invent realistic), licence/registration if applicable, copyright 2025, demo attribution
+13. Mobile sticky CTA — fixed bottom bar, only visible on mobile (max-width: 640px)
+
+## Technical requirements
+- Single self-contained file: ALL CSS in a <style> block in <head>, ALL JS in a <script> block before </body>
+- Schema.org JSON-LD in <head>: correct @type for industry (Plumber/MedicalClinic/FinancialService/ClothingStore/ElectricalContractor/AccountingService/ProfessionalService/EventVenue), aggregateRating (invent realistic 4.8–5.0 with 50–200 reviews), openingHoursSpecification, geo coordinates (look up ${suburb} ${state}), areaServed
+- Open Graph meta tags (og:title, og:description, og:type)
+- Canonical meta tag
+- IntersectionObserver scroll reveal on cards (opacity 0 → 1, translateY 20px → 0)
+- FAQ accordion: only one item open at a time, + arrow rotates 45°
+- Open/closed badge: checks Sydney time (Australia/Sydney timezone) against business hours array; updates textContent and className
+- Mobile responsive: grids → 1 column at 900px, sticky mobile CTA shown at 640px
+- All internal page links use .html extension
+- Phone links: tel: protocol (digits only, no spaces)
+- Hover effects on all cards: translateY(-3px), subtle box-shadow
+
+## Quality rules — NON-NEGOTIABLE
+- Zero generic placeholder text — every sentence earns its place
+- Testimonial quotes must name a specific outcome (dollar saved, time, problem resolved, named suburb)
+- All business details (phone, address, hours) must be consistent throughout the page
+- Local suburb/region names woven into copy naturally, not just listed
+- The interactive tool must be genuinely useful and visually impressive — styled card with clear inputs and a dramatic result reveal
+- Write like you know this business personally, not like you're filling a template
+
+## Output format
+Return ONLY the complete HTML document. Start with <!DOCTYPE html> and end with </html>. No markdown code fences, no explanation, no commentary.`;
+
+    const btn = document.getElementById('gen-site-btn');
+    btn.disabled = true;
+    document.getElementById('gen-site-output').style.display = 'none';
+    setGenStatus('⏳ Generating your site… this takes 2–3 minutes for a full page. Please wait.', 'loading');
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 8000,
+          messages: [{ role: 'user', content: masterPrompt }],
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `API error ${res.status}`);
+      }
+
+      const data = await res.json();
+      const html = data.content[0].text.replace(/^```html\s*/i, '').replace(/\s*```$/, '').trim();
+      const tokens = data.usage?.output_tokens || 0;
+
+      document.getElementById('gen-site-html').value = html;
+      document.getElementById('gen-token-count').textContent = `${tokens.toLocaleString()} tokens`;
+      document.getElementById('gen-site-output').style.display = 'block';
+      setGenStatus(`✅ Site generated — ${html.length.toLocaleString()} characters of HTML. Review below, copy, or push to GitHub.`, 'ok');
+
+    } catch (err) {
+      setGenStatus(`❌ ${err.message}`, 'err');
     } finally {
       btn.disabled = false;
     }
