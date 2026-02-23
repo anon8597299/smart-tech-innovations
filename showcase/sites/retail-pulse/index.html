@@ -3,331 +3,721 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Loft Boutique — Women's Fashion &amp; Homewares, Mudgee NSW</title>
-  <meta name="description" content="Curated women's fashion and unique homewares in Mudgee NSW. Visit us at 23 Market Street or shop our latest arrivals online.">
+  <title>The Loft Boutique &mdash; Contemporary Women&rsquo;s Fashion, Orange NSW</title>
+  <meta name="description" content="The Loft Boutique is Orange NSW's favourite women's fashion destination. Shop Sass &amp; Bide, Seed Heritage, Country Road and more. Free shipping over $150. Visit us at Shop 4, 212 Summer Street.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .demo-banner {
-      background: #0f172a;
-      color: #e2e8f0;
-      text-align: center;
-      padding: .52rem 1rem;
-      font-size: .82rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .demo-banner a {
-      color: #2dd4bf;
-      font-weight: 700;
-      text-decoration: underline;
-      margin-left: .4rem;
-    }
-    .site-header { top: 36px; }
-    /* Collection grid */
-    .collections-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-      margin-top: 1.4rem;
-    }
-    .collection-card {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-    }
-    .collection-card .swatch {
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-    .collection-card .info { padding: .8rem 1rem; }
-    .collection-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
-    .collection-card p { margin: 0; font-size: .88rem; color: var(--muted); }
-    /* Trust bar */
-    .trust-bar {
-      background: var(--primary);
-      color: #fff;
-      padding: 1.1rem 0;
-      margin-top: 2rem;
-    }
-    .trust-bar .container {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
-    /* Promo banner */
-    .promo-bar {
-      background: #fdf4ff;
-      border: 1px solid #e9d5ff;
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      margin-top: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .promo-bar .promo-badge {
-      background: #7c3aed;
-      color: #fff;
-      font-weight: 800;
-      font-size: .85rem;
-      padding: .3rem .7rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .promo-bar .promo-text { flex: 1; font-size: .95rem; }
-    .promo-bar strong { color: #6d28d9; }
-    /* Testimonials */
-    .testimonial-section {
-      padding: 2.4rem 0;
-      background: #faf5ff;
-      margin-top: 2rem;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-    }
-    .testimonial-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.1rem;
-    }
-    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
-    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
-    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
-    .cta-section { padding: 3rem 0; text-align: center; }
-    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
-    .btn-get-site {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      background: #5b4dff;
-      color: #fff;
-      font-weight: 800;
-      padding: .9rem 2rem;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      text-decoration: none;
-    }
-    .btn-get-site:hover { background: #4c40db; }
-    .section { padding: 2rem 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-head h2 { margin: 0 0 .3rem; }
-    .section-head p { color: var(--muted); margin: 0; }
-    @media (max-width: 900px) {
-      .collections-grid, .testimonials-grid { grid-template-columns: 1fr; }
-      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
-      .promo-bar { flex-direction: column; }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["ClothingStore", "LocalBusiness"],
+    "name": "The Loft Boutique",
+    "description": "Contemporary women's fashion boutique in Orange NSW stocking Sass & Bide, Seed Heritage, Country Road, Elka Collective, Viktoria & Woods and Cue.",
+    "url": "https://theloftboutique.com.au",
+    "telephone": "(02) 6361 4422",
+    "email": "hello@theloftboutique.com.au",
+    "foundingDate": "2014",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Shop 4, 212 Summer Street",
+      "addressLocality": "Orange",
+      "addressRegion": "NSW",
+      "postalCode": "2800",
+      "addressCountry": "AU"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "118",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:30"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"16:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"14:00"}
+    ],
+    "sameAs": ["https://www.instagram.com/theloftboutique"]
+  }
+  <\/script>
 </head>
 <body>
 
-  <div class="demo-banner">
-    This is a demo site by ImproveYourSite — showing what your finished site looks like.
-    <a href="/packages.html">Get a site like this &rarr;</a>
+<div class="demo-banner">
+  This is a demo site by ImproveYourSite &mdash; showing what your finished site looks like.
+  <a href="/packages.html">Get a site like this &rarr;</a>
+</div>
+
+<header class="site-header loft-header">
+  <div class="container nav">
+    <a class="brand loft-brand" href="#">
+      <span>&#128247;</span><span>The Loft Boutique</span>
+    </a>
+    <nav class="nav-links loft-nav" aria-label="Main navigation">
+      <a href="#collections">Collections</a>
+      <a href="#size-guide">Size Guide</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:0263614422" class="nav-phone-link">(02) 6361 4422</a>
+    </nav>
   </div>
+</header>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#">👗 The Loft Boutique</a>
-      <nav class="nav-links">
-        <a href="collections.html">Collections</a>
-        <a href="story.html">Our Story</a>
-        <a href="visit.html">Visit Us</a>
-      </nav>
-    </div>
-  </header>
+<main>
 
-  <main>
-    <!-- Hero + promo -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">New season arrivals in store now · Mudgee NSW</span>
-        <h1>Discover your style at The Loft — Mudgee's favourite boutique</h1>
-        <p class="lead">The Loft Boutique brings carefully curated women's fashion and unique homewares to the heart of Mudgee. New arrivals weekly, exclusive local brands, and a shopping experience you won't find anywhere else.</p>
-        <div class="cta cta-hero">
-          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
-          <a class="btn btn-secondary" href="collections.html">View Collections</a>
+  <!-- HERO -->
+  <section class="loft-hero" id="hero">
+    <div class="hero-bg-gradient" aria-hidden="true"></div>
+    <div class="container loft-hero-inner">
+      <div class="loft-hero-content">
+        <div class="loft-hero-badges">
+          <span class="badge loft-open-badge"><span class="open-pulse"></span>Open today</span>
+          <span class="badge loft-rating-badge">&#9733; 4.9 &middot; 118 Google reviews</span>
         </div>
-        <div class="trust-strip" aria-label="Highlights">
-          <span>✓ New arrivals weekly</span>
-          <span>✓ Exclusive Australian labels</span>
-          <span>✓ Free gift wrapping</span>
-          <span>✓ Layby available</span>
+        <h1 class="loft-h1">Contemporary fashion<br><span class="loft-h1-accent">for the modern woman</span></h1>
+        <p class="lead loft-lead">Orange NSW&rsquo;s favourite boutique since 2014. We stock Sass&nbsp;&amp;&nbsp;Bide, Seed Heritage, Country Road, Elka Collective and more &mdash; with new arrivals landing every fortnight.</p>
+        <div class="loft-shipping-strip">
+          <span>&#9992;&#65039; Ships Australia-wide</span>
+          <span class="strip-dot">&middot;</span>
+          <span>Free shipping over $150</span>
+          <span class="strip-dot">&middot;</span>
+          <span>30-day returns</span>
         </div>
-
-        <div class="promo-bar">
-          <div class="promo-badge">🔥 SALE NOW ON</div>
-          <div class="promo-text">
-            <strong>Winter clearance — up to 40% off selected lines.</strong> New stock arriving weekly. In-store only.
-          </div>
-          <a class="btn btn-primary" href="visit.html" style="white-space:nowrap;">Shop Now</a>
-        </div>
-
-        <div class="grid" style="margin-top:1.4rem;">
-          <div class="card">
-            <h3>📍 Visit us in Mudgee</h3>
-            <p>23 Market Street, Mudgee NSW 2850<br>
-               <strong>Mon–Fri:</strong> 9:30am – 5:30pm<br>
-               <strong>Saturday:</strong> 9:00am – 4:00pm<br>
-               <strong>Sunday:</strong> 10:00am – 2:00pm</p>
-            <p style="margin-top:.5rem;"><strong>Phone:</strong> (02) 6372 1890<br>
-               <strong>Instagram:</strong> @theloftmudgee</p>
-          </div>
-          <div class="hero-visual">
-            <h3>More than just shopping</h3>
-            <p>We offer personal styling sessions, gift registries, and monthly VIP nights. Join our mailing list for early access to sales and new arrivals.</p>
-            <div class="chips">
-              <span>Personal styling</span>
-              <span>Gift registry</span>
-              <span>VIP nights</span>
-              <span>Layby available</span>
-            </div>
-          </div>
+        <div class="cta loft-hero-cta">
+          <a class="btn btn-primary loft-btn-hero" href="#collections">&#128717; Shop online</a>
+          <a class="btn loft-btn-outline" href="#contact">&#128205; Visit in-store</a>
         </div>
       </div>
-    </section>
-
-    <!-- Collections -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Shop by category</h2>
-          <p>Curated collections updated every season — always something new in store.</p>
+      <div class="loft-info-card">
+        <div class="loft-ic-header">
+          <strong>Shop 4, 212 Summer Street</strong>
+          <span>Orange NSW 2800</span>
         </div>
-        <div class="collections-grid">
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#fdf4ff,#e9d5ff);">👗</div>
-            <div class="info">
-              <h3>Women's Fashion</h3>
-              <p>Dresses, knitwear, tops, denim, and outerwear from Australian and international labels.</p>
-            </div>
-          </div>
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">👜</div>
-            <div class="info">
-              <h3>Accessories</h3>
-              <p>Bags, jewellery, scarves, hats, and belts to complete any outfit.</p>
-            </div>
-          </div>
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🏡</div>
-            <div class="info">
-              <h3>Homewares</h3>
-              <p>Candles, ceramics, cushions, and artisan gifts. Perfect for home or gifting.</p>
-            </div>
-          </div>
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#eff6ff,#bfdbfe);">🎁</div>
-            <div class="info">
-              <h3>Gift Packs</h3>
-              <p>Curated gift hampers for birthdays, Mother's Day, Christmas, and every occasion.</p>
-            </div>
-          </div>
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#fefce8,#fef08a);">🔖</div>
-            <div class="info">
-              <h3>Sale Items</h3>
-              <p>End of season deals and selected markdowns. Updated weekly — always worth a look.</p>
-            </div>
-          </div>
-          <div class="collection-card">
-            <div class="swatch" style="background:linear-gradient(135deg,#fdf4ff,#f0abfc);">✨</div>
-            <div class="info">
-              <h3>New Arrivals</h3>
-              <p>Fresh stock every week. Follow us on Instagram @theloftmudgee to see it first.</p>
-            </div>
-          </div>
+        <div class="loft-ic-hours">
+          <div class="loft-ic-row"><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
+          <div class="loft-ic-row"><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
+          <div class="loft-ic-row"><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
         </div>
-      </div>
-    </section>
-
-    <!-- Trust bar -->
-    <div class="trust-bar">
-      <div class="container">
-        <div class="trust-item">⭐ 4.9 Google rating (210+ reviews)</div>
-        <div class="trust-item">🛍️ Open 7 days</div>
-        <div class="trust-item">📍 Mudgee town centre</div>
-        <div class="trust-item">🎁 Free gift wrapping</div>
+        <a class="loft-ic-phone" href="tel:0263614422">(02) 6361 4422</a>
+        <div class="loft-ic-brands">
+          <span>Sass &amp; Bide</span>
+          <span>Seed Heritage</span>
+          <span>Country Road</span>
+          <span>Elka Collective</span>
+          <span>Viktoria &amp; Woods</span>
+          <span>Cue</span>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Testimonials -->
-    <section class="testimonial-section">
-      <div class="container">
-        <h2>What our customers say</h2>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Every time I'm in Mudgee I make a point of visiting The Loft. The range is beautiful, the staff know their stuff, and I always leave with something I love."</p>
-            <div class="reviewer">— Kate M., Bathurst NSW</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Bought a birthday gift here last month. They wrapped it beautifully and even added a handwritten card. Such a lovely personal touch you just don't get from big stores."</p>
-            <div class="reviewer">— Anna S., Mudgee NSW</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"I've been shopping at The Loft for years. The quality is consistently excellent and they always have something different from everywhere else. Proud to support this local gem."</p>
-            <div class="reviewer">— Michelle P., Gulgong NSW</div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- KPI STRIP -->
+  <section class="loft-kpi-strip" aria-label="Store highlights">
+    <div class="container loft-kpi-inner">
+      <div class="loft-kpi"><strong>10</strong><span>Years in Orange</span></div>
+      <div class="loft-kpi-div" aria-hidden="true"></div>
+      <div class="loft-kpi"><strong>300+</strong><span>Styles in store</span></div>
+      <div class="loft-kpi-div" aria-hidden="true"></div>
+      <div class="loft-kpi"><strong>&#9992;&#65039;</strong><span>Ships Australia-wide</span></div>
+      <div class="loft-kpi-div" aria-hidden="true"></div>
+      <div class="loft-kpi"><strong>&#128081;</strong><span>Personal styling available</span></div>
+    </div>
+  </section>
 
-    <!-- KPIs + CTA -->
-    <section class="section">
-      <div class="container">
-        <div class="kpi-grid" aria-label="Store highlights">
-          <div class="kpi"><strong>New stock weekly</strong><span>Fresh arrivals every Wednesday in store.</span></div>
-          <div class="kpi"><strong>Layby accepted</strong><span>Spread payments on any purchase over $50.</span></div>
-          <div class="kpi"><strong>Gift wrapping</strong><span>Complimentary gift wrapping on all purchases.</span></div>
-          <div class="kpi"><strong>Personal styling</strong><span>Book a free 30-min personal styling session.</span></div>
-        </div>
-        <div class="cta" style="margin-top:1.4rem;">
-          <a class="btn btn-primary" href="visit.html">📍 Plan Your Visit</a>
-          <a class="btn btn-secondary" href="story.html">Our Story</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Get a site like this -->
-    <section class="cta-section">
-      <div class="container">
-        <h2>Want a website like this for your retail business?</h2>
-        <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses — see our packages and pricing below.</p>
-        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
+  <!-- COLLECTIONS -->
+  <section class="section loft-collections-section" id="collections">
     <div class="container">
-      <p style="margin:0;">© 2025 The Loft Boutique · 23 Market Street, Mudgee NSW 2850 · (02) 6372 1890</p>
-      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
-    </div>
-  </footer>
+      <div class="loft-section-head">
+        <span class="loft-section-label">What we stock</span>
+        <h2>Shop our collections</h2>
+        <p>Every piece hand-picked by our team. New arrivals every fortnight &mdash; follow us on <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a> to see what&rsquo;s just landed.</p>
+      </div>
+      <div class="loft-collections-grid">
 
-  <a class="phone-cta" href="visit.html">📍 Plan your visit</a>
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fdf4ff 0%,#e9d5ff 60%,#c4b5fd 100%);">
+            <span class="loft-ccard-emoji">&#10024;</span>
+            <span class="loft-ccard-new">Just landed</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>New Arrivals</h3>
+            <p>Our freshest pieces this fortnight &mdash; dresses, tops, knitwear and accessories. Come in before they sell out.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $59</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#eff6ff 0%,#bfdbfe 60%,#93c5fd 100%);">
+            <span class="loft-ccard-emoji">&#128188;</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>Work Wear</h3>
+            <p>Polished pieces that go from the boardroom to after-work drinks. Tailored trousers, structured blazers, silk blouses.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $89</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#f0fdf4 0%,#bbf7d0 60%,#86efac 100%);">
+            <span class="loft-ccard-emoji">&#127807;</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>Weekend Casual</h3>
+            <p>Easy dressing for farmers markets, coffee catch-ups and lazy Sunday afternoons. Linen, soft knits, wide-leg denim.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $49</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fff7ed 0%,#fed7aa 60%,#fb923c 100%);">
+            <span class="loft-ccard-emoji">&#127866;</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>Special Occasion</h3>
+            <p>Weddings, races, formals and celebrations. Midi dresses, cocktail pieces and anything that deserves a great photo.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $149</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fefce8 0%,#fde68a 60%,#fbbf24 100%);">
+            <span class="loft-ccard-emoji">&#127802;</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>Resort &amp; Holiday</h3>
+            <p>Flowy dresses, linen sets and beachy cover-ups for wherever summer takes you. Light, breathable, effortlessly chic.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $69</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="loft-ccard" tabindex="0">
+          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fdf2f8 0%,#fbcfe8 60%,#f9a8d4 100%);">
+            <span class="loft-ccard-emoji">&#128141;</span>
+          </div>
+          <div class="loft-ccard-body">
+            <h3>Accessories</h3>
+            <p>Bags, jewellery, scarves, belts and hats to complete any outfit. We always have something that pulls the whole look together.</p>
+            <div class="loft-ccard-foot">
+              <span class="loft-price">From $29</span>
+              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SHOP WITH US -->
+  <section class="section loft-why-section">
+    <div class="container">
+      <div class="loft-section-head">
+        <span class="loft-section-label">Why The Loft</span>
+        <h2>Shopping the way it should be</h2>
+      </div>
+      <div class="loft-why-grid">
+        <div class="loft-why-card">
+          <div class="loft-why-icon">&#128081;</div>
+          <h3>Personal styling advice</h3>
+          <p>Our team genuinely loves helping you find what works for your body, your lifestyle and your budget. Book a free 30-minute styling session &mdash; no pressure, just honest advice from people who know fashion.</p>
+        </div>
+        <div class="loft-why-card">
+          <div class="loft-why-icon">&#128260;</div>
+          <h3>30-day returns</h3>
+          <p>Changed your mind? No drama. Return any full-price item within 30 days for a store credit or exchange. We make it easy because we want you to love what you buy.</p>
+        </div>
+        <div class="loft-why-card">
+          <div class="loft-why-icon">&#9992;&#65039;</div>
+          <h3>Ships Australia-wide</h3>
+          <p>Can&rsquo;t make it to Orange? We ship across Australia. Orders over $150 ship free. Most metro orders arrive within 2&ndash;3 business days. Tracked via Australia Post.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZE GUIDE FINDER -->
+  <section class="section loft-size-section" id="size-guide">
+    <div class="container">
+      <div class="loft-section-head">
+        <span class="loft-section-label">Find your fit</span>
+        <h2>Size Guide Finder</h2>
+        <p>Not sure what size to order? Answer three quick questions and we&rsquo;ll give you a personalised recommendation.</p>
+      </div>
+      <div class="loft-size-card">
+        <div class="loft-size-form-area">
+          <div class="loft-size-fields">
+            <div class="loft-size-field">
+              <label for="sg-height">Height</label>
+              <div class="loft-size-input-wrap">
+                <input type="number" id="sg-height" placeholder="e.g. 165" min="140" max="200" />
+                <span class="loft-input-unit">cm</span>
+              </div>
+            </div>
+            <div class="loft-size-field">
+              <label for="sg-weight">Weight</label>
+              <div class="loft-size-input-wrap">
+                <input type="number" id="sg-weight" placeholder="e.g. 65" min="40" max="160" />
+                <span class="loft-input-unit">kg</span>
+              </div>
+            </div>
+          </div>
+          <div class="loft-size-field loft-size-full">
+            <label>Body type</label>
+            <div class="loft-body-type-group" role="radiogroup">
+              <label class="loft-bt-btn" for="bt-petite">
+                <input type="radio" name="bodytype" id="bt-petite" value="petite" />
+                <span>Petite <small>Under 162cm</small></span>
+              </label>
+              <label class="loft-bt-btn" for="bt-regular">
+                <input type="radio" name="bodytype" id="bt-regular" value="regular" checked />
+                <span>Regular <small>162&ndash;172cm</small></span>
+              </label>
+              <label class="loft-bt-btn" for="bt-tall">
+                <input type="radio" name="bodytype" id="bt-tall" value="tall" />
+                <span>Tall <small>Over 172cm</small></span>
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary loft-btn-size" id="sg-btn" type="button">Find my size &rarr;</button>
+          <div class="loft-size-result" id="sg-result" hidden aria-live="polite">
+            <div class="loft-size-badge" id="sg-result-badge"></div>
+            <p class="loft-size-note" id="sg-result-note"></p>
+            <p class="loft-size-sub">Sizes vary between brands &mdash; our team is happy to help in-store or via <a href="#contact">chat</a>.</p>
+            <button class="loft-size-reset" id="sg-reset" type="button">Try again</button>
+          </div>
+        </div>
+        <div class="loft-size-table-area">
+          <h4>Australian size guide</h4>
+          <p>Approximate measurements for reference:</p>
+          <table class="loft-size-table" aria-label="Size guide measurements">
+            <thead>
+              <tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hips</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>6</td><td>80cm</td><td>62cm</td><td>87cm</td></tr>
+              <tr><td>8</td><td>84cm</td><td>66cm</td><td>91cm</td></tr>
+              <tr><td>10</td><td>88cm</td><td>70cm</td><td>95cm</td></tr>
+              <tr><td>12</td><td>92cm</td><td>74cm</td><td>99cm</td></tr>
+              <tr><td>14</td><td>96cm</td><td>78cm</td><td>103cm</td></tr>
+              <tr><td>16</td><td>100cm</td><td>82cm</td><td>107cm</td></tr>
+            </tbody>
+          </table>
+          <p class="loft-size-table-note">Always measure your body, not your clothes. When between sizes, go up for comfort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED -->
+  <section class="section loft-feed-section" id="feed">
+    <div class="container">
+      <div class="loft-section-head loft-feed-head">
+        <span class="loft-section-label">@theloftboutique</span>
+        <h2>As seen on our feed</h2>
+        <p>Follow us on Instagram for daily style inspo, new arrivals and behind-the-scenes.<br>DM us to shop any look.</p>
+      </div>
+      <div class="loft-feed-grid">
+
+        <div class="loft-feed-post loft-feed-tilt-l">
+          <div class="loft-feed-img loft-feed-img-1">
+            <span class="loft-feed-em-main">&#128247;</span>
+            <span class="loft-feed-em-float">&#10024;</span>
+          </div>
+          <div class="loft-feed-body">
+            <div class="loft-feed-tags">
+              <span>#sassandbide</span><span>#orangensw</span><span>#ootd</span>
+            </div>
+            <p class="loft-feed-caption">Just landed &mdash; the Sass &amp; Bide Reverie midi in dusty rose &#127800; This one sold out within hours last season. Sizes 8&ndash;14 in store now.</p>
+            <div class="loft-feed-meta">
+              <span>&#10084;&#65039; 214 likes</span>
+              <span>The Loft Boutique</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loft-feed-post loft-feed-tilt-r">
+          <div class="loft-feed-img loft-feed-img-2">
+            <span class="loft-feed-em-main">&#128188;</span>
+            <span class="loft-feed-em-float">&#9728;&#65039;</span>
+          </div>
+          <div class="loft-feed-body">
+            <div class="loft-feed-tags">
+              <span>#seedheritage</span><span>#workwear</span><span>#theloftboutique</span>
+            </div>
+            <p class="loft-feed-caption">The Seed Heritage linen blazer in cream &mdash; your new work uniform &#129293; Pairs beautifully with the wide-leg trouser (also in store).</p>
+            <div class="loft-feed-meta">
+              <span>&#10084;&#65039; 187 likes</span>
+              <span>The Loft Boutique</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loft-feed-post loft-feed-tilt-l">
+          <div class="loft-feed-img loft-feed-img-3">
+            <span class="loft-feed-em-main">&#127802;</span>
+            <span class="loft-feed-em-float">&#127754;</span>
+          </div>
+          <div class="loft-feed-body">
+            <div class="loft-feed-tags">
+              <span>#elkacollective</span><span>#resortready</span><span>#summerstyle</span>
+            </div>
+            <p class="loft-feed-caption">Resort ready with Elka Collective &#127796; The Soleil wrap dress in terracotta is everything. Heading somewhere warm? Come see us first.</p>
+            <div class="loft-feed-meta">
+              <span>&#10084;&#65039; 302 likes</span>
+              <span>The Loft Boutique</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loft-feed-post loft-feed-tilt-r">
+          <div class="loft-feed-img loft-feed-img-4">
+            <span class="loft-feed-em-main">&#127866;</span>
+            <span class="loft-feed-em-float">&#128144;</span>
+          </div>
+          <div class="loft-feed-body">
+            <div class="loft-feed-tags">
+              <span>#viktoriawoods</span><span>#weddingguest</span><span>#specialoccasion</span>
+            </div>
+            <p class="loft-feed-caption">Wedding season is HERE &#128141; Viktoria &amp; Woods have delivered the most incredible formal collection. Book a styling session with us before you buy.</p>
+            <div class="loft-feed-meta">
+              <span>&#10084;&#65039; 389 likes</span>
+              <span>The Loft Boutique</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="loft-feed-cta-row">
+        <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" class="btn loft-btn-insta">
+          &#128247; Follow @theloftboutique on Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section loft-reviews-section" id="reviews">
+    <div class="container">
+      <div class="loft-section-head">
+        <span class="loft-section-label">What customers say</span>
+        <h2>Real women, real reviews</h2>
+        <div class="loft-aggregate-row">
+          <span class="loft-agg-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <strong>4.9 out of 5</strong>
+          <span class="loft-agg-count">&middot; 118 Google reviews</span>
+        </div>
+      </div>
+      <div class="loft-reviews-grid">
+
+        <div class="loft-review-card">
+          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="loft-rcard-quote">"I came in to find something for my daughter&rsquo;s wedding and genuinely had no idea where to start. The girls spent nearly an hour with me, pulled pieces I never would have picked myself, and I ended up in the most beautiful Elka Collective midi. I cried in the change room. Cannot recommend The Loft enough."</p>
+          <div class="loft-rcard-reviewer">
+            <div class="loft-rcard-avatar">SH</div>
+            <div>
+              <strong>Sandra H.</strong>
+              <span>Orange NSW &middot; Google review</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loft-review-card">
+          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="loft-rcard-quote">"Booked a styling session on a whim and it completely changed how I dress for work. I&rsquo;d been buying the same safe, boring pieces for years. After an hour with Kate I had a whole new wardrobe direction &mdash; I actually look forward to getting dressed in the morning now. Best free hour I&rsquo;ve ever spent."</p>
+          <div class="loft-rcard-reviewer">
+            <div class="loft-rcard-avatar">RB</div>
+            <div>
+              <strong>Rachel B.</strong>
+              <span>Orange NSW &middot; Google review</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loft-review-card">
+          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="loft-rcard-quote">"I&rsquo;ve been shopping at The Loft since they opened on Summer Street and I love that the stock genuinely turns over every fortnight. There&rsquo;s always something new, always something worth trying on. The new Seed Heritage arrivals last month were stunning. Best boutique in the Central West &mdash; full stop."</p>
+          <div class="loft-rcard-reviewer">
+            <div class="loft-rcard-avatar">JM</div>
+            <div>
+              <strong>Julie M.</strong>
+              <span>Bathurst NSW &middot; Google review</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT + FAQ -->
+  <section class="section loft-contact-section" id="contact">
+    <div class="container">
+      <div class="loft-section-head">
+        <span class="loft-section-label">Get in touch</span>
+        <h2>Let us help you find something</h2>
+        <p>Looking for a specific piece, need help with sizing, or want to book a styling session? Just reach out &mdash; we reply within one business day.</p>
+      </div>
+      <div class="loft-contact-layout">
+
+        <div class="loft-form-wrap">
+          <form class="loft-form" id="loft-contact-form" novalidate>
+            <div class="loft-form-row">
+              <div class="loft-form-field">
+                <label for="cf-name">Your name</label>
+                <input type="text" id="cf-name" placeholder="Jane Smith" autocomplete="name" required />
+              </div>
+              <div class="loft-form-field">
+                <label for="cf-email">Email address</label>
+                <input type="email" id="cf-email" placeholder="jane@example.com.au" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="loft-form-field">
+              <label for="cf-subject">What are you looking for?</label>
+              <select id="cf-subject">
+                <option value="">Please select&hellip;</option>
+                <option>A specific item or brand</option>
+                <option>Styling session booking</option>
+                <option>Shipping &amp; delivery question</option>
+                <option>Returns &amp; exchanges</option>
+                <option>Stock availability</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="loft-form-field">
+              <label for="cf-message">Your message</label>
+              <textarea id="cf-message" rows="4" placeholder="Tell us what you&rsquo;re after and we&rsquo;ll get back to you within one business day..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary loft-btn-submit">Send message &rarr;</button>
+            <p class="loft-form-note">We reply to every message. Your details are never shared.</p>
+          </form>
+        </div>
+
+        <div class="loft-info-panel">
+          <div class="loft-ip-block">
+            <h4>&#128205; Find us</h4>
+            <p>Shop 4, 212 Summer Street<br>Orange NSW 2800</p>
+            <a href="https://maps.google.com/?q=212+Summer+Street+Orange+NSW" target="_blank" rel="noopener" class="loft-map-link">Get directions &rarr;</a>
+          </div>
+          <div class="loft-ip-block">
+            <h4>&#128336; Trading hours</h4>
+            <div class="loft-ip-hours">
+              <div><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
+              <div><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
+              <div><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
+            </div>
+          </div>
+          <div class="loft-ip-block">
+            <h4>&#128222; Call or email</h4>
+            <p><a href="tel:0263614422">(02) 6361 4422</a><br>
+            <a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></p>
+          </div>
+          <div class="loft-ip-block">
+            <h4>&#128247; Instagram</h4>
+            <p><a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a><br>New arrivals posted every fortnight.</p>
+          </div>
+          <div class="loft-ip-est">
+            <span>Est. 2014 &middot; Orange NSW</span>
+            <span>&#9733; 4.9 &middot; 118 reviews</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <div class="loft-faq-section" id="faq">
+        <h3 class="loft-faq-heading">Frequently asked questions</h3>
+        <div class="loft-faq-list">
+
+          <div class="loft-faq-item">
+            <button class="loft-faq-btn" type="button" aria-expanded="false">
+              Do you offer personal styling sessions?
+              <span class="loft-faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="loft-faq-answer" hidden>
+              <p>Yes, and they&rsquo;re completely free. Our styling sessions run 30&ndash;45 minutes and are perfect if you have a special event coming up, want to refresh your wardrobe, or just want honest advice on what suits you. Book by calling <a href="tel:0263614422">(02) 6361 4422</a> or emailing us. Sessions are popular &mdash; we recommend booking at least a week ahead.</p>
+            </div>
+          </div>
+
+          <div class="loft-faq-item">
+            <button class="loft-faq-btn" type="button" aria-expanded="false">
+              Can I return or exchange items?
+              <span class="loft-faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="loft-faq-answer" hidden>
+              <p>Absolutely. We offer a 30-day returns and exchange policy on full-price items. Items must be unworn, unwashed and in original condition with tags attached. Return in-store or via post (postage at your cost for change-of-mind returns). Sale items are exchange-only.</p>
+            </div>
+          </div>
+
+          <div class="loft-faq-item">
+            <button class="loft-faq-btn" type="button" aria-expanded="false">
+              Do you ship to Sydney, Melbourne and other major cities?
+              <span class="loft-faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="loft-faq-answer" hidden>
+              <p>Yes &mdash; we ship Australia-wide, including Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra and everywhere in between. Orders over $150 ship free. Standard shipping is $10 for orders under $150. Metro orders typically arrive within 2&ndash;3 business days. You&rsquo;ll receive tracking as soon as your order is dispatched.</p>
+            </div>
+          </div>
+
+          <div class="loft-faq-item">
+            <button class="loft-faq-btn" type="button" aria-expanded="false">
+              How often does new stock arrive?
+              <span class="loft-faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="loft-faq-answer" hidden>
+              <p>New arrivals hit the floor every fortnight, with additional drops mid-season. The best way to stay across new stock is to follow us on Instagram at <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a> &mdash; we post every new delivery as it arrives.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GET A SITE LIKE THIS -->
+  <section class="loft-agency-cta">
+    <div class="container">
+      <h2>Want a website like this for your retail business?</h2>
+      <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses &mdash; see our packages and pricing below.</p>
+      <a class="btn-get-site" href="/packages.html">&#9889; See Our Packages &amp; Pricing</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="loft-footer">
+  <div class="container loft-footer-grid">
+    <div class="loft-footer-brand">
+      <a class="brand loft-brand" href="#">&#128247; The Loft Boutique</a>
+      <p>Contemporary women&rsquo;s fashion in Orange NSW since 2014. Stocking Sass &amp; Bide, Seed Heritage, Country Road, Elka Collective, Viktoria &amp; Woods and Cue.</p>
+      <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" class="loft-footer-insta">@theloftboutique</a>
+    </div>
+    <div class="loft-footer-col">
+      <h4>Visit us</h4>
+      <p>Shop 4, 212 Summer Street<br>Orange NSW 2800</p>
+      <p><a href="tel:0263614422">(02) 6361 4422</a><br>
+      <a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></p>
+    </div>
+    <div class="loft-footer-col">
+      <h4>Trading hours</h4>
+      <div class="loft-footer-hours">
+        <div><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
+        <div><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
+        <div><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="loft-footer-bottom">
+    <div class="container">
+      <p>&copy; 2025 The Loft Boutique &middot; Shop 4, 212 Summer Street, Orange NSW 2800 &middot; Est. 2014</p>
+      <p>This is a <strong>demo site</strong> created by <a href="/packages.html">ImproveYourSite</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<a class="phone-cta loft-mobile-cta" href="#contact">&#128717; Visit us in store</a>
+
+<script>
+(function(){
+  // Size Guide Finder
+  var btn = document.getElementById('sg-btn');
+  var resetBtn = document.getElementById('sg-reset');
+  var result = document.getElementById('sg-result');
+  var badge = document.getElementById('sg-result-badge');
+  var note = document.getElementById('sg-result-note');
+
+  btn.addEventListener('click', function(){
+    var h = parseFloat(document.getElementById('sg-height').value);
+    var w = parseFloat(document.getElementById('sg-weight').value);
+    var btEl = document.querySelector('input[name="bodytype"]:checked');
+    var bt = btEl ? btEl.value : 'regular';
+    if(!h || !w || h < 140 || h > 200 || w < 40 || w > 160){
+      alert('Please enter a valid height (140\u2013200cm) and weight (40\u2013160kg).');
+      return;
+    }
+    var bmi = w / Math.pow(h / 100, 2);
+    var sz;
+    if(bmi < 18.5)      sz = '6\u20138';
+    else if(bmi < 21)   sz = '8\u201310';
+    else if(bmi < 23.5) sz = '10\u201312';
+    else if(bmi < 26)   sz = '12\u201314';
+    else                sz = '14\u201316';
+    badge.textContent = 'Your recommended size is ' + sz;
+    var n = '';
+    if(bt === 'petite') n = 'We recommend sizing down for Petite frames \u2014 many of our styles run slightly long.';
+    if(bt === 'tall')   n = 'Consider sizing up for Tall frames \u2014 or ask our team about our online Tall range.';
+    note.textContent = n;
+    note.hidden = !n;
+    result.hidden = false;
+    btn.hidden = true;
+    result.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  resetBtn.addEventListener('click', function(){
+    result.hidden = true;
+    btn.hidden = false;
+    document.getElementById('sg-height').value = '';
+    document.getElementById('sg-weight').value = '';
+    document.getElementById('bt-regular').checked = true;
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.loft-faq-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      var item = this.closest('.loft-faq-item');
+      var isOpen = this.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.loft-faq-item').forEach(function(i){
+        i.querySelector('.loft-faq-btn').setAttribute('aria-expanded','false');
+        i.querySelector('.loft-faq-answer').hidden = true;
+        i.querySelector('.loft-faq-icon').textContent = '+';
+      });
+      if(!isOpen){
+        this.setAttribute('aria-expanded','true');
+        item.querySelector('.loft-faq-answer').hidden = false;
+        item.querySelector('.loft-faq-icon').textContent = '\u2212';
+      }
+    });
+  });
+
+  // Scroll reveal
+  var els = document.querySelectorAll('.loft-ccard,.loft-why-card,.loft-review-card,.loft-feed-post,.loft-kpi,.loft-faq-item');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('revealed'); obs.unobserve(e.target); }
+      });
+    },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ el.classList.add('reveal-ready'); obs.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('revealed'); });
+  }
+
+  // Contact form
+  document.getElementById('loft-contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var s = this.querySelector('.loft-btn-submit');
+    s.textContent = "Message sent! We\u2019ll be in touch within one business day.";
+    s.disabled = true;
+    s.style.background = '#059669';
+  });
+})();
+<\/script>
+
 </body>
 </html>

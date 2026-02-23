@@ -21,3 +21,945 @@ h1{font-size:clamp(1.9rem,4.8vw,3rem);line-height:1.08;margin:.82rem 0 .64rem}.l
 .phone-cta{display:none}
 footer{border-top:1px solid var(--line);padding:1rem 0 2rem;color:var(--muted);font-size:.88rem}
 @media (max-width:900px){body{padding-bottom:4.5rem}.hero{padding-top:4rem}h1{font-size:clamp(1.55rem,6.5vw,2rem);line-height:1.15}.lead{font-size:.95rem}.grid,.values,.kpi-grid{grid-template-columns:1fr}.card,.hero-visual,.values article,.kpi{padding:.82rem}.btn{width:100%}.phone-cta{display:flex;position:fixed;left:.7rem;right:.7rem;bottom:.7rem;z-index:50;border-radius:12px;background:var(--primary);color:#fff;font-weight:800;justify-content:center;padding:.82rem 1rem;box-shadow:0 12px 30px rgba(91,33,182,.35)}}
+
+
+/* =============================================================
+   THE LOFT BOUTIQUE — Extended Styles
+   Appended to existing styles.css
+   ============================================================= */
+
+/* ---- Demo banner (keep consistent) ---- */
+.demo-banner {
+  background: #0f172a;
+  color: #e2e8f0;
+  text-align: center;
+  padding: .52rem 1rem;
+  font-size: .82rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.demo-banner a {
+  color: #2dd4bf;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-left: .4rem;
+}
+.site-header.loft-header { top: 36px; }
+
+/* ---- Header / brand ---- */
+.loft-brand {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -.01em;
+}
+.loft-nav a { font-size: .86rem; }
+.nav-phone-link {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+  font-weight: 700;
+}
+.nav-phone-link:hover { background: #6d28d9 !important; }
+
+/* ---- Hero ---- */
+.loft-hero {
+  position: relative;
+  padding: 5rem 0 3rem;
+  overflow: hidden;
+}
+.hero-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 45%, #ddd6fe 80%, #c4b5fd 100%);
+  z-index: 0;
+}
+.loft-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+.loft-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: .9rem;
+}
+.loft-open-badge {
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+}
+.open-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  animation: loft-pulse 1.6s ease-in-out infinite;
+}
+@keyframes loft-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .55; transform: scale(1.35); }
+}
+.loft-rating-badge {
+  background: #fef9c3;
+  border: 1px solid #fde047;
+  color: #713f12;
+}
+.loft-h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.06;
+  margin: 0 0 .75rem;
+  letter-spacing: -.025em;
+}
+.loft-h1-accent {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.loft-lead {
+  max-width: 560px;
+  color: #4c1d95;
+  font-size: 1.05rem;
+  margin-bottom: .9rem;
+}
+.loft-shipping-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  align-items: center;
+  font-size: .84rem;
+  font-weight: 600;
+  color: #5b21b6;
+  margin-bottom: 1.1rem;
+}
+.strip-dot { color: #a78bfa; }
+.loft-hero-cta { margin-top: 0; }
+.loft-btn-hero {
+  padding: .8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(124,58,237,.3);
+}
+.loft-btn-hero:hover { background: #6d28d9; box-shadow: 0 6px 22px rgba(124,58,237,.4); }
+.loft-btn-outline {
+  border: 2px solid #7c3aed;
+  color: #7c3aed;
+  background: rgba(255,255,255,.8);
+  padding: .78rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+.loft-btn-outline:hover { background: #fff; }
+
+/* Info card */
+.loft-info-card {
+  background: #fff;
+  border: 1px solid #ddd6fe;
+  border-radius: 20px;
+  padding: 1.4rem;
+  box-shadow: 0 8px 32px rgba(124,58,237,.1);
+}
+.loft-ic-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid #ede9fe;
+}
+.loft-ic-header strong { font-size: 1rem; color: #3b0764; }
+.loft-ic-header span { font-size: .84rem; color: var(--muted); margin-top: .1rem; }
+.loft-ic-hours { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1rem; }
+.loft-ic-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .88rem;
+}
+.loft-ic-row span:first-child { color: var(--muted); }
+.loft-ic-row span:last-child { font-weight: 600; }
+.loft-ic-phone {
+  display: block;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  padding: .65rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: .02em;
+}
+.loft-ic-phone:hover { background: #6d28d9; }
+.loft-ic-brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+.loft-ic-brands span {
+  font-size: .75rem;
+  font-weight: 600;
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #5b21b6;
+  padding: .22rem .55rem;
+  border-radius: 999px;
+}
+
+/* ---- KPI strip ---- */
+.loft-kpi-strip {
+  background: #4c1d95;
+  padding: 1.4rem 0;
+}
+.loft-kpi-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.loft-kpi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: .5rem 2.2rem;
+  color: #fff;
+}
+.loft-kpi strong {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.loft-kpi span {
+  font-size: .82rem;
+  color: #c4b5fd;
+  margin-top: .25rem;
+  font-weight: 500;
+}
+.loft-kpi-div {
+  width: 1px;
+  height: 38px;
+  background: rgba(255,255,255,.2);
+  flex-shrink: 0;
+}
+
+/* ---- Section heads ---- */
+.loft-section-head {
+  margin-bottom: 2rem;
+  max-width: 680px;
+}
+.loft-section-head h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  margin: .3rem 0 .5rem;
+  letter-spacing: -.02em;
+}
+.loft-section-head p { color: var(--muted); margin: 0; }
+.loft-section-head a { color: var(--primary); text-decoration: underline; }
+.loft-section-label {
+  display: inline-block;
+  font-size: .76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #7c3aed;
+  background: #ede9fe;
+  border: 1px solid #ddd6fe;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  margin-bottom: .35rem;
+}
+
+/* ---- Collections grid ---- */
+.loft-collections-section { background: #fff; }
+.loft-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.loft-ccard {
+  border: 1px solid #ede9fe;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform .22s ease, box-shadow .22s ease;
+  cursor: pointer;
+}
+.loft-ccard:hover, .loft-ccard:focus {
+  transform: translateY(-5px) scale(1.013);
+  box-shadow: 0 16px 40px rgba(124,58,237,.13);
+  border-color: #c4b5fd;
+  outline: none;
+}
+.loft-ccard-img {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform .3s ease;
+}
+.loft-ccard:hover .loft-ccard-img { transform: scale(1.04); }
+.loft-ccard-emoji { font-size: 2.6rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,.15)); }
+.loft-ccard-new {
+  position: absolute;
+  top: .65rem;
+  right: .65rem;
+  background: #7c3aed;
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .22rem .55rem;
+  border-radius: 999px;
+  letter-spacing: .04em;
+}
+.loft-ccard-body { padding: 1rem 1.1rem 1.1rem; }
+.loft-ccard-body h3 { margin: 0 0 .35rem; font-size: 1rem; font-weight: 700; }
+.loft-ccard-body p { margin: 0 0 .8rem; font-size: .88rem; color: var(--muted); line-height: 1.5; }
+.loft-ccard-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loft-price { font-size: .9rem; font-weight: 700; color: #5b21b6; }
+.loft-card-link {
+  font-size: .84rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+.loft-card-link:hover { text-decoration: underline; }
+
+/* ---- Why section ---- */
+.loft-why-section { background: #faf5ff; }
+.loft-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.loft-why-card {
+  background: #fff;
+  border: 1px solid #ede9fe;
+  border-radius: 18px;
+  padding: 1.6rem 1.4rem;
+}
+.loft-why-icon {
+  font-size: 2rem;
+  margin-bottom: .7rem;
+  display: block;
+}
+.loft-why-card h3 { margin: 0 0 .5rem; font-size: 1.05rem; font-weight: 700; }
+.loft-why-card p { margin: 0; font-size: .91rem; color: var(--muted); line-height: 1.6; }
+
+/* ---- Size Guide Finder ---- */
+.loft-size-section { background: #fff; }
+.loft-size-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: #faf5ff;
+  border: 2px solid #7c3aed;
+  border-radius: 20px;
+  padding: 2rem;
+}
+.loft-size-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .9rem;
+  margin-bottom: .9rem;
+}
+.loft-size-field label {
+  display: block;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #3b0764;
+  margin-bottom: .4rem;
+}
+.loft-size-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.loft-size-input-wrap input {
+  width: 100%;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 10px;
+  padding: .65rem .9rem .65rem .9rem;
+  font-size: .95rem;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color .18s;
+  padding-right: 3rem;
+}
+.loft-size-input-wrap input:focus { border-color: var(--primary); }
+.loft-input-unit {
+  position: absolute;
+  right: .8rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: #a78bfa;
+  pointer-events: none;
+}
+.loft-size-full { margin-bottom: 1.1rem; }
+.loft-body-type-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+.loft-bt-btn {
+  display: block;
+  cursor: pointer;
+}
+.loft-bt-btn input[type="radio"] { display: none; }
+.loft-bt-btn span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 10px;
+  padding: .6rem .5rem;
+  font-size: .86rem;
+  font-weight: 600;
+  text-align: center;
+  background: #fff;
+  transition: border-color .18s, background .18s;
+  cursor: pointer;
+}
+.loft-bt-btn span small {
+  font-size: .72rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: .1rem;
+}
+.loft-bt-btn input:checked + span {
+  border-color: var(--primary);
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.loft-bt-btn:hover span { border-color: #a78bfa; }
+.loft-btn-size {
+  width: 100%;
+  padding: .78rem;
+  font-size: .98rem;
+  border-radius: 12px;
+  margin-top: .2rem;
+}
+.loft-size-result {
+  margin-top: 1.2rem;
+  background: #fff;
+  border: 2px solid #7c3aed;
+  border-radius: 14px;
+  padding: 1.2rem;
+  text-align: center;
+}
+.loft-size-badge {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: .75rem 1.2rem;
+  margin-bottom: .75rem;
+}
+.loft-size-note {
+  font-size: .9rem;
+  color: #5b21b6;
+  font-weight: 600;
+  margin: 0 0 .5rem;
+}
+.loft-size-sub {
+  font-size: .85rem;
+  color: var(--muted);
+  margin: 0 0 .9rem;
+}
+.loft-size-sub a { color: var(--primary); }
+.loft-size-reset {
+  background: none;
+  border: 1.5px solid #ddd6fe;
+  color: #5b21b6;
+  font-weight: 700;
+  font-size: .85rem;
+  border-radius: 8px;
+  padding: .4rem .9rem;
+  cursor: pointer;
+  transition: border-color .18s;
+}
+.loft-size-reset:hover { border-color: var(--primary); }
+.loft-size-table-area h4 {
+  margin: 0 0 .3rem;
+  font-size: 1rem;
+}
+.loft-size-table-area p {
+  font-size: .86rem;
+  color: var(--muted);
+  margin: 0 0 .7rem;
+}
+.loft-size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+}
+.loft-size-table th, .loft-size-table td {
+  padding: .45rem .7rem;
+  text-align: left;
+  border-bottom: 1px solid #ede9fe;
+}
+.loft-size-table th {
+  font-weight: 700;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #7c3aed;
+  background: #f5f3ff;
+}
+.loft-size-table td:first-child { font-weight: 700; }
+.loft-size-table-note {
+  font-size: .81rem;
+  color: var(--muted);
+  margin: .7rem 0 0;
+  font-style: italic;
+}
+
+/* ---- Instagram feed ---- */
+.loft-feed-section { background: #faf5ff; }
+.loft-feed-head { max-width: 100%; text-align: center; margin-left: auto; margin-right: auto; }
+.loft-feed-head p { margin: 0 auto; }
+.loft-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+}
+.loft-feed-post {
+  background: #fff;
+  border-radius: 18px;
+  overflow: visible;
+  box-shadow: 0 4px 20px rgba(124,58,237,.08);
+  border: 1px solid #ede9fe;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.loft-feed-post:hover {
+  box-shadow: 0 10px 32px rgba(124,58,237,.16);
+  z-index: 1;
+}
+.loft-feed-tilt-l { transform: rotate(-1.2deg); }
+.loft-feed-tilt-r { transform: rotate(1.1deg); }
+.loft-feed-tilt-l:hover, .loft-feed-tilt-r:hover { transform: rotate(0deg) scale(1.03); }
+.loft-feed-img {
+  height: 160px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.loft-feed-img-1 { background: linear-gradient(145deg, #fdf4ff, #e9d5ff, #c4b5fd); }
+.loft-feed-img-2 { background: linear-gradient(145deg, #eff6ff, #bfdbfe, #93c5fd); }
+.loft-feed-img-3 { background: linear-gradient(145deg, #fff7ed, #fed7aa, #fb923c); }
+.loft-feed-img-4 { background: linear-gradient(145deg, #fefce8, #fde68a, #fbbf24); }
+.loft-feed-em-main { font-size: 3rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,.15)); }
+.loft-feed-em-float {
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  font-size: 1.2rem;
+  opacity: .8;
+}
+.loft-feed-body { padding: .9rem; }
+.loft-feed-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-bottom: .5rem;
+}
+.loft-feed-tags span {
+  font-size: .72rem;
+  font-weight: 700;
+  color: #7c3aed;
+}
+.loft-feed-caption {
+  font-size: .84rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0 0 .6rem;
+}
+.loft-feed-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .76rem;
+  color: var(--muted);
+  border-top: 1px solid #f3e8ff;
+  padding-top: .5rem;
+}
+.loft-feed-cta-row {
+  text-align: center;
+  margin-top: 1.6rem;
+}
+.loft-btn-insta {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-weight: 700;
+  padding: .75rem 1.8rem;
+  border-radius: 12px;
+  font-size: .95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.loft-btn-insta:hover { background: linear-gradient(135deg, #6d28d9, #9333ea); }
+
+/* ---- Reviews ---- */
+.loft-reviews-section { background: #fff; }
+.loft-aggregate-row {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .5rem;
+}
+.loft-agg-stars { color: #f59e0b; font-size: 1.1rem; }
+.loft-agg-count { font-size: .88rem; color: var(--muted); }
+.loft-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.loft-review-card {
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+  border-radius: 18px;
+  padding: 1.4rem;
+}
+.loft-rcard-stars { color: #f59e0b; font-size: 1rem; margin-bottom: .7rem; }
+.loft-rcard-quote {
+  font-size: .92rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 1rem;
+  font-style: italic;
+}
+.loft-rcard-reviewer {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+.loft-rcard-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.loft-rcard-reviewer div { display: flex; flex-direction: column; }
+.loft-rcard-reviewer strong { font-size: .88rem; }
+.loft-rcard-reviewer span { font-size: .78rem; color: var(--muted); margin-top: .1rem; }
+
+/* ---- Contact section ---- */
+.loft-contact-section { background: #faf5ff; }
+.loft-contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+.loft-form-wrap {
+  background: #fff;
+  border: 1px solid #ede9fe;
+  border-radius: 20px;
+  padding: 1.8rem;
+}
+.loft-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .9rem;
+}
+.loft-form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .9rem;
+}
+.loft-form-field label {
+  font-size: .83rem;
+  font-weight: 700;
+  color: #3b0764;
+  margin-bottom: .35rem;
+}
+.loft-form-field input,
+.loft-form-field select,
+.loft-form-field textarea {
+  border: 1.5px solid #ddd6fe;
+  border-radius: 10px;
+  padding: .65rem .85rem;
+  font-size: .93rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color .18s;
+  width: 100%;
+}
+.loft-form-field input:focus,
+.loft-form-field select:focus,
+.loft-form-field textarea:focus { border-color: var(--primary); }
+.loft-form-field textarea { resize: vertical; }
+.loft-btn-submit {
+  width: 100%;
+  padding: .82rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+.loft-form-note {
+  font-size: .78rem;
+  color: var(--muted);
+  text-align: center;
+  margin: .6rem 0 0;
+}
+.loft-info-panel {
+  background: #fff;
+  border: 1px solid #ede9fe;
+  border-radius: 20px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.loft-ip-block {
+  padding: .9rem 0;
+  border-bottom: 1px solid #f3e8ff;
+}
+.loft-ip-block:last-of-type { border-bottom: none; }
+.loft-ip-block h4 { margin: 0 0 .4rem; font-size: .88rem; font-weight: 700; }
+.loft-ip-block p { margin: 0; font-size: .86rem; color: var(--muted); line-height: 1.6; }
+.loft-ip-block a { color: var(--primary); }
+.loft-ip-hours div {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: var(--muted);
+  padding: .15rem 0;
+}
+.loft-ip-hours div span:last-child { font-weight: 600; color: var(--text); }
+.loft-map-link {
+  display: inline-block;
+  margin-top: .4rem;
+  font-size: .83rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.loft-ip-est {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding-top: .8rem;
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ---- FAQ ---- */
+.loft-faq-section { margin-top: 2.5rem; }
+.loft-faq-heading {
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+.loft-faq-list { display: flex; flex-direction: column; gap: 0; }
+.loft-faq-item {
+  border: 1px solid #ede9fe;
+  border-radius: 12px;
+  background: #fff;
+  margin-bottom: .5rem;
+  overflow: hidden;
+}
+.loft-faq-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: none;
+  border: none;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  gap: .5rem;
+}
+.loft-faq-btn:hover { background: #faf5ff; }
+.loft-faq-btn[aria-expanded="true"] { color: #5b21b6; background: #f5f3ff; }
+.loft-faq-icon {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #7c3aed;
+  flex-shrink: 0;
+  transition: transform .2s;
+  line-height: 1;
+}
+.loft-faq-answer { padding: 0 1.2rem 1rem; }
+.loft-faq-answer p {
+  margin: 0;
+  font-size: .91rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.loft-faq-answer a { color: var(--primary); }
+
+/* ---- Agency CTA ---- */
+.loft-agency-cta {
+  padding: 3rem 0;
+  text-align: center;
+  background: #fff;
+}
+.loft-agency-cta h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: .6rem; }
+.loft-agency-cta p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1rem; }
+.btn-get-site {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: #5b4dff;
+  color: #fff;
+  font-weight: 800;
+  padding: .9rem 2rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+.btn-get-site:hover { background: #4c40db; }
+
+/* ---- Footer ---- */
+.loft-footer {
+  background: #1e0a3c;
+  color: #c4b5fd;
+  padding-top: 2.4rem;
+}
+.loft-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.loft-footer-brand .loft-brand { color: #fff; margin-bottom: .7rem; display: flex; }
+.loft-footer-brand p { font-size: .88rem; color: #a78bfa; line-height: 1.6; margin: 0 0 .8rem; }
+.loft-footer-insta {
+  font-size: .86rem;
+  font-weight: 700;
+  color: #c4b5fd;
+  text-decoration: underline;
+}
+.loft-footer-col h4 { color: #fff; font-size: .9rem; margin: 0 0 .7rem; }
+.loft-footer-col p { font-size: .86rem; color: #a78bfa; line-height: 1.7; margin: 0 0 .4rem; }
+.loft-footer-col a { color: #c4b5fd; }
+.loft-footer-col a:hover { color: #fff; }
+.loft-footer-hours div {
+  display: flex;
+  justify-content: space-between;
+  font-size: .84rem;
+  color: #a78bfa;
+  padding: .18rem 0;
+}
+.loft-footer-hours div span:last-child { color: #c4b5fd; }
+.loft-footer-bottom {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.loft-footer-bottom p {
+  margin: .2rem 0;
+  font-size: .8rem;
+  color: #7c6aaa;
+}
+.loft-footer-bottom a { color: #a78bfa; }
+
+/* ---- Sticky mobile CTA ---- */
+.loft-mobile-cta {
+  display: none;
+  position: fixed;
+  left: .7rem;
+  right: .7rem;
+  bottom: .7rem;
+  z-index: 50;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  justify-content: center;
+  padding: .85rem 1rem;
+  font-size: 1rem;
+  box-shadow: 0 12px 30px rgba(91,33,182,.38);
+  text-align: center;
+}
+
+/* ---- Scroll reveal ---- */
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal-ready.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .loft-collections-grid { grid-template-columns: repeat(2, 1fr); }
+  .loft-feed-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  body { padding-bottom: 5rem; }
+  .site-header.loft-header { top: 0; }
+  .demo-banner { position: relative; }
+  .loft-hero { padding: 2.8rem 0 2rem; }
+  .loft-hero-inner { grid-template-columns: 1fr; gap: 1.4rem; }
+  .loft-h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+  .loft-info-card { display: none; }
+  .loft-kpi-inner { gap: 0; justify-content: space-around; }
+  .loft-kpi { padding: .4rem 1rem; }
+  .loft-kpi-div { height: 28px; }
+  .loft-collections-grid { grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .loft-why-grid { grid-template-columns: 1fr; }
+  .loft-size-card { grid-template-columns: 1fr; gap: 1.4rem; }
+  .loft-size-fields { grid-template-columns: 1fr 1fr; }
+  .loft-feed-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .loft-feed-tilt-l, .loft-feed-tilt-r { transform: rotate(0); }
+  .loft-reviews-grid { grid-template-columns: 1fr; }
+  .loft-contact-layout { grid-template-columns: 1fr; }
+  .loft-form-row { grid-template-columns: 1fr; }
+  .loft-footer-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+  .loft-mobile-cta { display: flex; }
+  .btn { width: auto; }
+  .loft-btn-hero, .loft-btn-outline, .loft-btn-size, .loft-btn-submit { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 560px) {
+  .loft-collections-grid { grid-template-columns: 1fr; }
+  .loft-feed-grid { grid-template-columns: 1fr; }
+  .loft-kpi-inner { flex-wrap: wrap; }
+  .loft-kpi-div { display: none; }
+  .loft-kpi { padding: .6rem 1rem; flex-basis: 50%; }
+  .loft-body-type-group { grid-template-columns: 1fr; }
+  .loft-size-fields { grid-template-columns: 1fr; }
+}
