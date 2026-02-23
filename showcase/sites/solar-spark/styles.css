@@ -7,6 +7,14 @@
   --primary-dark: #0f766e;
   --accent: #2563eb;
   --line: #d8e6f5;
+
+  /* SunVolt Solar brand tokens */
+  --sv-primary: #ea580c;
+  --sv-primary-dark: #c2460a;
+  --sv-bg: #fff8f0;
+  --sv-text: #1a1208;
+  --sv-muted: #7c3a0e;
+  --sv-line: #f5d3a8;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -141,4 +149,434 @@ footer { border-top: 1px solid var(--line); padding: 1rem 0 2rem; color: var(--m
     padding: 0.82rem 1rem;
     box-shadow: 0 12px 30px rgba(15, 118, 110, 0.35);
   }
+}
+
+/* ══════════════════════════════════════════════════════
+   SUNVOLT SOLAR — ADDITIONAL STYLES
+   Appended to extend the base stylesheet for the
+   fully rebuilt SunVolt Solar showcase site.
+   Primary: #ea580c  Background: #fff8f0
+══════════════════════════════════════════════════════ */
+
+/* ── Nav link overrides for SunVolt orange theme ── */
+.nav-links a:last-child {
+  background: var(--sv-primary);
+  color: #fff;
+  border-color: var(--sv-primary);
+}
+.nav-links a:hover { border-color: var(--sv-primary); color: var(--sv-primary); }
+.nav-links a:last-child:hover { background: var(--sv-primary-dark); color: #fff; }
+
+/* ── Global body override when SunVolt page is active ── */
+body {
+  background: var(--sv-bg);
+}
+
+/* ══════════════════════════
+   SOLAR CALCULATOR CARD
+══════════════════════════ */
+
+/* Orange gradient border wrapper */
+.calc-wrapper {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 50px rgba(234, 88, 12, .10), 0 2px 12px rgba(0,0,0,.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slider input — cross-browser orange styling */
+input[type="range"].calc-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    var(--sv-primary) 0%,
+    var(--sv-primary) var(--slider-pct, 40%),
+    #f5d3a8 var(--slider-pct, 40%),
+    #f5d3a8 100%
+  );
+}
+input[type="range"].calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--sv-primary);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, .4);
+  cursor: pointer;
+  transition: transform .15s;
+}
+input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type="range"].calc-slider::-moz-range-thumb {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--sv-primary);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, .4);
+  cursor: pointer;
+}
+input[type="range"].calc-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #f5d3a8;
+}
+
+/* Result card animated number reveal */
+.calc-result {
+  animation: fadeSlideUp .35s ease;
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.result-item .r-val {
+  display: inline-block;
+  transition: color .3s;
+}
+
+/* ══════════════════════════
+   PROCESS STEPS
+   Numbered badge styling
+══════════════════════════ */
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, #ea580c, #f97316);
+  color: #fff; font-weight: 900; font-size: 1.25rem;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  position: relative; z-index: 1;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, .3);
+  transition: transform .2s, box-shadow .2s;
+}
+.step-card:hover .step-badge {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, .45);
+}
+
+/* ══════════════════════════
+   REBATE INFO BOX (green/emerald)
+══════════════════════════ */
+.rebate-box {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #86efac;
+  border-radius: 20px;
+  padding: 2.2rem 2.4rem;
+}
+.ri-amount {
+  display: inline-block;
+  background: #22c55e;
+  color: #fff;
+  font-weight: 800;
+  font-size: .82rem;
+  border-radius: 999px;
+  padding: .18rem .6rem;
+  margin-bottom: .5rem;
+  letter-spacing: .02em;
+}
+
+/* ══════════════════════════
+   CONTACT GRID (2-col)
+══════════════════════════ */
+.sv-contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.4rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .sv-contact-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════
+   FAQ ACCORDION
+══════════════════════════ */
+.faq-item {
+  background: #fff;
+  border: 1.5px solid var(--sv-line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.faq-item.open {
+  border-color: var(--sv-primary);
+  box-shadow: 0 4px 18px rgba(234, 88, 12, .1);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.3rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .97rem;
+  color: #1a1208;
+  user-select: none;
+  gap: 1rem;
+  transition: color .15s;
+}
+.faq-question:hover { color: var(--sv-primary); }
+.faq-chevron {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff8f0;
+  border: 1.5px solid var(--sv-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .25s, background .2s, border-color .2s;
+  font-size: .75rem;
+  color: var(--sv-primary);
+  font-style: normal;
+}
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+  background: var(--sv-primary);
+  color: #fff;
+  border-color: var(--sv-primary);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .32s ease, padding .25s ease;
+  padding: 0 1.3rem;
+  font-size: .9rem;
+  color: #5a3e28;
+  line-height: 1.65;
+}
+.faq-item.open .faq-answer {
+  max-height: 500px;
+  padding: 0 1.3rem 1.2rem;
+}
+
+/* ══════════════════════════
+   OPEN NOW BADGE
+══════════════════════════ */
+.open-now-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  border-radius: 999px;
+  padding: .28rem .7rem;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  transition: background .3s, color .3s, border-color .3s;
+}
+.open-now-badge .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@keyframes pulse-green {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .55; transform: scale(1.35); }
+}
+
+/* ══════════════════════════
+   SCROLL REVEAL ANIMATION
+══════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: .10s; }
+.reveal-delay-2 { transition-delay: .20s; }
+.reveal-delay-3 { transition-delay: .30s; }
+.reveal-delay-4 { transition-delay: .40s; }
+
+/* Reduced motion: skip animations */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .open-now-badge .dot { animation: none; }
+}
+
+/* ══════════════════════════
+   MOBILE STICKY CTA — SunVolt
+══════════════════════════ */
+.sv-mobile-cta {
+  display: none;
+}
+@media (max-width: 900px) {
+  .sv-mobile-cta {
+    display: block;
+    position: fixed;
+    left: .7rem; right: .7rem; bottom: .7rem;
+    z-index: 150;
+    background: var(--sv-primary);
+    color: #fff;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 14px;
+    padding: .9rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(234, 88, 12, .45);
+    animation: slideUpCta .4s ease;
+  }
+  @keyframes slideUpCta {
+    from { transform: translateY(80px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  body { padding-bottom: 5rem; }
+}
+
+/* ══════════════════════════
+   KPI STRIP
+══════════════════════════ */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--sv-line);
+  border: 1px solid var(--sv-line);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.kpi-strip-item {
+  background: #fff;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  transition: background .2s;
+}
+.kpi-strip-item:hover { background: #fff8f0; }
+.kpi-strip-item .kpi-num {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--sv-primary);
+  line-height: 1;
+  display: block;
+}
+.kpi-strip-item .kpi-label {
+  font-size: .82rem;
+  color: var(--sv-muted);
+  font-weight: 600;
+  margin-top: .25rem;
+  display: block;
+}
+@media (max-width: 900px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ══════════════════════════
+   TRUST BAR (orange)
+══════════════════════════ */
+.sv-trust-bar {
+  background: var(--sv-primary);
+  color: #fff;
+  padding: 1rem 0;
+}
+.sv-trust-bar .container {
+  display: flex;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.sv-trust-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-weight: 700;
+  font-size: .9rem;
+}
+@media (max-width: 900px) {
+  .sv-trust-bar .container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 4vw;
+    gap: .7rem;
+  }
+}
+
+/* ══════════════════════════
+   SECTION SCAFFOLD
+══════════════════════════ */
+.sv-section { padding: 4rem 0; }
+.sv-section-head { margin-bottom: 2.2rem; }
+.sv-eyebrow {
+  display: inline-block;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--sv-primary);
+  margin-bottom: .5rem;
+}
+.sv-section-head h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 900;
+  color: #1a1208;
+  margin: 0 0 .5rem;
+  line-height: 1.15;
+}
+.sv-section-head p { color: #6b4226; margin: 0; font-size: 1.02rem; }
+
+/* ══════════════════════════
+   FOOTER
+══════════════════════════ */
+.sv-footer {
+  background: #1a1208;
+  color: #c0a080;
+  padding: 3rem 0 1.5rem;
+}
+.sv-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2.4rem;
+  margin-bottom: 2rem;
+}
+.sv-footer-brand {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 .6rem;
+}
+.sv-footer-brand span { color: var(--sv-primary); }
+.sv-footer p { font-size: .86rem; line-height: 1.65; margin: 0 0 .9rem; }
+.sv-footer h4 { color: #fff; font-size: .9rem; font-weight: 800; margin: 0 0 .75rem; }
+.sv-footer ul { list-style: none; padding: 0; margin: 0; }
+.sv-footer ul li { margin-bottom: .45rem; }
+.sv-footer ul li a { font-size: .86rem; color: #c0a080; text-decoration: none; }
+.sv-footer ul li a:hover { color: var(--sv-primary); }
+.sv-footer-bottom {
+  border-top: 1px solid #2e1f0e;
+  padding-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .6rem;
+  font-size: .78rem;
+  color: #7a5a3a;
+}
+.cec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: #2e1f0e;
+  border: 1.5px solid #4a3018;
+  border-radius: 10px;
+  padding: .45rem .75rem;
+  font-size: .78rem;
+  font-weight: 700;
+  color: #e0b87a;
+}
+@media (max-width: 900px) {
+  .sv-footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .sv-footer-bottom { flex-direction: column; align-items: flex-start; }
 }
