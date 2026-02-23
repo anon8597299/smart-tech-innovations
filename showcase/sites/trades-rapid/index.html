@@ -129,24 +129,16 @@
             </div>
           </div>
           <div class="hero-visual">
-            <h3>Job cost estimator</h3>
-            <p style="font-size:.85rem;color:#7c4a16;margin-bottom:.7rem;">Get a rough idea of what your job might cost — then call us for a free fixed quote.</p>
-            <div class="estimator-card" style="padding:1rem;margin-top:0;">
-              <select class="est-select" id="job-type" onchange="estimateCost()">
-                <option value="">— Select job type —</option>
-                <option value="blocked-drain">Blocked drain</option>
-                <option value="hot-water">Hot water system replacement</option>
-                <option value="tap-repair">Tap or toilet repair</option>
-                <option value="burst-pipe">Burst pipe repair</option>
-                <option value="bathroom-reno">Bathroom renovation</option>
-                <option value="emergency">Emergency callout (24/7)</option>
-              </select>
-              <div class="est-result" id="est-result">
-                <div class="est-range" id="est-range"></div>
-                <div class="est-note" id="est-note"></div>
-                <a class="btn btn-primary" href="tel:0400123456" style="margin-top:.7rem;display:inline-flex;font-size:.88rem;padding:.55rem 1rem;">📞 Get your free quote</a>
-              </div>
+            <h3>Why Bathurst chooses us</h3>
+            <p style="font-size:.88rem;color:#7c4a16;margin-bottom:.9rem;">Local, licensed, and available when you need us — not a franchise, not a call centre.</p>
+            <div class="chips">
+              <span>⏱ 60-min emergency response</span>
+              <span>📋 Fixed-price, always in writing</span>
+              <span>✓ QBCC licensed &amp; insured</span>
+              <span>🧹 We clean up after every job</span>
+              <span>💬 Plain English, no upselling</span>
             </div>
+            <a class="btn btn-primary" href="tel:0400123456" style="margin-top:1rem;display:flex;width:100%;justify-content:center;font-size:.92rem;">📞 0400 123 456 — call now</a>
           </div>
         </div>
       </div>
@@ -194,6 +186,37 @@
       </div>
     </section>
 
+    <!-- Job Cost Estimator -->
+    <section class="estimator-section">
+      <div class="container">
+        <div class="estimator-eyebrow">⚡ Instant Estimate</div>
+        <h2 class="estimator-heading">What will your plumbing job cost?</h2>
+        <p class="estimator-subtext">Get a rough ballpark in under 10 seconds — then call us for a free written fixed-price quote. No obligations, ever.</p>
+        <div class="estimator-main-card">
+          <label class="est-label" for="job-type-main">Choose your job type:</label>
+          <select class="est-select-main" id="job-type-main" onchange="estimateCostMain()">
+            <option value="">Select job type…</option>
+            <option value="blocked-drain">🚿 Blocked drain</option>
+            <option value="hot-water">🔥 Hot water system replacement</option>
+            <option value="tap-repair">🔧 Tap or toilet repair</option>
+            <option value="burst-pipe">💧 Burst pipe repair</option>
+            <option value="bathroom-reno">🛁 Bathroom renovation (plumbing scope)</option>
+            <option value="emergency">🚨 Emergency callout (24/7)</option>
+          </select>
+          <div class="est-main-result" id="est-main-result">
+            <div class="est-main-label">Typical price range</div>
+            <div class="est-main-range" id="est-main-range"></div>
+            <div class="est-main-note" id="est-main-note"></div>
+            <div class="est-main-actions">
+              <a class="btn btn-primary" href="tel:0400123456">📞 Call for your free fixed quote</a>
+              <a class="btn btn-secondary" href="#contact-form">Send an enquiry →</a>
+            </div>
+          </div>
+          <p class="est-disclaimer">Indicative estimates only. Final price depends on site conditions and materials. All quotes are written, fixed-price, and obligation-free.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works -->
     <section class="section" style="background:#fff8f0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
       <div class="container">
@@ -203,20 +226,24 @@
         </div>
         <div class="process-steps">
           <div class="process-step reveal">
-            <h4>Call or enquire</h4>
-            <p>Phone us or submit an online request. We'll confirm your job within the hour during business hours.</p>
+            <span class="step-icon">📞</span>
+            <h4>Call or send an enquiry</h4>
+            <p>Phone us anytime or drop us a message. We confirm your job and give you an arrival window — within the hour during business hours.</p>
           </div>
           <div class="process-step reveal">
-            <h4>Free assessment</h4>
-            <p>We assess the job and explain exactly what needs doing in plain English. No jargon, no pressure.</p>
+            <span class="step-icon">🔍</span>
+            <h4>Free on-site assessment</h4>
+            <p>We come to you, inspect the problem properly, and explain what needs doing in plain English. No upselling, no pressure.</p>
           </div>
           <div class="process-step reveal">
-            <h4>Fixed-price quote</h4>
-            <p>You get a written fixed price before any work starts. No surprise charges on the invoice.</p>
+            <span class="step-icon">📋</span>
+            <h4>Written fixed-price quote</h4>
+            <p>You get a written price before we touch anything. What we quote is what you pay — no hidden call-out fees, no invoice surprises.</p>
           </div>
           <div class="process-step reveal">
-            <h4>Job done right</h4>
-            <p>We complete the work cleanly and efficiently, then walk you through what was done and why.</p>
+            <span class="step-icon">✅</span>
+            <h4>Job done &amp; guaranteed</h4>
+            <p>We complete the work cleanly and on time, walk you through everything, and back it with our 5-year workmanship warranty.</p>
           </div>
         </div>
       </div>
@@ -272,11 +299,16 @@
     </section>
 
     <!-- Contact + Map -->
-    <section class="contact-section">
+    <section class="contact-section" id="contact-form">
       <div class="container">
-        <div class="section-head">
-          <h2>Get a free quote</h2>
-          <p>Tell us about your job and we'll get back to you within the hour during business hours.</p>
+        <div class="response-promise">
+          <span>⚡ We typically respond within 60 minutes during business hours</span>
+          <span class="rp-sep">·</span>
+          <span>Prefer to call? <a href="tel:0400123456" style="color:#fff;font-weight:800;text-decoration:underline;">0400 123 456</a></span>
+        </div>
+        <div class="section-head" style="margin-top:1.5rem;">
+          <h2>Get your free fixed-price quote</h2>
+          <p>Tell us about your job — we'll come to you, assess it properly, and give you a written price. No call-out fee. No obligation.</p>
         </div>
         <div class="contact-grid">
           <form class="contact-form" onsubmit="return false;">
@@ -349,7 +381,8 @@
     <!-- FAQ -->
     <section class="faq-section">
       <div class="container">
-        <h2>Frequently asked questions</h2>
+        <h2>Common questions</h2>
+        <p style="color:var(--muted);margin-top:.3rem;margin-bottom:1.4rem;font-size:.95rem;">Still not sure? Here are the things people ask us most often — or just give us a call and we'll answer straight up.</p>
         <div class="faq-item">
           <button class="faq-q">How quickly do you respond to a plumbing emergency? <span class="faq-arrow">+</span></button>
           <div class="faq-a">For emergencies like burst pipes or major leaks, we aim to be on-site within 60 minutes across greater Bathurst. Our emergency line is available 24 hours a day, 7 days a week — including public holidays.</div>
@@ -398,13 +431,13 @@
       'bathroom-reno':  {range:'$4,500 – $15,000+', note:'Plumbing scope only — does not include tiling, fixtures supply, or cabinetry. Full quote after on-site assessment.'},
       'emergency':      {range:'$180 – $350 call-out', note:'24/7 emergency rate applies. Job materials and labour quoted separately on arrival.'}
     };
-    function estimateCost() {
-      var type = document.getElementById('job-type').value;
-      var result = document.getElementById('est-result');
+    function estimateCostMain() {
+      var type = document.getElementById('job-type-main').value;
+      var result = document.getElementById('est-main-result');
       if (!type) { result.style.display='none'; return; }
       var data = ESTIMATES[type];
-      document.getElementById('est-range').textContent = data.range;
-      document.getElementById('est-note').textContent = data.note;
+      document.getElementById('est-main-range').textContent = data.range;
+      document.getElementById('est-main-note').textContent = data.note;
       result.style.display = 'block';
     }
 
