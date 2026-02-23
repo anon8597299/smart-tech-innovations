@@ -3,330 +3,886 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Stonebridge Estate — Weddings &amp; Events Venue, Orange NSW</title>
-  <meta name="description" content="Stunning weddings and private events in the heart of Orange NSW wine country. Capacity for up to 200 guests. Enquire about your date today.">
+  <title>The Stonebridge Estate &#8212; Wedding &amp; Events Venue, Mudgee NSW Wine Country</title>
+  <meta name="description" content="Celebrate your love story at The Stonebridge Estate &#8212; a 42-acre heritage estate in Mudgee NSW wine country. 1890s sandstone chapel, heritage barn, in-house catering, 6 luxury cottages. Enquire about your date today.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #fdf8f2;
-      --surface: #ffffff;
-      --text: #1c0f05;
-      --muted: #6b5744;
-      --primary: #92400e;
-      --primary-light: #b45309;
-      --accent: #6d28d9;
-      --line: #e8d5c4;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
-
-    .demo-banner {
-      background: #0f172a; color: #e2e8f0; text-align: center;
-      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 100;
-    }
-    .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
-    .site-header {
-      position: sticky; top: 36px; background: rgba(255,252,247,.96);
-      border-bottom: 1px solid var(--line); z-index: 20;
-    }
-    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; gap: .8rem; }
-    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: -.01em; }
-    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
-    .nav-links a { border: 1px solid var(--line); padding: .34rem .65rem; border-radius: 999px; font-size: .86rem; background: #fff; }
-
-    .hero { padding: 5rem 0 2rem; }
-    .badge {
-      display: inline-block; background: #fef3c7; border: 1px solid #fcd34d;
-      color: #92400e; font-weight: 700; padding: .28rem .68rem; border-radius: 999px; font-size: .76rem;
-    }
-    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: .8rem 0 .65rem; }
-    .lead { color: var(--muted); max-width: 760px; font-size: 1.05rem; }
-    .cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.15rem; border-radius: 10px; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: #7c2d12; }
-    .btn-secondary { border-color: var(--line); background: #fff; }
-    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
-    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; color: #78350f; }
-
-    .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; margin-top: 1.4rem; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.1rem; }
-    .hero-panel {
-      background: linear-gradient(140deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
-      border: 1px solid #fbbf24; border-radius: 16px; padding: 1.1rem;
-    }
-    .hero-panel h3 { margin: 0 0 .4rem; }
-    .hero-panel p { margin: 0; color: #78350f; font-size: .92rem; }
-    .chips { margin-top: .6rem; display: flex; gap: .4rem; flex-wrap: wrap; }
-    .chips span { font-size: .76rem; font-weight: 700; background: rgba(255,255,255,.8); border: 1px solid #fbbf24; padding: .24rem .55rem; border-radius: 999px; }
-
-    /* Packages */
-    .packages-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
-    .pkg-card {
-      background: #fff; border: 1.5px solid var(--line); border-radius: 16px; padding: 1.3rem;
-      display: flex; flex-direction: column;
-    }
-    .pkg-card.featured { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(146,64,14,.1); }
-    .pkg-price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: .4rem 0 .2rem; }
-    .pkg-card h3 { margin: 0 0 .2rem; font-size: 1.05rem; }
-    .pkg-card .pkg-desc { font-size: .88rem; color: var(--muted); margin: 0 0 .9rem; flex: 1; }
-    .pkg-card ul { list-style: none; margin: 0 0 1rem; padding: 0; }
-    .pkg-card ul li { font-size: .88rem; padding: .28rem 0; border-bottom: 1px solid #f5ece3; display: flex; gap: .4rem; }
-    .pkg-card ul li:last-child { border-bottom: none; }
-    .pkg-card ul li::before { content: "✓"; color: var(--primary); font-weight: 800; flex-shrink: 0; }
-
-    /* Gallery strip */
-    .gallery-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .5rem; margin-top: 1.4rem; }
-    .gallery-tile {
-      border-radius: 10px; overflow: hidden; aspect-ratio: 4/3;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
-    }
-
-    /* Trust bar */
-    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
-    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
-
-    /* Testimonials */
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
-    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
-    .stars { color: #f59e0b; margin-bottom: .5rem; }
-    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
-    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
-
-    .section { padding: 2rem 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-head h2 { margin: 0 0 .3rem; }
-    .section-head p { color: var(--muted); margin: 0; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
-    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
-    .kpi strong { display: block; font-size: .98rem; }
-    .kpi span { font-size: .84rem; color: var(--muted); }
-
-    .cta-section { padding: 3rem 0; text-align: center; }
-    .cta-section h2 { font-size: clamp(1.6rem,4vw,2.2rem); margin-bottom: .6rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; }
-    .btn-get-site {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: #5b4dff; color: #fff; font-weight: 800;
-      padding: .9rem 2rem; border-radius: 12px; font-size: 1.05rem; text-decoration: none;
-    }
-    .btn-get-site:hover { background: #4c40db; }
-    .phone-cta { display: none; }
-    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); }
-
-    @media (max-width: 900px) {
-      body { padding-bottom: 4.5rem; }
-      .hero-grid, .packages-grid, .testimonials-grid, .kpi-grid, .gallery-strip { grid-template-columns: 1fr; }
-      .gallery-strip { grid-template-columns: repeat(2,1fr); }
-      .btn { width: 100%; }
-      .trust-bar .container { flex-direction: column; align-items: flex-start; padding: 0 4vw; gap: .9rem; }
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
-      .phone-cta {
-        display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem;
-        z-index: 50; border-radius: 12px; background: var(--primary); color: #fff;
-        font-weight: 800; justify-content: center; padding: .82rem 1rem;
-        box-shadow: 0 12px 30px rgba(146,64,14,.35); text-decoration: none;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["EventVenue", "LocalBusiness"],
+    "name": "The Stonebridge Estate",
+    "description": "Wedding and event venue on a 42-acre heritage estate in Mudgee NSW wine country. Featuring an 1890s sandstone chapel, heritage barn, manicured gardens, in-house catering and 6 luxury on-site cottages.",
+    "url": "https://stonebridgeestate.com.au",
+    "telephone": "+61263724488",
+    "email": "events@stonebridgeestate.com.au",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1240 Ulan Road",
+      "addressLocality": "Mudgee",
+      "addressRegion": "NSW",
+      "postalCode": "2850",
+      "addressCountry": "AU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -32.5956,
+      "longitude": 149.5873
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "138",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
       }
-    }
-  </style>
+    ],
+    "maximumAttendeeCapacity": 180,
+    "amenityFeature": [
+      {"@type":"LocationFeatureSpecification","name":"Sandstone Chapel (1890s)","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Heritage Barn Reception","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Garden Terrace","value":true},
+      {"@type":"LocationFeatureSpecification","name":"On-site Luxury Cottages","value":true},
+      {"@type":"LocationFeatureSpecification","name":"In-house Catering","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Full Liquor Licence","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Wedding Coordinator","value":true}
+    ],
+    "foundingDate": "2009",
+    "priceRange": "$$$$",
+    "currenciesAccepted": "AUD"
+  }
+  <\/script>
 </head>
 <body>
+
   <div class="demo-banner">
-    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    This is a demo site by ImproveYourSite &#8212; showing what your finished site looks like.
     <a href="/packages.html">Get a site like this &rarr;</a>
   </div>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container nav">
-      <a class="brand" href="#">🌿 The Stonebridge Estate</a>
-      <nav class="nav-links">
-        <a href="#">Weddings</a>
-        <a href="#">Functions</a>
-        <a href="#">Gallery</a>
-        <a href="#">Enquire</a>
+      <a class="brand" href="#">
+        <span class="brand-icon">&#9752;</span>
+        <span class="brand-name">The Stonebridge Estate</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#spaces">Our Spaces</a>
+        <a href="#packages">Packages</a>
+        <a href="#calculator">Budget</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact" class="nav-cta">Enquire</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">Orange NSW Wine Country · Up to 200 guests · All-inclusive packages</span>
-        <h1>Where love stories begin — and memories are made forever</h1>
-        <p class="lead">Nestled in the rolling vineyards of Orange NSW, The Stonebridge Estate is Central West's most loved wedding and events venue. Award-winning catering, stunning natural settings, and a dedicated events team to handle every detail.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#">💌 Enquire About Your Date</a>
-          <a class="btn btn-secondary" href="#">View Event Packages</a>
-        </div>
-        <div class="trust-strip">
-          <span>✓ 2024 Best Venue — Wedding Central West</span>
-          <span>✓ Up to 200 guests</span>
-          <span>✓ All-inclusive packages available</span>
-          <span>✓ On-site accommodation</span>
-        </div>
 
-        <div class="hero-grid">
-          <div class="card">
-            <h3>📍 Orange Wine Country, NSW</h3>
-            <p>1240 Cargo Road, Orange NSW 2800<br>
-               45 minutes from Bathurst · 3.5 hours from Sydney</p>
-            <p style="margin-top:.6rem;"><strong>Phone:</strong> (02) 6362 9800<br>
-               <strong>Email:</strong> events@stonebridgeestate.com.au</p>
-            <p style="margin-top:.5rem;font-size:.88rem;color:var(--muted);">Open for venue tours Thursday–Sunday 10am–4pm. After-hours by appointment.</p>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <div class="hero-badges">
+            <span class="badge badge-open">
+              <span class="badge-dot"></span>
+              Open Mon&#8211;Fri 9am&#8211;5pm AEST
+            </span>
+            <span class="badge badge-trust">5.0 &#9733; Google &middot; 138 reviews</span>
           </div>
-          <div class="hero-panel">
-            <h3>2025 dates still available</h3>
-            <p>We have limited Saturdays remaining for 2025 and are now taking bookings for 2026. Enquire early to secure your preferred date.</p>
-            <div class="chips">
-              <span>Weekday discounts</span>
-              <span>Elopement packages</span>
-              <span>Corporate retreats</span>
-              <span>Private dining</span>
+          <h1 class="hero-headline">Where Central West<br><em>love stories begin</em></h1>
+          <p class="hero-lead">A 42-acre heritage estate in Mudgee wine country &#8212; an 1890s sandstone chapel, a century-old heritage barn, manicured gardens, and the warmth of a team who have celebrated over 280 weddings and still feel every one.</p>
+          <div class="hero-cta-row">
+            <a class="btn btn-primary btn-lg" href="#contact">&#128140; Enquire About Your Date</a>
+            <a class="btn btn-ghost btn-lg" href="tel:0263724488">(02) 6372 4488</a>
+          </div>
+          <div class="trust-strip">
+            <span>&#10003; 1890s Sandstone Chapel</span>
+            <span>&#10003; In-house Mudgee Catering</span>
+            <span>&#10003; 6 Luxury Cottages On-site</span>
+            <span>&#10003; Exclusive Hire &#8212; Your Day, Your Way</span>
+          </div>
+        </div>
+        <div class="hero-panel-col">
+          <div class="hero-avail-card card">
+            <div class="avail-header">
+              <span class="avail-icon">&#128197;</span>
+              <div>
+                <strong>2025 Dates &#8212; Limited Availability</strong>
+                <span>A handful of Saturdays remain. 2026 now open.</span>
+              </div>
+            </div>
+            <p class="avail-note">Saturday evenings in peak season (Oct&#8211;Apr) book 12&#8211;18 months ahead. Reach out early &#8212; we would love to show you around.</p>
+            <a class="btn btn-primary btn-block" href="#contact">Check My Date</a>
+            <div class="avail-chips">
+              <span>Weekday savings available</span>
+              <span>Off-peak packages</span>
+              <span>Elopements welcome</span>
+            </div>
+          </div>
+          <div class="hero-detail-card card">
+            <div class="detail-row">
+              <span class="detail-icon">&#128205;</span>
+              <div>
+                <strong>1240 Ulan Road, Mudgee NSW 2850</strong>
+                <span>3.5 hrs from Sydney &middot; 1 hr from Dubbo</span>
+              </div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">&#128222;</span>
+              <div>
+                <strong>(02) 6372 4488</strong>
+                <span>Mon&#8211;Fri 9am&#8211;5pm &middot; Weekends by appt</span>
+              </div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">&#9993;</span>
+              <div>
+                <strong>events@stonebridgeestate.com.au</strong>
+                <span>We reply within 1 business day</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Event packages -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Event packages</h2>
-          <p>Everything you need, with nothing left to chance.</p>
-        </div>
-        <div class="packages-grid">
-          <div class="pkg-card">
-            <h3>🌸 Intimate Ceremony</h3>
-            <div class="pkg-price">From $4,500</div>
-            <p class="pkg-desc">Perfect for elopements and small ceremonies up to 30 guests in our private rose garden.</p>
-            <ul>
-              <li>Ceremony space (up to 30 guests)</li>
-              <li>Floral arrangements included</li>
-              <li>Celebrant coordination</li>
-              <li>Sparkling arrival drinks</li>
-              <li>Post-ceremony photography</li>
-            </ul>
-            <a class="btn btn-secondary" href="#" style="text-align:center;justify-content:center;">Enquire</a>
-          </div>
-          <div class="pkg-card featured">
-            <h3>💍 Full Wedding Day</h3>
-            <div class="pkg-price">From $14,900</div>
-            <p class="pkg-desc">Our most popular package — ceremony, reception, catering and styling for up to 120 guests.</p>
-            <ul>
-              <li>Ceremony + reception spaces</li>
-              <li>3-course dinner &amp; canapés</li>
-              <li>5-hour beverage package</li>
-              <li>Dedicated event coordinator</li>
-              <li>Bridal suite access</li>
-              <li>10% accommodation discount</li>
-            </ul>
-            <a class="btn btn-primary" href="#" style="text-align:center;justify-content:center;">Enquire Now</a>
-          </div>
-          <div class="pkg-card">
-            <h3>🎉 Corporate &amp; Private Events</h3>
-            <div class="pkg-price">From $3,200</div>
-            <p class="pkg-desc">Team retreats, product launches, milestone dinners, and private functions up to 200 guests.</p>
-            <ul>
-              <li>Flexible indoor/outdoor spaces</li>
-              <li>AV equipment included</li>
-              <li>Catering from $85/head</li>
-              <li>Accommodation packages available</li>
-              <li>Tailored menus on request</li>
-            </ul>
-            <a class="btn btn-secondary" href="#" style="text-align:center;justify-content:center;">Enquire</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery strip -->
-    <section class="section" style="padding-top:0;">
-      <div class="container">
-        <h2 style="margin-bottom:.5rem;">A venue worth falling in love with</h2>
-        <p style="color:var(--muted);margin-bottom:0;">Every corner of Stonebridge Estate is designed to create beautiful memories.</p>
-        <div class="gallery-strip">
-          <div class="gallery-tile" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">💐</div>
-          <div class="gallery-tile" style="background:linear-gradient(135deg,#fdf2f8,#fce7f3);">🥂</div>
-          <div class="gallery-tile" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">🌿</div>
-          <div class="gallery-tile" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">🎵</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trust bar -->
-    <div class="trust-bar">
-      <div class="container">
-        <div class="trust-item">🏆 Best Venue Award 2024</div>
-        <div class="trust-item">⭐ 5.0 Google rating (190+ reviews)</div>
-        <div class="trust-item">💒 380+ weddings hosted</div>
-        <div class="trust-item">🌿 Orange Wine Country setting</div>
+    <!-- KPI BAR -->
+    <div class="kpi-bar">
+      <div class="container kpi-bar-inner">
+        <div class="kpi-item"><strong>15</strong><span>Years Operating</span></div>
+        <div class="kpi-divider" aria-hidden="true"></div>
+        <div class="kpi-item"><strong>5.0 &#9733;</strong><span>138 Google Reviews</span></div>
+        <div class="kpi-divider" aria-hidden="true"></div>
+        <div class="kpi-item"><strong>42 acres</strong><span>Heritage Estate</span></div>
+        <div class="kpi-divider" aria-hidden="true"></div>
+        <div class="kpi-item"><strong>280+</strong><span>Weddings Celebrated</span></div>
       </div>
     </div>
 
-    <!-- Testimonials -->
-    <section class="section" style="background:#fffbf5;padding:2.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <!-- VENUE SPACES -->
+    <section class="section" id="spaces">
       <div class="container">
-        <h2>From our couples</h2>
+        <div class="section-head">
+          <div class="section-label">Our Venue Spaces</div>
+          <h2>Four unique settings, one unforgettable estate</h2>
+          <p>From the quiet reverence of the sandstone chapel at dawn to the warm glow of the heritage barn at midnight &#8212; every space at Stonebridge has been shaped by 15 years of wedding days and the love stories that happened within them.</p>
+        </div>
+        <div class="spaces-grid">
+
+          <div class="space-card" data-reveal>
+            <div class="space-image space-chapel" role="img" aria-label="The Sandstone Chapel">
+              <span class="space-emoji" aria-hidden="true">&#9962;</span>
+              <div class="space-cap-badge">Up to 80 guests</div>
+            </div>
+            <div class="space-info">
+              <h3>The Sandstone Chapel</h3>
+              <p class="space-desc">Built in the 1890s and lovingly restored, the chapel is Stonebridge&#39;s most iconic space. Morning light pours through original leadlight windows onto warm sandstone walls. The bell tower still rings on wedding days.</p>
+              <div class="space-meta">
+                <span>&#10003; Ceremony up to 80 guests</span>
+                <span>&#10003; Original 1890s architecture</span>
+                <span>&#10003; Leadlight windows</span>
+                <span>&#10003; PA system installed</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-card" data-reveal>
+            <div class="space-image space-barn" role="img" aria-label="The Heritage Barn">
+              <span class="space-emoji" aria-hidden="true">&#127979;</span>
+              <div class="space-cap-badge">Up to 150 guests</div>
+            </div>
+            <div class="space-info">
+              <h3>The Heritage Barn</h3>
+              <p class="space-desc">A century-old timber and iron barn transformed into a breathtaking reception space. Exposed beams draped with fairy lights, a polished concrete dance floor, and a full catering kitchen behind the scenes.</p>
+              <div class="space-meta">
+                <span>&#10003; Reception up to 150 guests</span>
+                <span>&#10003; Original exposed timber beams</span>
+                <span>&#10003; Dance floor &amp; stage</span>
+                <span>&#10003; Full in-house catering kitchen</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-card" data-reveal>
+            <div class="space-image space-terrace" role="img" aria-label="The Garden Terrace">
+              <span class="space-emoji" aria-hidden="true">&#127795;</span>
+              <div class="space-cap-badge">Up to 100 guests</div>
+            </div>
+            <div class="space-info">
+              <h3>The Garden Terrace</h3>
+              <p class="space-desc">Outdoor ceremonies with the Mudgee ridgeline as backdrop. The manicured terrace features a rose-framed arbour, flagstone pathways, and established olive trees. When the wisteria blooms in spring, it is truly something else.</p>
+              <div class="space-meta">
+                <span>&#10003; Outdoor ceremony up to 100</span>
+                <span>&#10003; Rose &amp; wisteria arbour</span>
+                <span>&#10003; Established olive grove</span>
+                <span>&#10003; Wet weather backup included</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-card" data-reveal>
+            <div class="space-image space-cottage" role="img" aria-label="The Cottage Retreat">
+              <span class="space-emoji" aria-hidden="true">&#127968;</span>
+              <div class="space-cap-badge">6 Luxury Cottages</div>
+            </div>
+            <div class="space-info">
+              <h3>The Cottage Retreat</h3>
+              <p class="space-desc">Six luxury self-contained cottages set among the estate gardens, available exclusively to the wedding party. Stone fireplaces, king beds, claw-foot baths, and private verandahs with vineyard views.</p>
+              <div class="space-meta">
+                <span>&#10003; 6 self-contained cottages</span>
+                <span>&#10003; Exclusive to wedding party</span>
+                <span>&#10003; Stone fireplaces &amp; claw-foot baths</span>
+                <span>&#10003; From $380/night (all 6)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="section section-tinted" id="packages">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Wedding Packages</div>
+          <h2>Three ways to celebrate your day</h2>
+          <p>Every package includes exclusive venue hire, your dedicated on-site coordinator from first contact to last dance, and the full warmth of the Stonebridge team. All pricing is all-inclusive &#8212; no hidden extras.</p>
+        </div>
+        <div class="packages-grid">
+
+          <div class="pkg-card" data-reveal>
+            <div class="pkg-header pkg-header-intimate">
+              <div class="pkg-icon">&#127864;</div>
+              <h3>Intimate</h3>
+              <div class="pkg-guests">Up to 60 guests</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-price">From <strong>$8,500</strong> <span>all-inclusive</span></div>
+              <p class="pkg-desc">For couples who want something beautifully personal. The sandstone chapel or garden terrace, a private dining experience, and the feeling that the whole estate is yours for the day.</p>
+              <ul class="pkg-inclusions">
+                <li>Ceremony in chapel or garden terrace</li>
+                <li>3-hour reception with canapés &amp; grazing</li>
+                <li>Welcome drinks on arrival</li>
+                <li>Mudgee wine &amp; beer package (3 hrs)</li>
+                <li>In-house catering team</li>
+                <li>Dedicated on-site coordinator</li>
+                <li>Setup, styling &amp; pack-down</li>
+                <li>Tables, chairs, linen &amp; tableware</li>
+              </ul>
+              <a class="btn btn-outline pkg-cta" href="#contact">Enquire About Intimate</a>
+            </div>
+          </div>
+
+          <div class="pkg-card pkg-featured" data-reveal>
+            <div class="pkg-popular-badge">Most Popular</div>
+            <div class="pkg-header pkg-header-classic">
+              <div class="pkg-icon">&#128149;</div>
+              <h3>Classic</h3>
+              <div class="pkg-guests">Up to 100 guests</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-price">From <strong>$14,500</strong> <span>all-inclusive</span></div>
+              <p class="pkg-desc">The full Stonebridge experience &#8212; chapel ceremony, barn reception, and a menu that celebrates the finest of Mudgee&#39;s producers. This is what most of our couples choose.</p>
+              <ul class="pkg-inclusions">
+                <li>Chapel ceremony &amp; heritage barn reception</li>
+                <li>3-course dinner with canapé hour</li>
+                <li>Full 5-hour Mudgee wine &amp; beverage package</li>
+                <li>Menu tasting session for 2 included</li>
+                <li>Dedicated on-site coordinator</li>
+                <li>Full setup, styling &amp; pack-down</li>
+                <li>Tables, chairs, linen, tableware &amp; centrepieces</li>
+                <li>Bridal suite access for the day</li>
+                <li>Preferred supplier list (photographers, florists)</li>
+              </ul>
+              <a class="btn btn-primary pkg-cta" href="#contact">Enquire About Classic</a>
+            </div>
+          </div>
+
+          <div class="pkg-card" data-reveal>
+            <div class="pkg-header pkg-header-grand">
+              <div class="pkg-icon">&#127882;</div>
+              <h3>Grand Celebration</h3>
+              <div class="pkg-guests">Up to 150 guests</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-price">From <strong>$22,000</strong> <span>all-inclusive</span></div>
+              <p class="pkg-desc">For couples who want to mark their wedding with real grandeur. The full estate is yours &#8212; all spaces, all cottages prioritised, and a level of service that genuinely sets a new standard.</p>
+              <ul class="pkg-inclusions">
+                <li>Exclusive use of all estate spaces</li>
+                <li>4-course dinner with canapé reception &amp; cheese station</li>
+                <li>Premium Mudgee wine &amp; craft spirits package (6 hrs)</li>
+                <li>Menu tasting for 4 &amp; dedicated chef consultation</li>
+                <li>Senior coordinator &amp; day-of assistant</li>
+                <li>Full florals &amp; centrepiece styling credit ($1,500)</li>
+                <li>All 6 cottages at preferred rate</li>
+                <li>Setup, styling, pack-down &amp; next-morning collection</li>
+                <li>Post-wedding estate breakfast for bridal party</li>
+              </ul>
+              <a class="btn btn-outline pkg-cta" href="#contact">Enquire About Grand</a>
+            </div>
+          </div>
+
+        </div>
+        <p class="packages-note">All packages subject to availability and seasonal pricing. Weekday and off-peak dates attract lower pricing &#8212; ask our team. Prices shown are from-rates; final quote depends on guest count, date and menu selections.</p>
+      </div>
+    </section>
+
+    <!-- WHATS INCLUDED -->
+    <section class="section" id="included">
+      <div class="container">
+        <div class="included-layout">
+          <div class="included-text" data-reveal>
+            <div class="section-label">What&#39;s Included</div>
+            <h2>One booking.<br>Everything handled.</h2>
+            <p>When you book Stonebridge, you are not coordinating a dozen separate vendors. Our team takes care of the things that matter most &#8212; so you can be present on your day instead of managing it.</p>
+            <p>Every wedding at Stonebridge is exclusive hire. On your day, the estate belongs to you and your guests alone. No other events. No shared spaces.</p>
+            <a class="btn btn-primary" href="#contact" style="margin-top:.8rem;display:inline-flex;">Talk to our events team</a>
+          </div>
+          <div class="included-checklist" data-reveal>
+            <div class="checklist-grid">
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Dedicated on-site coordinator</strong><span>With you from first enquiry to the last dance &#8212; not just on the day.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Exclusive venue hire</strong><span>The entire estate is yours. No other events, no shared spaces, no interruptions.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Full setup &amp; pack-down</strong><span>We arrive early and leave late. You arrive to a venue already dressed and ready.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Tables, chairs, linen &amp; tableware</strong><span>All premium quality. Customisable linen colours to match your palette.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>In-house catering team</strong><span>Our kitchen has been cooking Stonebridge weddings for 15 years. They know what makes a great wedding meal.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Mudgee wine &amp; beverage list</strong><span>Curated local Mudgee wines, craft beers and non-alcoholic options. Full liquor licence held.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>Ceremony PA &amp; sound</strong><span>Wireless microphones for the officiant, Bluetooth input for your ceremony playlist.</span></div>
+              </div>
+              <div class="checklist-item">
+                <div class="check-icon">&#10003;</div>
+                <div><strong>On-site cottage accommodation</strong><span>Six luxury cottages available for the wedding party &#8212; preferred rates on all packages.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATERING -->
+    <section class="section catering-section" id="catering">
+      <div class="container">
+        <div class="catering-layout">
+          <div class="catering-visual-col" aria-hidden="true">
+            <div class="catering-visual">
+              <span class="catering-emoji">&#127829;</span>
+              <div class="catering-float-badge"><span>&#127815;</span> Locally Sourced, Mudgee NSW</div>
+            </div>
+          </div>
+          <div class="catering-text" data-reveal>
+            <div class="section-label">In-House Catering</div>
+            <h2>Mudgee&#39;s finest on every plate</h2>
+            <p>Our kitchen team has been cooking for Stonebridge weddings since 2009 &#8212; and they take it personally. Every menu starts with what&#39;s in season from local Mudgee producers: stone fruits from the orchards, lamb from the Central West tablelands, vegetables grown within 50 kilometres.</p>
+            <p>We work with you to create a menu that reflects who you are as a couple. Whether that&#39;s a relaxed grazing feast under the olive trees or a formal four-course dinner in the barn, the food will be something your guests talk about for months.</p>
+            <div class="catering-features">
+              <div class="catering-feat"><span>&#10003;</span><span>Exclusive in-house catering &#8212; no outside caterers permitted</span></div>
+              <div class="catering-feat"><span>&#10003;</span><span>Full liquor licence held (BYO wine by arrangement)</span></div>
+              <div class="catering-feat"><span>&#10003;</span><span>Curated Mudgee wine list from local vineyards</span></div>
+              <div class="catering-feat"><span>&#10003;</span><span>All dietary requirements accommodated &#8212; please advise on booking</span></div>
+              <div class="catering-feat"><span>&#10003;</span><span>Menu tasting sessions included on packages over $15,000</span></div>
+              <div class="catering-feat"><span>&#10003;</span><span>Canapé service from $45/head &middot; Dinner from $115/head</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section section-tinted" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">From Our Couples</div>
+          <h2>What they said after their day</h2>
+          <p>138 reviews. 5.0 stars. But it&#39;s the words that matter most.</p>
+        </div>
         <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"We couldn't have asked for a more perfect day. From the very first site visit to the last dance of the night, the Stonebridge team made every detail feel effortless. Absolutely breathtaking."</p>
-            <div class="reviewer">— Sophie &amp; James R., married May 2024</div>
+
+          <div class="testimonial-card" data-reveal>
+            <div class="testimonial-heart">&#10084;</div>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>&#8220;We had looked at twelve venues before we found Stonebridge. The moment we walked into the chapel and the morning light came through those leadlight windows &#8212; we looked at each other and just knew. Our coordinator Emma was extraordinary. Guests are still talking about that day nearly a year later.&#8221;</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">A+T</div>
+              <div>
+                <strong>Annalise &amp; Tom Whitfield</strong>
+                <span>Married April 2024 &middot; Flew in from Sydney</span>
+              </div>
+            </div>
           </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Our corporate retreat here was exceptional. The catering was outstanding, the AV setup was seamless, and the team anticipated every need. Our whole board commented on the quality."</p>
-            <div class="reviewer">— Mark T., CEO, Bathurst NSW</div>
+
+          <div class="testimonial-card" data-reveal>
+            <div class="testimonial-heart">&#10084;</div>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>&#8220;I was so anxious about organising a wedding three hours from home. But from the first call with the Stonebridge team I just relaxed. The food was stunning &#8212; genuinely the best meal I&#39;ve had at a wedding. Six months on, guests are still messaging us about it. Every dish celebrated something local.&#8221;</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">J+M</div>
+              <div>
+                <strong>Jessie &amp; Marcus Chen</strong>
+                <span>Married October 2024 &middot; Central West NSW</span>
+              </div>
+            </div>
           </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"We chose Stonebridge for our intimate elopement with just 18 guests. It was more magical than we could have imagined. The rose garden ceremony had everyone in tears — the good kind!"</p>
-            <div class="reviewer">— Claire &amp; Nathan M., married Oct 2024</div>
+
+          <div class="testimonial-card" data-reveal>
+            <div class="testimonial-heart">&#10084;</div>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>&#8220;We stayed in the cottages the night before with our bridal party and I wouldn&#39;t change a moment of it. Waking up on your wedding morning with your best friends around you, in a stone cottage on an estate like that &#8212; it was the best decision we made. The coordinator made everything feel completely effortless.&#8221;</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">S+D</div>
+              <div>
+                <strong>Sarah &amp; Dan Morrow</strong>
+                <span>Married February 2025 &middot; Dubbo NSW</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="testimonials-footer">
+          <div class="google-rating-badge">
+            <span class="gr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <div><strong>5.0 on Google</strong><span>138 verified reviews</span></div>
+          </div>
+          <a class="btn btn-outline" href="#contact">Read more &amp; enquire</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUDGET CALCULATOR -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Budget Calculator</div>
+          <h2>Get a rough idea of your investment</h2>
+          <p>Use the calculator below to build an indicative budget. It&#39;s not a quote &#8212; but it gives you a clear starting point for the conversation with our team.</p>
+        </div>
+        <div class="calculator-card">
+          <div class="calc-inputs">
+            <div class="calc-group">
+              <label class="calc-label" for="calc-guests">
+                Number of guests
+                <span class="calc-value-display" id="guests-display">80 guests</span>
+              </label>
+              <input class="calc-slider" type="range" id="calc-guests" min="20" max="150" value="80" step="5">
+              <div class="slider-range-labels"><span>20</span><span>150</span></div>
+            </div>
+            <div class="calc-group">
+              <label class="calc-label">Season</label>
+              <div class="calc-toggle-row">
+                <button class="calc-toggle active" data-group="season" data-value="peak" type="button">
+                  Peak (Oct&#8211;Apr)
+                  <span class="calc-toggle-note">Standard rates</span>
+                </button>
+                <button class="calc-toggle" data-group="season" data-value="offpeak" type="button">
+                  Off-Peak (May&#8211;Sep)
+                  <span class="calc-toggle-note">Save approx. 15%</span>
+                </button>
+              </div>
+            </div>
+            <div class="calc-group">
+              <label class="calc-label">Day of week</label>
+              <div class="calc-toggle-row">
+                <button class="calc-toggle active" data-group="day" data-value="saturday" type="button">Saturday</button>
+                <button class="calc-toggle" data-group="day" data-value="fri_sun" type="button">
+                  Fri or Sun
+                  <span class="calc-toggle-note">Save approx. 10%</span>
+                </button>
+                <button class="calc-toggle" data-group="day" data-value="weekday" type="button">
+                  Weekday
+                  <span class="calc-toggle-note">Save approx. 20%</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="calc-results" id="calc-results">
+            <div class="result-row">
+              <div class="result-item">
+                <span class="result-label">Venue hire</span>
+                <span class="result-value" id="result-venue">&#8212;</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Catering estimate</span>
+                <span class="result-value" id="result-catering">&#8212;</span>
+              </div>
+              <div class="result-item result-total-item">
+                <span class="result-label">Estimated total</span>
+                <span class="result-value result-total" id="result-total">&#8212;</span>
+              </div>
+            </div>
+            <div class="result-cottage-note">
+              <span class="cottage-icon">&#127968;</span>
+              <span id="cottage-text">6 cottages available from $480/night (all 6, exclusive to wedding party)</span>
+            </div>
+            <div class="result-inclusions">
+              <strong>All packages include:</strong> ceremony space, reception, full setup &amp; pack-down, tables/chairs/linen, and dedicated coordinator on the day.
+            </div>
+            <div class="result-cta">
+              <a class="btn btn-primary" href="#contact">Get your personalised quote &#8212; speak with our events team</a>
+            </div>
+          </div>
+        </div>
+        <p class="calculator-disclaimer">Estimates are indicative only and based on standard package rates. Final pricing depends on date, menu selections, beverage package and custom requirements. All prices include GST.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-tinted" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Frequently Asked Questions</div>
+          <h2>Questions couples ask us most</h2>
+        </div>
+        <div class="faq-list">
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>Do you cater exclusively, or can we bring our own caterer?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>We cater exclusively in-house. Our kitchen team has been cooking for Stonebridge weddings since 2009, and in-house catering is one of the reasons our food consistently receives such strong feedback. It means we can guarantee quality, accommodate all dietary requirements, and coordinate timing seamlessly with the rest of your day. We hold a full liquor licence and work with an outstanding selection of local Mudgee wines and craft beverages.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>Can we visit the estate before we commit?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely &#8212; and we strongly encourage it. There is something about standing in the chapel or walking through the barn that no photograph can fully capture. Our team hosts guided estate tours Monday to Friday during business hours and by appointment on weekends. Call us on (02) 6372 4488 or use the enquiry form below &#8212; we suggest allowing 1.5 hours to see all four spaces properly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>What is the booking process and how do we secure our date?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>After your site visit and personalised quote, securing your date requires a 20% deposit and a signed venue agreement. The remaining balance is invoiced in two stages &#8212; at 6 months prior and 4 weeks prior to your wedding. Peak Saturdays (October through April) book 12&#8211;18 months ahead. If you have a date in mind, reach out early even if you&#39;re not quite ready to commit &#8212; we can do a preliminary availability check.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>Do we need to hire a separate wedding planner?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>No &#8212; every Stonebridge wedding includes a dedicated on-site coordinator who works with you from the moment you book. They will help with timelines, vendor coordination, ceremony logistics, and everything in between. On your wedding day they are there from setup to the final song. Many of our couples find they do not need an external planner at all, though if you have one already, our coordinators are experienced at working alongside them.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>Are the on-site cottages available for all weddings?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes &#8212; our six luxury cottages can be booked by any couple marrying at Stonebridge. They are available exclusively to the wedding party; no other guests are on the property on your wedding night. Cottage rates start from $380/night (off-peak) for all six combined, rising to $480/night in peak season. Most couples book for two nights &#8212; the night before for the bridal party getting-ready experience, and the wedding night itself.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-reveal>
+            <button class="faq-question" aria-expanded="false" type="button">
+              <span>What happens if the weather is bad on our outdoor ceremony day?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Every outdoor ceremony booking includes a wet weather backup at no extra cost. The sandstone chapel (up to 80 guests) is available as the backup for garden terrace ceremonies. For larger outdoor events we have a permanent marquee structure that can be deployed. Our coordinator monitors forecasts in the days prior and will have a clear contingency plan ready &#8212; you will never be scrambling on the morning.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Get In Touch</div>
+          <h2>Tell us about your day</h2>
+          <p>Whether you have a date locked in or you are just starting to look, we would love to hear from you. Fill in a few details and our events team will be in touch within one business day.</p>
+        </div>
+        <div class="contact-layout">
+          <div class="contact-form-wrap" data-reveal>
+            <form class="enquiry-form" id="enquiry-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-name">Your name(s)</label>
+                  <input type="text" id="f-name" name="name" placeholder="e.g. Sarah &amp; James" required>
+                </div>
+                <div class="form-group">
+                  <label for="f-email">Email address</label>
+                  <input type="email" id="f-email" name="email" placeholder="you@email.com" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-phone">Phone number</label>
+                  <input type="tel" id="f-phone" name="phone" placeholder="04XX XXX XXX">
+                </div>
+                <div class="form-group">
+                  <label for="f-date">Preferred wedding date</label>
+                  <input type="date" id="f-date" name="date">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-guests">Approximate guest numbers</label>
+                  <select id="f-guests" name="guests">
+                    <option value="">Select range</option>
+                    <option>20&#8211;40 guests</option>
+                    <option>40&#8211;60 guests</option>
+                    <option>60&#8211;100 guests</option>
+                    <option>100&#8211;150 guests</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="f-package">Package interest</label>
+                  <select id="f-package" name="package">
+                    <option value="">Select package</option>
+                    <option>Intimate (up to 60 guests)</option>
+                    <option>Classic (up to 100 guests)</option>
+                    <option>Grand Celebration (up to 150 guests)</option>
+                    <option>Not sure &#8212; please advise</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group form-group-full">
+                <label for="f-message">Anything you would like us to know</label>
+                <textarea id="f-message" name="message" rows="4" placeholder="Tell us a little about your vision, or ask us anything you like..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg form-submit">Send Enquiry</button>
+              <p class="form-note">We will respond within 1 business day. For urgent enquiries, call <a href="tel:0263724488">(02) 6372 4488</a>.</p>
+            </form>
+          </div>
+          <div class="contact-info-col" data-reveal>
+            <div class="contact-info-card card">
+              <h3>Find us in Mudgee wine country</h3>
+              <div class="contact-detail">
+                <span class="contact-icon">&#128205;</span>
+                <div><strong>1240 Ulan Road</strong><span>Mudgee NSW 2850</span></div>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-icon">&#128222;</span>
+                <div><strong>(02) 6372 4488</strong><span>Mon&#8211;Fri 9am&#8211;5pm AEST</span></div>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-icon">&#9993;</span>
+                <div><strong>events@stonebridgeestate.com.au</strong><span>Replies within 1 business day</span></div>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-icon">&#128197;</span>
+                <div><strong>Venue tours available</strong><span>Mon&#8211;Fri in hours &middot; Weekends by appointment</span></div>
+              </div>
+              <div class="map-embed">
+                <iframe
+                  title="The Stonebridge Estate location near Mudgee NSW"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105817.46534875577!2d149.4673295!3d-32.5956232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0b5a14e1e99155%3A0x5017d681632e160!2sMudgee%20NSW%202850!5e0!3m2!1sen!2sau!4v1708000000000!5m2!1sen!2sau"
+                  width="100%" height="220"
+                  style="border:0;border-radius:10px;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+              <div class="abn-note">ABN: 64 321 987 654 &middot; Est. 2009</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- AGENCY CTA -->
+    <section class="agency-cta-section">
       <div class="container">
-        <div class="kpi-grid">
-          <div class="kpi"><strong>380+ events hosted</strong><span>Weddings, corporate, private dining.</span></div>
-          <div class="kpi"><strong>5-star catering</strong><span>Award-winning kitchen team on site.</span></div>
-          <div class="kpi"><strong>On-site accommodation</strong><span>12 luxury rooms for bridal parties.</span></div>
-          <div class="kpi"><strong>Dedicated coordinator</strong><span>Yours from booking to last dance.</span></div>
-        </div>
-        <div class="cta" style="margin-top:1.4rem;">
-          <a class="btn btn-primary" href="#">💌 Enquire About Your Date</a>
-          <a class="btn btn-secondary" href="#">Download Venue Brochure</a>
-        </div>
+        <h2>Want a website like this for your venue or hospitality business?</h2>
+        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses &#8212; see packages and pricing.</p>
+        <a class="btn-get-site" href="/packages.html">&#9889; See Packages &amp; Pricing</a>
       </div>
     </section>
 
-    <section class="cta-section">
-      <div class="container">
-        <h2>Want a website like this for your venue or events business?</h2>
-        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses — see our packages and pricing below.</p>
-        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p style="margin:0;">© 2025 The Stonebridge Estate · 1240 Cargo Road, Orange NSW 2800 · (02) 6362 9800</p>
-      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand footer-brand-link" href="#">
+          <span class="brand-icon">&#9752;</span>
+          <span class="brand-name">The Stonebridge Estate</span>
+        </a>
+        <p>Wedding &amp; event venue in Mudgee NSW wine country. Established 2009.</p>
+        <p class="footer-abn">ABN: 64 321 987 654</p>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <a href="#spaces">Our Spaces</a>
+        <a href="#packages">Packages</a>
+        <a href="#calculator">Budget Calculator</a>
+        <a href="#catering">Catering</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Enquire</a>
+      </div>
+      <div class="footer-contact">
+        <strong>Contact</strong>
+        <span>1240 Ulan Road, Mudgee NSW 2850</span>
+        <a href="tel:0263724488">(02) 6372 4488</a>
+        <a href="mailto:events@stonebridgeestate.com.au">events@stonebridgeestate.com.au</a>
+        <span>Mon&#8211;Fri 9am&#8211;5pm AEST</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>&copy; 2025 The Stonebridge Estate &middot; Mudgee NSW</span>
+        <span>Demo site by <a href="/packages.html">ImproveYourSite</a></span>
+      </div>
     </div>
   </footer>
 
-  <a class="phone-cta" href="#">💌 Enquire today</a>
+  <a class="sticky-mobile-cta" href="#contact" id="sticky-cta">&#128140; Enquire about your date</a>
+
+  <script>
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('faq-open');
+      document.querySelectorAll('.faq-item.faq-open').forEach(function(open) {
+        open.classList.remove('faq-open');
+        open.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('faq-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Budget Calculator
+  (function() {
+    var slider = document.getElementById('calc-guests');
+    var display = document.getElementById('guests-display');
+    var state = { guests: 80, season: 'peak', day: 'saturday' };
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-AU'); }
+    function fmtRange(lo, hi) { return fmt(lo) + ' \u2013 ' + fmt(hi); }
+    function calculate() {
+      var g = state.guests;
+      var peak = state.season === 'peak';
+      var sat = state.day === 'saturday';
+      var fri_sun = state.day === 'fri_sun';
+      var base_venue = g <= 60 ? 3500 : g <= 100 ? 5500 : 8500;
+      var season_mult = peak ? 1.0 : 0.85;
+      var day_mult = sat ? 1.0 : fri_sun ? 0.90 : 0.80;
+      var venue_cost = base_venue * season_mult * day_mult;
+      var catering_low = g * 115;
+      var catering_high = g * 165;
+      var total_low = venue_cost + catering_low;
+      var total_high = venue_cost + catering_high;
+      var cottage_rate = peak ? 480 : 380;
+      document.getElementById('result-venue').textContent = fmt(venue_cost);
+      document.getElementById('result-catering').textContent = fmtRange(catering_low, catering_high);
+      document.getElementById('result-total').textContent = fmtRange(total_low, total_high);
+      document.getElementById('cottage-text').textContent =
+        '6 cottages available from ' + fmt(cottage_rate) + '/night (all 6, exclusive to wedding party)';
+    }
+    slider.addEventListener('input', function() {
+      state.guests = parseInt(slider.value);
+      display.textContent = state.guests + ' guests';
+      calculate();
+    });
+    document.querySelectorAll('.calc-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var group = btn.dataset.group;
+        document.querySelectorAll('.calc-toggle[data-group="' + group + '"]').forEach(function(b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        state[group] = btn.dataset.value;
+        calculate();
+      });
+    });
+    calculate();
+  })();
+
+  // Scroll reveal
+  (function() {
+    var els = document.querySelectorAll('[data-reveal]');
+    if (!els.length || !window.IntersectionObserver) {
+      els.forEach(function(el) { el.classList.add('revealed'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+    els.forEach(function(el) { obs.observe(el); });
+  })();
+
+  // Sticky header
+  (function() {
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function() {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  })();
+
+  // Open/closed badge (AEST simplified)
+  (function() {
+    var badge = document.querySelector('.badge-open');
+    if (!badge) return;
+    var now = new Date();
+    var aest = new Date(now.getTime() + 10 * 3600000);
+    var day = aest.getUTCDay();
+    var hour = aest.getUTCHours();
+    var isOpen = day >= 1 && day <= 5 && hour >= 9 && hour < 17;
+    if (!isOpen) {
+      var dot = badge.querySelector('.badge-dot');
+      if (dot) dot.style.background = '#9ca3af';
+      badge.style.cssText = 'background:#f3f4f6;border-color:#d1d5db;color:#6b7280;';
+    }
+  })();
+
+  // Form demo intercept
+  document.getElementById('enquiry-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.innerHTML = '<div class="form-success"><div class="form-success-icon">\u2713<\/div><h3>Enquiry received!<\/h3><p>Thank you \u2014 our events team will be in touch within 1 business day. In the meantime, feel free to call us on <a href="tel:0263724488">(02) 6372 4488<\/a>.<\/p><p class="form-demo-note">This is a demo site by ImproveYourSite \u2014 form submissions are not delivered to a real inbox.<\/p><\/div>';
+  });
+  <\/script>
 </body>
 </html>
