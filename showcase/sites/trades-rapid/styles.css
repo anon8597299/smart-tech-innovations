@@ -29,7 +29,7 @@ a { color: inherit; text-decoration: none; }
 .nav-links { display: flex; gap: .75rem; flex-wrap: wrap; }
 .nav-links a { padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; }
 .hero { padding: 5rem 0 2.2rem; }
-.badge { display:inline-block; background:#dbeafe; color:#9a3412; border:1px solid #93c5fd; font-weight:700; padding:.3rem .7rem; border-radius:999px; font-size:.76rem; }
+.badge { display:inline-block; background:#dbeafe; color:#1e40af; border:1px solid #93c5fd; font-weight:700; padding:.3rem .7rem; border-radius:999px; font-size:.76rem; }
 h1 { font-size: clamp(1.8rem, 5vw, 3rem); line-height:1.05; margin: .85rem 0 .65rem; }
 .lead { color: var(--muted); max-width: 760px; }
 .cta-hero { margin-top: .85rem; }
