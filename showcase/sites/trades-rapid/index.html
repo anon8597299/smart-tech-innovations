@@ -3,138 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bathurst Plumbing Co — Fast, Reliable Plumbers, Bathurst NSW</title>
-  <meta name="description" content="Licensed plumbers in Bathurst NSW. Emergency callouts, hot water, blocked drains & more. Call 0400 123 456 for fast response.">
+  <title>Bathurst Plumbing Co — Licensed Plumbers, Bathurst NSW | Call 0400 123 456</title>
+  <meta name="description" content="Licensed plumbers in Bathurst NSW. Emergency callouts 24/7, hot water systems, blocked drains & bathroom renovations. Call Bathurst Plumbing Co on 0400 123 456.">
+  <link rel="canonical" href="https://improveyoursite.com/showcase/sites/trades-rapid/">
+  <meta property="og:title" content="Bathurst Plumbing Co — Licensed Plumbers, Bathurst NSW">
+  <meta property="og:description" content="Fast, reliable plumbers in Bathurst. Emergency callouts 24/7. Call 0400 123 456.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Demo banner */
-    .demo-banner {
-      background: #0f172a;
-      color: #e2e8f0;
-      text-align: center;
-      padding: .52rem 1rem;
-      font-size: .82rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .demo-banner a {
-      color: #2dd4bf;
-      font-weight: 700;
-      text-decoration: underline;
-      margin-left: .4rem;
-    }
-    .site-header { top: 36px; }
-    /* Services */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-      margin-top: 1.4rem;
-    }
-    .service-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.1rem;
-    }
-    .service-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
-    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
-    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
-    /* Trust bar */
-    .trust-bar {
-      background: var(--primary);
-      color: #fff;
-      padding: 1.1rem 0;
-      margin-top: 2rem;
-    }
-    .trust-bar .container {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      font-weight: 700;
-      font-size: .92rem;
-    }
-    .trust-item span.icon { font-size: 1.1rem; }
-    /* Testimonials */
-    .testimonial-section {
-      padding: 2.4rem 0;
-      background: #fffbf5;
-      margin-top: 2rem;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-    }
-    .testimonial-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.1rem;
-    }
-    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
-    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
-    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
-    /* CTA section */
-    .cta-section {
-      padding: 3rem 0;
-      text-align: center;
-    }
-    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
-    .btn-get-site {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      background: #5b4dff;
-      color: #fff;
-      font-weight: 800;
-      padding: .9rem 2rem;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      text-decoration: none;
-    }
-    .btn-get-site:hover { background: #4c40db; }
-    .section { padding: 2rem 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-head h2 { margin: 0 0 .3rem; }
-    .section-head p { color: var(--muted); margin: 0; }
-    /* ── Dynamic components ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .service-card, .value, .testimonial-card, .kpi { transition: box-shadow .18s, transform .18s; }
-    .service-card:hover, .value:hover, .testimonial-card:hover, .kpi:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-3px); }
-    .open-badge { display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:700; padding:.22rem .6rem; border-radius:999px; margin-left:.5rem; vertical-align:middle; }
-    .open-badge.open  { background:#dcfce7; color:#16a34a; }
-    .open-badge.closed { background:#fee2e2; color:#dc2626; }
-    .faq-section { padding:2rem 0; border-top:1px solid var(--line); }
-    .faq-section h2 { margin-bottom:1.1rem; }
-    .faq-item { border:1px solid var(--line); border-radius:12px; background:#fff; margin-bottom:.5rem; overflow:hidden; }
-    .faq-q { width:100%; background:none; border:none; padding:.85rem 1rem; text-align:left; font-family:Inter,sans-serif; font-size:.95rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--text); gap:.5rem; }
-    .faq-arrow { font-size:1.1rem; color:var(--primary); flex-shrink:0; transition:transform .25s; display:inline-block; }
-    .faq-item.open .faq-arrow { transform:rotate(45deg); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .25s; padding:0 1rem; color:var(--muted); font-size:.91rem; line-height:1.65; }
-    .faq-item.open .faq-a { max-height:300px; padding:.05rem 1rem .85rem; }
-    @media (max-width: 900px) {
-      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
-      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
+    .demo-banner{background:#0f172a;color:#e2e8f0;text-align:center;padding:.52rem 1rem;font-size:.82rem;position:sticky;top:0;z-index:100;}
+    .demo-banner a{color:#2dd4bf;font-weight:700;text-decoration:underline;margin-left:.4rem;}
+    .site-header{top:36px;}
+    .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;margin-top:1.4rem;}
+    .service-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.25rem;}
+    .service-card .icon{font-size:1.8rem;margin-bottom:.5rem;}
+    .service-card h3{margin:0 0 .35rem;font-size:1rem;}
+    .service-card p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.55;}
+    .trust-bar{background:var(--primary);color:#fff;padding:1.1rem 0;margin-top:2rem;}
+    .trust-bar .container{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;align-items:center;}
+    .trust-item{display:flex;align-items:center;gap:.4rem;font-weight:700;font-size:.92rem;}
+    .trust-item span.icon{font-size:1.1rem;}
+    .testimonial-section{padding:2.4rem 0;background:#fffbf5;margin-top:2rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .testimonial-section h2{text-align:center;margin-bottom:1.4rem;}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;}
+    .testimonial-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem;}
+    .stars{color:#f59e0b;font-size:1rem;margin-bottom:.5rem;}
+    .testimonial-card p{margin:0 0 .8rem;font-size:.93rem;}
+    .reviewer{font-weight:700;font-size:.86rem;color:var(--muted);}
+    .google-badge{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.35rem .75rem;font-size:.78rem;font-weight:700;color:#5f6368;margin-bottom:1.2rem;}
+    .cta-section{padding:3rem 0;text-align:center;}
+    .cta-section h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:.6rem;}
+    .cta-section p{color:var(--muted);margin-bottom:1.4rem;font-size:1.05rem;}
+    .btn-get-site{display:inline-flex;align-items:center;gap:.45rem;background:#5b4dff;color:#fff;font-weight:800;padding:.9rem 2rem;border-radius:12px;font-size:1.05rem;text-decoration:none;}
+    .btn-get-site:hover{background:#4c40db;}
+    .section{padding:2rem 0;}
+    .section-head{margin-bottom:1rem;}
+    .section-head h2{margin:0 0 .3rem;}
+    .section-head p{color:var(--muted);margin:0;}
+    @media(max-width:900px){
+      .services-grid,.testimonials-grid{grid-template-columns:1fr;}
+      .trust-bar .container{gap:1rem;flex-direction:column;align-items:flex-start;padding:0 4vw;}
+      .site-header{top:0;}
+      .demo-banner{position:relative;}
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Plumber",
+    "name": "Bathurst Plumbing Co.",
+    "image": "",
+    "telephone": "0400123456",
+    "email": "info@bathurstplumbing.com.au",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "67 Keppel Street",
+      "addressLocality": "Bathurst",
+      "addressRegion": "NSW",
+      "postalCode": "2795",
+      "addressCountry": "AU"
+    },
+    "geo": {"@type": "GeoCoordinates", "latitude": -33.4155, "longitude": 149.5786},
+    "url": "https://bathurstplumbing.com.au",
+    "priceRange": "$$",
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"07:00","closes":"18:00"}
+    ],
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "154"},
+    "areaServed": ["Bathurst","Orange","Kelso","Blayney","Oberon","Lithgow"]
+  }
+  </script>
 </head>
 <body>
 
@@ -150,6 +90,7 @@
         <a href="services.html">Services</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <a href="tel:0400123456" style="background:var(--primary);color:#fff;border-color:var(--primary);">📞 0400 123 456</a>
       </nav>
     </div>
   </header>
@@ -158,35 +99,53 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Licensed · Insured · Local · Bathurst NSW</span><span class="open-badge" id="open-badge">⏳</span>
-        <h1>Trusted plumbers in Bathurst — fast response, fair prices</h1>
-        <p class="lead">Bathurst Plumbing Co. handles everything from blocked drains and hot water systems to full bathroom renovations. Available 7 days a week with same-day emergency callouts.</p>
+        <div class="hero-badge-row">
+          <span class="badge">Licensed · Insured · Bathurst NSW</span>
+          <span class="open-badge" id="open-badge">⏳</span>
+        </div>
+        <h1>Bathurst's trusted plumbers — fast response, fair prices</h1>
+        <p class="lead">Bathurst Plumbing Co. has served Central West NSW families since 2011. From blocked drains and burst pipes to full bathroom renovations — we show up on time, explain the job clearly, and give you a fixed price before we start.</p>
         <div class="cta cta-hero">
-          <a class="btn btn-primary" href="contact.html">📞 Request a Callback</a>
-          <a class="btn btn-secondary" href="services.html">View All Services</a>
+          <a class="btn btn-primary" href="tel:0400123456">📞 Call 0400 123 456</a>
+          <a class="btn btn-secondary" href="contact.html">Request a Callback</a>
         </div>
         <div class="trust-strip" aria-label="Trust signals">
           <span>✓ QBCC licensed</span>
           <span>✓ Fully insured</span>
           <span>✓ Same-day emergency</span>
-          <span>✓ Upfront pricing</span>
+          <span>✓ Fixed-price quotes</span>
+          <span>✓ Local since 2011</span>
         </div>
 
         <div class="hero-grid" style="margin-top:1.4rem;">
           <div class="card">
-            <h3>📞 Call us now</h3>
-            <p style="font-size:1.5rem;font-weight:800;color:var(--primary);margin:.3rem 0;">0400 123 456</p>
-            <p>Available Mon–Sat 7am–6pm<br>Emergency callouts 24/7</p>
-            <p style="margin-top:.5rem;"><strong>Office:</strong> 67 Keppel Street, Bathurst NSW 2795</p>
+            <h3>📞 Available now</h3>
+            <p style="font-size:1.6rem;font-weight:800;color:var(--primary);margin:.3rem 0 .5rem;"><a href="tel:0400123456" style="color:inherit;">0400 123 456</a></p>
+            <p style="font-size:.88rem;color:var(--muted);">Mon–Sat 7am–6pm · Emergency 24/7<br><strong style="color:var(--text);">67 Keppel Street, Bathurst NSW 2795</strong></p>
+            <div class="cert-strip">
+              <div class="cert-badge">🪪 QBCC Lic. 1234567</div>
+              <div class="cert-badge">🛡 Public liability insured</div>
+              <div class="cert-badge">⭐ 4.8 Google rating</div>
+            </div>
           </div>
           <div class="hero-visual">
-            <h3>No-nonsense service</h3>
-            <p>We show up on time, explain the job clearly, and give you a fixed price before we start. No surprise invoices.</p>
-            <div class="chips">
-              <span>Same-day available</span>
-              <span>Fixed-price quotes</span>
-              <span>5-star rated</span>
-              <span>Local family business</span>
+            <h3>Job cost estimator</h3>
+            <p style="font-size:.85rem;color:#7c4a16;margin-bottom:.7rem;">Get a rough idea of what your job might cost — then call us for a free fixed quote.</p>
+            <div class="estimator-card" style="padding:1rem;margin-top:0;">
+              <select class="est-select" id="job-type" onchange="estimateCost()">
+                <option value="">— Select job type —</option>
+                <option value="blocked-drain">Blocked drain</option>
+                <option value="hot-water">Hot water system replacement</option>
+                <option value="tap-repair">Tap or toilet repair</option>
+                <option value="burst-pipe">Burst pipe repair</option>
+                <option value="bathroom-reno">Bathroom renovation</option>
+                <option value="emergency">Emergency callout (24/7)</option>
+              </select>
+              <div class="est-result" id="est-result">
+                <div class="est-range" id="est-range"></div>
+                <div class="est-note" id="est-note"></div>
+                <a class="btn btn-primary" href="tel:0400123456" style="margin-top:.7rem;display:inline-flex;font-size:.88rem;padding:.55rem 1rem;">📞 Get your free quote</a>
+              </div>
             </div>
           </div>
         </div>
@@ -197,39 +156,67 @@
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h2>Our services</h2>
-          <p>Residential and light commercial plumbing across Bathurst and surrounds.</p>
+          <h2>Our plumbing services</h2>
+          <p>Residential and light commercial plumbing across Bathurst and the Central West.</p>
         </div>
         <div class="services-grid">
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🚿</div>
             <h3>Blocked Drains</h3>
-            <p>CCTV drain inspection and high-pressure water jetting. Fast diagnosis, permanent fix.</p>
+            <p>CCTV drain inspection and high-pressure water jetting. Fast diagnosis, permanent fix. We find the cause, not just clear the symptom.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🔥</div>
             <h3>Hot Water Systems</h3>
-            <p>Supply and install gas, electric, solar, and heat pump systems. Same-day replacement available.</p>
+            <p>Supply and install gas, electric, solar, and heat pump systems. Same-day replacement available. All major brands serviced.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🚽</div>
             <h3>Bathroom Renovations</h3>
-            <p>Full bathroom and laundry fit-outs from plans to final fixtures. Quality guaranteed.</p>
+            <p>Full bathroom and laundry fit-outs from plans to final fixtures. Quality guaranteed. We manage the full plumbing scope.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🏗️</div>
             <h3>New Construction</h3>
-            <p>Rough-in and fit-out for new builds and major renovations. Builders welcome.</p>
+            <p>Rough-in and fit-out for new builds and major renovations. Builders welcome. Experience with residential and light commercial.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🔧</div>
             <h3>General Repairs</h3>
-            <p>Leaking taps, burst pipes, toilet repairs, and all general plumbing maintenance.</p>
+            <p>Leaking taps, burst pipes, toilet repairs, and all general plumbing maintenance. No job too small. Fixed-price every time.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card reveal">
             <div class="icon">🚨</div>
             <h3>Emergency Callouts</h3>
-            <p>Burst pipes don't wait — neither do we. 24/7 emergency response across Bathurst.</p>
+            <p>Burst pipes don't wait — neither do we. 24/7 emergency response across Bathurst. Typical arrival within 60 minutes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" style="background:#fff8f0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      <div class="container">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>Straightforward from first call to final invoice.</p>
+        </div>
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <h4>Call or enquire</h4>
+            <p>Phone us or submit an online request. We'll confirm your job within the hour during business hours.</p>
+          </div>
+          <div class="process-step reveal">
+            <h4>Free assessment</h4>
+            <p>We assess the job and explain exactly what needs doing in plain English. No jargon, no pressure.</p>
+          </div>
+          <div class="process-step reveal">
+            <h4>Fixed-price quote</h4>
+            <p>You get a written fixed price before any work starts. No surprise charges on the invoice.</p>
+          </div>
+          <div class="process-step reveal">
+            <h4>Job done right</h4>
+            <p>We complete the work cleanly and efficiently, then walk you through what was done and why.</p>
           </div>
         </div>
       </div>
@@ -238,49 +225,123 @@
     <!-- Trust bar -->
     <div class="trust-bar">
       <div class="container">
-        <div class="trust-item"><span class="icon">⭐</span> 4.8 Google rating (150+ reviews)</div>
+        <div class="trust-item"><span class="icon">⭐</span> 4.8 Google rating (154 reviews)</div>
         <div class="trust-item"><span class="icon">🪪</span> QBCC Lic. 1234567</div>
         <div class="trust-item"><span class="icon">📍</span> Serving Bathurst, Orange &amp; surrounds</div>
-        <div class="trust-item"><span class="icon">🗓️</span> Open 7 days</div>
+        <div class="trust-item"><span class="icon">🗓️</span> Open 7 days · Emergency 24/7</div>
       </div>
     </div>
 
     <!-- Testimonials -->
     <section class="testimonial-section">
       <div class="container">
-        <h2>What our customers say</h2>
+        <div style="text-align:center;">
+          <div class="google-badge">⭐ 4.8 · 154 reviews on Google</div>
+        </div>
+        <h2 style="text-align:center;">What Bathurst locals say</h2>
         <div class="testimonials-grid">
-          <div class="testimonial-card">
+          <div class="testimonial-card reveal">
             <div class="stars">★★★★★</div>
-            <p>"Called at 7am with a burst pipe under the house. Mark arrived within the hour and had it sorted by 9am. Absolute legends. Reasonable price too."</p>
-            <div class="reviewer">— Pete H., Bathurst NSW</div>
+            <p>"Called at 7am with a burst pipe under the house. Mark arrived within the hour and had it sorted by 9am. Absolute legends. Reasonable price too — exactly what they quoted."</p>
+            <div class="reviewer">— Pete H. · Bathurst NSW · Hot water emergency</div>
           </div>
-          <div class="testimonial-card">
+          <div class="testimonial-card reveal">
             <div class="stars">★★★★★</div>
-            <p>"Replaced our old hot water system with a heat pump. The guys were clean, professional, and left the place spotless. Highly recommend."</p>
-            <div class="reviewer">— Jenny K., Orange NSW</div>
+            <p>"Replaced our old hot water system with a heat pump. The guys were clean, professional, and left the place spotless. Explained everything before they started. Highly recommend."</p>
+            <div class="reviewer">— Jenny K. · Orange NSW · Hot water replacement</div>
           </div>
-          <div class="testimonial-card">
+          <div class="testimonial-card reveal">
             <div class="stars">★★★★★</div>
-            <p>"Used Bathurst Plumbing for our full bathroom reno. The quotes were honest and the work was first class. Will be using them again for sure."</p>
-            <div class="reviewer">— Brad S., Kelso NSW</div>
+            <p>"Used Bathurst Plumbing for our full bathroom reno. The quotes were honest and the work was first class. They turned up every day on time, which I can't say about every tradie."</p>
+            <div class="reviewer">— Brad S. · Kelso NSW · Bathroom renovation</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- KPIs + CTA -->
+    <!-- KPIs -->
     <section class="section">
       <div class="container">
         <div class="kpi-grid" aria-label="Service highlights">
-          <div class="kpi"><strong>60-min response</strong><span>Emergency callouts across greater Bathurst.</span></div>
-          <div class="kpi"><strong>Fixed-price quotes</strong><span>Know your cost before we start work.</span></div>
-          <div class="kpi"><strong>5-year warranty</strong><span>On all workmanship, parts and labour.</span></div>
-          <div class="kpi"><strong>Local since 2011</strong><span>Serving Bathurst families for 13+ years.</span></div>
+          <div class="kpi reveal"><strong>60 min</strong><span>Emergency response time across greater Bathurst</span></div>
+          <div class="kpi reveal"><strong>Fixed-price</strong><span>Written quote before any work begins — always</span></div>
+          <div class="kpi reveal"><strong>5-year warranty</strong><span>On all workmanship, parts and labour</span></div>
+          <div class="kpi reveal"><strong>Since 2011</strong><span>Serving Bathurst families for 13+ years</span></div>
         </div>
-        <div class="cta" style="margin-top:1.4rem;">
-          <a class="btn btn-primary" href="contact.html">📞 Get a Free Quote</a>
-          <a class="btn btn-secondary" href="about.html">About Us</a>
+      </div>
+    </section>
+
+    <!-- Contact + Map -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Get a free quote</h2>
+          <p>Tell us about your job and we'll get back to you within the hour during business hours.</p>
+        </div>
+        <div class="contact-grid">
+          <form class="contact-form" onsubmit="return false;">
+            <input type="text" placeholder="Your name *" required>
+            <input type="tel" placeholder="Phone number *" required>
+            <input type="text" placeholder="Suburb / area *" required>
+            <select>
+              <option value="">— Job type —</option>
+              <option>Blocked drain</option>
+              <option>Hot water system</option>
+              <option>Bathroom renovation</option>
+              <option>Burst pipe / emergency</option>
+              <option>Tap or toilet repair</option>
+              <option>New construction</option>
+              <option>Other</option>
+            </select>
+            <textarea placeholder="Brief description of the problem…"></textarea>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="this.textContent='✅ Enquiry sent!';this.disabled=true;">Send Enquiry →</button>
+            <p style="font-size:.78rem;color:var(--muted);margin:.5rem 0 0;text-align:center;">We'll respond within the hour during business hours.</p>
+          </form>
+          <div class="contact-info-box">
+            <div class="cib-item">
+              <div class="cib-icon">📞</div>
+              <div class="cib-text">
+                <strong>Phone</strong>
+                <a href="tel:0400123456">0400 123 456</a>
+                <span> · Mon–Sat 7am–6pm</span>
+              </div>
+            </div>
+            <div class="cib-item">
+              <div class="cib-icon">🚨</div>
+              <div class="cib-text">
+                <strong>24/7 Emergency</strong>
+                <a href="tel:0400123456">0400 123 456</a>
+                <span> · Burst pipes &amp; gas leaks</span>
+              </div>
+            </div>
+            <div class="cib-item">
+              <div class="cib-icon">📧</div>
+              <div class="cib-text">
+                <strong>Email</strong>
+                <a href="mailto:info@bathurstplumbing.com.au">info@bathurstplumbing.com.au</a>
+              </div>
+            </div>
+            <div class="cib-item">
+              <div class="cib-icon">📍</div>
+              <div class="cib-text">
+                <strong>Based in Bathurst</strong>
+                <span>67 Keppel Street, Bathurst NSW 2795</span><br>
+                <span>Serving: Bathurst, Orange, Kelso, Blayney, Oberon, Lithgow</span>
+              </div>
+            </div>
+            <div class="cib-item">
+              <div class="cib-icon">🕐</div>
+              <div class="cib-text">
+                <strong>Business hours</strong>
+                <span>Mon–Sat 7:00am – 6:00pm<br>Emergency callouts: 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-section" style="padding-top:1rem;">
+          <div class="map-embed">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26474.77!2d149.5786!3d-33.4155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0d73d4d3a7a58f%3A0x5017d681632b130!2sBathurst%20NSW%202795!5e0!3m2!1sen!2sau!4v1700000000000!5m2!1sen!2sau" width="100%" height="260" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bathurst Plumbing Co service area map"></iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -299,11 +360,11 @@
         </div>
         <div class="faq-item">
           <button class="faq-q">Are you licensed and insured? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">Yes. Bathurst Plumbing Co. holds a current QBCC plumbing licence and full public liability insurance. All our plumbers are licensed tradespeople — we'll show you our licence number on request.</div>
+          <div class="faq-a">Yes. Bathurst Plumbing Co. holds a current QBCC plumbing licence (Lic. 1234567) and full public liability insurance. All our plumbers are licensed tradespeople — we'll show you our credentials on request.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">What suburbs do you service? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">We cover Bathurst and surrounding areas including Orange, Kelso, Blayney, Oberon, Lithgow, and most of the Central West. If you're unsure whether we service your area, give us a call and we'll let you know.</div>
+          <button class="faq-q">What areas do you service? <span class="faq-arrow">+</span></button>
+          <div class="faq-a">We cover Bathurst and surrounding areas including Orange, Kelso, Blayney, Oberon, Lithgow, and most of the Central West NSW region. If you're unsure whether we service your area, give us a call and we'll let you know straight away.</div>
         </div>
       </div>
     </section>
@@ -312,53 +373,66 @@
     <section class="cta-section">
       <div class="container">
         <h2>Want a website like this for your trade business?</h2>
-        <p>This demo was built by ImproveYourSite. We build professional websites for Australian tradies — see our packages and pricing below.</p>
-        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
+        <p>This demo was built by ImproveYourSite. We build professional, high-converting websites for Australian tradies — from $3,000.</p>
+        <a class="btn-get-site" href="/packages.html">⚡ See Packages &amp; Pricing</a>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p style="margin:0;">© 2025 Bathurst Plumbing Co. · 67 Keppel Street, Bathurst NSW 2795 · 0400 123 456</p>
-      <p style="margin:.3rem 0 0; font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
+      <p style="margin:0;">© 2025 Bathurst Plumbing Co. · 67 Keppel Street, Bathurst NSW 2795 · <a href="tel:0400123456" style="color:var(--primary);">0400 123 456</a> · <a href="mailto:info@bathurstplumbing.com.au" style="color:var(--primary);">info@bathurstplumbing.com.au</a></p>
+      <p style="margin:.3rem 0 0;font-size:.8rem;">QBCC Lic. 1234567 · ABN 12 345 678 901 · This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a>.</p>
     </div>
   </footer>
 
-  <a class="phone-cta" href="tel:0400123456">📞 Call now — 0400 123 456</a>
+  <a class="phone-cta" href="tel:0400123456">📞 Emergency? Call now — 0400 123 456</a>
 
   <script>
+    /* ── Job cost estimator ── */
+    var ESTIMATES = {
+      'blocked-drain':  {range:'$180 – $450', note:'Includes CCTV inspection for complex blockages. High-pressure jetting quoted separately if needed.'},
+      'hot-water':      {range:'$900 – $2,400', note:'Depending on system type (electric, gas, heat pump, solar). Includes supply and installation.'},
+      'tap-repair':     {range:'$120 – $280', note:'For standard tap or toilet repairs. Replacement parts included in quote.'},
+      'burst-pipe':     {range:'$250 – $800+', note:'Depends on location and extent of damage. Emergency call-out rates apply outside business hours.'},
+      'bathroom-reno':  {range:'$4,500 – $15,000+', note:'Plumbing scope only — does not include tiling, fixtures supply, or cabinetry. Full quote after on-site assessment.'},
+      'emergency':      {range:'$180 – $350 call-out', note:'24/7 emergency rate applies. Job materials and labour quoted separately on arrival.'}
+    };
+    function estimateCost() {
+      var type = document.getElementById('job-type').value;
+      var result = document.getElementById('est-result');
+      if (!type) { result.style.display='none'; return; }
+      var data = ESTIMATES[type];
+      document.getElementById('est-range').textContent = data.range;
+      document.getElementById('est-note').textContent = data.note;
+      result.style.display = 'block';
+    }
+
     /* ── Scroll reveal ── */
-    var _io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); _io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card,.value,.testimonial-card,.kpi,.faq-item').forEach(function(el) {
-      el.classList.add('reveal'); _io.observe(el);
-    });
+    var _io = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');_io.unobserve(x.target);}});},{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(function(el){_io.observe(el);});
 
     /* ── FAQ accordion ── */
-    document.querySelectorAll('.faq-q').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var item = btn.closest('.faq-item');
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
-        if (!isOpen) item.classList.add('open');
+    document.querySelectorAll('.faq-q').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var item=btn.closest('.faq-item');
+        var open=item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+        if(!open)item.classList.add('open');
       });
     });
 
     /* ── Open now badge ── */
-    (function() {
-      var badge = document.getElementById('open-badge');
-      if (!badge) return;
-      var HOURS = [null,[7,18],[7,18],[7,18],[7,18],[7,18],[7,18]]; // [open, close] per weekday index (0=Sun)
-      var now = new Date(new Date().toLocaleString('en-AU', {timeZone:'Australia/Sydney'}));
-      var h = now.getHours() + now.getMinutes()/60;
-      var todayHours = HOURS[now.getDay()];
-      var isOpen = todayHours && h >= todayHours[0] && h < todayHours[1];
-      badge.textContent = isOpen ? '● Open now' : '● Closed';
-      badge.className = 'open-badge ' + (isOpen ? 'open' : 'closed');
+    (function(){
+      var badge=document.getElementById('open-badge');
+      if(!badge)return;
+      var HOURS=[null,[7,18],[7,18],[7,18],[7,18],[7,18],[7,18]];
+      var now=new Date(new Date().toLocaleString('en-AU',{timeZone:'Australia/Sydney'}));
+      var h=now.getHours()+now.getMinutes()/60;
+      var t=HOURS[now.getDay()];
+      var open=t&&h>=t[0]&&h<t[1];
+      badge.textContent=open?'● Open now':'● Closed';
+      badge.className='open-badge '+(open?'open':'closed');
     })();
   </script>
 </body>
