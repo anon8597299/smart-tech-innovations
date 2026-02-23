@@ -119,6 +119,22 @@
       font-size: .8rem;
       font-weight: 700;
     }
+    /* ── Dynamic components ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .service-card, .value, .testimonial-card, .kpi { transition: box-shadow .18s, transform .18s; }
+    .service-card:hover, .value:hover, .testimonial-card:hover, .kpi:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .open-badge { display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:700; padding:.22rem .6rem; border-radius:999px; margin-left:.5rem; vertical-align:middle; }
+    .open-badge.open  { background:#dcfce7; color:#16a34a; }
+    .open-badge.closed { background:#fee2e2; color:#dc2626; }
+    .faq-section { padding:2rem 0; border-top:1px solid var(--line); }
+    .faq-section h2 { margin-bottom:1.1rem; }
+    .faq-item { border:1px solid var(--line); border-radius:12px; background:#fff; margin-bottom:.5rem; overflow:hidden; }
+    .faq-q { width:100%; background:none; border:none; padding:.85rem 1rem; text-align:left; font-family:Inter,sans-serif; font-size:.95rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--text); gap:.5rem; }
+    .faq-arrow { font-size:1.1rem; color:var(--primary); flex-shrink:0; transition:transform .25s; display:inline-block; }
+    .faq-item.open .faq-arrow { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .25s; padding:0 1rem; color:var(--muted); font-size:.91rem; line-height:1.65; }
+    .faq-item.open .faq-a { max-height:300px; padding:.05rem 1rem .85rem; }
     @media (max-width: 900px) {
       .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
       .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
@@ -149,7 +165,7 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Independent · Fee-for-service · Dubbo NSW</span>
+        <span class="badge">Independent · Fee-for-service · Dubbo NSW</span><span class="open-badge" id="open-badge">⏳</span>
         <h1>Wealth strategy built around your life, not a product commission</h1>
         <p class="lead">Pinnacle Financial Advice provides independent, fee-for-service financial planning for business owners, professionals, and pre-retirees across regional NSW. No product bias. Just straightforward advice.</p>
         <div class="cta">

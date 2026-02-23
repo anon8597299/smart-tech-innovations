@@ -112,6 +112,22 @@
     .section-head { margin-bottom: 1rem; }
     .section-head h2 { margin: 0 0 .3rem; }
     .section-head p { color: var(--muted); margin: 0; }
+    /* ── Dynamic components ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .service-card, .value, .testimonial-card, .kpi { transition: box-shadow .18s, transform .18s; }
+    .service-card:hover, .value:hover, .testimonial-card:hover, .kpi:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .open-badge { display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:700; padding:.22rem .6rem; border-radius:999px; margin-left:.5rem; vertical-align:middle; }
+    .open-badge.open  { background:#dcfce7; color:#16a34a; }
+    .open-badge.closed { background:#fee2e2; color:#dc2626; }
+    .faq-section { padding:2rem 0; border-top:1px solid var(--line); }
+    .faq-section h2 { margin-bottom:1.1rem; }
+    .faq-item { border:1px solid var(--line); border-radius:12px; background:#fff; margin-bottom:.5rem; overflow:hidden; }
+    .faq-q { width:100%; background:none; border:none; padding:.85rem 1rem; text-align:left; font-family:Inter,sans-serif; font-size:.95rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--text); gap:.5rem; }
+    .faq-arrow { font-size:1.1rem; color:var(--primary); flex-shrink:0; transition:transform .25s; display:inline-block; }
+    .faq-item.open .faq-arrow { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .25s; padding:0 1rem; color:var(--muted); font-size:.91rem; line-height:1.65; }
+    .faq-item.open .faq-a { max-height:300px; padding:.05rem 1rem .85rem; }
     @media (max-width: 900px) {
       .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
       .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
@@ -142,7 +158,7 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Licensed · Insured · Local · Bathurst NSW</span>
+        <span class="badge">Licensed · Insured · Local · Bathurst NSW</span><span class="open-badge" id="open-badge">⏳</span>
         <h1>Trusted plumbers in Bathurst — fast response, fair prices</h1>
         <p class="lead">Bathurst Plumbing Co. handles everything from blocked drains and hot water systems to full bathroom renovations. Available 7 days a week with same-day emergency callouts.</p>
         <div class="cta cta-hero">
@@ -269,6 +285,29 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <div class="faq-item">
+          <button class="faq-q">How quickly do you respond to a plumbing emergency? <span class="faq-arrow">+</span></button>
+          <div class="faq-a">For emergencies like burst pipes or major leaks, we aim to be on-site within 60 minutes across greater Bathurst. Our emergency line is available 24 hours a day, 7 days a week — including public holidays.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you charge for quotes? <span class="faq-arrow">+</span></button>
+          <div class="faq-a">No — all quotes are free. We'll assess the job, explain what needs doing in plain English, and give you a fixed price before any work begins. No hidden call-out fees, no surprises on the invoice.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Are you licensed and insured? <span class="faq-arrow">+</span></button>
+          <div class="faq-a">Yes. Bathurst Plumbing Co. holds a current QBCC plumbing licence and full public liability insurance. All our plumbers are licensed tradespeople — we'll show you our licence number on request.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What suburbs do you service? <span class="faq-arrow">+</span></button>
+          <div class="faq-a">We cover Bathurst and surrounding areas including Orange, Kelso, Blayney, Oberon, Lithgow, and most of the Central West. If you're unsure whether we service your area, give us a call and we'll let you know.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Get a site like this -->
     <section class="cta-section">
       <div class="container">
@@ -287,5 +326,40 @@
   </footer>
 
   <a class="phone-cta" href="tel:0400123456">📞 Call now — 0400 123 456</a>
+
+  <script>
+    /* ── Scroll reveal ── */
+    var _io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); _io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card,.value,.testimonial-card,.kpi,.faq-item').forEach(function(el) {
+      el.classList.add('reveal'); _io.observe(el);
+    });
+
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.faq-q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* ── Open now badge ── */
+    (function() {
+      var badge = document.getElementById('open-badge');
+      if (!badge) return;
+      var HOURS = [null,[7,18],[7,18],[7,18],[7,18],[7,18],[7,18]]; // [open, close] per weekday index (0=Sun)
+      var now = new Date(new Date().toLocaleString('en-AU', {timeZone:'Australia/Sydney'}));
+      var h = now.getHours() + now.getMinutes()/60;
+      var todayHours = HOURS[now.getDay()];
+      var isOpen = todayHours && h >= todayHours[0] && h < todayHours[1];
+      badge.textContent = isOpen ? '● Open now' : '● Closed';
+      badge.className = 'open-badge ' + (isOpen ? 'open' : 'closed');
+    })();
+  </script>
 </body>
 </html>
