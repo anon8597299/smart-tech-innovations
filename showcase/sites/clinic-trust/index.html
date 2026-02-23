@@ -3,139 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hillcrest Family Clinic — GP & Allied Health, Orange NSW</title>
-  <meta name="description" content="Caring, professional GP and allied health services in Orange NSW. Book online today.">
+  <title>Hillcrest Family Clinic — GP &amp; Allied Health, Orange NSW</title>
+  <meta name="description" content="Hillcrest Family Clinic provides bulk-billing GP care, mental health plans, chronic disease management, and allied health services in Orange NSW. Call 02 6362 1234.">
+  <link rel="canonical" href="https://hillcrestclinic.com.au/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hillcrestclinic.com.au/" />
+  <meta property="og:title" content="Hillcrest Family Clinic — Your Local GP &amp; Allied Health Team, Orange NSW" />
+  <meta property="og:description" content="Bulk-billing GP care, mental health plans, chronic disease management, and allied health in Orange NSW. Call 02 6362 1234 to book." />
+  <meta property="og:image" content="https://hillcrestclinic.com.au/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalClinic",
+        "@id": "https://hillcrestclinic.com.au/#clinic",
+        "name": "Hillcrest Family Clinic",
+        "description": "Your local GP and allied health team serving Orange NSW. Bulk billing available for eligible patients.",
+        "url": "https://hillcrestclinic.com.au/",
+        "telephone": "+61263621234",
+        "email": "reception@hillcrestclinic.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "88 Lords Place",
+          "addressLocality": "Orange",
+          "addressRegion": "NSW",
+          "postalCode": "2800",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -33.2832,
+          "longitude": 149.1000
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "13:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "203",
+          "bestRating": "5"
+        },
+        "medicalSpecialty": ["General Practice","MentalHealth","PrimaryCare"],
+        "availableService": [
+          {"@type": "MedicalTherapy", "name": "General Practice"},
+          {"@type": "MedicalTherapy", "name": "Mental Health Care Plan"},
+          {"@type": "MedicalTherapy", "name": "Chronic Disease Management"},
+          {"@type": "MedicalTherapy", "name": "Women's Health"},
+          {"@type": "MedicalTherapy", "name": "Childhood Immunisation"},
+          {"@type": "MedicalTherapy", "name": "Physiotherapy"},
+          {"@type": "MedicalTherapy", "name": "Psychology"},
+          {"@type": "MedicalTherapy", "name": "Dietetics"}
+        ],
+        "hasMap": "https://maps.google.com/?q=88+Lords+Place+Orange+NSW+2800"
+      },
+      {
+        "@type": "Physician",
+        "@id": "https://hillcrestclinic.com.au/#dr-mitchell",
+        "name": "Dr Sarah Mitchell",
+        "affiliation": {"@id": "https://hillcrestclinic.com.au/#clinic"},
+        "medicalSpecialty": "General Practice",
+        "description": "GP with special interest in women's health, mental health, and preventive medicine."
+      },
+      {
+        "@type": "Physician",
+        "@id": "https://hillcrestclinic.com.au/#dr-okafor",
+        "name": "Dr James Okafor",
+        "affiliation": {"@id": "https://hillcrestclinic.com.au/#clinic"},
+        "medicalSpecialty": "General Practice",
+        "description": "GP with special interest in chronic disease management and men's health."
+      },
+      {
+        "@type": "Physician",
+        "@id": "https://hillcrestclinic.com.au/#dr-sharma",
+        "name": "Dr Priya Sharma",
+        "affiliation": {"@id": "https://hillcrestclinic.com.au/#clinic"},
+        "medicalSpecialty": "General Practice",
+        "description": "GP with special interest in childhood health, immunisations, and family medicine."
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Demo banner */
-    .demo-banner {
-      background: #0f172a;
-      color: #e2e8f0;
-      text-align: center;
-      padding: .52rem 1rem;
-      font-size: .82rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .demo-banner a {
-      color: #2dd4bf;
-      font-weight: 700;
-      text-decoration: underline;
-      margin-left: .4rem;
-    }
-    .site-header { top: 36px; }
-    /* Services section */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-      margin-top: 1.4rem;
-    }
-    .service-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.1rem;
-    }
-    .service-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
-    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
-    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
-    /* Trust strip */
-    .trust-bar {
-      background: var(--primary);
-      color: #fff;
-      padding: 1.1rem 0;
-      margin-top: 2rem;
-    }
-    .trust-bar .container {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-    .trust-bar .trust-item {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      font-weight: 700;
-      font-size: .92rem;
-    }
-    .trust-bar .trust-item span.icon { font-size: 1.1rem; }
-    /* Testimonial */
-    .testimonial-section {
-      padding: 2.4rem 0;
-      background: #f0fdf9;
-      margin-top: 2rem;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .testimonial-section h2 { text-align: center; margin-bottom: 1.4rem; }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .9rem;
-    }
-    .testimonial-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.1rem;
-    }
-    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: .5rem; }
-    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; color: var(--text); }
-    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
-    /* CTA section */
-    .cta-section {
-      padding: 3rem 0;
-      text-align: center;
-    }
-    .cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; font-size: 1.05rem; }
-    .cta-section .btn-get-site {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      background: #5b4dff;
-      color: #fff;
-      font-weight: 800;
-      padding: .9rem 2rem;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      text-decoration: none;
-    }
-    .cta-section .btn-get-site:hover { background: #4c40db; }
-    /* Section spacing */
-    .section { padding: 2rem 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-head h2 { margin: 0 0 .3rem; }
-    .section-head p { color: var(--muted); margin: 0; }
-    /* ── Dynamic components ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .service-card, .value, .testimonial-card, .kpi { transition: box-shadow .18s, transform .18s; }
-    .service-card:hover, .value:hover, .testimonial-card:hover, .kpi:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-3px); }
-    .open-badge { display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:700; padding:.22rem .6rem; border-radius:999px; margin-left:.5rem; vertical-align:middle; }
-    .open-badge.open  { background:#dcfce7; color:#16a34a; }
-    .open-badge.closed { background:#fee2e2; color:#dc2626; }
-    .faq-section { padding:2rem 0; border-top:1px solid var(--line); }
-    .faq-section h2 { margin-bottom:1.1rem; }
-    .faq-item { border:1px solid var(--line); border-radius:12px; background:#fff; margin-bottom:.5rem; overflow:hidden; }
-    .faq-q { width:100%; background:none; border:none; padding:.85rem 1rem; text-align:left; font-family:Inter,sans-serif; font-size:.95rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--text); gap:.5rem; }
-    .faq-arrow { font-size:1.1rem; color:var(--primary); flex-shrink:0; transition:transform .25s; display:inline-block; }
-    .faq-item.open .faq-arrow { transform:rotate(45deg); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .25s; padding:0 1rem; color:var(--muted); font-size:.91rem; line-height:1.65; }
-    .faq-item.open .faq-a { max-height:300px; padding:.05rem 1rem .85rem; }
-    @media (max-width: 900px) {
-      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
-      .trust-bar .container { gap: 1rem; flex-direction: column; align-items: flex-start; padding: 0 4vw; }
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
-    }
-  </style>
 </head>
 <body>
 
@@ -145,224 +114,864 @@
     <a href="/packages.html">Get a site like this &rarr;</a>
   </div>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#">🏥 Hillcrest Family Clinic</a>
-      <nav class="nav-links">
-        <a href="services.html">Services</a>
-        <a href="team.html">Our Team</a>
-        <a href="book.html">Book Online</a>
+  <!-- ── STICKY HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="container hc-nav">
+      <a class="hc-brand" href="#">
+        <div class="hc-logo-mark">H</div>
+        <div>
+          <span class="hc-brand-name">Hillcrest Family Clinic</span>
+          <span class="hc-brand-sub">Orange NSW</span>
+        </div>
+      </a>
+      <nav class="hc-nav-links" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#team">Our Team</a>
+        <a href="#allied">Allied Health</a>
+        <a href="#contact">Contact</a>
+        <a href="#book" class="hc-nav-book">Book Now</a>
       </nav>
+      <button class="hc-hamburger" id="hc-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="hc-mobile-menu" id="hc-mobile-menu" aria-hidden="true">
+      <a href="#services">Services</a>
+      <a href="#team">Our Team</a>
+      <a href="#allied">Allied Health</a>
+      <a href="#contact">Contact</a>
+      <a href="#book" class="hc-nav-book">Book Now</a>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">Bulk-billing available · Orange NSW</span><span class="open-badge" id="open-badge">⏳</span>
-        <h1>Caring for Orange families since 2008</h1>
-        <p class="lead">Hillcrest Family Clinic provides compassionate GP care, physiotherapy, and allied health services for patients of all ages. Same-day appointments often available.</p>
-        <div class="cta cta-hero">
-          <a class="btn btn-primary" href="book.html">Book an Appointment</a>
-          <a class="btn btn-secondary" href="services.html">View Our Services</a>
-        </div>
-        <div class="trust-strip" aria-label="Trust signals">
-          <span>✓ Bulk billing available</span>
-          <span>✓ Same-day appointments</span>
-          <span>✓ AGPAL accredited</span>
-          <span>✓ Open 7 days</span>
+
+    <!-- ── HERO ── -->
+    <section class="hc-hero" id="hero">
+      <div class="hc-hero-bg" aria-hidden="true"></div>
+      <div class="container hc-hero-inner">
+        <div class="hc-hero-content">
+          <div class="hc-hero-badges">
+            <span class="hc-badge-pill hc-badge-teal">Bulk Billing Available</span>
+            <span class="hc-open-badge" id="open-badge">⏳</span>
+          </div>
+          <h1 class="hc-hero-h1">Your local GP &amp; allied&nbsp;health team,<br>Orange NSW</h1>
+          <p class="hc-hero-lead">Hillcrest Family Clinic has been caring for Orange families for over 20 years. Expert GPs, mental health support, and allied health — all under one roof at 88 Lords Place.</p>
+
+          <div class="hc-hero-phone-row">
+            <a href="tel:0263621234" class="hc-hero-phone">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              02 6362 1234
+            </a>
+            <span class="hc-hero-or">or</span>
+            <a href="#book" class="hc-btn hc-btn-primary">Request an Appointment</a>
+          </div>
+
+          <ul class="hc-trust-pills" aria-label="Trust signals">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Bulk billing for eligible patients</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Same-day urgent appointments</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> AGPAL accredited practice</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> New patients welcome</li>
+          </ul>
         </div>
 
-        <div class="grid" style="margin-top:1.4rem;">
-          <div class="card">
-            <h3>📍 Find Us</h3>
-            <p>14 Summer Street, Orange NSW 2800<br>
-               <strong>Mon–Fri:</strong> 8:00am – 6:00pm<br>
-               <strong>Sat–Sun:</strong> 9:00am – 1:00pm</p>
-            <p style="margin-top:.6rem;"><strong>Phone:</strong> (02) 6362 4400<br>
-               <strong>Email:</strong> reception@hillcrestclinic.com.au</p>
+        <div class="hc-hero-card">
+          <div class="hc-rating-row">
+            <div class="hc-stars" aria-label="4.7 out of 5 stars">★★★★<span class="hc-half-star">★</span></div>
+            <div>
+              <strong>4.7 / 5</strong>
+              <span class="hc-rating-sub">203 Google reviews</span>
+            </div>
           </div>
-          <div class="hero-visual">
-            <h3>New patients welcome</h3>
-            <p>We're accepting new patients across all services. No referral required for GP appointments.</p>
-            <div class="chips">
-              <span>General Practice</span>
-              <span>Physiotherapy</span>
-              <span>Psychology</span>
-              <span>Dietetics</span>
+          <hr class="hc-divider" />
+          <h3 class="hc-card-heading">Clinic Hours</h3>
+          <table class="hc-hours-table">
+            <tbody>
+              <tr><td>Monday – Friday</td><td><strong>8:00am – 6:00pm</strong></td></tr>
+              <tr><td>Saturday</td><td><strong>8:00am – 1:00pm</strong></td></tr>
+              <tr><td>Sunday &amp; Public Holidays</td><td>Closed</td></tr>
+            </tbody>
+          </table>
+          <hr class="hc-divider" />
+          <p class="hc-card-address">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            88 Lords Place, Orange NSW 2800
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KPI STRIP ── -->
+    <div class="hc-kpi-strip">
+      <div class="container hc-kpi-inner">
+        <div class="hc-kpi reveal">
+          <span class="hc-kpi-num">3</span>
+          <span class="hc-kpi-label">GPs on staff</span>
+        </div>
+        <div class="hc-kpi reveal">
+          <span class="hc-kpi-num">20+</span>
+          <span class="hc-kpi-label">Years serving Orange</span>
+        </div>
+        <div class="hc-kpi reveal">
+          <span class="hc-kpi-num">Bulk</span>
+          <span class="hc-kpi-label">Billing available</span>
+        </div>
+        <div class="hc-kpi reveal">
+          <span class="hc-kpi-num">Same</span>
+          <span class="hc-kpi-label">Day urgent appointments</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SERVICES GRID ── -->
+    <section class="hc-section hc-section-white" id="services">
+      <div class="container">
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">What We Offer</div>
+          <h2>Comprehensive care for&nbsp;every&nbsp;stage of life</h2>
+          <p>From routine checkups to complex chronic disease management — our experienced team covers the full spectrum of primary healthcare.</p>
+        </div>
+        <div class="hc-services-grid">
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-teal">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            </div>
+            <h3>General Practice</h3>
+            <p>Routine checkups, sick appointments, health plans, referrals, and preventive care for patients of all ages.</p>
+            <a href="#book" class="hc-svc-link">Book a GP appointment &rarr;</a>
+          </div>
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-purple">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+            </div>
+            <h3>Mental Health</h3>
+            <p>GP Mental Health Care Plans, psychology referrals, and ongoing support for anxiety, depression, and more.</p>
+            <a href="#book" class="hc-svc-link">Book a mental health appointment &rarr;</a>
+          </div>
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-blue">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </div>
+            <h3>Chronic Disease Management</h3>
+            <p>Personalised care plans for diabetes, hypertension, asthma, COPD, and other long-term conditions. Medicare CDM plans available.</p>
+            <a href="#book" class="hc-svc-link">Book a CDM appointment &rarr;</a>
+          </div>
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-pink">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            </div>
+            <h3>Women's Health</h3>
+            <p>Cervical screening, contraception advice, pregnancy care, menopause management, and breast health assessments.</p>
+            <a href="#book" class="hc-svc-link">Book a women's health appointment &rarr;</a>
+          </div>
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-amber">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>Childhood Health</h3>
+            <p>Immunisations, developmental checks, school health assessments, and ongoing care for infants, children, and teenagers.</p>
+            <a href="#book" class="hc-svc-link">Book a childhood health appointment &rarr;</a>
+          </div>
+          <div class="hc-svc-card reveal">
+            <div class="hc-svc-icon hc-icon-green">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <h3>Allied Health</h3>
+            <p>On-site physiotherapy, psychology, and dietetics. Medicare rebates available with a referral from your GP.</p>
+            <a href="#allied" class="hc-svc-link">Learn about allied health &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BULK BILLING PANEL ── -->
+    <section class="hc-section hc-section-bg" id="bulk-billing">
+      <div class="container">
+        <div class="hc-bb-panel reveal">
+          <div class="hc-bb-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          </div>
+          <div class="hc-bb-content">
+            <h2>Bulk billing available — no out-of-pocket cost</h2>
+            <p>Hillcrest Family Clinic bulk bills eligible patients, meaning your GP consultation is fully covered by Medicare with <strong>no gap payment</strong>.</p>
+            <div class="hc-bb-who">
+              <h3>Who qualifies for bulk billing?</h3>
+              <ul>
+                <li>Concession card holders (Pensioner Concession Card, Health Care Card, Commonwealth Seniors Health Card)</li>
+                <li>Children aged 15 and under</li>
+                <li>DVA card holders</li>
+                <li>Patients with a valid Medicare card — ask reception at booking, as eligibility may vary by appointment type</li>
+              </ul>
+            </div>
+            <p class="hc-bb-note">A standard out-of-pocket fee applies for non-eligible patients. Our reception team will always advise you of any costs before your appointment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT TO BRING ── -->
+    <section class="hc-section hc-section-white" id="what-to-bring">
+      <div class="container">
+        <div class="hc-wtb-grid">
+          <div class="hc-wtb-content reveal">
+            <div class="hc-section-eyebrow">Before Your Visit</div>
+            <h2>What to bring to your appointment</h2>
+            <p>To help us provide the best possible care, please bring the following items to your appointment:</p>
+            <ul class="hc-checklist">
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Medicare card</strong> — required for bulk billing and to claim rebates on services.</div>
+              </li>
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Referrals and specialist letters</strong> — if you're seeing a new GP or following up specialist advice, bring any existing letters or reports.</div>
+              </li>
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Current medication list</strong> — bring all medications or a written list, including any vitamins and supplements you take.</div>
+              </li>
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Concession card</strong> — Pensioner Concession, Health Care Card, or DVA card if applicable.</div>
+              </li>
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Previous test results</strong> — blood tests, x-rays, or scan results if you have them.</div>
+              </li>
+              <li>
+                <span class="hc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <div><strong>Private health insurance card</strong> — for any applicable rebates on allied health services.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="hc-wtb-aside reveal">
+            <div class="hc-info-box">
+              <h3>New to Hillcrest?</h3>
+              <p>We warmly welcome new patients. Our friendly reception team will register you on your first visit. Bring a photo ID along with your Medicare card.</p>
+              <p>If you're transferring from another practice, we can request your medical records with your written consent.</p>
+              <a href="#book" class="hc-btn hc-btn-primary" style="width:100%;justify-content:center;margin-top:.5rem;">Request an Appointment</a>
+            </div>
+            <div class="hc-info-box hc-info-box-urgent">
+              <h3>Urgent or after-hours?</h3>
+              <p>For urgent matters during clinic hours, call us and we will prioritise your appointment. For after-hours emergencies:</p>
+              <p><strong>National Home Doctor Service:</strong><br><a href="tel:137425">13 SICK (13 7425)</a></p>
+              <p><strong>Emergency:</strong> <a href="tel:000">000</a></p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services -->
-    <section class="section">
+    <!-- ── DOCTOR PROFILES ── -->
+    <section class="hc-section hc-section-bg" id="team">
       <div class="container">
-        <div class="section-head">
-          <h2>Our services</h2>
-          <p>Comprehensive healthcare for individuals and families under one roof.</p>
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">Meet the Team</div>
+          <h2>Our experienced doctors</h2>
+          <p>Our GPs bring decades of combined experience and a genuine commitment to the Orange community.</p>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="icon">🩺</div>
-            <h3>General Practice</h3>
-            <p>Routine checkups, chronic disease management, health plans, and preventive care for all ages.</p>
+        <div class="hc-doctors-grid">
+          <div class="hc-doctor-card reveal">
+            <div class="hc-doctor-avatar hc-avatar-teal">SM</div>
+            <div class="hc-doctor-info">
+              <h3>Dr Sarah Mitchell</h3>
+              <p class="hc-doctor-quals">MBBS, FRACGP — Fellow of the Royal Australian College of General Practitioners</p>
+              <div class="hc-doctor-specialties">
+                <span>Women's Health</span>
+                <span>Mental Health</span>
+                <span>Preventive Medicine</span>
+              </div>
+              <p class="hc-doctor-bio">Dr Mitchell has been practising in Orange for over 15 years. She has a special interest in women's health, GP Mental Health Care Plans, and holistic preventive medicine. She is known for her thorough, unhurried approach and warm bedside manner.</p>
+              <div class="hc-doctor-avail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Available: Mon, Tue, Wed, Fri
+              </div>
+            </div>
           </div>
-          <div class="service-card">
-            <div class="icon">🧠</div>
-            <h3>Psychology</h3>
-            <p>Evidence-based mental health support. Medicare rebates available under a GP Mental Health Plan.</p>
+          <div class="hc-doctor-card reveal">
+            <div class="hc-doctor-avatar hc-avatar-blue">JO</div>
+            <div class="hc-doctor-info">
+              <h3>Dr James Okafor</h3>
+              <p class="hc-doctor-quals">MBChB, FRACGP, Dip. Derm — Fellow of the RACGP, Diploma in Dermatology</p>
+              <div class="hc-doctor-specialties">
+                <span>Chronic Disease</span>
+                <span>Men's Health</span>
+                <span>Skin Health</span>
+              </div>
+              <p class="hc-doctor-bio">Dr Okafor joined Hillcrest Family Clinic in 2014 after completing his training in Sydney. He specialises in chronic disease management including diabetes and cardiovascular disease, men's health, and skin cancer checks. He bulk bills all eligible patients.</p>
+              <div class="hc-doctor-avail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Available: Mon, Wed, Thu, Sat
+              </div>
+            </div>
           </div>
-          <div class="service-card">
-            <div class="icon">🏃</div>
+          <div class="hc-doctor-card reveal">
+            <div class="hc-doctor-avatar hc-avatar-purple">PS</div>
+            <div class="hc-doctor-info">
+              <h3>Dr Priya Sharma</h3>
+              <p class="hc-doctor-quals">MBBS, FRACGP, Dip. Paeds — Fellow of the RACGP, Diploma in Paediatrics</p>
+              <div class="hc-doctor-specialties">
+                <span>Childhood Health</span>
+                <span>Immunisations</span>
+                <span>Family Medicine</span>
+              </div>
+              <p class="hc-doctor-bio">Dr Sharma is beloved by her young patients and their parents. With a Diploma in Paediatrics, she brings expert knowledge to childhood development, immunisations, and family medicine. She also has a strong interest in culturally sensitive care.</p>
+              <div class="hc-doctor-avail">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Available: Tue, Thu, Fri, Sat
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ALLIED HEALTH ── -->
+    <section class="hc-section hc-section-white" id="allied">
+      <div class="container">
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">Allied Health</div>
+          <h2>On-site allied health — Medicare rebates available</h2>
+          <p>Our co-located allied health team works alongside our GPs to provide integrated, coordinated care. A GP referral may entitle you to Medicare-subsidised sessions.</p>
+        </div>
+        <div class="hc-allied-grid">
+          <div class="hc-allied-card reveal">
+            <div class="hc-allied-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
             <h3>Physiotherapy</h3>
-            <p>Sports injuries, post-surgical rehab, chronic pain, and movement assessment by qualified physios.</p>
+            <p class="hc-allied-desc">Our qualified physiotherapists treat sports injuries, back and neck pain, post-surgical rehabilitation, and movement disorders. Initial and ongoing appointments available.</p>
+            <div class="hc-allied-rebate">
+              <strong>Medicare Rebate:</strong> Up to 5 sessions per calendar year under a Chronic Disease Management plan (GP referral required).
+            </div>
+            <ul class="hc-allied-treats">
+              <li>Sports injuries &amp; sprains</li>
+              <li>Back, neck &amp; joint pain</li>
+              <li>Post-surgical rehabilitation</li>
+              <li>Workplace injury recovery</li>
+            </ul>
           </div>
-          <div class="service-card">
-            <div class="icon">🥗</div>
+          <div class="hc-allied-card reveal">
+            <div class="hc-allied-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3>Psychology</h3>
+            <p class="hc-allied-desc">Evidence-based psychological therapy for anxiety, depression, trauma, and relationship difficulties. Our registered psychologists provide a safe, non-judgmental space.</p>
+            <div class="hc-allied-rebate">
+              <strong>Medicare Rebate:</strong> Up to 10 individual sessions per calendar year under a GP Mental Health Care Plan (MHCP).
+            </div>
+            <ul class="hc-allied-treats">
+              <li>Anxiety &amp; depression</li>
+              <li>Trauma &amp; PTSD</li>
+              <li>Stress &amp; burnout</li>
+              <li>Grief &amp; adjustment</li>
+            </ul>
+          </div>
+          <div class="hc-allied-card reveal">
+            <div class="hc-allied-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+            </div>
             <h3>Dietetics</h3>
-            <p>Personalised nutrition plans for weight management, diabetes, heart health, and more.</p>
+            <p class="hc-allied-desc">Personalised nutrition assessment and therapy for diabetes, heart disease, weight management, digestive conditions, and eating disorder recovery.</p>
+            <div class="hc-allied-rebate">
+              <strong>Medicare Rebate:</strong> Up to 5 sessions per calendar year under a Chronic Disease Management plan (GP referral required).
+            </div>
+            <ul class="hc-allied-treats">
+              <li>Diabetes &amp; pre-diabetes</li>
+              <li>Heart disease &amp; cholesterol</li>
+              <li>Weight management</li>
+              <li>Gut health &amp; IBS</li>
+            </ul>
           </div>
-          <div class="service-card">
-            <div class="icon">💉</div>
-            <h3>Immunisations</h3>
-            <p>Childhood vaccinations, flu shots, travel vaccines, and catch-up schedules.</p>
+        </div>
+        <p class="hc-allied-note reveal">Private health insurance rebates may also apply. Check with your insurer. To access Medicare-rebated sessions, start with a GP appointment at Hillcrest — we'll coordinate your entire care plan.</p>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIALS ── -->
+    <section class="hc-section hc-section-teal-pale" id="testimonials">
+      <div class="container">
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">Patient Reviews</div>
+          <h2>What Orange patients say about us</h2>
+          <div class="hc-overall-rating">
+            <span class="hc-stars-lg" aria-label="4.7 stars">★★★★★</span>
+            <span><strong>4.7</strong> out of 5 &mdash; based on 203 Google reviews</span>
           </div>
-          <div class="service-card">
-            <div class="icon">📋</div>
-            <h3>Health Assessments</h3>
-            <p>45+ health assessments, work medicals, pre-employment checks, and insurance medicals.</p>
+        </div>
+        <div class="hc-testimonials-grid">
+          <div class="hc-tcard reveal">
+            <div class="hc-tcard-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"I've been managing Type 2 diabetes for six years and Dr Okafor has genuinely changed my life. He set up a Chronic Disease Management plan, got me onto the dietitian, and my last HbA1c was the best it's been in years. Cannot recommend this clinic enough."</p>
+            <div class="hc-tcard-reviewer">
+              <div class="hc-tcard-initial" style="background:#0d9488;">RH</div>
+              <div>
+                <strong>Robert H.</strong>
+                <span>Orange NSW &mdash; Chronic Disease Patient</span>
+              </div>
+            </div>
+          </div>
+          <div class="hc-tcard reveal">
+            <div class="hc-tcard-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"Dr Mitchell organised a Mental Health Care Plan for me and referred me to the on-site psychologist. Having everything in one place made such a difference — no running around. The psychologist is excellent and I finally feel like I'm making progress with my anxiety."</p>
+            <div class="hc-tcard-reviewer">
+              <div class="hc-tcard-initial" style="background:#7c3aed;">CW</div>
+              <div>
+                <strong>Catherine W.</strong>
+                <span>Orange NSW &mdash; Mental Health Patient</span>
+              </div>
+            </div>
+          </div>
+          <div class="hc-tcard reveal">
+            <div class="hc-tcard-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"Dr Sharma is absolutely wonderful with my kids. She remembered details from our last visit six months ago, took her time explaining my daughter's immunisation schedule, and the kids actually don't mind coming to the doctor anymore. This is what a family GP should be."</p>
+            <div class="hc-tcard-reviewer">
+              <div class="hc-tcard-initial" style="background:#b45309;">MT</div>
+              <div>
+                <strong>Michelle T.</strong>
+                <span>Orange NSW &mdash; Parent of 3</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Trust bar -->
-    <div class="trust-bar">
+    <!-- ── APPOINTMENT BOOKING WIDGET ── -->
+    <section class="hc-section hc-section-white" id="book">
       <div class="container">
-        <div class="trust-item"><span class="icon">⭐</span> 4.9 Google rating (280+ reviews)</div>
-        <div class="trust-item"><span class="icon">🏥</span> AGPAL accredited practice</div>
-        <div class="trust-item"><span class="icon">👨‍👩‍👧</span> 3,200+ active patients</div>
-        <div class="trust-item"><span class="icon">📅</span> 15+ years serving Orange</div>
-      </div>
-    </div>
-
-    <!-- Testimonials -->
-    <section class="testimonial-section">
-      <div class="container">
-        <h2>What our patients say</h2>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Dr Nguyen is absolutely brilliant. She takes the time to explain everything and actually listens. I've recommended Hillcrest to all my friends."</p>
-            <div class="reviewer">— Sarah M., Orange NSW</div>
+        <div class="hc-book-layout">
+          <div class="hc-book-intro reveal">
+            <div class="hc-section-eyebrow">Appointments</div>
+            <h2>Request an appointment</h2>
+            <p>Fill in the form and our reception team will call you within <strong>2 business hours</strong> to confirm your appointment time.</p>
+            <p>For urgent appointments, please call us directly on <a href="tel:0263621234" class="hc-link-teal"><strong>02 6362 1234</strong></a>.</p>
+            <div class="hc-book-trust">
+              <div class="hc-book-trust-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirmation call within 2 business hours
+              </div>
+              <div class="hc-book-trust-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Same-day urgent appointments available
+              </div>
+              <div class="hc-book-trust-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                New patients always welcome
+              </div>
+            </div>
           </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Got a same-day appointment for my son when he had a bad ear infection. The staff were so kind and efficient. Really impressed by this clinic."</p>
-            <div class="reviewer">— Tom R., Blayney NSW</div>
+
+          <div class="hc-book-form-wrap reveal">
+            <form class="hc-book-form" id="book-form" novalidate>
+              <div class="hc-form-row hc-form-row-2">
+                <div class="hc-form-group">
+                  <label for="book-service">Service needed <span class="hc-req">*</span></label>
+                  <select id="book-service" name="service" required>
+                    <option value="" disabled selected>Select a service…</option>
+                    <option>GP Consultation</option>
+                    <option>Health Assessment</option>
+                    <option>Mental Health Care Plan</option>
+                    <option>Chronic Disease Management</option>
+                    <option>Childhood Immunisation</option>
+                    <option>Allied Health (Physio / Psychology / Dietetics)</option>
+                    <option>Repeat Prescription</option>
+                  </select>
+                </div>
+                <div class="hc-form-group">
+                  <label for="book-doctor">Preferred doctor</label>
+                  <select id="book-doctor" name="doctor">
+                    <option value="" selected>Any available</option>
+                    <option>Dr Sarah Mitchell</option>
+                    <option>Dr James Okafor</option>
+                    <option>Dr Priya Sharma</option>
+                  </select>
+                </div>
+              </div>
+              <div class="hc-form-group">
+                <label>Preferred time <span class="hc-req">*</span></label>
+                <div class="hc-time-options" role="group" aria-label="Preferred appointment time">
+                  <label class="hc-time-opt">
+                    <input type="radio" name="time" value="Morning (8am–12pm)" required>
+                    <span>Morning<br><small>8am – 12pm</small></span>
+                  </label>
+                  <label class="hc-time-opt">
+                    <input type="radio" name="time" value="Afternoon (12pm–4pm)">
+                    <span>Afternoon<br><small>12pm – 4pm</small></span>
+                  </label>
+                  <label class="hc-time-opt">
+                    <input type="radio" name="time" value="Evening (4pm–6pm)">
+                    <span>Evening<br><small>4pm – 6pm</small></span>
+                  </label>
+                  <label class="hc-time-opt">
+                    <input type="radio" name="time" value="Saturday">
+                    <span>Saturday<br><small>8am – 1pm</small></span>
+                  </label>
+                </div>
+              </div>
+              <div class="hc-form-row hc-form-row-2">
+                <div class="hc-form-group">
+                  <label for="book-name">Your name <span class="hc-req">*</span></label>
+                  <input type="text" id="book-name" name="name" placeholder="Full name" required />
+                </div>
+                <div class="hc-form-group">
+                  <label for="book-phone">Phone number <span class="hc-req">*</span></label>
+                  <input type="tel" id="book-phone" name="phone" placeholder="04xx xxx xxx" required />
+                </div>
+              </div>
+              <div class="hc-form-group">
+                <label for="book-reason">Brief reason for visit <span class="hc-req">*</span></label>
+                <textarea id="book-reason" name="reason" rows="3" placeholder="e.g. Annual health check, ongoing back pain, repeat script for blood pressure medication…" required></textarea>
+              </div>
+              <div class="hc-form-footer">
+                <button type="submit" class="hc-btn hc-btn-primary hc-btn-submit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  Request Appointment
+                </button>
+                <p class="hc-form-disclaimer">By submitting, you consent to being contacted by Hillcrest Family Clinic to confirm your appointment. This is a request only — not a confirmed booking.</p>
+              </div>
+            </form>
+
+            <!-- Success message (hidden until form submitted) -->
+            <div class="hc-form-success" id="book-success" aria-live="polite" hidden>
+              <div class="hc-success-icon" aria-hidden="true">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3>Request sent — we'll call within 2 business hours to confirm your time.</h3>
+              <p>Thank you! Our reception team will be in touch shortly. If your matter is urgent, please call us directly on <a href="tel:0263621234">02 6362 1234</a>.</p>
+            </div>
           </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Jake the physio sorted out my back in just three sessions. Couldn't be happier. Booked my follow-up online at midnight — super convenient."</p>
-            <div class="reviewer">— Lisa D., Orange NSW</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT + MAP + HOURS ── -->
+    <section class="hc-section hc-section-bg" id="contact">
+      <div class="container">
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">Find Us</div>
+          <h2>Contact &amp; location</h2>
+        </div>
+        <div class="hc-contact-grid">
+          <div class="hc-contact-details reveal">
+            <div class="hc-contact-item">
+              <div class="hc-contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div>
+                <strong>Address</strong>
+                <p>88 Lords Place<br>Orange NSW 2800</p>
+                <a href="https://maps.google.com/?q=88+Lords+Place+Orange+NSW+2800" target="_blank" rel="noopener" class="hc-map-link">Get directions &rarr;</a>
+              </div>
+            </div>
+            <div class="hc-contact-item">
+              <div class="hc-contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <strong>Phone</strong>
+                <p><a href="tel:0263621234" class="hc-link-teal">02 6362 1234</a></p>
+              </div>
+            </div>
+            <div class="hc-contact-item">
+              <div class="hc-contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div>
+                <strong>Email</strong>
+                <p><a href="mailto:reception@hillcrestclinic.com.au" class="hc-link-teal">reception@hillcrestclinic.com.au</a></p>
+              </div>
+            </div>
+            <div class="hc-contact-item">
+              <div class="hc-contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div>
+                <strong>Opening Hours</strong>
+                <table class="hc-hours-table hc-hours-table-contact">
+                  <tbody>
+                    <tr id="hours-mon"><td>Monday</td><td>8:00am – 6:00pm</td></tr>
+                    <tr id="hours-tue"><td>Tuesday</td><td>8:00am – 6:00pm</td></tr>
+                    <tr id="hours-wed"><td>Wednesday</td><td>8:00am – 6:00pm</td></tr>
+                    <tr id="hours-thu"><td>Thursday</td><td>8:00am – 6:00pm</td></tr>
+                    <tr id="hours-fri"><td>Friday</td><td>8:00am – 6:00pm</td></tr>
+                    <tr id="hours-sat"><td>Saturday</td><td>8:00am – 1:00pm</td></tr>
+                    <tr><td>Sunday &amp; Public Holidays</td><td>Closed</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="hc-map-wrap reveal">
+            <iframe
+              title="Hillcrest Family Clinic map — 88 Lords Place, Orange NSW"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3377.8428063085697!2d149.09700567629338!3d-33.28366189731038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b11c00ccb33bc9b%3A0x8aedc6c4e8cc1b7c!2sLords%20Pl%2C%20Orange%20NSW%202800!5e0!3m2!1sen!2sau!4v1709000000000!5m2!1sen!2sau"
+              width="100%"
+              height="420"
+              style="border:0;border-radius:12px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Booking CTA -->
-    <section class="section">
+    <!-- ── FAQ ── -->
+    <section class="hc-section hc-section-white" id="faq">
       <div class="container">
-        <div class="kpi-grid" aria-label="Clinic highlights">
-          <div class="kpi"><strong>Same-day available</strong><span>Call before 10am for same-day GP bookings.</span></div>
-          <div class="kpi"><strong>Bulk billing</strong><span>Available for children under 16 and concession card holders.</span></div>
-          <div class="kpi"><strong>Online booking</strong><span>Book instantly 24/7 via our patient portal.</span></div>
-          <div class="kpi"><strong>Allied health team</strong><span>4 disciplines, one convenient location.</span></div>
+        <div class="hc-section-head reveal">
+          <div class="hc-section-eyebrow">FAQ</div>
+          <h2>Frequently asked questions</h2>
         </div>
-        <div class="cta" style="margin-top:1.4rem;">
-          <a class="btn btn-primary" href="book.html">Book Online Now</a>
-          <a class="btn btn-secondary" href="team.html">Meet Our Team</a>
+        <div class="hc-faq-list" role="list">
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              Do I need an appointment, or can I walk in?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              Appointments are strongly recommended as they minimise your waiting time and allow our GPs to prepare for your visit. We do accommodate urgent walk-ins during business hours based on availability — please call ahead if possible so we can advise on wait times. If you have a life-threatening emergency, please call 000 immediately.
+            </div>
+          </div>
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              Do you bulk bill?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              Yes — Hillcrest Family Clinic bulk bills eligible patients, meaning no out-of-pocket cost for your GP consultation. Bulk billing is available for concession card holders (Pensioner Concession Card, Health Care Card, Commonwealth Seniors Health Card), children aged 15 and under, and DVA card holders. Standard fees apply for non-eligible patients. Please mention your eligibility when booking and bring your Medicare card to the appointment.
+            </div>
+          </div>
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              What allied health services do you offer?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              We have on-site physiotherapy, psychology, and dietetics. With a GP referral and a Chronic Disease Management plan, you may be eligible for up to 5 Medicare-subsidised allied health sessions per year. Psychology sessions are subsidised under a GP Mental Health Care Plan (up to 10 sessions per calendar year). Private health insurance rebates may also apply — check with your insurer.
+            </div>
+          </div>
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              How do I get my test results?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              Your GP will follow up results with you directly, either by phone or at a scheduled follow-up appointment. For results that require discussion or treatment changes, you'll be asked to book a review appointment. We strongly advise against relying on "no news is good news" — if you're concerned or haven't heard back within an expected timeframe, please call reception on 02 6362 1234.
+            </div>
+          </div>
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              Are you accepting new patients?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              Yes — we warmly welcome new patients to Hillcrest Family Clinic. No referral is required to see a GP. Simply call our reception team on 02 6362 1234, use our appointment request form above, or come in during clinic hours. Please bring your Medicare card and a photo ID on your first visit.
+            </div>
+          </div>
+          <div class="hc-faq-item reveal" role="listitem">
+            <button class="hc-faq-q" aria-expanded="false">
+              Can I request a repeat prescription without an appointment?
+              <span class="hc-faq-arrow" aria-hidden="true">+</span>
+            </button>
+            <div class="hc-faq-a" hidden>
+              In some circumstances, repeat prescriptions can be arranged without a full consultation — please call reception to discuss. Your GP will need to review your records and may require a brief appointment to ensure your medication is still appropriate. For your safety, we do not provide prescriptions for medications not previously prescribed at our clinic.
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq-section">
-      <div class="container">
-        <h2>Frequently asked questions</h2>
-        <div class="faq-item">
-          <button class="faq-q">Do I need an appointment, or can I walk in? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">Appointments are recommended to minimise wait times, but we do accept walk-in patients based on availability. You can book online, call reception, or simply come in. Urgent medical concerns are always seen as a priority.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Do you bulk bill? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">Yes — Hillcrest bulk bills eligible patients including concession card holders, children under 16, and patients with a valid Healthcare Card. Standard consultation fees apply for other patients. Ask reception when you book.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">What allied health services do you offer? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">We have on-site physiotherapy, psychology, and dietetics. Referrals from your GP are available for Medicare-subsidised sessions under a Mental Health Care Plan or Chronic Disease Management plan where eligible.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">How do I get my test results? <span class="faq-arrow">+</span></button>
-          <div class="faq-a">Your GP will follow up results with you directly, either by phone or at a follow-up appointment. We ask that you book a review appointment for any results that require discussion — please don't rely on "no news is good news".</div>
-        </div>
+    <!-- ── DEMO CTA SECTION ── -->
+    <section class="hc-cta-section">
+      <div class="container hc-cta-inner">
+        <h2>Want a website like this for your healthcare practice?</h2>
+        <p>This demo was built by ImproveYourSite. We build high-converting websites for Australian healthcare providers and small businesses. See our packages below.</p>
+        <a class="hc-cta-btn" href="/packages.html">See Our Packages &amp; Pricing &rarr;</a>
       </div>
     </section>
 
-    <!-- Get a site like this CTA -->
-    <section class="cta-section">
-      <div class="container">
-        <h2>Want a website like this for your business?</h2>
-        <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses — see our packages and pricing below.</p>
-        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p style="margin:0;">© 2025 Hillcrest Family Clinic · 14 Summer Street, Orange NSW 2800 · (02) 6362 4400</p>
-      <p style="margin:.3rem 0 0; font-size:.8rem;">This is a <strong>demo site</strong> created by <a href="/packages.html" style="color:var(--primary);">ImproveYourSite</a> to show what your finished website will look like.</p>
+  <!-- ── FOOTER ── -->
+  <footer class="hc-footer">
+    <div class="container hc-footer-inner">
+      <div class="hc-footer-col">
+        <div class="hc-footer-brand">
+          <div class="hc-logo-mark hc-logo-mark-sm">H</div>
+          <span>Hillcrest Family Clinic</span>
+        </div>
+        <p>Your local GP and allied health team, serving the Orange community since 2004.</p>
+        <p class="hc-footer-muted">AGPAL Accredited General Practice</p>
+      </div>
+      <div class="hc-footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">General Practice</a></li>
+          <li><a href="#services">Mental Health</a></li>
+          <li><a href="#services">Chronic Disease</a></li>
+          <li><a href="#services">Women's Health</a></li>
+          <li><a href="#services">Childhood Health</a></li>
+          <li><a href="#allied">Allied Health</a></li>
+        </ul>
+      </div>
+      <div class="hc-footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#bulk-billing">Bulk Billing</a></li>
+          <li><a href="#what-to-bring">What to Bring</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#book">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div class="hc-footer-col">
+        <h4>Contact</h4>
+        <ul class="hc-footer-contact">
+          <li><a href="tel:0263621234">02 6362 1234</a></li>
+          <li><a href="mailto:reception@hillcrestclinic.com.au">reception@hillcrestclinic.com.au</a></li>
+          <li>88 Lords Place, Orange NSW 2800</li>
+        </ul>
+        <div class="hc-footer-hours">
+          <p>Mon–Fri: 8:00am – 6:00pm</p>
+          <p>Saturday: 8:00am – 1:00pm</p>
+        </div>
+      </div>
+    </div>
+    <div class="hc-footer-bottom">
+      <div class="container hc-footer-bottom-inner">
+        <p>&copy; 2025 Hillcrest Family Clinic &bull; 88 Lords Place, Orange NSW 2800 &bull; 02 6362 1234</p>
+        <p>This is a <strong>demo site</strong> created by <a href="/packages.html">ImproveYourSite</a> to show what your finished website will look like.</p>
+      </div>
     </div>
   </footer>
 
-  <a class="phone-cta" href="book.html">📅 Book appointment</a>
+  <!-- ── STICKY MOBILE BOOK CTA ── -->
+  <a class="hc-mobile-book-cta" href="#book" id="mobile-book-cta" aria-label="Book appointment">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+    Book Appointment
+  </a>
 
   <script>
-    /* ── Scroll reveal ── */
-    var _io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); _io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card,.value,.testimonial-card,.kpi,.faq-item').forEach(function(el) {
-      el.classList.add('reveal'); _io.observe(el);
-    });
-
-    /* ── FAQ accordion ── */
-    document.querySelectorAll('.faq-q').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var item = btn.closest('.faq-item');
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
-        if (!isOpen) item.classList.add('open');
-      });
-    });
-
-    /* ── Open now badge ── */
-    (function() {
+    /* ── Open/Closed badge ── */
+    (function () {
       var badge = document.getElementById('open-badge');
       if (!badge) return;
-      var HOURS = [null,[8,18],[8,18],[8,18],[8,18],[8,18],[8,13]]; // [open, close] per weekday index (0=Sun)
-      var now = new Date(new Date().toLocaleString('en-AU', {timeZone:'Australia/Sydney'}));
-      var h = now.getHours() + now.getMinutes()/60;
+      var HOURS = [null, [8, 18], [8, 18], [8, 18], [8, 18], [8, 18], [8, 13]];
+      var now = new Date(new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' }));
+      var h = now.getHours() + now.getMinutes() / 60;
       var todayHours = HOURS[now.getDay()];
       var isOpen = todayHours && h >= todayHours[0] && h < todayHours[1];
-      badge.textContent = isOpen ? '● Open now' : '● Closed';
-      badge.className = 'open-badge ' + (isOpen ? 'open' : 'closed');
+      badge.textContent = isOpen ? 'Open now' : 'Closed';
+      badge.className = 'hc-open-badge ' + (isOpen ? 'hc-open' : 'hc-closed');
+    })();
+
+    /* ── Highlight today's row in contact hours table ── */
+    (function () {
+      var dayMap = [null, 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      var now = new Date(new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' }));
+      var todayKey = dayMap[now.getDay()];
+      if (todayKey) {
+        var row = document.getElementById('hours-' + todayKey);
+        if (row) row.classList.add('hc-today-row');
+      }
+    })();
+
+    /* ── Scroll reveal ── */
+    (function () {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    })();
+
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.hc-faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.hc-faq-item');
+        var answer = item.querySelector('.hc-faq-a');
+        var isOpen = item.classList.contains('hc-open');
+        /* Close all */
+        document.querySelectorAll('.hc-faq-item.hc-open').forEach(function (i) {
+          i.classList.remove('hc-open');
+          i.querySelector('.hc-faq-q').setAttribute('aria-expanded', 'false');
+          i.querySelector('.hc-faq-a').hidden = true;
+        });
+        /* Open clicked (unless it was already open) */
+        if (!isOpen) {
+          item.classList.add('hc-open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.hidden = false;
+        }
+      });
+    });
+
+    /* ── Booking form ── */
+    document.getElementById('book-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target;
+      /* Basic validation */
+      var service = form.querySelector('[name="service"]').value;
+      var name = form.querySelector('[name="name"]').value.trim();
+      var phone = form.querySelector('[name="phone"]').value.trim();
+      var time = form.querySelector('[name="time"]:checked');
+      var reason = form.querySelector('[name="reason"]').value.trim();
+      if (!service || !name || !phone || !time || !reason) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      form.hidden = true;
+      document.getElementById('book-success').hidden = false;
+    });
+
+    /* ── Mobile hamburger ── */
+    (function () {
+      var btn = document.getElementById('hc-hamburger');
+      var menu = document.getElementById('hc-mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('hc-menu-open');
+        btn.classList.toggle('hc-ham-open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+        menu.setAttribute('aria-hidden', String(!isOpen));
+      });
+      /* Close on nav link click */
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          menu.classList.remove('hc-menu-open');
+          btn.classList.remove('hc-ham-open');
+          btn.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        });
+      });
+    })();
+
+    /* ── Header shrink on scroll ── */
+    (function () {
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('hc-header-scrolled', window.scrollY > 60);
+      }, { passive: true });
     })();
   </script>
 </body>
