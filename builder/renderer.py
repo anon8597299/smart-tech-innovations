@@ -96,10 +96,14 @@ def derive_tokens(config: dict) -> dict:
     # Default COLOR_BG based on template
     if "COLOR_BG" not in tokens:
         template_defaults = {
-            "clinic-trust":   "#f4fbfb",
-            "trades-rapid":   "#fffaf5",
-            "advisor-prime":  "#f6f8ff",
-            "retail-pulse":   "#f8f7ff",
+            "clinic-trust":          "#f4fbfb",
+            "trades-rapid":          "#fffaf5",
+            "advisor-prime":         "#f6f8ff",
+            "retail-pulse":          "#f8f7ff",
+            "solar-spark":           "#fff8f0",
+            "accounting-conversion": "#f8fafc",
+            "consulting-authority":  "#f8fafc",
+            "hospitality-events":    "#fdf8f0",
         }
         template_id = tokens.get("TEMPLATE_ID", "")
         tokens["COLOR_BG"] = template_defaults.get(template_id, "#f8fafc")
@@ -107,10 +111,14 @@ def derive_tokens(config: dict) -> dict:
     # Default COLOR_PRIMARY based on template
     if "COLOR_PRIMARY" not in tokens:
         primary_defaults = {
-            "clinic-trust":   "#0f766e",
-            "trades-rapid":   "#d97706",
-            "advisor-prime":  "#1d4ed8",
-            "retail-pulse":   "#7c3aed",
+            "clinic-trust":          "#0f766e",
+            "trades-rapid":          "#d97706",
+            "advisor-prime":         "#1d4ed8",
+            "retail-pulse":          "#7c3aed",
+            "solar-spark":           "#ea580c",
+            "accounting-conversion": "#1e3a5f",
+            "consulting-authority":  "#334155",
+            "hospitality-events":    "#92400e",
         }
         template_id = tokens.get("TEMPLATE_ID", "")
         tokens["COLOR_PRIMARY"] = primary_defaults.get(template_id, "#5b4dff")
