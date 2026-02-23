@@ -5,3 +5,9 @@ builder/.env
 
 # macOS
 .DS_Store
+
+# Social media content — local only, do not push to GitHub
+social/
+assets/social/*.png
+assets/social/*.jpg
+marketing/
