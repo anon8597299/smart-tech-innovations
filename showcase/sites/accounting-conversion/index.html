@@ -3,340 +3,669 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clearview Accounting — Tax &amp; Business Advisors, Bathurst NSW</title>
-  <meta name="description" content="Expert tax, accounting, and business advisory for individuals and SMEs in Bathurst NSW. Fixed-fee pricing, proactive advice, and a team that actually returns your calls.">
+  <title>Clearview Accounting &#8212; Tax, Business Advisory &amp; SMSF | Bathurst NSW</title>
+  <meta name="description" content="Sarah Chen CPA &#8212; expert tax returns, business advisory and SMSF administration in Bathurst NSW. Xero Gold Partner. Fixed-fee pricing. Book a free 20-min consult today.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --primary: #334155;
-      --accent: #b45309;
-      --accent-light: #fef3c7;
-      --line: #e2e8f0;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body { font-family: Inter, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
+  <link rel="stylesheet" href="styles.css">
 
-    .demo-banner {
-      background: #0f172a; color: #e2e8f0; text-align: center;
-      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 100;
-    }
-    .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
-    .site-header { position: sticky; top: 36px; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); z-index: 20; }
-    .nav { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; gap: .8rem; }
-    .brand { font-weight: 800; font-size: 1.1rem; }
-    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap; }
-    .nav-links a { border: 1px solid var(--line); padding: .34rem .65rem; border-radius: 999px; font-size: .86rem; background: #fff; }
-    .nav-cta { background: var(--primary) !important; color: #fff !important; border-color: var(--primary) !important; }
-
-    .hero { padding: 5rem 0 2rem; }
-    .badge { display: inline-block; background: #fef3c7; border: 1px solid #fcd34d; color: #78350f; font-weight: 700; padding: .28rem .68rem; border-radius: 999px; font-size: .76rem; }
-    h1 { font-size: clamp(1.9rem, 5vw, 3.1rem); line-height: 1.05; margin: .8rem 0 .65rem; max-width: 800px; }
-    .lead { color: var(--muted); max-width: 760px; font-size: 1.05rem; }
-    .cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.15rem; border-radius: 10px; font-weight: 700; border: 1px solid transparent; font-size: .95rem; }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: #1e293b; }
-    .btn-accent { background: var(--accent); color: #fff; }
-    .btn-secondary { border-color: var(--line); background: #fff; }
-    .trust-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
-    .trust-strip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: .22rem .56rem; font-size: .76rem; font-weight: 700; color: #334155; }
-
-    .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; margin-top: 1.4rem; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.1rem; }
-    .accent-panel {
-      background: linear-gradient(140deg, #fefce8 0%, #fef3c7 60%, #fde68a 100%);
-      border: 1px solid #fcd34d; border-radius: 16px; padding: 1.1rem;
-    }
-    .accent-panel p { margin: 0; color: #78350f; font-size: .9rem; }
-    .chips { margin-top: .6rem; display: flex; gap: .4rem; flex-wrap: wrap; }
-    .chips span { font-size: .76rem; font-weight: 700; background: rgba(255,255,255,.82); border: 1px solid #fbbf24; padding: .24rem .55rem; border-radius: 999px; }
-
-    /* Services */
-    .services-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
-    .service-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; border-left: 3px solid var(--accent); }
-    .service-card .icon { font-size: 1.5rem; margin-bottom: .4rem; }
-    .service-card h3 { margin: 0 0 .3rem; font-size: 1rem; }
-    .service-card p { margin: 0; font-size: .9rem; color: var(--muted); }
-
-    /* Pricing */
-    .pricing-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
-    .price-card { background: #fff; border: 1.5px solid var(--line); border-radius: 14px; padding: 1.2rem; }
-    .price-card.featured { border-color: var(--accent); }
-    .price-card h3 { margin: 0 0 .2rem; font-size: 1rem; }
-    .price-card .price-from { font-size: .82rem; color: var(--muted); margin: 0 0 .4rem; }
-    .price-card .price { font-size: 1.7rem; font-weight: 800; color: var(--primary); margin: 0 0 .2rem; }
-    .price-card ul { list-style: none; margin: .6rem 0 0; padding: 0; }
-    .price-card ul li { font-size: .86rem; padding: .25rem 0; border-bottom: 1px solid #f1f5f9; color: var(--muted); display: flex; gap: .4rem; }
-    .price-card ul li:last-child { border-bottom: none; }
-    .price-card ul li::before { content: "✓"; color: var(--accent); font-weight: 800; flex-shrink: 0; }
-
-    .trust-bar { background: var(--primary); color: #fff; padding: 1.1rem 0; margin-top: 2rem; }
-    .trust-bar .container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-    .trust-item { display: flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .92rem; }
-
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 1.4rem; }
-    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem; }
-    .stars { color: #f59e0b; margin-bottom: .5rem; }
-    .testimonial-card p { margin: 0 0 .8rem; font-size: .93rem; }
-    .reviewer { font-weight: 700; font-size: .86rem; color: var(--muted); }
-
-    .section { padding: 2rem 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-head h2 { margin: 0 0 .3rem; }
-    .section-head p { color: var(--muted); margin: 0; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .6rem; margin-top: .9rem; }
-    .kpi { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
-    .kpi strong { display: block; font-size: .98rem; }
-    .kpi span { font-size: .84rem; color: var(--muted); }
-
-    .cta-section { padding: 3rem 0; text-align: center; }
-    .cta-section h2 { font-size: clamp(1.6rem,4vw,2.2rem); margin-bottom: .6rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 1.4rem; }
-    .btn-get-site {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: #5b4dff; color: #fff; font-weight: 800;
-      padding: .9rem 2rem; border-radius: 12px; font-size: 1.05rem; text-decoration: none;
-    }
-    .phone-cta { display: none; }
-    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); }
-
-    @media (max-width: 900px) {
-      body { padding-bottom: 4.5rem; }
-      .hero-grid, .services-grid, .pricing-row, .testimonials-grid, .kpi-grid { grid-template-columns: 1fr; }
-      .btn { width: 100%; }
-      .trust-bar .container { flex-direction: column; align-items: flex-start; padding: 0 4vw; gap: .9rem; }
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
-      .phone-cta {
-        display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem;
-        z-index: 50; border-radius: 12px; background: var(--primary); color: #fff;
-        font-weight: 800; justify-content: center; padding: .82rem 1rem;
-        box-shadow: 0 12px 30px rgba(51,65,85,.35); text-decoration: none;
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Clearview Accounting",
+    "description": "Tax, business advisory and SMSF administration for individuals and SMEs across Central West NSW. CPA Australia member, Xero Gold Partner, MYOB Partner.",
+    "url": "https://clearviewaccounting.com.au",
+    "telephone": "(02) 6331 2200",
+    "email": "admin@clearviewaccounting.com.au",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Suite 3, 157 George Street",
+      "addressLocality": "Bathurst",
+      "addressRegion": "NSW",
+      "postalCode": "2795",
+      "addressCountry": "AU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -33.4193,
+      "longitude": 149.5768
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:30",
+        "closes": "17:30"
       }
-    }
-  </style>
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "67",
+      "bestRating": "5"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Bathurst"},
+      {"@type": "City", "name": "Orange"},
+      {"@type": "City", "name": "Lithgow"},
+      {"@type": "City", "name": "Mudgee"},
+      {"@type": "AdministrativeArea", "name": "Central West NSW"}
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Sarah Chen",
+      "jobTitle": "Principal, CPA"
+    },
+    "foundingDate": "2011",
+    "memberOf": [
+      {"@type": "Organization", "name": "CPA Australia"},
+      {"@type": "Organization", "name": "Xero Gold Partner"},
+      {"@type": "Organization", "name": "MYOB Partner"}
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- 1. Demo banner -->
   <div class="demo-banner">
-    This is a demo site by ImproveYourSite — showing what your finished site looks like.
+    This is a demo site by ImproveYourSite &#8212; see what a finished site looks like.
     <a href="/packages.html">Get a site like this &rarr;</a>
   </div>
 
+  <!-- Sticky header -->
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="#">📊 Clearview Accounting</a>
+      <a class="brand" href="#">&#x1F4CA; Clearview Accounting</a>
       <nav class="nav-links">
-        <a href="#">Services</a>
-        <a href="#">Pricing</a>
-        <a href="#">About</a>
-        <a class="nav-cta" href="#">Book Appointment</a>
+        <a href="#services">Services</a>
+        <a href="#estimator">Tax Estimator</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#contact">Book Free Consult</a>
+        <a class="nav-phone" href="tel:0263312200">(02) 6331 2200</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+
+    <!-- 2. Hero -->
+    <section class="hero reveal">
       <div class="container">
-        <span class="badge">CPA firm · Bathurst NSW · Fixed-fee pricing</span>
-        <h1>Accounting that actually helps your business — not just your tax return</h1>
-        <p class="lead">Clearview Accounting provides proactive tax advice, bookkeeping, and business advisory for individuals and SMEs across Bathurst, Orange, and the Central West. We're the firm that calls you first.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#">📅 Book a Free Consultation</a>
-          <a class="btn btn-secondary" href="#">View Our Services</a>
+        <div class="hero-top-row">
+          <span id="open-badge" class="open-badge open-badge--loading">&#x25CF; Checking hours&hellip;</span>
+          <span class="hero-est">Est. 2011 &#8212; 13+ years Bathurst</span>
+        </div>
+        <h1>Clear advice. Maximum returns. No surprises.</h1>
+        <p class="lead">Sarah Chen CPA and the Clearview team provide proactive tax, business advisory and SMSF services to individuals and SMEs across Bathurst, Orange, Lithgow, Mudgee and the Central West. We call you first.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">&#x1F4C5; Book Free 20-Min Consult</a>
+          <a class="btn btn-secondary" href="#services">View Our Services</a>
+          <a class="btn btn-phone" href="tel:0263312200">&#x1F4DE; (02) 6331 2200</a>
         </div>
         <div class="trust-strip">
-          <span>✓ CPA Australia members</span>
-          <span>✓ Fixed-fee packages</span>
-          <span>✓ Same-week appointments</span>
-          <span>✓ Xero gold partner</span>
+          <span>&#x2713; CPA Australia</span>
+          <span>&#x2713; Xero Gold Partner</span>
+          <span>&#x2713; MYOB Partner</span>
+          <span>&#x2713; 13 years Bathurst</span>
+          <span>&#x2605; 4.9 Google (67 reviews)</span>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-grid">
-          <div class="card">
-            <h3>📍 Bathurst NSW</h3>
-            <p>Level 1, 72 William Street, Bathurst NSW 2795<br>
-               <strong>Phone:</strong> (02) 6331 4400<br>
-               <strong>Email:</strong> hello@clearviewaccounting.com.au<br>
-               <strong>Hours:</strong> Mon–Fri 8:30am–5:30pm</p>
-            <p style="margin-top:.6rem;font-size:.88rem;color:var(--muted);">Also servicing Orange, Lithgow, and surrounding regions. Zoom appointments available.</p>
+    <!-- 5. Partner badges strip -->
+    <div class="partner-strip reveal">
+      <div class="container partner-strip-inner">
+        <span class="partner-label">Proud partners &amp; members:</span>
+        <span class="partner-badge partner-badge--xero">&#x1F7E2; Xero Gold Partner</span>
+        <span class="partner-badge partner-badge--myob">&#x1F7E3; MYOB Partner</span>
+        <span class="partner-badge partner-badge--cpa">&#x1F535; CPA Australia</span>
+      </div>
+    </div>
+
+    <!-- 4. Services grid -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>What we do</h2>
+          <p>Comprehensive accounting, tax and advisory services for individuals and businesses across Central West NSW.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F4CB;</div>
+            <h3>Individual Tax Returns</h3>
+            <p>Expert preparation of your personal tax return, maximising deductions and ensuring full ATO compliance. <strong>From $220.</strong></p>
           </div>
-          <div class="accent-panel">
-            <h3 style="margin:0 0 .4rem;">Tired of reactive accounting?</h3>
-            <p>We don't wait until June 30 to call you. Our clients get quarterly check-ins, proactive tax planning, and real advice throughout the year — not just a tax return and a bill.</p>
-            <div class="chips">
-              <span>Proactive advice</span>
-              <span>Quarterly reviews</span>
-              <span>Tax planning</span>
-              <span>Xero specialists</span>
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F4BC;</div>
+            <h3>Small Business Accounting</h3>
+            <p>Company, trust and partnership tax returns, BAS, financial statements and annual compliance &#8212; all in one fixed-fee engagement.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F3E6;</div>
+            <h3>SMSF Administration</h3>
+            <p>Full SMSF establishment, annual compliance, audit coordination and investment strategy support for your self-managed super fund.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F4C8;</div>
+            <h3>Business Advisory</h3>
+            <p>Profit improvement, cash flow forecasting, KPI dashboards, entity structure reviews and strategic planning year-round.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F4D2;</div>
+            <h3>Bookkeeping &amp; BAS</h3>
+            <p>Monthly Xero bookkeeping, BAS and IAS lodgements, payables, receivables and bank reconciliation &#8212; clean books, every month.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#x1F9FE;</div>
+            <h3>Payroll &amp; HR Support</h3>
+            <p>End-to-end payroll processing, STP compliance, superannuation, employee entitlements and HR document templates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. How a good accountant pays for itself -->
+    <section class="section savings-section" id="savings">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>How a good accountant pays for itself</h2>
+          <p>Proactive advice is an investment, not a cost. Here is what clients typically gain.</p>
+        </div>
+        <div class="savings-grid">
+          <div class="savings-highlight reveal">
+            <div class="savings-number">01</div>
+            <div class="savings-amount">Avg $3,400/yr saved</div>
+            <h3>Proactive tax planning</h3>
+            <p>We review your tax position quarterly, not just at 30 June. Timing income, accelerating deductions and super contributions typically saves clients $3,400 per year compared to reactive filing alone.</p>
+          </div>
+          <div class="savings-highlight reveal">
+            <div class="savings-number">02</div>
+            <div class="savings-amount">$8,000 &ndash; $22,000 saved</div>
+            <h3>Business structure review</h3>
+            <p>Running through the wrong entity costs real money. A trust or company structure review can identify $8,000 to $22,000 in annual tax savings for growing businesses &#8212; often in the very first engagement.</p>
+          </div>
+          <div class="savings-highlight reveal">
+            <div class="savings-number">03</div>
+            <div class="savings-amount">Included at no extra cost</div>
+            <h3>ATO audit support</h3>
+            <p>If the ATO comes knocking, we are right there with you. Full audit support, correspondence handling and representation is included on all annual packages &#8212; no surprise bills.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Tax Return Estimator -->
+    <section class="estimator-section section" id="estimator">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>&#x1F9EE; Tax Return Estimator</h2>
+          <p>Get a quick sense of your tax bracket, likely deductions and what our fee would be &#8212; in under 60 seconds.</p>
+        </div>
+        <div class="estimator-card reveal">
+          <div class="estimator-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="emp-type">Employment type</label>
+                <select id="emp-type">
+                  <option value="">&#8212; Select &#8212;</option>
+                  <option value="employee">Employee (PAYG)</option>
+                  <option value="soletrader">Sole Trader</option>
+                  <option value="business">Small Business (Company / Trust)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="income">Annual income ($)</label>
+                <input type="number" id="income" placeholder="e.g. 85000" min="0" step="1000">
+              </div>
+            </div>
+            <div class="form-row form-row--checks">
+              <label class="check-label">
+                <input type="checkbox" id="wfh"> Work from home?
+              </label>
+              <label class="check-label">
+                <input type="checkbox" id="investment"> Investment income (shares / property)?
+              </label>
+            </div>
+            <button class="btn btn-primary btn-estimate" onclick="calculateEstimate()">&#x1F4CA; Calculate my estimate</button>
+          </div>
+          <div class="tax-result" id="tax-result" aria-live="polite" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Testimonials -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>What Bathurst businesses say</h2>
+          <p>Real results from real clients across the Central West.</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal">
+            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+            <p>&#8220;Sarah restructured our trust and saved us $14,200 in a single year &#8212; that&#8217;s paid for six years of fees. Genuinely couldn&#8217;t recommend Clearview more highly.&#8221;</p>
+            <div class="reviewer">&#8212; Mark D., construction business, Bathurst NSW</div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+            <p>&#8220;The Xero setup took about two hours. Now our bookkeeping takes 20 minutes a week. Should have done it years ago &#8212; the team made the whole transition painless.&#8221;</p>
+            <div class="reviewer">&#8212; Jess &amp; Tom F., caf&eacute; owner, Orange NSW</div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+            <p>&#8220;Sarah found deductions from my home office setup that I&#8217;d missed for three years running. Worth over $4,000 in refunds &#8212; more than covered everything.&#8221;</p>
+            <div class="reviewer">&#8212; Claire W., consultant, Mudgee NSW</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. KPI strip -->
+    <div class="kpi-strip reveal">
+      <div class="container kpi-strip-inner">
+        <div class="kpi-item">
+          <strong>13 years</strong>
+          <span>Serving Bathurst</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+          <strong>67 reviews &#x2605; 4.9</strong>
+          <span>Google rating</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+          <strong>Xero Gold Partner</strong>
+          <span>Certified specialists</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+          <strong>CPA Australia</strong>
+          <span>Fully qualified CPAs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Contact section -->
+    <section class="contact-section section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Book your free 20-minute consultation</h2>
+          <p>Tell us a little about your situation and we will be in touch within one business day &#8212; usually within a few hours.</p>
+        </div>
+        <div class="contact-grid reveal">
+          <div class="contact-form-wrap">
+            <form class="contact-form" id="contact-form" onsubmit="submitForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cf-name">Full name *</label>
+                  <input type="text" id="cf-name" required placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <label for="cf-phone">Phone *</label>
+                  <input type="tel" id="cf-phone" required placeholder="(02) #### ####">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cf-email">Email address *</label>
+                <input type="email" id="cf-email" required placeholder="you@example.com">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cf-biztype">Business type</label>
+                  <select id="cf-biztype">
+                    <option value="">&#8212; Select &#8212;</option>
+                    <option>Individual / employee</option>
+                    <option>Sole trader</option>
+                    <option>Small business (company / trust)</option>
+                    <option>SMSF trustee</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cf-service">Service needed</label>
+                  <select id="cf-service">
+                    <option value="">&#8212; Select &#8212;</option>
+                    <option>Individual tax return</option>
+                    <option>Business accounting</option>
+                    <option>SMSF administration</option>
+                    <option>Bookkeeping / BAS</option>
+                    <option>Business advisory</option>
+                    <option>Payroll &amp; HR</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" rows="4" placeholder="Briefly describe your situation or question&hellip;"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;">&#x1F4E8; Send enquiry</button>
+            </form>
+            <div class="form-success" id="form-success" style="display:none;">
+              <div class="form-success-inner">
+                <div class="form-success-icon">&#x2705;</div>
+                <h3>Message received!</h3>
+                <p>Thanks for reaching out. Sarah or a team member will contact you within one business day &#8212; usually much sooner.</p>
+                <p style="font-size:.88rem;color:var(--muted);">In the meantime, feel free to call us on <a href="tel:0263312200">(02) 6331 2200</a>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info-box">
+            <h3>Our details</h3>
+            <ul class="contact-list">
+              <li>
+                <span class="ci-icon">&#x1F4DE;</span>
+                <div>
+                  <strong>Phone</strong><br>
+                  <a href="tel:0263312200">(02) 6331 2200</a>
+                </div>
+              </li>
+              <li>
+                <span class="ci-icon">&#x2709;</span>
+                <div>
+                  <strong>Email</strong><br>
+                  <a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a>
+                </div>
+              </li>
+              <li>
+                <span class="ci-icon">&#x1F4CD;</span>
+                <div>
+                  <strong>Address</strong><br>
+                  Suite 3, 157 George Street<br>
+                  Bathurst NSW 2795
+                </div>
+              </li>
+              <li>
+                <span class="ci-icon">&#x1F550;</span>
+                <div>
+                  <strong>Office hours</strong><br>
+                  Mon &ndash; Fri: 8:30am &ndash; 5:30pm AEST<br>
+                  Closed weekends &amp; public holidays
+                </div>
+              </li>
+            </ul>
+            <div class="response-promise">
+              <strong>&#x26A1; Our response promise</strong>
+              <p>All enquiries acknowledged within 4 business hours. We do not keep you waiting.</p>
+            </div>
+            <div class="service-area-box">
+              <strong>Service area</strong>
+              <p>Bathurst &bull; Orange &bull; Lithgow &bull; Mudgee &bull; Central West NSW<br>
+              <em>Remote / Zoom appointments available Australia-wide.</em></p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services -->
-    <section class="section">
+    <!-- 11. FAQ accordion -->
+    <section class="faq-section section" id="faq">
       <div class="container">
-        <div class="section-head">
-          <h2>What we do</h2>
-          <p>From tax returns to full CFO-level business advisory.</p>
+        <div class="section-head reveal">
+          <h2>Frequently asked questions</h2>
+          <p>Quick answers to what we hear most often.</p>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="icon">📋</div>
-            <h3>Tax Returns &amp; Compliance</h3>
-            <p>Individual, company, trust, and SMSF tax returns. BAS, IAS, payroll tax. We handle the lodgements so you don't have to.</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              How much does a tax return cost?
+              <span class="faq-arrow">&#x25BC;</span>
+            </button>
+            <div class="faq-a">
+              <p>Individual tax returns start from <strong>$220</strong> for straightforward PAYG employees, and go up based on complexity &#8212; investment properties, capital gains, sole trader income and other schedules each add to the scope. During your free 20-minute consultation we will give you a fixed-fee quote before any work begins, so there are no surprises at invoice time.</p>
+            </div>
           </div>
-          <div class="service-card">
-            <div class="icon">📊</div>
-            <h3>Business Advisory</h3>
-            <p>Profit improvement, cash flow forecasting, KPI dashboards, and strategic planning. We help you run a better business.</p>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              What records do I need to bring?
+              <span class="faq-arrow">&#x25BC;</span>
+            </button>
+            <div class="faq-a">
+              <p>For most individuals: your PAYG payment summary (or ATO pre-fill), bank statements for interest, dividend statements, receipts for work-related expenses, and details of any investment property income and expenses. Sole traders should also bring a profit and loss summary or bank statements covering the full financial year. We will send you a personalised checklist after you book so you arrive fully prepared.</p>
+            </div>
           </div>
-          <div class="service-card">
-            <div class="icon">💻</div>
-            <h3>Bookkeeping &amp; Xero</h3>
-            <p>Monthly bookkeeping, Xero setup and training, accounts payable/receivable, bank reconciliation. Clean books, always.</p>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              Can you administer our SMSF?
+              <span class="faq-arrow">&#x25BC;</span>
+            </button>
+            <div class="faq-a">
+              <p>Yes &#8212; SMSF administration is one of our core services. We handle everything from establishment and trust deed preparation through to annual financial statements, tax returns, audit coordination and investment strategy compliance. Sarah Chen holds specialist SMSF accreditation through CPA Australia. We currently administer SMSFs for clients across Bathurst, Orange and remotely throughout NSW.</p>
+            </div>
           </div>
-          <div class="service-card">
-            <div class="icon">🏢</div>
-            <h3>Company &amp; Trust Setup</h3>
-            <p>Business structure advice, company registration, trust deeds, and shareholder agreements. Get it right from the start.</p>
-          </div>
-          <div class="service-card">
-            <div class="icon">🏖️</div>
-            <h3>SMSF Administration</h3>
-            <p>Full SMSF establishment, annual compliance, investment strategy advice, and audit coordination.</p>
-          </div>
-          <div class="service-card">
-            <div class="icon">🤝</div>
-            <h3>Business Buying &amp; Selling</h3>
-            <p>Due diligence, business valuations, sale structure advice, and post-acquisition integration support.</p>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              What is the difference between a tax agent and an accountant?
+              <span class="faq-arrow">&#x25BC;</span>
+            </button>
+            <div class="faq-a">
+              <p>A <strong>registered tax agent</strong> is licensed by the Tax Practitioners Board (TPB) to prepare and lodge tax returns on your behalf and provide tax advice for a fee &#8212; all our principals are registered tax agents. A <strong>CPA accountant</strong> holds additional qualifications through CPA Australia covering financial reporting, business advisory, management accounting and more. At Clearview, you get both: registered tax agents who are also CPAs, meaning you receive tax compliance and broader business advice under one roof.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="section" style="background:#f1f5f9;padding:2.4rem 0;border-top:1px solid var(--line);">
-      <div class="container">
-        <div class="section-head">
-          <h2>Simple, fixed-fee pricing</h2>
-          <p>No hourly billing surprises. Know your cost upfront.</p>
-        </div>
-        <div class="pricing-row">
-          <div class="price-card">
-            <h3>Individuals &amp; Investors</h3>
-            <div class="price-from">From</div>
-            <div class="price">$350/yr</div>
-            <ul>
-              <li>Individual tax return</li>
-              <li>Investment property schedules</li>
-              <li>Capital gains calculations</li>
-              <li>ATO correspondence handled</li>
-            </ul>
-          </div>
-          <div class="price-card featured">
-            <h3>Small Business</h3>
-            <div class="price-from">From</div>
-            <div class="price">$2,800/yr</div>
-            <ul>
-              <li>Company or trust tax return</li>
-              <li>BAS lodgements (quarterly)</li>
-              <li>Annual financial statements</li>
-              <li>Quarterly advisory meeting</li>
-              <li>Xero setup &amp; support</li>
-            </ul>
-          </div>
-          <div class="price-card">
-            <h3>Growth Business</h3>
-            <div class="price-from">From</div>
-            <div class="price">$6,500/yr</div>
-            <ul>
-              <li>Everything in Small Business</li>
-              <li>Monthly bookkeeping</li>
-              <li>Monthly management accounts</li>
-              <li>Cash flow forecasting</li>
-              <li>CFO advisory hours included</li>
-            </ul>
-          </div>
-        </div>
-        <p style="text-align:center;color:var(--muted);font-size:.88rem;margin-top:.9rem;">All prices exclude GST. Full scope agreed in writing before engagement begins.</p>
-      </div>
-    </section>
-
-    <!-- Trust bar -->
-    <div class="trust-bar">
-      <div class="container">
-        <div class="trust-item">📊 CPA Australia members</div>
-        <div class="trust-item">⭐ 4.9 Google rating (180+ reviews)</div>
-        <div class="trust-item">💻 Xero Gold Partner</div>
-        <div class="trust-item">📍 Bathurst &amp; Orange NSW</div>
-      </div>
-    </div>
-
-    <!-- Testimonials -->
-    <section class="section" style="padding:2.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-      <div class="container">
-        <h2>What our clients say</h2>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Switched to Clearview three years ago and never looked back. They saved us $28,000 in tax in the first year through proper planning we'd never had before. Genuinely proactive."</p>
-            <div class="reviewer">— Paul H., construction business, Bathurst NSW</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"After years of never hearing from our old accountant until tax time, it's refreshing to have a firm that actually picks up the phone and reaches out when something matters."</p>
-            <div class="reviewer">— Sandra M., physiotherapy practice, Orange NSW</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"The fixed-fee model was a game-changer for us. No more invoice shock. We know exactly what we're paying and the service we get is worth every cent."</p>
-            <div class="reviewer">— Tom &amp; Julie B., farming business, Molong NSW</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="kpi-grid">
-          <div class="kpi"><strong>Free first consult</strong><span>60-min consultation to assess your needs.</span></div>
-          <div class="kpi"><strong>Fixed-fee pricing</strong><span>No hourly surprises. Cost agreed upfront.</span></div>
-          <div class="kpi"><strong>Proactive reviews</strong><span>Quarterly calls included on all packages.</span></div>
-          <div class="kpi"><strong>Same-week bookings</strong><span>Usually available within 5 business days.</span></div>
-        </div>
-        <div class="cta" style="margin-top:1.4rem;">
-          <a class="btn btn-primary" href="#">📅 Book a Free Consultation</a>
-          <a class="btn btn-secondary" href="#">View Pricing</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="container">
+    <!-- 12. Want a website like this CTA -->
+    <section class="cta-final-section reveal">
+      <div class="container cta-final-inner">
         <h2>Want a website like this for your accounting firm?</h2>
-        <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses — see our packages and pricing below.</p>
-        <a class="btn-get-site" href="/packages.html">⚡ See Our Packages &amp; Pricing</a>
+        <p>This showcase was built by <strong>ImproveYourSite</strong>. We create high-converting websites for Australian professional services firms &#8212; with interactive tools, SEO and trust signals built in.</p>
+        <a class="btn btn-get-site" href="/packages.html">&#x26A1; See our packages &amp; pricing</a>
       </div>
     </section>
+
   </main>
 
-  <footer>
-    <div class="container">
-      <p style="margin:0;">© 2025 Clearview Accounting Pty Ltd · CPA Australia · Level 1, 72 William Street, Bathurst NSW 2795 · (02) 6331 4400</p>
-      <p style="margin:.3rem 0 0;font-size:.8rem;">This is a <strong>demo site</strong> by <a href="/packages.html" style="color:var(--accent);">ImproveYourSite</a>.</p>
+  <!-- 13. Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>&#x1F4CA; Clearview Accounting</strong>
+        <p>CPA Australia &bull; Xero Gold Partner &bull; MYOB Partner</p>
+        <p>ABN 47 123 456 789</p>
+      </div>
+      <div class="footer-info">
+        <p>Suite 3, 157 George Street, Bathurst NSW 2795</p>
+        <p><a href="tel:0263312200">(02) 6331 2200</a> &bull; <a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a></p>
+        <p>&copy; 2025 Clearview Accounting. Principal: Sarah Chen CPA. Established 2011.</p>
+      </div>
+      <div class="footer-demo">
+        <p>This is a <strong>demo site</strong> by <a href="/packages.html">ImproveYourSite</a>.</p>
+      </div>
     </div>
   </footer>
 
-  <a class="phone-cta" href="#">📅 Book a free consultation</a>
+  <!-- 14. Mobile sticky CTA -->
+  <a class="mobile-sticky-cta" href="#contact">&#x1F4CA; Book free consult</a>
+
+  <script>
+  /* =====================================================================
+     OPEN-NOW BADGE  Mon-Fri 08:30-17:30 Sydney/AEST
+     ===================================================================== */
+  (function () {
+    function getSydneyTime() {
+      var now = new Date();
+      var parts = new Intl.DateTimeFormat('en-AU', {
+        timeZone: 'Australia/Sydney',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(now);
+      var p = {};
+      parts.forEach(function (x) { p[x.type] = x.value; });
+      var y = parseInt(p.year, 10), mo = parseInt(p.month, 10), d = parseInt(p.day, 10);
+      return {
+        weekday: new Date(y, mo - 1, d).getDay(),
+        mins: parseInt(p.hour, 10) * 60 + parseInt(p.minute, 10)
+      };
+    }
+    function updateBadge() {
+      var badge = document.getElementById('open-badge');
+      if (!badge) return;
+      try {
+        var t = getSydneyTime();
+        var isWeekday = t.weekday >= 1 && t.weekday <= 5;
+        var inHours = t.mins >= 510 && t.mins < 1050;
+        if (isWeekday && inHours) {
+          badge.className = 'open-badge open-badge--open';
+          badge.textContent = '\u25CF Open now \u2014 Mon\u2013Fri 8:30am\u20135:30pm AEST';
+        } else {
+          badge.className = 'open-badge open-badge--closed';
+          badge.textContent = '\u25CF Closed now \u2014 open Mon\u2013Fri 8:30am\u20135:30pm AEST';
+        }
+      } catch (e) {
+        badge.className = 'open-badge open-badge--closed';
+        badge.textContent = 'Mon\u2013Fri 8:30am\u20135:30pm AEST';
+      }
+    }
+    updateBadge();
+    setInterval(updateBadge, 60000);
+  })();
+
+  /* =====================================================================
+     TAX RETURN ESTIMATOR
+     ===================================================================== */
+  function calculateEstimate() {
+    var type     = document.getElementById('emp-type').value;
+    var income   = parseFloat(document.getElementById('income').value) || 0;
+    var wfh      = document.getElementById('wfh').checked;
+    var invest   = document.getElementById('investment').checked;
+    var resultEl = document.getElementById('tax-result');
+
+    if (!type) {
+      resultEl.innerHTML = '<p class="tax-result-error">Please select your employment type to continue.</p>';
+      resultEl.style.display = 'block';
+      return;
+    }
+
+    // Tax bracket
+    var bracket, bracketLabel, taxOwed;
+    if (income <= 18200)       { bracket = '0%';    bracketLabel = '$0 \u2013 $18,200 (tax-free threshold)'; taxOwed = 0; }
+    else if (income <= 45000)  { bracket = '19%';   bracketLabel = '$18,201 \u2013 $45,000';                 taxOwed = (income - 18200) * 0.19; }
+    else if (income <= 120000) { bracket = '32.5%'; bracketLabel = '$45,001 \u2013 $120,000';                taxOwed = 5092 + (income - 45000) * 0.325; }
+    else if (income <= 180000) { bracket = '37%';   bracketLabel = '$120,001 \u2013 $180,000';               taxOwed = 29467 + (income - 120000) * 0.37; }
+    else                       { bracket = '45%';   bracketLabel = '$180,001+';                               taxOwed = 51667 + (income - 180000) * 0.45; }
+
+    // Deductions
+    var deductionMap = {
+      employee: [
+        wfh ? 'Work-from-home expenses (hourly rate or actual cost method)' : null,
+        'Work-related travel (client visits, site visits \u2014 not commuting)',
+        'Union fees and professional association memberships',
+        'Professional development, courses and seminars',
+        'Tools, equipment and stationery under $300 (immediate deduction)',
+        'Mobile phone \u2014 work-use portion (partial deduction)'
+      ],
+      soletrader: [
+        'All business operating expenses (direct deduction)',
+        'Home office \u2014 actual costs or fixed rate method',
+        'Vehicle \u2014 logbook method (up to 100% business use)',
+        'Equipment depreciation (instant asset write-off may apply)',
+        'Professional fees (legal, accounting, consulting)',
+        'Superannuation contributions (personal deductible contributions)'
+      ],
+      business: [
+        'All operating expenses (wages, rent, utilities, insurance)',
+        'Payroll tax and superannuation obligations',
+        'Asset depreciation and instant asset write-off',
+        'R&D expenditure (Tax Incentive may apply)',
+        'Entity structure optimisation (trust distributions, Div 7A)',
+        'Losses, carry-forwards and consolidation strategies'
+      ]
+    };
+    var deductions = deductionMap[type].filter(Boolean);
+
+    // Fee
+    var fee;
+    if (type === 'employee')   { fee = 220; if (wfh) fee += 50; if (invest) fee += 80; }
+    else if (type === 'soletrader') { fee = 550; if (invest) fee += 120; }
+    else                       { fee = 1200; }
+
+    var labels = { employee: 'Employee (PAYG)', soletrader: 'Sole Trader', business: 'Small Business (Company / Trust)' };
+    var taxStr = income > 0 ? '$' + Math.round(taxOwed).toLocaleString() : 'N/A';
+
+    var html = '<div class="tax-result-inner">'
+      + '<h3>Your estimate</h3>'
+      + '<div class="tax-result-grid">'
+      + '<div class="tri-item"><span class="tri-label">Employment type</span><span class="tri-value">' + labels[type] + '</span></div>';
+
+    if (income > 0) {
+      html += '<div class="tri-item"><span class="tri-label">Tax bracket</span><span class="tri-value">' + bracket + ' <small>(' + bracketLabel + ')</small></span></div>';
+      html += '<div class="tri-item"><span class="tri-label">Estimated tax payable</span><span class="tri-value tri-value--accent">' + taxStr + ' <small>(before offsets &amp; deductions)</small></span></div>';
+    }
+
+    html += '<div class="tri-item"><span class="tri-label">Our fee starts from</span><span class="tri-value tri-value--fee">$' + fee.toLocaleString() + ' <small>+ GST &mdash; exact quote provided free before engagement</small></span></div>';
+    html += '</div>';
+
+    html += '<div class="tax-result-deductions"><h4>Likely deductions for your situation</h4><ul>'
+      + deductions.map(function (d) { return '<li>' + d + '</li>'; }).join('')
+      + '</ul></div>';
+
+    html += '<p class="tax-result-disclaimer">This is a guide only, not financial advice. Individual circumstances vary. <a href="#contact">Book a free consultation</a> for a personalised assessment.</p>';
+    html += '<a class="btn btn-primary" href="#contact" style="margin-top:.6rem;display:inline-flex;">&#x1F4C5; Book free consult to discuss</a>';
+    html += '</div>';
+
+    resultEl.innerHTML = html;
+    resultEl.style.display = 'block';
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* =====================================================================
+     FAQ ACCORDION
+     ===================================================================== */
+  function toggleFaq(btn) {
+    var item   = btn.closest('.faq-item');
+    var answer = item.querySelector('.faq-a');
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    document.querySelectorAll('.faq-item').forEach(function (el) {
+      el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      var a = el.querySelector('.faq-a');
+      a.style.maxHeight = '0';
+      a.style.paddingBottom = '0';
+      el.classList.remove('faq-item--open');
+    });
+
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = (answer.scrollHeight + 32) + 'px';
+      answer.style.paddingBottom = '1rem';
+      item.classList.add('faq-item--open');
+    }
+  }
+
+  /* =====================================================================
+     CONTACT FORM FAKE SUBMIT
+     ===================================================================== */
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'flex';
+  }
+
+  /* =====================================================================
+     SCROLL REVEAL
+     ===================================================================== */
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('revealed'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+  })();
+  </script>
+
 </body>
 </html>
