@@ -59,6 +59,8 @@
 </head>
 <body>
 
+  <div id="scroll-bar"></div>
+
   <!-- Demo Banner -->
   <div class="demo-banner">
     This is a demo site by ImproveYourSite — showing what your finished site looks like.
@@ -84,6 +86,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
+      <div class="hero-parallax-bg" aria-hidden="true"></div>
       <div class="container">
         <div class="hero-inner">
           <div class="hero-content">
@@ -780,6 +783,243 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       revealEls.forEach(el => observer.observe(el));
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       Scroll-Driven Visual Effects — Apex Strategy Group
+       ============================================================ */
+
+    (function () {
+      'use strict';
+
+      // ─── Cached DOM refs ─────────────────────────────────────
+      var scrollBar       = document.getElementById('scroll-bar');
+      var header          = document.querySelector('.site-header');
+      var heroContent     = document.querySelector('.hero-content');
+      var heroPanel       = document.querySelector('.hero-panel');
+      var heroParallaxBg  = document.querySelector('.hero-parallax-bg');
+      var heroSection     = document.querySelector('.hero');
+      var quizCard        = document.querySelector('.quiz-card');
+      var phaseCards      = document.querySelectorAll('.phase-card');
+      var caseCards       = document.querySelectorAll('.case-study-card');
+      var sectionH2s      = document.querySelectorAll('.section-head h2');
+
+      // ─── Helpers ─────────────────────────────────────────────
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      // Parse a hex colour to [r,g,b]
+      function hexToRgb(hex) {
+        var clean = hex.replace('#', '');
+        return [
+          parseInt(clean.substring(0, 2), 16),
+          parseInt(clean.substring(2, 4), 16),
+          parseInt(clean.substring(4, 6), 16)
+        ];
+      }
+
+      // Darken an rgb array by a fraction
+      function darkenRgb(rgb, fraction) {
+        return rgb.map(function (c) { return Math.round(Math.max(0, c * (1 - fraction))); });
+      }
+
+      // ─── 1. Scroll Progress Bar ───────────────────────────────
+      function updateScrollBar() {
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+        if (scrollBar) scrollBar.style.width = pct + '%';
+      }
+
+      // ─── 2. Hero Parallax ─────────────────────────────────────
+      var heroBottom = 0;
+      function cacheHeroBounds() {
+        if (heroSection) heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      }
+      function updateHeroParallax() {
+        var sy = window.scrollY;
+        if (sy > heroBottom) return; // past hero — skip
+        if (heroContent)    heroContent.style.transform    = 'translateY(' + (sy * 0.25) + 'px)';
+        if (heroPanel)      heroPanel.style.transform      = 'translateY(' + (sy * 0.25) + 'px)';
+        if (heroParallaxBg) heroParallaxBg.style.transform = 'translateY(' + (sy * -0.1) + 'px)';
+      }
+
+      // ─── 3. Background Darkening ──────────────────────────────
+      var baseBg = [248, 250, 252]; // #f8fafc
+      var darkFraction = 0.08;
+      function updateBgDarken() {
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0;
+        var rgb = lerp(0, 1, progress);
+        var r = Math.round(lerp(baseBg[0], darkenRgb(baseBg, darkFraction)[0], progress));
+        var g = Math.round(lerp(baseBg[1], darkenRgb(baseBg, darkFraction)[1], progress));
+        var b = Math.round(lerp(baseBg[2], darkenRgb(baseBg, darkFraction)[2], progress));
+        document.documentElement.style.setProperty('--bg-dynamic', 'rgb(' + r + ',' + g + ',' + b + ')');
+      }
+
+      // ─── 8. Header Authority ──────────────────────────────────
+      function updateHeader() {
+        if (!header) return;
+        if (window.scrollY > 80) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      }
+
+      // ─── Main scroll handler (rAF-gated) ─────────────────────
+      var ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            updateScrollBar();
+            updateHeroParallax();
+            updateBgDarken();
+            updateHeader();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', cacheHeroBounds);
+      cacheHeroBounds();
+      // Run once on load
+      updateScrollBar();
+      updateHeroParallax();
+      updateBgDarken();
+      updateHeader();
+
+      // ─── IntersectionObserver factory ────────────────────────
+      function makeObserver(callback, options) {
+        if (!('IntersectionObserver' in window)) {
+          // Fallback: fire immediately
+          return { observe: function (el) { callback([{ isIntersecting: true, target: el }]); } };
+        }
+        return new IntersectionObserver(callback, options);
+      }
+
+      // ─── 4. Phase Cards — alternating L/R reveals ─────────────
+      if (phaseCards.length) {
+        var phaseObs = makeObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var card = entry.target;
+            var idx = Array.prototype.indexOf.call(phaseCards, card);
+            // odd (0-based: 0,2,…) from left; even (1,3,…) from right
+            card.style.transform = (idx % 2 === 0) ? 'translateX(-30px)' : 'translateX(30px)';
+            // force browser to paint the initial transform before transitioning
+            card.getBoundingClientRect();
+            setTimeout(function () {
+              card.classList.add('phase-revealed');
+            }, idx * 150);
+            phaseObs.unobserve(card);
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        // Set initial transforms before observing
+        phaseCards.forEach(function (card, idx) {
+          card.style.transform = (idx % 2 === 0) ? 'translateX(-30px)' : 'translateX(30px)';
+          phaseObs.observe(card);
+        });
+      }
+
+      // ─── 5. Quiz Card Highlight Pulse ─────────────────────────
+      if (quizCard) {
+        var quizPulsed = false;
+        var quizObs = makeObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting || quizPulsed) return;
+            quizPulsed = true;
+            quizCard.classList.add('quiz-pulsed');
+            quizObs.unobserve(quizCard);
+          });
+        }, { threshold: 0.3 });
+        quizObs.observe(quizCard);
+      }
+
+      // ─── 6. Case Study Card Reveals ───────────────────────────
+      if (caseCards.length) {
+        var caseObs = makeObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var card = entry.target;
+            var idx = Array.prototype.indexOf.call(caseCards, card);
+            setTimeout(function () {
+              card.classList.add('case-revealed');
+            }, idx * 120);
+            caseObs.unobserve(card);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        caseCards.forEach(function (card) { caseObs.observe(card); });
+      }
+
+      // ─── 7. Stats/KPI Count-up ────────────────────────────────
+      // Targets: .kpi-num elements with numeric content
+      var kpiNums = document.querySelectorAll('.kpi-num');
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function parseKpiValue(text) {
+        // Extract leading number (int or float), prefix/suffix
+        var trimmed = text.trim();
+        var match = trimmed.match(/^([^0-9]*)([0-9]+(\.[0-9]+)?)(.*)$/);
+        if (!match) return null;
+        return {
+          prefix: match[1],
+          value: parseFloat(match[2]),
+          isFloat: match[3] !== undefined,
+          suffix: match[4],
+          original: trimmed
+        };
+      }
+
+      function animateCount(el, parsed, duration) {
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = easeOutQuart(progress);
+          var current = eased * parsed.value;
+          var display = parsed.isFloat
+            ? current.toFixed(1)
+            : Math.floor(current).toString();
+          el.textContent = parsed.prefix + display + parsed.suffix;
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = parsed.original; // ensure exact final value
+        }
+        requestAnimationFrame(step);
+      }
+
+      if (kpiNums.length) {
+        var kpiObs = makeObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            var parsed = parseKpiValue(el.textContent);
+            if (parsed && parsed.value > 0) {
+              animateCount(el, parsed, 1600);
+            }
+            kpiObs.unobserve(el);
+          });
+        }, { threshold: 0.5 });
+        kpiNums.forEach(function (el) { kpiObs.observe(el); });
+      }
+
+      // ─── 9. Section H2 Authority Slide ────────────────────────
+      if (sectionH2s.length) {
+        var h2Obs = makeObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('h2-revealed');
+            h2Obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
+        sectionH2s.forEach(function (h2) { h2Obs.observe(h2); });
+      }
+
     })();
   </script>
 
