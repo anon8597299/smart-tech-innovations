@@ -353,3 +353,86 @@ footer{padding:1rem 0 2rem;border-top:1px solid var(--line);font-size:.88rem;col
   .hc-time-options{grid-template-columns:1fr 1fr}
   .hc-kpi-inner{grid-template-columns:1fr 1fr}
 }
+
+/* ============================================================
+   SCROLL-DRIVEN VISUAL EFFECTS — Hillcrest Family Clinic
+   ============================================================ */
+
+/* ── 1. Scroll progress bar ── */
+#scroll-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0%;
+  height:3px;
+  background:#0f766e;
+  z-index:9999;
+  transition:width .05s linear;
+  pointer-events:none;
+}
+
+/* ── 3. Staggered card reveals ── */
+.hc-svc-card,
+.hc-doctor-card,
+.hc-allied-card,
+.hc-tcard,
+.hc-faq-item,
+.values article,
+.flow article{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.hc-svc-card.revealed,
+.hc-doctor-card.revealed,
+.hc-allied-card.revealed,
+.hc-tcard.revealed,
+.hc-faq-item.revealed,
+.values article.revealed,
+.flow article.revealed{
+  opacity:1;
+  transform:none;
+}
+
+/* ── 6. Header shadow on scroll ── */
+.site-header{
+  transition:box-shadow .3s ease, padding .2s ease;
+}
+.hc-header-shadow{
+  box-shadow:0 2px 20px rgba(0,0,0,.08);
+}
+
+/* ── 7. Appointment widget pulse ── */
+@keyframes pulse-ring{
+  0%{
+    box-shadow:0 0 0 0 rgba(15,118,110,.45);
+  }
+  60%{
+    box-shadow:0 0 0 12px rgba(15,118,110,0);
+  }
+  100%{
+    box-shadow:0 0 0 0 rgba(15,118,110,0);
+  }
+}
+.hc-btn-submit,
+.hc-nav-book,
+.hc-mobile-book-cta{
+  animation:pulse-ring 3s ease-out infinite;
+}
+
+/* ── 8. Section h2 slide-in from left ── */
+.hc-section-head h2,
+.hc-wtb-content h2,
+.hc-bb-content h2,
+.hc-book-intro h2{
+  opacity:0;
+  transform:translateX(-20px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.hc-section-head h2.h2-revealed,
+.hc-wtb-content h2.h2-revealed,
+.hc-bb-content h2.h2-revealed,
+.hc-book-intro h2.h2-revealed{
+  opacity:1;
+  transform:translateX(0);
+}

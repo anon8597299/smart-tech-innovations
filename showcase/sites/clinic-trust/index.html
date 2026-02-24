@@ -108,6 +108,8 @@
 </head>
 <body>
 
+  <div id="scroll-bar"></div>
+
   <!-- Demo banner -->
   <div class="demo-banner">
     This is a demo site by ImproveYourSite — showing what your finished site looks like.
@@ -973,6 +975,172 @@
         header.classList.toggle('hc-header-scrolled', window.scrollY > 60);
       }, { passive: true });
     })();
+  </script>
+
+  <!-- ── SCROLL-DRIVEN VISUAL EFFECTS ── -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── 1. Scroll progress bar ── */
+    var scrollBar = document.getElementById('scroll-bar');
+    function updateScrollBar() {
+      if (!scrollBar) return;
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollBar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateScrollBar, { passive: true });
+    updateScrollBar();
+
+    /* ── 2. Hero parallax via requestAnimationFrame ── */
+    var heroContent = document.querySelector('.hc-hero-content');
+    var heroCard = document.querySelector('.hc-hero-card');
+    var ticking = false;
+    var lastScrollY = 0;
+    function applyParallax() {
+      var offset = lastScrollY * 0.2;
+      if (heroContent) heroContent.style.transform = 'translateY(' + offset + 'px)';
+      if (heroCard) heroCard.style.transform = 'translateY(' + (offset * 0.5) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(applyParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* ── 3. Staggered card reveals ── */
+    var cardSelectors = [
+      '.hc-svc-card',
+      '.hc-doctor-card',
+      '.hc-allied-card',
+      '.hc-tcard',
+      '.hc-faq-item',
+      '.values article',
+      '.flow article'
+    ];
+    var cardGroups = {};
+    cardSelectors.forEach(function (sel) {
+      var nodes = document.querySelectorAll(sel);
+      nodes.forEach(function (el) {
+        /* Group siblings by their parent element */
+        var parentKey = el.parentElement ? el.parentElement.className + (el.parentElement.id || '') : 'root';
+        if (!cardGroups[parentKey]) cardGroups[parentKey] = [];
+        cardGroups[parentKey].push(el);
+      });
+    });
+    var cardObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var parentKey = el.parentElement ? el.parentElement.className + (el.parentElement.id || '') : 'root';
+          var siblings = cardGroups[parentKey] || [el];
+          var idx = siblings.indexOf(el);
+          var delay = idx >= 0 ? idx * 100 : 0;
+          setTimeout(function () {
+            el.classList.add('revealed');
+          }, delay);
+          cardObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+    Object.keys(cardGroups).forEach(function (key) {
+      cardGroups[key].forEach(function (el) { cardObserver.observe(el); });
+    });
+
+    /* ── 4. Stat / KPI count-up ── */
+    var kpiNums = document.querySelectorAll('.hc-kpi-num');
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function animateCount(el) {
+      var raw = el.textContent.trim();
+      /* Extract leading number, allow decimals */
+      var match = raw.match(/^([\d.]+)/);
+      if (!match) return; /* Skip non-numeric labels like "Bulk", "Same" */
+      var target = parseFloat(match[1]);
+      var isDecimal = raw.indexOf('.') !== -1;
+      var suffix = raw.slice(match[1].length); /* e.g. "+" or " / 5" */
+      var duration = 1600;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = easeOut(progress);
+        var current = eased * target;
+        el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var kpiObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          kpiObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    kpiNums.forEach(function (el) { kpiObserver.observe(el); });
+
+    /* Also count-up the rating display in hero card */
+    var ratingStrong = document.querySelector('.hc-rating-row strong');
+    if (ratingStrong) kpiObserver.observe(ratingStrong);
+
+    /* ── 5. Section background drift ── */
+    var driftSections = document.querySelectorAll('.hc-section-bg, .hc-section-teal-pale, .hc-kpi-strip, .hc-hero');
+    var driftTicking = false;
+    function applyDrift() {
+      var sy = window.scrollY;
+      driftSections.forEach(function (sec) {
+        var rect = sec.getBoundingClientRect();
+        var offset = (sy + rect.top + sy) * 0.05;
+        sec.style.backgroundPosition = '50% calc(50% + ' + (offset * 0.1) + 'px)';
+      });
+      driftTicking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!driftTicking) {
+        requestAnimationFrame(applyDrift);
+        driftTicking = true;
+      }
+    }, { passive: true });
+
+    /* ── 6. Header shadow on scroll ── */
+    var siteHeader = document.getElementById('site-header');
+    window.addEventListener('scroll', function () {
+      if (!siteHeader) return;
+      if (window.scrollY > 50) {
+        siteHeader.classList.add('hc-header-shadow');
+      } else {
+        siteHeader.classList.remove('hc-header-shadow');
+      }
+    }, { passive: true });
+
+    /* ── 8. Section h2 slide-in from left ── */
+    var h2Selectors = [
+      '.hc-section-head h2',
+      '.hc-wtb-content h2',
+      '.hc-bb-content h2',
+      '.hc-book-intro h2'
+    ];
+    var allH2s = [];
+    h2Selectors.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) { allH2s.push(el); });
+    });
+    var h2Observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('h2-revealed');
+          h2Observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    allH2s.forEach(function (el) { h2Observer.observe(el); });
+
+  })();
   </script>
 </body>
 </html>
