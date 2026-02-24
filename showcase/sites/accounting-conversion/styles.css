@@ -635,3 +635,74 @@ h1, h2, h3 { line-height: 1.15; }
   .cta-row .btn { flex: 1 1 100%; }
   .estimator-card { padding: 1.2rem; }
 }
+
+/* ================================================================
+   SCROLL-DRIVEN VISUAL EFFECTS
+   ================================================================ */
+
+/* 1. Scroll progress bar */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--primary);
+  z-index: 9999;
+  transition: width .05s linear;
+  pointer-events: none;
+}
+
+/* 4. Staggered card reveals — base state */
+.card-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.card-reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* 5. Section heading slide-in — base state */
+.heading-slide {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.heading-slide.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* 6. Partner badge pulse */
+@keyframes badge-glow {
+  0%,  90%, 100% { box-shadow: none; }
+  45%            { box-shadow: 0 0 0 4px rgba(30,58,95,.12), 0 0 10px rgba(30,58,95,.08); }
+}
+.partner-badge {
+  animation: badge-glow 3s ease-in-out infinite;
+}
+.partner-badge--xero { animation-delay: 0s;    }
+.partner-badge--myob { animation-delay: 1s;    }
+.partner-badge--cpa  { animation-delay: 2s;    }
+
+/* 7. Header glass on scroll */
+.site-header--glassy {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 1px 20px rgba(0,0,0,.07) !important;
+  background: rgba(255,255,255,.92) !important;
+}
+
+/* 8. Calculator result emphasis */
+@keyframes result-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+.tax-result--pop .tri-value--fee,
+.tax-result--pop .tri-value--accent {
+  animation: result-pop 0.45s ease-out both;
+}
+

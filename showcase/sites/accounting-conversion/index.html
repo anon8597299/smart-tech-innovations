@@ -68,6 +68,8 @@
 </head>
 <body>
 
+  <div id="scroll-bar"></div>
+
   <!-- 1. Demo banner -->
   <div class="demo-banner">
     This is a demo site by ImproveYourSite &#8212; see what a finished site looks like.
@@ -482,6 +484,275 @@
 
   <!-- 14. Mobile sticky CTA -->
   <a class="mobile-sticky-cta" href="#contact">&#x1F4CA; Book free consult</a>
+
+  <!-- ================================================================
+       SCROLL-DRIVEN VISUAL EFFECTS
+       ================================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ------------------------------------------------------------------
+       Utilities
+    ------------------------------------------------------------------ */
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    /* ------------------------------------------------------------------
+       1. Scroll progress bar
+    ------------------------------------------------------------------ */
+    var scrollBar = document.getElementById('scroll-bar');
+    function updateScrollBar() {
+      var scrollTop  = window.scrollY || document.documentElement.scrollTop;
+      var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      var pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      if (scrollBar) scrollBar.style.width = clamp(pct, 0, 100) + '%';
+    }
+
+    /* ------------------------------------------------------------------
+       2. Hero parallax
+    ------------------------------------------------------------------ */
+    var heroSection  = document.querySelector('.hero');
+    var heroContainer = heroSection ? heroSection.querySelector('.container') : null;
+    function updateHeroParallax() {
+      if (!heroContainer) return;
+      var scrollTop = window.scrollY || 0;
+      heroContainer.style.transform = 'translateY(' + (scrollTop * 0.2) + 'px)';
+    }
+
+    /* ------------------------------------------------------------------
+       7. Header glass on scroll
+    ------------------------------------------------------------------ */
+    var siteHeader = document.querySelector('.site-header');
+    function updateHeaderGlass() {
+      if (!siteHeader) return;
+      var scrollTop = window.scrollY || 0;
+      if (scrollTop > 60) {
+        siteHeader.classList.add('site-header--glassy');
+      } else {
+        siteHeader.classList.remove('site-header--glassy');
+      }
+    }
+
+    /* ------------------------------------------------------------------
+       9. Subtle background scroll tint
+       Interpolate bg from #f8fafc (light) toward #f2f5f9 (very slightly
+       warmer/deeper) as scroll progresses 0 → 100%
+    ------------------------------------------------------------------ */
+    var bgFrom = { r: 248, g: 250, b: 252 };
+    var bgTo   = { r: 240, g: 244, b: 249 };
+    function updateBodyTint() {
+      var scrollTop  = window.scrollY || 0;
+      var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      var t          = docHeight > 0 ? clamp(scrollTop / docHeight, 0, 1) : 0;
+      var r = Math.round(bgFrom.r + (bgTo.r - bgFrom.r) * t);
+      var g = Math.round(bgFrom.g + (bgTo.g - bgFrom.g) * t);
+      var b = Math.round(bgFrom.b + (bgTo.b - bgFrom.b) * t);
+      document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+    /* ------------------------------------------------------------------
+       rAF scroll loop (1 + 2 + 7 + 9)
+    ------------------------------------------------------------------ */
+    var rafPending = false;
+    function onScroll() {
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(function () {
+          updateScrollBar();
+          updateHeroParallax();
+          updateHeaderGlass();
+          updateBodyTint();
+          rafPending = false;
+        });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Run once on load
+    updateScrollBar();
+    updateHeroParallax();
+    updateHeaderGlass();
+    updateBodyTint();
+
+    /* ------------------------------------------------------------------
+       3. Number count-up animations
+       Targets elements with [data-countup] attribute (added below via
+       class detection), or any .savings-amount and .kpi-item strong.
+    ------------------------------------------------------------------ */
+    function parseCountup(text) {
+      // Returns { prefix, suffix, value } or null if no number found
+      var cleaned = text.replace(/,/g, '').trim();
+      var m = cleaned.match(/^([^0-9-]*)(-?[\d.]+)(.*)$/);
+      if (!m) return null;
+      return {
+        prefix: m[1],
+        value:  parseFloat(m[2]),
+        suffix: m[3].trim(),
+        original: text
+      };
+    }
+
+    function animateCountup(el, duration) {
+      var data = parseCountup(el.getAttribute('data-countup-target') || el.textContent);
+      if (!data || isNaN(data.value)) return;
+      el.setAttribute('data-countup-target', data.original);
+      var startTime = null;
+      var isFloat   = (data.value % 1 !== 0);
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        var progress = clamp(elapsed / duration, 0, 1);
+        var eased    = easeOutQuart(progress);
+        var current  = data.value * eased;
+        var display;
+        if (isFloat) {
+          display = current.toFixed(1);
+        } else {
+          display = Math.round(current).toLocaleString();
+        }
+        el.textContent = data.prefix + display + data.suffix;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = data.prefix + (isFloat ? data.value.toFixed(1) : Math.round(data.value).toLocaleString()) + data.suffix;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Mark countup targets
+    var countupSelectors = [
+      '.kpi-item strong',
+      '.savings-amount'
+    ];
+    countupSelectors.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        el.classList.add('js-countup');
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      var countupObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCountup(entry.target, 1600);
+            countupObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.js-countup').forEach(function (el) {
+        countupObserver.observe(el);
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       4. Staggered card reveals
+       Apply .card-reveal to service cards, savings highlights,
+       testimonial cards. Use IntersectionObserver; siblings stagger 100ms.
+    ------------------------------------------------------------------ */
+    var cardGroupSelectors = [
+      '.services-grid',
+      '.savings-grid',
+      '.testimonials-grid'
+    ];
+
+    cardGroupSelectors.forEach(function (groupSel) {
+      document.querySelectorAll(groupSel).forEach(function (group) {
+        var children = Array.prototype.slice.call(group.children);
+        children.forEach(function (child) {
+          // Remove existing .reveal so we drive it ourselves
+          child.classList.remove('reveal', 'revealed');
+          child.classList.add('card-reveal');
+        });
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      var cardObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el      = entry.target;
+            var parent  = el.parentElement;
+            var siblings = parent ? Array.prototype.slice.call(parent.querySelectorAll('.card-reveal')) : [];
+            var idx      = siblings.indexOf(el);
+            var delay    = Math.max(0, idx) * 100;
+            setTimeout(function () {
+              el.classList.add('revealed');
+            }, delay);
+            cardObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.card-reveal').forEach(function (el) {
+        cardObserver.observe(el);
+      });
+    } else {
+      document.querySelectorAll('.card-reveal').forEach(function (el) {
+        el.classList.add('revealed');
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       5. Section heading slide-in
+       Apply .heading-slide to h2 and h3 that live directly inside
+       .section-head or major section containers (not inside cards).
+    ------------------------------------------------------------------ */
+    var headingTargets = document.querySelectorAll(
+      '.section-head h2, .section-head h3, .cta-final-inner h2'
+    );
+    headingTargets.forEach(function (el) {
+      el.classList.add('heading-slide');
+    });
+
+    if ('IntersectionObserver' in window) {
+      var headingObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            headingObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+
+      headingTargets.forEach(function (el) {
+        headingObserver.observe(el);
+      });
+    } else {
+      headingTargets.forEach(function (el) { el.classList.add('revealed'); });
+    }
+
+    /* ------------------------------------------------------------------
+       8. Calculator result emphasis
+       MutationObserver watches #tax-result display → pop animation
+    ------------------------------------------------------------------ */
+    var taxResult = document.getElementById('tax-result');
+    if (taxResult && 'MutationObserver' in window) {
+      var resultObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+            var isVisible = taxResult.style.display !== 'none' && taxResult.style.display !== '';
+            if (isVisible) {
+              taxResult.classList.remove('tax-result--pop');
+              // Force reflow so re-triggering works
+              void taxResult.offsetWidth;
+              taxResult.classList.add('tax-result--pop');
+              setTimeout(function () {
+                taxResult.classList.remove('tax-result--pop');
+              }, 600);
+            }
+          }
+        });
+      });
+      resultObserver.observe(taxResult, { attributes: true, attributeFilter: ['style'] });
+    }
+
+  })();
+  </script>
 
   <script>
   /* =====================================================================
