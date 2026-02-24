@@ -750,6 +750,9 @@
 </head>
 <body>
 
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-bar"></div>
+
   <!-- Demo Banner -->
   <div class="demo-banner">
     This is a demo site by ImproveYourSite — showing what your finished site looks like.
@@ -1398,6 +1401,203 @@
   <!-- ════════════════════════════════════
        JAVASCRIPT
   ════════════════════════════════════ -->
+  <!-- ════════════════════════════════════
+       SCROLL-DRIVEN VISUAL EFFECTS
+  ════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    // ── 1. Scroll Progress Bar ──
+    var scrollBar = document.getElementById('scroll-bar');
+
+    // ── 2. Dawn-to-noon gradient shift ──
+    // Dawn blue: #dbeafe → rgb(219,234,254)
+    // Solar gold: #fef3c7 → rgb(254,243,199)
+    var dawnR = 219, dawnG = 234, dawnB = 254;
+    var noonR = 254, noonG = 243, noonB = 199;
+
+    function lerpColor(t) {
+      var r = Math.round(dawnR + (noonR - dawnR) * t);
+      var g = Math.round(dawnG + (noonG - dawnG) * t);
+      var b = Math.round(dawnB + (noonB - dawnB) * t);
+      return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+    // ── 3. Scroll velocity energy burst ──
+    var lastScrollY = window.scrollY;
+    var lastScrollTime = performance.now();
+    var energyBurstTimer = null;
+
+    // ── 4. Hero parallax ──
+    var heroSection = document.querySelector('.hero-v2');
+    var heroContainer = heroSection ? heroSection.querySelector('.container') : null;
+
+    // ── 7. Calculator section parallax ──
+    var calcSection = document.getElementById('calculator');
+
+    // ─── Main rAF loop ───
+    var ticking = false;
+    var currentScrollY = window.scrollY;
+
+    function onScroll() {
+      // Velocity measurement
+      var now = performance.now();
+      var dt = now - lastScrollTime;
+      var dy = Math.abs(window.scrollY - lastScrollY);
+      if (dt > 0) {
+        var velocity = dy / dt; // px/ms
+        if (velocity > 1.5) {
+          document.body.classList.add('energy-burst');
+          clearTimeout(energyBurstTimer);
+          energyBurstTimer = setTimeout(function () {
+            document.body.classList.remove('energy-burst');
+          }, 600);
+        }
+      }
+      lastScrollY = window.scrollY;
+      lastScrollTime = now;
+
+      currentScrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(updateEffects);
+        ticking = true;
+      }
+    }
+
+    function updateEffects() {
+      ticking = false;
+      var scrollY = currentScrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
+
+      // 1. Progress bar width
+      if (scrollBar) {
+        scrollBar.style.width = (progress * 100).toFixed(2) + '%';
+      }
+
+      // 2. Dawn-to-noon background colour
+      document.documentElement.style.setProperty('--page-bg', lerpColor(progress));
+
+      // 4. Hero parallax — container drifts down at 0.25x
+      if (heroContainer) {
+        heroContainer.style.transform = 'translateY(' + (scrollY * 0.25) + 'px)';
+      }
+      // Hero decorative pseudo-element drift can't be done via JS directly;
+      // instead animate the hero section itself slightly in opposite direction
+      if (heroSection) {
+        heroSection.style.backgroundPositionY = (-scrollY * 0.1) + 'px';
+      }
+
+      // 7. Calculator section parallax background-position-y
+      if (calcSection) {
+        var calcRect = calcSection.getBoundingClientRect();
+        var calcOffset = scrollY + calcRect.top - (document.documentElement.scrollTop === 0 ? 0 : 0);
+        // Use scroll position relative to section centre
+        var sectionScrolled = scrollY - (scrollY + calcRect.top - window.innerHeight / 2);
+        var bgPosY = 50 + sectionScrolled * 0.02;
+        bgPosY = Math.max(0, Math.min(100, bgPosY));
+        calcSection.style.backgroundPositionY = bgPosY + '%';
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ── 5. KPI count-up on scroll into view ──
+    function parseKpiValue(text) {
+      // Returns { num: Number, prefix: String, suffix: String }
+      text = text.trim();
+      // e.g. "9+", "500+", "4.9★", "25yr"
+      var prefix = '';
+      var suffix = '';
+      var numStr = '';
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        if ((ch >= '0' && ch <= '9') || ch === '.') {
+          numStr += ch;
+        } else if (numStr === '') {
+          prefix += ch;
+        } else {
+          suffix += ch;
+        }
+      }
+      return { num: parseFloat(numStr) || 0, prefix: prefix, suffix: suffix };
+    }
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function animateKpi(el, from, to, prefix, suffix, duration) {
+      var startTime = null;
+      var isInteger = Number.isInteger(to) && Number.isInteger(from);
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        var t = Math.min(elapsed / duration, 1);
+        var eased = easeOutQuart(t);
+        var current = from + (to - from) * eased;
+        el.textContent = prefix + (isInteger ? Math.round(current) : current.toFixed(1)) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    var kpiObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var parsed = parseKpiValue(el.textContent);
+        animateKpi(el, 0, parsed.num, parsed.prefix, parsed.suffix, 2000);
+        kpiObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.kpi-strip-item .kpi-num').forEach(function (el) {
+      kpiObserver.observe(el);
+    });
+
+    // ── 6. Staggered card reveals ──
+    var cardSelectors = [
+      '.sv-step',
+      '.sv-review-card',
+      '.sv-service-card',
+      '.card',
+      '.step-card',
+      '.sv-testimonial-card'
+    ];
+
+    var cardRevealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        if (el.dataset.svRevealed) return;
+        el.dataset.svRevealed = '1';
+
+        // Find siblings in same parent to compute stagger index
+        var siblings = Array.from(el.parentElement.children).filter(function (c) {
+          return c.matches(cardSelectors.join(','));
+        });
+        var idx = siblings.indexOf(el);
+        var delay = idx >= 0 ? idx * 90 : 0;
+
+        setTimeout(function () {
+          el.classList.add('sv-revealed');
+        }, delay);
+
+        cardRevealObserver.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll(cardSelectors.join(',')).forEach(function (el) {
+      cardRevealObserver.observe(el);
+    });
+
+  })();
+  </script>
+
   <script>
     // ── CSS variable sync ──
     document.documentElement.style.setProperty('--sv-primary', '#1d4ed8');

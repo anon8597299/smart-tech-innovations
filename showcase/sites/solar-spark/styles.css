@@ -583,3 +583,124 @@ input[type="range"].calc-slider::-moz-range-track {
   .sv-footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
   .sv-footer-bottom { flex-direction: column; align-items: flex-start; }
 }
+
+/* ══════════════════════════════════════════════════════
+   SCROLL-DRIVEN VISUAL EFFECTS — SunVolt Solar
+══════════════════════════════════════════════════════ */
+
+/* ── 1. Scroll Progress Bar ── */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #1d4ed8, #f59e0b);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.05s linear;
+}
+
+/* ── 2. Dawn-to-noon background ── */
+body {
+  background: var(--page-bg, #eff6ff);
+}
+
+/* ── 3. Energy burst on fast scroll ── */
+.energy-burst .kpi-strip {
+  box-shadow: 0 0 60px rgba(245, 158, 11, 0.4);
+  transition: box-shadow 0.15s ease;
+}
+
+/* ── 4. Hero parallax ── */
+.hero-v2 {
+  will-change: transform;
+}
+.hero-v2 .container {
+  will-change: transform;
+}
+
+/* ── 5. KPI count-up: start invisible, JS triggers reveal ── */
+.kpi-num[data-target] {
+  display: block;
+}
+
+/* ── 6. Staggered card reveals ── */
+.sv-step,
+.sv-review-card,
+.sv-service-card,
+.card,
+.step-card,
+.sv-testimonial-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.sv-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+/* Ensure already-visible reveal elements don't conflict */
+.reveal.visible.sv-service-card,
+.reveal.visible.sv-testimonial-card,
+.reveal.visible.step-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 7. Calculator section parallax background ── */
+#calculator {
+  background-attachment: scroll;
+  background-size: 100% 200%;
+  background-position-y: 0%;
+}
+
+/* ── 8. Sunbeam shimmer on primary CTA button ── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.btn-sv-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-sv-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: -200% center;
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Reduced motion: disable all scroll effects */
+@media (prefers-reduced-motion: reduce) {
+  #scroll-bar { display: none; }
+  .sv-step,
+  .sv-review-card,
+  .sv-service-card,
+  .card,
+  .step-card,
+  .sv-testimonial-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .btn-sv-primary::after { animation: none; }
+}
