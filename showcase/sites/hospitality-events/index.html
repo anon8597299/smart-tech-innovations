@@ -63,6 +63,9 @@
 </head>
 <body>
 
+  <div id="scroll-bar"></div>
+  <div id="golden-hour-overlay"></div>
+
   <div class="demo-banner">
     This is a demo site by ImproveYourSite &#8212; showing what your finished site looks like.
     <a href="/packages.html">Get a site like this &rarr;</a>
@@ -88,7 +91,9 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-      <div class="container hero-inner">
+      <div id="hero-bg-layer" aria-hidden="true"></div>
+      <div id="hero-shimmer" aria-hidden="true"></div>
+      <div class="container hero-inner" id="hero-content-parallax">
         <div class="hero-content">
           <div class="hero-badges">
             <span class="badge badge-open">
@@ -883,6 +888,272 @@
     e.preventDefault();
     this.innerHTML = '<div class="form-success"><div class="form-success-icon">\u2713<\/div><h3>Enquiry received!<\/h3><p>Thank you \u2014 our events team will be in touch within 1 business day. In the meantime, feel free to call us on <a href="tel:0263724488">(02) 6372 4488<\/a>.<\/p><p class="form-demo-note">This is a demo site by ImproveYourSite \u2014 form submissions are not delivered to a real inbox.<\/p><\/div>';
   });
+  </script>
+
+  <script>
+  /* ============================================================
+     STONEBRIDGE ESTATE — Scroll Effects
+     ============================================================ */
+  (function() {
+
+    /* ---- 1. Scroll progress bar ---- */
+    var scrollBar = document.getElementById('scroll-bar');
+    function updateScrollBar() {
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+      scrollBar.style.width = pct + '%';
+    }
+
+    /* ---- 2. Cinematic hero parallax ---- */
+    var heroBg = document.getElementById('hero-bg-layer');
+    var heroContent = document.getElementById('hero-content-parallax');
+    function updateParallax() {
+      var sy = window.scrollY;
+      if (heroBg)      heroBg.style.transform      = 'translateY(' + (sy * 0.4) + 'px)';
+      if (heroContent) heroContent.style.transform  = 'translateY(' + (sy * 0.15) + 'px)';
+    }
+
+    /* ---- 3. Golden hour scroll tint ---- */
+    var goldenOverlay = document.getElementById('golden-hour-overlay');
+    function updateGoldenHour() {
+      var triggerEnd = document.documentElement.scrollHeight * 0.6;
+      var progress = Math.min(window.scrollY / triggerEnd, 1);
+      var opacity = progress * 0.06;
+      goldenOverlay.style.opacity = opacity;
+    }
+
+    /* ---- 7. Scroll-speed shimmer ---- */
+    var heroShimmer = document.getElementById('hero-shimmer');
+    var lastScrollY = window.scrollY;
+    var lastScrollTime = Date.now();
+    var shimmerTimeout = null;
+    function checkShimmer() {
+      var now = Date.now();
+      var dt = Math.max(now - lastScrollTime, 1);
+      var dy = Math.abs(window.scrollY - lastScrollY);
+      var velocity = dy / dt * 16; // px per frame approx
+      lastScrollY = window.scrollY;
+      lastScrollTime = now;
+      if (velocity > 2 && heroShimmer && !heroShimmer.classList.contains('shimmer-active')) {
+        heroShimmer.classList.add('shimmer-active');
+        clearTimeout(shimmerTimeout);
+        shimmerTimeout = setTimeout(function() {
+          heroShimmer.classList.remove('shimmer-active');
+        }, 450);
+      }
+    }
+
+    /* ---- 8. Header frosted glass ---- */
+    var siteHeader = document.getElementById('site-header');
+    function updateHeader() {
+      if (window.scrollY > 80) {
+        siteHeader.classList.add('scrolled-luxe');
+      } else {
+        siteHeader.classList.remove('scrolled-luxe');
+      }
+    }
+
+    /* ---- Main rAF loop ---- */
+    var ticking = false;
+    function onScroll() {
+      checkShimmer();
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          updateScrollBar();
+          updateParallax();
+          updateGoldenHour();
+          updateHeader();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Initialise on load
+    updateScrollBar();
+    updateParallax();
+    updateGoldenHour();
+    updateHeader();
+
+    /* ---- 4. Venue space card cinematic reveals ---- */
+    /* ---- 5. Package card flip-in ---- */
+    /* (Both handled via IntersectionObserver with staggered delays) */
+    if (window.IntersectionObserver) {
+      // Space cards
+      var spaceCards = document.querySelectorAll('.space-card[data-reveal]');
+      var spaceObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var idx = Array.prototype.indexOf.call(spaceCards, entry.target);
+            var delay = idx * 140;
+            setTimeout(function() {
+              entry.target.classList.add('revealed');
+            }, delay);
+            spaceObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+      spaceCards.forEach(function(el) { spaceObs.observe(el); });
+
+      // Package cards
+      var pkgCards = document.querySelectorAll('.pkg-card[data-reveal]');
+      var pkgObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var idx = Array.prototype.indexOf.call(pkgCards, entry.target);
+            var delay = idx * 180;
+            setTimeout(function() {
+              entry.target.classList.add('revealed');
+            }, delay);
+            pkgObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+      pkgCards.forEach(function(el) { pkgObs.observe(el); });
+    } else {
+      // Fallback: reveal immediately
+      document.querySelectorAll('.space-card[data-reveal], .pkg-card[data-reveal]').forEach(function(el) {
+        el.classList.add('revealed');
+      });
+    }
+
+    /* ---- 6. Budget calculator result drama ---- */
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+    function countUp(el, start, end, duration) {
+      var startTime = null;
+      // Parse numbers from text like "$9,200 – $13,200"
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutQuart(progress);
+        var current = Math.round(start + (end - start) * eased);
+        // Preserve original format (range or single)
+        var orig = el.dataset.countTarget;
+        if (orig && orig.indexOf('\u2013') !== -1) {
+          // Range: scale both numbers proportionally
+          var parts = orig.split('\u2013').map(function(s) { return parseInt(s.replace(/[^0-9]/g, ''), 10); });
+          var lo = Math.round(parts[0] + (parts[0] * (end / parts[1] - 1)) * eased);
+          // Keep ratio
+          var ratio = parts[1] / parts[0];
+          var hi = Math.round(lo * ratio);
+          el.textContent = '$' + lo.toLocaleString('en-AU') + ' \u2013 $' + hi.toLocaleString('en-AU');
+        } else {
+          el.textContent = '$' + current.toLocaleString('en-AU');
+        }
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    var calcResults = document.getElementById('calc-results');
+    var resultTotal = document.getElementById('result-total');
+    var resultVenue = document.getElementById('result-venue');
+    var resultCatering = document.getElementById('result-catering');
+
+    // Patch the calculator to trigger drama on update
+    var origCalculate = null;
+    // We hook into slider/toggle events to trigger drama after calculation
+    function triggerResultDrama() {
+      // Store targets for count-up
+      var venueText = resultVenue.textContent;
+      var cateringText = resultCatering.textContent;
+      var totalText = resultTotal.textContent;
+
+      // Count-up venue (single value)
+      var venueNum = parseInt(venueText.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(venueNum)) {
+        resultVenue.dataset.countTarget = venueText;
+        countUp(resultVenue, 0, venueNum, 2000);
+      }
+
+      // Count-up catering (range)
+      if (cateringText.indexOf('\u2013') !== -1) {
+        resultCatering.dataset.countTarget = cateringText;
+        var parts = cateringText.split('\u2013').map(function(s) { return parseInt(s.replace(/[^0-9]/g, ''), 10); });
+        if (!isNaN(parts[0]) && !isNaN(parts[1])) {
+          countUp(resultCatering, 0, parts[1], 2000);
+        }
+      }
+
+      // Count-up total (range)
+      if (totalText.indexOf('\u2013') !== -1) {
+        resultTotal.dataset.countTarget = totalText;
+        var tparts = totalText.split('\u2013').map(function(s) { return parseInt(s.replace(/[^0-9]/g, ''), 10); });
+        if (!isNaN(tparts[0]) && !isNaN(tparts[1])) {
+          countUp(resultTotal, 0, tparts[1], 2000);
+        }
+      }
+
+      // Golden glow on result container
+      var totalItem = document.querySelector('.result-total-item');
+      if (totalItem) {
+        totalItem.classList.remove('calc-result-glow');
+        void totalItem.offsetWidth; // reflow
+        totalItem.classList.add('calc-result-glow');
+      }
+    }
+
+    // Attach drama to calculator interactions
+    var calcSlider = document.getElementById('calc-guests');
+    var calcToggles = document.querySelectorAll('.calc-toggle');
+    if (calcSlider) {
+      calcSlider.addEventListener('change', function() {
+        setTimeout(triggerResultDrama, 20);
+      });
+    }
+    calcToggles.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTimeout(triggerResultDrama, 20);
+      });
+    });
+    // Trigger once on load
+    setTimeout(triggerResultDrama, 300);
+
+    /* ---- 9. Section headings serif reveal ---- */
+    // Find all h2s inside section-head, included-text, catering-text
+    var h2s = document.querySelectorAll('.section-head h2, .included-text h2, .catering-text h2');
+    h2s.forEach(function(h2) {
+      // Add hidden class
+      h2.classList.add('h2-scroll-hidden');
+      // Inject decorative line after the h2
+      var line = document.createElement('span');
+      line.className = 'h2-reveal-line';
+      h2.parentNode.insertBefore(line, h2.nextSibling);
+    });
+
+    if (window.IntersectionObserver) {
+      var h2Obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('h2-scroll-hidden');
+            entry.target.classList.add('h2-scroll-visible');
+            // Animate the line that follows
+            var next = entry.target.nextElementSibling;
+            if (next && next.classList.contains('h2-reveal-line')) {
+              setTimeout(function() {
+                next.classList.add('h2-line-visible');
+              }, 300);
+            }
+            h2Obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+      h2s.forEach(function(h2) { h2Obs.observe(h2); });
+    } else {
+      h2s.forEach(function(h2) {
+        h2.classList.remove('h2-scroll-hidden');
+        h2.classList.add('h2-scroll-visible');
+        var next = h2.nextElementSibling;
+        if (next && next.classList.contains('h2-reveal-line')) {
+          next.classList.add('h2-line-visible');
+        }
+      });
+    }
+
+  })();
   </script>
 </body>
 </html>

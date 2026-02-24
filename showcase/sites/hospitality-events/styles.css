@@ -1457,3 +1457,164 @@ p:last-child { margin-bottom: 0; }
   .section-head { margin-bottom: 1.5rem; }
   .enquiry-form { padding: 1.2rem; }
 }
+
+/* ============================================================
+   SCROLL EFFECTS — The Stonebridge Estate
+   Luxury cinematic scroll-driven visual effects
+   ============================================================ */
+
+/* 1. Scroll progress bar */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #be8a6d, #e8c4a8, #be8a6d);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.05s linear;
+}
+
+/* 2. Cinematic hero parallax — hero needs overflow:visible for parallax to show */
+.hero {
+  overflow: visible;
+}
+.hero::before {
+  pointer-events: none;
+}
+
+/* Hero parallax layers */
+#hero-bg-layer {
+  position: absolute;
+  inset: -20% 0;
+  background: inherit;
+  background: linear-gradient(135deg, #fef9f0 0%, #fef3c7 40%, #fdf8f2 100%);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.hero {
+  background: none !important;
+}
+#hero-content-parallax {
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+}
+
+/* 3. Golden hour scroll tint overlay */
+#golden-hour-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(180, 100, 20, 1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  transition: opacity 0.15s ease;
+}
+
+/* 4. Venue space card cinematic reveals — override base [data-reveal] for .space-card */
+.space-card[data-reveal] {
+  opacity: 0;
+  transform: scale(0.92) translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.space-card[data-reveal].revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* 5. Package card flip-in */
+.pkg-card[data-reveal] {
+  opacity: 0;
+  transform: perspective(800px) rotateX(8deg);
+  transition: opacity 0.65s ease,
+              transform 0.65s ease;
+}
+.pkg-card[data-reveal].revealed {
+  opacity: 1;
+  transform: perspective(800px) rotateX(0deg);
+}
+
+/* 6. Budget calculator result drama — golden glow animation */
+@keyframes golden-glow-fade {
+  0%   { box-shadow: 0 0 40px rgba(190, 138, 109, 0.4); }
+  100% { box-shadow: none; }
+}
+.calc-result-glow {
+  animation: golden-glow-fade 1.5s ease forwards;
+}
+
+/* 7. Scroll-speed shimmer on hero */
+#hero-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+#hero-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 60%;
+  height: 300%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+#hero-shimmer.shimmer-active::after {
+  animation: shimmer-sweep 0.4s ease forwards;
+}
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(340%); }
+}
+
+/* 8. Header frosted glass on scroll */
+.site-header.scrolled-luxe {
+  backdrop-filter: blur(16px) saturate(1.8);
+  box-shadow: 0 1px 40px rgba(190, 138, 109, 0.2);
+  background: rgba(253, 248, 242, 0.88) !important;
+}
+
+/* 9. Section heading serif reveal with decorative underline */
+.section-head h2,
+.included-text h2,
+.catering-text h2 {
+  position: relative;
+  display: inline-block;
+}
+.h2-reveal-line {
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #be8a6d, #e8c4a8, #be8a6d, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.6s ease;
+  margin-top: 0.35rem;
+  border-radius: 1px;
+}
+.h2-line-visible {
+  transform: scaleX(1);
+}
+
+/* h2 heading fade-in drift */
+.h2-scroll-hidden {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.h2-scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
