@@ -77,6 +77,7 @@
   </script>
 </head>
 <body>
+  <div id="scroll-bar"></div>
 
   <div class="demo-banner">
     This is a demo site by ImproveYourSite — showing what your finished site looks like.
@@ -422,6 +423,253 @@
   <a class="phone-cta" href="tel:0400123456">📞 Emergency? Call now — 0400 123 456</a>
 
   <script>
+    /* ════════════════════════════════════════════════
+       SCROLL-DRIVEN VISUAL EFFECTS
+       ════════════════════════════════════════════════ */
+    (function () {
+      'use strict';
+
+      /* ── Shared state ── */
+      var lastScrollY = window.pageYOffset;
+      var lastScrollTime = Date.now();
+      var scrollVel = 0;       // 0–1 normalised velocity
+      var rafPending = false;
+
+      /* ── 1. Scroll progress bar ── */
+      var scrollBar = document.getElementById('scroll-bar');
+
+      function updateScrollBar() {
+        var doc = document.documentElement;
+        var scrollTop = window.pageYOffset || doc.scrollTop;
+        var totalHeight = doc.scrollHeight - doc.clientHeight;
+        var pct = totalHeight > 0 ? (scrollTop / totalHeight) * 100 : 0;
+        scrollBar.style.width = pct + '%';
+      }
+
+      /* ── 2. Parallax hero background (blueprint grid layer) ── */
+      var heroSection = document.querySelector('.hero');
+      // Build the SVG data-URI blueprint grid
+      var svgGrid = [
+        '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">',
+        '<path d="M 60 0 L 0 0 0 60" fill="none" stroke="%23bfdbfe" stroke-width="0.75"/>',
+        '</svg>'
+      ].join('');
+      var gridDataUri = 'url("data:image/svg+xml,' + svgGrid + '")';
+
+      if (heroSection) {
+        // We inject a pseudo-overlay div for the parallax grid so we don't
+        // disturb the existing gradient background on .hero
+        var heroGrid = document.createElement('div');
+        heroGrid.id = 'hero-grid-layer';
+        heroGrid.style.cssText = [
+          'position:absolute',
+          'inset:0',
+          'pointer-events:none',
+          'z-index:0',
+          'background-image:' + gridDataUri,
+          'background-size:60px 60px',
+          'background-repeat:repeat',
+          'opacity:0.55'
+        ].join(';');
+        // hero section must be positioned so the absolute child works
+        heroSection.style.position = 'relative';
+        heroSection.insertBefore(heroGrid, heroSection.firstChild);
+        // Ensure hero content sits above the grid layer
+        var heroContainer = heroSection.querySelector('.container');
+        if (heroContainer) heroContainer.style.position = 'relative';
+      }
+
+      function updateHeroParallax(scrollY) {
+        if (!heroGrid) return;
+        // drift upward at 0.3x scroll speed
+        var offset = scrollY * 0.3;
+        heroGrid.style.backgroundPositionY = (-offset) + 'px';
+      }
+
+      /* ── 3. Scroll-velocity reactive header ── */
+      var siteHeader = document.querySelector('.site-header');
+
+      function updateHeaderVelocity(scrollY) {
+        var now = Date.now();
+        var dt = now - lastScrollTime;
+        var dy = Math.abs(scrollY - lastScrollY);
+        // pixels-per-ms, normalised: 1.5 px/ms → vel = 1
+        var rawVel = dt > 0 ? dy / (dt * 1.5) : 0;
+        scrollVel = Math.min(1, scrollVel * 0.85 + rawVel * 0.15);
+        lastScrollY = scrollY;
+        lastScrollTime = now;
+        if (siteHeader) {
+          siteHeader.style.setProperty('--scroll-vel', scrollVel.toFixed(3));
+        }
+      }
+
+      /* ── 4. Staggered card reveals ── */
+      var REVEAL_SELECTORS = [
+        '.service-card',
+        '.value',
+        '.process-step',
+        '.kpi',
+        '.testimonial-card',
+        '.faq-item'
+      ];
+
+      function setupStaggeredReveals() {
+        // Group elements by their parent grid container
+        // so we can stagger siblings together
+        var gridParentsSeen = [];
+
+        REVEAL_SELECTORS.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (el) {
+            var parent = el.parentElement;
+            var siblingIndex = 0;
+
+            if (parent) {
+              var matches = Array.prototype.filter.call(
+                parent.children,
+                function (c) { return c.matches(sel); }
+              );
+              siblingIndex = matches.indexOf(el);
+            }
+
+            var delayMs = siblingIndex * 80;
+            el.style.transitionDelay = delayMs + 'ms';
+          });
+        });
+
+        var allRevealEls = [];
+        REVEAL_SELECTORS.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (el) {
+            allRevealEls.push(el);
+          });
+        });
+
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+
+        allRevealEls.forEach(function (el) {
+          revealObserver.observe(el);
+        });
+      }
+
+      /* ── 5. KPI counter animation ── */
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function animateCounter(el, target, duration) {
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var elapsed = ts - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = easeOutQuart(progress);
+          el.textContent = Math.round(eased * target).toLocaleString();
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toLocaleString();
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      function setupKPICounters() {
+        // Target .kpi strong elements that contain a leading integer
+        var candidates = document.querySelectorAll('.kpi strong, [data-count]');
+        var counterObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var original = el.getAttribute('data-original') || el.textContent;
+              var match = original.match(/^(\d[\d,]*)/);
+              if (match) {
+                var numStr = match[1].replace(/,/g, '');
+                var num = parseInt(numStr, 10);
+                if (!isNaN(num) && num > 0) {
+                  el.setAttribute('data-original', original);
+                  animateCounter(el, num, 1400);
+                }
+              }
+              counterObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        candidates.forEach(function (el) {
+          // Only animate those containing a leading number
+          if (/^\d/.test(el.textContent.trim())) {
+            counterObserver.observe(el);
+          }
+        });
+      }
+
+      /* ── 6. Section background parallax (.estimator-section, .contact-section) ── */
+      var parallaxSections = Array.prototype.slice.call(
+        document.querySelectorAll('.estimator-section, .contact-section')
+      );
+
+      function updateSectionParallax(scrollY) {
+        parallaxSections.forEach(function (section) {
+          var rect = section.getBoundingClientRect();
+          var sectionScrollY = scrollY + rect.top;
+          var offset = (scrollY - sectionScrollY) * 0.15;
+          section.style.backgroundPositionY = (50 + offset).toFixed(2) + '%';
+        });
+      }
+
+      /* ── 7. Hero scroll fade — JS fallback ── */
+      // Only activates if the CSS animation-timeline approach is NOT supported
+      var heroH1 = document.querySelector('.hero h1');
+      var heroLead = document.querySelector('.hero .lead');
+      var cssScrollTimelineSupported = (function () {
+        try {
+          return CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+        } catch (e) { return false; }
+      })();
+
+      function updateHeroFade(scrollY) {
+        if (cssScrollTimelineSupported) return;
+        // fade from opacity 1 → 0.4 over first 420px of scroll
+        var progress = Math.min(scrollY / 420, 1);
+        var opacity = 1 - progress * 0.6;
+        if (heroH1)   heroH1.style.opacity   = opacity;
+        if (heroLead) heroLead.style.opacity = opacity;
+      }
+
+      /* ── RAF loop ── */
+      function tick() {
+        rafPending = false;
+        var scrollY = window.pageYOffset;
+
+        updateScrollBar();
+        updateHeroParallax(scrollY);
+        updateHeaderVelocity(scrollY);
+        updateSectionParallax(scrollY);
+        updateHeroFade(scrollY);
+      }
+
+      function onScroll() {
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(tick);
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ── Init on DOM ready ── */
+      setupStaggeredReveals();
+      setupKPICounters();
+      // Run once immediately so initial state is correct
+      tick();
+
+    })();
     /* ── Job cost estimator ── */
     var ESTIMATES = {
       'blocked-drain':  {range:'$180 – $450', note:'Includes CCTV inspection for complex blockages. High-pressure jetting quoted separately if needed.'},

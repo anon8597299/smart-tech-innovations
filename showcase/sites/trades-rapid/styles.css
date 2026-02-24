@@ -191,3 +191,90 @@ footer { border-top:1px solid var(--line); padding:1rem 0 2rem; color: var(--mut
 
 /* ── Process step icon ── */
 .step-icon{display:block;font-size:1.8rem;margin-bottom:.45rem;margin-top:.6rem;}
+
+/* ════════════════════════════════════════════════
+   SCROLL-DRIVEN VISUAL EFFECTS
+   ════════════════════════════════════════════════ */
+
+/* 1. Scroll progress bar */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: #2563eb;
+  z-index: 9999;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* 3. Scroll-velocity reactive header */
+.site-header {
+  background: rgba(255,255,255,calc(0.96 - var(--scroll-vel, 0) * 0.08));
+  /* The JS sets --scroll-vel on .site-header; the blue wash blends in */
+  /* We layer the blue wash on top with a pseudo-element driven by --scroll-vel */
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(37,99,235, calc(var(--scroll-vel, 0) * 0.08));
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 4. Staggered card reveals — reset existing simple reveal, add stagger */
+.service-card,
+.value,
+.process-step,
+.kpi,
+.testimonial-card,
+.faq-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.service-card.visible,
+.value.visible,
+.process-step.visible,
+.kpi.visible,
+.testimonial-card.visible,
+.faq-item.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Override the simpler .reveal rule for elements covered above */
+.service-card.reveal,
+.value.reveal,
+.process-step.reveal,
+.kpi.reveal,
+.testimonial-card.reveal,
+.faq-item.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.service-card.reveal.visible,
+.value.reveal.visible,
+.process-step.reveal.visible,
+.kpi.reveal.visible,
+.testimonial-card.reveal.visible,
+.faq-item.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 7. Hero scroll fade — CSS progressive enhancement via animation-timeline */
+@supports (animation-timeline: scroll()) {
+  .hero h1,
+  .hero .lead {
+    animation: hero-fade-out linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 420px;
+  }
+  @keyframes hero-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0.4; }
+  }
+}
