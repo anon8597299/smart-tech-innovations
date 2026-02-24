@@ -276,6 +276,8 @@ p:last-child { margin-bottom: 0; }
   gap: .45rem;
   margin-top: 1rem;
 }
+/* Centre trust strip in hero */
+.hero .trust-strip { justify-content: center; }
 /* On dark hero overlay, trust strip needs visibility */
 .hero .trust-strip span {
   background: rgba(255,255,255,.18);
@@ -334,21 +336,26 @@ p:last-child { margin-bottom: 0; }
 }
 
 .hero-inner {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 2rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   position: relative;
   z-index: 3;
-  padding: 5rem 0 4rem;
+  padding: 8rem 0 6rem;
   width: 100%;
 }
-.hero-content { padding-right: .5rem; }
+.hero-content {
+  max-width: 820px;
+  width: 100%;
+  padding-right: 0;
+}
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
   margin-bottom: 1rem;
+  justify-content: center;
 }
 
 /* On white-text hero, badges need contrast adjustment */
@@ -377,6 +384,8 @@ p:last-child { margin-bottom: 0; }
   color: var(--warm-mid);
 }
 .hero-lead {
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.07rem;
   color: rgba(255,255,255,.88);
   max-width: 560px;
@@ -389,6 +398,7 @@ p:last-child { margin-bottom: 0; }
   flex-wrap: wrap;
   gap: .65rem;
   margin-bottom: .9rem;
+  justify-content: center;
 }
 
 /* Ghost button on dark background needs white treatment */
@@ -405,13 +415,22 @@ p:last-child { margin-bottom: 0; }
 
 .hero-panel-col {
   display: flex;
-  flex-direction: column;
-  gap: .75rem;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 2rem;
+  max-width: 820px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .hero-avail-card {
-  border-color: #fbbf24;
-  background: linear-gradient(140deg, rgba(255,251,235,.96) 0%, rgba(254,243,199,.96) 100%);
-  backdrop-filter: blur(8px);
+  border-color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(16px);
+  color: #fff;
+  max-width: 420px;
+  width: 100%;
+  text-align: left;
 }
 .avail-header {
   display: flex;
@@ -427,15 +446,15 @@ p:last-child { margin-bottom: 0; }
 .avail-header strong {
   display: block;
   font-size: .97rem;
-  color: var(--text);
+  color: #fff;
 }
 .avail-header span {
   font-size: .83rem;
-  color: var(--muted);
+  color: rgba(255,255,255,.75);
 }
 .avail-note {
   font-size: .88rem;
-  color: #78350f;
+  color: rgba(255,255,255,.82);
   margin-bottom: .85rem;
 }
 .avail-chips {
@@ -447,11 +466,11 @@ p:last-child { margin-bottom: 0; }
 .avail-chips span {
   font-size: .75rem;
   font-weight: 700;
-  background: rgba(255,255,255,.8);
-  border: 1px solid #fbbf24;
+  background: rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.4);
   padding: .2rem .55rem;
   border-radius: 999px;
-  color: var(--primary);
+  color: #fff;
 }
 .hero-detail-card {
   padding: 1rem 1.25rem;
