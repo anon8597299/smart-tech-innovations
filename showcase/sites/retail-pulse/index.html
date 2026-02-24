@@ -44,6 +44,8 @@
 </head>
 <body>
 
+<div id="scroll-bar"></div>
+
 <div class="demo-banner">
   This is a demo site by ImproveYourSite &mdash; showing what your finished site looks like.
   <a href="/packages.html">Get a site like this &rarr;</a>
@@ -124,6 +126,36 @@
       <div class="loft-kpi"><strong>&#128081;</strong><span>Personal styling available</span></div>
     </div>
   </section>
+
+  <!-- MARQUEE TRUST STRIP -->
+  <div class="loft-marquee-wrap" aria-hidden="true">
+    <div class="loft-marquee-track">
+      <span class="loft-marquee-item">Sass &amp; Bide</span>
+      <span class="loft-marquee-item">Seed Heritage</span>
+      <span class="loft-marquee-item">Country Road</span>
+      <span class="loft-marquee-item">Elka Collective</span>
+      <span class="loft-marquee-item">Viktoria &amp; Woods</span>
+      <span class="loft-marquee-item">Cue</span>
+      <span class="loft-marquee-item">Free Shipping $150+</span>
+      <span class="loft-marquee-item">30-Day Returns</span>
+      <span class="loft-marquee-item">Personal Styling</span>
+      <span class="loft-marquee-item">Ships Australia-Wide</span>
+      <span class="loft-marquee-item">Est. 2014</span>
+      <span class="loft-marquee-item">Orange NSW</span>
+      <span class="loft-marquee-item">Sass &amp; Bide</span>
+      <span class="loft-marquee-item">Seed Heritage</span>
+      <span class="loft-marquee-item">Country Road</span>
+      <span class="loft-marquee-item">Elka Collective</span>
+      <span class="loft-marquee-item">Viktoria &amp; Woods</span>
+      <span class="loft-marquee-item">Cue</span>
+      <span class="loft-marquee-item">Free Shipping $150+</span>
+      <span class="loft-marquee-item">30-Day Returns</span>
+      <span class="loft-marquee-item">Personal Styling</span>
+      <span class="loft-marquee-item">Ships Australia-Wide</span>
+      <span class="loft-marquee-item">Est. 2014</span>
+      <span class="loft-marquee-item">Orange NSW</span>
+    </div>
+  </div>
 
   <!-- COLLECTIONS -->
   <section class="section loft-collections-section" id="collections">
@@ -716,6 +748,191 @@
     s.disabled = true;
     s.style.background = '#059669';
   });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── 1. Scroll progress bar ── */
+  var scrollBar = document.getElementById('scroll-bar');
+  function updateScrollBar() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollBar.style.width = pct + '%';
+  }
+
+  /* ── 2. Hero parallax ── */
+  var heroInner = document.querySelector('.loft-hero-inner');
+
+  /* ── 4. Scroll velocity header flash ── */
+  var siteHeader = document.querySelector('.site-header.loft-header');
+  var lastScrollY = window.scrollY;
+  var lastScrollTime = performance.now();
+  var velocityFlashTimer = null;
+
+  function applyVelocityFlash(velocity) {
+    if (velocity > 400) {
+      siteHeader.classList.add('velocity-flash');
+      clearTimeout(velocityFlashTimer);
+      velocityFlashTimer = setTimeout(function () {
+        siteHeader.classList.remove('velocity-flash');
+      }, 420);
+    }
+  }
+
+  /* ── 5. Instagram feed tilt on scroll ── */
+  var feedPosts = document.querySelectorAll('.loft-feed-post');
+  var tiltBases = [];
+  feedPosts.forEach(function (post) {
+    if (post.classList.contains('loft-feed-tilt-l')) {
+      tiltBases.push(-1.2);
+    } else {
+      tiltBases.push(1.1);
+    }
+  });
+
+  /* ── 9. Footer parallax ── */
+  var footer = document.querySelector('.loft-footer');
+  var footerBgLayer = null;
+  if (footer) {
+    footerBgLayer = document.createElement('div');
+    footerBgLayer.className = 'loft-footer-bg-layer';
+    footer.insertBefore(footerBgLayer, footer.firstChild);
+  }
+
+  /* ── rAF scroll loop ── */
+  var ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(rafUpdate);
+      ticking = true;
+    }
+  }
+
+  function rafUpdate() {
+    var now = performance.now();
+    var scrollY = window.scrollY || document.documentElement.scrollTop;
+
+    /* Progress bar */
+    updateScrollBar();
+
+    /* Hero parallax */
+    if (heroInner) {
+      heroInner.style.transform = 'translateY(' + (scrollY * 0.28) + 'px)';
+    }
+
+    /* Velocity flash */
+    var dt = now - lastScrollTime;
+    if (dt > 0) {
+      var velocity = Math.abs(scrollY - lastScrollY) / dt * 1000;
+      applyVelocityFlash(velocity);
+    }
+    lastScrollY = scrollY;
+    lastScrollTime = now;
+
+    /* Feed tilt */
+    feedPosts.forEach(function (post, i) {
+      var delta = scrollY * 0.01;
+      var tilt = tiltBases[i] + (tiltBases[i] < 0 ? -delta : delta);
+      /* Only apply tilt when not being hovered */
+      if (!post.matches(':hover')) {
+        post.style.transform = 'rotate(' + tilt + 'deg)';
+      }
+    });
+
+    /* Footer parallax */
+    if (footerBgLayer && footer) {
+      var footerTop = footer.getBoundingClientRect().top + scrollY;
+      var offset = (scrollY - footerTop) * 0.1;
+      footerBgLayer.style.transform = 'translateY(' + offset + 'px)';
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── 3. Collection card reveals with scale + stagger ── */
+  var revealEls = document.querySelectorAll('.loft-ccard, .loft-why-card, .loft-review-card, .loft-feed-post, .loft-kpi, .loft-faq-item');
+
+  /* Remove old reveal-ready/revealed from the earlier script so we take over */
+  revealEls.forEach(function (el) {
+    el.classList.remove('reveal-ready', 'revealed');
+  });
+
+  if ('IntersectionObserver' in window) {
+    /* Group siblings for stagger */
+    function getSiblings(el) {
+      var parent = el.parentElement;
+      if (!parent) return [el];
+      return Array.prototype.slice.call(parent.children).filter(function (c) {
+        return c === el || c.classList.contains(el.classList[0]);
+      });
+    }
+
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var siblings = getSiblings(el);
+          var idx = siblings.indexOf(el);
+          var delay = idx * 80;
+          setTimeout(function () {
+            el.classList.add('revealed');
+          }, delay);
+          revealObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(function (el) {
+      el.classList.add('reveal-ready');
+      revealObs.observe(el);
+    });
+  } else {
+    revealEls.forEach(function (el) {
+      el.classList.add('revealed');
+    });
+  }
+
+  /* ── 7. Section heading reveal ── */
+  var headings = document.querySelectorAll('.loft-section-head h2');
+  if ('IntersectionObserver' in window) {
+    var h2Obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('h2-revealed');
+          h2Obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
+
+    headings.forEach(function (h) {
+      h.classList.add('h2-reveal-ready');
+      h2Obs.observe(h);
+    });
+  }
+
+  /* ── 8. CTA button shimmer ── */
+  var shimmerBtns = document.querySelectorAll('.btn-get-site, .loft-btn-hero, .btn-primary');
+  shimmerBtns.forEach(function (btn) {
+    btn.classList.add('btn-shimmer');
+  });
+
+  /* Stagger the shimmer animation start so buttons don't all flash simultaneously */
+  shimmerBtns.forEach(function (btn, i) {
+    btn.style.animationDelay = (i * 1.3) + 's';
+  });
+
+  /* ── Initial state ── */
+  updateScrollBar();
+  if (heroInner) {
+    heroInner.style.transform = 'translateY(0)';
+  }
+
 })();
 </script>
 

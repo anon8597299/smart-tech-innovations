@@ -963,3 +963,171 @@ footer{border-top:1px solid var(--line);padding:1rem 0 2rem;color:var(--muted);f
   .loft-body-type-group { grid-template-columns: 1fr; }
   .loft-size-fields { grid-template-columns: 1fr; }
 }
+
+/* =============================================================
+   SCROLL-DRIVEN VISUAL EFFECTS — The Loft Boutique
+   ============================================================= */
+
+/* 1. Scroll progress bar */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--primary);
+  z-index: 9999;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* 2. Hero parallax — inner content shifts via JS transform */
+.loft-hero-inner {
+  will-change: transform;
+}
+
+/* 3. Collection card reveals with scale */
+.loft-ccard.reveal-ready,
+.loft-why-card.reveal-ready,
+.loft-review-card.reveal-ready,
+.loft-feed-post.reveal-ready,
+.loft-kpi.reveal-ready,
+.loft-faq-item.reveal-ready {
+  opacity: 0;
+  transform: scale(0.94) translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.loft-ccard.reveal-ready.revealed,
+.loft-why-card.reveal-ready.revealed,
+.loft-review-card.reveal-ready.revealed,
+.loft-feed-post.reveal-ready.revealed,
+.loft-kpi.reveal-ready.revealed,
+.loft-faq-item.reveal-ready.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* 4. Header velocity intensity — class toggled by JS */
+.site-header.loft-header {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.site-header.loft-header.velocity-flash {
+  background: rgba(124, 58, 237, 0.97) !important;
+  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.35);
+}
+.site-header.loft-header.velocity-flash .loft-brand,
+.site-header.loft-header.velocity-flash .loft-nav a {
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* 5. Instagram feed tilt on scroll — base tilts kept; JS adjusts via style */
+.loft-feed-post {
+  transition: transform 0.12s ease, box-shadow 0.22s ease;
+}
+
+/* 6. Horizontal marquee */
+.loft-marquee-wrap {
+  overflow: hidden;
+  background: #f5f3ff;
+  border-top: 1px solid #ede9fe;
+  border-bottom: 1px solid #ede9fe;
+  padding: .7rem 0;
+}
+.loft-marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: loft-marquee 28s linear infinite;
+}
+.loft-marquee-track:hover { animation-play-state: paused; }
+.loft-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 2rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: #5b21b6;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.loft-marquee-item::after {
+  content: '·';
+  color: #c4b5fd;
+  font-size: 1.1rem;
+  margin-left: .5rem;
+}
+@keyframes loft-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* 7. Section heading reveal — h2 inside .loft-section-head */
+.loft-section-head h2.h2-reveal-ready {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.loft-section-head h2.h2-reveal-ready.h2-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 8. CTA button shimmer */
+@keyframes loft-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 65%
+  );
+  background-size: 200% 100%;
+  background-position: 200% center;
+  pointer-events: none;
+  border-radius: inherit;
+  animation: loft-shimmer 4s ease-in-out infinite;
+}
+.btn-shimmer:hover::after {
+  animation-duration: 0.6s;
+}
+
+/* 9. Footer parallax — background drifts via JS transform */
+.loft-footer {
+  position: relative;
+  will-change: background-position;
+  overflow: hidden;
+}
+.loft-footer-bg-layer {
+  position: absolute;
+  inset: -40px 0;
+  background: #1e0a3c;
+  z-index: 0;
+  will-change: transform;
+}
+.loft-footer > .container,
+.loft-footer > .loft-footer-bottom {
+  position: relative;
+  z-index: 1;
+}
+.loft-footer-grid {
+  position: relative;
+  z-index: 1;
+}
+.loft-footer-bottom > .container {
+  position: relative;
+  z-index: 1;
+}
