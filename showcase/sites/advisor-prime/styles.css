@@ -205,3 +205,101 @@
   .hero h1{font-size:clamp(1.6rem,7vw,2.1rem)}
   .contact-submit{width:100%}
 }
+
+/* ============================================================
+   SCROLL-DRIVEN VISUAL EFFECTS — Pinnacle Financial Advice
+   ============================================================ */
+
+/* ── 1. Scroll progress bar ── */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #1d4ed8 0%, #c9a84c 100%);
+  z-index: 9999;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* ── 3. Wealth-growth background shift ── */
+body {
+  background-color: var(--scroll-bg, var(--bg));
+}
+
+/* ── 4. Staggered card/badge reveals ── */
+/* Override base .reveal with the new stagger-ready version */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Keep legacy .visible working for any existing references */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 6. Section h2 slide-in ── */
+.section-h2-animate {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.section-h2-animate.h2-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── 7. Header prestige / frosted-glass effect ── */
+.site-header.scrolled {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* ── 8. CTA button shimmer ── */
+@keyframes pinnacle-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: -200% center;
+  animation: pinnacle-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Hero btn-primary has white background — adjust shimmer opacity */
+.hero .btn-primary::after {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(29, 78, 216, 0.13) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: -200% center;
+  animation: pinnacle-shimmer 4s ease-in-out infinite;
+}
