@@ -945,6 +945,8 @@ footer{border-top:1px solid var(--line);padding:1rem 0 2rem;color:var(--muted);f
   .loft-size-fields { grid-template-columns: 1fr 1fr; }
   .loft-feed-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
   .loft-feed-tilt-l, .loft-feed-tilt-r { transform: rotate(0); }
+  .loft-feed-cta-row { margin-top: 2rem; margin-bottom: 2rem; }
+  .loft-btn-insta { width: 100%; justify-content: center; }
   .loft-reviews-grid { grid-template-columns: 1fr; }
   .loft-contact-layout { grid-template-columns: 1fr; }
   .loft-form-row { grid-template-columns: 1fr; }
