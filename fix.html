@@ -197,6 +197,21 @@
     .dns-reg-btn { padding: .45rem 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .82rem; font-weight: 700; color: #334155; cursor: pointer; transition: all .15s; font-family: Inter, sans-serif; }
     .dns-reg-btn:hover { background: #5b4dff; color: #fff; border-color: #5b4dff; }
     .dns-reg-btn.active { background: #5b4dff; color: #fff; border-color: #5b4dff; }
+    /* ── URL Cleaner ── */
+    .url-row { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: .85rem 1rem; margin-bottom: .65rem; }
+    .url-row.url-ok { border-color: #bbf7d0; background: #f0fdf4; }
+    .url-row.url-warn { border-color: #fde68a; background: #fffbeb; }
+    .url-row.url-bad { border-color: #fecaca; background: #fef2f2; }
+    .url-original { font-family: monospace; font-size: .75rem; color: #94a3b8; word-break: break-all; margin-bottom: .45rem; }
+    .url-clean { font-family: monospace; font-size: .82rem; font-weight: 700; color: #0f172a; word-break: break-all; margin-bottom: .5rem; }
+    .url-issues { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+    .url-tag { font-size: .7rem; font-weight: 700; padding: .18rem .48rem; border-radius: 999px; }
+    .url-tag.bad { background: #fee2e2; color: #b91c1c; }
+    .url-tag.warn { background: #fef3c7; color: #92400e; }
+    .url-tag.ok { background: #dcfce7; color: #166534; }
+    .url-summary { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .84rem; font-weight: 700; }
+    .url-summary span { padding: .3rem .7rem; border-radius: 8px; }
+    .url-redirect-block { margin-top: .5rem; background: #020817; border-radius: 7px; padding: .55rem .75rem; font-family: monospace; font-size: .72rem; color: #7dd3fc; }
   </style>
 </head>
 <body>
@@ -699,6 +714,27 @@
           <div id="dns-prop-status" style="font-size:.82rem;color:#64748b"></div>
         </div>
       </div>
+    </div>
+
+    <!-- ── URL Cleaner ── -->
+    <div class="section-card" style="margin-top:1.25rem">
+      <div class="section-head">
+        <div class="section-num" style="background:#0ea5e9">🔗</div>
+        <div>
+          <div class="section-title">URL Cleaner</div>
+          <div class="section-desc">Paste the customer's messy URLs — one per line. Flags issues and outputs clean, SEO-ready versions.</div>
+        </div>
+      </div>
+
+      <textarea id="url-input" class="fi" rows="6" placeholder="Paste URLs here, one per line — e.g.&#10;www.SmithsPlumbing.com.au/Our Services/Plumbing%20Services.html?ref=google&source=ads&#10;SMITHSPLUMBING.COM.AU/Home-Page.html&#10;smithsplumbing.com.au/contact-us/index.html&#10;smithsplumbing.com.au/blog/Top-5-Tips-For-Fixing-A-Leaking-Tap-In-Bathurst-NSW-2795.html" style="font-family:monospace;font-size:.82rem;margin-bottom:.75rem"></textarea>
+
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="cleanURLs()" style="padding:.6rem 1.2rem;font-size:.88rem">🧹 Clean URLs</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('url-input').value='';document.getElementById('url-results').innerHTML=''" style="padding:.6rem 1rem;font-size:.88rem">Clear</button>
+        <button class="btn btn-secondary" id="url-copy-btn" onclick="copyCleanURLs()" style="padding:.6rem 1rem;font-size:.88rem;display:none">📋 Copy Clean URLs</button>
+      </div>
+
+      <div id="url-results"></div>
     </div>
 
   </div><!-- /.page-body -->
@@ -1837,6 +1873,182 @@ Return ONLY the complete HTML document. Start with <!DOCTYPE html> and end with 
     const saved = sessionStorage.getItem('claude-key');
     if (saved) document.getElementById('claude-key').value = saved;
   });
+
+  // ── URL Cleaner ──────────────────────────────────────────────────────────────
+  function cleanURLs() {
+    const raw = document.getElementById('url-input').value.trim();
+    if (!raw) return;
+    const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+    const results = lines.map(analyseURL);
+    renderURLResults(results);
+    document.getElementById('url-copy-btn').style.display = results.length ? '' : 'none';
+  }
+
+  function analyseURL(original) {
+    const issues = [];
+    let url = original.trim();
+
+    // Parse — handle URLs without protocol
+    let parsed;
+    try {
+      parsed = new URL(url.startsWith('http') ? url : 'https://' + url);
+    } catch {
+      return { original, clean: url, issues: [{ label: 'Invalid URL', type: 'bad' }], severity: 'bad' };
+    }
+
+    let hostname = parsed.hostname.toLowerCase();
+    let pathname = parsed.pathname;
+    let params   = parsed.searchParams;
+
+    // --- Flag issues ---
+
+    // www prefix (not wrong but worth flagging)
+    if (hostname.startsWith('www.')) {
+      issues.push({ label: 'Has www — decide: www vs non-www and be consistent', type: 'warn' });
+      hostname = hostname.replace(/^www\./, '');
+    }
+
+    // Uppercase in domain
+    if (parsed.hostname !== parsed.hostname.toLowerCase()) {
+      issues.push({ label: 'Uppercase in domain', type: 'bad' });
+    }
+
+    // Uppercase in path
+    if (pathname !== pathname.toLowerCase()) {
+      issues.push({ label: 'Uppercase letters in path', type: 'bad' });
+      pathname = pathname.toLowerCase();
+    }
+
+    // Spaces / %20 in path
+    if (pathname.includes('%20') || pathname.includes(' ')) {
+      issues.push({ label: 'Spaces in URL (%20)', type: 'bad' });
+      pathname = pathname.replace(/%20/g, '-').replace(/ /g, '-');
+    }
+
+    // Other encoded chars
+    if (/%[0-9a-f]{2}/i.test(pathname) && !pathname.includes('%20')) {
+      issues.push({ label: 'URL-encoded characters in path', type: 'warn' });
+      pathname = decodeURIComponent(pathname);
+    }
+
+    // .html / .htm / .php extension
+    const extMatch = pathname.match(/\.(html?|php|asp|aspx)$/i);
+    if (extMatch) {
+      issues.push({ label: `Unnecessary file extension (.${extMatch[1]})`, type: 'bad' });
+      pathname = pathname.replace(/\.(html?|php|asp|aspx)$/i, '');
+    }
+
+    // index page
+    if (pathname.endsWith('/index') || pathname === '/index') {
+      issues.push({ label: '/index in URL (remove — homepage should be just /)', type: 'bad' });
+      pathname = pathname.replace(/\/index$/, '') || '/';
+    }
+
+    // Trailing slash normalise (keep for directories, remove for pages)
+    if (pathname !== '/' && pathname.endsWith('/')) {
+      issues.push({ label: 'Trailing slash (pick one convention and redirect)', type: 'warn' });
+      pathname = pathname.replace(/\/$/, '');
+    }
+
+    // Double slashes
+    if (/\/{2,}/.test(pathname)) {
+      issues.push({ label: 'Double slashes in path', type: 'bad' });
+      pathname = pathname.replace(/\/{2,}/g, '/');
+    }
+
+    // Underscores (use hyphens for SEO)
+    if (pathname.includes('_')) {
+      issues.push({ label: 'Underscores — use hyphens instead (better SEO)', type: 'warn' });
+      pathname = pathname.replace(/_/g, '-');
+    }
+
+    // Double hyphens
+    if (/--/.test(pathname)) {
+      issues.push({ label: 'Double hyphens', type: 'warn' });
+      pathname = pathname.replace(/--+/g, '-');
+    }
+
+    // Tracking / UTM params
+    const trackingParams = ['ref','source','utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid','msclkid','mc_cid','mc_eid'];
+    const removedParams = [];
+    trackingParams.forEach(p => {
+      if (params.has(p)) { removedParams.push(p); params.delete(p); }
+    });
+    if (removedParams.length) {
+      issues.push({ label: `Tracking params removed: ${removedParams.join(', ')}`, type: 'bad' });
+    }
+
+    // Remaining query params (not tracking — flag as worth reviewing)
+    const remaining = [...params.keys()];
+    if (remaining.length) {
+      issues.push({ label: `Query params remaining (review if needed): ?${remaining.join('&')}`, type: 'warn' });
+    }
+
+    // Slug too long (> 60 chars)
+    const slugPart = pathname.split('/').pop();
+    if (slugPart && slugPart.length > 60) {
+      issues.push({ label: `Slug too long (${slugPart.length} chars — aim for <60)`, type: 'warn' });
+      // Truncate to last meaningful words
+      const words = slugPart.replace(/-/g,' ').split(' ').slice(0, 6).join('-');
+      pathname = pathname.replace(slugPart, words);
+    }
+
+    // Build clean URL
+    const cleanParams = params.toString();
+    const clean = `${hostname}${pathname}${cleanParams ? '?' + cleanParams : ''}`;
+
+    const severity = issues.some(i => i.type === 'bad') ? 'bad'
+                   : issues.some(i => i.type === 'warn') ? 'warn'
+                   : 'ok';
+
+    if (!issues.length) issues.push({ label: '✓ Clean', type: 'ok' });
+
+    return { original, clean, issues, severity };
+  }
+
+  function renderURLResults(results) {
+    const bad  = results.filter(r => r.severity === 'bad').length;
+    const warn = results.filter(r => r.severity === 'warn').length;
+    const ok   = results.filter(r => r.severity === 'ok').length;
+
+    let html = `<div class="url-summary">
+      <span style="background:#fef2f2;color:#b91c1c">${bad} need fixing</span>
+      <span style="background:#fffbeb;color:#92400e">${warn} warnings</span>
+      <span style="background:#f0fdf4;color:#166534">${ok} clean</span>
+    </div>`;
+
+    results.forEach(r => {
+      const changed = r.clean !== r.original.replace(/^https?:\/\//, '').replace(/^www\./, '');
+      const redirect = changed && r.severity !== 'ok'
+        ? `<div class="url-redirect-block">301 Redirect: ${r.original.replace(/^https?:\/\//,'')} → ${r.clean}</div>`
+        : '';
+
+      html += `<div class="url-row url-${r.severity}">
+        <div class="url-original">Original: ${escHtml(r.original)}</div>
+        <div class="url-clean">Clean: ${escHtml(r.clean)}</div>
+        <div class="url-issues">${r.issues.map(i => `<span class="url-tag ${i.type}">${escHtml(i.label)}</span>`).join('')}</div>
+        ${redirect}
+      </div>`;
+    });
+
+    document.getElementById('url-results').innerHTML = html;
+  }
+
+  function copyCleanURLs() {
+    const raw = document.getElementById('url-input').value.trim();
+    if (!raw) return;
+    const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+    const cleaned = lines.map(l => analyseURL(l).clean).join('\n');
+    navigator.clipboard.writeText(cleaned).then(() => {
+      const btn = document.getElementById('url-copy-btn');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy Clean URLs', 2000);
+    });
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
 </script>
 </body>
 </html>
