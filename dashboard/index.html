@@ -397,6 +397,45 @@
     }
     .cal-modal-item-title { font-weight: 600; margin-bottom: 2px; }
     .cal-modal-item-meta  { font-size: 11px; color: var(--muted); }
+
+    /* ── Schedule modal ─────────────────────────────────────────────────────── */
+    .cal-item.scheduled { background: rgba(251,191,36,.15); color: var(--amber);
+      border: 1px dashed rgba(251,191,36,.4); }
+    .cal-add-btn {
+      position: absolute; top: 6px; right: 6px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(91,77,255,.3); border: none; color: #fff;
+      font-size: 13px; line-height: 18px; text-align: center;
+      cursor: pointer; display: none; padding: 0;
+      transition: background 0.15s;
+    }
+    .cal-day:hover .cal-add-btn { display: block; }
+    .cal-add-btn:hover { background: var(--indigo); }
+    .sched-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.75);
+      z-index: 300; display: flex; align-items: center; justify-content: center;
+    }
+    .sched-modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; width: 400px; max-width: 92vw;
+    }
+    .sched-modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+    .sched-field { margin-bottom: 16px; }
+    .sched-field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing:.04em;
+    }
+    .sched-field select, .sched-field input, .sched-field textarea {
+      width: 100%; padding: 9px 12px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); font-family: inherit; font-size: 13px;
+      outline: none; transition: border-color 0.15s;
+    }
+    .sched-field select:focus, .sched-field input:focus, .sched-field textarea:focus {
+      border-color: var(--indigo);
+    }
+    .sched-field textarea { height: 72px; resize: vertical; }
+    .sched-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -829,21 +868,27 @@ function calNav(dir) {
 
 function renderCalendar(data) {
   const { year, month, tasks, posts } = data;
+  const { scheduled = [] } = data;
 
-  // Build lookup: date string → {tasks:[], posts:[]}
+  // Build lookup: date string → {tasks:[], posts:[], scheduled:[]}
   const byDay = {};
   const pad = d => String(d).padStart(2,'0');
   const key  = d => `${year}-${pad(month)}-${pad(d)}`;
 
   tasks.forEach(t => {
     const d = (t.created_at || '').slice(0,10);
-    if (!byDay[d]) byDay[d] = { tasks:[], posts:[] };
+    if (!byDay[d]) byDay[d] = { tasks:[], posts:[], scheduled:[] };
     byDay[d].tasks.push(t);
   });
   posts.forEach(p => {
     const d = (p.date || '').slice(0,10);
-    if (!byDay[d]) byDay[d] = { tasks:[], posts:[] };
+    if (!byDay[d]) byDay[d] = { tasks:[], posts:[], scheduled:[] };
     byDay[d].posts.push(p);
+  });
+  scheduled.forEach(s => {
+    const d = (s.scheduled_for || '').slice(0,10);
+    if (!byDay[d]) byDay[d] = { tasks:[], posts:[], scheduled:[] };
+    byDay[d].scheduled.push(s);
   });
 
   // Calendar math
@@ -867,7 +912,7 @@ function renderCalendar(data) {
   for (let d = 1; d <= daysInMonth; d++) {
     const dk       = key(d);
     const isToday  = dk === todayStr;
-    const dayData  = byDay[dk] || { tasks:[], posts:[] };
+    const dayData  = byDay[dk] || { tasks:[], posts:[], scheduled:[] };
     const allItems = [];
 
     // Posts first
@@ -875,7 +920,11 @@ function renderCalendar(data) {
       const cls = p.status === 'posted' ? 'post-posted' : 'post-pending';
       allItems.push({ cls, label: '▲ ' + (p.headline || 'IG Post'), raw: p, type:'post' });
     });
-    // Tasks
+    // Scheduled tasks
+    dayData.scheduled.forEach(s => {
+      allItems.push({ cls: 'scheduled', label: '◎ ' + s.title, raw: s, type:'scheduled' });
+    });
+    // Completed tasks
     dayData.tasks.forEach(t => {
       const cls = `task-${t.agent_id || 'manager'}`;
       allItems.push({ cls, label: t.title, raw: t, type:'task' });
@@ -885,7 +934,9 @@ function renderCalendar(data) {
     const shown = allItems.slice(0, MAX_SHOW);
     const extra = allItems.length - MAX_SHOW;
 
+    const isPast = new Date(dk) < new Date(todayStr);
     html += `<div class="cal-day${isToday?' today':''}" onclick="calDayClick('${dk}', ${JSON.stringify(dayData).replace(/"/g,'&quot;')})">`;
+    if (!isPast) html += `<button class="cal-add-btn" onclick="event.stopPropagation();openSchedule('${dk}')" title="Schedule task">+</button>`;
     html += `<span class="cal-day-num">${d}</span>`;
     html += '<div class="cal-items">';
     shown.forEach(item => {
@@ -903,9 +954,8 @@ function calDayClick(dateStr, dayData) {
   const existing = document.getElementById('cal-modal');
   if (existing) existing.remove();
 
-  const posts = dayData.posts || [];
-  const tasks = dayData.tasks || [];
-  if (!posts.length && !tasks.length) return;
+  const { tasks = [], posts = [], scheduled = [] } = dayData;
+  if (!posts.length && !tasks.length && !scheduled.length) return;
 
   const d = new Date(dateStr + 'T00:00:00');
   const label = d.toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
@@ -926,9 +976,33 @@ function calDayClick(dateStr, dayData) {
     inner += '</div>';
   }
 
+  const scheduled = dayData.scheduled || [];
+  if (scheduled.length) {
+    inner += `<div class="cal-modal-section">
+      <div class="cal-modal-section-title">Scheduled (${scheduled.length})</div>`;
+    const agentCol = {manager:'var(--muted)',social:'var(--mint)',ads:'var(--amber)',
+                      content:'#a5b4fc',builder:'var(--red)',analyst:'var(--muted)'};
+    scheduled.forEach(s => {
+      const col = agentCol[s.agent_id] || 'var(--amber)';
+      inner += `<div class="cal-modal-item" style="border-color:rgba(251,191,36,.3);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="cal-modal-item-title">${esc(s.title)}</div>
+            <div class="cal-modal-item-meta">
+              <span style="color:${col};">${esc(s.agent_id)}</span>
+              ${s.notes ? ' &nbsp;·&nbsp; ' + esc(s.notes.slice(0,60)) : ''}
+            </div>
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="cancelSchedule(${s.id})" style="flex-shrink:0;margin-left:8px;">Cancel</button>
+        </div>
+      </div>`;
+    });
+    inner += '</div>';
+  }
+
   if (tasks.length) {
     inner += `<div class="cal-modal-section">
-      <div class="cal-modal-section-title">Agent Tasks (${tasks.length})</div>`;
+      <div class="cal-modal-section-title">Completed Tasks (${tasks.length})</div>`;
     const agentCol = {manager:'var(--muted)',social:'var(--mint)',ads:'var(--amber)',
                       content:'#a5b4fc',builder:'var(--red)',analyst:'var(--muted)'};
     tasks.forEach(t => {
@@ -958,6 +1032,76 @@ function calDayClick(dateStr, dayData) {
     </div>`;
   modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
   document.body.appendChild(modal);
+}
+
+// ── Schedule task ────────────────────────────────────────────────────────────
+function openSchedule(dateStr) {
+  const existing = document.getElementById('sched-overlay');
+  if (existing) existing.remove();
+
+  const d = new Date(dateStr + 'T00:00:00');
+  const label = d.toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
+
+  const overlay = document.createElement('div');
+  overlay.id = 'sched-overlay';
+  overlay.className = 'sched-overlay';
+  overlay.innerHTML = `
+    <div class="sched-modal">
+      <h3>Schedule Task — ${label}</h3>
+      <div class="sched-field">
+        <label>Agent</label>
+        <select id="sched-agent">
+          <option value="social">Social — Instagram post</option>
+          <option value="content">Content — Auto-blog</option>
+          <option value="ads">Ads — Google Ads report</option>
+          <option value="manager">Manager — Digest</option>
+          <option value="builder">Builder — Site build</option>
+          <option value="analyst">Analyst — Quality review</option>
+        </select>
+      </div>
+      <div class="sched-field">
+        <label>Task Title</label>
+        <input id="sched-title" type="text" placeholder="e.g. Post Friday CTA carousel" maxlength="120">
+      </div>
+      <div class="sched-field">
+        <label>Notes (optional)</label>
+        <textarea id="sched-notes" placeholder="Any specific instructions for the agent…"></textarea>
+      </div>
+      <div class="sched-actions">
+        <button class="btn btn-secondary" onclick="document.getElementById('sched-overlay').remove()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveSchedule('${dateStr}')">Schedule</button>
+      </div>
+    </div>`;
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+  document.getElementById('sched-title').focus();
+}
+
+async function saveSchedule(dateStr) {
+  const agent_id = document.getElementById('sched-agent').value;
+  const title    = document.getElementById('sched-title').value.trim();
+  const notes    = document.getElementById('sched-notes').value.trim();
+  if (!title) { document.getElementById('sched-title').focus(); return; }
+
+  try {
+    await api('/api/schedule', 'POST', { agent_id, title, notes, date: dateStr });
+    document.getElementById('sched-overlay').remove();
+    loadCalendar();
+  } catch(e) {
+    alert('Could not save: ' + e.message);
+  }
+}
+
+async function cancelSchedule(id) {
+  if (!confirm('Cancel this scheduled task?')) return;
+  try {
+    await api(`/api/schedule/${id}`, 'DELETE');
+    const modal = document.getElementById('cal-modal');
+    if (modal) modal.remove();
+    loadCalendar();
+  } catch(e) {
+    alert('Could not cancel: ' + e.message);
+  }
 }
 
 function updateSystemBadge() {

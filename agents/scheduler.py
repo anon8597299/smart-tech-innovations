@@ -49,6 +49,20 @@ def _run(agent, run_analyst_after: bool = False):
         _analyst.execute()
 
 
+def _run_scheduled_tasks():
+    """Check for any tasks scheduled for today and trigger the assigned agents."""
+    from datetime import date
+    today = date.today().isoformat()
+    tasks = db.scheduled_tasks_for_date(today)
+    for t in tasks:
+        agent = AGENT_MAP.get(t["agent_id"])
+        if agent:
+            db.event_log("manager", "info", f"Running scheduled task: {t['title']} → {t['agent_id']}")
+            db.scheduled_task_mark_triggered(t["id"])
+            import threading
+            threading.Thread(target=agent.execute, daemon=True).start()
+
+
 def build_scheduler() -> BackgroundScheduler:
     """Create and configure the scheduler. Call .start() in run.py."""
     scheduler = BackgroundScheduler(timezone=TIMEZONE)
@@ -91,6 +105,14 @@ def build_scheduler() -> BackgroundScheduler:
         CronTrigger(day_of_week="mon", hour=6, minute=0, timezone=TIMEZONE),
         id="content", name="Auto-blog content",
         misfire_grace_time=600,
+    )
+
+    # Scheduled tasks — check at 6:00 AM daily and trigger assigned agents
+    scheduler.add_job(
+        _run_scheduled_tasks,
+        CronTrigger(hour=6, minute=0, timezone=TIMEZONE),
+        id="scheduled_tasks", name="Scheduled task runner",
+        misfire_grace_time=300,
     )
 
     # Update next_run timestamps in DB after schedule is built

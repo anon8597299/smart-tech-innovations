@@ -91,6 +91,7 @@ def init_db():
                 ('builder',  'Builder',  'idle'),
                 ('analyst',  'Analyst',  'idle');
         """)
+    _init_scheduled_tasks(get_conn())
 
 
 # ── Agent helpers ────────────────────────────────────────────────────────────
@@ -262,6 +263,61 @@ def content_recent(limit: int = 30) -> list[dict]:
         "SELECT * FROM content ORDER BY created_at DESC LIMIT ?", (limit,)
     ).fetchall()
     return [dict(r) for r in rows]
+
+
+# ── Scheduled tasks ───────────────────────────────────────────────────────────
+
+def _init_scheduled_tasks(conn):
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS scheduled_tasks (
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            agent_id      TEXT NOT NULL,
+            title         TEXT NOT NULL,
+            notes         TEXT DEFAULT '',
+            scheduled_for TEXT NOT NULL,
+            status        TEXT DEFAULT 'pending',
+            created_at    TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+
+
+def scheduled_task_create(agent_id: str, title: str, notes: str, scheduled_for: str) -> int:
+    with transaction() as c:
+        c.execute(
+            "INSERT INTO scheduled_tasks (agent_id, title, notes, scheduled_for, created_at) VALUES (?,?,?,?,?)",
+            (agent_id, title, notes, scheduled_for, _now())
+        )
+        return c.lastrowid
+
+
+def scheduled_tasks_for_month(year: int, month: int) -> list[dict]:
+    conn = get_conn()
+    prefix = f"{year:04d}-{month:02d}"
+    rows = conn.execute(
+        "SELECT * FROM scheduled_tasks WHERE scheduled_for LIKE ? AND status != 'cancelled' ORDER BY scheduled_for ASC",
+        (f"{prefix}%",)
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def scheduled_tasks_for_date(date_str: str) -> list[dict]:
+    conn = get_conn()
+    rows = conn.execute(
+        "SELECT * FROM scheduled_tasks WHERE scheduled_for=? AND status='pending' ORDER BY id ASC",
+        (date_str,)
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def scheduled_task_cancel(task_id: int):
+    with transaction() as c:
+        c.execute("UPDATE scheduled_tasks SET status='cancelled' WHERE id=?", (task_id,))
+
+
+def scheduled_task_mark_triggered(task_id: int):
+    with transaction() as c:
+        c.execute("UPDATE scheduled_tasks SET status='triggered' WHERE id=?", (task_id,))
 
 
 # ── Calendar helpers ──────────────────────────────────────────────────────────

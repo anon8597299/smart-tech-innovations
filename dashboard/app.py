@@ -298,7 +298,26 @@ async def calendar(year: int = 0, month: int = 0):
         except Exception:
             posts = []
 
-    return {"year": y, "month": m, "tasks": tasks, "posts": posts}
+    scheduled = db.scheduled_tasks_for_month(y, m)
+    return {"year": y, "month": m, "tasks": tasks, "posts": posts, "scheduled": scheduled}
+
+
+@app.post("/api/schedule")
+async def create_schedule(body: dict):
+    agent_id = (body.get("agent_id") or "").strip()
+    title    = (body.get("title") or "").strip()
+    notes    = (body.get("notes") or "").strip()
+    date_str = (body.get("date") or "").strip()
+    if not agent_id or not title or not date_str:
+        raise HTTPException(status_code=400, detail="agent_id, title, date required")
+    task_id = db.scheduled_task_create(agent_id, title, notes, date_str)
+    return {"id": task_id, "status": "scheduled"}
+
+
+@app.delete("/api/schedule/{task_id}")
+async def cancel_schedule(task_id: int):
+    db.scheduled_task_cancel(task_id)
+    return {"status": "cancelled"}
 
 
 @app.delete("/api/chat")
