@@ -44,26 +44,30 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "{{POST_TITLE}}",
-    "description": "{{POST_EXCERPT}}",
-    "datePublished": "{{POST_DATE_ISO}}",
-    "dateModified": "{{POST_DATE_ISO}}",
-    "author": { "@type": "Organization", "name": "{{BUSINESS_NAME}}" },
-    "publisher": {
-      "@type": "LocalBusiness",
-      "name": "{{BUSINESS_NAME}}",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "{{SUBURB}}",
-        "addressRegion": "{{STATE}}",
-        "addressCountry": "AU"
-      },
-      "telephone": "{{PHONE}}",
-      "email": "{{EMAIL}}"
-    }
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "{{POST_TITLE}}",
+        "description": "{{POST_EXCERPT}}",
+        "datePublished": "{{POST_DATE_ISO}}",
+        "dateModified": "{{POST_DATE_ISO}}",
+        "author": { "@type": "Organization", "name": "{{BUSINESS_NAME}}" },
+        "publisher": {
+          "@type": "LocalBusiness",
+          "name": "{{BUSINESS_NAME}}",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{SUBURB}}",
+            "addressRegion": "{{STATE}}",
+            "addressCountry": "AU"
+          },
+          "telephone": "{{PHONE}}",
+          "email": "{{EMAIL}}"
+        }
+      }
+    ]
   }
-  </script>
+  </script>{{POST_FAQ_SCHEMA}}
 </head>
 <body>
 

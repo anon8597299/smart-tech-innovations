@@ -81,6 +81,46 @@ def read_time(html: str) -> str:
     return f"{max(1, round(words / 200))} min"
 
 
+def extract_faq_schema(content_html: str) -> str:
+    """
+    Extract FAQ items from <div id="faq"> in the content HTML and return a
+    FAQPage JSON-LD <script> block, or empty string if no FAQ section found.
+    """
+    faq_block = re.search(
+        r'<div[^>]+id=["\']faq["\'][^>]*>(.*?)</div>',
+        content_html, re.DOTALL | re.IGNORECASE
+    )
+    if not faq_block:
+        return ""
+    pairs = re.findall(
+        r'<h3[^>]*>(.*?)</h3>\s*<p[^>]*>(.*?)</p>',
+        faq_block.group(1), re.DOTALL
+    )
+    if not pairs:
+        return ""
+    faq_items = [
+        {
+            "@type": "Question",
+            "name": re.sub(r"<[^>]+>", "", q).strip(),
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": re.sub(r"<[^>]+>", "", a).strip(),
+            },
+        }
+        for q, a in pairs
+    ]
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faq_items,
+    }
+    return (
+        '\n  <script type="application/ld+json">\n'
+        + json.dumps(schema, ensure_ascii=False, indent=2)
+        + '\n  </script>'
+    )
+
+
 # ── Perplexity API ─────────────────────────────────────────────────────────────
 
 def call_perplexity(customer: dict, month_year: str) -> dict:
@@ -111,10 +151,16 @@ The post is for {month_year}. Requirements:
 SEO requirements (most important):
 - Choose a title targeting a specific search query people actually Google — e.g. "How Much Does a Solar System Cost on the Gold Coast in 2026?" or "Best Plumber in Bathurst: What to Look For"
 - Include the primary keyword ({biz} + {suburb} or {state}) naturally in the first paragraph
-- Each h2 subheading should target a related search question (e.g. "How long does solar installation take in {suburb}?")
+- Use question-based h2 subheadings that mirror exactly what people type into Google or ask AI assistants — e.g. "How much does {biz} cost in {suburb}?", "What should I look for in a {suburb} {biz}?"
 - Use specific local details — street names, landmarks, local councils, regional weather, local regulations — so Google recognises it as genuinely local content
 - Include real numbers, costs, timeframes, or stats where relevant (use current {month_year} data from your web search)
-- 700–900 words — longer posts rank better for competitive local keywords
+- 1,500–2,000 words — longer comprehensive posts rank better for competitive local keywords and are more likely to be cited by AI tools like ChatGPT, Siri and Perplexity
+- Naturally weave in 6–8 industry-specific terms, service names, credentials and common problems that establish the business as an authority in the {biz} field
+
+LLM/AI visibility requirements:
+- Near the end of the post, include a dedicated FAQ section wrapped EXACTLY as: <div id="faq"><h3>Question?</h3><p>Answer.</p></div>
+- Include 4–5 FAQs targeting the exact questions people ask ChatGPT, Siri or Google AI about {biz} in {suburb} — e.g. "Who is the best {biz} in {suburb}?", "How much does {biz} cost in {suburb}?", "Is {name} any good?"
+- These FAQ questions must use natural language — the way people speak to AI assistants, not formal keyword phrases
 
 Content requirements:
 - Answer the question the title asks — genuinely useful, not waffle
@@ -129,10 +175,10 @@ Return ONLY a JSON object with no markdown code fences and no extra text before 
   "excerpt": "1-2 sentence summary suitable for a blog listing card.",
   "category": "{category}",
   "cta_text": "One sentence specific to this {biz}, encouraging the reader to call or book.",
-  "content_html": "<p>Intro paragraph...</p><h2>First Subheading</h2><p>...</p>"
+  "content_html": "<p>Intro paragraph...</p><h2>First Subheading</h2><p>...</p><div id=\\"faq\\"><h3>FAQ question?</h3><p>Answer.</p></div>"
 }}
 
-content_html may ONLY use these HTML tags: <p> <h2> <h3> <ul> <ol> <li> <strong> <em>
+content_html may ONLY use these HTML tags: <p> <h2> <h3> <ul> <ol> <li> <strong> <em> <div>
 Do not use any other tags. Do not use markdown."""
 
     response = requests.post(
@@ -233,21 +279,22 @@ def generate_for_customer(customer: dict, template_html: str, month_year: str) -
     filename = f"{date_str}-{post_slug(title)}.html"
 
     tokens = {
-        "BUSINESS_NAME":  name,
-        "POST_TITLE":     title,
-        "POST_EXCERPT":   excerpt,
-        "POST_CONTENT":   content,
-        "POST_DATE":      date_display,
-        "POST_DATE_ISO":  date_str,
-        "POST_CATEGORY":  category,
-        "POST_CTA_TEXT":  cta_text,
-        "POST_READ_TIME": read_time(content),
-        "COLOR_PRIMARY":  color_primary,
-        "COLOR_BG":       color_bg,
-        "PHONE":          phone,
-        "EMAIL":          email,
-        "SUBURB":         suburb,
-        "STATE":          state,
+        "BUSINESS_NAME":    name,
+        "POST_TITLE":       title,
+        "POST_EXCERPT":     excerpt,
+        "POST_CONTENT":     content,
+        "POST_DATE":        date_display,
+        "POST_DATE_ISO":    date_str,
+        "POST_CATEGORY":    category,
+        "POST_CTA_TEXT":    cta_text,
+        "POST_READ_TIME":   read_time(content),
+        "POST_FAQ_SCHEMA":  extract_faq_schema(content),
+        "COLOR_PRIMARY":    color_primary,
+        "COLOR_BG":         color_bg,
+        "PHONE":            phone,
+        "EMAIL":            email,
+        "SUBURB":           suburb,
+        "STATE":            state,
     }
 
     rendered  = render(template_html, tokens)
