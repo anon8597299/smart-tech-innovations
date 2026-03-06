@@ -160,23 +160,36 @@ class SocialAgent(BaseAgent):
         self.complete_task(tid, f"Visual: {image_path.name if image_path else 'queued'}")
 
         # 4. Publish or queue
-        token = os.environ.get("INSTAGRAM_PUBLISHING_TOKEN", "")
+        # Priority: Make.com webhook (free) → Graph API → manual queue
+        make_url   = os.environ.get("MAKE_WEBHOOK_URL", "")
+        ig_token   = os.environ.get("INSTAGRAM_PUBLISHING_TOKEN", "")
         account_id = os.environ.get("INSTAGRAM_ACCOUNT_ID", "")
 
-        if token and account_id and image_path:
-            tid = self.create_task("publish", "Publishing to Instagram")
-            published = self._publish_to_instagram(
-                token, account_id, image_path, post["caption"]
-            )
+        if make_url and image_path:
+            tid = self.create_task("publish", "Publishing via Make.com → Instagram")
+            published = self._publish_via_make(make_url, image_path, post["caption"])
+            if published:
+                self.complete_task(tid, "Posted to Instagram via Make.com")
+                self.log_info("Social: published to Instagram via Make.com webhook")
+                self._mark_posted(post)
+            else:
+                self.fail_task(tid, "Make.com publish failed — queued for manual post")
+                self._queue_post(post, image_path)
+
+        elif ig_token and account_id and image_path:
+            tid = self.create_task("publish", "Publishing via Instagram Graph API")
+            published = self._publish_to_instagram(ig_token, account_id, image_path, post["caption"])
             if published:
                 self.complete_task(tid, f"Posted: {published}")
-                self.log_info(f"Social: post published to Instagram — {published}")
+                self.log_info(f"Social: published via Graph API — {published}")
+                self._mark_posted(post)
             else:
-                self.fail_task(tid, "Publish failed — queued for manual post")
+                self.fail_task(tid, "Graph API publish failed — queued for manual post")
                 self._queue_post(post, image_path)
+
         else:
             self._queue_post(post, image_path)
-            self.log_info("Social: post queued for manual upload (no publishing token)")
+            self.log_info("Social: post queued — add MAKE_WEBHOOK_URL to builder/.env to auto-post")
 
         # 5. Log insights if token available
         read_token = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "")
@@ -406,6 +419,60 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
         return None
 
     # ── Instagram publishing ──────────────────────────────────────────────────
+
+    def _publish_via_make(self, webhook_url: str, image_path: Path, caption: str) -> bool:
+        """
+        Post to Instagram via Make.com (free tier covers ~60 posts/month).
+
+        Setup:
+          1. make.com → New Scenario
+          2. Trigger: Webhooks → Custom webhook → copy URL
+          3. Action: Instagram → Create a Photo Post
+          4. Map caption={{caption}}, image_url={{image_url}}
+          5. Add MAKE_WEBHOOK_URL to builder/.env
+
+        Make receives the JSON, fetches the image, posts to Instagram.
+        """
+        try:
+            # Image needs to be at a public URL
+            image_url = self._upload_image_to_repo(image_path)
+            if not image_url:
+                self.log_warn("Make.com: could not get public image URL — no GITHUB_PAT set?")
+                return False
+
+            payload = json.dumps({
+                "caption":   caption,
+                "image_url": image_url,
+            }).encode()
+
+            req = urllib.request.Request(
+                webhook_url,
+                data=payload,
+                method="POST",
+                headers={"Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=15) as r:
+                # Make.com returns "Accepted" (200) on success
+                status = r.status
+            return status == 200
+
+        except Exception as exc:
+            self.log_error(f"Make.com webhook failed: {exc}")
+            return False
+
+    def _mark_posted(self, post: dict):
+        """Mark a queued post as posted."""
+        if not QUEUE_FILE.exists():
+            return
+        try:
+            queue = json.loads(QUEUE_FILE.read_text())
+            for item in queue:
+                if item.get("headline") == post.get("headline") and item.get("status") == "pending":
+                    item["status"] = "posted"
+                    break
+            QUEUE_FILE.write_text(json.dumps(queue, indent=2))
+        except Exception:
+            pass
 
     def _publish_to_instagram(
         self, token: str, account_id: str, image_path: Path, caption: str
