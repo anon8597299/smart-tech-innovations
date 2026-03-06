@@ -1,0 +1,11 @@
+{
+  "id": "rough-notation",
+  "name": "Rough Notation",
+  "category": "text-effects",
+  "license": "MIT",
+  "repo": "https://github.com/rough-stuff/rough-notation",
+  "description": "Animates hand-drawn SVG annotations on page elements — underlines, circles, highlights, brackets, strikethroughs. 3.8kb. Creates a trust-building hand-crafted feel.",
+  "use_cases": ["highlight key prices", "circle important numbers", "underline CTAs", "bracket testimonials", "strikethrough old prices"],
+  "head": "<script src=\"https://unpkg.com/rough-notation/lib/rough-notation.iife.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof RoughNotation === 'undefined') return;\n  var annotate = RoughNotation.annotate;\n  var annotationGroup = RoughNotation.annotationGroup;\n\n  // Highlight key price/stat elements\n  var highlights = [];\n  document.querySelectorAll('.rn-highlight').forEach(function(el) {\n    highlights.push(annotate(el, { type: 'highlight', color: 'rgba(45,212,191,0.35)', animationDuration: 800 }));\n  });\n  document.querySelectorAll('.rn-circle').forEach(function(el) {\n    highlights.push(annotate(el, { type: 'circle', color: '#5b4dff', strokeWidth: 2, animationDuration: 1000 }));\n  });\n  document.querySelectorAll('.rn-underline').forEach(function(el) {\n    highlights.push(annotate(el, { type: 'underline', color: '#2dd4bf', strokeWidth: 2, animationDuration: 600 }));\n  });\n\n  if (highlights.length > 0 && window.IntersectionObserver) {\n    var group = annotationGroup(highlights);\n    var fired = false;\n    new IntersectionObserver(function(entries) {\n      if (entries[0].isIntersecting && !fired) {\n        fired = true;\n        group.show();\n      }\n    }, { threshold: 0.3 }).observe(document.querySelectorAll('.rn-highlight, .rn-circle, .rn-underline')[0]);\n  }\n})();\n</script>"
+}

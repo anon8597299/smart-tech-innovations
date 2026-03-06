@@ -1,0 +1,11 @@
+{
+  "id": "matter",
+  "name": "Matter.js",
+  "category": "physics",
+  "license": "MIT",
+  "repo": "https://github.com/liabru/matter-js",
+  "description": "2D rigid body physics engine — gravity, collisions, constraints and composites. Enables falling letters, bouncing hero elements, gravity-pulled cards, collision confetti.",
+  "use_cases": ["falling/bouncing hero text", "gravity logo animation", "interactive physics playground", "collision-based particles", "constraint animations"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js\"></script>",
+  "body": "<script>\n(function() {\n  var Engine   = Matter.Engine;\n  var Render   = Matter.Render;\n  var Runner   = Matter.Runner;\n  var Bodies   = Matter.Bodies;\n  var Composite = Matter.Composite;\n\n  var container = document.querySelector('.physics-canvas-container');\n  if (!container) return;\n\n  var engine = Engine.create();\n  var render = Render.create({\n    element: container,\n    engine: engine,\n    options: {\n      width: container.offsetWidth,\n      height: 300,\n      wireframes: false,\n      background: 'transparent'\n    }\n  });\n\n  // Add bouncing balls\n  var balls = [];\n  for (var i = 0; i < 8; i++) {\n    balls.push(Bodies.circle(Math.random() * container.offsetWidth, -50 - i * 60, 18, {\n      restitution: 0.7,\n      render: { fillStyle: i % 2 === 0 ? '#5b4dff' : '#2dd4bf' }\n    }));\n  }\n  var ground = Bodies.rectangle(container.offsetWidth / 2, 310, container.offsetWidth, 20, { isStatic: true, render: { fillStyle: 'transparent' } });\n  Composite.add(engine.world, balls.concat([ground]));\n  Render.run(render);\n  Runner.run(Runner.create(), engine);\n})();\n</script>"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "canvas-confetti",
+  "name": "canvas-confetti",
+  "category": "celebration",
+  "license": "MIT",
+  "repo": "https://github.com/catdad/canvas-confetti",
+  "description": "Performant confetti/particle burst from any position — configurable gravity, spread, shapes, colours and physics decay. Fires on form submit, CTA click or page milestones. 3kb.",
+  "use_cases": ["form submission celebration", "CTA click burst", "order confirmation page", "countdown timer end", "quiz completion"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof confetti === 'undefined') return;\n  // Fire on CTA button click\n  document.querySelectorAll('.btn-confetti, .btn--primary').forEach(function(btn) {\n    btn.addEventListener('click', function(e) {\n      var rect = btn.getBoundingClientRect();\n      confetti({\n        particleCount: 80,\n        spread: 60,\n        origin: {\n          x: (rect.left + rect.width / 2) / window.innerWidth,\n          y: (rect.top + rect.height / 2) / window.innerHeight\n        },\n        colors: ['#5b4dff', '#2dd4bf', '#a78bfa', '#ffffff'],\n        scalar: 0.9,\n        gravity: 1.2\n      });\n    });\n  });\n\n  // Fire on form success\n  var formSuccess = document.querySelector('.form-success, #form-success');\n  if (formSuccess) {\n    var successObs = new MutationObserver(function(mutations) {\n      mutations.forEach(function(m) {\n        if (m.target.style.display !== 'none') {\n          confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 }, colors: ['#5b4dff', '#2dd4bf'] });\n        }\n      });\n    });\n    successObs.observe(formSuccess, { attributes: true, attributeFilter: ['style'] });\n  }\n})();\n</script>"
+}

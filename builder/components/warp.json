@@ -1,0 +1,11 @@
+{
+  "id": "warp",
+  "name": "Warp.js (SVG Wave Distortion)",
+  "category": "svg-distortion",
+  "license": "MIT",
+  "repo": "https://github.com/benjaminwachter/warp.js",
+  "description": "Lightweight SVG path warping — distort any SVG shape or text with sine waves, noise or custom functions. Animates continuously. Perfect for organic logos, wavy dividers and morphing blob shapes without WebGL.",
+  "use_cases": ["wavy hero section divider", "organic logo warp animation", "morphing blob background shape", "ripple on SVG icon hover", "animated wave separator between sections"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/warp.js@0.1.0/dist/warp.min.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof Warp === 'undefined') return;\n\n  // Warp any SVG element with class .warp-svg\n  document.querySelectorAll('.warp-svg').forEach(function(el) {\n    var warp = new Warp(el);\n    warp.interpolate(4);\n    var offset = 0;\n    (function animate() {\n      offset += 0.5;\n      warp.transform(function(x, y) {\n        return [x, y + 6 * Math.sin(x / 40 + offset * 0.04)];\n      });\n      requestAnimationFrame(animate);\n    })();\n  });\n\n  // Warp wave divider — add class .warp-divider to an <svg> between sections\n  document.querySelectorAll('.warp-divider').forEach(function(el) {\n    var warp = new Warp(el);\n    warp.interpolate(8);\n    var t = 0;\n    (function animate() {\n      t += 1;\n      warp.transform(function(x, y) {\n        return [x, y + 10 * Math.sin(x / 60 + t * 0.03)];\n      });\n      requestAnimationFrame(animate);\n    })();\n  });\n})();\n</script>"
+}

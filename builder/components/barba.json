@@ -1,0 +1,11 @@
+{
+  "id": "barba",
+  "name": "Barba.js",
+  "category": "page-transitions",
+  "license": "MIT",
+  "repo": "https://github.com/barbajs/barba",
+  "description": "PJAX page transition library — prevents full page reloads, fetches new pages in background, gives leave/enter lifecycle hooks for cinematic cross-page animations. 7kb.",
+  "use_cases": ["smooth page-to-page transitions", "slide/fade between pages", "persistent nav during transitions", "SPA-like multi-page experience", "progress bar between pages"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/@barba/core@2.10.3/dist/barba.umd.min.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof barba === 'undefined') return;\n\n  barba.init({\n    transitions: [{\n      name: 'fade',\n      leave: function(data) {\n        return new Promise(function(resolve) {\n          data.current.container.style.transition = 'opacity 0.3s ease';\n          data.current.container.style.opacity = '0';\n          setTimeout(resolve, 300);\n        });\n      },\n      enter: function(data) {\n        data.next.container.style.opacity = '0';\n        data.next.container.style.transition = 'opacity 0.4s ease';\n        requestAnimationFrame(function() {\n          requestAnimationFrame(function() {\n            data.next.container.style.opacity = '1';\n          });\n        });\n      }\n    }]\n  });\n\n  // Re-init any scroll animations after transition\n  barba.hooks.after(function() {\n    window.scrollTo(0, 0);\n  });\n})();\n</script>"
+}

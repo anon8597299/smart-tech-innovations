@@ -1,0 +1,11 @@
+{
+  "id": "sal",
+  "name": "SAL.js",
+  "category": "scroll-reveal",
+  "license": "MIT",
+  "repo": "https://github.com/mciastek/sal",
+  "description": "Lightweight scroll animation library — pure IntersectionObserver, zero dependencies, 2.5kb. Data-attribute driven like AOS but 3x smaller with no scroll event polling.",
+  "use_cases": ["lightweight scroll reveals", "fade-in sections", "slide-up cards", "zoom-in images", "alternative to AOS on performance-critical pages"],
+  "head": "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/sal.js@0.9.0/dist/sal.css\">\n<script src=\"https://cdn.jsdelivr.net/npm/sal.js@0.9.0/dist/sal.js\"></script>",
+  "body": "<script>\n// SAL.js usage — add data attributes to HTML elements:\n// data-sal=\"fade\"           — fade in\n// data-sal=\"slide-up\"       — slide up\n// data-sal=\"slide-down\"     — slide down\n// data-sal=\"slide-left\"     — slide from left\n// data-sal=\"slide-right\"    — slide from right\n// data-sal=\"zoom-in\"        — scale up\n// data-sal-duration=\"700\"   — animation duration ms\n// data-sal-delay=\"200\"      — delay ms\n// data-sal-easing=\"ease-out-cubic\"\n\n(function() {\n  if (typeof sal === 'undefined') return;\n  sal({\n    threshold: 0.15,\n    once: true,\n    disable: false\n  });\n})();\n</script>"
+}

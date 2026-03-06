@@ -1,0 +1,11 @@
+{
+  "id": "micron",
+  "name": "Micron.js",
+  "category": "micro-interactions",
+  "license": "MIT",
+  "repo": "https://github.com/webkul/micron",
+  "description": "Data-attribute driven micro-interaction library — jelly, bounce, shake, shrink, fade and more on click/hover. Zero JS needed in HTML, just add data-micron='jelly' to any element.",
+  "use_cases": ["button click feedback (jelly/bounce)", "form validation shake", "card hover bounce", "menu item hover", "icon interactions"],
+  "head": "<link rel=\"stylesheet\" href=\"https://unpkg.com/webkul-micron@1.1.6/dist/css/micron.min.css\">\n<script src=\"https://unpkg.com/webkul-micron@1.1.6/dist/js/micron.min.js\"></script>",
+  "body": "<script>\n// Micron.js is data-attribute driven — add these to your HTML elements:\n// data-micron=\"jelly\"    — wobbly jelly press effect on click\n// data-micron=\"bounce\"  — bounce on click\n// data-micron=\"shake\"   — shake (good for error states)\n// data-micron=\"tada\"    — celebratory tada\n// data-micron=\"swing\"   — swing effect\n// data-micron=\"pulse\"   — pulse on click\n// Optional: data-micron-duration=\"0.9\" data-micron-timing=\"ease-in-out\"\n\n// Auto-apply jelly to all primary buttons that don't already have data-micron\n(function() {\n  if (typeof micron === 'undefined') return;\n  document.querySelectorAll('.btn--primary, .btn-primary').forEach(function(el) {\n    if (!el.getAttribute('data-micron')) {\n      el.setAttribute('data-micron', 'jelly');\n      el.setAttribute('data-micron-duration', '0.7');\n    }\n  });\n})();\n</script>"
+}

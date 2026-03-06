@@ -1,0 +1,11 @@
+{
+  "id": "anime",
+  "name": "Anime.js v3",
+  "category": "animation-engine",
+  "license": "MIT",
+  "repo": "https://github.com/juliangarnier/anime",
+  "description": "Lightweight JS animation engine for CSS properties, SVG, DOM attributes and JS objects. Timeline API, staggering, spring physics, keyframes — fully MIT, zero restrictions.",
+  "use_cases": ["hero text entrance", "staggered card reveals", "SVG line drawing", "number counting", "path following animations"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js\"></script>",
+  "body": "<script>\n(function() {\n  // Anime.js stagger entrance on section cards\n  anime({\n    targets: '.your-card-selector',\n    translateY: [40, 0],\n    opacity: [0, 1],\n    delay: anime.stagger(80),\n    duration: 700,\n    easing: 'easeOutExpo',\n    autoplay: false\n  });\n  // Trigger on scroll with IntersectionObserver\n  var section = document.querySelector('.your-section');\n  if (section && window.IntersectionObserver) {\n    new IntersectionObserver(function(entries) {\n      if (entries[0].isIntersecting) { anime({ targets: '.your-card-selector', translateY: [40,0], opacity:[0,1], delay: anime.stagger(80), duration: 700, easing: 'easeOutExpo' }); }\n    }, { threshold: 0.15 }).observe(section);\n  }\n})();\n</script>"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "popmotion",
+  "name": "Popmotion",
+  "category": "physics-animation",
+  "license": "MIT",
+  "repo": "https://github.com/Popmotion/popmotion",
+  "description": "Functional reactive animation toolkit — spring, keyframe and decay physics for numbers, colours, and strings. The engine inside Framer Motion. 4.5kb. Physics-first value interpolation.",
+  "use_cases": ["spring-physics button press", "momentum-based scroll snapping", "physics hover states", "elastic drag release", "natural motion curves"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/popmotion@11.0.5/dist/popmotion.global.min.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof popmotion === 'undefined') return;\n  var spring = popmotion.spring;\n  var animate = popmotion.animate;\n\n  // Spring physics on card hover\n  document.querySelectorAll('.spring-card').forEach(function(card) {\n    var currentScale = 1;\n    card.addEventListener('mouseenter', function() {\n      animate({\n        from: currentScale,\n        to: 1.04,\n        type: spring,\n        stiffness: 400,\n        damping: 20,\n        onUpdate: function(v) {\n          currentScale = v;\n          card.style.transform = 'scale(' + v + ')';\n        }\n      });\n    });\n    card.addEventListener('mouseleave', function() {\n      animate({\n        from: currentScale,\n        to: 1,\n        type: spring,\n        stiffness: 300,\n        damping: 25,\n        onUpdate: function(v) {\n          currentScale = v;\n          card.style.transform = 'scale(' + v + ')';\n        }\n      });\n    });\n  });\n})();\n</script>"
+}

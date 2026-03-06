@@ -1,0 +1,11 @@
+{
+  "id": "motion",
+  "name": "Motion (motion.dev)",
+  "category": "animation-engine",
+  "license": "MIT",
+  "repo": "https://github.com/motiondivision/motion",
+  "description": "Hardware-accelerated animations using the browser's native Web Animations API and Scroll Timeline — animations run off the main thread, immune to JS jank. 8kb core.",
+  "use_cases": ["scroll-linked animations", "hardware-accelerated transforms", "view transitions", "spring animations", "stagger reveals"],
+  "head": "<script src=\"https://cdn.jsdelivr.net/npm/motion@12/dist/motion.js\"></script>",
+  "body": "<script>\n(function() {\n  var animate = Motion.animate;\n  var scroll  = Motion.scroll;\n  var inView  = Motion.inView;\n\n  // Animate cards in when they enter view (hardware accelerated)\n  inView('.your-card', function(el) {\n    animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, delay: 0.1, easing: 'ease-out' });\n  });\n\n  // Scroll-linked progress bar (runs off main thread)\n  var progressBar = document.querySelector('.scroll-progress');\n  if (progressBar) {\n    scroll(animate(progressBar, { scaleX: [0, 1] }, { easing: 'linear' }));\n  }\n})();\n</script>"
+}

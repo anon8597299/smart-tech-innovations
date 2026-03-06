@@ -1,0 +1,11 @@
+{
+  "id": "cursor-effects",
+  "name": "cursor-effects",
+  "category": "cursor",
+  "license": "MIT",
+  "repo": "https://github.com/tholman/cursor-effects",
+  "description": "Canvas-based cursor trail effects — fairy dust, trailing bubbles, ghost cursors, springy emojis, snowflakes, rainbow trails. Respects prefers-reduced-motion. 10 distinct effects.",
+  "use_cases": ["fairy dust trail on agency/portfolio sites", "sparkle cursor on luxury/retail sites", "bubble trail on health/wellness sites", "star trail on hospitality sites"],
+  "head": "<script src=\"https://unpkg.com/cursor-effects@latest/dist/browser.js\"></script>",
+  "body": "<script>\n(function() {\n  if (typeof cursoreffects === 'undefined') return;\n  // Only on desktop — skip touch devices\n  if (!window.matchMedia('(hover: hover)').matches) return;\n  // Options: fairyDustCursor, trailingCursor, ghostCursor, emojiCursor, snowflakeCursor, springyEmojiCursor, followingDotCursor, bubbleCursor\n  new cursoreffects.fairyDustCursor({\n    colors: ['#5b4dff', '#2dd4bf', '#a78bfa'],\n    element: document.body\n  });\n})();\n</script>"
+}
