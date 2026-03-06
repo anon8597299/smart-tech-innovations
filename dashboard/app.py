@@ -181,3 +181,102 @@ async def clear_completed():
     with db.transaction() as c:
         c.execute("DELETE FROM tasks WHERE status IN ('completed', 'failed')")
     return {"status": "cleared"}
+
+
+# ── Chat endpoint ─────────────────────────────────────────────────────────────
+
+# Persistent conversation history (in-memory, resets on restart)
+_chat_history: list[dict] = []
+
+CHAT_SYSTEM_PROMPT = """You are the IYS (ImproveYourSite.com) operations assistant built into the agent dashboard.
+
+You help James Burke manage his web agency's automated systems. You have full knowledge of:
+- 6 agents: Manager (daily digest 7am), Social (Instagram + carousels 8am), Ads (Google Ads 9am),
+  Content (auto-blog Monday 6am), Builder (on-demand site generation), Analyst (quality review)
+- The dashboard at http://localhost:8080
+
+When James asks you to trigger an agent, respond with JSON action block:
+{"action": "trigger", "agent_id": "<id>"}
+
+When James asks you to queue a site build, respond with:
+{"action": "queue_build", "config": "<path>"}
+
+Otherwise, just answer helpfully and concisely. Keep responses short — this is a chat panel.
+
+Current system context will be provided in each message."""
+
+
+@app.post("/api/chat")
+async def chat(body: dict):
+    """Chat with Claude about the agent system. Can trigger agents, answer questions."""
+    import os
+    global _chat_history
+
+    message = (body.get("message") or "").strip()
+    if not message:
+        raise HTTPException(status_code=400, detail="message required")
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        return {"reply": "ANTHROPIC_API_KEY not set in builder/.env — add it to enable chat."}
+
+    try:
+        import anthropic
+    except ImportError:
+        return {"reply": "anthropic package not installed. Run: pip install anthropic"}
+
+    # Build system context snapshot
+    agents_state = db.agents_all()
+    summary = db.digest_summary()
+    context = (
+        f"\nAgent states: {', '.join(f\"{a['name']}:{a['status']}\" for a in agents_state)}"
+        f"\nToday — tasks completed: {summary['tasks_completed']}, errors: {summary['errors']}, "
+        f"content delivered: {summary['content_delivered']}"
+    )
+
+    _chat_history.append({"role": "user", "content": message})
+
+    client = anthropic.Anthropic(api_key=api_key)
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=400,
+        system=CHAT_SYSTEM_PROMPT + context,
+        messages=_chat_history[-20:],  # keep last 20 turns
+    )
+
+    reply_text = response.content[0].text.strip()
+    _chat_history.append({"role": "assistant", "content": reply_text})
+
+    # Check for action blocks
+    action_taken = None
+    import re as _re
+    action_match = _re.search(r'\{[^{}]*"action"\s*:\s*"([^"]+)"[^{}]*\}', reply_text)
+    if action_match:
+        import json as _json
+        try:
+            action = _json.loads(action_match.group(0))
+            if action.get("action") == "trigger":
+                agent_id = action.get("agent_id", "")
+                from agents.scheduler import AGENT_MAP
+                if agent_id in AGENT_MAP and not _paused:
+                    import threading
+                    threading.Thread(target=AGENT_MAP[agent_id].execute, daemon=True).start()
+                    action_taken = f"Triggered {agent_id} agent."
+            elif action.get("action") == "queue_build":
+                from agents.builder import BuilderAgent
+                BuilderAgent.enqueue(action.get("config", ""))
+                action_taken = "Build job queued."
+        except Exception:
+            pass
+
+    return {
+        "reply": reply_text,
+        "action_taken": action_taken,
+    }
+
+
+@app.delete("/api/chat")
+async def clear_chat():
+    global _chat_history
+    _chat_history = []
+    return {"status": "cleared"}

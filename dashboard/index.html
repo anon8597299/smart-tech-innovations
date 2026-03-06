@@ -243,6 +243,55 @@
     .perf-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .perf-note { font-size: 12px; color: var(--muted); margin-top: 12px; font-style: italic; }
 
+    /* ── Chat ──────────────────────────────────────────────────────────────── */
+    .chat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .chat-messages {
+      height: 320px; overflow-y: auto; padding: 12px 16px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .chat-msg {
+      max-width: 82%; font-size: 13px; line-height: 1.5;
+      padding: 9px 13px; border-radius: 12px;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--indigo); color: #fff; border-radius: 12px 12px 4px 12px;
+    }
+    .chat-msg.assistant {
+      align-self: flex-start;
+      background: #f1f5f9; color: var(--text); border-radius: 12px 12px 12px 4px;
+    }
+    .chat-msg.assistant.action {
+      border-left: 3px solid var(--mint);
+    }
+    .chat-msg-meta { font-size: 10px; opacity: 0.6; margin-top: 3px; }
+    .chat-input-row {
+      display: flex; gap: 8px; padding: 12px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .chat-input {
+      flex: 1; padding: 8px 12px; border: 1px solid var(--border);
+      border-radius: 8px; font-family: inherit; font-size: 13px;
+      outline: none; transition: border-color 0.15s;
+    }
+    .chat-input:focus { border-color: var(--indigo); }
+    .chat-thinking {
+      align-self: flex-start; padding: 9px 14px;
+      background: #f1f5f9; border-radius: 12px 12px 12px 4px;
+      font-size: 12px; color: var(--muted);
+      animation: pulse 1.4s infinite;
+    }
+    .chat-suggestion {
+      display: inline-block; padding: 4px 10px; border-radius: 20px;
+      font-size: 11px; font-weight: 500; cursor: pointer; border: none;
+      background: #ede9fe; color: var(--indigo); margin: 2px;
+      transition: background 0.15s;
+    }
+    .chat-suggestion:hover { background: #ddd6fe; }
+
     /* ── Empty states ───────────────────────────────────────────────────────── */
     .empty {
       text-align: center; padding: 32px; color: var(--muted);
@@ -379,6 +428,34 @@
         <div class="perf-note" id="ig-note">Data populated when Social agent runs.</div>
       </div>
 
+    </div>
+
+    <!-- Chat with Manager -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Ask the Manager</span>
+        <button class="btn btn-secondary btn-sm" onclick="clearChat()">Clear chat</button>
+      </div>
+      <div class="chat-card">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-msg assistant">
+            Hey James — I'm watching all 6 agents. Ask me anything, or give me instructions:<br><br>
+            <button class="chat-suggestion" onclick="sendSuggestion('What ran today?')">What ran today?</button>
+            <button class="chat-suggestion" onclick="sendSuggestion('Run the content agent now')">Run content agent</button>
+            <button class="chat-suggestion" onclick="sendSuggestion('Any errors I should know about?')">Any errors?</button>
+            <button class="chat-suggestion" onclick="sendSuggestion('Run the analyst now')">Run analyst</button>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input
+            class="chat-input" id="chat-input"
+            placeholder="Ask about agents, trigger a run, queue a site build…"
+            onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendChat(); }"
+            autocomplete="off"
+          >
+          <button class="btn btn-primary" onclick="sendChat()">Send</button>
+        </div>
+      </div>
     </div>
 
   </div><!-- /container -->
@@ -681,6 +758,70 @@ function fmtDate(iso) {
 
 // Refresh agent/task state every 30s
 setInterval(loadState, 30000);
+
+// ── Chat ──────────────────────────────────────────────────────────────────
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  appendChatMsg('user', msg);
+  showThinking();
+  try {
+    const data = await api('/api/chat', 'POST', { message: msg });
+    removeThinking();
+    appendChatMsg('assistant', data.reply, data.action_taken);
+    if (data.action_taken) loadState(); // refresh agents if something was triggered
+  } catch (e) {
+    removeThinking();
+    appendChatMsg('assistant', 'Sorry, something went wrong: ' + e.message);
+  }
+}
+
+function sendSuggestion(text) {
+  document.getElementById('chat-input').value = text;
+  sendChat();
+}
+
+function appendChatMsg(role, text, action) {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `chat-msg ${role}${action ? ' action' : ''}`;
+  // Simple markdown: bold **x**, newlines
+  const html = esc(text)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+  div.innerHTML = html;
+  if (action) {
+    const meta = document.createElement('div');
+    meta.className = 'chat-msg-meta';
+    meta.textContent = action;
+    div.appendChild(meta);
+  }
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showThinking() {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-thinking';
+  div.id = 'chat-thinking';
+  div.textContent = 'Thinking…';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function removeThinking() {
+  const el = document.getElementById('chat-thinking');
+  if (el) el.remove();
+}
+
+async function clearChat() {
+  try { await api('/api/chat', 'DELETE'); } catch {}
+  const box = document.getElementById('chat-messages');
+  box.innerHTML = '<div class="chat-msg assistant">Chat cleared. What do you need?</div>';
+}
 </script>
 
 </body>

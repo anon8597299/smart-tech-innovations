@@ -67,6 +67,28 @@
       .phone-cta { display: flex; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; z-index: 50; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 800; justify-content: center; padding: .82rem 1rem; box-shadow: 0 12px 30px rgba(30,64,175,.35); }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <style>
+    /* IYS Premium UI additions */
+    .hero-glow {
+      position: absolute; inset: -40%; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 35%, rgba(91,77,255,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 85% 15%, rgba(45,212,191,0.10) 0%, transparent 65%);
+      animation: hero-glow-float 14s ease-in-out infinite alternate;
+    }
+    @keyframes hero-glow-float {
+      0%   { transform: translate(0, 0)   scale(1);    }
+      100% { transform: translate(3%, 4%) scale(1.06); }
+    }
+    .hero { position: relative !important; overflow: hidden; }
+    .hero > .container { position: relative; z-index: 1; }
+    /* Swiper testimonials */
+    .swiper-testimonials { padding-bottom: 2.8rem !important; }
+    .swiper-testimonials .swiper-slide { height: auto; box-sizing: border-box; padding: 2px; }
+    .swiper-testimonials .testimonial-card { height: 100%; }
+    .swiper-testimonials .swiper-pagination-bullet-active { background: var(--primary, #5b4dff) !important; }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -82,6 +104,7 @@
 
   <main>
     <section class="hero">
+  <div class="hero-glow"></div>
       <div class="container">
         <span class="badge">{{SUBURB}}, {{STATE}}</span>
         <h1>{{HERO_HEADLINE}}</h1>
@@ -194,5 +217,11 @@
   </footer>
 
   <a class="phone-cta" href="tel:{{PHONE}}">📅 Book a call</a>
+  <!-- IYS Premium UI -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="../../assets/js/customer-animations.js"></script>
 </body>
 </html>
