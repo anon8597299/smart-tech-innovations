@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "description": "3D reactive UI component library for IYS customer sites. All MIT licensed, no build step required — loaded via CDN and injected by generate.py at build time.",
+  "usage": "Add an EFFECTS array to the customer config JSON, e.g. \"EFFECTS\": [\"aos\", \"vanilla-tilt\"]. generate.py injects the component scripts automatically into each HTML file.",
+  "categories": {
+    "tilt": {
+      "description": "3D mouse-tracking tilt on cards and interactive elements",
+      "components": ["vanilla-tilt", "card3d"],
+      "recommendation": "vanilla-tilt — more widely used, glare effect looks premium"
+    },
+    "background": {
+      "description": "Animated hero backgrounds — WebGL waves or interactive particles",
+      "components": ["vanta-waves", "particles"],
+      "recommendation": "vanta-waves for professional/corporate feel; particles for tech/modern feel"
+    },
+    "scroll": {
+      "description": "Scroll-triggered animations and parallax depth effects",
+      "components": ["aos", "rellax"],
+      "recommendation": "aos adds the most visible polish with zero effort; combine both for full depth"
+    }
+  },
+  "components": [
+    { "id": "vanilla-tilt",  "category": "tilt",       "file": "vanilla-tilt.json" },
+    { "id": "card3d",        "category": "tilt",       "file": "card3d.json" },
+    { "id": "vanta-waves",   "category": "background", "file": "vanta-waves.json" },
+    { "id": "particles",     "category": "background", "file": "particles.json" },
+    { "id": "aos",           "category": "scroll",     "file": "aos.json" },
+    { "id": "rellax",        "category": "scroll",     "file": "rellax.json" }
+  ],
+  "preset_combinations": {
+    "subtle": ["aos"],
+    "polished": ["aos", "vanilla-tilt"],
+    "immersive": ["aos", "vanilla-tilt", "vanta-waves"],
+    "tech": ["aos", "particles", "card3d"],
+    "full": ["aos", "rellax", "vanilla-tilt", "vanta-waves"]
+  }
+}

@@ -52,5 +52,8 @@
   "SITE_URL": "https://smithsplumbing.com.au",
 
   "_note_gsc": "Optional. Paste the code from Google Search Console HTML tag verification. Re-run generator after adding.",
-  "GSC_VERIFICATION_CODE": ""
+  "GSC_VERIFICATION_CODE": "",
+
+  "_note_effects": "Optional. 3D/reactive effects injected at build time. Available: vanilla-tilt, card3d, vanta-waves, particles, aos, rellax. Presets in builder/components/index.json.",
+  "EFFECTS": ["aos", "vanilla-tilt"]
 }

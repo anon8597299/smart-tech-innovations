@@ -1,0 +1,10 @@
+{
+  "id": "card3d",
+  "name": "card3d — Attribute-Driven 3D Tilt",
+  "category": "tilt",
+  "license": "MIT",
+  "repo": "https://github.com/yoannchb-pro/card3d",
+  "description": "Lightweight, actively-maintained HTML-attribute-driven 3D card tilt. Uses data-card3d attributes. No dependencies.",
+  "head": "",
+  "body": "<script src=\"https://unpkg.com/card3d/dist/card3d.min.js\"></script>\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    document.querySelectorAll('.card, .service-card, .feature-card').forEach(function (el) {\n      if (!el.hasAttribute('data-card3d')) {\n        el.setAttribute('data-card3d', '');\n        el.setAttribute('data-card3d-perspective', '800');\n        el.setAttribute('data-card3d-rotation-max', '10');\n      }\n    });\n  });\n</script>"
+}

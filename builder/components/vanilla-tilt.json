@@ -1,0 +1,10 @@
+{
+  "id": "vanilla-tilt",
+  "name": "Vanilla Tilt — 3D Card Tilt",
+  "category": "tilt",
+  "license": "MIT",
+  "repo": "https://github.com/micku7zu/vanilla-tilt.js",
+  "description": "Smooth mouse-tracking 3D tilt on cards with glare overlay and gyroscope support. Add data-tilt to any card element.",
+  "head": "",
+  "body": "<script src=\"https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js\"></script>\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    VanillaTilt.init(document.querySelectorAll('.card, .service-card, .feature-card, [data-tilt]'), {\n      max: 12,\n      speed: 500,\n      glare: true,\n      'max-glare': 0.25,\n      scale: 1.03\n    });\n  });\n</script>"
+}

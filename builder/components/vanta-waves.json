@@ -1,0 +1,10 @@
+{
+  "id": "vanta-waves",
+  "name": "Vanta.js Waves — Animated Hero Background",
+  "category": "background",
+  "license": "MIT",
+  "repo": "https://github.com/tengbao/vanta",
+  "description": "WebGL animated wave background on the hero section. Mouse-interactive. Reads the site's CSS --primary colour variable automatically.",
+  "head": "",
+  "body": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js\"></script>\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    var hero = document.querySelector('#hero, .hero, [data-vanta-hero]');\n    if (!hero) return;\n    var primary = getComputedStyle(document.documentElement)\n      .getPropertyValue('--primary').trim() || '#5b4dff';\n    var colorInt = parseInt(primary.replace('#', ''), 16);\n    VANTA.WAVES({\n      el: hero,\n      color: colorInt,\n      waveHeight: 18,\n      shininess: 40,\n      waveSpeed: 0.9,\n      zoom: 0.8,\n      mouseControls: true,\n      touchControls: true\n    });\n  });\n</script>"
+}

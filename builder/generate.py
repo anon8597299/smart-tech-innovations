@@ -29,6 +29,59 @@ sys.path.insert(0, str(Path(__file__).parent))
 from renderer import derive_tokens, render
 from github_client import push_customer_site
 
+COMPONENTS_DIR = Path(__file__).parent / "components"
+
+
+def load_component(effect_id: str) -> dict | None:
+    """Load a component JSON snippet by effect ID."""
+    path = COMPONENTS_DIR / f"{effect_id}.json"
+    if not path.exists():
+        return None
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def inject_components(html: str, effects: list[str]) -> str:
+    """
+    Inject 3D/reactive component scripts into a rendered HTML file.
+
+    - head content injected before </head>
+    - body scripts injected before </body>
+
+    Args:
+        html:    Rendered HTML string.
+        effects: List of effect IDs from config EFFECTS array
+                 e.g. ["aos", "vanilla-tilt", "vanta-waves"]
+
+    Returns:
+        HTML with component scripts injected.
+    """
+    if not effects:
+        return html
+
+    head_parts = []
+    body_parts = []
+
+    for effect_id in effects:
+        comp = load_component(effect_id)
+        if comp is None:
+            print(f"  ⚠ Unknown effect '{effect_id}' — skipped (check builder/components/)")
+            continue
+        if comp.get("head"):
+            head_parts.append(f"\n    <!-- {comp['name']} -->\n    {comp['head']}")
+        if comp.get("body"):
+            body_parts.append(f"\n  <!-- {comp['name']} -->\n  {comp['body']}")
+
+    if head_parts:
+        head_block = "".join(head_parts) + "\n"
+        html = html.replace("</head>", head_block + "</head>", 1)
+
+    if body_parts:
+        body_block = "".join(body_parts) + "\n"
+        html = html.replace("</body>", body_block + "</body>", 1)
+
+    return html
+
 # Templates live at project_root/templates/
 PROJECT_ROOT = Path(__file__).parent.parent
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
@@ -176,10 +229,15 @@ def generate(config_path: str, dry_run: bool = False) -> None:
     print()
 
     # 4. Render each file
+    effects = config.get("EFFECTS", [])
+    if effects:
+        print(f"  Effects: {', '.join(effects)}")
     print("  Rendering tokens...")
     rendered_files = {}
     for filename, content in template_files.items():
         rendered = render(content, tokens)
+        if filename.endswith(".html") and effects:
+            rendered = inject_components(rendered, effects)
         rendered_files[filename] = rendered
         print(f"    ✓ {filename}")
     print()

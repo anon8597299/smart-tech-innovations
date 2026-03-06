@@ -1,0 +1,10 @@
+{
+  "id": "rellax",
+  "name": "Rellax.js — Parallax Scroll",
+  "category": "scroll",
+  "license": "MIT",
+  "repo": "https://github.com/dixonandmoe/rellax",
+  "description": "Multi-layer parallax depth effect on hero images, backgrounds, and decorative elements. Zero dependencies, buttery-smooth.",
+  "head": "",
+  "body": "<script src=\"https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js\"></script>\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    var targets = [\n      { sel: '#hero img, .hero img, .hero-image',    speed: '-4' },\n      { sel: '#hero .hero-bg, .hero-bg',             speed: '-6' },\n      { sel: '.about-image, .team-photo',            speed: '-2' },\n      { sel: '.section-deco, .bg-shape, .blob',      speed: '-3' }\n    ];\n    targets.forEach(function (item) {\n      document.querySelectorAll(item.sel).forEach(function (el) {\n        if (!el.classList.contains('rellax')) {\n          el.classList.add('rellax');\n          el.setAttribute('data-rellax-speed', item.speed);\n        }\n      });\n    });\n    if (document.querySelector('.rellax')) new Rellax('.rellax', { center: true });\n  });\n</script>"
+}

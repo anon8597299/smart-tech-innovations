@@ -1,0 +1,10 @@
+{
+  "id": "aos",
+  "name": "AOS — Animate on Scroll",
+  "category": "scroll",
+  "license": "MIT",
+  "repo": "https://github.com/michalsnik/aos",
+  "description": "Triggers fade, slide, flip, and 3D zoom animations as sections scroll into view. Auto-applies to headings, cards, and section content.",
+  "head": "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css\" />",
+  "body": "<script src=\"https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js\"></script>\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    var selectors = [\n      { sel: 'h1, h2, h3',                  anim: 'fade-up',    delay: 0   },\n      { sel: '.card, .service-card',         anim: 'zoom-in',    delay: 100 },\n      { sel: '.feature-card',                anim: 'fade-up',    delay: 150 },\n      { sel: 'section p, .section-subtitle', anim: 'fade-up',    delay: 50  },\n      { sel: '.testimonial, .review-card',   anim: 'flip-left',  delay: 0   }\n    ];\n    selectors.forEach(function (item) {\n      document.querySelectorAll(item.sel).forEach(function (el, i) {\n        if (!el.hasAttribute('data-aos')) {\n          el.setAttribute('data-aos', item.anim);\n          el.setAttribute('data-aos-delay', String(item.delay + (i % 3) * 80));\n          el.setAttribute('data-aos-duration', '650');\n          el.setAttribute('data-aos-once', 'true');\n        }\n      });\n    });\n    AOS.init({ offset: 80, once: true });\n  });\n</script>"
+}
