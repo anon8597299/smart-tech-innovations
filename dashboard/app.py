@@ -228,8 +228,9 @@ async def chat(body: dict):
     # Build system context snapshot
     agents_state = db.agents_all()
     summary = db.digest_summary()
+    agent_state_str = ', '.join(a['name'] + ':' + a['status'] for a in agents_state)
     context = (
-        f"\nAgent states: {', '.join(f\"{a['name']}:{a['status']}\" for a in agents_state)}"
+        f"\nAgent states: {agent_state_str}"
         f"\nToday — tasks completed: {summary['tasks_completed']}, errors: {summary['errors']}, "
         f"content delivered: {summary['content_delivered']}"
     )
