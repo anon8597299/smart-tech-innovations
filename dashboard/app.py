@@ -287,7 +287,7 @@ async def chat(body: dict):
 
     client   = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
+        model="claude-sonnet-4-6",
         max_tokens=500,
         system=CHAT_SYSTEM_PROMPT + context,
         messages=_chat_history[-20:],
@@ -456,7 +456,7 @@ async def instagram_generate_reply(body: dict):
         prompt += f":\n\n\"{comment}\"\n\nWrite the reply."
 
         response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model="claude-sonnet-4-6",
             max_tokens=120,
             system=_REPLY_SYSTEM,
             messages=[{"role": "user", "content": prompt}],

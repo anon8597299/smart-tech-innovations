@@ -335,7 +335,7 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
         client = anthropic.Anthropic(api_key=api_key)
         response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model="claude-sonnet-4-6",
             max_tokens=600,
             system=system,
             messages=[{"role": "user", "content": prompt}],

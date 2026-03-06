@@ -59,6 +59,18 @@
     "knowsAbout": ["Superannuation","SMSF","Retirement Planning","Wealth Accumulation","Estate Planning","Business Exit Planning","Fee-for-service financial advice"]
   }
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+  <style>
+    [data-splitting] .char { display:inline-block; opacity:0; transform:translateY(60%) rotate(4deg); animation:none; }
+    [data-splitting].split-in .char { animation:split-char 0.55s cubic-bezier(0.16,1,0.3,1) forwards; animation-delay:calc(var(--char-index)*0.028s + 0.05s); }
+    @keyframes split-char { to { opacity:1; transform:none; } }
+    /* Swiper testimonials */
+    .swiper-testimonials { padding:1.5rem 0 3.5rem !important; }
+    .swiper-testimonials .swiper-slide { width:340px; border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(29,78,216,0.15); }
+    .swiper-testimonials .testimonial-card { margin:0; }
+    .swiper-testimonials .swiper-pagination-bullet-active { background:#1d4ed8; }
+  </style>
 </head>
 <body>
 
@@ -956,5 +968,70 @@
   })();
   </script>
 
+
+  <!-- ═══ Advisor Prime — 3D Effects Layer ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+  (function(){
+    /* 1 — Lenis */
+    var lenis = new Lenis({ duration:1.15, smoothWheel:true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0);
+
+    /* 2 — Convert .testimonials-grid to Swiper 3D Coverflow */
+    var grid = document.querySelector('.testimonials-grid');
+    if (grid) {
+      var cards = Array.from(grid.querySelectorAll('.testimonial-card'));
+      var swiperEl = document.createElement('div');
+      swiperEl.className = 'swiper swiper-testimonials';
+      var wrapper = document.createElement('div');
+      wrapper.className = 'swiper-wrapper';
+      cards.forEach(function(card){
+        var slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        card.classList.remove('reveal');
+        slide.appendChild(card);
+        wrapper.appendChild(slide);
+      });
+      swiperEl.appendChild(wrapper);
+      var pagination = document.createElement('div');
+      pagination.className = 'swiper-pagination';
+      swiperEl.appendChild(pagination);
+      grid.parentNode.replaceChild(swiperEl, grid);
+      new Swiper('.swiper-testimonials', {
+        effect:'coverflow', grabCursor:true, centeredSlides:true, slidesPerView:'auto',
+        coverflowEffect:{ rotate:35, stretch:0, depth:120, modifier:1, slideShadows:true },
+        pagination:{ el:'.swiper-testimonials .swiper-pagination', clickable:true },
+        loop:true, autoplay:{ delay:3800, disableOnInteraction:false }
+      });
+    }
+
+    /* 3 — Splitting on hero h1 and section headings */
+    document.querySelectorAll('section.hero h1, .section-head h2, .why-independent h2').forEach(function(el){
+      el.setAttribute('data-splitting','');
+    });
+    Splitting();
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('split-in'); obs.unobserve(e.target); }});
+    },{ threshold:0.2 });
+    document.querySelectorAll('[data-splitting]').forEach(function(el){ obs.observe(el); });
+
+    /* 4 — GSAP hero parallax + card stagger */
+    var heroImg = document.querySelector('.hero-img, .hero-visual img, .hero-panel');
+    if (heroImg) {
+      gsap.to(heroImg, { yPercent:18, ease:'none',
+        scrollTrigger:{ trigger:'section.hero', start:'top top', end:'bottom top', scrub:true }});
+    }
+    gsap.utils.toArray('.service-card, .why-item, .result-item').forEach(function(el,i){
+      gsap.from(el,{ opacity:0, y:45, duration:0.75, ease:'power3.out', delay:i%3*0.1,
+        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
+    });
+  })();
+  </script>
 </body>
 </html>

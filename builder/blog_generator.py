@@ -174,19 +174,27 @@ Phone number: {phone}
 Requirements:
 - Output ONLY the HTML content that would go inside an <article> element.
 - Do NOT include <html>, <head>, <body>, <article> wrapper tags — just the inner content.
-- 600–800 words total.
+- 1,500–2,000 words total. Longer, comprehensive posts rank better on Google and are more likely to be cited by AI tools like ChatGPT and Perplexity.
 - Start with an <h1> that is the blog post title (can be slightly reworded from the topic for SEO).
-- Use <h2> and <h3> subheadings to structure the post logically.
-- Use <p>, <ul>, <li>, <strong> tags as appropriate — no markdown, no asterisks.
-- Naturally weave in {suburb}{(', ' + state) if state else ''} and {business_name} throughout.
+- Use question-based <h2> subheadings that mirror exactly what people type into Google or ask AI assistants — e.g. "How much does a [service] cost in {suburb}?" or "What should I look for in a [business type] in {suburb}?".
+- Use <h3> subheadings, <p>, <ul>, <li>, <strong> tags as appropriate — no markdown, no asterisks.
+- Naturally weave in 6–8 industry-specific terms, service names, credentials and common problems that establish authority in the field. Use the language customers and AI tools use when searching for this type of business.
+- Include at least one specific cost range, timeframe or industry statistic relevant to {suburb}{(', ' + state) if state else ''} in 2026 — something concrete that makes the post useful and citable.
+- Naturally mention {suburb}{(', ' + state) if state else ''} and {business_name} throughout.
+- Near the end, include a dedicated FAQ section wrapped EXACTLY as follows:
+  <div id="faq">
+  <h3>Question one?</h3><p>Answer one.</p>
+  <h3>Question two?</h3><p>Answer two.</p>
+  </div>
+  Include 4–5 FAQs. Questions must match exactly what someone would type into ChatGPT, Siri or Google AI about this service and location — e.g. "Who is the best [service] in {suburb}?", "How much does [service] cost in {suburb}?", "Is [business name] any good?".
 - End with a call-to-action <p> that references {business_name} and encourages the reader to get in touch.
 - Write in a friendly, trustworthy Australian voice — helpful and informative, not salesy.
 - Do NOT include any markdown, backticks, code fences, or commentary outside the HTML tags.
 """
 
     message = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=2048,
+        model="claude-sonnet-4-6",
+        max_tokens=8000,
         messages=[{"role": "user", "content": user_prompt}],
         system=system_prompt,
     )
@@ -225,24 +233,43 @@ def build_full_page(article_html: str, topic: str, config: dict) -> str:
     if len(meta_description) > 160:
         meta_description = meta_description[:157].rstrip() + "..."
 
-    # Schema.org structured data
-    schema = {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": topic,
-        "author": {
-            "@type": "Organization",
-            "name": business_name,
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": business_name,
-        },
-        "datePublished": today,
-        "dateModified": today,
-        "description": meta_description,
-    }
+    # ── Extract FAQ items from <div id="faq"> for FAQPage schema ────────────────
+    faq_items = []
+    faq_block = re.search(
+        r'<div[^>]+id=["\']faq["\'][^>]*>(.*?)</div>',
+        article_html, re.DOTALL | re.IGNORECASE
+    )
+    if faq_block:
+        pairs = re.findall(
+            r'<h3[^>]*>(.*?)</h3>\s*<p[^>]*>(.*?)</p>',
+            faq_block.group(1), re.DOTALL
+        )
+        for q, a in pairs:
+            faq_items.append({
+                "@type": "Question",
+                "name": re.sub(r"<[^>]+>", "", q).strip(),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": re.sub(r"<[^>]+>", "", a).strip(),
+                },
+            })
 
+    # ── Schema.org structured data ────────────────────────────────────────────
+    graph = [
+        {
+            "@type": "Article",
+            "headline": topic,
+            "author": {"@type": "Organization", "name": business_name},
+            "publisher": {"@type": "Organization", "name": business_name},
+            "datePublished": today,
+            "dateModified": today,
+            "description": meta_description,
+        }
+    ]
+    if faq_items:
+        graph.append({"@type": "FAQPage", "mainEntity": faq_items})
+
+    schema = {"@context": "https://schema.org", "@graph": graph}
     schema_json = json.dumps(schema, ensure_ascii=False, indent=2)
 
     # Build a light address string for the footer

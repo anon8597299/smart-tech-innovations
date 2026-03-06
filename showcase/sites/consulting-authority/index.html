@@ -1023,5 +1023,97 @@
     })();
   </script>
 
+<!-- ═══════════════════════════════════════════
+     3D & Motion Effects — Apex Strategy Group
+     Lenis · GSAP ScrollTrigger · Splitting.js · Magnetic buttons
+     ═══════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
+<script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  /* 1. Lenis smooth scroll */
+  var lenis = new Lenis({ lerp: 0.09 });
+  function rafLoop(t) { lenis.raf(t); requestAnimationFrame(rafLoop); }
+  requestAnimationFrame(rafLoop);
+
+  /* 2. GSAP + ScrollTrigger */
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.lagSmoothing(0);
+
+  /* 3. Splitting.js char reveal on hero h1 — authority entrance */
+  var heroH1 = document.querySelector('.hero h1');
+  if (heroH1) {
+    var splitStyle = document.createElement('style');
+    splitStyle.textContent = [
+      '.apex-h1 .char { display:inline-block; opacity:0;',
+      '  transform: translateY(28px) rotate(4deg);',
+      '  transition: opacity 0.5s ease calc(var(--char-index)*0.024s),',
+      '              transform 0.5s ease calc(var(--char-index)*0.024s); }',
+      '.apex-h1.chars-in .char { opacity:1; transform:translateY(0) rotate(0deg); }'
+    ].join('');
+    document.head.appendChild(splitStyle);
+    heroH1.setAttribute('data-splitting', '');
+    heroH1.classList.add('apex-h1');
+    Splitting();
+    setTimeout(function() { heroH1.classList.add('chars-in'); }, 400);
+  }
+
+  /* 4. GSAP stagger on service cards */
+  gsap.utils.toArray('.service-card').forEach(function(card, i) {
+    gsap.fromTo(card,
+      { opacity: 0, y: 40, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.65, delay: i * 0.09, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 87%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* 5. GSAP directional entrance on phase cards */
+  gsap.utils.toArray('.phase-card').forEach(function(card, i) {
+    var xFrom = i === 0 ? -60 : i === 2 ? 60 : 0;
+    var yFrom = i === 1 ? 40 : 0;
+    gsap.fromTo(card,
+      { opacity: 0, x: xFrom, y: yFrom },
+      { opacity: 1, x: 0, y: 0, duration: 0.7, delay: i * 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* 6. GSAP hero panel float-in */
+  var heroPanel = document.querySelector('.hero-panel');
+  if (heroPanel) {
+    gsap.fromTo(heroPanel,
+      { opacity: 0, x: 50, scale: 0.96 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.9, delay: 0.5, ease: 'power3.out' }
+    );
+  }
+
+  /* 7. Magnetic pull on CTA buttons (desktop only) */
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.btn-primary').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var dx = (e.clientX - rect.left - rect.width / 2) * 0.35;
+        var dy = (e.clientY - rect.top - rect.height / 2) * 0.35;
+        btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(1.05)';
+        btn.style.transition = 'transform 0.1s ease';
+      });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = '';
+        btn.style.transition = 'transform 0.4s ease';
+      });
+    });
+  }
+
+})();
+</script>
+
 </body>
 </html>

@@ -41,6 +41,18 @@
     "sameAs": ["https://www.instagram.com/theloftboutique"]
   }
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    /* Grain overlay on hero */
+    .loft-hero { isolation:isolate; }
+    /* Swiper collections */
+    .swiper-collections { padding:1.5rem 0 3.5rem !important; }
+    .swiper-collections .swiper-slide { width:300px; border-radius:16px; overflow:hidden; box-shadow:0 10px 36px rgba(124,58,237,0.18); }
+    .swiper-collections .loft-collection-card { margin:0; border-radius:0; }
+    .swiper-collections .swiper-pagination-bullet-active { background:#7c3aed; }
+    .loft-hero-typed { font-size:1rem; font-weight:600; color:rgba(255,255,255,0.85); margin:.3rem 0 .8rem; min-height:1.5em; }
+    .typed-cursor { color:#c4b5fd; }
+  </style>
 </head>
 <body>
 
@@ -936,5 +948,64 @@
 })();
 </script>
 
+
+  <!-- ═══ Retail Pulse — 3D Effects Layer ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/grained@0.0.2/grained.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+  (function(){
+    /* 1 — Lenis */
+    var lenis = new Lenis({ duration:1.2, smoothWheel:true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0);
+
+    /* 2 — grained film grain on hero */
+    var hero = document.querySelector('.loft-hero');
+    if (hero) {
+      hero.id = hero.id || 'loft-hero-grain';
+      if (window.grained) grained('#' + hero.id, { animate:true, patternWidth:100, patternHeight:100, grainOpacity:0.035, grainDensity:1, grainWidth:1, grainHeight:1, speed:0.8 });
+    }
+
+    /* 3 — Typed.js below hero tagline */
+    var heroBadge = document.querySelector('.loft-hero .loft-hero-lead, .loft-hero h1');
+    if (heroBadge) {
+      var typedLine = document.createElement('p');
+      typedLine.className = 'loft-hero-typed';
+      typedLine.innerHTML = '<span id="loft-typed"></span>';
+      heroBadge.parentNode.insertBefore(typedLine, heroBadge.nextSibling);
+      new Typed('#loft-typed', { strings:['New arrivals every week.','Complimentary in-store styling.','Free shipping over $150.','Curated for every body.'],
+        typeSpeed:50, backSpeed:25, backDelay:2600, loop:true });
+    }
+
+    /* 4 — Convert .loft-collections-section cards to Swiper Coverflow */
+    var collectionsGrid = document.querySelector('.loft-collections-grid, .collections-grid');
+    if (collectionsGrid) {
+      var cards = Array.from(collectionsGrid.querySelectorAll('.loft-collection-card, .collection-card'));
+      if (cards.length > 0) {
+        var sw = document.createElement('div'); sw.className = 'swiper swiper-collections';
+        var wr = document.createElement('div'); wr.className = 'swiper-wrapper';
+        cards.forEach(function(c){ var s=document.createElement('div'); s.className='swiper-slide'; s.appendChild(c); wr.appendChild(s); });
+        sw.appendChild(wr);
+        var pg = document.createElement('div'); pg.className='swiper-pagination'; sw.appendChild(pg);
+        collectionsGrid.parentNode.replaceChild(sw, collectionsGrid);
+        new Swiper('.swiper-collections',{ effect:'coverflow', grabCursor:true, centeredSlides:true, slidesPerView:'auto',
+          coverflowEffect:{ rotate:40, stretch:0, depth:130, modifier:1, slideShadows:true },
+          pagination:{ el:'.swiper-collections .swiper-pagination', clickable:true },
+          loop:true, autoplay:{ delay:3400, disableOnInteraction:false }});
+      }
+    }
+
+    /* 5 — GSAP stagger for product/feed sections */
+    gsap.utils.toArray('.loft-why-item, .loft-review-card, .loft-size-row').forEach(function(el,i){
+      gsap.from(el,{ opacity:0, y:40, duration:0.7, ease:'power3.out', delay:i%3*0.1,
+        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
+    });
+  })();
+  </script>
 </body>
 </html>

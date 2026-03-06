@@ -105,6 +105,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+  <style>
+    /* Splitting text reveal */
+    [data-splitting] .char { display:inline-block; opacity:0; transform:translateY(70%) rotate(5deg); animation:none; }
+    [data-splitting].split-revealed .char { animation: split-in 0.55s cubic-bezier(0.16,1,0.3,1) forwards; animation-delay: calc(var(--char-index)*0.03s + 0.05s); }
+    @keyframes split-in { to { opacity:1; transform:none; } }
+    .hc-hero-bg { transition: transform 0.1s linear; }
+  </style>
 </head>
 <body>
 
@@ -1140,6 +1148,48 @@
     }, { threshold: 0.1 });
     allH2s.forEach(function (el) { h2Observer.observe(el); });
 
+  })();
+  </script>
+
+  <!-- ═══ Clinic Trust — 3D Effects Layer ═══ -->
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+  <!-- Splitting.js text reveal -->
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+  <!-- GSAP + ScrollTrigger parallax -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+  (function () {
+    /* 1 — Lenis smooth scroll */
+    var lenis = new Lenis({ duration: 1.1, smoothWheel: true, easing: function(t){ return Math.min(1,1.001-Math.pow(2,-10*t)); } });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+
+    /* 2 — GSAP hero bg subtle parallax */
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.lagSmoothing(0);
+    var heroBg = document.querySelector('.hc-hero-bg');
+    if (heroBg) {
+      gsap.to(heroBg, { yPercent: 28, ease:'none',
+        scrollTrigger:{ trigger:'.hc-hero', start:'top top', end:'bottom top', scrub:true }});
+    }
+
+    /* 3 — Splitting char reveal on section headings */
+    document.querySelectorAll('.hc-section-head h2, .hc-hero-h1, .hc-bb-content h2, .hc-wtb-content h2').forEach(function(el){
+      el.setAttribute('data-splitting','');
+    });
+    Splitting();
+    var splitObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('split-revealed'); splitObs.unobserve(e.target); }});
+    },{ threshold:0.25 });
+    document.querySelectorAll('[data-splitting]').forEach(function(el){ splitObs.observe(el); });
+
+    /* 4 — GSAP stagger on service cards */
+    document.querySelectorAll('.hc-service-card, .hc-allied-card, .hc-wtb-item').forEach(function(el,i){
+      gsap.from(el, { opacity:0, y:40, scale:0.97, duration:0.7, ease:'power3.out', delay:i%3*0.1,
+        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
+    });
   })();
   </script>
 </body>

@@ -938,5 +938,105 @@
   })();
   </script>
 
+<!-- ═══════════════════════════════════════════
+     3D & Motion Effects — Clearview Accounting
+     Lenis · Granim · Splitting.js · GSAP ScrollTrigger
+     ═══════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
+<script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  /* 1. Lenis smooth scroll */
+  var lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95 });
+  function rafLoop(t) { lenis.raf(t); requestAnimationFrame(rafLoop); }
+  requestAnimationFrame(rafLoop);
+
+  /* 2. GSAP + ScrollTrigger */
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.lagSmoothing(0);
+
+  /* 3. Granim animated teal gradient on hero */
+  var heroEl = document.querySelector('.hero');
+  if (heroEl) {
+    var canvas = document.createElement('canvas');
+    canvas.id = 'cv-granim-canvas';
+    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.35;z-index:0;';
+    heroEl.style.position = 'relative';
+    heroEl.insertBefore(canvas, heroEl.firstChild);
+    new Granim({
+      element: '#cv-granim-canvas',
+      direction: 'left-right',
+      isPausedWhenNotInView: true,
+      states: {
+        'default-state': {
+          gradients: [
+            ['#f0fdf4', '#ecfdf5'],
+            ['#ecfdf5', '#f0fdfa'],
+            ['#f0fdfa', '#f0fdf4']
+          ],
+          transitionSpeed: 5000
+        }
+      }
+    });
+  }
+
+  /* 4. Splitting.js char reveal on section h2 headings */
+  var splitStyle = document.createElement('style');
+  splitStyle.textContent = [
+    '.cv-split-h2 .char { display:inline-block; opacity:0; transform:translateY(20px);',
+    '  transition: opacity 0.4s ease calc(var(--char-index)*0.025s),',
+    '              transform 0.4s ease calc(var(--char-index)*0.025s); }',
+    '.cv-split-h2.chars-in .char { opacity:1; transform:translateY(0); }'
+  ].join('');
+  document.head.appendChild(splitStyle);
+
+  document.querySelectorAll('.section-head h2, .savings-section h2').forEach(function(h2) {
+    h2.setAttribute('data-splitting', '');
+    h2.classList.add('cv-split-h2');
+  });
+  Splitting();
+
+  if (window.IntersectionObserver) {
+    var charObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('chars-in');
+          charObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.cv-split-h2').forEach(function(el) { charObs.observe(el); });
+  }
+
+  /* 5. GSAP stagger on service cards */
+  gsap.utils.toArray('.service-card').forEach(function(card, i) {
+    gsap.fromTo(card,
+      { opacity: 0, y: 36, scale: 0.97 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.07, ease: 'power2.out',
+        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* 6. GSAP alternate slide-in on savings highlights */
+  gsap.utils.toArray('.savings-highlight').forEach(function(card, i) {
+    gsap.fromTo(card,
+      { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
+      { opacity: 1, x: 0, duration: 0.65, delay: i * 0.1, ease: 'power2.out',
+        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+})();
+</script>
+
 </body>
 </html>

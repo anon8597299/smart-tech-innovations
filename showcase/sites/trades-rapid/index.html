@@ -75,6 +75,19 @@
     "areaServed": ["Bathurst","Orange","Kelso","Blayney","Oberon","Lithgow"]
   }
   </script>
+  <style>
+    /* Granim hero canvas */
+    .hero { position:relative; overflow:hidden; }
+    #hero-granim-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:0.25; pointer-events:none; }
+    .hero .container { position:relative; z-index:1; }
+    /* Typed cursor */
+    .typed-cursor { color:var(--primary,#d97706); font-weight:400; }
+    .hero-typed-line { font-size:1.05rem; font-weight:600; color:var(--primary,#d97706); margin: .4rem 0 .8rem; min-height:1.6em; }
+    /* Magnetic btn */
+    .btn-primary { transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s; }
+    /* CountUp on KPI */
+    .kpi strong { display:inline-block; }
+  </style>
 </head>
 <body>
   <div id="scroll-bar"></div>
@@ -715,6 +728,75 @@
       badge.textContent=open?'● Open now':'● Closed';
       badge.className='open-badge '+(open?'open':'closed');
     })();
+  </script>
+
+  <!-- ═══ Trades Rapid — 3D Effects Layer ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script>
+  (function(){
+    /* 1 — Lenis */
+    var lenis = new Lenis({ duration:1.1, smoothWheel:true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+
+    /* 2 — Granim animated background on hero */
+    var canvas = document.createElement('canvas');
+    canvas.id = 'hero-granim-canvas';
+    var hero = document.querySelector('section.hero');
+    if (hero) { hero.insertBefore(canvas, hero.firstChild);
+      new Granim({ element: canvas, direction:'diagonal', isPausedWhenNotInView:true,
+        states:{'default-state':{ gradients:[['#d97706','#fbbf24'],['#f59e0b','#d97706'],['#fbbf24','#ea580c']], transitionSpeed:4000 }}}); }
+
+    /* 3 — Typed.js — services rotate below hero h1 */
+    var h1 = document.querySelector('section.hero h1');
+    if (h1) {
+      var typedSpan = document.createElement('p');
+      typedSpan.className = 'hero-typed-line';
+      typedSpan.innerHTML = '<span id="hero-typed"></span>';
+      h1.parentNode.insertBefore(typedSpan, h1.nextSibling);
+      new Typed('#hero-typed', { strings:['Emergency callouts — same day.', 'Hot water systems — all brands.', 'Blocked drains — permanent fix.', 'Bathroom renovations — quote to keys.', 'Fixed price, always in writing.'],
+        typeSpeed:45, backSpeed:22, backDelay:2400, loop:true, showCursor:true });
+    }
+
+    /* 4 — GSAP ScrollTrigger stagger on service cards */
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0);
+    gsap.utils.toArray('.service-card, .card').forEach(function(el,i){
+      gsap.from(el,{ opacity:0, y:50, scale:0.96, duration:0.75, ease:'power3.out', delay:i%3*0.12,
+        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
+    });
+
+    /* 5 — CountUp on KPI numbers */
+    var countUpOpts = { duration:2, useEasing:true, enableScrollSpy:false };
+    var kpiObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return; kpiObs.unobserve(e.target);
+        var el = e.target;
+        var raw = el.textContent.replace(/[^0-9.]/g,'');
+        if(!raw) return;
+        var suffix = el.textContent.replace(/[0-9.,\s]/g,'').trim();
+        var decimals = raw.indexOf('.')!==-1 ? raw.split('.')[1].length : 0;
+        try { new countUp.CountUp(el, parseFloat(raw), Object.assign({},countUpOpts,{decimalPlaces:decimals,suffix:' '+suffix})).start(); } catch(e){}
+      });
+    },{ threshold:0.5 });
+    document.querySelectorAll('.kpi strong').forEach(function(el){ kpiObs.observe(el); });
+
+    /* 6 — Magnetic CTA buttons */
+    var btns = document.querySelectorAll('.btn-primary');
+    btns.forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width/2;
+        var y = e.clientY - r.top - r.height/2;
+        btn.style.transform = 'translate('+x*0.2+'px,'+y*0.2+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+    });
+  })();
   </script>
 </body>
 </html>

@@ -1,37 +1,54 @@
 {
-  "version": "1.0",
-  "description": "3D reactive UI component library for IYS customer sites. All MIT licensed, no build step required — loaded via CDN and injected by generate.py at build time.",
-  "usage": "Add an EFFECTS array to the customer config JSON, e.g. \"EFFECTS\": [\"aos\", \"vanilla-tilt\"]. generate.py injects the component scripts automatically into each HTML file.",
+  "version": "2.0",
+  "description": "3D reactive UI component library for IYS customer sites. All MIT licensed (GSAP: free commercial), no build step, CDN-loaded and injected by generate.py at build time.",
+  "usage": "Add an EFFECTS array to the customer config JSON e.g. \"EFFECTS\": [\"lenis\", \"aos\", \"vanilla-tilt\"]. generate.py injects head/body blocks into every HTML file.",
   "categories": {
-    "tilt": {
-      "description": "3D mouse-tracking tilt on cards and interactive elements",
-      "components": ["vanilla-tilt", "card3d"],
-      "recommendation": "vanilla-tilt — more widely used, glare effect looks premium"
-    },
-    "background": {
-      "description": "Animated hero backgrounds — WebGL waves or interactive particles",
-      "components": ["vanta-waves", "particles"],
-      "recommendation": "vanta-waves for professional/corporate feel; particles for tech/modern feel"
-    },
-    "scroll": {
-      "description": "Scroll-triggered animations and parallax depth effects",
-      "components": ["aos", "rellax"],
-      "recommendation": "aos adds the most visible polish with zero effort; combine both for full depth"
-    }
+    "tilt":        { "components": ["vanilla-tilt", "card3d"] },
+    "background":  { "components": ["vanta-waves", "particles", "granim"] },
+    "scroll":      { "components": ["aos", "rellax", "lenis", "gsap-scrolltrigger"] },
+    "text":        { "components": ["typed", "splitting"] },
+    "interaction": { "components": ["countup", "magnet-mouse"] },
+    "carousel":    { "components": ["swiper-3d"] },
+    "animation":   { "components": ["vivus"] },
+    "3d":          { "components": ["zdog", "shery"] },
+    "texture":     { "components": ["grained"] }
   },
   "components": [
-    { "id": "vanilla-tilt",  "category": "tilt",       "file": "vanilla-tilt.json" },
-    { "id": "card3d",        "category": "tilt",       "file": "card3d.json" },
-    { "id": "vanta-waves",   "category": "background", "file": "vanta-waves.json" },
-    { "id": "particles",     "category": "background", "file": "particles.json" },
-    { "id": "aos",           "category": "scroll",     "file": "aos.json" },
-    { "id": "rellax",        "category": "scroll",     "file": "rellax.json" }
+    { "id": "vanilla-tilt",       "category": "tilt",        "file": "vanilla-tilt.json" },
+    { "id": "card3d",             "category": "tilt",        "file": "card3d.json" },
+    { "id": "vanta-waves",        "category": "background",  "file": "vanta-waves.json" },
+    { "id": "particles",          "category": "background",  "file": "particles.json" },
+    { "id": "granim",             "category": "background",  "file": "granim.json" },
+    { "id": "aos",                "category": "scroll",      "file": "aos.json" },
+    { "id": "rellax",             "category": "scroll",      "file": "rellax.json" },
+    { "id": "lenis",              "category": "scroll",      "file": "lenis.json" },
+    { "id": "gsap-scrolltrigger", "category": "scroll",      "file": "gsap-scrolltrigger.json" },
+    { "id": "typed",              "category": "text",        "file": "typed.json" },
+    { "id": "splitting",          "category": "text",        "file": "splitting.json" },
+    { "id": "countup",            "category": "interaction", "file": "countup.json" },
+    { "id": "magnet-mouse",       "category": "interaction", "file": "magnet-mouse.json" },
+    { "id": "swiper-3d",          "category": "carousel",    "file": "swiper-3d.json" },
+    { "id": "vivus",              "category": "animation",   "file": "vivus.json" },
+    { "id": "zdog",               "category": "3d",          "file": "zdog.json" },
+    { "id": "shery",              "category": "3d",          "file": "shery.json" },
+    { "id": "grained",            "category": "texture",     "file": "grained.json" }
   ],
+  "site_assignments": {
+    "clinic-trust":         ["lenis", "countup", "splitting", "gsap-scrolltrigger"],
+    "trades-rapid":         ["lenis", "typed", "countup", "magnet-mouse", "granim"],
+    "advisor-prime":        ["lenis", "swiper-3d", "countup", "splitting"],
+    "retail-pulse":         ["lenis", "swiper-3d", "grained", "typed"],
+    "solar-spark":          ["lenis", "gsap-scrolltrigger", "countup", "vivus", "granim"],
+    "accounting-conversion":["lenis", "countup", "splitting", "granim"],
+    "consulting-authority": ["lenis", "gsap-scrolltrigger", "splitting", "magnet-mouse"],
+    "hospitality-events":   ["lenis", "swiper-3d", "grained", "granim"]
+  },
   "preset_combinations": {
-    "subtle": ["aos"],
-    "polished": ["aos", "vanilla-tilt"],
-    "immersive": ["aos", "vanilla-tilt", "vanta-waves"],
-    "tech": ["aos", "particles", "card3d"],
-    "full": ["aos", "rellax", "vanilla-tilt", "vanta-waves"]
+    "subtle":    ["lenis", "aos"],
+    "polished":  ["lenis", "aos", "vanilla-tilt", "countup"],
+    "immersive": ["lenis", "aos", "vanilla-tilt", "vanta-waves", "countup"],
+    "tech":      ["lenis", "aos", "particles", "card3d", "typed"],
+    "luxury":    ["lenis", "grained", "granim", "splitting", "swiper-3d"],
+    "full":      ["lenis", "gsap-scrolltrigger", "vanilla-tilt", "countup", "typed", "splitting"]
   }
 }
