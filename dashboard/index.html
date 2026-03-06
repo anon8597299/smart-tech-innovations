@@ -15,17 +15,17 @@
       --indigo-l: #7c6fff;
       --mint:     #2dd4bf;
       --mint-l:   #5de0ce;
-      --bg:       #f8f7ff;
-      --surface:  #ffffff;
-      --border:   #e2e8f0;
-      --text:     #1e293b;
-      --muted:    #64748b;
-      --red:      #ef4444;
-      --amber:    #f59e0b;
-      --green:    #22c55e;
+      --bg:       #0d0d12;
+      --surface:  #16161e;
+      --border:   #252530;
+      --text:     #e2e8f0;
+      --muted:    #94a3b8;
+      --red:      #f87171;
+      --amber:    #fbbf24;
+      --green:    #4ade80;
       --radius:   12px;
-      --shadow:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
-      --shadow-md:0 4px 16px rgba(91,77,255,.10);
+      --shadow:   0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+      --shadow-md:0 4px 16px rgba(91,77,255,.20);
     }
 
     body {
@@ -63,9 +63,9 @@
       display: inline-flex; align-items: center; gap: 6px;
       padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;
     }
-    .status-badge.ok     { background: #dcfce7; color: #166534; }
-    .status-badge.warn   { background: #fef9c3; color: #854d0e; }
-    .status-badge.error  { background: #fee2e2; color: #991b1b; }
+    .status-badge.ok     { background: rgba(74,222,128,.15); color: #4ade80; }
+    .status-badge.warn   { background: rgba(251,191,36,.15);  color: #fbbf24; }
+    .status-badge.error  { background: rgba(248,113,113,.15); color: #f87171; }
     .status-dot {
       width: 7px; height: 7px; border-radius: 50%;
     }
@@ -151,14 +151,14 @@
     .badge {
       padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600;
     }
-    .badge-indigo { background: #ede9fe; color: var(--indigo); }
-    .badge-mint   { background: #ccfbf1; color: #0f766e; }
-    .badge-gray   { background: #f1f5f9; color: var(--muted); }
-    .badge-red    { background: #fee2e2; color: var(--red); }
-    .badge-green  { background: #dcfce7; color: #166534; }
+    .badge-indigo { background: rgba(91,77,255,.2);  color: #a5b4fc; }
+    .badge-mint   { background: rgba(45,212,191,.15); color: var(--mint); }
+    .badge-gray   { background: rgba(148,163,184,.12); color: var(--muted); }
+    .badge-red    { background: rgba(248,113,113,.15); color: var(--red); }
+    .badge-green  { background: rgba(74,222,128,.15);  color: var(--green); }
 
     .progress-bar {
-      height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden;
+      height: 6px; background: #2a2a38; border-radius: 3px; overflow: hidden;
     }
     .progress-fill {
       height: 100%; border-radius: 3px;
@@ -193,16 +193,16 @@
     .feed-item {
       display: flex; align-items: flex-start; gap: 10px;
       padding: 7px 16px; font-size: 12px; line-height: 1.5;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid #1e1e28;
     }
     .feed-item:last-child { border-bottom: none; }
     .feed-level {
       flex-shrink: 0; padding: 1px 6px; border-radius: 4px;
       font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 1px;
     }
-    .level-info  { background: #ede9fe; color: var(--indigo); }
-    .level-warn  { background: #fef9c3; color: #854d0e; }
-    .level-error { background: #fee2e2; color: var(--red); }
+    .level-info  { background: rgba(91,77,255,.2);  color: #a5b4fc; }
+    .level-warn  { background: rgba(251,191,36,.15); color: #fbbf24; }
+    .level-error { background: rgba(248,113,113,.2); color: var(--red); }
     .feed-agent { font-weight: 600; color: var(--indigo); }
     .feed-msg   { color: var(--text); }
     .feed-ts    { flex-shrink: 0; color: var(--muted); font-size: 11px; margin-left: auto; }
@@ -262,7 +262,7 @@
     }
     .chat-msg.assistant {
       align-self: flex-start;
-      background: #f1f5f9; color: var(--text); border-radius: 12px 12px 12px 4px;
+      background: #1e1e28; color: var(--text); border-radius: 12px 12px 12px 4px;
     }
     .chat-msg.assistant.action {
       border-left: 3px solid var(--mint);
@@ -280,17 +280,38 @@
     .chat-input:focus { border-color: var(--indigo); }
     .chat-thinking {
       align-self: flex-start; padding: 9px 14px;
-      background: #f1f5f9; border-radius: 12px 12px 12px 4px;
+      background: #1e1e28; border-radius: 12px 12px 12px 4px;
       font-size: 12px; color: var(--muted);
       animation: pulse 1.4s infinite;
     }
     .chat-suggestion {
       display: inline-block; padding: 4px 10px; border-radius: 20px;
       font-size: 11px; font-weight: 500; cursor: pointer; border: none;
-      background: #ede9fe; color: var(--indigo); margin: 2px;
+      background: rgba(91,77,255,.2); color: #a5b4fc; margin: 2px;
       transition: background 0.15s;
     }
-    .chat-suggestion:hover { background: #ddd6fe; }
+    .chat-suggestion:hover { background: rgba(91,77,255,.35); }
+
+    /* ── Agent toggle ───────────────────────────────────────────────────────── */
+    .agent-toggle {
+      display: flex; align-items: center; gap: 6px;
+      cursor: pointer; background: none; border: none; padding: 0;
+    }
+    .toggle-track {
+      width: 38px; height: 22px; border-radius: 11px;
+      position: relative; transition: background 0.2s; flex-shrink: 0;
+    }
+    .toggle-track.on  { background: var(--green); }
+    .toggle-track.off { background: var(--red); }
+    .toggle-knob {
+      position: absolute; top: 3px; width: 16px; height: 16px;
+      border-radius: 50%; background: #fff; transition: left 0.2s;
+    }
+    .toggle-track.on  .toggle-knob { left: 19px; }
+    .toggle-track.off .toggle-knob { left: 3px; }
+    .toggle-label { font-size: 11px; font-weight: 600; }
+    .toggle-track.on  + .toggle-label { color: var(--green); }
+    .toggle-track.off + .toggle-label { color: var(--red); }
 
     /* ── Empty states ───────────────────────────────────────────────────────── */
     .empty {
@@ -578,6 +599,20 @@ async function loadContentQuiet() {
 }
 
 // ── Renderers ──────────────────────────────────────────────────────────────
+// Track which agents are enabled (persisted in localStorage)
+const _disabledAgents = new Set(JSON.parse(localStorage.getItem('disabledAgents') || '[]'));
+
+function toggleAgent(id) {
+  if (_disabledAgents.has(id)) {
+    _disabledAgents.delete(id);
+  } else {
+    _disabledAgents.add(id);
+  }
+  localStorage.setItem('disabledAgents', JSON.stringify([..._disabledAgents]));
+  // Re-render agent cards
+  if (state.agents.length) renderAgents(state.agents);
+}
+
 function renderAgents(agents) {
   const grid = document.getElementById('agents-grid');
   if (!agents.length) { grid.innerHTML = '<div class="empty">No agents found.</div>'; return; }
@@ -586,13 +621,22 @@ function renderAgents(agents) {
     const dotClass = {idle:'dot-idle',running:'dot-running',error:'dot-error',paused:'dot-paused'}[a.status] || 'dot-idle';
     const lastRun  = a.last_run ? relTime(a.last_run) : 'Never';
     const nextRun  = a.next_run ? relTime(a.next_run) : '—';
+    const enabled  = !_disabledAgents.has(a.id);
+    const trackCls = enabled ? 'on' : 'off';
+    const toggleLabel = enabled ? 'ON' : 'OFF';
     return `
-      <div class="agent-card">
+      <div class="agent-card" style="opacity:${enabled ? 1 : 0.55}">
         <div class="agent-card-bar"></div>
         <div class="agent-card-body">
           <div class="agent-header">
             <span class="agent-name">${esc(a.name)}</span>
-            <span class="agent-dot ${dotClass}" title="${a.status}"></span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="agent-dot ${dotClass}" title="${a.status}"></span>
+              <button class="agent-toggle" onclick="toggleAgent('${a.id}')" title="Enable/disable agent">
+                <div class="toggle-track ${trackCls}"><div class="toggle-knob"></div></div>
+                <span class="toggle-label">${toggleLabel}</span>
+              </button>
+            </div>
           </div>
           <div class="agent-meta">
             <div>Status: <strong>${esc(a.status)}</strong></div>
@@ -601,7 +645,7 @@ function renderAgents(agents) {
             <div>Tasks: <strong>${a.task_count}</strong> &nbsp; Errors: <strong style="color:${a.error_count>0?'var(--red)':'inherit'}">${a.error_count}</strong></div>
           </div>
           <div class="agent-actions">
-            <button class="btn btn-primary btn-sm" onclick="runAgent('${a.id}')">Run now</button>
+            <button class="btn btn-primary btn-sm" onclick="runAgent('${a.id}')" ${enabled ? '' : 'disabled style="opacity:.4;cursor:not-allowed"'}>Run now</button>
           </div>
         </div>
       </div>`;
