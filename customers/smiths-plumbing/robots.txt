@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smithsplumbing.com.au/sitemap.xml
