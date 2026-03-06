@@ -61,11 +61,19 @@ def build_scheduler() -> BackgroundScheduler:
         misfire_grace_time=300,
     )
 
-    # Social — daily 8:00 AM, run analyst after
+    # Social — 7:30 AM morning post (peak engagement: commute/coffee)
     scheduler.add_job(
         lambda: _run(_social, run_analyst_after=True),
-        CronTrigger(hour=8, minute=0, timezone=TIMEZONE),
-        id="social", name="Social carousels + insights",
+        CronTrigger(hour=7, minute=30, timezone=TIMEZONE),
+        id="social", name="Social morning post",
+        misfire_grace_time=300,
+    )
+
+    # Social — 6:30 PM evening post (peak engagement: after work)
+    scheduler.add_job(
+        lambda: _run(_social),
+        CronTrigger(hour=18, minute=30, timezone=TIMEZONE),
+        id="social_evening", name="Social evening post",
         misfire_grace_time=300,
     )
 
