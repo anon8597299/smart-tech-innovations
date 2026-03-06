@@ -29,6 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -263,6 +264,19 @@
       font-size: .9rem;
     }
 
+    /* ── 3D Reactive Effects ── */
+    .hero { position: relative; overflow: hidden; }
+    #hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero .container { position: relative; z-index: 1; }
+    .diff-card, .demo-card, .pricing__card, .portfolio__card, .result__card, .quiet-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    /* Subtle glow on tilt hover */
+    .diff-card:hover, .demo-card:hover, .pricing__card:hover {
+      box-shadow: 0 8px 32px rgba(91,77,255,0.18);
+    }
+
     /* ── Mobile tweaks ── */
     @media (max-width: 600px) {
       .familiar-list { grid-template-columns: 1fr; }
@@ -313,20 +327,21 @@
 
   <!-- Hero — recognition moment first -->
   <section class="hero">
+    <div id="hero-particles"></div>
     <div class="container">
       <div class="hero__content">
-        <div class="hero__badge">For Australian service businesses with a site that used to work</div>
-        <h1 class="hero__title">Your Website Is <span class="accent">Costing You</span> Customers</h1>
-        <p class="hero__subtitle">It looked good at launch. Enquiries came in. Then slowly — the phone went quiet, Google rankings slipped, and the agency that built it moved on to their next client.</p>
-        <p class="hero__subtitle" style="margin-top:.75rem;">You're not imagining it. <strong>80% of Australian small business websites fail to return a positive ROI.</strong> We fix that.</p>
-        <div class="hero__actions">
+        <div class="hero__badge" data-aos="fade-down" data-aos-duration="600">For Australian service businesses with a site that used to work</div>
+        <h1 class="hero__title" data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">Your Website Is <span class="accent">Costing You</span> Customers</h1>
+        <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="200" data-aos-duration="700">It looked good at launch. Enquiries came in. Then slowly — the phone went quiet, Google rankings slipped, and the agency that built it moved on to their next client.</p>
+        <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="280" data-aos-duration="700" style="margin-top:.75rem;">You're not imagining it. <strong>80% of Australian small business websites fail to return a positive ROI.</strong> We fix that.</p>
+        <div class="hero__actions" data-aos="fade-up" data-aos-delay="360" data-aos-duration="700">
           <a href="book.html" class="btn btn--primary">Book a Free 15-Min Call</a>
           <a href="our-work.html" class="btn btn--spotlight">See Live Demo Sites</a>
         </div>
         <div class="hero__stats">
-          <div class="stat"><span class="stat__number">90%+</span><span class="stat__label">Lighthouse Scores</span></div>
-          <div class="stat"><span class="stat__number">3x</span><span class="stat__label">More Enquiries</span></div>
-          <div class="stat"><span class="stat__number">2–4 wks</span><span class="stat__label">To Go Live</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="480" data-aos-duration="600"><span class="stat__number">90%+</span><span class="stat__label">Lighthouse Scores</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="560" data-aos-duration="600"><span class="stat__number">3x</span><span class="stat__label">More Enquiries</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="640" data-aos-duration="600"><span class="stat__number">2–4 wks</span><span class="stat__label">To Go Live</span></div>
         </div>
       </div>
     </div>
@@ -335,37 +350,37 @@
   <!-- Why It Went Quiet -->
   <section class="went-quiet" id="why-quiet">
     <div class="container">
-      <div class="went-quiet__intro">
+      <div class="went-quiet__intro" data-aos="fade-up">
         <h2>Why It Went Quiet</h2>
         <p>It's not your business. It's not your product. A website built even three years ago was built for a completely different internet — and nobody told you it needed to keep up.</p>
       </div>
       <div class="quiet-reasons">
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 01</div>
           <h3>Google changed — 13 times last year alone</h3>
           <p>A site built in 2021 was optimised for a Google that no longer exists. Every major update since has moved the goalposts. Sites that don't adapt, drop.</p>
         </div>
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 02</div>
           <h3>Mobile standards moved on</h3>
           <p>Only 30% of Australian SME websites pass current speed tests. If your site loads slowly on a phone, Google now penalises it — in desktop results too.</p>
         </div>
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 03</div>
           <h3>Competitors got new sites</h3>
           <p>Every year, some of your competition invests in a rebuild. A site that ranked #2 in 2021 can sit on page 3 by 2025 — not because your business got worse, but because theirs got better online.</p>
         </div>
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 04</div>
           <h3>Content went stale</h3>
           <p>Google's ranking system now rewards fresh, relevant content. 42% of small business owners update their website once a year or less. A static site is a slowly sinking ship.</p>
         </div>
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 05</div>
           <h3>It was built to look good, not convert</h3>
           <p>Most small business sites were designed to impress, not to generate enquiries. No clear call to action, no lead capture, no tracking. Visitors land, look around, and leave — and no one even set up the tools to tell you it was happening.</p>
         </div>
-        <div class="quiet-card">
+        <div class="quiet-card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="quiet-card__num">Reason 06</div>
           <h3>Your trust signals aged out</h3>
           <p>Customers research online before they call. An outdated design, old testimonials, or a copyright year from years ago signals a business that's fallen behind — even if your work is excellent. Telstra Business research found 72% of consumers are less likely to engage with a business whose site looks outdated.</p>
@@ -377,29 +392,29 @@
   <!-- Sound Familiar — agreement strip -->
   <section class="familiar-strip">
     <div class="container">
-      <h2>Do These Sound Familiar?</h2>
+      <h2 data-aos="fade-up">Do These Sound Familiar?</h2>
       <div class="familiar-list">
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-right" data-aos-delay="0">
           <div class="fi-check">✓</div>
           <p>You Google your own business and a competitor shows up above you</p>
         </div>
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-left" data-aos-delay="80">
           <div class="fi-check">✓</div>
           <p>You hesitate before sharing your website URL — or add a disclaimer when you do</p>
         </div>
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-right" data-aos-delay="160">
           <div class="fi-check">✓</div>
           <p>The agency that built your site hasn't been in contact since it went live</p>
         </div>
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-left" data-aos-delay="240">
           <div class="fi-check">✓</div>
           <p>Enquiries come through word-of-mouth — almost never from the website</p>
         </div>
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-right" data-aos-delay="320">
           <div class="fi-check">✓</div>
           <p>You're paying for hosting or a retainer with nothing to show for it</p>
         </div>
-        <div class="familiar-item">
+        <div class="familiar-item" data-aos="fade-left" data-aos-delay="400">
           <div class="fi-check">✓</div>
           <p>You've been meaning to do something about it for over a year</p>
         </div>
@@ -411,37 +426,37 @@
   <!-- How We're Different -->
   <section class="different" id="different">
     <div class="container">
-      <div class="different__header">
+      <div class="different__header" data-aos="fade-up">
         <h2>What We Do Differently</h2>
         <p>The industry standard is build, launch, move on. We don't operate that way.</p>
       </div>
       <div class="diff-grid">
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="0" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">📋</span>
           <h3>Pricing published upfront</h3>
           <p>Every package is listed here on this page. <strong>No phone call required just to find out what things cost.</strong> You see the price, you pick what fits, you pay. Simple.</p>
         </div>
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">🔑</span>
           <h3>You own it — completely</h3>
           <p>When we hand over your site, it belongs to you. <strong>No monthly platform fees, no lock-in, no holding it hostage.</strong> Host it wherever you want. Change it whenever you want.</p>
         </div>
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="200" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">📝</span>
           <h3>Blog content that runs itself</h3>
           <p>Our Premium package includes an automated blog system that publishes SEO content on a schedule. <strong>No writing, no briefing, no chasing anyone.</strong> The site keeps working long after launch.</p>
         </div>
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="0" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">👁</span>
           <h3>See it before you pay</h3>
           <p>Every template we build from is live online right now. <strong>Browse real demo sites on your phone before you commit a dollar.</strong> You know exactly what you're getting.</p>
         </div>
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">⚡</span>
           <h3>Built for performance, not just looks</h3>
           <p>We target 90%+ Lighthouse scores on every build. <strong>Fast load times, clean code, structured data.</strong> The things that actually move rankings — not just the things that look impressive in a screenshot.</p>
         </div>
-        <div class="diff-card">
+        <div class="diff-card" data-aos="zoom-in" data-aos-delay="200" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <span class="diff-card__icon">📅</span>
           <h3>Live in 2–4 weeks</h3>
           <p>Not months. Not "pending your feedback for three weeks." We keep projects moving. <strong>Most clients are live and receiving enquiries within a month of starting.</strong></p>
@@ -458,10 +473,10 @@
   <!-- Results -->
   <section class="results" id="results">
     <div class="container">
-      <h2 class="section__title">What Actually Changes</h2>
-      <p class="section__subtitle">Real before/after numbers from conversion-focused rebuilds.</p>
+      <h2 class="section__title" data-aos="fade-up">What Actually Changes</h2>
+      <p class="section__subtitle" data-aos="fade-up" data-aos-delay="80">Real before/after numbers from conversion-focused rebuilds.</p>
       <div class="results__grid">
-        <div class="result__card">
+        <div class="result__card" data-aos="flip-left" data-aos-delay="0" data-aos-duration="800" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <span class="result__icon">⚡</span>
           <p class="result__kicker">Performance</p>
           <h3 class="result__metric-title">Lighthouse Score</h3>
@@ -471,7 +486,7 @@
             <div class="result__pill"><span>After</span><strong class="green">96/100</strong></div>
           </div>
         </div>
-        <div class="result__card">
+        <div class="result__card" data-aos="flip-left" data-aos-delay="150" data-aos-duration="800" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <span class="result__icon">🔎</span>
           <p class="result__kicker">SEO</p>
           <h3 class="result__metric-title">Google Position</h3>
@@ -481,7 +496,7 @@
             <div class="result__pill"><span>After</span><strong class="green">Page 1</strong></div>
           </div>
         </div>
-        <div class="result__card">
+        <div class="result__card" data-aos="flip-left" data-aos-delay="300" data-aos-duration="800" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <span class="result__icon">📥</span>
           <p class="result__kicker">Lead Flow</p>
           <h3 class="result__metric-title">Inbound Enquiries</h3>
@@ -499,30 +514,30 @@
   <!-- Demos -->
   <section class="demos">
     <div class="container">
-      <div class="demos__header">
+      <div class="demos__header" data-aos="fade-up">
         <h2>See It Before You Commit</h2>
         <p>Every demo is live right now. Open them on your phone — this is the standard we build to.</p>
       </div>
       <div class="demo-grid">
-        <a href="showcase/sites/trades-rapid/index.html" class="demo-card" target="_blank">
+        <a href="showcase/sites/trades-rapid/index.html" class="demo-card" target="_blank" data-aos="zoom-in" data-aos-delay="0" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <div class="demo-card__tag">Trades &amp; Services</div>
           <h3>Bathurst Plumbing Co.</h3>
           <p>Fast-loading, mobile-first, built to capture emergency callout enquiries.</p>
           <div class="demo-card__link">View demo →</div>
         </a>
-        <a href="showcase/sites/clinic-trust/index.html" class="demo-card" target="_blank">
+        <a href="showcase/sites/clinic-trust/index.html" class="demo-card" target="_blank" data-aos="zoom-in" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <div class="demo-card__tag">Health &amp; Allied Health</div>
           <h3>Hillcrest Family Clinic</h3>
           <p>Online booking, patient trust signals, 24/7 appointment capture.</p>
           <div class="demo-card__link">View demo →</div>
         </a>
-        <a href="showcase/sites/advisor-prime/index.html" class="demo-card" target="_blank">
+        <a href="showcase/sites/advisor-prime/index.html" class="demo-card" target="_blank" data-aos="zoom-in" data-aos-delay="200" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <div class="demo-card__tag">Financial Services</div>
           <h3>Pinnacle Financial Advice</h3>
           <p>Authority positioning, qualified lead intake, compliance-ready copy.</p>
           <div class="demo-card__link">View demo →</div>
         </a>
-        <a href="showcase/sites/retail-pulse/index.html" class="demo-card" target="_blank">
+        <a href="showcase/sites/retail-pulse/index.html" class="demo-card" target="_blank" data-aos="zoom-in" data-aos-delay="300" data-tilt data-tilt-max="10" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.2">
           <div class="demo-card__tag">Retail &amp; Hospitality</div>
           <h3>The Loft Boutique</h3>
           <p>Visual, fast, and built to convert browsers into in-store or online buyers.</p>
@@ -538,10 +553,10 @@
   <!-- Portfolio proof -->
   <section class="portfolio" id="portfolio">
     <div class="container">
-      <h2 class="section__title">Recent Projects</h2>
-      <p class="section__subtitle">Three businesses that invested in a site that works — and what happened next.</p>
+      <h2 class="section__title" data-aos="fade-up">Recent Projects</h2>
+      <p class="section__subtitle" data-aos="fade-up" data-aos-delay="80">Three businesses that invested in a site that works — and what happened next.</p>
       <div class="portfolio__grid">
-        <div class="portfolio__card">
+        <div class="portfolio__card" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="portfolio__tag">Trades &amp; Services</div>
           <h3>Local Electrical Company</h3>
           <p>Legacy site rebuilt into a quote-capture funnel with mobile-first speed.</p>
@@ -551,7 +566,7 @@
             <li><strong>+41%</strong> organic traffic</li>
           </ul>
         </div>
-        <div class="portfolio__card">
+        <div class="portfolio__card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="portfolio__tag">Healthcare</div>
           <h3>Private Clinic Group</h3>
           <p>Booking automation and patient enquiry workflows across multiple locations.</p>
@@ -561,7 +576,7 @@
             <li><strong>+67%</strong> first-page keyword wins</li>
           </ul>
         </div>
-        <div class="portfolio__card">
+        <div class="portfolio__card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="portfolio__tag">Professional Services</div>
           <h3>Consultancy Rebrand</h3>
           <p>Authority positioning with clear social proof and lead qualification flows.</p>
@@ -578,20 +593,20 @@
   <!-- Process -->
   <section class="process-section" id="process">
     <div class="container">
-      <h2 class="section__title">How It Works</h2>
-      <p class="section__subtitle">Three steps. No jargon. Most clients are live within a month.</p>
+      <h2 class="section__title" data-aos="fade-up">How It Works</h2>
+      <p class="section__subtitle" data-aos="fade-up" data-aos-delay="80">Three steps. No jargon. Most clients are live within a month.</p>
       <div class="process__grid process-grid-3">
-        <div class="process__step">
+        <div class="process__step" data-aos="fade-up" data-aos-delay="0">
           <div class="step__number">01</div>
           <h3>Book a Free Call</h3>
           <p>15 minutes with James. Tell us about your business and what's not working. No obligation — if we can't genuinely help, we'll say so.</p>
         </div>
-        <div class="process__step">
+        <div class="process__step" data-aos="fade-up" data-aos-delay="150">
           <div class="step__number">02</div>
           <h3>We Build It</h3>
           <p>Pick your package, fill in your business details, and we handle design, development, SEO and automation. You review and approve.</p>
         </div>
-        <div class="process__step">
+        <div class="process__step" data-aos="fade-up" data-aos-delay="300">
           <div class="step__number">03</div>
           <h3>Go Live. Get Leads.</h3>
           <p>Your site launches in 2–4 weeks. From there it runs 24/7 — booking enquiries, ranking on Google, publishing blog content if you're on Premium.</p>
@@ -606,10 +621,10 @@
   <!-- Pricing -->
   <section class="pricing" id="pricing">
     <div class="container">
-      <h2 class="section__title">Pricing — Published Here. No Phone Call Required.</h2>
-      <p class="section__subtitle">Pick the path that fits your stage. Pay online. We get started.</p>
+      <h2 class="section__title" data-aos="fade-up">Pricing — Published Here. No Phone Call Required.</h2>
+      <p class="section__subtitle" data-aos="fade-up" data-aos-delay="80">Pick the path that fits your stage. Pay online. We get started.</p>
       <div class="pricing__grid">
-        <div class="pricing__card pricing__card--compact">
+        <div class="pricing__card pricing__card--compact" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="6" data-tilt-speed="600" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="pricing__badge">Fast Win</div>
           <div class="pricing__amount">$3,000</div>
           <div class="pricing__period">Scan + Fix</div>
@@ -622,7 +637,7 @@
           </ul>
           <a href="packages.html" class="btn btn--ghost btn--full">Start Scan + Fix</a>
         </div>
-        <div class="pricing__card pricing__card--featured">
+        <div class="pricing__card pricing__card--featured" data-aos="fade-up" data-aos-delay="150" data-tilt data-tilt-max="6" data-tilt-speed="600" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="pricing__badge">Most Popular</div>
           <div class="pricing__amount">$5,000</div>
           <div class="pricing__period">Complete Redesign</div>
@@ -637,7 +652,7 @@
           </ul>
           <a href="packages.html" class="btn btn--primary btn--full">Get Started</a>
         </div>
-        <div class="pricing__card pricing__card--premium">
+        <div class="pricing__card pricing__card--premium" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="6" data-tilt-speed="600" data-tilt-glare data-tilt-max-glare="0.15">
           <div class="pricing__badge">Premium Build</div>
           <div class="pricing__amount">$10,000</div>
           <div class="pricing__period">Brand + Growth Package</div>
@@ -862,6 +877,47 @@
     </div>
   </footer>
 
+  <!-- tsParticles — hero floating particle network -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <!-- AOS — scroll-triggered animations -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- vanilla-tilt — 3D mouse-tracking tilt on cards -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script>
+    // Hero particles — subtle floating indigo dot network
+    tsParticles.load('hero-particles', {
+      background: { color: { value: 'transparent' } },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 45, density: { enable: true, area: 900 } },
+        color: { value: '#5b4dff' },
+        links: { enable: true, color: '#5b4dff', distance: 140, opacity: 0.25, width: 1 },
+        move: { enable: true, speed: 0.8, direction: 'none', random: true, outModes: 'out' },
+        opacity: { value: 0.35, animation: { enable: true, speed: 0.5, minimumValue: 0.15 } },
+        size: { value: { min: 1, max: 2.5 } },
+        shape: { type: 'circle' }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'grab' },
+          onClick: { enable: false }
+        },
+        modes: { grab: { distance: 140, links: { opacity: 0.5 } } }
+      },
+      detectRetina: true
+    });
+
+    // AOS — scroll animations
+    AOS.init({ duration: 700, once: true, offset: 60, easing: 'ease-out-quad' });
+
+    // vanilla-tilt — 3D tilt on all card types (desktop only)
+    if (window.matchMedia('(hover: hover)').matches) {
+      VanillaTilt.init(
+        document.querySelectorAll('.diff-card, .demo-card, .pricing__card, .portfolio__card, .result__card, .quiet-card'),
+        { max: 10, speed: 500, glare: true, 'max-glare': 0.18, scale: 1.02 }
+      );
+    }
+  </script>
   <script src="analytics-config.js"></script>
   <script src="src/js/analytics.js"></script>
   <script>
