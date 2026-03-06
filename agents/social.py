@@ -167,10 +167,10 @@ class SocialAgent(BaseAgent):
 
         if make_url and slide_paths:
             tid = self.create_task("publish", f"Publishing {slide_count}-slide carousel via Make.com")
-            published = self._publish_via_make(make_url, slide_paths, post["caption"])
+            published = self._publish_via_make(make_url, slide_paths, post["caption"], post.get("facebook_caption", ""))
             if published:
-                self.complete_task(tid, f"Posted {slide_count}-slide carousel via Make.com")
-                self.log_info(f"Social: published {slide_count}-slide carousel via Make.com webhook")
+                self.complete_task(tid, f"Posted {slide_count}-slide carousel via Make.com (Instagram + Facebook)")
+                self.log_info(f"Social: published {slide_count}-slide carousel via Make.com → Instagram + Facebook")
                 self._mark_posted(post)
             else:
                 self.fail_task(tid, "Make.com publish failed — queued for manual post")
@@ -325,11 +325,11 @@ Return ONLY valid JSON with these exact keys:
 {{
   "headline": "The main hook (under 8 words, no punctuation at end)",
   "slides": ["slide 1 text (under 12 words)", "slide 2", "slide 3", "slide 4", "slide 5"],
-  "caption": "The full Instagram caption (2-4 sentences, conversational, ends with a question or CTA). No hashtags — they are added separately.",
+  "caption": "Instagram caption — 2-4 sentences, conversational, ends with a question or CTA. No hashtags — they are added separately.",
+  "facebook_caption": "Facebook version — same message but 3-5 sentences, slightly warmer and more conversational, no hashtags. Facebook readers respond to a bit more context and a direct CTA at the end.",
   "alt_text": "Image description for accessibility"
 }}
 
-For the caption: use a line break between the main copy and hashtags. Max 3 paragraphs.
 Do not start with 'Are you' or 'Did you know'. Start with a statement or a number."""
 
         client = anthropic.Anthropic(api_key=api_key)
@@ -349,9 +349,12 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
         raw = raw.strip()
 
         post = json.loads(raw)
-        # Append hashtags if not present
+        # Append hashtags to Instagram caption
         if HASHTAGS["web"] not in post["caption"]:
             post["caption"] += "\n\n" + HASHTAGS["web"]
+        # Ensure facebook_caption exists (fallback to caption without hashtags)
+        if not post.get("facebook_caption"):
+            post["facebook_caption"] = post["caption"].split("\n\n" + HASHTAGS["web"])[0]
         return post
 
     def _template_post(self, plan: dict, today: date) -> dict:
@@ -431,15 +434,18 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
     # ── Instagram publishing ──────────────────────────────────────────────────
 
-    def _publish_via_make(self, webhook_url: str, slide_paths: list[Path], caption: str) -> bool:
+    def _publish_via_make(self, webhook_url: str, slide_paths: list[Path], caption: str, facebook_caption: str = "") -> bool:
         """
-        Post a carousel to Instagram via Make.com webhook.
+        Post a carousel to Instagram + Facebook via Make.com webhook.
 
         Make.com scenario setup:
           1. Trigger: Webhooks → Custom webhook (copy URL → MAKE_WEBHOOK_URL in .env)
           2. Action: Instagram → Create a Carousel Post
-          3. Caption field: map {{1.caption}}
-          4. Media → add 5 items, map {{1.slide_1}} … {{1.slide_5}}
+             - Caption field: map {{1.caption}}
+             - Media → add 5 items, map {{1.slide_1}} … {{1.slide_5}}
+          3. Action: Facebook Pages → Create a Page Post (photo)
+             - Message field: map {{1.facebook_caption}}
+             - Photo URL: map {{1.slide_1}}
 
         This sends up to 5 public image URLs as slide_1 … slide_5.
         """
@@ -462,7 +468,10 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
                 return False
 
             # Build payload with slide_1 … slide_N
-            payload: dict = {"caption": caption}
+            payload: dict = {
+                "caption":          caption,
+                "facebook_caption": facebook_caption or caption.split("\n\n#")[0],
+            }
             for i, url in enumerate(slide_urls, 1):
                 payload[f"slide_{i}"] = url
 
@@ -607,13 +616,14 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
                 queue = []
 
         entry = {
-            "date":        date.today().isoformat(),
-            "headline":    post.get("headline", ""),
-            "caption":     post.get("caption", ""),
-            "slides":      post.get("slides", []),
-            "image_path":  str(slide_paths[0]) if slide_paths else None,
-            "slide_paths": [str(p) for p in slide_paths],
-            "status":      "pending",
+            "date":             date.today().isoformat(),
+            "headline":         post.get("headline", ""),
+            "caption":          post.get("caption", ""),
+            "facebook_caption": post.get("facebook_caption", ""),
+            "slides":           post.get("slides", []),
+            "image_path":       str(slide_paths[0]) if slide_paths else None,
+            "slide_paths":      [str(p) for p in slide_paths],
+            "status":           "pending",
         }
         queue.append(entry)
         QUEUE_FILE.write_text(json.dumps(queue, indent=2))
