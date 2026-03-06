@@ -323,6 +323,80 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Calendar ───────────────────────────────────────────────────────────── */
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 2px; background: var(--border); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--border);
+    }
+    .cal-day-header {
+      background: var(--surface); padding: 8px 4px;
+      text-align: center; font-size: 11px; font-weight: 700;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .05em;
+    }
+    .cal-day {
+      background: var(--surface); min-height: 96px;
+      padding: 8px 6px 6px; position: relative;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .cal-day:hover { background: #1e1e28; }
+    .cal-day.other-month { opacity: 0.35; }
+    .cal-day.today { background: #1a1a2e; }
+    .cal-day.today .cal-day-num { color: var(--indigo); font-weight: 800; }
+    .cal-day-num {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      margin-bottom: 5px; display: block;
+    }
+    .cal-items { display: flex; flex-direction: column; gap: 3px; }
+    .cal-item {
+      font-size: 10px; font-weight: 600; padding: 2px 5px;
+      border-radius: 4px; white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis; max-width: 100%;
+    }
+    .cal-item.post-pending  { background: rgba(45,212,191,.18); color: var(--mint); }
+    .cal-item.post-posted   { background: rgba(74,222,128,.15); color: var(--green); }
+    .cal-item.task-social   { background: rgba(45,212,191,.15); color: var(--mint); }
+    .cal-item.task-manager  { background: rgba(148,163,184,.1); color: var(--muted); }
+    .cal-item.task-content  { background: rgba(91,77,255,.2);   color: #a5b4fc; }
+    .cal-item.task-ads      { background: rgba(251,191,36,.15); color: var(--amber); }
+    .cal-item.task-builder  { background: rgba(248,113,113,.15);color: var(--red); }
+    .cal-item.task-analyst  { background: rgba(148,163,184,.1); color: var(--muted); }
+    .cal-more {
+      font-size: 10px; color: var(--muted); margin-top: 2px;
+      font-style: italic;
+    }
+
+    /* Day detail modal */
+    .cal-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.7);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+    }
+    .cal-modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; width: 420px; max-width: 90vw;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .cal-modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .cal-modal-title { font-size: 16px; font-weight: 700; }
+    .cal-modal-close {
+      background: none; border: none; color: var(--muted);
+      font-size: 20px; cursor: pointer; line-height: 1;
+    }
+    .cal-modal-section { margin-bottom: 16px; }
+    .cal-modal-section-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted); margin-bottom: 8px;
+    }
+    .cal-modal-item {
+      padding: 8px 10px; border-radius: 8px; margin-bottom: 6px;
+      font-size: 13px; border: 1px solid var(--border);
+    }
+    .cal-modal-item-title { font-weight: 600; margin-bottom: 2px; }
+    .cal-modal-item-meta  { font-size: 11px; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -396,16 +470,19 @@
         </div>
       </div>
 
-      <!-- Delivered Content -->
-      <div>
-        <div class="section-header">
-          <span class="section-title">Delivered Content</span>
-        </div>
-        <div class="content-grid" id="content-grid">
-          <div class="empty">No content yet.</div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="section" id="calendar-section">
+      <div class="section-header">
+        <span class="section-title">Content &amp; Task Calendar</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="calNav(-1)">&#8592;</button>
+          <span id="cal-month-label" style="font-size:14px;font-weight:700;min-width:120px;text-align:center;"></span>
+          <button class="btn btn-secondary btn-sm" onclick="calNav(1)">&#8594;</button>
         </div>
       </div>
-
+      <div id="calendar-wrap"></div>
     </div>
 
     <!-- Performance Panels -->
@@ -493,6 +570,7 @@ let sseConnected = false;
 document.addEventListener('DOMContentLoaded', () => {
   loadState();
   connectSSE();
+  loadCalendar();
 });
 
 // ── API helpers ────────────────────────────────────────────────────────────
@@ -579,8 +657,7 @@ function handleSSE(msg) {
       if (msg.data.preview) t.output_preview = msg.data.preview;
       renderTasks(state.tasks);
     }
-    // Refresh content panel
-    loadContentQuiet();
+    loadCalendar();
     return;
   }
 
@@ -721,6 +798,166 @@ function renderContent(content) {
         </div>
       </div>`;
   }).join('');
+}
+
+// ── Calendar ────────────────────────────────────────────────────────────────
+let calYear  = new Date().getFullYear();
+let calMonth = new Date().getMonth() + 1; // 1-based
+
+const MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+const DAY_NAMES   = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+async function loadCalendar() {
+  document.getElementById('cal-month-label').textContent =
+    `${MONTH_NAMES[calMonth-1]} ${calYear}`;
+  try {
+    const data = await api(`/api/calendar?year=${calYear}&month=${calMonth}`);
+    renderCalendar(data);
+  } catch(e) {
+    document.getElementById('calendar-wrap').innerHTML =
+      '<div class="empty">Could not load calendar.</div>';
+  }
+}
+
+function calNav(dir) {
+  calMonth += dir;
+  if (calMonth > 12) { calMonth = 1;  calYear++; }
+  if (calMonth < 1)  { calMonth = 12; calYear--; }
+  loadCalendar();
+}
+
+function renderCalendar(data) {
+  const { year, month, tasks, posts } = data;
+
+  // Build lookup: date string → {tasks:[], posts:[]}
+  const byDay = {};
+  const pad = d => String(d).padStart(2,'0');
+  const key  = d => `${year}-${pad(month)}-${pad(d)}`;
+
+  tasks.forEach(t => {
+    const d = (t.created_at || '').slice(0,10);
+    if (!byDay[d]) byDay[d] = { tasks:[], posts:[] };
+    byDay[d].tasks.push(t);
+  });
+  posts.forEach(p => {
+    const d = (p.date || '').slice(0,10);
+    if (!byDay[d]) byDay[d] = { tasks:[], posts:[] };
+    byDay[d].posts.push(p);
+  });
+
+  // Calendar math
+  const firstDay   = new Date(year, month-1, 1);
+  const daysInMonth = new Date(year, month, 0).getDate();
+  // getDay: 0=Sun…6=Sat → convert to Mon-first: Mon=0…Sun=6
+  let startDow = (firstDay.getDay() + 6) % 7;
+
+  const today    = new Date();
+  const todayStr = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
+
+  // Build header
+  let html = '<div class="cal-grid">';
+  DAY_NAMES.forEach(d => { html += `<div class="cal-day-header">${d}</div>`; });
+
+  // Empty cells before month starts
+  for (let i = 0; i < startDow; i++) {
+    html += '<div class="cal-day other-month"></div>';
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dk       = key(d);
+    const isToday  = dk === todayStr;
+    const dayData  = byDay[dk] || { tasks:[], posts:[] };
+    const allItems = [];
+
+    // Posts first
+    dayData.posts.forEach(p => {
+      const cls = p.status === 'posted' ? 'post-posted' : 'post-pending';
+      allItems.push({ cls, label: '▲ ' + (p.headline || 'IG Post'), raw: p, type:'post' });
+    });
+    // Tasks
+    dayData.tasks.forEach(t => {
+      const cls = `task-${t.agent_id || 'manager'}`;
+      allItems.push({ cls, label: t.title, raw: t, type:'task' });
+    });
+
+    const MAX_SHOW = 3;
+    const shown = allItems.slice(0, MAX_SHOW);
+    const extra = allItems.length - MAX_SHOW;
+
+    html += `<div class="cal-day${isToday?' today':''}" onclick="calDayClick('${dk}', ${JSON.stringify(dayData).replace(/"/g,'&quot;')})">`;
+    html += `<span class="cal-day-num">${d}</span>`;
+    html += '<div class="cal-items">';
+    shown.forEach(item => {
+      html += `<div class="cal-item ${item.cls}" title="${esc(item.label)}">${esc(item.label)}</div>`;
+    });
+    if (extra > 0) html += `<div class="cal-more">+${extra} more</div>`;
+    html += '</div></div>';
+  }
+
+  html += '</div>';
+  document.getElementById('calendar-wrap').innerHTML = html;
+}
+
+function calDayClick(dateStr, dayData) {
+  const existing = document.getElementById('cal-modal');
+  if (existing) existing.remove();
+
+  const posts = dayData.posts || [];
+  const tasks = dayData.tasks || [];
+  if (!posts.length && !tasks.length) return;
+
+  const d = new Date(dateStr + 'T00:00:00');
+  const label = d.toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
+
+  let inner = '';
+
+  if (posts.length) {
+    inner += `<div class="cal-modal-section">
+      <div class="cal-modal-section-title">Instagram Posts (${posts.length})</div>`;
+    posts.forEach(p => {
+      const statusColor = p.status === 'posted' ? 'var(--green)' : 'var(--mint)';
+      inner += `<div class="cal-modal-item">
+        <div class="cal-modal-item-title">${esc(p.headline || 'Post')}</div>
+        <div class="cal-modal-item-meta" style="color:${statusColor};">${esc(p.status || 'pending')}</div>
+        ${p.caption ? `<div class="cal-modal-item-meta" style="margin-top:4px;line-height:1.4;">${esc(p.caption.slice(0,120))}…</div>` : ''}
+      </div>`;
+    });
+    inner += '</div>';
+  }
+
+  if (tasks.length) {
+    inner += `<div class="cal-modal-section">
+      <div class="cal-modal-section-title">Agent Tasks (${tasks.length})</div>`;
+    const agentCol = {manager:'var(--muted)',social:'var(--mint)',ads:'var(--amber)',
+                      content:'#a5b4fc',builder:'var(--red)',analyst:'var(--muted)'};
+    tasks.forEach(t => {
+      const col = agentCol[t.agent_id] || 'var(--muted)';
+      inner += `<div class="cal-modal-item">
+        <div class="cal-modal-item-title">${esc(t.title)}</div>
+        <div class="cal-modal-item-meta">
+          <span style="color:${col};">${esc(t.agent_id)}</span>
+          &nbsp;·&nbsp;${esc(t.status)}
+          ${t.output_preview ? ' &nbsp;·&nbsp; ' + esc(t.output_preview.slice(0,60)) : ''}
+        </div>
+      </div>`;
+    });
+    inner += '</div>';
+  }
+
+  const modal = document.createElement('div');
+  modal.id = 'cal-modal';
+  modal.className = 'cal-modal-overlay';
+  modal.innerHTML = `
+    <div class="cal-modal">
+      <div class="cal-modal-header">
+        <span class="cal-modal-title">${label}</span>
+        <button class="cal-modal-close" onclick="document.getElementById('cal-modal').remove()">&times;</button>
+      </div>
+      ${inner}
+    </div>`;
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+  document.body.appendChild(modal);
 }
 
 function updateSystemBadge() {

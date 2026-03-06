@@ -264,6 +264,20 @@ def content_recent(limit: int = 30) -> list[dict]:
     return [dict(r) for r in rows]
 
 
+# ── Calendar helpers ──────────────────────────────────────────────────────────
+
+def tasks_for_month(year: int, month: int) -> list[dict]:
+    """Return all tasks created in the given month, grouped by date."""
+    conn = get_conn()
+    prefix = f"{year:04d}-{month:02d}"
+    rows = conn.execute(
+        "SELECT id, agent_id, type, title, status, progress, created_at, output_preview "
+        "FROM tasks WHERE created_at LIKE ? ORDER BY created_at ASC",
+        (f"{prefix}%",)
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
 # ── Digest helpers ───────────────────────────────────────────────────────────
 
 def digest_summary() -> dict:

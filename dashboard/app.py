@@ -276,8 +276,101 @@ async def chat(body: dict):
     }
 
 
+@app.get("/api/calendar")
+async def calendar(year: int = 0, month: int = 0):
+    """Return tasks + social posts for a given month for the calendar view."""
+    from datetime import date
+    import json as _json
+    today = date.today()
+    y = year  or today.year
+    m = month or today.month
+
+    tasks = db.tasks_for_month(y, m)
+
+    # Load social posts from upload_queue.json, filtered to this month
+    queue_file = Path(__file__).parent.parent / "social" / "upload_queue.json"
+    posts = []
+    if queue_file.exists():
+        try:
+            prefix = f"{y:04d}-{m:02d}"
+            all_posts = _json.loads(queue_file.read_text())
+            posts = [p for p in all_posts if str(p.get("date", "")).startswith(prefix)]
+        except Exception:
+            posts = []
+
+    return {"year": y, "month": m, "tasks": tasks, "posts": posts}
+
+
 @app.delete("/api/chat")
 async def clear_chat():
     global _chat_history
     _chat_history = []
     return {"status": "cleared"}
+
+
+# ── Instagram comment reply endpoint ──────────────────────────────────────────
+# Called by Make.com when a new comment arrives.
+# Make.com scenario: Instagram Watch Comments → HTTP POST here → Instagram Reply
+
+_REPLY_SYSTEM = """You write short Instagram comment replies for ImproveYourSite.com,
+an Australian web agency that builds websites for small businesses.
+
+Rules:
+- Max 2 sentences. Sound human and warm, not corporate.
+- If the comment is a question about price, services, or websites → invite a DM.
+- If it's a compliment or positive → thank them and plant curiosity (e.g. "Let us know if you ever want to chat about yours").
+- If it's generic/vague → acknowledge warmly and ask a question back.
+- Never use exclamation marks excessively. No emojis unless the commenter used them.
+- Always sign off naturally, never with "ImproveYourSite" — keep it personal.
+- If the comment is spam, negative/abusive, or irrelevant — return exactly: SKIP"""
+
+
+@app.post("/api/instagram/generate-reply")
+async def instagram_generate_reply(body: dict):
+    """
+    Called by Make.com to generate a Claude reply to an Instagram comment.
+
+    Request body:
+      { "comment": "...", "commenter": "username", "post_caption": "..." }
+
+    Returns:
+      { "reply": "...", "skip": false }
+    """
+    comment      = (body.get("comment") or "").strip()
+    commenter    = (body.get("commenter") or "").strip()
+    post_caption = (body.get("post_caption") or "").strip()[:200]
+
+    if not comment:
+        return {"reply": "", "skip": True}
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        return {"reply": "Thanks for your comment! Feel free to DM us if you have any questions.", "skip": False}
+
+    try:
+        import anthropic
+        client = anthropic.Anthropic(api_key=api_key)
+
+        prompt = f"Instagram comment"
+        if commenter:
+            prompt += f" from @{commenter}"
+        if post_caption:
+            prompt += f" on a post about: \"{post_caption}\""
+        prompt += f":\n\n\"{comment}\"\n\nWrite the reply."
+
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=120,
+            system=_REPLY_SYSTEM,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        reply = response.content[0].text.strip()
+
+        if reply == "SKIP":
+            return {"reply": "", "skip": True}
+
+        db.event_log("social", "info", f"IG reply generated for @{commenter}: {reply[:60]}…")
+        return {"reply": reply, "skip": False}
+
+    except Exception as exc:
+        return {"reply": "Thanks for the comment! DM us if you'd like to chat.", "skip": False}
