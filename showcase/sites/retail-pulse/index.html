@@ -1001,8 +1001,9 @@
     }
 
     /* 5 — GSAP stagger for product/feed sections */
+    gsap.set('.loft-why-item, .loft-review-card, .loft-size-row', { opacity:0, y:40 });
     gsap.utils.toArray('.loft-why-item, .loft-review-card, .loft-size-row').forEach(function(el,i){
-      gsap.from(el,{ opacity:0, y:40, duration:0.7, ease:'power3.out', delay:i%3*0.1,
+      gsap.to(el,{ opacity:1, y:0, duration:0.7, ease:'power3.out', delay:i%3*0.1,
         scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
     });
   })();

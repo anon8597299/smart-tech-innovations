@@ -457,7 +457,7 @@
           <p>Our co-located allied health team works alongside our GPs to provide integrated, coordinated care. A GP referral may entitle you to Medicare-subsidised sessions.</p>
         </div>
         <div class="hc-allied-grid">
-          <div class="hc-allied-card reveal">
+          <div class="hc-allied-card">
             <div class="hc-allied-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
             </div>
@@ -473,7 +473,7 @@
               <li>Workplace injury recovery</li>
             </ul>
           </div>
-          <div class="hc-allied-card reveal">
+          <div class="hc-allied-card">
             <div class="hc-allied-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
             </div>
@@ -489,7 +489,7 @@
               <li>Grief &amp; adjustment</li>
             </ul>
           </div>
-          <div class="hc-allied-card reveal">
+          <div class="hc-allied-card">
             <div class="hc-allied-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
             </div>
@@ -1186,8 +1186,9 @@
     document.querySelectorAll('[data-splitting]').forEach(function(el){ splitObs.observe(el); });
 
     /* 4 — GSAP stagger on service cards */
+    gsap.set('.hc-service-card, .hc-allied-card, .hc-wtb-item', { opacity:0, y:40, scale:0.97 });
     document.querySelectorAll('.hc-service-card, .hc-allied-card, .hc-wtb-item').forEach(function(el,i){
-      gsap.from(el, { opacity:0, y:40, scale:0.97, duration:0.7, ease:'power3.out', delay:i%3*0.1,
+      gsap.to(el, { opacity:1, y:0, scale:1, duration:0.7, ease:'power3.out', delay:i%3*0.1,
         scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
     });
   })();

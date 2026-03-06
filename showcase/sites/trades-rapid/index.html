@@ -166,32 +166,32 @@
           <p>Residential and light commercial plumbing across Bathurst and the Central West.</p>
         </div>
         <div class="services-grid">
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🚿</div>
             <h3>Blocked Drains</h3>
             <p>CCTV drain inspection and high-pressure water jetting. Fast diagnosis, permanent fix. We find the cause, not just clear the symptom.</p>
           </div>
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🔥</div>
             <h3>Hot Water Systems</h3>
             <p>Supply and install gas, electric, solar, and heat pump systems. Same-day replacement available. All major brands serviced.</p>
           </div>
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🚽</div>
             <h3>Bathroom Renovations</h3>
             <p>Full bathroom and laundry fit-outs from plans to final fixtures. Quality guaranteed. We manage the full plumbing scope.</p>
           </div>
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🏗️</div>
             <h3>New Construction</h3>
             <p>Rough-in and fit-out for new builds and major renovations. Builders welcome. Experience with residential and light commercial.</p>
           </div>
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🔧</div>
             <h3>General Repairs</h3>
             <p>Leaking taps, burst pipes, toilet repairs, and all general plumbing maintenance. No job too small. Fixed-price every time.</p>
           </div>
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="icon">🚨</div>
             <h3>Emergency Callouts</h3>
             <p>Burst pipes don't wait — neither do we. 24/7 emergency response across Bathurst. Typical arrival within 60 minutes.</p>
@@ -765,8 +765,9 @@
     /* 4 — GSAP ScrollTrigger stagger on service cards */
     gsap.registerPlugin(ScrollTrigger);
     lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0);
+    gsap.set('.service-card, .card', { opacity:0, y:50, scale:0.96 });
     gsap.utils.toArray('.service-card, .card').forEach(function(el,i){
-      gsap.from(el,{ opacity:0, y:50, scale:0.96, duration:0.75, ease:'power3.out', delay:i%3*0.12,
+      gsap.to(el,{ opacity:1, y:0, scale:1, duration:0.75, ease:'power3.out', delay:i%3*0.12,
         scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
     });
 
