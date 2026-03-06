@@ -1,0 +1,71 @@
+{
+  "_comment": "Edit this file to configure what the Social agent monitors. Add/remove competitors and hashtags as needed.",
+
+  "competitors": [
+    { "handle": "webdesignaustralia",     "notes": "Generic AU web design" },
+    { "handle": "digitalduck.com.au",     "notes": "AU web agency" },
+    { "handle": "online_solutions_au",    "notes": "SMB websites" },
+    { "handle": "tradie_websites_au",     "notes": "Trades-focused competitor" },
+    { "handle": "localbizwebsites",       "notes": "Local business sites" }
+  ],
+
+  "monitor_hashtags": [
+    "australianwebdesign",
+    "smallbusinessaustralia",
+    "websitedesign",
+    "digitalmarketingaustralia",
+    "aussietradie",
+    "sydneybusiness",
+    "melbournebusiness",
+    "brisbanebusiness",
+    "smallbusinessowner",
+    "localbusiness",
+    "businessgrowth",
+    "seoaustralia",
+    "tradiebusiness",
+    "accountingaustralia",
+    "australianentrepreneur"
+  ],
+
+  "target_keywords": [
+    "website design Australia 2026",
+    "small business website Australia",
+    "web agency Australia",
+    "tradie website",
+    "local business website",
+    "google business profile Australia",
+    "SEO small business Australia"
+  ],
+
+  "industry_verticals": [
+    "trades",
+    "healthcare",
+    "accounting",
+    "consulting",
+    "retail",
+    "solar",
+    "hospitality"
+  ],
+
+  "content_pillars": [
+    "website mistakes small businesses make",
+    "why local SEO matters in Australia",
+    "what a website that converts actually looks like",
+    "behind the scenes of building a site",
+    "customer results and transformations",
+    "debunking web design myths",
+    "Australian small business growth tips"
+  ],
+
+  "posting_times_aest": {
+    "morning": "07:30",
+    "evening": "18:30"
+  },
+
+  "avoid_topics": [
+    "politics",
+    "religion",
+    "specific pricing unless part of a CTA post",
+    "naming or attacking specific competitors"
+  ]
+}

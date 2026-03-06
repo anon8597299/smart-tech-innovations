@@ -38,12 +38,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from agents.base import BaseAgent
+from agents.social_intel import run_intel
 from dashboard import db
 
 PROJECT_ROOT = Path(__file__).parent.parent
 SOCIAL_DIR   = PROJECT_ROOT / "social"
 TILES_DIR    = Path.home() / "Documents" / "ImproveYourSite - Social Media" / "Tiles"
 QUEUE_FILE   = SOCIAL_DIR / "upload_queue.json"
+REPORT_FILE  = SOCIAL_DIR / "intel_report.json"
 
 GRAPH_BASE   = "https://graph.facebook.com/v19.0"
 
@@ -120,15 +122,33 @@ class SocialAgent(BaseAgent):
         self.log_info(f"Social: {today} ({['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][weekday]}) "
                       f"— theme: {plan['theme']}, slot: {time_slot}")
 
-        # 1. Market research
+        # 1. Competitive intelligence (morning run only — avoid double API calls)
+        intel = {}
+        if time_slot == "morning":
+            tid = self.create_task("intel", "Competitor + trend intelligence")
+            self.update_progress(tid, 10)
+            intel = run_intel(log=self.log)
+            gaps    = len(intel.get("content_gaps", []))
+            angles  = len(intel.get("recommended_angles", []))
+            self.complete_task(tid, f"{gaps} gaps found · {angles} content angles")
+        else:
+            # Evening run: use this morning's report if available
+            if REPORT_FILE.exists():
+                try:
+                    intel = json.loads(REPORT_FILE.read_text())
+                except Exception:
+                    intel = {}
+
+        # 2. Market research (legacy — now supplemented by intel)
         tid = self.create_task("research", f"Market research: {plan['theme']}")
-        trending = self._research_trending(plan)
+        trending = self._research_trending(plan, intel)
         self.complete_task(tid, f"Research complete: {len(trending)} insights")
 
         # 2. Generate post content
         tid = self.create_task("copywriting", f"Writing {plan['format']} copy")
         self.update_progress(tid, 20)
-        post = self._generate_post(plan, trending, today, time_slot)
+        recommended = intel.get("recommended_angles", []) if intel else []
+        post = self._generate_post(plan, trending, today, time_slot, recommended)
         if not post:
             self.fail_task(tid, "Content generation failed")
             return
@@ -173,10 +193,20 @@ class SocialAgent(BaseAgent):
 
     # ── Market research ───────────────────────────────────────────────────────
 
-    def _research_trending(self, plan: dict) -> list[str]:
-        """Use Perplexity to find what's trending for Australian SMBs right now."""
+    def _research_trending(self, plan: dict, intel: dict = None) -> list[str]:
+        """Combine intel report + Perplexity for a full picture of what's trending."""
+        # Pull from intel report first (already researched this morning)
+        combined = []
+        if intel:
+            combined += intel.get("trending_topics", [])[:3]
+            combined += [g for g in intel.get("content_gaps", [])[:2]]
+            if intel.get("market_pulse"):
+                combined.insert(0, intel["market_pulse"])
+
         perplexity_key = os.environ.get("PERPLEXITY_KEY", "")
         if not perplexity_key:
+            if combined:
+                return combined[:6]
             self.log_warn("No PERPLEXITY_KEY — using cached research topics")
             return self._fallback_research(plan["theme"])
 
@@ -230,7 +260,7 @@ class SocialAgent(BaseAgent):
 
     # ── Content generation ────────────────────────────────────────────────────
 
-    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str) -> dict | None:
+    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str, recommended_angles: list = None) -> dict | None:
         api_key = os.environ.get("ANTHROPIC_API_KEY", "")
         if not api_key:
             self.log_warn("No ANTHROPIC_API_KEY — using template post")
@@ -242,7 +272,15 @@ class SocialAgent(BaseAgent):
             return self._template_post(plan, today)
 
         research_text = "\n".join(f"- {t}" for t in trending)
-        day_name = today.strftime("%A")
+        day_name      = today.strftime("%A")
+        angles_text   = ""
+        if recommended_angles:
+            angles_text = "\n\nCOMPETITIVE ANGLES TO CONSIDER (from today's market research):\n"
+            for a in recommended_angles[:3]:
+                if isinstance(a, dict):
+                    angles_text += f"- Hook: \"{a.get('hook','')}\" | Why: {a.get('why_it_wins','')}\n"
+                else:
+                    angles_text += f"- {a}\n"
 
         system = """You write Instagram content for ImproveYourSite.com, an Australian web agency
 that builds websites for small businesses (tradies, GP clinics, accountants, boutiques, consultants).
@@ -264,7 +302,10 @@ Format: {plan['format']}
 Tone: {plan['caption_tone']}
 
 Current trending insights (from market research today):
-{research_text}
+{research_text}{angles_text}
+
+If a competitive angle above fits today's theme better than a generic post — use it.
+Prioritise angles that competitors are NOT covering.
 
 Return ONLY valid JSON with these exact keys:
 {{
