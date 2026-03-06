@@ -176,37 +176,37 @@
         </div>
         <div class="services-grid">
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#127968;</div>
             <h3>Wealth Accumulation</h3>
             <p>Investment strategy, portfolio construction and asset allocation tailored to your goals and risk profile. We build structures that grow wealth tax-effectively.</p>
           </div>
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#127958;</div>
             <h3>Retirement Planning</h3>
             <p>Transition to retirement, account-based pension streams, and sequencing-of-returns strategies. We model exactly how your money will last in retirement.</p>
           </div>
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#127970;</div>
             <h3>SMSF Strategy</h3>
             <p>Setup, ongoing strategy, and compliance for self-managed super funds. Investment policy statements, contribution planning, and full trustee support.</p>
           </div>
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#128188;</div>
             <h3>Business Exit Planning</h3>
             <p>Structuring the sale or succession of your business to maximise after-tax proceeds. CGT concessions, small business 15-year exemption, and reinvestment strategy.</p>
           </div>
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#128737;</div>
             <h3>Risk &amp; Insurance</h3>
             <p>Life, TPD, income protection and business expenses insurance — assessed on need, not commission. We compare the market and recommend what you actually need.</p>
           </div>
 
-          <div class="service-card reveal">
+          <div class="service-card">
             <div class="svc-icon">&#128221;</div>
             <h3>Estate Planning</h3>
             <p>Wills, powers of attorney, binding death benefit nominations, and intergenerational wealth transfer. We co-ordinate with your solicitor to get the structure right.</p>
@@ -1027,8 +1027,16 @@
       gsap.to(heroImg, { yPercent:18, ease:'none',
         scrollTrigger:{ trigger:'section.hero', start:'top top', end:'bottom top', scrub:true }});
     }
-    gsap.utils.toArray('.service-card, .why-item, .result-item').forEach(function(el,i){
-      gsap.from(el,{ opacity:0, y:45, duration:0.75, ease:'power3.out', delay:i%3*0.1,
+    /* Pre-hide service cards so the IntersectionObserver reveal system
+       cannot interfere — GSAP owns these elements exclusively */
+    gsap.set('.service-card', { opacity:0, y:45 });
+    gsap.utils.toArray('.service-card').forEach(function(el, i) {
+      gsap.to(el, { opacity:1, y:0, duration:0.7, ease:'power3.out',
+        delay: (i % 3) * 0.1,
+        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
+    });
+    gsap.utils.toArray('.why-item, .result-item').forEach(function(el, i) {
+      gsap.from(el,{ opacity:0, y:35, duration:0.65, ease:'power3.out', delay:i%3*0.1,
         scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
     });
   })();
