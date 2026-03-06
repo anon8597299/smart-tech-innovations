@@ -99,13 +99,12 @@ CONTENT_CALENDAR = {
 
 # ── Australian SMB Instagram hashtags by industry ────────────────────────────
 HASHTAGS = {
-    "web":      "#smallbusiness #australianbusiness #sydneybusiness #websitedesign "
-                "#localbusiness #digitalmarketing #businessgrowth #seoaustralia "
-                "#websitetips #smallbusinessowner #melbournebusiness #brisbanebusiness",
-    "trades":   "#tradie #australiantradie #plumber #electrician #smallbusiness "
-                "#localbusiness #tradesman #australianbusiness #businesswebsite",
-    "health":   "#gpaustralia #healthclinic #medicalpractice #smallbusiness "
-                "#australianhealthcare #localdoctor #businesswebsite",
+    "web":      "#smallbusiness #australianbusiness #websitedesign "
+                "#digitalmarketing #businessgrowth #seoaustralia #websitetips",
+    "trades":   "#tradie #australiantradie #smallbusiness "
+                "#localbusiness #australianbusiness #businesswebsite",
+    "health":   "#gpaustralia #healthclinic #smallbusiness "
+                "#australianhealthcare #businesswebsite",
 }
 
 
@@ -326,7 +325,7 @@ Return ONLY valid JSON with these exact keys:
 {{
   "headline": "The main hook (under 8 words, no punctuation at end)",
   "slides": ["slide 1 text (under 12 words)", "slide 2", "slide 3", "slide 4", "slide 5"],
-  "caption": "The full Instagram caption (2-4 sentences, conversational, ends with a question or CTA). Include relevant Australian hashtags at the end.",
+  "caption": "The full Instagram caption (2-4 sentences, conversational, ends with a question or CTA). No hashtags — they are added separately.",
   "alt_text": "Image description for accessibility"
 }}
 
