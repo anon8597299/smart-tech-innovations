@@ -1,0 +1,22 @@
+# IYS Agent System dependencies
+# Install: pip install -r requirements-agents.txt
+
+# Web framework + ASGI server
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+aiofiles>=23.2.1
+
+# Task scheduler
+APScheduler>=3.10.0
+pytz>=2024.1
+
+# AI / API clients
+anthropic>=0.25.0
+
+# Existing builder deps (already in builder/requirements.txt — listed here for completeness)
+PyGithub>=2.3.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Optional: Google Ads (uncomment if using ads agent with google-ads SDK)
+# google-ads>=24.0.0
