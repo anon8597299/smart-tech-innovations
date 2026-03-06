@@ -32,7 +32,7 @@ from github_client import push_customer_site
 COMPONENTS_DIR = Path(__file__).parent / "components"
 
 
-def load_component(effect_id: str) -> dict | None:
+def load_component(effect_id: str):
     """Load a component JSON snippet by effect ID."""
     path = COMPONENTS_DIR / f"{effect_id}.json"
     if not path.exists():
@@ -41,7 +41,7 @@ def load_component(effect_id: str) -> dict | None:
         return json.load(f)
 
 
-def inject_components(html: str, effects: list[str]) -> str:
+def inject_components(html: str, effects: list) -> str:
     """
     Inject 3D/reactive component scripts into a rendered HTML file.
 
