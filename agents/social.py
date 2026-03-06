@@ -154,10 +154,11 @@ class SocialAgent(BaseAgent):
             return
         self.complete_task(tid, post.get("headline", "Post written"))
 
-        # 3. Generate visual (carousel PNG via existing scripts)
+        # 3. Generate visual (carousel slides via existing scripts)
         tid = self.create_task("visual", f"Producing visual: {plan['theme']}")
-        image_path = self._produce_visual(plan, post)
-        self.complete_task(tid, f"Visual: {image_path.name if image_path else 'queued'}")
+        slide_paths = self._produce_visual(plan, post)
+        slide_count = len(slide_paths)
+        self.complete_task(tid, f"{slide_count} slide(s)" if slide_paths else "no visual — queued text-only")
 
         # 4. Publish or queue
         # Priority: Make.com webhook (free) → Graph API → manual queue
@@ -165,19 +166,20 @@ class SocialAgent(BaseAgent):
         ig_token   = os.environ.get("INSTAGRAM_PUBLISHING_TOKEN", "")
         account_id = os.environ.get("INSTAGRAM_ACCOUNT_ID", "")
 
-        if make_url and image_path:
-            tid = self.create_task("publish", "Publishing via Make.com → Instagram")
-            published = self._publish_via_make(make_url, image_path, post["caption"])
+        if make_url and slide_paths:
+            tid = self.create_task("publish", f"Publishing {slide_count}-slide carousel via Make.com")
+            published = self._publish_via_make(make_url, slide_paths, post["caption"])
             if published:
-                self.complete_task(tid, "Posted to Instagram via Make.com")
-                self.log_info("Social: published to Instagram via Make.com webhook")
+                self.complete_task(tid, f"Posted {slide_count}-slide carousel via Make.com")
+                self.log_info(f"Social: published {slide_count}-slide carousel via Make.com webhook")
                 self._mark_posted(post)
             else:
                 self.fail_task(tid, "Make.com publish failed — queued for manual post")
-                self._queue_post(post, image_path)
+                self._queue_post(post, slide_paths)
 
-        elif ig_token and account_id and image_path:
+        elif ig_token and account_id and slide_paths:
             tid = self.create_task("publish", "Publishing via Instagram Graph API")
+            image_path = slide_paths[0]
             published = self._publish_to_instagram(ig_token, account_id, image_path, post["caption"])
             if published:
                 self.complete_task(tid, f"Posted: {published}")
@@ -185,10 +187,10 @@ class SocialAgent(BaseAgent):
                 self._mark_posted(post)
             else:
                 self.fail_task(tid, "Graph API publish failed — queued for manual post")
-                self._queue_post(post, image_path)
+                self._queue_post(post, slide_paths)
 
         else:
-            self._queue_post(post, image_path)
+            self._queue_post(post, slide_paths)
             self.log_info("Social: post queued — add MAKE_WEBHOOK_URL to builder/.env to auto-post")
 
         # 5. Log insights if token available
@@ -200,7 +202,7 @@ class SocialAgent(BaseAgent):
         db.content_add(
             content_type="carousel",
             title=post.get("headline", f"IG post {today}"),
-            preview_path=str(image_path) if image_path else None,
+            preview_path=str(slide_paths[0]) if slide_paths else None,
             status="delivered",
         )
 
@@ -374,11 +376,11 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
     # ── Visual production ─────────────────────────────────────────────────────
 
-    def _produce_visual(self, plan: dict, post: dict) -> Path | None:
+    def _produce_visual(self, plan: dict, post: dict) -> list[Path]:
         """
-        Tries to produce a carousel PNG using existing make_*.py scripts.
-        Picks the script most relevant to today's theme.
-        Falls back to any available script.
+        Runs a carousel make_*.py script and returns the list of slide PNGs it produced
+        (up to 5), sorted by filename for correct slide order.
+        Returns an empty list if no scripts succeed.
         """
         TILES_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -395,64 +397,85 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
         preferred = theme_script_map.get(plan["theme"])
         scripts = list(SOCIAL_DIR.glob("make_*.py"))
 
-        # Sort: preferred first
         def sort_key(p):
             return 0 if p.name == preferred else 1
         scripts.sort(key=sort_key)
 
         for script in scripts:
             try:
+                # Record time before running so we can find new files afterward
+                before = datetime.now().timestamp() - 1  # 1s buffer
                 result = subprocess.run(
                     [sys.executable, str(script)],
                     capture_output=True, text=True, cwd=str(PROJECT_ROOT),
-                    timeout=60,
+                    timeout=90,
                 )
                 if result.returncode == 0:
-                    # Find the most recently created PNG in Tiles dir
-                    pngs = sorted(TILES_DIR.glob("*.png"), key=lambda p: p.stat().st_mtime, reverse=True)
-                    if pngs:
-                        return pngs[0]
+                    # Collect all PNGs written during this run (by mtime)
+                    new_pngs = [
+                        p for p in TILES_DIR.glob("*.png")
+                        if p.stat().st_mtime >= before
+                    ]
+                    if new_pngs:
+                        # Sort by name so slide-1, slide-2 … are in order
+                        new_pngs.sort(key=lambda p: p.name)
+                        self.log_info(
+                            f"Social: {script.name} produced {len(new_pngs)} slide(s): "
+                            + ", ".join(p.name for p in new_pngs[:5])
+                        )
+                        return new_pngs[:5]
             except Exception as exc:
                 self.log_warn(f"Script {script.name} failed: {exc}")
 
         self.log_warn("No carousel scripts succeeded — post will be text-only")
-        return None
+        return []
 
     # ── Instagram publishing ──────────────────────────────────────────────────
 
-    def _publish_via_make(self, webhook_url: str, image_path: Path, caption: str) -> bool:
+    def _publish_via_make(self, webhook_url: str, slide_paths: list[Path], caption: str) -> bool:
         """
-        Post to Instagram via Make.com (free tier covers ~60 posts/month).
+        Post a carousel to Instagram via Make.com webhook.
 
-        Setup:
-          1. make.com → New Scenario
-          2. Trigger: Webhooks → Custom webhook → copy URL
-          3. Action: Instagram → Create a Photo Post
-          4. Map caption={{caption}}, image_url={{image_url}}
-          5. Add MAKE_WEBHOOK_URL to builder/.env
+        Make.com scenario setup:
+          1. Trigger: Webhooks → Custom webhook (copy URL → MAKE_WEBHOOK_URL in .env)
+          2. Action: Instagram → Create a Carousel Post
+          3. Caption field: map {{1.caption}}
+          4. Media → add 5 items, map {{1.slide_1}} … {{1.slide_5}}
 
-        Make receives the JSON, fetches the image, posts to Instagram.
+        This sends up to 5 public image URLs as slide_1 … slide_5.
         """
+        if not slide_paths:
+            return False
+
         try:
-            # Image needs to be at a public URL
-            image_url = self._upload_image_to_repo(image_path)
-            if not image_url:
-                self.log_warn("Make.com: could not get public image URL — no GITHUB_PAT set?")
+            # Upload all slides to GitHub to get public URLs
+            slide_urls = []
+            for path in slide_paths[:5]:
+                url = self._upload_image_to_repo(path)
+                if url:
+                    slide_urls.append(url)
+                    self.log_info(f"Make.com: uploaded {path.name} → {url}")
+                else:
+                    self.log_warn(f"Make.com: upload failed for {path.name}")
+
+            if not slide_urls:
+                self.log_warn("Make.com: all image uploads failed — no GITHUB_PAT set?")
                 return False
 
-            payload = json.dumps({
-                "caption":   caption,
-                "image_url": image_url,
-            }).encode()
+            # Build payload with slide_1 … slide_N
+            payload: dict = {"caption": caption}
+            for i, url in enumerate(slide_urls, 1):
+                payload[f"slide_{i}"] = url
+
+            self.log_info(f"Make.com: sending {len(slide_urls)}-slide carousel payload")
 
             req = urllib.request.Request(
                 webhook_url,
-                data=payload,
+                data=json.dumps(payload).encode(),
                 method="POST",
                 headers={"Content-Type": "application/json"},
             )
-            with urllib.request.urlopen(req, timeout=15) as r:
-                # Make.com returns "Accepted" (200) on success
+            with urllib.request.urlopen(req, timeout=30) as r:
                 status = r.status
             return status == 200
 
@@ -575,7 +598,7 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
     # ── Upload queue ──────────────────────────────────────────────────────────
 
-    def _queue_post(self, post: dict, image_path: Path | None):
+    def _queue_post(self, post: dict, slide_paths: list[Path]):
         """Save post to social/upload_queue.json for manual Instagram upload."""
         queue = []
         if QUEUE_FILE.exists():
@@ -585,16 +608,18 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
                 queue = []
 
         entry = {
-            "date":       date.today().isoformat(),
-            "headline":   post.get("headline", ""),
-            "caption":    post.get("caption", ""),
-            "slides":     post.get("slides", []),
-            "image_path": str(image_path) if image_path else None,
-            "status":     "pending",
+            "date":        date.today().isoformat(),
+            "headline":    post.get("headline", ""),
+            "caption":     post.get("caption", ""),
+            "slides":      post.get("slides", []),
+            "image_path":  str(slide_paths[0]) if slide_paths else None,
+            "slide_paths": [str(p) for p in slide_paths],
+            "status":      "pending",
         }
         queue.append(entry)
         QUEUE_FILE.write_text(json.dumps(queue, indent=2))
-        self.log_info(f"Queued post: {entry['headline']} — image: {image_path.name if image_path else 'none'}")
+        names = ", ".join(p.name for p in slide_paths) if slide_paths else "none"
+        self.log_info(f"Queued post: {entry['headline']} — slides: {names}")
 
     # ── Insights ──────────────────────────────────────────────────────────────
 
