@@ -571,22 +571,25 @@
     <div class="section">
       <div class="section-header">
         <span class="section-title">Ask the Manager</span>
-        <button class="btn btn-secondary btn-sm" onclick="clearChat()">Clear chat</button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="showMemory()">Memory</button>
+          <button class="btn btn-secondary btn-sm" onclick="clearChat()">Clear chat</button>
+        </div>
       </div>
       <div class="chat-card">
         <div class="chat-messages" id="chat-messages">
           <div class="chat-msg assistant">
-            Hey James — I'm watching all 6 agents. Ask me anything, or give me instructions:<br><br>
+            Hey James — I'm watching all 6 agents. I remember what we've discussed, can schedule tasks directly to the calendar, and trigger agents on command.<br><br>
             <button class="chat-suggestion" onclick="sendSuggestion('What ran today?')">What ran today?</button>
-            <button class="chat-suggestion" onclick="sendSuggestion('Run the content agent now')">Run content agent</button>
+            <button class="chat-suggestion" onclick="sendSuggestion('Schedule the social agent for next Monday')">Schedule social Monday</button>
             <button class="chat-suggestion" onclick="sendSuggestion('Any errors I should know about?')">Any errors?</button>
-            <button class="chat-suggestion" onclick="sendSuggestion('Run the analyst now')">Run analyst</button>
+            <button class="chat-suggestion" onclick="sendSuggestion('What do you remember about our plans?')">Show memory</button>
           </div>
         </div>
         <div class="chat-input-row">
           <input
             class="chat-input" id="chat-input"
-            placeholder="Ask about agents, trigger a run, queue a site build…"
+            placeholder="Tell me what to schedule, remember, or run…"
             onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendChat(); }"
             autocomplete="off"
           >
@@ -1246,6 +1249,48 @@ async function clearChat() {
   try { await api('/api/chat', 'DELETE'); } catch {}
   const box = document.getElementById('chat-messages');
   box.innerHTML = '<div class="chat-msg assistant">Chat cleared. What do you need?</div>';
+}
+
+// ── Memory viewer ──────────────────────────────────────────────────────────
+async function showMemory() {
+  const existing = document.getElementById('mem-overlay');
+  if (existing) { existing.remove(); return; }
+
+  let memories = [];
+  try {
+    const data = await api('/api/memory');
+    memories = data.memories || [];
+  } catch (e) {}
+
+  const overlay = document.createElement('div');
+  overlay.id = 'mem-overlay';
+  overlay.className = 'sched-overlay';
+  overlay.innerHTML = `
+    <div class="sched-modal" style="max-width:520px;">
+      <div class="sched-modal-title">Persistent Memory</div>
+      <div id="mem-list" style="max-height:360px;overflow-y:auto;margin-bottom:16px;">
+        ${memories.length === 0
+          ? '<p style="color:var(--muted);font-size:13px;">No memories saved yet. Chat with the manager to build memory.</p>'
+          : memories.slice().reverse().map(m => `
+            <div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;">
+              <span style="color:var(--muted);margin-right:8px;">${esc(m.date)}</span>
+              ${esc(m.text)}
+            </div>`).join('')
+        }
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn btn-secondary" onclick="clearMemory()">Clear all memory</button>
+        <button class="btn btn-primary" onclick="document.getElementById('mem-overlay').remove()">Close</button>
+      </div>
+    </div>`;
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+
+async function clearMemory() {
+  if (!confirm('Clear all saved memories? This cannot be undone.')) return;
+  try { await api('/api/memory', 'DELETE'); } catch {}
+  document.getElementById('mem-overlay')?.remove();
 }
 </script>
 

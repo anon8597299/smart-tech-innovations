@@ -22,6 +22,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -183,34 +184,68 @@ async def clear_completed():
     return {"status": "cleared"}
 
 
-# ── Chat endpoint ─────────────────────────────────────────────────────────────
+# ── Chat memory ───────────────────────────────────────────────────────────────
 
-# Persistent conversation history (in-memory, resets on restart)
+_MEMORY_FILE = Path(__file__).parent.parent / "social" / "chat_memory.json"
 _chat_history: list[dict] = []
+
+
+def _load_memory() -> list[dict]:
+    if _MEMORY_FILE.exists():
+        try:
+            return json.loads(_MEMORY_FILE.read_text())
+        except Exception:
+            pass
+    return []
+
+
+def _save_memory(memories: list[dict]):
+    _MEMORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    _MEMORY_FILE.write_text(json.dumps(memories[-60:], indent=2))  # keep last 60
+
+
+def _memory_context() -> str:
+    memories = _load_memory()
+    if not memories:
+        return ""
+    lines = "\n".join(f"- [{m['date']}] {m['text']}" for m in memories[-15:])
+    return f"\n\nPERSISTENT MEMORY (what you've discussed previously):\n{lines}"
+
+
+# ── Chat endpoint ─────────────────────────────────────────────────────────────
 
 CHAT_SYSTEM_PROMPT = """You are the IYS (ImproveYourSite.com) operations assistant built into the agent dashboard.
 
 You help James Burke manage his web agency's automated systems. You have full knowledge of:
 - 6 agents: Manager (daily digest 7am), Social (Instagram + carousels 8am), Ads (Google Ads 9am),
   Content (auto-blog Monday 6am), Builder (on-demand site generation), Analyst (quality review)
-- The dashboard at http://localhost:8080
+- The calendar where scheduled tasks appear by date
 
-When James asks you to trigger an agent, respond with JSON action block:
-{"action": "trigger", "agent_id": "<id>"}
+ACTIONS — when the user wants something done, reply with the matching JSON block:
 
-When James asks you to queue a site build, respond with:
+Trigger an agent now:
+{"action": "trigger", "agent_id": "<manager|social|ads|content|builder|analyst>"}
+
+Schedule a task on the calendar:
+{"action": "schedule", "agent_id": "<id>", "title": "<title>", "date": "<YYYY-MM-DD>", "notes": "<optional>"}
+
+Save something important to memory (decisions, plans, client info):
+{"action": "remember", "text": "<what to remember>"}
+
+Queue a site build:
 {"action": "queue_build", "config": "<path>"}
 
-Otherwise, just answer helpfully and concisely. Keep responses short — this is a chat panel.
+You can combine a natural reply with an action block on the same response.
+When the user mentions a task for a specific date or agent, proactively schedule it without being asked.
+When important business information is shared (client names, decisions, plans), save it to memory automatically.
 
-Current system context will be provided in each message."""
+Keep responses concise — this is a chat panel, not an essay."""
 
 
 @app.post("/api/chat")
 async def chat(body: dict):
-    """Chat with Claude about the agent system. Can trigger agents, answer questions."""
-    import os
     global _chat_history
+    from datetime import date as _date
 
     message = (body.get("message") or "").strip()
     if not message:
@@ -225,55 +260,98 @@ async def chat(body: dict):
     except ImportError:
         return {"reply": "anthropic package not installed. Run: pip install anthropic"}
 
-    # Build system context snapshot
+    # Build live context
     agents_state = db.agents_all()
-    summary = db.digest_summary()
-    agent_state_str = ', '.join(a['name'] + ':' + a['status'] for a in agents_state)
+    summary      = db.digest_summary()
+    agent_str    = ', '.join(a['name'] + ':' + a['status'] for a in agents_state)
+    today_str    = _date.today().isoformat()
+
+    # Upcoming scheduled tasks for next 7 days (so Claude knows the calendar)
+    upcoming = db.scheduled_tasks_for_month(_date.today().year, _date.today().month)
+    upcoming_str = ""
+    if upcoming:
+        upcoming_str = "\nUpcoming scheduled tasks:\n" + "\n".join(
+            f"  {t['scheduled_for']} → [{t['agent_id']}] {t['title']}"
+            for t in upcoming[:8]
+        )
+
     context = (
-        f"\nAgent states: {agent_state_str}"
-        f"\nToday — tasks completed: {summary['tasks_completed']}, errors: {summary['errors']}, "
-        f"content delivered: {summary['content_delivered']}"
+        f"\nToday: {today_str}"
+        f"\nAgent states: {agent_str}"
+        f"\nTasks completed today: {summary['tasks_completed']}, errors: {summary['errors']}"
+        + upcoming_str
+        + _memory_context()
     )
 
     _chat_history.append({"role": "user", "content": message})
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client   = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
         model="claude-haiku-4-5-20251001",
-        max_tokens=400,
+        max_tokens=500,
         system=CHAT_SYSTEM_PROMPT + context,
-        messages=_chat_history[-20:],  # keep last 20 turns
+        messages=_chat_history[-20:],
     )
 
     reply_text = response.content[0].text.strip()
     _chat_history.append({"role": "assistant", "content": reply_text})
 
-    # Check for action blocks
-    action_taken = None
-    import re as _re
-    action_match = _re.search(r'\{[^{}]*"action"\s*:\s*"([^"]+)"[^{}]*\}', reply_text)
-    if action_match:
-        import json as _json
+    # ── Process all action blocks in the reply ────────────────────────────────
+    actions_taken = []
+    for match in re.finditer(r'\{[^{}]{10,400}\}', reply_text):
         try:
-            action = _json.loads(action_match.group(0))
-            if action.get("action") == "trigger":
+            action = json.loads(match.group(0))
+            act = action.get("action", "")
+
+            if act == "trigger":
                 agent_id = action.get("agent_id", "")
                 from agents.scheduler import AGENT_MAP
                 if agent_id in AGENT_MAP and not _paused:
                     import threading
                     threading.Thread(target=AGENT_MAP[agent_id].execute, daemon=True).start()
-                    action_taken = f"Triggered {agent_id} agent."
-            elif action.get("action") == "queue_build":
+                    actions_taken.append(f"Triggered {agent_id} agent")
+
+            elif act == "schedule":
+                agent_id = action.get("agent_id", "")
+                title    = action.get("title", "")
+                date_s   = action.get("date", "")
+                notes    = action.get("notes", "")
+                if agent_id and title and date_s:
+                    task_id = db.scheduled_task_create(agent_id, title, notes, date_s)
+                    actions_taken.append(f"Scheduled [{agent_id}] '{title}' on {date_s}")
+
+            elif act == "remember":
+                text = action.get("text", "").strip()
+                if text:
+                    memories = _load_memory()
+                    memories.append({"date": today_str, "text": text})
+                    _save_memory(memories)
+                    actions_taken.append(f"Remembered: {text[:60]}")
+
+            elif act == "queue_build":
                 from agents.builder import BuilderAgent
                 BuilderAgent.enqueue(action.get("config", ""))
-                action_taken = "Build job queued."
+                actions_taken.append("Build job queued")
+
         except Exception:
             pass
 
     return {
-        "reply": reply_text,
-        "action_taken": action_taken,
+        "reply":        reply_text,
+        "action_taken": " · ".join(actions_taken) if actions_taken else None,
+        "actions":      actions_taken,
     }
+
+
+@app.get("/api/memory")
+async def get_memory():
+    return {"memories": _load_memory()}
+
+
+@app.delete("/api/memory")
+async def clear_memory():
+    _save_memory([])
+    return {"status": "cleared"}
 
 
 @app.get("/api/calendar")
