@@ -434,6 +434,38 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
     # ── Instagram publishing ──────────────────────────────────────────────────
 
+    def _ensure_scenario_active(self) -> None:
+        """Re-activate the Make.com scenario if it has been auto-paused after an error."""
+        api_key     = os.environ.get("MAKE_API_KEY", "")
+        scenario_id = os.environ.get("MAKE_SCENARIO_ID", "")
+        if not api_key or not scenario_id:
+            return
+        try:
+            # Check current status
+            req = urllib.request.Request(
+                f"https://eu1.make.com/api/v2/scenarios/{scenario_id}",
+                headers={"Authorization": f"Token {api_key}", "Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=10) as r:
+                data = json.loads(r.read())
+            is_active = data.get("scenario", {}).get("isActive", True)
+            if not is_active:
+                # Re-activate it
+                payload = json.dumps({"isActive": True}).encode()
+                req = urllib.request.Request(
+                    f"https://eu1.make.com/api/v2/scenarios/{scenario_id}",
+                    data=payload,
+                    method="PATCH",
+                    headers={"Authorization": f"Token {api_key}", "Content-Type": "application/json"},
+                )
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    pass
+                self.log_info("Make.com: scenario was paused — re-activated successfully")
+            else:
+                self.log_info("Make.com: scenario is active")
+        except Exception as exc:
+            self.log_warn(f"Make.com: could not check/reactivate scenario: {exc}")
+
     def _publish_via_make(self, webhook_url: str, slide_paths: list[Path], caption: str, facebook_caption: str = "") -> bool:
         """
         Post a carousel to Instagram + Facebook via Make.com webhook.
@@ -451,6 +483,9 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
         """
         if not slide_paths:
             return False
+
+        # Wake scenario if Make.com auto-paused it after a previous error
+        self._ensure_scenario_active()
 
         try:
             # Upload all slides to GitHub to get public URLs
