@@ -1,0 +1,182 @@
+[
+  {
+    "business_name": "Wagga City Auto Centre",
+    "industry": "mechanic",
+    "city": "Wagga Wagga",
+    "email": "kandtparkerwaggacityautocentre@hotmail.com",
+    "website": "https://wcac.net.au",
+    "phone": "02 69 255 755",
+    "place_id": "seed_wagga_city_auto_centre"
+  },
+  {
+    "business_name": "Physiotherapy Centre Bendigo",
+    "industry": "physiotherapist",
+    "city": "Bendigo",
+    "email": "info@physiotherapycentrebendigo.com.au",
+    "website": "https://physiotherapycentrebendigo.com.au",
+    "phone": "03 5442 4044",
+    "place_id": "seed_physio_centre_bendigo"
+  },
+  {
+    "business_name": "Lonestar Power",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "solar@lonestarwelds.com.au",
+    "website": "https://www.lonestarpower.com.au",
+    "phone": "07 4751 8008",
+    "place_id": "seed_lonestar_power_townsville"
+  },
+  {
+    "business_name": "Laser Plumbing Bathurst",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "bathurst@laserplumbing.com.au",
+    "website": "https://www.laserplumbing.com.au/m/Plumber-Bathurst",
+    "phone": "02 6332 4062",
+    "place_id": "seed_laser_plumbing_bathurst"
+  },
+  {
+    "business_name": "Ladgrove Builder",
+    "industry": "builder",
+    "city": "Albury",
+    "email": "",
+    "website": "https://www.ladgrovebuilder.com",
+    "phone": "0432 748 992",
+    "place_id": "seed_ladgrove_builder_albury"
+  },
+  {
+    "business_name": "Wolki Construction",
+    "industry": "builder",
+    "city": "Albury",
+    "email": "",
+    "website": "https://wolkiconstruction.com",
+    "phone": "",
+    "place_id": "seed_wolki_construction_albury"
+  },
+  {
+    "business_name": "WB Carpentry",
+    "industry": "carpenter",
+    "city": "Albury",
+    "email": "",
+    "website": "https://www.wbcarpentry.com.au",
+    "phone": "",
+    "place_id": "seed_wb_carpentry_albury"
+  },
+  {
+    "business_name": "O'Neill Carpentry & Construction",
+    "industry": "builder",
+    "city": "Albury",
+    "email": "",
+    "website": "https://oneillcc.com.au",
+    "phone": "",
+    "place_id": "seed_oneill_cc_albury"
+  },
+  {
+    "business_name": "Toowoomba Cleaning Co",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.toowoombacleaningco.com.au",
+    "phone": "0444 511 658",
+    "place_id": "seed_toowoomba_cleaning_co"
+  },
+  {
+    "business_name": "Pure Eco Clean",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.pureecoclean.com.au",
+    "phone": "0409 960 763",
+    "place_id": "seed_pure_eco_clean_toowoomba"
+  },
+  {
+    "business_name": "Dream n Clean",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.dreamnclean.com.au",
+    "phone": "0407 593 062",
+    "place_id": "seed_dream_n_clean_toowoomba"
+  },
+  {
+    "business_name": "Solar Dimension",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://solardimension.com.au",
+    "phone": "",
+    "place_id": "seed_solar_dimension_townsville"
+  },
+  {
+    "business_name": "Barra Solar Power",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://www.barrasolarpower.com.au",
+    "phone": "",
+    "place_id": "seed_barra_solar_townsville"
+  },
+  {
+    "business_name": "Dubbo Premier Landscapes",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.dubbopremierlandscapes.com.au",
+    "phone": "0487 638 783",
+    "place_id": "seed_dubbo_premier_landscapes"
+  },
+  {
+    "business_name": "Creative Spaces Landscaping",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.creativespaceslandscaping.au",
+    "phone": "0424 192 911",
+    "place_id": "seed_creative_spaces_dubbo"
+  },
+  {
+    "business_name": "ASP Electrical Orange",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://www.aspelectrical.com.au",
+    "phone": "0411 898 735",
+    "place_id": "seed_asp_electrical_orange"
+  },
+  {
+    "business_name": "SDS Electrical Services",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://sdselectrical.com.au",
+    "phone": "0407 414 609",
+    "place_id": "seed_sds_electrical_orange"
+  },
+  {
+    "business_name": "MAC Electrical Services",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://macelectrical.com.au",
+    "phone": "",
+    "place_id": "seed_mac_electrical_orange"
+  },
+  {
+    "business_name": "Byrnes Accounting & Financial",
+    "industry": "accountant",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://www.byrnesaccounting.com.au",
+    "phone": "",
+    "place_id": "seed_byrnes_accounting_tamworth"
+  },
+  {
+    "business_name": "Hancocks Accountants",
+    "industry": "accountant",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://hancocks.com.au",
+    "phone": "",
+    "place_id": "seed_hancocks_tamworth"
+  }
+]

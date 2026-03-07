@@ -9,8 +9,10 @@ ops.html
 # macOS
 .DS_Store
 
-# Social media content — local only, do not push to GitHub
-social/
+# Social media images — local only
 assets/social/*.png
 assets/social/*.jpg
 marketing/
+
+# Social data files — push these (queue, intel, leads seed)
+# social/ directory is NOT ignored — only the images above are

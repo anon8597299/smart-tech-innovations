@@ -89,7 +89,8 @@ def init_db():
                 ('ads',      'Ads',      'idle'),
                 ('content',  'Content',  'idle'),
                 ('builder',  'Builder',  'idle'),
-                ('analyst',  'Analyst',  'idle');
+                ('analyst',  'Analyst',  'idle'),
+                ('leads',    'Leads',    'idle');
         """)
     _init_scheduled_tasks(get_conn())
 
