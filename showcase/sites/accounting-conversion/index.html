@@ -1,1042 +1,851 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clearview Accounting &#8212; Tax, Business Advisory &amp; SMSF | Bathurst NSW</title>
-  <meta name="description" content="Sarah Chen CPA &#8212; expert tax returns, business advisory and SMSF administration in Bathurst NSW. Xero Gold Partner. Fixed-fee pricing. Book a free 20-min consult today.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clearview Accounting | CPA Firm — Bathurst NSW</title>
+<meta name="description" content="Bathurst's trusted CPA firm. Individual tax returns, small business accounting, SMSF, Xero bookkeeping and proactive tax advice from Sarah Chen CPA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── tokens ── */
+:root{
+  --teal:#0d9488;
+  --teal-dk:#0f766e;
+  --teal-lt:#14b8a6;
+  --teal-pale:#f0fdfa;
+  --amber:#d97706;
+  --amber-lt:#f59e0b;
+  --ink:#1a2e3b;
+  --body:#374151;
+  --muted:#6b7280;
+  --off:#f8fffe;
+  --border:#d1faf5;
+}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AccountingService",
-    "name": "Clearview Accounting",
-    "description": "Tax, business advisory and SMSF administration for individuals and SMEs across Central West NSW. CPA Australia member, Xero Gold Partner, MYOB Partner.",
-    "url": "https://clearviewaccounting.com.au",
-    "telephone": "(02) 6331 2200",
-    "email": "admin@clearviewaccounting.com.au",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Suite 3, 157 George Street",
-      "addressLocality": "Bathurst",
-      "addressRegion": "NSW",
-      "postalCode": "2795",
-      "addressCountry": "AU"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -33.4193,
-      "longitude": 149.5768
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "08:30",
-        "closes": "17:30"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "67",
-      "bestRating": "5"
-    },
-    "areaServed": [
-      {"@type": "City", "name": "Bathurst"},
-      {"@type": "City", "name": "Orange"},
-      {"@type": "City", "name": "Lithgow"},
-      {"@type": "City", "name": "Mudgee"},
-      {"@type": "AdministrativeArea", "name": "Central West NSW"}
-    ],
-    "founder": {
-      "@type": "Person",
-      "name": "Sarah Chen",
-      "jobTitle": "Principal, CPA"
-    },
-    "foundingDate": "2011",
-    "memberOf": [
-      {"@type": "Organization", "name": "CPA Australia"},
-      {"@type": "Organization", "name": "Xero Gold Partner"},
-      {"@type": "Organization", "name": "MYOB Partner"}
-    ]
-  }
-  </script>
+/* ── reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--body);background:#fff;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* ── scroll bar ── */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--teal),var(--teal-lt));z-index:9999;transition:width .1s}
+
+/* ── demo banner ── */
+.demo-banner{background:linear-gradient(90deg,var(--teal-dk),var(--teal));color:#fff;text-align:center;padding:10px 20px;font-size:.82rem;font-weight:500;position:relative;z-index:200}
+.demo-banner a{color:#a7f3d0;font-weight:700;text-decoration:underline;margin-left:8px}
+
+/* ── nav ── */
+nav{position:sticky;top:36px;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #d1fae5;padding:0 40px}
+.nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:38px;height:38px;background:linear-gradient(135deg,var(--teal-dk),var(--teal-lt));border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo svg{width:20px;height:20px;fill:#fff}
+.brand-name{font-size:1.05rem;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.87rem;font-weight:500;color:var(--body);transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--teal);color:#fff!important;padding:9px 22px;border-radius:6px;font-weight:600;transition:background .2s!important}
+.nav-cta:hover{background:var(--teal-dk)!important}
+
+/* ── hero ── */
+.hero{background:linear-gradient(150deg,var(--ink) 0%,#0d2b36 55%,#0f4a44 100%);padding:100px 40px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.3) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.3);border-radius:30px;padding:6px 16px;font-size:.78rem;color:#5eead4;font-weight:600;margin-bottom:24px;letter-spacing:.04em}
+.hero h1{font-size:3rem;font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;letter-spacing:-.02em}
+.hero h1 span{color:var(--teal-lt)}
+.hero-lead{font-size:1.04rem;color:rgba(255,255,255,.72);line-height:1.75;margin-bottom:36px;font-weight:300}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--teal-lt));color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;font-size:.95rem;transition:opacity .2s;box-shadow:0 4px 20px rgba(13,148,136,.4)}
+.btn-primary:hover{opacity:.9}
+.btn-outline{border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.9);padding:12px 28px;border-radius:8px;font-weight:600;font-size:.95rem;transition:border-color .2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.8)}
+.hero-panel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:30px;backdrop-filter:blur(6px)}
+.hero-panel-title{font-size:.73rem;font-weight:700;color:#5eead4;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.panel-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+.p-stat .num{font-size:2rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.p-stat .lbl{font-size:.74rem;color:rgba(255,255,255,.6);margin-top:4px}
+.profile-strip{display:flex;align-items:center;gap:14px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+.prof-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-lt));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;flex-shrink:0}
+.prof-name{font-size:.95rem;font-weight:700;color:#fff}
+.prof-title{font-size:.76rem;color:rgba(255,255,255,.6);margin-top:2px}
+.partner-logos{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.partner-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:.73rem;font-weight:700;color:rgba(255,255,255,.85)}
+.partner-badge svg{width:13px;height:13px;fill:#5eead4}
+
+/* ── sections ── */
+section{padding:88px 40px}
+.section-inner{max-width:1160px;margin:0 auto}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+h2{font-size:2.4rem;font-weight:800;color:var(--ink);line-height:1.2;margin-bottom:16px;letter-spacing:-.02em}
+.lead{font-size:1.02rem;color:var(--muted);max-width:640px;line-height:1.75}
+
+/* ── reveal ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── kpi strip ── */
+.kpi-strip{background:linear-gradient(90deg,var(--teal-dk),var(--teal));padding:44px 40px}
+.kpi-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.kpi-item{text-align:center}
+.kpi-item .kpi-num{font-size:2.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.kpi-item .kpi-sub{font-size:.8rem;color:rgba(255,255,255,.72);margin-top:6px}
+
+/* ── trust bar ── */
+.trust-bar{background:var(--teal-pale);border-top:1px solid #99f6e4;border-bottom:1px solid #99f6e4;padding:22px 40px}
+.trust-inner{max-width:1160px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:600;color:var(--ink)}
+.trust-item svg{width:20px;height:20px;fill:var(--teal)}
+
+/* ── services ── */
+.services{background:var(--off)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.svc-card{background:#fff;border-radius:14px;border:1px solid #d1fae5;padding:28px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(13,148,136,.05);transition:transform .2s,box-shadow .2s}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,148,136,.12)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
+.svc-icon{width:44px;height:44px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-icon svg{width:22px;height:22px;fill:var(--teal)}
+.svc-card h3{font-size:1.04rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.svc-card p{font-size:.87rem;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.svc-from{display:inline-flex;align-items:center;gap:6px;background:var(--teal-pale);border:1px solid #99f6e4;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;color:var(--teal-dk)}
+
+/* ── tax estimator ── */
+.estimator{background:var(--ink)}
+.estimator-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:64px;align-items:start}
+.estimator-intro h2{color:#fff}
+.estimator-intro .eyebrow{color:#5eead4}
+.estimator-intro p{color:rgba(255,255,255,.7);font-size:.93rem;line-height:1.75;margin-top:16px;max-width:460px}
+.est-points{list-style:none;margin-top:28px}
+.est-point{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.88rem;color:rgba(255,255,255,.75)}
+.est-point:last-child{border-bottom:none}
+.est-point svg{width:16px;height:16px;fill:#5eead4;flex-shrink:0}
+.est-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:32px}
+.est-card h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px}
+.est-card .est-sub{font-size:.83rem;color:rgba(255,255,255,.55);margin-bottom:24px}
+.est-group{margin-bottom:18px}
+.est-group label{display:block;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:6px}
+.est-group select,.est-group input{width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;padding:11px 14px;font:inherit;font-size:.9rem;color:#fff;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.est-group select:focus,.est-group input:focus{outline:none;border-color:var(--teal-lt)}
+.est-group select option{background:var(--ink);color:#fff}
+.est-btn{width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-lt));color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s;font:inherit;border:none;margin-top:4px}
+.est-btn:hover{opacity:.9}
+.est-result{display:none;margin-top:20px;background:rgba(13,148,136,.15);border:1px solid rgba(20,184,166,.3);border-radius:10px;padding:20px}
+.est-result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.88rem}
+.est-result-row:last-child{border-bottom:none;margin-top:6px;padding-top:12px}
+.est-result-row .label{color:rgba(255,255,255,.7)}
+.est-result-row .value{font-weight:700;color:#fff}
+.est-result-row.total .value{color:var(--teal-lt);font-size:1.15rem}
+.est-note{font-size:.75rem;color:rgba(255,255,255,.45);margin-top:12px;line-height:1.5}
+
+/* ── partners ── */
+.partners{background:var(--off)}
+.partners-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:44px}
+.partner-card{background:#fff;border:1px solid #d1fae5;border-radius:12px;padding:22px 32px;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;min-width:200px;max-width:260px}
+.partner-card .p-icon{width:52px;height:52px;border-radius:12px;background:var(--teal-pale);display:flex;align-items:center;justify-content:center}
+.partner-card .p-icon svg{width:26px;height:26px;fill:var(--teal)}
+.partner-card .p-name{font-size:.93rem;font-weight:700;color:var(--ink);text-align:center}
+.partner-card .p-level{font-size:.76rem;color:var(--teal);font-weight:600;background:var(--teal-pale);padding:3px 10px;border-radius:20px}
+
+/* ── testimonials ── */
+.testimonials{background:#fff}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.testi-card{background:var(--off);border-radius:14px;border:1px solid #d1fae5;padding:28px;position:relative}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
+.testi-result{background:var(--teal-pale);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:inline-block}
+.testi-result .r-num{font-size:1.35rem;font-weight:800;color:var(--teal-dk);line-height:1}
+.testi-result .r-lbl{font-size:.73rem;color:var(--teal);margin-top:2px}
+.testi-stars{display:flex;gap:3px;margin-bottom:12px}
+.testi-stars svg{width:14px;height:14px;fill:#f59e0b}
+.testi-text{font-size:.9rem;color:var(--body);line-height:1.7;margin-bottom:18px}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal-dk),var(--teal-lt));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.84rem}
+.testi-name{font-weight:700;font-size:.87rem;color:var(--ink)}
+.testi-detail{font-size:.77rem;color:var(--muted)}
+
+/* ── pricing ── */
+.pricing{background:var(--teal-pale)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.price-card{background:#fff;border-radius:14px;border:1px solid #a7f3d0;padding:28px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(13,148,136,.06)}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
+.price-card h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.price-card .pc-desc{font-size:.83rem;color:var(--muted);margin-bottom:16px}
+.pc-price{font-size:2rem;font-weight:800;color:var(--teal-dk);letter-spacing:-.02em;line-height:1;margin-bottom:4px}
+.pc-price span{font-size:.88rem;font-weight:400;color:var(--muted)}
+.pc-from{font-size:.74rem;color:var(--muted);margin-bottom:18px}
+.pc-features{list-style:none}
+.pc-features li{display:flex;align-items:flex-start;gap:8px;font-size:.83rem;color:var(--body);padding:5px 0;border-bottom:1px solid #f0fdfa}
+.pc-features li:last-child{border-bottom:none}
+.pc-features li svg{width:15px;height:15px;fill:var(--teal);flex-shrink:0;margin-top:2px}
+
+/* ── enquiry ── */
+.enquiry{background:#fff}
+.enquiry-wrap{display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start;margin-top:52px}
+.form-card{background:var(--off);border-radius:16px;border:1px solid #d1fae5;padding:36px;box-shadow:0 4px 24px rgba(13,148,136,.06)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1.5px solid #d1fae5;border-radius:8px;padding:11px 14px;font:inherit;font-size:.9rem;color:var(--body);background:#fff;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--teal)}
+.form-group textarea{min-height:100px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-submit{width:100%;background:linear-gradient(135deg,var(--teal-dk),var(--teal-lt));color:#fff;padding:14px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;transition:opacity .2s;font:inherit;border:none}
+.form-submit:hover{opacity:.9}
+.contact-card{display:flex;flex-direction:column;gap:18px}
+.contact-item{display:flex;gap:16px;align-items:flex-start;background:var(--off);border:1px solid #d1fae5;border-radius:12px;padding:18px}
+.contact-icon{width:40px;height:40px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:18px;height:18px;fill:var(--teal)}
+.contact-item h4{font-size:.87rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.contact-item p{font-size:.84rem;color:var(--muted);line-height:1.5}
+.contact-item a{color:var(--teal-dk);font-weight:600}
+.sarah-bio{background:linear-gradient(135deg,var(--teal-dk),var(--teal));border-radius:12px;padding:22px;color:#fff}
+.sarah-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.sarah-initial{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#fff;flex-shrink:0}
+.sarah-dn{font-weight:700;color:#fff;font-size:.95rem}
+.sarah-dt{font-size:.77rem;color:rgba(255,255,255,.7);margin-top:2px}
+.sarah-bio p{font-size:.85rem;color:rgba(255,255,255,.82);line-height:1.65}
+
+/* ── faq ── */
+.faq-section{background:var(--off)}
+.faq-grid{max-width:760px;margin:52px auto 0}
+.faq-item{background:#fff;border:1px solid #d1fae5;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;font-weight:600;font-size:.92rem;color:var(--ink);cursor:pointer;transition:background .2s}
+.faq-q:hover{background:var(--teal-pale)}
+.faq-q svg{width:18px;height:18px;fill:var(--teal);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a p{padding:4px 22px 18px;font-size:.9rem;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-a{max-height:400px}
+
+/* ── footer ── */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:52px 40px 28px}
+.footer-inner{max-width:1160px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.footer-brand-name{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.footer-brand-tagline{font-size:.83rem;color:rgba(255,255,255,.42);line-height:1.6}
+.footer-heading{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:8px}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.55);transition:color .2s}
+.footer-links a:hover{color:#5eead4}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.3)}
+.footer-bottom a{color:rgba(255,255,255,.5)}
+
+/* ── mobile CTA ── */
+.mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--teal-dk);padding:14px 20px;z-index:300;justify-content:center}
+.mobile-cta a{color:#fff;font-weight:700;font-size:.9rem}
+
+/* ── responsive ── */
+@media(max-width:1000px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-panel{max-width:480px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .estimator-inner{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .enquiry-wrap{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .kpi-inner{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero{padding:64px 20px}
+  .hero h1{font-size:2.1rem}
+  section{padding:60px 20px}
+  .kpi-strip,.trust-bar{padding:40px 20px}
+  h2{font-size:1.9rem}
+  .services-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .mobile-cta{display:flex}
+  body{padding-bottom:56px}
+}
+</style>
 </head>
 <body>
 
-  <div id="scroll-bar"></div>
+<div id="scroll-bar"></div>
 
-  <!-- 1. Demo banner -->
-  <div class="demo-banner">
-    This is a demo site by ImproveYourSite &#8212; see what a finished site looks like.
-    <a href="/packages.html">Get a site like this &rarr;</a>
+<div class="demo-banner">
+  This is a sample website built by improveyoursite.com
+  <a href="/packages.html">Get a site like this &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      </div>
+      <span class="brand-name">Clearview Accounting</span>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#estimator">Tax Estimator</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="nav-cta">Book a Meeting</a>
+    </div>
   </div>
+</nav>
 
-  <!-- Sticky header -->
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#">&#x1F4CA; Clearview Accounting</a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#estimator">Tax Estimator</a>
-        <a href="#testimonials">Reviews</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-cta" href="#contact">Book Free Consult</a>
-        <a class="nav-phone" href="tel:0263312200">(02) 6331 2200</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- 2. Hero -->
-    <section class="hero reveal">
-      <div class="container">
-        <div class="hero-top-row">
-          <span id="open-badge" class="open-badge open-badge--loading">&#x25CF; Checking hours&hellip;</span>
-          <span class="hero-est">Est. 2011 &#8212; 13+ years Bathurst</span>
-        </div>
-        <h1>Clear advice. Maximum returns. No surprises.</h1>
-        <p class="lead">Sarah Chen CPA and the Clearview team provide proactive tax, business advisory and SMSF services to individuals and SMEs across Bathurst, Orange, Lithgow, Mudgee and the Central West. We call you first.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">&#x1F4C5; Book Free 20-Min Consult</a>
-          <a class="btn btn-secondary" href="#services">View Our Services</a>
-          <a class="btn btn-phone" href="tel:0263312200">&#x1F4DE; (02) 6331 2200</a>
-        </div>
-        <div class="trust-strip">
-          <span>&#x2713; CPA Australia</span>
-          <span>&#x2713; Xero Gold Partner</span>
-          <span>&#x2713; MYOB Partner</span>
-          <span>&#x2713; 13 years Bathurst</span>
-          <span>&#x2605; 4.9 Google (67 reviews)</span>
-        </div>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="rgba(94,234,212,0.9)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Bathurst NSW &nbsp;|&nbsp; CPA Qualified &nbsp;|&nbsp; Xero Gold Partner &nbsp;|&nbsp; 5.0 Stars
       </div>
-    </section>
-
-    <!-- 5. Partner badges strip -->
-    <div class="partner-strip reveal">
-      <div class="container partner-strip-inner">
-        <span class="partner-label">Proud partners &amp; members:</span>
-        <span class="partner-badge partner-badge--xero">&#x1F7E2; Xero Gold Partner</span>
-        <span class="partner-badge partner-badge--myob">&#x1F7E3; MYOB Partner</span>
-        <span class="partner-badge partner-badge--cpa">&#x1F535; CPA Australia</span>
+      <h1>Accounting That <span>Works For You</span>, Not Against You</h1>
+      <p class="hero-lead">Clearview Accounting takes the stress out of tax and compliance for individuals, small businesses and self-managed super funds across Bathurst and the Central Tablelands.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Free Meeting</a>
+        <a href="#estimator" class="btn-outline">Tax Return Estimator</a>
       </div>
     </div>
-
-    <!-- 4. Services grid -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>What we do</h2>
-          <p>Comprehensive accounting, tax and advisory services for individuals and businesses across Central West NSW.</p>
+    <div class="hero-panel reveal d1">
+      <div class="hero-panel-title">Clearview at a Glance</div>
+      <div class="panel-stats">
+        <div class="p-stat"><div class="num">600+</div><div class="lbl">Returns lodged annually</div></div>
+        <div class="p-stat"><div class="num">12</div><div class="lbl">Years in Bathurst</div></div>
+        <div class="p-stat"><div class="num">5.0★</div><div class="lbl">Google reviews</div></div>
+        <div class="p-stat"><div class="num">$0</div><div class="lbl">Obligation on first meeting</div></div>
+      </div>
+      <div class="profile-strip">
+        <div class="prof-avatar">SC</div>
+        <div>
+          <div class="prof-name">Sarah Chen CPA</div>
+          <div class="prof-title">Principal, Clearview Accounting</div>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">&#x1F4CB;</div>
-            <h3>Individual Tax Returns</h3>
-            <p>Expert preparation of your personal tax return, maximising deductions and ensuring full ATO compliance. <strong>From $220.</strong></p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#x1F4BC;</div>
-            <h3>Small Business Accounting</h3>
-            <p>Company, trust and partnership tax returns, BAS, financial statements and annual compliance &#8212; all in one fixed-fee engagement.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#x1F3E6;</div>
-            <h3>SMSF Administration</h3>
-            <p>Full SMSF establishment, annual compliance, audit coordination and investment strategy support for your self-managed super fund.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#x1F4C8;</div>
-            <h3>Business Advisory</h3>
-            <p>Profit improvement, cash flow forecasting, KPI dashboards, entity structure reviews and strategic planning year-round.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#x1F4D2;</div>
-            <h3>Bookkeeping &amp; BAS</h3>
-            <p>Monthly Xero bookkeeping, BAS and IAS lodgements, payables, receivables and bank reconciliation &#8212; clean books, every month.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#x1F9FE;</div>
-            <h3>Payroll &amp; HR Support</h3>
-            <p>End-to-end payroll processing, STP compliance, superannuation, employee entitlements and HR document templates.</p>
+      </div>
+      <div class="partner-logos">
+        <span class="partner-badge"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>CPA Australia</span>
+        <span class="partner-badge"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Xero Gold</span>
+        <span class="partner-badge"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>MYOB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kpi-strip">
+  <div class="kpi-inner">
+    <div class="kpi-item reveal"><div class="kpi-num">600+</div><div class="kpi-sub">Returns Lodged Per Year</div></div>
+    <div class="kpi-item reveal d1"><div class="kpi-num">12</div><div class="kpi-sub">Years in Bathurst</div></div>
+    <div class="kpi-item reveal d2"><div class="kpi-num">5.0★</div><div class="kpi-sub">Google Reviews</div></div>
+    <div class="kpi-item reveal d3"><div class="kpi-num">$220</div><div class="kpi-sub">Individual Tax From</div></div>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      CPA Australia Member
+    </div>
+    <div class="trust-item reveal d1">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Xero Gold Partner
+    </div>
+    <div class="trust-item reveal d2">
+      <svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      MYOB Partner
+    </div>
+    <div class="trust-item reveal d3">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+      Tax Agent Registered
+    </div>
+    <div class="trust-item reveal d4">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Fixed-Fee Pricing
+    </div>
+  </div>
+</div>
+
+<section id="services" class="services">
+  <div class="section-inner">
+    <div class="eyebrow reveal">What We Do</div>
+    <h2 class="reveal">Comprehensive Accounting Services</h2>
+    <p class="lead reveal d1">From a simple individual tax return to full small business accounting, SMSF and strategic tax planning, Clearview is your one-stop accounting partner in Bathurst.</p>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+        <h3>Individual Tax Returns</h3>
+        <p>Fast, accurate individual tax returns for employees, investors and sole traders. We identify every deduction you are entitled to and lodge on time, every time.</p>
+        <span class="svc-from">From $220</span>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+        <h3>Small Business Accounting</h3>
+        <p>End-to-end accounting for small businesses. Annual accounts, financial statements, tax returns, ATO compliance and proactive tax planning to minimise your liability.</p>
+        <span class="svc-from">Custom quote</span>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+        <h3>SMSF Administration</h3>
+        <p>Self-managed super fund administration, annual compliance, audit coordination and investment strategy support. We keep your SMSF compliant and your retirement on track.</p>
+        <span class="svc-from">From $1,800 p.a.</span>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+        <h3>Advisory and Tax Planning</h3>
+        <p>Proactive tax planning that goes beyond compliance. Structure reviews, trust distributions, year-end strategies and guidance through major financial decisions.</p>
+        <span class="svc-from">Included for business clients</span>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+        <h3>Bookkeeping and BAS</h3>
+        <p>Xero and MYOB bookkeeping, bank reconciliation and quarterly BAS lodgements. We keep your books clean so you can see where your business stands at any time.</p>
+        <span class="svc-from">From $280 / month</span>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3>Payroll Services</h3>
+        <p>Single Touch Payroll, superannuation processing, leave calculations and payroll tax compliance. We handle the complexity so your staff are paid accurately and on time.</p>
+        <span class="svc-from">From $120 / month</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="estimator" class="estimator">
+  <div class="section-inner estimator-inner">
+    <div class="estimator-intro reveal">
+      <div class="eyebrow">Free Tool</div>
+      <h2>Tax Return Estimator</h2>
+      <p>Get a quick estimate of your potential tax refund or tax payable for the current financial year. This is a guide only and subject to your individual circumstances.</p>
+      <ul class="est-points">
+        <li class="est-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Based on current ATO individual rates</li>
+        <li class="est-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Includes Medicare levy and LITO</li>
+        <li class="est-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Instant result — no email required</li>
+        <li class="est-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Book with Sarah to find additional deductions</li>
+      </ul>
+    </div>
+    <div class="est-card reveal d2">
+      <h3>Individual Tax Estimator</h3>
+      <div class="est-sub">2024/25 financial year guide</div>
+      <div class="est-group">
+        <label>Gross Income</label>
+        <select id="e-income">
+          <option value="30000">$30,000</option>
+          <option value="45000">$45,000</option>
+          <option value="60000" selected>$60,000</option>
+          <option value="80000">$80,000</option>
+          <option value="100000">$100,000</option>
+          <option value="120000">$120,000</option>
+          <option value="150000">$150,000</option>
+          <option value="200000">$200,000+</option>
+        </select>
+      </div>
+      <div class="est-group">
+        <label>Tax Withheld by Employer (approx.)</label>
+        <select id="e-withheld">
+          <option value="0">None (sole trader / investment income)</option>
+          <option value="5000">Around $5,000</option>
+          <option value="10000">Around $10,000</option>
+          <option value="15000" selected>Around $15,000</option>
+          <option value="20000">Around $20,000</option>
+          <option value="30000">Around $30,000</option>
+          <option value="45000">Around $45,000</option>
+        </select>
+      </div>
+      <div class="est-group">
+        <label>Work-Related Deductions (estimate)</label>
+        <select id="e-deductions">
+          <option value="500">Minimal — under $500</option>
+          <option value="2000" selected>$500 to $3,000</option>
+          <option value="5000">$3,000 to $8,000</option>
+          <option value="10000">$8,000 or more</option>
+        </select>
+      </div>
+      <button class="est-btn" onclick="calcTax()">Estimate My Refund</button>
+      <div class="est-result" id="est-result">
+        <div class="est-result-row"><span class="label">Gross income</span><span class="value" id="er-income"></span></div>
+        <div class="est-result-row"><span class="label">Less deductions</span><span class="value" id="er-ded"></span></div>
+        <div class="est-result-row"><span class="label">Taxable income</span><span class="value" id="er-taxable"></span></div>
+        <div class="est-result-row"><span class="label">Estimated tax payable</span><span class="value" id="er-tax"></span></div>
+        <div class="est-result-row"><span class="label">Tax already withheld</span><span class="value" id="er-withheld"></span></div>
+        <div class="est-result-row total"><span class="label" style="font-weight:700;color:#fff">Estimated outcome</span><span class="value" id="er-outcome"></span></div>
+        <div class="est-note">This estimate is a guide only. Your actual refund may be higher with a professional review of all deductions. Book a meeting with Sarah to maximise your return.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="section-inner">
+    <div class="eyebrow reveal" style="text-align:center">Our Partnerships</div>
+    <h2 class="reveal" style="text-align:center">Qualified and Accredited</h2>
+    <p class="lead reveal d1" style="margin:0 auto;text-align:center">Our accreditations mean you receive advice grounded in professional standards and the latest software expertise.</p>
+    <div class="partners-row">
+      <div class="partner-card reveal">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+        <div class="p-name">CPA Australia</div>
+        <div class="p-level">Full Member</div>
+      </div>
+      <div class="partner-card reveal d1">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+        <div class="p-name">Xero</div>
+        <div class="p-level">Gold Partner</div>
+      </div>
+      <div class="partner-card reveal d2">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+        <div class="p-name">MYOB</div>
+        <div class="p-level">Certified Advisor</div>
+      </div>
+      <div class="partner-card reveal d3">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+        <div class="p-name">Tax Practitioners Board</div>
+        <div class="p-level">Registered Agent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="testimonials">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Client Results</div>
+    <h2 class="reveal">What Our Clients Achieve</h2>
+    <p class="lead reveal d1">Real results from real Clearview clients. We are proud of the outcomes we deliver for individuals and businesses across the Bathurst region.</p>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-result"><div class="r-num">$14,200</div><div class="r-lbl">Tax saved through restructure</div></div>
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testi-text">"Sarah identified a structure issue that my previous accountant had missed for three years. Her advice saved us $14,200 in a single financial year. Best move we ever made."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MD</div>
+          <div>
+            <div class="testi-name">Mark D.</div>
+            <div class="testi-detail">Small business owner, Bathurst NSW</div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 6. How a good accountant pays for itself -->
-    <section class="section savings-section" id="savings">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>How a good accountant pays for itself</h2>
-          <p>Proactive advice is an investment, not a cost. Here is what clients typically gain.</p>
+      <div class="testi-card reveal d1">
+        <div class="testi-result"><div class="r-num">Xero</div><div class="r-lbl">Migrated in under a week</div></div>
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="savings-grid">
-          <div class="savings-highlight">
-            <div class="savings-number">01</div>
-            <div class="savings-amount">Avg $3,400/yr saved</div>
-            <h3>Proactive tax planning</h3>
-            <p>We review your tax position quarterly, not just at 30 June. Timing income, accelerating deductions and super contributions typically saves clients $3,400 per year compared to reactive filing alone.</p>
-          </div>
-          <div class="savings-highlight">
-            <div class="savings-number">02</div>
-            <div class="savings-amount">$8,000 &ndash; $22,000 saved</div>
-            <h3>Business structure review</h3>
-            <p>Running through the wrong entity costs real money. A trust or company structure review can identify $8,000 to $22,000 in annual tax savings for growing businesses &#8212; often in the very first engagement.</p>
-          </div>
-          <div class="savings-highlight">
-            <div class="savings-number">03</div>
-            <div class="savings-amount">Included at no extra cost</div>
-            <h3>ATO audit support</h3>
-            <p>If the ATO comes knocking, we are right there with you. Full audit support, correspondence handling and representation is included on all annual packages &#8212; no surprise bills.</p>
+        <p class="testi-text">"We were drowning in spreadsheets. Sarah moved us onto Xero and set up proper bookkeeping processes that we now run ourselves day to day. The time we save every month is extraordinary."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JT</div>
+          <div>
+            <div class="testi-name">Jess &amp; Tom F.</div>
+            <div class="testi-detail">Hospitality business, Bathurst NSW</div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 7. Tax Return Estimator -->
-    <section class="estimator-section section" id="estimator">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>&#x1F9EE; Tax Return Estimator</h2>
-          <p>Get a quick sense of your tax bracket, likely deductions and what our fee would be &#8212; in under 60 seconds.</p>
+      <div class="testi-card reveal d2">
+        <div class="testi-result"><div class="r-num">$4,000+</div><div class="r-lbl">Average annual refund</div></div>
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="estimator-card reveal">
-          <div class="estimator-form">
+        <p class="testi-text">"I have used three different accountants over the years and Sarah is in a different league. She finds deductions I never knew I was entitled to. I have averaged over $4,000 in refunds each year."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">CW</div>
+          <div>
+            <div class="testi-name">Claire W.</div>
+            <div class="testi-detail">Teacher and investment property owner, Bathurst NSW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Transparent Pricing</div>
+    <h2 class="reveal">Fixed Fees. No Surprises.</h2>
+    <p class="lead reveal d1">We quote upfront and stick to it. Every fee includes our professional opinion, not just data entry. All prices include GST.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Individual Tax Return</h3>
+        <div class="pc-desc">Employees, investors and sole traders</div>
+        <div class="pc-price">$220 <span>+ GST</span></div>
+        <div class="pc-from">Starting price. Complex returns quoted individually.</div>
+        <ul class="pc-features">
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Complete review of all income sources</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Work-related deduction maximisation</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Investment property schedules</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>ATO portal lodgement</li>
+        </ul>
+      </div>
+      <div class="price-card reveal d1">
+        <h3>Small Business Package</h3>
+        <div class="pc-desc">Companies, trusts and partnerships</div>
+        <div class="pc-price">Custom <span>quote</span></div>
+        <div class="pc-from">Typically $1,800 to $4,500 per year</div>
+        <ul class="pc-features">
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Annual accounts and tax return</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Quarterly BAS lodgements</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Year-end tax planning meeting</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Unlimited email and phone support</li>
+        </ul>
+      </div>
+      <div class="price-card reveal d2">
+        <h3>SMSF Administration</h3>
+        <div class="pc-desc">Self-managed superannuation funds</div>
+        <div class="pc-price">$1,800 <span>+ GST p.a.</span></div>
+        <div class="pc-from">Audit coordination included</div>
+        <ul class="pc-features">
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Annual accounts and tax return</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Independent audit arranged</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>ATO regulatory compliance</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Pension and contribution advice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="enquiry">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Get in Touch</div>
+    <h2 class="reveal">Book a Free Meeting</h2>
+    <p class="lead reveal d1">A 30-minute no-obligation meeting with Sarah. We will assess your situation and tell you exactly where we can add value. No pressure, no commitment.</p>
+    <div class="enquiry-wrap">
+      <div id="form-wrap">
+        <div class="form-card reveal d2">
+          <form id="contact-form" onsubmit="submitForm(event)">
             <div class="form-row">
               <div class="form-group">
-                <label for="emp-type">Employment type</label>
-                <select id="emp-type">
-                  <option value="">&#8212; Select &#8212;</option>
-                  <option value="employee">Employee (PAYG)</option>
-                  <option value="soletrader">Sole Trader</option>
-                  <option value="business">Small Business (Company / Trust)</option>
+                <label>Your Name</label>
+                <input type="text" placeholder="Jane Smith" required>
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" placeholder="0400 000 000" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="jane@email.com" required>
+              </div>
+              <div class="form-group">
+                <label>Best Time to Call</label>
+                <select>
+                  <option>Morning (8am to 12pm)</option>
+                  <option>Afternoon (12pm to 5pm)</option>
+                  <option>Either is fine</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="income">Annual income ($)</label>
-                <input type="number" id="income" placeholder="e.g. 85000" min="0" step="1000">
-              </div>
             </div>
-            <div class="form-row form-row--checks">
-              <label class="check-label">
-                <input type="checkbox" id="wfh"> Work from home?
-              </label>
-              <label class="check-label">
-                <input type="checkbox" id="investment"> Investment income (shares / property)?
-              </label>
+            <div class="form-group">
+              <label>What do you need help with?</label>
+              <select>
+                <option>Individual tax return</option>
+                <option>Small business accounting</option>
+                <option>SMSF administration</option>
+                <option>Bookkeeping / BAS</option>
+                <option>Payroll services</option>
+                <option>Tax planning / advice</option>
+                <option>Not sure yet</option>
+              </select>
             </div>
-            <button class="btn btn-primary btn-estimate" onclick="calculateEstimate()">&#x1F4CA; Calculate my estimate</button>
-          </div>
-          <div class="tax-result" id="tax-result" aria-live="polite" style="display:none;"></div>
+            <div class="form-group">
+              <label>Anything else you would like us to know?</label>
+              <textarea placeholder="Optional — any additional context about your situation..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Book My Free Meeting</button>
+          </form>
         </div>
       </div>
-    </section>
-
-    <!-- 8. Testimonials -->
-    <section class="section" id="testimonials">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>What Bathurst businesses say</h2>
-          <p>Real results from real clients across the Central West.</p>
-        </div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card reveal">
-            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-            <p>&#8220;Sarah restructured our trust and saved us $14,200 in a single year &#8212; that&#8217;s paid for six years of fees. Genuinely couldn&#8217;t recommend Clearview more highly.&#8221;</p>
-            <div class="reviewer">&#8212; Mark D., construction business, Bathurst NSW</div>
-          </div>
-          <div class="testimonial-card reveal">
-            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-            <p>&#8220;The Xero setup took about two hours. Now our bookkeeping takes 20 minutes a week. Should have done it years ago &#8212; the team made the whole transition painless.&#8221;</p>
-            <div class="reviewer">&#8212; Jess &amp; Tom F., caf&eacute; owner, Orange NSW</div>
-          </div>
-          <div class="testimonial-card reveal">
-            <div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-            <p>&#8220;Sarah found deductions from my home office setup that I&#8217;d missed for three years running. Worth over $4,000 in refunds &#8212; more than covered everything.&#8221;</p>
-            <div class="reviewer">&#8212; Claire W., consultant, Mudgee NSW</div>
+      <div class="contact-card reveal d3">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:0263312200">(02) 6331 2200</a></p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 9. KPI strip -->
-    <div class="kpi-strip reveal">
-      <div class="container kpi-strip-inner">
-        <div class="kpi-item">
-          <strong>13 years</strong>
-          <span>Serving Bathurst</span>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a></p>
+          </div>
         </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <strong>67 reviews &#x2605; 4.9</strong>
-          <span>Google rating</span>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <h4>Office</h4>
+            <p>Suite 3, 157 George Street<br>Bathurst NSW 2795</p>
+          </div>
         </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <strong>Xero Gold Partner</strong>
-          <span>Certified specialists</span>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h4>Office Hours</h4>
+            <p>Monday to Friday 8:30am to 5:30pm<br>Saturday by appointment (July to October)</p>
+          </div>
         </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <strong>CPA Australia</strong>
-          <span>Fully qualified CPAs</span>
+        <div class="sarah-bio">
+          <div class="sarah-head">
+            <div class="sarah-initial">SC</div>
+            <div>
+              <div class="sarah-dn">Sarah Chen CPA</div>
+              <div class="sarah-dt">Principal, Clearview Accounting</div>
+            </div>
+          </div>
+          <p>Sarah has 15 years of public practice experience with a focus on small business, property investment and SMSF. She is known for proactive advice, plain-English communication and results that go well beyond compliance.</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- 10. Contact section -->
-    <section class="contact-section section" id="contact">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Book your free 20-minute consultation</h2>
-          <p>Tell us a little about your situation and we will be in touch within one business day &#8212; usually within a few hours.</p>
+<section class="faq-section">
+  <div class="section-inner">
+    <div class="eyebrow reveal" style="text-align:center">Questions</div>
+    <h2 class="reveal" style="text-align:center">Frequently Asked</h2>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          When should I lodge my tax return?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <div class="contact-grid reveal">
-          <div class="contact-form-wrap">
-            <form class="contact-form" id="contact-form" onsubmit="submitForm(event)">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="cf-name">Full name *</label>
-                  <input type="text" id="cf-name" required placeholder="Your name">
-                </div>
-                <div class="form-group">
-                  <label for="cf-phone">Phone *</label>
-                  <input type="tel" id="cf-phone" required placeholder="(02) #### ####">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cf-email">Email address *</label>
-                <input type="email" id="cf-email" required placeholder="you@example.com">
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="cf-biztype">Business type</label>
-                  <select id="cf-biztype">
-                    <option value="">&#8212; Select &#8212;</option>
-                    <option>Individual / employee</option>
-                    <option>Sole trader</option>
-                    <option>Small business (company / trust)</option>
-                    <option>SMSF trustee</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="cf-service">Service needed</label>
-                  <select id="cf-service">
-                    <option value="">&#8212; Select &#8212;</option>
-                    <option>Individual tax return</option>
-                    <option>Business accounting</option>
-                    <option>SMSF administration</option>
-                    <option>Bookkeeping / BAS</option>
-                    <option>Business advisory</option>
-                    <option>Payroll &amp; HR</option>
-                    <option>Not sure yet</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cf-message">Message</label>
-                <textarea id="cf-message" rows="4" placeholder="Briefly describe your situation or question&hellip;"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="width:100%;">&#x1F4E8; Send enquiry</button>
-            </form>
-            <div class="form-success" id="form-success" style="display:none;">
-              <div class="form-success-inner">
-                <div class="form-success-icon">&#x2705;</div>
-                <h3>Message received!</h3>
-                <p>Thanks for reaching out. Sarah or a team member will contact you within one business day &#8212; usually much sooner.</p>
-                <p style="font-size:.88rem;color:var(--muted);">In the meantime, feel free to call us on <a href="tel:0263312200">(02) 6331 2200</a>.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-info-box">
-            <h3>Our details</h3>
-            <ul class="contact-list">
-              <li>
-                <span class="ci-icon">&#x1F4DE;</span>
-                <div>
-                  <strong>Phone</strong><br>
-                  <a href="tel:0263312200">(02) 6331 2200</a>
-                </div>
-              </li>
-              <li>
-                <span class="ci-icon">&#x2709;</span>
-                <div>
-                  <strong>Email</strong><br>
-                  <a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a>
-                </div>
-              </li>
-              <li>
-                <span class="ci-icon">&#x1F4CD;</span>
-                <div>
-                  <strong>Address</strong><br>
-                  Suite 3, 157 George Street<br>
-                  Bathurst NSW 2795
-                </div>
-              </li>
-              <li>
-                <span class="ci-icon">&#x1F550;</span>
-                <div>
-                  <strong>Office hours</strong><br>
-                  Mon &ndash; Fri: 8:30am &ndash; 5:30pm AEST<br>
-                  Closed weekends &amp; public holidays
-                </div>
-              </li>
-            </ul>
-            <div class="response-promise">
-              <strong>&#x26A1; Our response promise</strong>
-              <p>All enquiries acknowledged within 4 business hours. We do not keep you waiting.</p>
-            </div>
-            <div class="service-area-box">
-              <strong>Service area</strong>
-              <p>Bathurst &bull; Orange &bull; Lithgow &bull; Mudgee &bull; Central West NSW<br>
-              <em>Remote / Zoom appointments available Australia-wide.</em></p>
-            </div>
-          </div>
+        <div class="faq-a"><p>Individual returns are due by 31 October each year if lodging yourself. Clients who lodge through a registered tax agent like Clearview receive an automatic extension, often to May the following year. We recommend lodging as early as possible to receive any refund faster.</p></div>
+      </div>
+      <div class="faq-item reveal d1">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What records do I need to bring?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
+        <div class="faq-a"><p>For individual returns: payment summaries or income statements from myGov, bank interest statements, any dividend or rental income records, and receipts for work-related expenses. We send you a simple checklist when you book. Many documents can be retrieved via our ATO portal access with your consent.</p></div>
       </div>
-    </section>
-
-    <!-- 11. FAQ accordion -->
-    <section class="faq-section section" id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Frequently asked questions</h2>
-          <p>Quick answers to what we hear most often.</p>
+      <div class="faq-item reveal d2">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I switch to Clearview mid-year?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-              How much does a tax return cost?
-              <span class="faq-arrow">&#x25BC;</span>
-            </button>
-            <div class="faq-a">
-              <p>Individual tax returns start from <strong>$220</strong> for straightforward PAYG employees, and go up based on complexity &#8212; investment properties, capital gains, sole trader income and other schedules each add to the scope. During your free 20-minute consultation we will give you a fixed-fee quote before any work begins, so there are no surprises at invoice time.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-              What records do I need to bring?
-              <span class="faq-arrow">&#x25BC;</span>
-            </button>
-            <div class="faq-a">
-              <p>For most individuals: your PAYG payment summary (or ATO pre-fill), bank statements for interest, dividend statements, receipts for work-related expenses, and details of any investment property income and expenses. Sole traders should also bring a profit and loss summary or bank statements covering the full financial year. We will send you a personalised checklist after you book so you arrive fully prepared.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-              Can you administer our SMSF?
-              <span class="faq-arrow">&#x25BC;</span>
-            </button>
-            <div class="faq-a">
-              <p>Yes &#8212; SMSF administration is one of our core services. We handle everything from establishment and trust deed preparation through to annual financial statements, tax returns, audit coordination and investment strategy compliance. Sarah Chen holds specialist SMSF accreditation through CPA Australia. We currently administer SMSFs for clients across Bathurst, Orange and remotely throughout NSW.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-              What is the difference between a tax agent and an accountant?
-              <span class="faq-arrow">&#x25BC;</span>
-            </button>
-            <div class="faq-a">
-              <p>A <strong>registered tax agent</strong> is licensed by the Tax Practitioners Board (TPB) to prepare and lodge tax returns on your behalf and provide tax advice for a fee &#8212; all our principals are registered tax agents. A <strong>CPA accountant</strong> holds additional qualifications through CPA Australia covering financial reporting, business advisory, management accounting and more. At Clearview, you get both: registered tax agents who are also CPAs, meaning you receive tax compliance and broader business advice under one roof.</p>
-            </div>
-          </div>
+        <div class="faq-a"><p>Absolutely. We handle the transition from your previous accountant, including obtaining prior year records and picking up mid-year bookkeeping. There is no disruption to your compliance obligations. Most clients are fully transitioned within two weeks.</p></div>
+      </div>
+      <div class="faq-item reveal d3">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you offer a Xero setup service?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-      </div>
-    </section>
-
-    <!-- 12. Want a website like this CTA -->
-    <section class="cta-final-section reveal">
-      <div class="container cta-final-inner">
-        <h2>Want a website like this for your accounting firm?</h2>
-        <p>This showcase was built by <strong>ImproveYourSite</strong>. We create high-converting websites for Australian professional services firms &#8212; with interactive tools, SEO and trust signals built in.</p>
-        <a class="btn btn-get-site" href="/packages.html">&#x26A1; See our packages &amp; pricing</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- 13. Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <strong>&#x1F4CA; Clearview Accounting</strong>
-        <p>CPA Australia &bull; Xero Gold Partner &bull; MYOB Partner</p>
-        <p>ABN 47 123 456 789</p>
-      </div>
-      <div class="footer-info">
-        <p>Suite 3, 157 George Street, Bathurst NSW 2795</p>
-        <p><a href="tel:0263312200">(02) 6331 2200</a> &bull; <a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a></p>
-        <p>&copy; 2025 Clearview Accounting. Principal: Sarah Chen CPA. Established 2011.</p>
-      </div>
-      <div class="footer-demo">
-        <p>This is a <strong>demo site</strong> by <a href="/packages.html">ImproveYourSite</a>.</p>
+        <div class="faq-a"><p>Yes. As a Xero Gold Partner, we set up and configure Xero for new clients, migrate data from MYOB or other software, train your staff and provide ongoing support. A proper Xero setup pays for itself quickly in time savings and improved visibility over your numbers.</p></div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- 14. Mobile sticky CTA -->
-  <a class="mobile-sticky-cta" href="#contact">&#x1F4CA; Book free consult</a>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Clearview Accounting</div>
+        <div class="footer-brand-tagline" style="margin-top:8px">Suite 3, 157 George Street, Bathurst NSW 2795<br>CPA Qualified &bull; Xero Gold Partner &bull; MYOB Partner<br>Serving Bathurst and the Central Tablelands since 2013.</div>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Individual Tax Returns</a></li>
+          <li><a href="#services">Small Business Accounting</a></li>
+          <li><a href="#services">SMSF Administration</a></li>
+          <li><a href="#services">Bookkeeping and BAS</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:0263312200">(02) 6331 2200</a></li>
+          <li><a href="mailto:admin@clearviewaccounting.com.au">admin@clearviewaccounting.com.au</a></li>
+          <li><a href="#contact">Book a Free Meeting</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Clearview Accounting. All rights reserved.</span>
+      <a href="/packages.html">Website by improveyoursite.com</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- ================================================================
-       SCROLL-DRIVEN VISUAL EFFECTS
-       ================================================================ -->
-  <script>
-  (function () {
-    'use strict';
+<div class="mobile-cta">
+  <a href="tel:0263312200">Call (02) 6331 2200 to Book a Free Meeting</a>
+</div>
 
-    /* ------------------------------------------------------------------
-       Utilities
-    ------------------------------------------------------------------ */
-    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
-    function easeOutQuart(t) {
-      return 1 - Math.pow(1 - t, 4);
-    }
-
-    /* ------------------------------------------------------------------
-       1. Scroll progress bar
-    ------------------------------------------------------------------ */
-    var scrollBar = document.getElementById('scroll-bar');
-    function updateScrollBar() {
-      var scrollTop  = window.scrollY || document.documentElement.scrollTop;
-      var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-      var pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      if (scrollBar) scrollBar.style.width = clamp(pct, 0, 100) + '%';
-    }
-
-    /* ------------------------------------------------------------------
-       2. Hero parallax
-    ------------------------------------------------------------------ */
-    var heroSection  = document.querySelector('.hero');
-    var heroContainer = heroSection ? heroSection.querySelector('.container') : null;
-    function updateHeroParallax() {
-      if (!heroContainer) return;
-      var scrollTop = window.scrollY || 0;
-      heroContainer.style.transform = 'translateY(' + (scrollTop * 0.2) + 'px)';
-    }
-
-    /* ------------------------------------------------------------------
-       7. Header glass on scroll
-    ------------------------------------------------------------------ */
-    var siteHeader = document.querySelector('.site-header');
-    function updateHeaderGlass() {
-      if (!siteHeader) return;
-      var scrollTop = window.scrollY || 0;
-      if (scrollTop > 60) {
-        siteHeader.classList.add('site-header--glassy');
-      } else {
-        siteHeader.classList.remove('site-header--glassy');
-      }
-    }
-
-    /* ------------------------------------------------------------------
-       9. Subtle background scroll tint
-       Interpolate bg from #f8fafc (light) toward #f2f5f9 (very slightly
-       warmer/deeper) as scroll progresses 0 → 100%
-    ------------------------------------------------------------------ */
-    var bgFrom = { r: 248, g: 250, b: 252 };
-    var bgTo   = { r: 240, g: 244, b: 249 };
-    function updateBodyTint() {
-      var scrollTop  = window.scrollY || 0;
-      var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-      var t          = docHeight > 0 ? clamp(scrollTop / docHeight, 0, 1) : 0;
-      var r = Math.round(bgFrom.r + (bgTo.r - bgFrom.r) * t);
-      var g = Math.round(bgFrom.g + (bgTo.g - bgFrom.g) * t);
-      var b = Math.round(bgFrom.b + (bgTo.b - bgFrom.b) * t);
-      document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
-    }
-
-    /* ------------------------------------------------------------------
-       rAF scroll loop (1 + 2 + 7 + 9)
-    ------------------------------------------------------------------ */
-    var rafPending = false;
-    function onScroll() {
-      if (!rafPending) {
-        rafPending = true;
-        requestAnimationFrame(function () {
-          updateScrollBar();
-          updateHeroParallax();
-          updateHeaderGlass();
-          updateBodyTint();
-          rafPending = false;
-        });
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Run once on load
-    updateScrollBar();
-    updateHeroParallax();
-    updateHeaderGlass();
-    updateBodyTint();
-
-    /* ------------------------------------------------------------------
-       3. Number count-up animations
-       Targets elements with [data-countup] attribute (added below via
-       class detection), or any .savings-amount and .kpi-item strong.
-    ------------------------------------------------------------------ */
-    function parseCountup(text) {
-      // Returns { prefix, suffix, value } or null if no number found
-      var cleaned = text.replace(/,/g, '').trim();
-      var m = cleaned.match(/^([^0-9-]*)(-?[\d.]+)(.*)$/);
-      if (!m) return null;
-      return {
-        prefix: m[1],
-        value:  parseFloat(m[2]),
-        suffix: m[3].trim(),
-        original: text
-      };
-    }
-
-    function animateCountup(el, duration) {
-      var data = parseCountup(el.getAttribute('data-countup-target') || el.textContent);
-      if (!data || isNaN(data.value)) return;
-      el.setAttribute('data-countup-target', data.original);
-      var startTime = null;
-      var isFloat   = (data.value % 1 !== 0);
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        var elapsed = ts - startTime;
-        var progress = clamp(elapsed / duration, 0, 1);
-        var eased    = easeOutQuart(progress);
-        var current  = data.value * eased;
-        var display;
-        if (isFloat) {
-          display = current.toFixed(1);
-        } else {
-          display = Math.round(current).toLocaleString();
-        }
-        el.textContent = data.prefix + display + data.suffix;
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = data.prefix + (isFloat ? data.value.toFixed(1) : Math.round(data.value).toLocaleString()) + data.suffix;
-        }
-      }
-      requestAnimationFrame(step);
-    }
-
-    // Mark countup targets
-    var countupSelectors = [
-      '.kpi-item strong',
-      '.savings-amount'
-    ];
-    countupSelectors.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(function (el) {
-        el.classList.add('js-countup');
-      });
-    });
-
-    if ('IntersectionObserver' in window) {
-      var countupObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCountup(entry.target, 1600);
-            countupObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-
-      document.querySelectorAll('.js-countup').forEach(function (el) {
-        countupObserver.observe(el);
-      });
-    }
-
-    /* ------------------------------------------------------------------
-       4. Staggered card reveals
-       Apply .card-reveal to service cards, savings highlights,
-       testimonial cards. Use IntersectionObserver; siblings stagger 100ms.
-    ------------------------------------------------------------------ */
-    var cardGroupSelectors = [
-      '.services-grid',
-      '.savings-grid',
-      '.testimonials-grid'
-    ];
-
-    cardGroupSelectors.forEach(function (groupSel) {
-      document.querySelectorAll(groupSel).forEach(function (group) {
-        var children = Array.prototype.slice.call(group.children);
-        children.forEach(function (child) {
-          // Remove existing .reveal so we drive it ourselves
-          child.classList.remove('reveal', 'revealed');
-          child.classList.add('card-reveal');
-        });
-      });
-    });
-
-    if ('IntersectionObserver' in window) {
-      var cardObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var el      = entry.target;
-            var parent  = el.parentElement;
-            var siblings = parent ? Array.prototype.slice.call(parent.querySelectorAll('.card-reveal')) : [];
-            var idx      = siblings.indexOf(el);
-            var delay    = Math.max(0, idx) * 100;
-            setTimeout(function () {
-              el.classList.add('revealed');
-            }, delay);
-            cardObserver.unobserve(el);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
-      document.querySelectorAll('.card-reveal').forEach(function (el) {
-        cardObserver.observe(el);
-      });
-    } else {
-      document.querySelectorAll('.card-reveal').forEach(function (el) {
-        el.classList.add('revealed');
-      });
-    }
-
-    /* ------------------------------------------------------------------
-       5. Section heading slide-in
-       Apply .heading-slide to h2 and h3 that live directly inside
-       .section-head or major section containers (not inside cards).
-    ------------------------------------------------------------------ */
-    var headingTargets = document.querySelectorAll(
-      '.section-head h2, .section-head h3, .cta-final-inner h2'
-    );
-    headingTargets.forEach(function (el) {
-      el.classList.add('heading-slide');
-    });
-
-    if ('IntersectionObserver' in window) {
-      var headingObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            headingObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
-
-      headingTargets.forEach(function (el) {
-        headingObserver.observe(el);
-      });
-    } else {
-      headingTargets.forEach(function (el) { el.classList.add('revealed'); });
-    }
-
-    /* ------------------------------------------------------------------
-       8. Calculator result emphasis
-       MutationObserver watches #tax-result display → pop animation
-    ------------------------------------------------------------------ */
-    var taxResult = document.getElementById('tax-result');
-    if (taxResult && 'MutationObserver' in window) {
-      var resultObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-            var isVisible = taxResult.style.display !== 'none' && taxResult.style.display !== '';
-            if (isVisible) {
-              taxResult.classList.remove('tax-result--pop');
-              // Force reflow so re-triggering works
-              void taxResult.offsetWidth;
-              taxResult.classList.add('tax-result--pop');
-              setTimeout(function () {
-                taxResult.classList.remove('tax-result--pop');
-              }, 600);
-            }
-          }
-        });
-      });
-      resultObserver.observe(taxResult, { attributes: true, attributeFilter: ['style'] });
-    }
-
-  })();
-  </script>
-
-  <script>
-  /* =====================================================================
-     OPEN-NOW BADGE  Mon-Fri 08:30-17:30 Sydney/AEST
-     ===================================================================== */
-  (function () {
-    function getSydneyTime() {
-      var now = new Date();
-      var parts = new Intl.DateTimeFormat('en-AU', {
-        timeZone: 'Australia/Sydney',
-        year: 'numeric', month: '2-digit', day: '2-digit',
-        hour: '2-digit', minute: '2-digit', hour12: false
-      }).formatToParts(now);
-      var p = {};
-      parts.forEach(function (x) { p[x.type] = x.value; });
-      var y = parseInt(p.year, 10), mo = parseInt(p.month, 10), d = parseInt(p.day, 10);
-      return {
-        weekday: new Date(y, mo - 1, d).getDay(),
-        mins: parseInt(p.hour, 10) * 60 + parseInt(p.minute, 10)
-      };
-    }
-    function updateBadge() {
-      var badge = document.getElementById('open-badge');
-      if (!badge) return;
-      try {
-        var t = getSydneyTime();
-        var isWeekday = t.weekday >= 1 && t.weekday <= 5;
-        var inHours = t.mins >= 510 && t.mins < 1050;
-        if (isWeekday && inHours) {
-          badge.className = 'open-badge open-badge--open';
-          badge.textContent = '\u25CF Open now \u2014 Mon\u2013Fri 8:30am\u20135:30pm AEST';
-        } else {
-          badge.className = 'open-badge open-badge--closed';
-          badge.textContent = '\u25CF Closed now \u2014 open Mon\u2013Fri 8:30am\u20135:30pm AEST';
-        }
-      } catch (e) {
-        badge.className = 'open-badge open-badge--closed';
-        badge.textContent = 'Mon\u2013Fri 8:30am\u20135:30pm AEST';
-      }
-    }
-    updateBadge();
-    setInterval(updateBadge, 60000);
-  })();
-
-  /* =====================================================================
-     TAX RETURN ESTIMATOR
-     ===================================================================== */
-  function calculateEstimate() {
-    var type     = document.getElementById('emp-type').value;
-    var income   = parseFloat(document.getElementById('income').value) || 0;
-    var wfh      = document.getElementById('wfh').checked;
-    var invest   = document.getElementById('investment').checked;
-    var resultEl = document.getElementById('tax-result');
-
-    if (!type) {
-      resultEl.innerHTML = '<p class="tax-result-error">Please select your employment type to continue.</p>';
-      resultEl.style.display = 'block';
-      return;
-    }
-
-    // Tax bracket
-    var bracket, bracketLabel, taxOwed;
-    if (income <= 18200)       { bracket = '0%';    bracketLabel = '$0 \u2013 $18,200 (tax-free threshold)'; taxOwed = 0; }
-    else if (income <= 45000)  { bracket = '19%';   bracketLabel = '$18,201 \u2013 $45,000';                 taxOwed = (income - 18200) * 0.19; }
-    else if (income <= 120000) { bracket = '32.5%'; bracketLabel = '$45,001 \u2013 $120,000';                taxOwed = 5092 + (income - 45000) * 0.325; }
-    else if (income <= 180000) { bracket = '37%';   bracketLabel = '$120,001 \u2013 $180,000';               taxOwed = 29467 + (income - 120000) * 0.37; }
-    else                       { bracket = '45%';   bracketLabel = '$180,001+';                               taxOwed = 51667 + (income - 180000) * 0.45; }
-
-    // Deductions
-    var deductionMap = {
-      employee: [
-        wfh ? 'Work-from-home expenses (hourly rate or actual cost method)' : null,
-        'Work-related travel (client visits, site visits \u2014 not commuting)',
-        'Union fees and professional association memberships',
-        'Professional development, courses and seminars',
-        'Tools, equipment and stationery under $300 (immediate deduction)',
-        'Mobile phone \u2014 work-use portion (partial deduction)'
-      ],
-      soletrader: [
-        'All business operating expenses (direct deduction)',
-        'Home office \u2014 actual costs or fixed rate method',
-        'Vehicle \u2014 logbook method (up to 100% business use)',
-        'Equipment depreciation (instant asset write-off may apply)',
-        'Professional fees (legal, accounting, consulting)',
-        'Superannuation contributions (personal deductible contributions)'
-      ],
-      business: [
-        'All operating expenses (wages, rent, utilities, insurance)',
-        'Payroll tax and superannuation obligations',
-        'Asset depreciation and instant asset write-off',
-        'R&D expenditure (Tax Incentive may apply)',
-        'Entity structure optimisation (trust distributions, Div 7A)',
-        'Losses, carry-forwards and consolidation strategies'
-      ]
-    };
-    var deductions = deductionMap[type].filter(Boolean);
-
-    // Fee
-    var fee;
-    if (type === 'employee')   { fee = 220; if (wfh) fee += 50; if (invest) fee += 80; }
-    else if (type === 'soletrader') { fee = 550; if (invest) fee += 120; }
-    else                       { fee = 1200; }
-
-    var labels = { employee: 'Employee (PAYG)', soletrader: 'Sole Trader', business: 'Small Business (Company / Trust)' };
-    var taxStr = income > 0 ? '$' + Math.round(taxOwed).toLocaleString() : 'N/A';
-
-    var html = '<div class="tax-result-inner">'
-      + '<h3>Your estimate</h3>'
-      + '<div class="tax-result-grid">'
-      + '<div class="tri-item"><span class="tri-label">Employment type</span><span class="tri-value">' + labels[type] + '</span></div>';
-
-    if (income > 0) {
-      html += '<div class="tri-item"><span class="tri-label">Tax bracket</span><span class="tri-value">' + bracket + ' <small>(' + bracketLabel + ')</small></span></div>';
-      html += '<div class="tri-item"><span class="tri-label">Estimated tax payable</span><span class="tri-value tri-value--accent">' + taxStr + ' <small>(before offsets &amp; deductions)</small></span></div>';
-    }
-
-    html += '<div class="tri-item"><span class="tri-label">Our fee starts from</span><span class="tri-value tri-value--fee">$' + fee.toLocaleString() + ' <small>+ GST &mdash; exact quote provided free before engagement</small></span></div>';
-    html += '</div>';
-
-    html += '<div class="tax-result-deductions"><h4>Likely deductions for your situation</h4><ul>'
-      + deductions.map(function (d) { return '<li>' + d + '</li>'; }).join('')
-      + '</ul></div>';
-
-    html += '<p class="tax-result-disclaimer">This is a guide only, not financial advice. Individual circumstances vary. <a href="#contact">Book a free consultation</a> for a personalised assessment.</p>';
-    html += '<a class="btn btn-primary" href="#contact" style="margin-top:.6rem;display:inline-flex;">&#x1F4C5; Book free consult to discuss</a>';
-    html += '</div>';
-
-    resultEl.innerHTML = html;
-    resultEl.style.display = 'block';
-    resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  /* =====================================================================
-     FAQ ACCORDION
-     ===================================================================== */
-  function toggleFaq(btn) {
-    var item   = btn.closest('.faq-item');
-    var answer = item.querySelector('.faq-a');
-    var isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-    document.querySelectorAll('.faq-item').forEach(function (el) {
-      el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      var a = el.querySelector('.faq-a');
-      a.style.maxHeight = '0';
-      a.style.paddingBottom = '0';
-      el.classList.remove('faq-item--open');
-    });
-
-    if (!isOpen) {
-      btn.setAttribute('aria-expanded', 'true');
-      answer.style.maxHeight = (answer.scrollHeight + 32) + 'px';
-      answer.style.paddingBottom = '1rem';
-      item.classList.add('faq-item--open');
-    }
-  }
-
-  /* =====================================================================
-     CONTACT FORM FAKE SUBMIT
-     ===================================================================== */
-  function submitForm(e) {
-    e.preventDefault();
-    document.getElementById('contact-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'flex';
-  }
-
-  /* =====================================================================
-     SCROLL REVEAL
-     ===================================================================== */
-  (function () {
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('revealed'); });
-      return;
-    }
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
-  })();
-  </script>
-
-<!-- ═══════════════════════════════════════════
-     3D & Motion Effects — Clearview Accounting
-     Lenis · Granim · Splitting.js · GSAP ScrollTrigger
-     ═══════════════════════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
-<script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
-(function() {
-  'use strict';
+// Scroll bar
+window.addEventListener('scroll',function(){
+  var s=document.documentElement;
+  document.getElementById('scroll-bar').style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%';
+});
 
-  /* 1. Lenis smooth scroll */
-  var lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95 });
-  function rafLoop(t) { lenis.raf(t); requestAnimationFrame(rafLoop); }
-  requestAnimationFrame(rafLoop);
+// Reveal
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-  /* 2. GSAP + ScrollTrigger */
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.lagSmoothing(0);
+// FAQ
+function toggleFaq(el){
+  var item=el.parentElement;
+  var wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+  if(!wasOpen)item.classList.add('open');
+}
 
-  /* 3. Granim animated teal gradient on hero */
-  var heroEl = document.querySelector('.hero');
-  if (heroEl) {
-    var canvas = document.createElement('canvas');
-    canvas.id = 'cv-granim-canvas';
-    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.35;z-index:0;';
-    heroEl.style.position = 'relative';
-    heroEl.insertBefore(canvas, heroEl.firstChild);
-    new Granim({
-      element: '#cv-granim-canvas',
-      direction: 'left-right',
-      isPausedWhenNotInView: true,
-      states: {
-        'default-state': {
-          gradients: [
-            ['#f0fdf4', '#ecfdf5'],
-            ['#ecfdf5', '#f0fdfa'],
-            ['#f0fdfa', '#f0fdf4']
-          ],
-          transitionSpeed: 5000
-        }
-      }
-    });
-  }
+// Form
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('form-wrap').innerHTML='<div style="background:var(--off);border-radius:16px;border:1px solid #d1fae5;padding:48px 36px;text-align:center;box-shadow:0 4px 24px rgba(13,148,136,.06)"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="var(--teal)" stroke-width="2" style="margin-bottom:16px"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><h3 style="color:var(--ink);font-size:1.35rem;font-weight:800;margin-bottom:10px">Booking Received</h3><p style="color:var(--muted);font-size:.95rem;line-height:1.7">Sarah will call you within one business day to arrange your free meeting. We look forward to helping you.</p></div>';
+}
 
-  /* 4. Splitting.js char reveal on section h2 headings */
-  var splitStyle = document.createElement('style');
-  splitStyle.textContent = [
-    '.cv-split-h2 .char { display:inline-block; opacity:0; transform:translateY(20px);',
-    '  transition: opacity 0.4s ease calc(var(--char-index)*0.025s),',
-    '              transform 0.4s ease calc(var(--char-index)*0.025s); }',
-    '.cv-split-h2.chars-in .char { opacity:1; transform:translateY(0); }'
-  ].join('');
-  document.head.appendChild(splitStyle);
-
-  document.querySelectorAll('.section-head h2, .savings-section h2').forEach(function(h2) {
-    h2.setAttribute('data-splitting', '');
-    h2.classList.add('cv-split-h2');
-  });
-  Splitting();
-
-  if (window.IntersectionObserver) {
-    var charObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('chars-in');
-          charObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.cv-split-h2').forEach(function(el) { charObs.observe(el); });
-  }
-
-  /* 5. GSAP stagger on service cards */
-  gsap.utils.toArray('.service-card').forEach(function(card, i) {
-    gsap.fromTo(card,
-      { opacity: 0, y: 36, scale: 0.97 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.07, ease: 'power2.out',
-        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-  /* 6. GSAP alternate slide-in on savings highlights */
-  gsap.utils.toArray('.savings-highlight').forEach(function(card, i) {
-    gsap.fromTo(card,
-      { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
-      { opacity: 1, x: 0, duration: 0.65, delay: i * 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-})();
+// Tax calculator
+function calcTax(){
+  var income=parseInt(document.getElementById('e-income').value)||60000;
+  var withheld=parseInt(document.getElementById('e-withheld').value)||0;
+  var deductions=parseInt(document.getElementById('e-deductions').value)||0;
+  var taxable=Math.max(0,income-deductions);
+  var tax=0;
+  // 2024-25 tax rates (simplified, resident individual)
+  if(taxable<=18200){tax=0;}
+  else if(taxable<=45000){tax=(taxable-18200)*0.19;}
+  else if(taxable<=120000){tax=5092+(taxable-45000)*0.325;}
+  else if(taxable<=180000){tax=29467+(taxable-120000)*0.37;}
+  else{tax=51667+(taxable-180000)*0.45;}
+  // Low income tax offset (LITO) simplified
+  var lito=0;
+  if(taxable<=37500){lito=700;}
+  else if(taxable<=45000){lito=700-(taxable-37500)*0.05;}
+  else if(taxable<=66667){lito=325-(taxable-45000)*0.015;}
+  tax=Math.max(0,tax-lito);
+  // Medicare levy 2%
+  var medicare=taxable>=26000?taxable*0.02:0;
+  var total=Math.round(tax+medicare);
+  var outcome=withheld-total;
+  var fmt=function(n){return (n<0?'-$':'+$')+Math.abs(n).toLocaleString();};
+  var fmtPlain=function(n){return '$'+n.toLocaleString();};
+  document.getElementById('er-income').textContent=fmtPlain(income);
+  document.getElementById('er-ded').textContent='-'+fmtPlain(deductions);
+  document.getElementById('er-taxable').textContent=fmtPlain(taxable);
+  document.getElementById('er-tax').textContent=fmtPlain(total);
+  document.getElementById('er-withheld').textContent=fmtPlain(withheld);
+  var outEl=document.getElementById('er-outcome');
+  outEl.textContent=(outcome>=0?'Refund '+fmtPlain(outcome):'Tax owing '+fmtPlain(Math.abs(outcome)));
+  outEl.style.color=outcome>=0?'#5eead4':'#fca5a5';
+  document.getElementById('est-result').style.display='block';
+}
 </script>
-
 </body>
 </html>

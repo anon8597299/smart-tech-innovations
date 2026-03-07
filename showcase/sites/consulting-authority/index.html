@@ -1,1119 +1,805 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apex Strategy Group — Business Growth Strategy &amp; Advisory, Orange NSW</title>
-  <meta name="description" content="Strategic business consulting for Central West NSW SMEs. Revenue growth, performance reviews, exit planning and succession. Book a free strategy session with David Thornton MBA.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Strategy Group | Business Consulting — Orange NSW</title>
+<meta name="description" content="Independent business strategy consultancy serving Central West NSW. Strategic planning, performance reviews, exit planning and leadership coaching for ambitious business owners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── tokens ── */
+:root{
+  --slate:#0f172a;
+  --slate-md:#1e293b;
+  --slate-lt:#334155;
+  --blue:#1d4ed8;
+  --blue-lt:#3b82f6;
+  --blue-pale:#eff6ff;
+  --muted:#64748b;
+  --off:#f8fafc;
+  --border:#e2e8f0;
+}
 
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["ProfessionalService", "LocalBusiness"],
-    "name": "Apex Strategy Group",
-    "description": "Business growth strategy and advisory for Central West NSW SMEs. Strategic planning, performance reviews, exit and succession planning.",
-    "url": "https://apexstrategy.com.au",
-    "telephone": "(02) 6360 1188",
-    "email": "david@apexstrategy.com.au",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Level 1, 88 Summer Street",
-      "addressLocality": "Orange",
-      "addressRegion": "NSW",
-      "postalCode": "2800",
-      "addressCountry": "AU"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -33.2833,
-      "longitude": 149.1000
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "41",
-      "bestRating": "5"
-    },
-    "areaServed": ["Orange NSW","Bathurst NSW","Dubbo NSW","Mudgee NSW","Regional NSW"],
-    "founder": {
-      "@type": "Person",
-      "name": "David Thornton",
-      "honorificSuffix": "MBA"
-    },
-    "foundingDate": "2015",
-    "taxID": "53 198 234 712"
-  }
-  </script>
+/* ── reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--slate-lt);background:#fff;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* ── scroll bar ── */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--blue-lt));z-index:9999;transition:width .1s}
+
+/* ── demo banner ── */
+.demo-banner{background:linear-gradient(90deg,var(--slate),var(--slate-md));color:#fff;text-align:center;padding:10px 20px;font-size:.82rem;font-weight:500;position:relative;z-index:200}
+.demo-banner a{color:#93c5fd;font-weight:700;text-decoration:underline;margin-left:8px}
+
+/* ── nav ── */
+nav{position:sticky;top:36px;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 40px}
+.nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:38px;height:38px;background:linear-gradient(135deg,var(--slate),var(--blue));border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo svg{width:20px;height:20px;fill:#fff}
+.brand-name{font-size:1.05rem;font-weight:800;color:var(--slate);letter-spacing:-.01em}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.87rem;font-weight:500;color:var(--slate-lt);transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff!important;padding:9px 22px;border-radius:6px;font-weight:600;transition:background .2s!important}
+.nav-cta:hover{background:var(--slate)!important}
+
+/* ── hero ── */
+.hero{background:var(--slate);padding:100px 40px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-120px;right:-120px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.25) 0%,transparent 70%);pointer-events:none}
+.hero::before{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.12) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:30px;padding:6px 16px;font-size:.78rem;color:#93c5fd;font-weight:600;margin-bottom:24px;letter-spacing:.04em}
+.hero h1{font-size:3.1rem;font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;letter-spacing:-.02em}
+.hero h1 span{color:var(--blue-lt)}
+.hero-lead{font-size:1.05rem;color:rgba(255,255,255,.72);line-height:1.75;margin-bottom:36px;font-weight:300;max-width:540px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue-lt));color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;font-size:.95rem;transition:opacity .2s;box-shadow:0 4px 20px rgba(29,78,216,.4)}
+.btn-primary:hover{opacity:.9}
+.btn-outline{border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.9);padding:12px 28px;border-radius:8px;font-weight:600;font-size:.95rem;transition:border-color .2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.7)}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;backdrop-filter:blur(6px)}
+.hero-card-title{font-size:.73rem;font-weight:700;color:#93c5fd;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.h-stat .num{font-size:2.1rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.h-stat .lbl{font-size:.75rem;color:rgba(255,255,255,.6);margin-top:4px}
+.profile-row{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.profile-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-lt));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;flex-shrink:0}
+.profile-name{font-size:.97rem;font-weight:700;color:#fff}
+.profile-title{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:2px}
+
+/* ── sections ── */
+section{padding:88px 40px}
+.section-inner{max-width:1160px;margin:0 auto}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+h2{font-size:2.4rem;font-weight:800;color:var(--slate);line-height:1.2;margin-bottom:16px;letter-spacing:-.02em}
+.lead{font-size:1.02rem;color:var(--muted);max-width:620px;line-height:1.75}
+
+/* ── reveal ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── kpi strip ── */
+.kpi-strip{background:linear-gradient(90deg,var(--slate),var(--slate-md));padding:44px 40px}
+.kpi-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.kpi-item{text-align:center}
+.kpi-item .kpi-num{font-size:2.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.kpi-item .kpi-sub{font-size:.8rem;color:rgba(255,255,255,.65);margin-top:6px}
+
+/* ── trust bar ── */
+.trust-bar{background:var(--blue-pale);border-top:1px solid #bfdbfe;border-bottom:1px solid #bfdbfe;padding:22px 40px}
+.trust-inner{max-width:1160px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:600;color:var(--slate)}
+.trust-item svg{width:20px;height:20px;fill:var(--blue)}
+
+/* ── services ── */
+.services{background:var(--off)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.svc-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:28px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,.04);transition:transform .2s,box-shadow .2s}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(15,23,42,.1)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-lt))}
+.svc-num{font-size:.72rem;font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:14px}
+.svc-icon{width:44px;height:44px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-icon svg{width:22px;height:22px;fill:var(--blue)}
+.svc-card h3{font-size:1.05rem;font-weight:700;color:var(--slate);margin-bottom:8px}
+.svc-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+
+/* ── case studies ── */
+.case-studies{background:#fff}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.case-card{background:var(--off);border-radius:14px;border:1px solid var(--border);padding:28px;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--slate),var(--blue))}
+.case-industry{font-size:.72rem;font-weight:700;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.case-card h3{font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:10px;line-height:1.35}
+.case-card p{font-size:.87rem;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.case-result{background:#fff;border-radius:8px;padding:14px;border:1px solid var(--border)}
+.case-result-num{font-size:1.7rem;font-weight:800;color:var(--blue);letter-spacing:-.02em;line-height:1}
+.case-result-lbl{font-size:.76rem;color:var(--muted);margin-top:3px}
+
+/* ── process ── */
+.process{background:var(--slate)}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px;position:relative}
+.process-grid::before{content:'';position:absolute;top:28px;left:calc(16.6% + 12px);right:calc(16.6% + 12px);height:2px;background:linear-gradient(to right,var(--blue-lt),var(--blue));opacity:.4}
+.proc-step{text-align:center;position:relative}
+.proc-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-lt));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 0 8px rgba(29,78,216,.15)}
+.proc-circle svg{width:24px;height:24px;fill:#fff}
+.proc-step h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.proc-step p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.65}
+.proc-label{font-size:.7rem;font-weight:700;color:#93c5fd;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+
+/* ── health check ── */
+.health-check{background:var(--off)}
+.hc-wrap{display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:start;margin-top:52px}
+.hc-intro p{font-size:.93rem;color:var(--muted);line-height:1.75;margin-bottom:24px}
+.hc-points{list-style:none}
+.hc-point{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--slate-lt)}
+.hc-point:last-child{border-bottom:none}
+.hc-point svg{width:18px;height:18px;fill:var(--blue);flex-shrink:0;margin-top:2px}
+.hc-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:32px;box-shadow:0 4px 24px rgba(15,23,42,.06)}
+.hc-card h3{font-size:1.15rem;font-weight:700;color:var(--slate);margin-bottom:6px}
+.hc-card .hc-sub{font-size:.83rem;color:var(--muted);margin-bottom:24px}
+.hc-q{margin-bottom:20px}
+.hc-q label{display:block;font-size:.83rem;font-weight:600;color:var(--slate);margin-bottom:8px}
+.hc-options{display:flex;flex-direction:column;gap:6px}
+.hc-option{display:flex;align-items:center;gap:10px;padding:9px 14px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;font-size:.87rem;transition:border-color .2s,background .2s}
+.hc-option:hover{border-color:var(--blue-lt);background:var(--blue-pale)}
+.hc-option input{accent-color:var(--blue)}
+#hc-result{display:none;background:linear-gradient(135deg,var(--blue),var(--blue-lt));border-radius:10px;padding:20px;color:#fff;margin-top:20px;text-align:center}
+#hc-result .hc-score{font-size:2.2rem;font-weight:800;line-height:1}
+#hc-result .hc-msg{font-size:.88rem;margin-top:8px;opacity:.9}
+.hc-submit{width:100%;background:linear-gradient(135deg,var(--slate),var(--blue));color:#fff;padding:13px;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s;font:inherit;border:none;margin-top:20px}
+.hc-submit:hover{opacity:.88}
+
+/* ── testimonials ── */
+.testimonials{background:#fff}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.testi-card{background:var(--off);border-radius:14px;border:1px solid var(--border);padding:28px;position:relative}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-lt))}
+.testi-stars{display:flex;gap:3px;margin-bottom:14px}
+.testi-stars svg{width:15px;height:15px;fill:#f59e0b}
+.testi-text{font-size:.93rem;color:var(--slate-lt);line-height:1.7;margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--slate),var(--blue));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem}
+.testi-name{font-weight:700;font-size:.87rem;color:var(--slate)}
+.testi-detail{font-size:.77rem;color:var(--muted)}
+
+/* ── enquiry ── */
+.enquiry{background:var(--off)}
+.enquiry-wrap{display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start;margin-top:52px}
+.form-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:36px;box-shadow:0 4px 24px rgba(15,23,42,.06)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--slate);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font:inherit;font-size:.9rem;color:var(--slate-lt);background:#fff;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--blue)}
+.form-group textarea{min-height:110px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-submit{width:100%;background:linear-gradient(135deg,var(--slate),var(--blue));color:#fff;padding:14px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;transition:opacity .2s;font:inherit;border:none}
+.form-submit:hover{opacity:.9}
+.contact-card{display:flex;flex-direction:column;gap:18px}
+.contact-item{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
+.contact-icon{width:40px;height:40px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:18px;height:18px;fill:var(--blue)}
+.contact-item h4{font-size:.87rem;font-weight:700;color:var(--slate);margin-bottom:3px}
+.contact-item p{font-size:.84rem;color:var(--muted);line-height:1.5}
+.contact-item a{color:var(--blue);font-weight:600}
+.david-bio{background:var(--slate);border-radius:12px;padding:22px;color:#fff}
+.david-bio-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.david-initials{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-lt));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#fff;flex-shrink:0}
+.david-bio-head .dn{font-weight:700;color:#fff;font-size:.97rem}
+.david-bio-head .dt{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:2px}
+.david-bio p{font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.65}
+
+/* ── faq ── */
+.faq-section{background:#fff}
+.faq-grid{max-width:760px;margin:52px auto 0}
+.faq-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;font-weight:600;font-size:.92rem;color:var(--slate);cursor:pointer;transition:background .2s}
+.faq-q:hover{background:var(--blue-pale)}
+.faq-q svg{width:18px;height:18px;fill:var(--blue);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a p{padding:4px 22px 18px;font-size:.9rem;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-a{max-height:400px}
+
+/* ── footer ── */
+footer{background:var(--slate);color:rgba(255,255,255,.65);padding:52px 40px 28px}
+.footer-inner{max-width:1160px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.footer-brand-name{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.footer-brand-tagline{font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.6}
+.footer-heading{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:8px}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.6);transition:color .2s}
+.footer-links a:hover{color:#93c5fd}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.35)}
+.footer-bottom a{color:rgba(255,255,255,.55)}
+
+/* ── mobile CTA ── */
+.mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--blue);padding:14px 20px;z-index:300;justify-content:center}
+.mobile-cta a{color:#fff;font-weight:700;font-size:.9rem}
+
+/* ── responsive ── */
+@media(max-width:1000px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-card{max-width:480px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .case-grid{grid-template-columns:1fr}
+  .hc-wrap{grid-template-columns:1fr}
+  .enquiry-wrap{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .kpi-inner{grid-template-columns:repeat(2,1fr)}
+  .process-grid{grid-template-columns:1fr;gap:24px}
+  .process-grid::before{display:none}
+}
+@media(max-width:700px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero{padding:64px 20px}
+  .hero h1{font-size:2.1rem}
+  section{padding:60px 20px}
+  .kpi-strip,.trust-bar{padding:40px 20px}
+  h2{font-size:1.9rem}
+  .services-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .mobile-cta{display:flex}
+  body{padding-bottom:56px}
+}
+</style>
 </head>
 <body>
 
-  <div id="scroll-bar"></div>
+<div id="scroll-bar"></div>
 
-  <!-- Demo Banner -->
-  <div class="demo-banner">
-    This is a demo site by ImproveYourSite — showing what your finished site looks like.
-    <a href="/packages.html">Get a site like this &rarr;</a>
+<div class="demo-banner">
+  This is a sample website built by improveyoursite.com
+  <a href="/packages.html">Get a site like this &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V10m4 10V4m4 16v-7m4 7v-3"/></svg>
+      </div>
+      <span class="brand-name">Apex Strategy Group</span>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Our Process</a>
+      <a href="#health-check">Health Check</a>
+      <a href="#contact" class="nav-cta">Book a Call</a>
+    </div>
   </div>
+</nav>
 
-  <!-- Sticky Header -->
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#">Apex Strategy Group</a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#how-we-work">How We Work</a>
-        <a href="#case-studies">Case Studies</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-book" href="#contact">Book a Call</a>
-      </nav>
-      <a class="phone-pill" href="tel:0263601188">(02) 6360 1188</a>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="rgba(147,197,253,0.9)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Orange NSW &nbsp;|&nbsp; 5.0 Stars &nbsp;|&nbsp; 41 Reviews &nbsp;|&nbsp; 9 Years Experience
+      </div>
+      <h1>Strategy That Moves Your Business <span>Forward</span></h1>
+      <p class="hero-lead">Independent business strategy consultancy for ambitious Central West NSW business owners. From strategic planning to exit succession, we provide the clarity and framework to achieve measurable results.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Strategy Call</a>
+        <a href="#health-check" class="btn-outline">Free Health Check</a>
+      </div>
     </div>
-  </header>
-
-  <main>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-parallax-bg" aria-hidden="true"></div>
-      <div class="container">
-        <div class="hero-inner">
-          <div class="hero-content">
-            <div class="hero-badges">
-              <span class="badge-open" id="open-badge">Checking hours...</span>
-              <span class="badge-location">Orange NSW</span>
-            </div>
-            <h1>Strategy that moves Central West businesses forward</h1>
-            <p class="lead">David Thornton MBA has worked with 80+ business owners across Orange, Bathurst, Dubbo and Mudgee. We don't just write reports — we roll up our sleeves and help you implement the strategy that transforms your business.</p>
-            <div class="cta-group">
-              <a class="btn btn-primary" href="#contact">Book free strategy session</a>
-              <a class="btn btn-ghost" href="#health-check">Take the health check</a>
-            </div>
-            <div class="trust-strip">
-              <span class="trust-chip">80+ clients advised</span>
-              <span class="trust-chip">$40M+ revenue influenced</span>
-              <span class="trust-chip">9 years in practice</span>
-              <span class="trust-chip">Regional specialists</span>
-              <span class="trust-chip">5.0 ★ Google (41 reviews)</span>
-            </div>
-          </div>
-          <div class="hero-panel">
-            <div class="hero-panel-inner">
-              <div class="hero-panel-label">Est. 2015 · Orange NSW</div>
-              <div class="hero-stat-row">
-                <div class="hero-stat">
-                  <span class="stat-num">80+</span>
-                  <span class="stat-label">Clients advised</span>
-                </div>
-                <div class="hero-stat">
-                  <span class="stat-num">$40M+</span>
-                  <span class="stat-label">Revenue influenced</span>
-                </div>
-                <div class="hero-stat">
-                  <span class="stat-num">5.0</span>
-                  <span class="stat-label">Google rating</span>
-                </div>
-              </div>
-              <blockquote class="hero-quote">
-                "David's strategic plan gave us our first $1M quarter."
-                <cite>— Regional SME client, Orange NSW</cite>
-              </blockquote>
-              <div class="hero-panel-chips">
-                <span>$1M–$20M revenue</span>
-                <span>Central West NSW</span>
-                <span>SME specialists</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="hero-card reveal d1">
+      <div class="hero-card-title">Apex at a Glance</div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="num">80+</div><div class="lbl">Clients served</div></div>
+        <div class="h-stat"><div class="num">$40M+</div><div class="lbl">Value delivered</div></div>
+        <div class="h-stat"><div class="num">9</div><div class="lbl">Years established</div></div>
+        <div class="h-stat"><div class="num">5.0★</div><div class="lbl">41 Google reviews</div></div>
       </div>
-    </section>
-
-    <!-- Services Grid -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">What We Do</span>
-          <h2>Strategic services built for regional business</h2>
-          <p>Every engagement is tailored. We don't give generic advice — we get across your numbers, your market, and your team, then build a plan you can actually execute.</p>
-        </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">&#9650;</div>
-            <h3>Strategic Planning</h3>
-            <p>A documented 3-year strategy with quarterly milestones, clear accountabilities and KPIs that keep your team aligned and moving.</p>
-            <div class="service-outcome">Outcome: Direction, alignment, measurable growth</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#128200;</div>
-            <h3>Business Performance Review</h3>
-            <p>Deep-dive financial and operational analysis to identify where profit is leaking, where capacity is being wasted, and where the real growth levers are.</p>
-            <div class="service-outcome">Outcome: Clarity on what to fix first</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#128197;</div>
-            <h3>Exit &amp; Succession Planning</h3>
-            <p>Prepare your business for a sale or handover 2–5 years out. We build the systems, documentation and financial story that maximises your multiple.</p>
-            <div class="service-outcome">Outcome: Maximum value at exit</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#128202;</div>
-            <h3>Financial Modelling</h3>
-            <p>Scenario modelling, cash flow forecasting and board-ready financial presentations. Know exactly what different strategic choices will cost and return.</p>
-            <div class="service-outcome">Outcome: Confident financial decisions</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#127919;</div>
-            <h3>Marketing Strategy</h3>
-            <p>Market positioning, customer segmentation and growth channel planning. We identify where your best customers come from and how to get more of them.</p>
-            <div class="service-outcome">Outcome: Targeted, cost-effective growth</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">&#128081;</div>
-            <h3>Leadership Coaching</h3>
-            <p>One-on-one coaching for business owners and senior leaders. Work on the business instead of just in it — develop the decision-making habits that scale.</p>
-            <div class="service-outcome">Outcome: Stronger leadership, less owner dependency</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How We Work — 3-phase -->
-    <section class="section section-alt" id="how-we-work">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">How We Work</span>
-          <h2>A proven three-phase process</h2>
-          <p>We don't just hand over a document and disappear. Our process is designed to deliver results you can measure — and we're with you at every stage.</p>
-        </div>
-        <div class="phases-grid">
-          <div class="phase-card">
-            <div class="phase-badge">1</div>
-            <div class="phase-body">
-              <h3>Diagnose</h3>
-              <p>We run a deep-dive analysis of your business: financial review, market assessment, operational audit and leadership evaluation. We find the real constraints — not the symptoms.</p>
-              <ul class="phase-list">
-                <li>Financial review &amp; benchmarking</li>
-                <li>Market &amp; competitor assessment</li>
-                <li>Operational audit</li>
-                <li>Team capability review</li>
-              </ul>
-            </div>
-          </div>
-          <div class="phase-card">
-            <div class="phase-badge">2</div>
-            <div class="phase-body">
-              <h3>Design</h3>
-              <p>We build a custom strategic roadmap specific to your business, your goals and your resources — not a generic template. Includes a 90-day action plan to create early wins.</p>
-              <ul class="phase-list">
-                <li>Custom strategic roadmap</li>
-                <li>90-day action plan</li>
-                <li>KPI framework</li>
-                <li>Leadership team presentation</li>
-              </ul>
-            </div>
-          </div>
-          <div class="phase-card">
-            <div class="phase-badge">3</div>
-            <div class="phase-body">
-              <h3>Deliver</h3>
-              <p>Where most consultants stop, we keep going. Hands-on implementation support, monthly check-ins, and real-time KPI tracking keep your strategy on course.</p>
-              <ul class="phase-list">
-                <li>Hands-on implementation support</li>
-                <li>Monthly check-in sessions</li>
-                <li>KPI tracking dashboard</li>
-                <li>Strategy adjustments as needed</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Business Health Check Quiz -->
-    <section class="section" id="health-check">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">Free Assessment</span>
-          <h2>Business Health Check</h2>
-          <p>Five quick questions to identify where your business stands — and where the biggest opportunities are.</p>
-        </div>
-        <div class="quiz-card reveal">
-          <div class="quiz-progress-wrap">
-            <div class="quiz-progress-label" id="quiz-progress-label">Question 1 of 5</div>
-            <div class="quiz-progress-bar-track">
-              <div class="quiz-progress-bar-fill" id="quiz-progress-bar" style="width:20%"></div>
-            </div>
-          </div>
-
-          <div id="quiz-questions">
-            <!-- Q1 -->
-            <div class="quiz-question active" data-q="1">
-              <p class="quiz-q-text">Does your business have a <strong>documented 3-year strategic plan</strong>?</p>
-              <div class="quiz-options">
-                <button class="quiz-btn" data-answer="yes">Yes</button>
-                <button class="quiz-btn" data-answer="no">No</button>
-              </div>
-            </div>
-            <!-- Q2 -->
-            <div class="quiz-question" data-q="2">
-              <p class="quiz-q-text">Do you <strong>review your financials monthly</strong>?</p>
-              <div class="quiz-options">
-                <button class="quiz-btn" data-answer="yes">Yes</button>
-                <button class="quiz-btn" data-answer="no">No</button>
-              </div>
-            </div>
-            <!-- Q3 -->
-            <div class="quiz-question" data-q="3">
-              <p class="quiz-q-text">Is your business <strong>systemised enough to run without you for 2 weeks</strong>?</p>
-              <div class="quiz-options">
-                <button class="quiz-btn" data-answer="yes">Yes</button>
-                <button class="quiz-btn" data-answer="no">No</button>
-              </div>
-            </div>
-            <!-- Q4 -->
-            <div class="quiz-question" data-q="4">
-              <p class="quiz-q-text">Do you have a <strong>clear exit or succession plan</strong>?</p>
-              <div class="quiz-options">
-                <button class="quiz-btn" data-answer="yes">Yes</button>
-                <button class="quiz-btn" data-answer="no">No</button>
-              </div>
-            </div>
-            <!-- Q5 -->
-            <div class="quiz-question" data-q="5">
-              <p class="quiz-q-text">Is your <strong>revenue growing consistently year-on-year</strong>?</p>
-              <div class="quiz-options">
-                <button class="quiz-btn" data-answer="yes">Yes</button>
-                <button class="quiz-btn" data-answer="no">No</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Result -->
-          <div id="quiz-result" class="quiz-result" style="display:none;">
-            <div class="quiz-result-icon" id="quiz-result-icon"></div>
-            <h3 id="quiz-result-title"></h3>
-            <p id="quiz-result-desc"></p>
-            <ul class="quiz-recommendations" id="quiz-recommendations"></ul>
-            <a class="btn btn-primary" href="#contact">Book a free strategy session</a>
-            <button class="quiz-restart-btn" id="quiz-restart">Retake the quiz</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Case Studies -->
-    <section class="section section-alt" id="case-studies">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">Results</span>
-          <h2>What we've helped clients achieve</h2>
-          <p>Real outcomes from real businesses across Central West NSW. All figures verified at project close.</p>
-        </div>
-        <div class="case-studies-grid">
-          <div class="case-study-card reveal">
-            <div class="case-tag">Manufacturing · Orange</div>
-            <h3>$2.4M revenue increase in 18 months</h3>
-            <p>An Orange manufacturing firm with stalled growth engaged us for a full strategic review. We identified three underpriced product lines, restructured their sales process, and built a new channel strategy targeting regional infrastructure projects.</p>
-            <div class="case-metric">+$2.4M revenue · 18-month engagement</div>
-          </div>
-          <div class="case-study-card reveal">
-            <div class="case-tag">Retail · Bathurst</div>
-            <h3>Business sold at 4.2× EBITDA</h3>
-            <p>A family retail business in Bathurst wanted to exit within three years. We spent 24 months systematising operations, cleaning up the financials, and building a transferable customer base that made the business highly attractive to buyers.</p>
-            <div class="case-metric">4.2× EBITDA multiple · successful exit</div>
-          </div>
-          <div class="case-study-card reveal">
-            <div class="case-tag">Services · Dubbo</div>
-            <h3>Owner hours reduced by 60% in 12 months</h3>
-            <p>A services firm owner in Dubbo was working 70-hour weeks and couldn't grow without burning out. We mapped every process, delegated key functions, and built a management layer that freed the owner to focus on strategy and business development.</p>
-            <div class="case-metric">60% hours reduction · 12-month engagement</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section" id="testimonials">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">Client Feedback</span>
-          <h2>What Central West business owners say</h2>
-        </div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card reveal">
-            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <blockquote>"David's strategic plan gave us our first $1M quarter. It wasn't magic — it was a clear plan, the right priorities and someone keeping us accountable. Best investment we've made in the business."</blockquote>
-            <div class="reviewer">
-              <strong>Margaret F.</strong>
-              <span>Professional services, Orange NSW</span>
-            </div>
-          </div>
-          <div class="testimonial-card reveal">
-            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <blockquote>"We were going nowhere for 3 years — same revenue, same problems, same frustration. Six months with Apex and we have a real roadmap. Twelve months on, revenue is up 38%."</blockquote>
-            <div class="reviewer">
-              <strong>Jason &amp; Karen W.</strong>
-              <span>Trade services, Bathurst NSW</span>
-            </div>
-          </div>
-          <div class="testimonial-card reveal">
-            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <blockquote>"The exit planning alone was worth 10 times the fee when we sold. David helped us understand what buyers actually look at and we spent 18 months making our business look the way it needed to."</blockquote>
-            <div class="reviewer">
-              <strong>Robert &amp; Sue T.</strong>
-              <span>Retail, Dubbo NSW</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- KPI Strip -->
-    <div class="kpi-strip">
-      <div class="container kpi-strip-inner">
-        <div class="kpi-item">
-          <span class="kpi-num">80+</span>
-          <span class="kpi-label">Clients advised</span>
-        </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <span class="kpi-num">$40M+</span>
-          <span class="kpi-label">Revenue influenced</span>
-        </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <span class="kpi-num">9 years</span>
-          <span class="kpi-label">In practice</span>
-        </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <span class="kpi-num">5.0 &#9733;</span>
-          <span class="kpi-label">Google rating (41 reviews)</span>
-        </div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-item">
-          <span class="kpi-num">Regional</span>
-          <span class="kpi-label">Central West NSW specialists</span>
+      <div class="profile-row">
+        <div class="profile-avatar">DT</div>
+        <div>
+          <div class="profile-name">David Thornton</div>
+          <div class="profile-title">MBA, Founder &amp; Lead Consultant</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">Get Started</span>
-          <h2>Book your free strategy session</h2>
-          <p>A 60-minute session with David Thornton MBA. No obligation, no sales pitch — just a straight conversation about your business.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-form-wrap reveal">
-            <form class="contact-form" id="contact-form" novalidate>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="f-name">Full name</label>
-                  <input type="text" id="f-name" name="name" placeholder="Your name" required>
-                </div>
-                <div class="form-group">
-                  <label for="f-phone">Phone</label>
-                  <input type="tel" id="f-phone" name="phone" placeholder="04xx xxx xxx" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="f-email">Email</label>
-                <input type="email" id="f-email" name="email" placeholder="you@yourbusiness.com.au" required>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="f-biz-type">Business type</label>
-                  <select id="f-biz-type" name="business_type">
-                    <option value="">Select industry</option>
-                    <option>Manufacturing</option>
-                    <option>Retail &amp; Wholesale</option>
-                    <option>Professional Services</option>
-                    <option>Trade &amp; Construction</option>
-                    <option>Agriculture</option>
-                    <option>Health &amp; Allied Health</option>
-                    <option>Hospitality</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="f-revenue">Annual revenue</label>
-                  <select id="f-revenue" name="annual_revenue">
-                    <option value="">Select range</option>
-                    <option>$1M – $2M</option>
-                    <option>$2M – $5M</option>
-                    <option>$5M – $10M</option>
-                    <option>$10M – $20M</option>
-                    <option>$20M+</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="f-challenge">Biggest challenge right now</label>
-                <select id="f-challenge" name="biggest_challenge">
-                  <option value="">Select your main challenge</option>
-                  <option>Revenue growth has stalled</option>
-                  <option>Profitability is down</option>
-                  <option>Too owner-dependent</option>
-                  <option>Planning for an exit or sale</option>
-                  <option>Scaling without losing control</option>
-                  <option>Cash flow management</option>
-                  <option>Team and leadership issues</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="f-message">Tell us more (optional)</label>
-                <textarea id="f-message" name="message" rows="3" placeholder="Any context that will help us prepare for your session..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-full">Request free strategy session</button>
-              <p class="form-note">We'll be in touch within 1 business day to confirm a time.</p>
-            </form>
-            <div class="form-success" id="form-success" style="display:none;">
-              <div class="form-success-icon">&#10003;</div>
-              <h3>Thanks, we'll be in touch shortly</h3>
-              <p>David will personally review your submission and be in touch within 1 business day to arrange your free session.</p>
-            </div>
-          </div>
-          <div class="contact-info reveal">
-            <div class="contact-info-box">
-              <h3>Session details</h3>
-              <p class="session-detail">60 minutes · Confidential · No obligation</p>
-              <p>We'll cover your current situation, your goals, and whether we're the right fit. If we can help, we'll explain how. If not, we'll tell you that too.</p>
-              <div class="contact-details">
-                <div class="contact-detail-item">
-                  <span class="contact-detail-icon">&#128222;</span>
-                  <div>
-                    <strong>Phone</strong>
-                    <a href="tel:0263601188">(02) 6360 1188</a>
-                  </div>
-                </div>
-                <div class="contact-detail-item">
-                  <span class="contact-detail-icon">&#9993;</span>
-                  <div>
-                    <strong>Email</strong>
-                    <a href="mailto:david@apexstrategy.com.au">david@apexstrategy.com.au</a>
-                  </div>
-                </div>
-                <div class="contact-detail-item">
-                  <span class="contact-detail-icon">&#128205;</span>
-                  <div>
-                    <strong>Office</strong>
-                    <span>Level 1, 88 Summer Street<br>Orange NSW 2800</span>
-                  </div>
-                </div>
-                <div class="contact-detail-item">
-                  <span class="contact-detail-icon">&#128336;</span>
-                  <div>
-                    <strong>Hours</strong>
-                    <span>Mon–Fri 9am–5pm<br><em>Appointments preferred</em></span>
-                  </div>
-                </div>
-              </div>
-              <div class="contact-areas">
-                <strong>Serving:</strong> Orange · Bathurst · Dubbo · Mudgee · Regional NSW
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="kpi-strip">
+  <div class="kpi-inner">
+    <div class="kpi-item reveal"><div class="kpi-num">80+</div><div class="kpi-sub">Businesses Advised</div></div>
+    <div class="kpi-item reveal d1"><div class="kpi-num">$40M+</div><div class="kpi-sub">Client Value Delivered</div></div>
+    <div class="kpi-item reveal d2"><div class="kpi-num">9</div><div class="kpi-sub">Years in Practice</div></div>
+    <div class="kpi-item reveal d3"><div class="kpi-num">5.0★</div><div class="kpi-sub">Google Reviews</div></div>
+  </div>
+</div>
 
-    <!-- FAQ Accordion -->
-    <section class="section section-alt" id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">Common Questions</span>
-          <h2>Frequently asked questions</h2>
-        </div>
-        <div class="faq-list reveal">
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              What size businesses do you work with?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <p>We work with SMEs generating between $1M and $20M in annual revenue, primarily across Orange, Bathurst, Dubbo, Mudgee and the broader Central West region of NSW. Our sweet spot is businesses with a genuine growth appetite — owners who are ready to invest in strategy and have the capacity to act on recommendations. If you're outside this range, we'll let you know upfront whether we're the right fit.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              How long does an engagement last?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <p>It depends on what you need. A focused diagnostic and strategic roadmap typically takes 6–8 weeks. Ongoing implementation support engagements run 12–24 months, with monthly check-ins and quarterly strategy reviews. Exit preparation engagements are usually 18–36 months depending on the target timeline. We'll scope it clearly before anything starts — no open-ended retainers unless that's what you want.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              Do you work on retainer?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <p>Yes, for clients who want ongoing strategic support we offer a monthly advisory retainer. This includes a set number of hours per month, access to David for ad-hoc decisions, and participation in your monthly management meetings. Retainer arrangements are typically established after an initial project engagement so both parties understand the working relationship. All fees are agreed upfront — no hourly billing surprises.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              How is this different from working with an accountant?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <p>Accountants are essential — but their job is to record and report what happened in the past and keep you compliant. We focus entirely on the future: where you want to go, how to get there, and what needs to change in your operations, team and market position to make it happen. We work closely with your accountant, not instead of them. We often find that the financial analysis we do surfaces insights that help your accountant do their job better too.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Independent Advice
+    </div>
+    <div class="trust-item reveal d1">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      MBA Qualified
+    </div>
+    <div class="trust-item reveal d2">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+      Local Central West NSW
+    </div>
+    <div class="trust-item reveal d3">
+      <svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V10m4 10V4m4 16v-7m4 7v-3"/></svg>
+      Measurable Outcomes
+    </div>
+    <div class="trust-item reveal d4">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Confidential Engagements
+    </div>
+  </div>
+</div>
 
-    <!-- ImproveYourSite CTA -->
-    <section class="improve-cta-section">
-      <div class="container">
-        <div class="improve-cta-inner">
-          <div class="improve-cta-text">
-            <h2>Want a professional website like this for your business?</h2>
-            <p>This demo was built by ImproveYourSite. Professional websites for Australian businesses — from $3,000. See our packages and pricing.</p>
-          </div>
-          <a class="btn-get-site" href="/packages.html">See our packages &amp; pricing &rarr;</a>
-        </div>
+<section id="services" class="services">
+  <div class="section-inner">
+    <div class="eyebrow reveal">What We Do</div>
+    <h2 class="reveal">Six Core Service Areas</h2>
+    <p class="lead reveal d1">Whether you need a clear direction, a performance turnaround or a structured exit, Apex provides the independent expertise to make it happen.</p>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
+        <h3>Strategic Planning</h3>
+        <p>Facilitated planning sessions that produce a clear, actionable 3 to 5 year roadmap. We align your leadership team and convert goals into quarterly milestones you can track.</p>
       </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <strong>Apex Strategy Group</strong>
-        <span>ABN 53 198 234 712</span>
+      <div class="svc-card reveal d1">
+        <div class="svc-num">02</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+        <h3>Business Performance Review</h3>
+        <p>A rigorous diagnostic of your operations, financials, people and market position. We identify where value is being lost and map out a prioritised improvement plan.</p>
       </div>
-      <div class="footer-address">
-        Level 1, 88 Summer Street, Orange NSW 2800<br>
-        <a href="tel:0263601188">(02) 6360 1188</a> &middot; <a href="mailto:david@apexstrategy.com.au">david@apexstrategy.com.au</a>
+      <div class="svc-card reveal d2">
+        <div class="svc-num">03</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+        <h3>Exit and Succession Planning</h3>
+        <p>Structured planning to maximise your business value ahead of a sale, management buyout or generational transfer. We prepare the business, the numbers and the story.</p>
       </div>
-      <div class="footer-copy">
-        <p>&copy; 2025 Apex Strategy Group Pty Ltd. All rights reserved.</p>
-        <p>This is a <strong>demo site</strong> by <a href="/packages.html">ImproveYourSite</a>.</p>
+      <div class="svc-card reveal">
+        <div class="svc-num">04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+        <h3>Financial Modelling</h3>
+        <p>Board-ready financial models for capital raising, acquisitions, scenario planning and budget forecasting. We turn your numbers into a compelling picture for stakeholders and lenders.</p>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-num">05</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg></div>
+        <h3>Marketing Strategy</h3>
+        <p>Market positioning, competitive differentiation and go-to-market planning. We help you own a clear position in your market and build the systems to grow revenue with intention.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-num">06</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3>Leadership Coaching</h3>
+        <p>One-on-one executive coaching for business owners and senior leaders navigating growth, transition or complexity. Practical, direct and confidential coaching grounded in real-world experience.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- Mobile Sticky CTA -->
-  <a class="mobile-sticky-cta" href="#contact">&#127963; Book free session</a>
+<section id="case-studies" class="case-studies">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Client Results</div>
+    <h2 class="reveal">Real Outcomes for Real Businesses</h2>
+    <p class="lead reveal d1">All results are genuine, drawn from anonymised client engagements across Central West NSW. Specific business details are kept confidential.</p>
+    <div class="case-grid">
+      <div class="case-card reveal">
+        <div class="case-industry">Manufacturing — Orange NSW</div>
+        <h3>Margin Recovery Through Operational Restructure</h3>
+        <p>A third-generation manufacturer with declining margins engaged Apex for a full performance review. We identified three areas of operational waste and redesigned their pricing structure.</p>
+        <div class="case-result">
+          <div class="case-result-num">34%</div>
+          <div class="case-result-lbl">Gross margin improvement over 18 months</div>
+        </div>
+      </div>
+      <div class="case-card reveal d1">
+        <div class="case-industry">Professional Services — Bathurst NSW</div>
+        <h3>Exit at Maximum Value After 2 Years of Preparation</h3>
+        <p>An accounting practice owner engaged Apex 24 months before their intended retirement. We restructured operations to reduce key-person dependency and built a clean information memorandum for buyers.</p>
+        <div class="case-result">
+          <div class="case-result-num">2.8x</div>
+          <div class="case-result-lbl">EBIT multiple achieved at sale (above market)</div>
+        </div>
+      </div>
+      <div class="case-card reveal d2">
+        <div class="case-industry">Retail and Distribution — Dubbo NSW</div>
+        <h3>Strategic Expansion Into Three New Markets</h3>
+        <p>A regional distributor wanted to expand but lacked a structured go-to-market framework. We built a market entry strategy covering two states and secured two new wholesale agreements.</p>
+        <div class="case-result">
+          <div class="case-result-num">$2.1M</div>
+          <div class="case-result-lbl">New annual revenue within 12 months</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // ─── Open/Closed Badge ───────────────────────────────────────────
-    (function () {
-      const badge = document.getElementById('open-badge');
-      if (!badge) return;
-      // Sydney time (AEDT = UTC+11, AEST = UTC+10)
-      const now = new Date();
-      const sydneyOffset = 11; // AEDT (Oct–Apr); adjust dynamically for production
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const sydney = new Date(utc + 3600000 * sydneyOffset);
-      const day = sydney.getDay(); // 0=Sun, 6=Sat
-      const hour = sydney.getHours();
-      const isOpen = day >= 1 && day <= 5 && hour >= 9 && hour < 17;
-      badge.textContent = isOpen ? 'Open now' : 'Open Mon–Fri 9am–5pm';
-      badge.className = 'badge-open ' + (isOpen ? 'badge-open--open' : 'badge-open--closed');
-    })();
+<section id="process" class="process">
+  <div class="section-inner">
+    <div class="eyebrow reveal" style="color:#93c5fd">How We Work</div>
+    <h2 class="reveal" style="color:#fff">Three Phases. One Clear Path.</h2>
+    <p class="lead reveal d1" style="color:rgba(255,255,255,.65)">Every Apex engagement follows a proven structure designed to deliver rapid clarity and sustained progress.</p>
+    <div class="process-grid">
+      <div class="proc-step reveal">
+        <div class="proc-circle">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        </div>
+        <div class="proc-label">Phase One</div>
+        <h3>Diagnose</h3>
+        <p>We invest time to understand your business deeply. Financials, operations, people, market, and your personal goals. No assumptions, no templates. Just rigorous discovery.</p>
+      </div>
+      <div class="proc-step reveal d1">
+        <div class="proc-circle">
+          <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        </div>
+        <div class="proc-label">Phase Two</div>
+        <h3>Design</h3>
+        <p>We build a tailored strategy with clear priorities, milestones and accountability structures. Every recommendation is grounded in evidence and calibrated for your capacity to execute.</p>
+      </div>
+      <div class="proc-step reveal d2">
+        <div class="proc-circle">
+          <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="proc-label">Phase Three</div>
+        <h3>Deliver</h3>
+        <p>We stay with you through implementation. Regular check-ins, course corrections, and accountability reviews ensure momentum. Results are tracked and shared transparently.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // ─── Business Health Check Quiz ──────────────────────────────────
-    (function () {
-      const questions = document.querySelectorAll('.quiz-question');
-      const progressLabel = document.getElementById('quiz-progress-label');
-      const progressBar = document.getElementById('quiz-progress-bar');
-      const quizResult = document.getElementById('quiz-result');
-      const quizQuestions = document.getElementById('quiz-questions');
-      const restartBtn = document.getElementById('quiz-restart');
+<section id="health-check" class="health-check">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Free Tool</div>
+    <h2 class="reveal">Business Health Check</h2>
+    <p class="lead reveal d1">Answer five quick questions and get an instant read on how your business is tracking across the key strategic dimensions.</p>
+    <div class="hc-wrap">
+      <div class="hc-intro reveal d2">
+        <p>Most business owners have a sense that something is holding their growth back. This quick diagnostic surfaces the key risk areas in strategy, finance, operations, people and market position.</p>
+        <p style="margin-top:16px">It takes under two minutes. Your results are private and not collected without your permission. Use it as a conversation starter for a no-obligation strategy call with David.</p>
+        <ul class="hc-points" style="margin-top:28px">
+          <li class="hc-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Five questions covering the core pillars of business performance</li>
+          <li class="hc-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Instant result with a plain-English interpretation</li>
+          <li class="hc-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Optional follow-up with David at no cost</li>
+          <li class="hc-point"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>No email required to receive results</li>
+        </ul>
+      </div>
+      <div class="hc-card reveal d3">
+        <h3>Quick Business Diagnostic</h3>
+        <div class="hc-sub">Takes 2 minutes. Instant results.</div>
+        <div class="hc-q">
+          <label>1. How clear is your 3-year business direction?</label>
+          <div class="hc-options">
+            <label class="hc-option"><input type="radio" name="q1" value="3"> Very clear — documented and shared with the team</label>
+            <label class="hc-option"><input type="radio" name="q1" value="2"> Reasonably clear — in my head but not formalised</label>
+            <label class="hc-option"><input type="radio" name="q1" value="1"> Unclear — we are reactive more than proactive</label>
+          </div>
+        </div>
+        <div class="hc-q">
+          <label>2. How well do you track business performance metrics?</label>
+          <div class="hc-options">
+            <label class="hc-option"><input type="radio" name="q2" value="3"> Regularly — dashboards and monthly reviews in place</label>
+            <label class="hc-option"><input type="radio" name="q2" value="2"> Occasionally — I review financials when prompted</label>
+            <label class="hc-option"><input type="radio" name="q2" value="1"> Rarely — mostly rely on gut feel and bank balance</label>
+          </div>
+        </div>
+        <div class="hc-q">
+          <label>3. How dependent is the business on you personally?</label>
+          <div class="hc-options">
+            <label class="hc-option"><input type="radio" name="q3" value="3"> Low — the business runs well without me for weeks</label>
+            <label class="hc-option"><input type="radio" name="q3" value="2"> Medium — some areas struggle without me present</label>
+            <label class="hc-option"><input type="radio" name="q3" value="1"> High — I am involved in most decisions daily</label>
+          </div>
+        </div>
+        <div class="hc-q">
+          <label>4. How differentiated are you from your competitors?</label>
+          <div class="hc-options">
+            <label class="hc-option"><input type="radio" name="q4" value="3"> Strongly — we have a clear and defensible position</label>
+            <label class="hc-option"><input type="radio" name="q4" value="2"> Somewhat — we are better but struggle to articulate why</label>
+            <label class="hc-option"><input type="radio" name="q4" value="1"> Weakly — we compete mostly on price</label>
+          </div>
+        </div>
+        <div class="hc-q">
+          <label>5. Have you planned for what happens when you exit?</label>
+          <div class="hc-options">
+            <label class="hc-option"><input type="radio" name="q5" value="3"> Yes — documented succession or exit plan in place</label>
+            <label class="hc-option"><input type="radio" name="q5" value="2"> Partially — thought about it but not formalised</label>
+            <label class="hc-option"><input type="radio" name="q5" value="1"> No — have not addressed this yet</label>
+          </div>
+        </div>
+        <div id="hc-result">
+          <div class="hc-score" id="hc-score-val"></div>
+          <div class="hc-msg" id="hc-score-msg"></div>
+        </div>
+        <button class="hc-submit" onclick="runHealthCheck()">Get My Result</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-      let currentQ = 1;
-      let yesCount = 0;
+<section id="testimonials" class="testimonials">
+  <div class="section-inner">
+    <div class="eyebrow reveal">What Clients Say</div>
+    <h2 class="reveal">Outcomes Worth Talking About</h2>
+    <p class="lead reveal d1">41 five-star reviews on Google. Here are three clients on what working with Apex Strategy Group meant for their business.</p>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testi-text">"David does not just give you a plan and walk away. He stays with you, holds you accountable, and genuinely cares about the outcome. Our business today is unrecognisable from where we started."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">GH</div>
+          <div>
+            <div class="testi-name">Grant H.</div>
+            <div class="testi-detail">Manufacturing business owner, Orange NSW</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testi-text">"We engaged David 18 months before selling. The preparation he put into our business made a significant difference to our final sale price. His exit planning process is exceptional and worth every dollar."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PK</div>
+          <div>
+            <div class="testi-name">Peter &amp; Karen B.</div>
+            <div class="testi-detail">Professional services, sold 2024 — Bathurst NSW</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testi-text">"I was sceptical about whether a consultant could add real value to a business like ours. David proved me wrong. His financial modelling for our expansion was exactly what our bank needed to approve the funding."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">TR</div>
+          <div>
+            <div class="testi-name">Tony R.</div>
+            <div class="testi-detail">Distributor, Dubbo NSW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const results = {
-        5: {
-          title: 'Strong foundation — let\'s look at scaling',
-          desc: 'Your business has solid fundamentals in place. The opportunity now is to build on that base and accelerate growth strategically.',
-          color: 'result-green',
-          icon: '&#9650;',
-          recs: [
-            'Explore how to leverage your systems for faster geographic or product expansion',
-            'Consider a formal growth accelerator engagement to identify your next revenue ceiling'
-          ]
-        },
-        '3-4': {
-          title: 'Good base, some gaps to address',
-          desc: 'You have real strengths to build on, but there are specific areas that — if addressed — could significantly improve your performance and resilience.',
-          color: 'result-amber',
-          icon: '&#9651;',
-          recs: [
-            'Identify which missing elements represent the highest risk to your business continuity',
-            'Prioritise a strategic planning process to formalise the direction and fill the gaps'
-          ]
-        },
-        '1-2': {
-          title: 'Significant opportunities to improve',
-          desc: 'Your business is likely leaving value on the table and carrying more owner risk than necessary. The good news: these are well-understood problems with clear solutions.',
-          color: 'result-orange',
-          icon: '&#9888;',
-          recs: [
-            'Start with a Business Performance Review to identify where the biggest profit and time leaks are',
-            'Build a 90-day action plan focused on the two changes that will have the most immediate impact'
-          ]
-        },
-        0: {
-          title: 'Your business needs urgent strategic attention',
-          desc: 'Without core strategic foundations in place, your business is exposed to significant risk — and missing the growth you\'re capable of. Let\'s talk.',
-          color: 'result-red',
-          icon: '&#9888;',
-          recs: [
-            'Book an urgent strategy session — we\'ll identify the most critical issues within the first meeting',
-            'A full strategic diagnostic will give you a clear picture of where to focus first for maximum impact'
-          ]
-        }
-      };
+<section id="contact" class="enquiry">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Get Started</div>
+    <h2 class="reveal">Book a Strategy Call</h2>
+    <p class="lead reveal d1">A 30-minute no-obligation call with David. No pitch, no pressure. Just a direct conversation about where your business is and where you want it to go.</p>
+    <div class="enquiry-wrap">
+      <div id="form-wrap">
+        <div class="form-card reveal d2">
+          <form id="contact-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="John Smith" required>
+              </div>
+              <div class="form-group">
+                <label>Business Name</label>
+                <input type="text" placeholder="Smith &amp; Co">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" placeholder="0400 000 000" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="john@business.com.au" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>What brings you to Apex?</label>
+              <select>
+                <option>Strategic planning</option>
+                <option>Business performance review</option>
+                <option>Exit or succession planning</option>
+                <option>Financial modelling</option>
+                <option>Marketing strategy</option>
+                <option>Leadership coaching</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tell us about your situation</label>
+              <textarea placeholder="Brief description of your business and what you are trying to achieve..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Request Strategy Call</button>
+          </form>
+        </div>
+      </div>
+      <div class="contact-card reveal d3">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div>
+            <h4>Direct Line</h4>
+            <p><a href="tel:0263601188">(02) 6360 1188</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:david@apexstrategy.com.au">david@apexstrategy.com.au</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <h4>Office</h4>
+            <p>Level 1, 88 Summer Street<br>Orange NSW 2800</p>
+          </div>
+        </div>
+        <div class="david-bio">
+          <div class="david-bio-head">
+            <div class="david-initials">DT</div>
+            <div>
+              <div class="dn">David Thornton MBA</div>
+              <div class="dt">Founder, Apex Strategy Group</div>
+            </div>
+          </div>
+          <p>David has advised over 80 businesses across manufacturing, professional services, retail, construction and agriculture in regional NSW. He brings board-level thinking to businesses that typically do not have access to it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function getResultKey(count) {
-        if (count === 5) return 5;
-        if (count >= 3) return '3-4';
-        if (count >= 1) return '1-2';
-        return 0;
-      }
+<section class="faq-section">
+  <div class="section-inner">
+    <div class="eyebrow reveal" style="text-align:center">Questions</div>
+    <h2 class="reveal" style="text-align:center">Frequently Asked</h2>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What size businesses do you work with?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a"><p>Most Apex clients turn over between $1M and $20M per year across a wide range of industries. We work particularly well with privately-owned businesses where the owner is directly involved. Smaller businesses can access our Leadership Coaching service as a cost-effective entry point.</p></div>
+      </div>
+      <div class="faq-item reveal d1">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How do engagements typically work?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a"><p>Most engagements begin with a 3-month diagnostic and strategy phase, followed by an ongoing retainer for implementation support. Some clients engage for specific one-off projects like exit planning or financial modelling. All engagements begin with a free 30-minute discovery call.</p></div>
+      </div>
+      <div class="faq-item reveal d2">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is my information kept confidential?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a"><p>Completely. Every Apex engagement is bound by a formal confidentiality agreement before any commercial information is shared. We do not discuss client situations with third parties and our case studies are always anonymised with client approval.</p></div>
+      </div>
+      <div class="faq-item reveal d3">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you work outside of Orange?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a"><p>Yes. David regularly works with clients in Bathurst, Dubbo, Parkes, Forbes, Mudgee and across Central West NSW. Approximately 40% of our work is conducted remotely via video and phone, so geography is rarely a barrier. We are happy to travel for key workshops and presentations.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function showQuestion(n) {
-        questions.forEach(q => q.classList.remove('active'));
-        const target = document.querySelector('.quiz-question[data-q="' + n + '"]');
-        if (target) target.classList.add('active');
-        progressLabel.textContent = 'Question ' + n + ' of 5';
-        progressBar.style.width = (n / 5 * 100) + '%';
-      }
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Apex Strategy Group</div>
+        <div class="footer-brand-tagline" style="margin-top:8px">Level 1, 88 Summer Street, Orange NSW 2800<br>Independent business strategy consulting<br>for Central West NSW business owners.</div>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Strategic Planning</a></li>
+          <li><a href="#services">Performance Review</a></li>
+          <li><a href="#services">Exit Planning</a></li>
+          <li><a href="#services">Leadership Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:0263601188">(02) 6360 1188</a></li>
+          <li><a href="mailto:david@apexstrategy.com.au">david@apexstrategy.com.au</a></li>
+          <li><a href="#contact">Book a Strategy Call</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Apex Strategy Group. All rights reserved.</span>
+      <a href="/packages.html">Website by improveyoursite.com</a>
+    </div>
+  </div>
+</footer>
 
-      function showResult() {
-        const key = getResultKey(yesCount);
-        const r = results[key];
-        quizQuestions.style.display = 'none';
-        document.querySelector('.quiz-progress-wrap').style.display = 'none';
-        quizResult.style.display = 'block';
-        document.getElementById('quiz-result-icon').innerHTML = r.icon;
-        document.getElementById('quiz-result-title').textContent = r.title;
-        document.getElementById('quiz-result-desc').textContent = r.desc;
-        quizResult.querySelector('h3').className = 'quiz-result-title ' + r.color;
-        const recsList = document.getElementById('quiz-recommendations');
-        recsList.innerHTML = r.recs.map(rec => '<li>' + rec + '</li>').join('');
-      }
+<div class="mobile-cta">
+  <a href="tel:0263601188">Call (02) 6360 1188 to Book a Strategy Call</a>
+</div>
 
-      document.querySelectorAll('.quiz-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-          if (this.dataset.answer === 'yes') yesCount++;
-          if (currentQ < 5) {
-            currentQ++;
-            showQuestion(currentQ);
-          } else {
-            showResult();
-          }
-        });
-      });
-
-      if (restartBtn) {
-        restartBtn.addEventListener('click', function () {
-          currentQ = 1;
-          yesCount = 0;
-          quizResult.style.display = 'none';
-          document.querySelector('.quiz-progress-wrap').style.display = 'block';
-          quizQuestions.style.display = 'block';
-          showQuestion(1);
-        });
-      }
-    })();
-
-    // ─── FAQ Accordion ───────────────────────────────────────────────
-    document.querySelectorAll('.faq-trigger').forEach(trigger => {
-      trigger.addEventListener('click', function () {
-        const item = this.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
-          i.querySelector('.faq-icon').textContent = '+';
-        });
-        if (!isOpen) {
-          item.classList.add('open');
-          this.setAttribute('aria-expanded', 'true');
-          item.querySelector('.faq-icon').textContent = '−';
-        }
-      });
-    });
-
-    // ─── Contact Form Fake Submit ────────────────────────────────────
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('form-success').style.display = 'flex';
-    });
-
-    // ─── Scroll Reveal (IntersectionObserver) ───────────────────────
-    (function () {
-      const revealEls = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        revealEls.forEach(el => el.classList.add('revealed'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      revealEls.forEach(el => observer.observe(el));
-    })();
-  </script>
-
-  <script>
-    /* ============================================================
-       Scroll-Driven Visual Effects — Apex Strategy Group
-       ============================================================ */
-
-    (function () {
-      'use strict';
-
-      // ─── Cached DOM refs ─────────────────────────────────────
-      var scrollBar       = document.getElementById('scroll-bar');
-      var header          = document.querySelector('.site-header');
-      var heroContent     = document.querySelector('.hero-content');
-      var heroPanel       = document.querySelector('.hero-panel');
-      var heroParallaxBg  = document.querySelector('.hero-parallax-bg');
-      var heroSection     = document.querySelector('.hero');
-      var quizCard        = document.querySelector('.quiz-card');
-      var phaseCards      = document.querySelectorAll('.phase-card');
-      var caseCards       = document.querySelectorAll('.case-study-card');
-      var sectionH2s      = document.querySelectorAll('.section-head h2');
-
-      // ─── Helpers ─────────────────────────────────────────────
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      // Parse a hex colour to [r,g,b]
-      function hexToRgb(hex) {
-        var clean = hex.replace('#', '');
-        return [
-          parseInt(clean.substring(0, 2), 16),
-          parseInt(clean.substring(2, 4), 16),
-          parseInt(clean.substring(4, 6), 16)
-        ];
-      }
-
-      // Darken an rgb array by a fraction
-      function darkenRgb(rgb, fraction) {
-        return rgb.map(function (c) { return Math.round(Math.max(0, c * (1 - fraction))); });
-      }
-
-      // ─── 1. Scroll Progress Bar ───────────────────────────────
-      function updateScrollBar() {
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-        if (scrollBar) scrollBar.style.width = pct + '%';
-      }
-
-      // ─── 2. Hero Parallax ─────────────────────────────────────
-      var heroBottom = 0;
-      function cacheHeroBounds() {
-        if (heroSection) heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-      }
-      function updateHeroParallax() {
-        var sy = window.scrollY;
-        if (sy > heroBottom) return; // past hero — skip
-        if (heroContent)    heroContent.style.transform    = 'translateY(' + (sy * 0.25) + 'px)';
-        if (heroPanel)      heroPanel.style.transform      = 'translateY(' + (sy * 0.25) + 'px)';
-        if (heroParallaxBg) heroParallaxBg.style.transform = 'translateY(' + (sy * -0.1) + 'px)';
-      }
-
-      // ─── 3. Background Darkening ──────────────────────────────
-      var baseBg = [248, 250, 252]; // #f8fafc
-      var darkFraction = 0.08;
-      function updateBgDarken() {
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var progress = docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0;
-        var rgb = lerp(0, 1, progress);
-        var r = Math.round(lerp(baseBg[0], darkenRgb(baseBg, darkFraction)[0], progress));
-        var g = Math.round(lerp(baseBg[1], darkenRgb(baseBg, darkFraction)[1], progress));
-        var b = Math.round(lerp(baseBg[2], darkenRgb(baseBg, darkFraction)[2], progress));
-        document.documentElement.style.setProperty('--bg-dynamic', 'rgb(' + r + ',' + g + ',' + b + ')');
-      }
-
-      // ─── 8. Header Authority ──────────────────────────────────
-      function updateHeader() {
-        if (!header) return;
-        if (window.scrollY > 80) {
-          header.classList.add('header-scrolled');
-        } else {
-          header.classList.remove('header-scrolled');
-        }
-      }
-
-      // ─── Main scroll handler (rAF-gated) ─────────────────────
-      var ticking = false;
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(function () {
-            updateScrollBar();
-            updateHeroParallax();
-            updateBgDarken();
-            updateHeader();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', cacheHeroBounds);
-      cacheHeroBounds();
-      // Run once on load
-      updateScrollBar();
-      updateHeroParallax();
-      updateBgDarken();
-      updateHeader();
-
-      // ─── IntersectionObserver factory ────────────────────────
-      function makeObserver(callback, options) {
-        if (!('IntersectionObserver' in window)) {
-          // Fallback: fire immediately
-          return { observe: function (el) { callback([{ isIntersecting: true, target: el }]); } };
-        }
-        return new IntersectionObserver(callback, options);
-      }
-
-      // ─── 4. Phase Cards — alternating L/R reveals ─────────────
-      if (phaseCards.length) {
-        var phaseObs = makeObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            var card = entry.target;
-            var idx = Array.prototype.indexOf.call(phaseCards, card);
-            // odd (0-based: 0,2,…) from left; even (1,3,…) from right
-            card.style.transform = (idx % 2 === 0) ? 'translateX(-30px)' : 'translateX(30px)';
-            // force browser to paint the initial transform before transitioning
-            card.getBoundingClientRect();
-            setTimeout(function () {
-              card.classList.add('phase-revealed');
-            }, idx * 150);
-            phaseObs.unobserve(card);
-          });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-        // Set initial transforms before observing
-        phaseCards.forEach(function (card, idx) {
-          card.style.transform = (idx % 2 === 0) ? 'translateX(-30px)' : 'translateX(30px)';
-          phaseObs.observe(card);
-        });
-      }
-
-      // ─── 5. Quiz Card Highlight Pulse ─────────────────────────
-      if (quizCard) {
-        var quizPulsed = false;
-        var quizObs = makeObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting || quizPulsed) return;
-            quizPulsed = true;
-            quizCard.classList.add('quiz-pulsed');
-            quizObs.unobserve(quizCard);
-          });
-        }, { threshold: 0.3 });
-        quizObs.observe(quizCard);
-      }
-
-      // ─── 6. Case Study Card Reveals ───────────────────────────
-      if (caseCards.length) {
-        var caseObs = makeObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            var card = entry.target;
-            var idx = Array.prototype.indexOf.call(caseCards, card);
-            setTimeout(function () {
-              card.classList.add('case-revealed');
-            }, idx * 120);
-            caseObs.unobserve(card);
-          });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        caseCards.forEach(function (card) { caseObs.observe(card); });
-      }
-
-      // ─── 7. Stats/KPI Count-up ────────────────────────────────
-      // Targets: .kpi-num elements with numeric content
-      var kpiNums = document.querySelectorAll('.kpi-num');
-
-      function easeOutQuart(t) {
-        return 1 - Math.pow(1 - t, 4);
-      }
-
-      function parseKpiValue(text) {
-        // Extract leading number (int or float), prefix/suffix
-        var trimmed = text.trim();
-        var match = trimmed.match(/^([^0-9]*)([0-9]+(\.[0-9]+)?)(.*)$/);
-        if (!match) return null;
-        return {
-          prefix: match[1],
-          value: parseFloat(match[2]),
-          isFloat: match[3] !== undefined,
-          suffix: match[4],
-          original: trimmed
-        };
-      }
-
-      function animateCount(el, parsed, duration) {
-        var start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          var progress = Math.min((ts - start) / duration, 1);
-          var eased = easeOutQuart(progress);
-          var current = eased * parsed.value;
-          var display = parsed.isFloat
-            ? current.toFixed(1)
-            : Math.floor(current).toString();
-          el.textContent = parsed.prefix + display + parsed.suffix;
-          if (progress < 1) requestAnimationFrame(step);
-          else el.textContent = parsed.original; // ensure exact final value
-        }
-        requestAnimationFrame(step);
-      }
-
-      if (kpiNums.length) {
-        var kpiObs = makeObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            var el = entry.target;
-            var parsed = parseKpiValue(el.textContent);
-            if (parsed && parsed.value > 0) {
-              animateCount(el, parsed, 1600);
-            }
-            kpiObs.unobserve(el);
-          });
-        }, { threshold: 0.5 });
-        kpiNums.forEach(function (el) { kpiObs.observe(el); });
-      }
-
-      // ─── 9. Section H2 Authority Slide ────────────────────────
-      if (sectionH2s.length) {
-        var h2Obs = makeObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('h2-revealed');
-            h2Obs.unobserve(entry.target);
-          });
-        }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
-        sectionH2s.forEach(function (h2) { h2Obs.observe(h2); });
-      }
-
-    })();
-  </script>
-
-<!-- ═══════════════════════════════════════════
-     3D & Motion Effects — Apex Strategy Group
-     Lenis · GSAP ScrollTrigger · Splitting.js · Magnetic buttons
-     ═══════════════════════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
-<script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
-(function() {
-  'use strict';
+// Scroll bar
+window.addEventListener('scroll',function(){
+  var s=document.documentElement;
+  document.getElementById('scroll-bar').style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%';
+});
 
-  /* 1. Lenis smooth scroll */
-  var lenis = new Lenis({ lerp: 0.09 });
-  function rafLoop(t) { lenis.raf(t); requestAnimationFrame(rafLoop); }
-  requestAnimationFrame(rafLoop);
+// Reveal
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-  /* 2. GSAP + ScrollTrigger */
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.lagSmoothing(0);
+// FAQ
+function toggleFaq(el){
+  var item=el.parentElement;
+  var wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+  if(!wasOpen)item.classList.add('open');
+}
 
-  /* 3. Splitting.js char reveal on hero h1 — authority entrance */
-  var heroH1 = document.querySelector('.hero h1');
-  if (heroH1) {
-    var splitStyle = document.createElement('style');
-    splitStyle.textContent = [
-      '.apex-h1 .char { display:inline-block; opacity:0;',
-      '  transform: translateY(28px) rotate(4deg);',
-      '  transition: opacity 0.5s ease calc(var(--char-index)*0.024s),',
-      '              transform 0.5s ease calc(var(--char-index)*0.024s); }',
-      '.apex-h1.chars-in .char { opacity:1; transform:translateY(0) rotate(0deg); }'
-    ].join('');
-    document.head.appendChild(splitStyle);
-    heroH1.setAttribute('data-splitting', '');
-    heroH1.classList.add('apex-h1');
-    Splitting();
-    setTimeout(function() { heroH1.classList.add('chars-in'); }, 400);
-  }
+// Form
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('form-wrap').innerHTML='<div style="background:#fff;border-radius:16px;border:1px solid var(--border);padding:48px 36px;text-align:center;box-shadow:0 4px 24px rgba(15,23,42,.06)"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="var(--blue)" stroke-width="2" style="margin-bottom:16px"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><h3 style="color:var(--slate);font-size:1.4rem;font-weight:800;margin-bottom:10px">Request Received</h3><p style="color:var(--muted);font-size:.95rem;line-height:1.7">David will be in touch within one business day to arrange your strategy call. We look forward to the conversation.</p></div>';
+}
 
-  /* 4. GSAP stagger on service cards */
-  gsap.utils.toArray('.service-card').forEach(function(card, i) {
-    gsap.fromTo(card,
-      { opacity: 0, y: 40, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.65, delay: i * 0.09, ease: 'power3.out',
-        scrollTrigger: { trigger: card, start: 'top 87%', toggleActions: 'play none none none' }
-      }
-    );
+// Health check
+function runHealthCheck(){
+  var scores=[1,2,3,4,5].map(function(i){
+    var sel=document.querySelector('input[name="q'+i+'"]:checked');
+    return sel?parseInt(sel.value):0;
   });
-
-  /* 5. GSAP directional entrance on phase cards */
-  gsap.utils.toArray('.phase-card').forEach(function(card, i) {
-    var xFrom = i === 0 ? -60 : i === 2 ? 60 : 0;
-    var yFrom = i === 1 ? 40 : 0;
-    gsap.fromTo(card,
-      { opacity: 0, x: xFrom, y: yFrom },
-      { opacity: 1, x: 0, y: 0, duration: 0.7, delay: i * 0.12, ease: 'power3.out',
-        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-  /* 6. GSAP hero panel float-in */
-  var heroPanel = document.querySelector('.hero-panel');
-  if (heroPanel) {
-    gsap.fromTo(heroPanel,
-      { opacity: 0, x: 50, scale: 0.96 },
-      { opacity: 1, x: 0, scale: 1, duration: 0.9, delay: 0.5, ease: 'power3.out' }
-    );
-  }
-
-  /* 7. Magnetic pull on CTA buttons (desktop only) */
-  if (window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.btn-primary').forEach(function(btn) {
-      btn.addEventListener('mousemove', function(e) {
-        var rect = btn.getBoundingClientRect();
-        var dx = (e.clientX - rect.left - rect.width / 2) * 0.35;
-        var dy = (e.clientY - rect.top - rect.height / 2) * 0.35;
-        btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(1.05)';
-        btn.style.transition = 'transform 0.1s ease';
-      });
-      btn.addEventListener('mouseleave', function() {
-        btn.style.transform = '';
-        btn.style.transition = 'transform 0.4s ease';
-      });
-    });
-  }
-
-})();
+  var total=scores.reduce(function(a,b){return a+b;},0);
+  var max=15;
+  var pct=Math.round((total/max)*100);
+  var msgs={
+    high:'Strong foundations. Your business is well positioned strategically. A targeted review could unlock the next level of performance.',
+    mid:'Good progress but gaps exist. Several strategic areas need attention to reach your full potential. A structured review is worthwhile.',
+    low:'Significant opportunity. Key strategic foundations need strengthening. An Apex engagement could materially change your trajectory.'
+  };
+  var msg=total>=11?msgs.high:total>=7?msgs.mid:msgs.low;
+  var label=total>=11?'Strong — '+pct+'% score':total>=7?'Developing — '+pct+'% score':'Needs work — '+pct+'% score';
+  document.getElementById('hc-score-val').textContent=label;
+  document.getElementById('hc-score-msg').textContent=msg;
+  document.getElementById('hc-result').style.display='block';
+}
 </script>
-
 </body>
 </html>

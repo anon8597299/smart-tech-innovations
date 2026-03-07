@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SunVolt Solar — CEC Accredited Solar Installers, Orange NSW</title>
+  <title>SunVolt Solar &mdash; CEC Accredited Solar Installers, Orange NSW</title>
   <meta name="description" content="SunVolt Solar: CEC accredited solar installers serving Orange, Bathurst, Dubbo and Central West NSW since 2016. Free on-site assessment. 500+ systems installed. Call 0400 987 654.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ElectricalContractor",
     "name": "SunVolt Solar",
-    "description": "CEC accredited solar panel installers serving Orange, Bathurst, Dubbo and Central West NSW since 2016. Residential, commercial, and battery storage systems.",
-    "url": "https://sunvoltsolar.com.au",
+    "description": "CEC accredited solar panel installers serving Orange, Bathurst, Dubbo and Central West NSW since 2016.",
     "telephone": "0400987654",
     "email": "info@sunvoltsolar.com.au",
     "foundingDate": "2016",
@@ -29,25 +25,6 @@
       "postalCode": "2800",
       "addressCountry": "AU"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -33.2839,
-      "longitude": 149.0994
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "07:30",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "08:00",
-        "closes": "12:00"
-      }
-    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -55,1783 +32,760 @@
       "bestRating": "5"
     },
     "areaServed": [
-      {"@type": "City", "name": "Orange"},
-      {"@type": "City", "name": "Bathurst"},
-      {"@type": "City", "name": "Dubbo"},
-      {"@type": "City", "name": "Parkes"},
-      {"@type": "City", "name": "Cowra"},
-      {"@type": "City", "name": "Forbes"}
+      {"@type":"City","name":"Orange"},{"@type":"City","name":"Bathurst"},{"@type":"City","name":"Dubbo"},
+      {"@type":"City","name":"Parkes"},{"@type":"City","name":"Cowra"},{"@type":"City","name":"Forbes"}
     ],
-    "knowsAbout": ["Solar panel installation", "Battery storage", "STC rebates", "Hybrid solar systems", "Commercial solar"],
-    "hasCredential": {
-      "@type": "EducationalOccupationalCredential",
-      "credentialCategory": "CEC Accredited Installer"
-    }
+    "hasCredential": {"@type":"EducationalOccupationalCredential","credentialCategory":"CEC Accredited Installer"}
   }
   </script>
-
   <style>
-    /* ── Demo Banner ── */
-    .demo-banner {
-      background: #0f172a; color: #e2e8f0; text-align: center;
-      padding: .52rem 1rem; font-size: .82rem; position: sticky; top: 0; z-index: 200;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1d4ed8;
+      --blue-dk: #1e3a8a;
+      --blue-lt: #3b82f6;
+      --orange: #f97316;
+      --orange-lt: #fb923c;
+      --amber: #fbbf24;
+      --bg-warm: #fffbf5;
+      --slate: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --white: #ffffff;
+      --bg: #f8fafc;
     }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--slate); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--orange), var(--amber)); width: 0%; z-index: 999; transition: width .1s linear; }
+    .demo-banner { background: #0f172a; color: #e2e8f0; text-align: center; padding: .5rem 1rem; font-size: .8rem; position: sticky; top: 0; z-index: 200; }
     .demo-banner a { color: #2dd4bf; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
+    .site-header { position: sticky; top: 36px; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 62px; gap: 1rem; }
+    .brand { font-size: 1.1rem; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: .45rem; }
+    .brand-sun { width: 28px; height: 28px; background: linear-gradient(135deg, var(--orange), var(--amber)); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 1.4rem; }
+    .nav-links a { font-size: .86rem; font-weight: 600; color: var(--slate); transition: color .15s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: .42rem 1.05rem; border-radius: 8px; }
+    .nav-phone { color: var(--blue) !important; font-weight: 700; }
 
-    /* ── Nav override for demo ── */
-    .site-header { top: 36px; }
+    /* Hero */
+    .hero { background: linear-gradient(145deg, #eff6ff 0%, #fff3e6 40%, #dbeafe 100%); padding: 4.5rem 0 3.5rem; border-bottom: 2px solid #f5d3a8; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -80px; right: -120px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(29,78,216,.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .hero-top { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; align-items: center; }
+    .badge { display: inline-flex; align-items: center; gap: .35rem; padding: .28rem .7rem; border-radius: 999px; font-size: .76rem; font-weight: 700; }
+    .badge-open { background: #dcfce7; border: 1.5px solid #86efac; color: #15803d; }
+    .badge-rating { font-size: .82rem; color: var(--muted); font-weight: 600; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 900; color: #0f172a; line-height: 1.07; margin-bottom: .85rem; }
+    .hero h1 span { color: var(--blue); }
+    .hero .lead { font-size: 1.05rem; color: var(--slate); max-width: 680px; margin-bottom: 1.4rem; line-height: 1.65; }
+    .cta-row { display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.4rem; }
+    .btn-blue { display: inline-flex; align-items: center; gap: .45rem; background: var(--blue); color: #fff; font-weight: 800; font-size: 1rem; padding: .82rem 1.6rem; border-radius: 12px; text-decoration: none; border: none; cursor: pointer; transition: background .18s, transform .14s; box-shadow: 0 4px 20px rgba(29,78,216,.35); }
+    .btn-blue:hover { background: var(--blue-dk); transform: translateY(-1px); }
+    .btn-white { display: inline-flex; align-items: center; gap: .45rem; background: #fff; color: var(--blue); font-weight: 700; font-size: .97rem; padding: .78rem 1.4rem; border-radius: 12px; border: 2px solid var(--blue); text-decoration: none; transition: all .18s; }
+    .btn-white:hover { background: var(--blue); color: #fff; }
+    .btn-phone { display: inline-flex; align-items: center; gap: .4rem; color: #0f172a; font-weight: 700; font-size: .95rem; text-decoration: none; }
+    .btn-phone:hover { color: var(--blue); }
+    .trust-strip { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.8rem; }
+    .trust-strip span { background: rgba(255,255,255,.75); border: 1px solid #f5d3a8; border-radius: 999px; padding: .26rem .65rem; font-size: .78rem; font-weight: 700; color: var(--slate); display: inline-flex; align-items: center; gap: .25rem; }
 
-    /* ── Open Now Badge ── */
-    .open-now-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      background: #dcfce7;
-      border: 1.5px solid #86efac;
-      color: #15803d;
-      font-size: .78rem;
-      font-weight: 800;
-      border-radius: 999px;
-      padding: .28rem .7rem;
-      letter-spacing: .01em;
-    }
-    .open-now-badge .dot {
-      width: 7px; height: 7px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse-green 1.6s infinite;
-    }
-    @keyframes pulse-green {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .55; transform: scale(1.35); }
-    }
+    /* KPI strip */
+    .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #f5d3a8; border: 1px solid #f5d3a8; border-radius: 16px; overflow: hidden; margin-top: 2rem; }
+    .kpi-item { background: #fff; padding: 1.2rem 1rem; text-align: center; }
+    .kpi-item .kn { font-size: 1.85rem; font-weight: 900; color: var(--blue); display: block; line-height: 1; }
+    .kpi-item .kl { font-size: .8rem; color: var(--muted); font-weight: 600; margin-top: .25rem; display: block; }
 
-    /* ── Hero ── */
-    .hero-v2 {
-      background: linear-gradient(145deg, #eff6ff 0%, #fff3e6 40%, #dbeafe 100%);
-      border-bottom: 2px solid #f5d3a8;
-      padding: 4.5rem 0 2.8rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-v2::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -120px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(29,78,216,.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero-v2 .hero-top-row {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .hero-v2 h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 1.07;
-      margin: 0 0 .8rem;
-      font-weight: 900;
-      color: #1a1208;
-    }
-    .hero-v2 h1 span { color: var(--sv-primary); }
-    .hero-v2 .lead {
-      font-size: clamp(.97rem, 2vw, 1.12rem);
-      color: #5a3e28;
-      max-width: 680px;
-      margin: 0 0 1.4rem;
-      line-height: 1.6;
-    }
-    .hero-cta-row {
-      display: flex;
-      gap: .7rem;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 1.4rem;
-    }
-    .btn-sv-primary {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: var(--sv-primary);
-      color: #fff; font-weight: 800; font-size: 1.02rem;
-      padding: .82rem 1.6rem; border-radius: 12px;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background .18s, transform .14s, box-shadow .18s;
-      box-shadow: 0 4px 20px rgba(29,78,216,.35);
-    }
-    .btn-sv-primary:hover { background: #1e40af; transform: translateY(-1px); box-shadow: 0 6px 26px rgba(29,78,216,.45); }
-    .btn-sv-secondary {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: #fff; color: var(--sv-primary);
-      font-weight: 700; font-size: .97rem;
-      padding: .78rem 1.4rem; border-radius: 12px;
-      border: 2px solid var(--sv-primary); text-decoration: none;
-      transition: background .18s, color .18s;
-    }
-    .btn-sv-secondary:hover { background: var(--sv-primary); color: #fff; }
-    .btn-sv-phone {
-      display: inline-flex; align-items: center; gap: .4rem;
-      color: #1a1208; font-weight: 700; font-size: .95rem;
-      text-decoration: none;
-    }
-    .btn-sv-phone:hover { color: var(--sv-primary); }
-    .hero-trust-strip {
-      display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.8rem;
-    }
-    .hero-trust-strip span {
-      background: rgba(255,255,255,.75);
-      border: 1px solid #f5d3a8;
-      border-radius: 999px;
-      padding: .26rem .65rem;
-      font-size: .78rem; font-weight: 700; color: #475569;
-    }
+    /* Trust bar */
+    .trust-bar { background: var(--blue); padding: .9rem 0; }
+    .tb-inner { display: flex; gap: 1.8rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+    .tb-item { display: flex; align-items: center; gap: .4rem; color: #fff; font-weight: 700; font-size: .88rem; }
 
-    /* ── KPI Strip ── */
-    .kpi-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: #f5d3a8;
-      border: 1px solid #f5d3a8;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-top: 2rem;
-    }
-    .kpi-strip-item {
-      background: #fff;
-      padding: 1.2rem 1rem;
-      text-align: center;
-    }
-    .kpi-strip-item .kpi-num {
-      font-size: 1.9rem; font-weight: 900; color: var(--sv-primary); line-height: 1;
-      display: block;
-    }
-    .kpi-strip-item .kpi-label {
-      font-size: .82rem; color: #475569; font-weight: 600; margin-top: .25rem;
-      display: block;
-    }
+    /* Sections */
+    .section { padding: 4rem 0; }
+    .section-warm { background: var(--bg-warm); border-top: 2px solid #f5d3a8; border-bottom: 2px solid #f5d3a8; }
+    .section-head { margin-bottom: 2.2rem; }
+    .eyebrow { display: inline-block; font-size: .74rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: .5rem; }
+    .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; color: #0f172a; line-height: 1.12; margin-bottom: .5rem; }
+    .section-head p { color: var(--muted); font-size: 1rem; max-width: 640px; }
 
-    /* ── Trust / Orange brand bar ── */
-    .sv-trust-bar {
-      background: var(--sv-primary);
-      color: #fff;
-      padding: 1rem 0;
-    }
-    .sv-trust-bar .container {
-      display: flex; gap: 1.8rem; flex-wrap: wrap;
-      justify-content: center; align-items: center;
-    }
-    .sv-trust-item {
-      display: flex; align-items: center; gap: .4rem;
-      font-weight: 700; font-size: .9rem;
-    }
-
-    /* ── Section Scaffold ── */
-    .sv-section { padding: 4rem 0; }
-    .sv-section-head { margin-bottom: 2.2rem; }
-    .sv-section-head .sv-eyebrow {
-      display: inline-block;
-      font-size: .76rem; font-weight: 800; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--sv-primary);
-      margin-bottom: .5rem;
-    }
-    .sv-section-head h2 {
-      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-      font-weight: 900; color: #1a1208;
-      margin: 0 0 .5rem; line-height: 1.15;
-    }
-    .sv-section-head p { color: #6b4226; margin: 0; font-size: 1.02rem; }
-
-    /* ── Calculator ── */
-    .calc-wrapper {
-      background: #fff;
-      border: 2.5px solid transparent;
-      background-clip: padding-box;
-      border-radius: 20px;
-      box-shadow: 0 8px 50px rgba(29,78,216,.1), 0 2px 12px rgba(0,0,0,.06);
-      position: relative;
-      overflow: hidden;
-    }
-    .calc-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      padding: 2.5px;
-      background: linear-gradient(135deg, #1d4ed8, #f97316, #fbbf24);
-      border-radius: 20px;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-    .calc-inner { padding: 2.2rem 2.4rem; }
-    .calc-title {
-      font-size: 1.4rem; font-weight: 900; color: #1a1208;
-      margin: 0 0 .35rem;
-    }
-    .calc-subtitle {
-      font-size: .92rem; color: #475569; margin: 0 0 2rem;
-    }
-    .calc-fields {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.4rem;
-      margin-bottom: 1.8rem;
-    }
-    .calc-field label {
-      display: block;
-      font-size: .83rem; font-weight: 700; color: #3d2408;
-      margin-bottom: .5rem;
-    }
-    .calc-field .field-row {
-      display: flex; align-items: center; gap: .5rem;
-    }
-    .calc-field .dollar-prefix {
-      font-weight: 800; font-size: 1rem; color: var(--sv-primary);
-    }
-    .calc-num-input {
-      width: 90px;
-      border: 2px solid #f5d3a8;
-      border-radius: 9px;
-      padding: .5rem .65rem;
-      font-size: 1.05rem; font-weight: 700;
-      color: #1a1208;
-      outline: none;
-      transition: border-color .15s;
-      font-family: inherit;
-    }
-    .calc-num-input:focus { border-color: var(--sv-primary); }
-    .calc-slider {
-      width: 100%;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 6px;
-      border-radius: 999px;
-      background: linear-gradient(to right, var(--sv-primary) 0%, var(--sv-primary) var(--slider-pct, 40%), #f5d3a8 var(--slider-pct, 40%), #f5d3a8 100%);
-      outline: none;
-      margin-top: .5rem;
-      cursor: pointer;
-    }
-    .calc-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--sv-primary);
-      border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(29,78,216,.4);
-      cursor: pointer;
-    }
-    .calc-slider::-moz-range-thumb {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--sv-primary);
-      border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(29,78,216,.4);
-      cursor: pointer;
-    }
-    .calc-select {
-      width: 100%;
-      border: 2px solid #f5d3a8;
-      border-radius: 9px;
-      padding: .58rem .75rem;
-      font-size: .95rem; font-weight: 600;
-      color: #1a1208;
-      background: #fff;
-      outline: none;
-      cursor: pointer;
-      font-family: inherit;
-      transition: border-color .15s;
-    }
-    .calc-select:focus { border-color: var(--sv-primary); }
-    .calc-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #1d4ed8, #f97316);
-      color: #fff; font-weight: 800; font-size: 1.05rem;
-      border: none; border-radius: 12px;
-      padding: .95rem 1.4rem;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: .5rem;
-      transition: opacity .18s, transform .14s, box-shadow .18s;
-      box-shadow: 0 4px 18px rgba(29,78,216,.35);
-      font-family: inherit;
-    }
-    .calc-btn:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(29,78,216,.45); }
-
-    /* Result card */
-    .calc-result {
-      margin-top: 1.8rem;
-      background: linear-gradient(135deg, #eff6ff 0%, #fff3e6 100%);
-      border: 2px solid #f5d3a8;
-      border-radius: 16px;
-      padding: 1.8rem 2rem;
-      display: none;
-    }
-    .calc-result.visible { display: block; animation: fadeSlideUp .35s ease; }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.4rem;
-    }
-    .result-item {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 12px;
-      padding: 1rem .9rem;
-      text-align: center;
-    }
-    .result-item .r-val {
-      font-size: 1.6rem; font-weight: 900; color: var(--sv-primary);
-      line-height: 1; display: block;
-    }
-    .result-item .r-label {
-      font-size: .78rem; font-weight: 600; color: #475569;
-      margin-top: .3rem; display: block; line-height: 1.3;
-    }
-    .result-co2 {
-      background: #f0fdf4;
-      border: 1.5px solid #86efac;
-      border-radius: 12px;
-      padding: .85rem 1rem;
-      display: flex; align-items: center; gap: .7rem;
-      margin-bottom: 1rem;
-    }
-    .result-co2 .co2-icon { font-size: 1.5rem; }
-    .result-co2 .co2-text { font-size: .9rem; color: #15803d; font-weight: 600; }
-    .result-co2 .co2-text strong { display: block; font-size: 1.1rem; }
-    .result-disclaimer {
-      font-size: .78rem; color: #a0684a; font-style: italic;
-      text-align: center; margin-top: .5rem;
-    }
-    .result-cta-row {
-      display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem;
-    }
-
-    /* ── How It Works ── */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.4rem;
-      margin-top: 2rem;
-      position: relative;
-    }
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: calc(12.5% + 20px);
-      right: calc(12.5% + 20px);
-      height: 2px;
-      background: linear-gradient(to right, var(--sv-primary), #fbbf24);
-    }
-    .step-card {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 16px;
-      padding: 1.5rem 1.2rem;
-      text-align: center;
-      position: relative;
-      transition: box-shadow .2s, transform .2s;
-    }
+    /* Steps */
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; position: relative; }
+    .steps-grid::before { content: ''; position: absolute; top: 28px; left: calc(12.5% + 20px); right: calc(12.5% + 20px); height: 2px; background: linear-gradient(to right, var(--blue), var(--orange), var(--amber)); pointer-events: none; }
+    .step-card { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 16px; padding: 1.5rem 1.2rem; text-align: center; transition: box-shadow .2s, transform .2s; }
     .step-card:hover { box-shadow: 0 8px 30px rgba(29,78,216,.12); transform: translateY(-3px); }
-    .step-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, #1d4ed8, #f97316);
-      color: #fff; font-weight: 900; font-size: 1.25rem;
-      border-radius: 50%;
-      margin: 0 auto 1rem;
-      position: relative; z-index: 1;
-      box-shadow: 0 4px 14px rgba(29,78,216,.3);
-    }
-    .step-card h3 {
-      margin: 0 0 .5rem; font-size: 1.02rem; font-weight: 800; color: #1a1208;
-    }
-    .step-card p { margin: 0; font-size: .88rem; color: #475569; line-height: 1.5; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: linear-gradient(135deg, var(--blue), var(--orange)); color: #fff; font-weight: 900; font-size: 1.2rem; border-radius: 50%; margin: 0 auto 1rem; position: relative; z-index: 1; box-shadow: 0 4px 14px rgba(29,78,216,.3); }
+    .step-card h3 { font-size: .97rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .step-card p { font-size: .86rem; color: var(--muted); line-height: 1.5; }
 
-    /* ── Services Grid ── */
-    .sv-services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-    }
-    .sv-service-card {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 16px;
-      padding: 1.6rem 1.4rem;
-      transition: box-shadow .2s, transform .2s, border-color .2s;
-    }
-    .sv-service-card:hover {
-      border-color: var(--sv-primary);
-      box-shadow: 0 8px 30px rgba(29,78,216,.12);
-      transform: translateY(-2px);
-    }
-    .sv-service-icon {
-      font-size: 2rem; margin-bottom: .7rem; display: block;
-    }
-    .sv-service-card h3 { margin: 0 0 .5rem; font-size: 1.05rem; font-weight: 800; color: #1a1208; }
-    .sv-service-card p { margin: 0; font-size: .88rem; color: #475569; line-height: 1.55; }
+    /* Services */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .svc-card { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 16px; padding: 1.6rem 1.4rem; position: relative; overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--orange)); }
+    .svc-card:hover { box-shadow: 0 8px 30px rgba(29,78,216,.12); transform: translateY(-2px); }
+    .svc-icon { width: 46px; height: 46px; border-radius: 12px; background: #eff6ff; display: flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: .9rem; }
+    .svc-card h3 { font-size: 1.02rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .svc-card p { font-size: .87rem; color: var(--muted); line-height: 1.55; }
 
-    /* ── Rebates Info Box ── */
-    .rebate-box {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-      border: 2px solid #86efac;
-      border-radius: 20px;
-      padding: 2.2rem 2.4rem;
-    }
-    .rebate-box h2 {
-      font-size: 1.5rem; font-weight: 900; color: #14532d; margin: 0 0 .5rem;
-    }
-    .rebate-box .rebate-intro {
-      color: #166534; font-size: .97rem; margin: 0 0 1.6rem;
-    }
-    .rebate-items {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
-    }
-    .rebate-item {
-      background: rgba(255,255,255,.65);
-      border: 1.5px solid #86efac;
-      border-radius: 14px;
-      padding: 1.2rem 1rem;
-    }
-    .rebate-item .ri-head {
-      font-weight: 800; font-size: .97rem; color: #14532d; margin-bottom: .4rem;
-    }
-    .rebate-item p { font-size: .86rem; color: #166534; margin: 0; line-height: 1.5; }
-    .rebate-item .ri-amount {
-      display: inline-block;
-      background: #22c55e; color: #fff;
-      font-weight: 800; font-size: .85rem;
-      border-radius: 999px; padding: .18rem .6rem; margin-bottom: .5rem;
-    }
+    /* Rebates box */
+    .rebate-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #86efac; border-radius: 20px; padding: 2.2rem 2.4rem; }
+    .rebate-box h2 { font-size: 1.4rem; font-weight: 900; color: #14532d; margin-bottom: .4rem; }
+    .rebate-box .rb-intro { color: #166534; font-size: .97rem; margin-bottom: 1.6rem; }
+    .rebate-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .ri { background: rgba(255,255,255,.65); border: 1.5px solid #86efac; border-radius: 14px; padding: 1.2rem 1rem; }
+    .ri-amt { display: inline-block; background: #22c55e; color: #fff; font-weight: 800; font-size: .84rem; border-radius: 999px; padding: .18rem .6rem; margin-bottom: .5rem; }
+    .ri-head { font-weight: 800; font-size: .95rem; color: #14532d; margin-bottom: .35rem; }
+    .ri p { font-size: .85rem; color: #166534; line-height: 1.5; }
 
-    /* ── Testimonials ── */
-    .sv-testimonials {
-      background: linear-gradient(135deg, #eff6ff, #fff3e6);
-      border-top: 2px solid #f5d3a8;
-      border-bottom: 2px solid #f5d3a8;
-    }
-    .sv-testimonials-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
-    }
-    .sv-testimonial-card {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 16px;
-      padding: 1.5rem 1.3rem;
-      transition: box-shadow .2s;
-    }
-    .sv-testimonial-card:hover { box-shadow: 0 6px 24px rgba(29,78,216,.1); }
-    .sv-stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; margin-bottom: .7rem; }
-    .sv-testimonial-card .quote-text {
-      font-size: .92rem; color: #3d2408; line-height: 1.65;
-      margin: 0 0 1rem; font-style: italic;
-    }
-    .sv-reviewer-row { display: flex; align-items: center; gap: .6rem; }
-    .sv-reviewer-avatar {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: linear-gradient(135deg, #1d4ed8, #fbbf24);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; color: #fff; font-size: .92rem;
-      flex-shrink: 0;
-    }
-    .sv-reviewer-name { font-weight: 700; font-size: .88rem; color: #1a1208; }
-    .sv-reviewer-job { font-size: .78rem; color: #a0684a; }
+    /* Calculator */
+    .calc-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 20px; box-shadow: 0 8px 40px rgba(29,78,216,.1); overflow: hidden; position: relative; }
+    .calc-card::before { content: ''; position: absolute; inset: 0; padding: 2px; background: linear-gradient(135deg, var(--blue), var(--orange), var(--amber)); border-radius: 20px; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+    .calc-inner { padding: 2.2rem 2.4rem; }
+    .calc-title { font-size: 1.35rem; font-weight: 900; color: #0f172a; margin-bottom: .3rem; }
+    .calc-sub { font-size: .9rem; color: var(--muted); margin-bottom: 1.8rem; }
+    .calc-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 1.4rem; }
+    .calc-field label { display: block; font-size: .82rem; font-weight: 700; color: #0f172a; margin-bottom: .5rem; }
+    .calc-select { width: 100%; border: 2px solid #f5d3a8; border-radius: 9px; padding: .58rem .75rem; font-size: .95rem; font-weight: 600; color: #0f172a; background: #fff; outline: none; font-family: inherit; transition: border-color .15s; cursor: pointer; }
+    .calc-select:focus { border-color: var(--blue); }
+    .calc-btn { width: 100%; background: linear-gradient(135deg, var(--blue), var(--orange)); color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 12px; padding: .9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .5rem; transition: opacity .18s, transform .14s; box-shadow: 0 4px 18px rgba(29,78,216,.35); font-family: inherit; }
+    .calc-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .calc-result { margin-top: 1.8rem; background: linear-gradient(135deg, #eff6ff, #fff3e6); border: 2px solid #f5d3a8; border-radius: 16px; padding: 1.8rem 2rem; display: none; }
+    .calc-result.show { display: block; animation: fadeUp .35s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.2rem; }
+    .ritem { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 12px; padding: 1rem; text-align: center; }
+    .ritem .rv { font-size: 1.55rem; font-weight: 900; color: var(--blue); line-height: 1; display: block; }
+    .ritem .rl { font-size: .77rem; font-weight: 600; color: var(--muted); margin-top: .3rem; display: block; }
+    .result-co2 { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: .85rem 1rem; display: flex; align-items: center; gap: .7rem; margin-bottom: .8rem; }
+    .result-co2 svg { color: #15803d; flex-shrink: 0; }
+    .result-co2 span { font-size: .9rem; color: #15803d; font-weight: 600; }
+    .result-disclaimer { font-size: .76rem; color: #a0684a; font-style: italic; text-align: center; }
+    .result-cta { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
 
-    /* ── Contact Section ── */
-    .sv-contact-grid {
-      display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.4rem;
-    }
-    .contact-form-card {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 20px;
-      padding: 2rem 2.2rem;
-    }
-    .contact-form-card h3 {
-      margin: 0 0 .4rem; font-size: 1.25rem; font-weight: 800; color: #1a1208;
-    }
-    .contact-form-card .form-subtitle {
-      font-size: .88rem; color: #475569; margin: 0 0 1.4rem;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-bottom: .8rem; }
-    .form-group { margin-bottom: .8rem; }
-    .form-group label { display: block; font-size: .82rem; font-weight: 700; color: #3d2408; margin-bottom: .3rem; }
-    .form-control {
-      width: 100%;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 9px;
-      padding: .6rem .8rem;
-      font-size: .93rem; color: #1a1208;
-      font-family: inherit; outline: none;
-      transition: border-color .15s;
-      background: #fff;
-    }
-    .form-control:focus { border-color: var(--sv-primary); }
-    textarea.form-control { resize: vertical; min-height: 90px; }
-    .contact-info-panel { display: flex; flex-direction: column; gap: 1.2rem; }
-    .contact-detail-card {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 16px;
-      padding: 1.3rem 1.4rem;
-    }
-    .contact-detail-card h4 { margin: 0 0 .7rem; font-size: 1rem; font-weight: 800; color: #1a1208; }
-    .contact-detail-row {
-      display: flex; align-items: flex-start; gap: .6rem;
-      font-size: .9rem; color: #5a3e28; margin-bottom: .5rem; line-height: 1.4;
-    }
-    .contact-detail-row:last-child { margin-bottom: 0; }
-    .contact-detail-icon { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
-    .map-embed {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1.5px solid #f5d3a8;
-      height: 220px;
-    }
-    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
-    .service-areas-row {
-      display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem;
-    }
-    .area-chip {
-      background: #eff6ff;
-      border: 1px solid #f5d3a8;
-      border-radius: 999px;
-      padding: .2rem .55rem;
-      font-size: .76rem; font-weight: 700; color: #475569;
-    }
+    /* Testimonials */
+    .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .tcard { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 16px; padding: 1.5rem 1.3rem; display: flex; flex-direction: column; gap: .8rem; transition: box-shadow .2s; }
+    .tcard:hover { box-shadow: 0 6px 24px rgba(29,78,216,.1); }
+    .tcard-stars { color: #f59e0b; font-size: .95rem; }
+    .tcard blockquote { font-size: .9rem; color: #3d2408; line-height: 1.65; font-style: italic; flex: 1; }
+    .tcard-rev { display: flex; align-items: center; gap: .6rem; }
+    .rev-av { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--amber)); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: .85rem; flex-shrink: 0; }
+    .tcard-rev strong { font-size: .88rem; color: #0f172a; display: block; }
+    .tcard-rev span { font-size: .77rem; color: var(--muted); }
 
-    /* ── FAQ Accordion ── */
-    .faq-list { display: flex; flex-direction: column; gap: .6rem; }
-    .faq-item {
-      background: #fff;
-      border: 1.5px solid #f5d3a8;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .faq-question {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 1.3rem;
-      cursor: pointer;
-      font-weight: 700; font-size: .97rem; color: #1a1208;
-      user-select: none;
-      gap: 1rem;
-    }
-    .faq-question:hover { color: var(--sv-primary); }
-    .faq-chevron {
-      flex-shrink: 0;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: #eff6ff;
-      border: 1.5px solid #f5d3a8;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform .25s, background .2s;
-      font-size: .75rem; color: var(--sv-primary);
-    }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--sv-primary); color: #fff; border-color: var(--sv-primary); }
-    .faq-answer {
-      max-height: 0; overflow: hidden;
-      transition: max-height .3s ease, padding .25s ease;
-      padding: 0 1.3rem;
-      font-size: .9rem; color: #5a3e28; line-height: 1.65;
-    }
-    .faq-item.open .faq-answer { max-height: 500px; padding: 0 1.3rem 1.2rem; }
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.4rem; align-items: start; }
+    .form-card { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 20px; padding: 2rem 2.2rem; }
+    .form-card h3 { font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: .3rem; }
+    .form-card .sub { font-size: .87rem; color: var(--muted); margin-bottom: 1.4rem; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-bottom: .8rem; }
+    .fg { margin-bottom: .8rem; }
+    .fg label { display: block; font-size: .8rem; font-weight: 700; color: #0f172a; margin-bottom: .3rem; }
+    .fg input, .fg select, .fg textarea { width: 100%; border: 1.5px solid #f5d3a8; border-radius: 9px; padding: .6rem .8rem; font-size: .9rem; font-family: inherit; color: #0f172a; outline: none; transition: border-color .15s; background: #fff; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--blue); }
+    .fg textarea { resize: vertical; min-height: 85px; }
+    .btn-submit { width: 100%; background: var(--blue); color: #fff; border: none; border-radius: 10px; padding: .85rem; font-size: .97rem; font-weight: 700; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .4rem; transition: background .18s; }
+    .btn-submit:hover { background: var(--blue-dk); }
+    .ci-panel { display: flex; flex-direction: column; gap: 1rem; }
+    .ci-card { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 14px; padding: 1.1rem 1.2rem; display: flex; gap: .75rem; align-items: flex-start; }
+    .ci-ico { width: 38px; height: 38px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0; }
+    .ci-card strong { font-size: .86rem; font-weight: 800; color: #0f172a; display: block; margin-bottom: .15rem; }
+    .ci-card p, .ci-card a { font-size: .86rem; color: var(--slate); line-height: 1.5; }
+    .ci-card a { color: var(--blue); font-weight: 600; }
+    .areas-row { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+    .area-chip { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 999px; padding: .18rem .5rem; font-size: .76rem; font-weight: 700; color: var(--blue); }
 
-    /* ── Footer ── */
-    .sv-footer {
-      background: #1a1208;
-      color: #c0a080;
-      padding: 3rem 0 1.5rem;
-    }
-    .sv-footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.4rem;
-      margin-bottom: 2rem;
-    }
-    .sv-footer-brand {
-      font-size: 1.4rem; font-weight: 900; color: #fff; margin: 0 0 .6rem;
-    }
-    .sv-footer-brand span { color: var(--sv-primary); }
-    .sv-footer p { font-size: .86rem; line-height: 1.65; margin: 0 0 .9rem; }
-    .sv-footer h4 { color: #fff; font-size: .9rem; font-weight: 800; margin: 0 0 .75rem; }
-    .sv-footer ul { list-style: none; padding: 0; margin: 0; }
-    .sv-footer ul li { margin-bottom: .45rem; }
-    .sv-footer ul li a { font-size: .86rem; color: #c0a080; text-decoration: none; }
-    .sv-footer ul li a:hover { color: var(--sv-primary); }
-    .sv-footer-bottom {
-      border-top: 1px solid #2e1f0e;
-      padding-top: 1.2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: .6rem;
-      font-size: .78rem; color: #7a5a3a;
-    }
-    .cec-badge {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: #2e1f0e;
-      border: 1.5px solid #4a3018;
-      border-radius: 10px;
-      padding: .45rem .75rem;
-      font-size: .78rem; font-weight: 700; color: #e0b87a;
-    }
-    .cec-badge .cec-icon { font-size: 1rem; }
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: .5rem; max-width: 800px; margin: 0 auto; }
+    .faq-item { background: #fff; border: 1.5px solid #f5d3a8; border-radius: 14px; overflow: hidden; }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 1.05rem 1.3rem; cursor: pointer; font-weight: 700; font-size: .93rem; color: #0f172a; user-select: none; gap: 1rem; }
+    .faq-q:hover { color: var(--blue); }
+    .faq-chevron { width: 22px; height: 22px; border-radius: 50%; background: #eff6ff; border: 1.5px solid #f5d3a8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .25s, background .2s; color: var(--blue); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--blue); color: #fff; border-color: var(--blue); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .25s ease; padding: 0 1.3rem; font-size: .88rem; color: var(--slate); line-height: 1.65; }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 1.3rem 1.1rem; }
 
-    /* ── Sticky Mobile CTA ── */
-    .sv-mobile-cta {
-      display: none;
-      position: fixed;
-      left: .7rem; right: .7rem; bottom: .7rem;
-      z-index: 150;
-      background: var(--sv-primary);
-      color: #fff; font-weight: 900; font-size: 1rem;
-      border-radius: 14px;
-      padding: .9rem 1rem;
-      text-align: center;
-      text-decoration: none;
-      box-shadow: 0 8px 30px rgba(29,78,216,.45);
-      animation: slideUpCta .4s ease;
-    }
-    @keyframes slideUpCta {
-      from { transform: translateY(80px); opacity: 0; }
-      to   { transform: translateY(0); opacity: 1; }
-    }
-
-    /* ── Scroll Reveal ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .55s ease, transform .55s ease;
-    }
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
 
-    /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .calc-fields { grid-template-columns: 1fr 1fr; }
-    }
+    /* Footer */
+    .footer { background: #0f172a; color: #64748b; padding: 3rem 0 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.4rem; margin-bottom: 2rem; }
+    .footer-brand { font-size: 1.15rem; font-weight: 900; color: #fff; margin-bottom: .5rem; display: flex; align-items: center; gap: .4rem; }
+    .footer p { font-size: .83rem; line-height: 1.6; margin-bottom: .5rem; }
+    .footer h4 { color: #e2e8f0; font-size: .85rem; font-weight: 800; margin-bottom: .7rem; }
+    .footer a { color: #64748b; font-size: .83rem; }
+    .footer a:hover { color: var(--blue-lt); }
+    .footer ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .footer-btm { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; font-size: .76rem; color: #475569; }
+    .cec-badge { display: inline-flex; align-items: center; gap: .4rem; background: #1e293b; border: 1.5px solid #334155; border-radius: 8px; padding: .4rem .7rem; font-size: .78rem; font-weight: 700; color: #f5d3a8; margin-top: .6rem; }
+
+    .mobile-cta { display: none; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; background: var(--blue); color: #fff; font-weight: 900; font-size: .97rem; border-radius: 12px; padding: .9rem 1rem; text-align: center; text-decoration: none; z-index: 150; box-shadow: 0 8px 28px rgba(29,78,216,.4); }
+
     @media (max-width: 900px) {
-      .site-header { top: 0; }
-      .demo-banner { position: relative; }
-      .hero-v2 { padding: 3rem 0 2rem; }
+      .services-grid, .tgrid { grid-template-columns: 1fr 1fr; }
       .kpi-strip { grid-template-columns: repeat(2, 1fr); }
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .steps-grid::before { display: none; }
-      .sv-services-grid { grid-template-columns: 1fr 1fr; }
-      .rebate-items { grid-template-columns: 1fr; }
-      .sv-testimonials-grid { grid-template-columns: 1fr; }
-      .sv-contact-grid { grid-template-columns: 1fr; }
-      .sv-footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
-      .sv-footer-bottom { flex-direction: column; align-items: flex-start; }
-      .result-grid { grid-template-columns: repeat(2, 1fr); }
-      .calc-fields { grid-template-columns: 1fr; }
-      .sv-mobile-cta { display: block; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+      .footer-btm { flex-direction: column; }
+      .mobile-cta { display: block; }
       body { padding-bottom: 5rem; }
-      .sv-trust-bar .container { flex-direction: column; align-items: flex-start; padding: 0 4vw; gap: .7rem; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+      .rebate-items { grid-template-columns: 1fr; }
+      .calc-fields { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
-      .sv-services-grid { grid-template-columns: 1fr; }
-      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
-      .result-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .hero-cta-row { flex-direction: column; align-items: flex-start; }
-      .btn-sv-primary, .btn-sv-secondary { width: 100%; justify-content: center; }
-      .calc-inner { padding: 1.4rem 1.2rem; }
-      .form-row { grid-template-columns: 1fr; }
+      .services-grid, .tgrid, .steps-grid { grid-template-columns: 1fr; }
+      .frow { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Scroll Progress Bar -->
-  <div id="scroll-bar"></div>
+<div id="scroll-bar"></div>
+<div class="demo-banner">
+  This is a demo site by ImproveYourSite &mdash; showing what your finished site looks like.
+  <a href="/packages.html">Get a site like this &rarr;</a>
+</div>
 
-  <!-- Demo Banner -->
-  <div class="demo-banner">
-    This is a demo site by ImproveYourSite — showing what your finished site looks like.
-    <a href="/packages.html">Get a site like this &rarr;</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <span class="brand-sun">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </span>
+      SunVolt Solar
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#services">Services</a>
+      <a href="#calculator">Savings Calc</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact" class="nav-cta">Free Assessment</a>
+      <a href="tel:0400987654" class="nav-phone">0400 987 654</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-top">
+        <span class="badge badge-open">
+          <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 1.6s infinite;"></span>
+          Open Mon&ndash;Fri 7:30am&ndash;5pm
+        </span>
+        <span class="badge-rating">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          4.9 stars &bull; 89 Google reviews
+        </span>
+      </div>
+      <h1>Central West NSW's trusted<br><span>solar installers since 2016</span></h1>
+      <p class="lead">SunVolt Solar is a locally owned, CEC accredited team based right here in Orange. We've installed 500+ solar systems across the region &mdash; and every single job is done by our own certified crew, not subcontractors.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          Book Free On-Site Assessment
+        </a>
+        <a href="#calculator" class="btn-white">Calculate My Savings</a>
+        <a href="tel:0400987654" class="btn-phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0400 987 654
+        </a>
+      </div>
+      <div class="trust-strip">
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          CEC Accredited Installer
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          25-year panel warranty
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          10-year workmanship warranty
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          STC rebates handled for you
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          No subcontractors
+        </span>
+      </div>
+      <div class="kpi-strip reveal">
+        <div class="kpi-item"><span class="kn">9+</span><span class="kl">Years in Central West</span></div>
+        <div class="kpi-item"><span class="kn">500+</span><span class="kl">Systems installed locally</span></div>
+        <div class="kpi-item"><span class="kn">4.9 &#9733;</span><span class="kl">Google (89 reviews)</span></div>
+        <div class="kpi-item"><span class="kn">25yr</span><span class="kl">Panel performance warranty</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="container tb-inner">
+      <div class="tb-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        CEC Accredited Installer
+      </div>
+      <div class="tb-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        4.9 Google &bull; 89 Reviews
+      </div>
+      <div class="tb-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Orange, Bathurst &amp; Central West NSW
+      </div>
+      <div class="tb-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Est. 2016 &mdash; Same-Week Quotes
+      </div>
+    </div>
   </div>
 
-  <!-- Header / Nav -->
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#" style="font-size:1.12rem; color:#1a1208; display:flex; align-items:center; gap:.35rem;">
-        <span style="color:var(--sv-primary);">&#9728;</span> SunVolt Solar
-      </a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#calculator">Savings Calc</a>
-        <a href="#testimonials">Reviews</a>
-        <a href="#contact" style="background:var(--sv-primary); color:#fff; border-color:var(--sv-primary); font-weight:700;">Free Assessment</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ════════════════════════════════════
-         HERO
-    ════════════════════════════════════ -->
-    <section class="hero-v2">
-      <div class="container">
-        <div class="hero-top-row">
-          <div class="open-now-badge">
-            <span class="dot"></span>
-            Open Now — Mon–Fri 7:30am–5pm
-          </div>
-          <span style="font-size:.82rem; color:#475569; font-weight:600;">&#x2B50; 4.9 stars &bull; 89 Google reviews</span>
-        </div>
-
-        <h1>
-          Central West NSW's trusted<br>
-          <span>solar installers since 2016</span>
-        </h1>
-        <p class="lead">
-          SunVolt Solar is a locally owned, CEC accredited team based right here in Orange. We've installed 500+ solar systems across Orange, Bathurst, Dubbo, Parkes, Cowra, and Forbes — and every single job is done by our own certified crew, not subcontractors.
-        </p>
-
-        <div class="hero-cta-row">
-          <a class="btn-sv-primary" href="#contact">&#9728;&#65039; Book Free On-Site Assessment</a>
-          <a class="btn-sv-secondary" href="#calculator">Calculate My Savings</a>
-          <a class="btn-sv-phone" href="tel:0400987654">
-            <span>&#128222;</span> 0400 987 654
-          </a>
-        </div>
-
-        <div class="hero-trust-strip">
-          <span>&#10003; CEC Accredited Installer</span>
-          <span>&#10003; 25-year panel warranty</span>
-          <span>&#10003; 10-year workmanship warranty</span>
-          <span>&#10003; STC rebates handled for you</span>
-          <span>&#10003; Interest-free finance available</span>
-          <span>&#10003; Local team — no subcontractors</span>
-        </div>
-
-        <div class="kpi-strip reveal">
-          <div class="kpi-strip-item">
-            <span class="kpi-num">9+</span>
-            <span class="kpi-label">Years installing in Central West</span>
-          </div>
-          <div class="kpi-strip-item">
-            <span class="kpi-num">500+</span>
-            <span class="kpi-label">Systems installed locally</span>
-          </div>
-          <div class="kpi-strip-item">
-            <span class="kpi-num">4.9&#9733;</span>
-            <span class="kpi-label">Google rating (89 reviews)</span>
-          </div>
-          <div class="kpi-strip-item">
-            <span class="kpi-num">25yr</span>
-            <span class="kpi-label">Panel performance warranty</span>
-          </div>
-        </div>
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The SunVolt Process</span>
+        <h2>From first call to first savings &mdash; in as little as 2 weeks</h2>
+        <p>We handle everything, start to finish. Most Orange homes are generating solar power within 10&ndash;14 business days of signing.</p>
       </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         TRUST BAR
-    ════════════════════════════════════ -->
-    <div class="sv-trust-bar">
-      <div class="container">
-        <div class="sv-trust-item">&#9728; CEC Accredited Installer</div>
-        <div class="sv-trust-item">&#11088; 4.9 Google Rating — 89 Reviews</div>
-        <div class="sv-trust-item">&#128205; Orange, Bathurst &amp; Central West NSW</div>
-        <div class="sv-trust-item">&#128296; Est. 2016 — 9+ Years Local Experience</div>
-        <div class="sv-trust-item">&#9203; Same-Week Quotes Available</div>
+      <div class="steps-grid">
+        <div class="step-card reveal d1">
+          <div class="step-num">1</div>
+          <h3>Free On-Site Assessment</h3>
+          <p>One of our CEC accredited designers visits your property. We assess your roof, shading, and current energy usage. No cost, no obligation.</p>
+        </div>
+        <div class="step-card reveal d2">
+          <div class="step-num">2</div>
+          <h3>Custom System Design</h3>
+          <p>We design a system tailored to your roof and usage profile. You receive a detailed proposal with projected savings and STC rebate within 48 hours.</p>
+        </div>
+        <div class="step-card reveal d3">
+          <div class="step-num">3</div>
+          <h3>Professional Installation</h3>
+          <p>Our own accredited crew handles the full install &mdash; panels, inverter, metering and grid connection with Essential Energy. Most residential jobs are done in a single day.</p>
+        </div>
+        <div class="step-card reveal d4">
+          <div class="step-num">4</div>
+          <h3>Watch Your Savings Start</h3>
+          <p>We set up your monitoring app so you can see live generation from day one. Your STC rebate is deducted off the invoice. Most customers see an impact on their very next bill.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- ════════════════════════════════════
-         HOW IT WORKS
-    ════════════════════════════════════ -->
-    <section class="sv-section" id="how-it-works">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">The SunVolt Process</span>
-          <h2>From first call to first savings — in as little as 2 weeks</h2>
-          <p>We handle everything, start to finish. Most Orange homes are generating solar power within 10–14 business days of signing.</p>
+  <section class="section" id="services" style="background: var(--bg);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our Services</span>
+        <h2>Residential, commercial and battery storage</h2>
+        <p>Whether you're a homeowner, farmer or business operator, we have the right system for your energy goals and budget.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Residential Solar</h3>
+          <p>Grid-connected solar systems for homes across Central West NSW. We size every system to your actual consumption data and roof orientation for maximum return.</p>
         </div>
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Commercial Solar</h3>
+          <p>Larger commercial systems for businesses, farms and industrial sites. We handle project management from design through to grid connection and commissioning.</p>
+        </div>
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          </div>
+          <h3>Battery Storage</h3>
+          <p>Add a battery to your existing or new solar system. Store your excess generation and use it at night or during outages. We supply and install leading battery brands.</p>
+        </div>
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Hybrid Solar Systems</h3>
+          <p>Hybrid inverter systems that work with the grid, battery and solar simultaneously &mdash; giving you maximum flexibility and resilience against outages and price spikes.</p>
+        </div>
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+          </div>
+          <h3>Solar Add-Ons &amp; Upgrades</h3>
+          <p>Expanding an existing system? Upgrading an old inverter? Adding monitoring? We service and upgrade systems regardless of original installer.</p>
+        </div>
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <h3>STC Rebate Management</h3>
+          <p>Small-scale Technology Certificates can be complex. We handle the paperwork and deduct the rebate directly from your invoice, so you only pay the net cost from day one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="steps-grid">
-          <div class="step-card reveal reveal-delay-1">
-            <div class="step-badge">1</div>
-            <h3>Free On-Site Assessment</h3>
-            <p>One of our CEC accredited designers visits your property in Orange or surrounds. We assess your roof orientation, shading from surrounding trees or structures, and your current energy usage. No cost, no obligation.</p>
+  <section class="section section-warm" id="rebates">
+    <div class="container">
+      <div class="rebate-box reveal">
+        <h2>Government rebates available in 2025</h2>
+        <p class="rb-intro">Solar buyers in Central West NSW can access significant rebates and incentives. SunVolt handles all paperwork &mdash; the savings are deducted from your invoice automatically.</p>
+        <div class="rebate-items">
+          <div class="ri">
+            <span class="ri-amt">Up to $3,500+</span>
+            <div class="ri-head">STC Federal Rebate</div>
+            <p>Small-scale Technology Certificates are available to most residential and small commercial solar installs. Amount varies by system size and postcode zone.</p>
           </div>
-          <div class="step-card reveal reveal-delay-2">
-            <div class="step-badge">2</div>
-            <h3>Custom System Design</h3>
-            <p>We design a system tailored to your roof and usage profile — not a one-size-fits-all package. You receive a detailed proposal with system layout, projected savings, and STC rebate calculation within 48 hours.</p>
+          <div class="ri">
+            <span class="ri-amt">0% Interest Finance</span>
+            <div class="ri-head">Interest-Free Finance</div>
+            <p>Finance your solar system over 3&ndash;5 years with zero interest through our finance partners. Most customers start cash-flow positive from month one.</p>
           </div>
-          <div class="step-card reveal reveal-delay-3">
-            <div class="step-badge">3</div>
-            <h3>Professional Installation</h3>
-            <p>Our own accredited crew handles the full install — panels, inverter, metering, and grid connection paperwork with Essential Energy. Most residential jobs in Orange are completed in a single day.</p>
-          </div>
-          <div class="step-card reveal reveal-delay-4">
-            <div class="step-badge">4</div>
-            <h3>Watch Your Savings Start</h3>
-            <p>We set up your monitoring app so you can see live generation from day one. Your STC rebate is deducted off the invoice — no waiting around. Most customers see a positive impact on their very next bill.</p>
+          <div class="ri">
+            <span class="ri-amt">Ongoing savings</span>
+            <div class="ri-head">Feed-in Tariff Earnings</div>
+            <p>Export excess solar generation back to the grid and earn a feed-in tariff credit on your electricity bill. Every unit you export is money in your pocket.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ════════════════════════════════════
-         SOLAR SAVINGS CALCULATOR
-    ════════════════════════════════════ -->
-    <section class="sv-section" id="calculator" style="background:var(--sv-bg); border-top:2px solid #f5d3a8; border-bottom:2px solid #f5d3a8;">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">Solar Savings Calculator</span>
-          <h2>How much could you save with solar?</h2>
-          <p>Answer 3 quick questions and get a personalised estimate for your Orange or Central West NSW property.</p>
+  <section class="section" id="calculator">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Solar Savings Calculator</span>
+        <h2>How much could you save with solar?</h2>
+        <p>Answer 3 quick questions for a personalised estimate for your Central West NSW property.</p>
+      </div>
+      <div class="calc-card reveal">
+        <div class="calc-inner">
+          <div class="calc-title">Solar Savings Estimator</div>
+          <p class="calc-sub">Based on average Orange NSW solar performance data and current electricity tariffs.</p>
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label for="c-bill">Monthly electricity bill</label>
+              <select id="c-bill" class="calc-select" onchange="calcSolar()">
+                <option value="">Select&hellip;</option>
+                <option value="120">Under $150/month</option>
+                <option value="200">$150&ndash;$250/month</option>
+                <option value="325">$250&ndash;$400/month</option>
+                <option value="500">$400&ndash;$600/month</option>
+                <option value="700">Over $600/month</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="c-type">Property type</label>
+              <select id="c-type" class="calc-select" onchange="calcSolar()">
+                <option value="">Select&hellip;</option>
+                <option value="home">Home (residential)</option>
+                <option value="farm">Farm / rural property</option>
+                <option value="biz">Business / commercial</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="c-usage">Daytime usage</label>
+              <select id="c-usage" class="calc-select" onchange="calcSolar()">
+                <option value="">Select&hellip;</option>
+                <option value="low">Mostly evenings (low daytime)</option>
+                <option value="med">Mixed &mdash; some daytime</option>
+                <option value="high">Mostly daytime (high offset)</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-result" id="calc-result">
+            <div class="result-grid">
+              <div class="ritem"><span class="rv" id="r-size"></span><span class="rl">Recommended system size</span></div>
+              <div class="ritem"><span class="rv" id="r-saving"></span><span class="rl">Estimated annual saving</span></div>
+              <div class="ritem"><span class="rv" id="r-payback"></span><span class="rl">Estimated payback period</span></div>
+            </div>
+            <div class="result-co2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span id="r-co2">Approx. CO&#8322; offset calculated from your usage profile.</span>
+            </div>
+            <p class="result-disclaimer">* Estimates based on average Orange NSW irradiance data (5.2 peak sun hours/day) and $0.30/kWh tariff. Actual results depend on your roof, usage and feed-in rate. Get an exact quote with a free on-site assessment.</p>
+            <div class="result-cta">
+              <a href="#contact" class="btn-blue">Book Free On-Site Assessment</a>
+              <a href="tel:0400987654" class="btn-white">Call 0400 987 654</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="calc-wrapper reveal">
-          <div class="calc-inner">
-            <p class="calc-title">&#9728;&#65039; Your Personal Solar Estimate</p>
-            <p class="calc-subtitle">Tailored to Central West NSW conditions — STC Zone 3, Essential Energy grid</p>
+  <section class="section section-warm" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Customer Reviews</span>
+        <h2>What Central West customers say</h2>
+        <p>4.9 out of 5 &mdash; 89 Google reviews</p>
+      </div>
+      <div class="tgrid">
+        <div class="tcard reveal d1">
+          <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"SunVolt installed our 10kW system in one day and the monitoring app was set up before they left. Our last power bill was $14. Fourteen dollars. We've had the system 8 months and it's already paid back nearly a third of the cost."</blockquote>
+          <div class="tcard-rev">
+            <div class="rev-av">MK</div>
+            <div><strong>Mark &amp; Kate T.</strong><span>Orange NSW &mdash; 10kW Residential</span></div>
+          </div>
+        </div>
+        <div class="tcard reveal d2">
+          <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"I went with SunVolt over a cheaper Sydney company because they were local and used their own crew. Best decision. Their designer actually came out and looked at the roof himself &mdash; the other mob just wanted a deposit over the phone."</blockquote>
+          <div class="tcard-rev">
+            <div class="rev-av">PF</div>
+            <div><strong>Phil F.</strong><span>Bathurst NSW &mdash; 6.6kW Residential</span></div>
+          </div>
+        </div>
+        <div class="tcard reveal d3">
+          <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"We installed a 30kW system on our sheds last year. The quote was detailed, the install was clean and professional, and the STC paperwork was handled without any hassle on our end. Our electricity costs on the farm have dropped enormously."</blockquote>
+          <div class="tcard-rev">
+            <div class="rev-av">JB</div>
+            <div><strong>Jim &amp; Bev H.</strong><span>Parkes NSW &mdash; 30kW Farm System</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="calc-fields">
-              <!-- Bill -->
-              <div class="calc-field">
-                <label for="monthly-bill">Monthly electricity bill</label>
-                <div class="field-row">
-                  <span class="dollar-prefix">$</span>
-                  <input class="calc-num-input" type="number" id="monthly-bill" value="280" min="50" max="2000" step="10">
-                </div>
-                <input class="calc-slider" type="range" id="bill-slider" min="50" max="1000" value="280" step="10">
-                <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#a0684a;margin-top:.2rem;">
-                  <span>$50</span><span>$1,000+</span>
-                </div>
-              </div>
-
-              <!-- Orientation -->
-              <div class="calc-field">
-                <label for="roof-orient">Roof orientation</label>
-                <select class="calc-select" id="roof-orient">
-                  <option value="North">North (ideal)</option>
-                  <option value="North-East">North-East or North-West</option>
-                  <option value="East/West">East / West split</option>
-                  <option value="South">South (limited)</option>
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Book your free on-site assessment</h2>
+        <p>One of our CEC accredited designers will visit your property. No cost, no obligation &mdash; just an honest recommendation based on your actual roof and usage data.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="form-card reveal">
+          <h3>Request a free assessment</h3>
+          <p class="sub">We respond to all enquiries within one business day &mdash; usually the same day.</p>
+          <form id="contact-form" novalidate>
+            <div class="frow">
+              <div class="fg"><label for="cf-name">Full name *</label><input type="text" id="cf-name" placeholder="Your name" required /></div>
+              <div class="fg"><label for="cf-phone">Phone *</label><input type="tel" id="cf-phone" placeholder="04xx xxx xxx" required /></div>
+            </div>
+            <div class="fg"><label for="cf-email">Email address</label><input type="email" id="cf-email" placeholder="you@example.com" /></div>
+            <div class="frow">
+              <div class="fg">
+                <label for="cf-type">Property type</label>
+                <select id="cf-type">
+                  <option value="">Select&hellip;</option>
+                  <option>Residential</option>
+                  <option>Farm / Rural</option>
+                  <option>Commercial</option>
                 </select>
-                <p style="font-size:.76rem;color:#a0684a;margin:.4rem 0 0;line-height:1.4;">Not sure? Most roof peaks in Orange face north or north-east.</p>
               </div>
-
-              <!-- Household -->
-              <div class="calc-field">
-                <label for="household-size">Household size</label>
-                <select class="calc-select" id="household-size">
-                  <option value="1-2">1–2 people</option>
-                  <option value="3-4" selected>3–4 people</option>
-                  <option value="5+">5 or more people</option>
+              <div class="fg">
+                <label for="cf-loc">Location</label>
+                <select id="cf-loc">
+                  <option value="">Select&hellip;</option>
+                  <option>Orange</option>
+                  <option>Bathurst</option>
+                  <option>Dubbo</option>
+                  <option>Parkes</option>
+                  <option>Cowra</option>
+                  <option>Forbes</option>
+                  <option>Other Central West</option>
                 </select>
-                <p style="font-size:.76rem;color:#a0684a;margin:.4rem 0 0;line-height:1.4;">Larger households get bigger recommended systems.</p>
               </div>
             </div>
-
-            <button class="calc-btn" id="calc-btn" type="button">
-              <span>&#9728;&#65039;</span> Calculate My Solar Savings
+            <div class="fg"><label for="cf-msg">Message (optional)</label><textarea id="cf-msg" rows="3" placeholder="Any questions or details about your property&hellip;"></textarea></div>
+            <button type="submit" class="btn-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Book Free Assessment
             </button>
-
-            <!-- Result Card -->
-            <div class="calc-result" id="calc-result">
-              <div style="font-size:1.05rem;font-weight:800;color:#1a1208;margin-bottom:1.2rem;">
-                &#9728;&#65039; Your estimated solar snapshot for Orange NSW
-              </div>
-              <div class="result-grid">
-                <div class="result-item">
-                  <span class="r-val" id="r-size">—</span>
-                  <span class="r-label">Recommended system size</span>
-                </div>
-                <div class="result-item">
-                  <span class="r-val" id="r-savings">—</span>
-                  <span class="r-label">Estimated annual savings</span>
-                </div>
-                <div class="result-item">
-                  <span class="r-val" id="r-stc">—</span>
-                  <span class="r-label">STC government rebate</span>
-                </div>
-                <div class="result-item">
-                  <span class="r-val" id="r-cost">—</span>
-                  <span class="r-label">Est. cost after rebate</span>
-                </div>
-                <div class="result-item">
-                  <span class="r-val" id="r-payback">—</span>
-                  <span class="r-label">Estimated payback period</span>
-                </div>
-                <div class="result-item">
-                  <span class="r-val" id="r-co2">—</span>
-                  <span class="r-label">CO&#8322; offset per year</span>
-                </div>
-              </div>
-              <div class="result-co2">
-                <span class="co2-icon">&#127807;</span>
-                <div class="co2-text">
-                  <strong id="r-co2-inline">—</strong>
-                  That's the equivalent of planting dozens of native trees every year.
-                </div>
-              </div>
-              <div class="result-cta-row">
-                <a class="btn-sv-primary" href="#contact">Get my free on-site quote</a>
-                <a class="btn-sv-secondary" href="tel:0400987654">Call 0400 987 654</a>
-              </div>
-              <p class="result-disclaimer">Estimates only — based on average Orange NSW conditions (STC Zone 3, Endeavour Energy/Essential Energy tariffs). Call for a free on-site assessment for a precise figure.</p>
-            </div>
-          </div>
+          </form>
         </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         SERVICES
-    ════════════════════════════════════ -->
-    <section class="sv-section" id="services">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">Our Services</span>
-          <h2>Everything solar, under one local roof</h2>
-          <p>From a 6.6kW home system in Summer Hill to a 100kW farm array near Molong — we design, supply, and install.</p>
-        </div>
-
-        <div class="sv-services-grid">
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#9728;</span>
-            <h3>Residential Solar Panels</h3>
-            <p>6.6kW to 20kW systems for homes across Orange, Bathurst, and the Central West. Jinko, Canadian Solar, and Risen panels with Fronius, SolarEdge, or Growatt inverters. Rebates handled, grid connection arranged.</p>
+        <div class="ci-panel reveal">
+          <div class="ci-card">
+            <div class="ci-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><strong>Phone</strong><p><a href="tel:0400987654">0400 987 654</a></p></div>
           </div>
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#128267;</span>
-            <h3>Battery Storage</h3>
-            <p>Store surplus generation and use it after sunset. We install Tesla Powerwall 3, Sungrow SBH, and Alpha ESS Smile 5 batteries. Ideal for Orange families who want energy independence through Central West blackouts.</p>
+          <div class="ci-card">
+            <div class="ci-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><strong>Email</strong><p><a href="mailto:info@sunvoltsolar.com.au">info@sunvoltsolar.com.au</a></p></div>
           </div>
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#9889;</span>
-            <h3>Hybrid Solar Systems</h3>
-            <p>Solar + battery + grid in one smart system. A hybrid inverter manages all three sources, maximising self-consumption. Perfect if you plan to add a battery later or switch to an EV. Popular across Parkes and Forbes.</p>
+          <div class="ci-card">
+            <div class="ci-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><strong>Office</strong><p>14 Anson Street, Orange NSW 2800</p></div>
           </div>
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#127970;</span>
-            <h3>Commercial Solar</h3>
-            <p>20kW–250kW+ systems for businesses, councils, wineries, and agricultural operations. We've installed for Orange City Council facilities, Canobolas Rural Technology High School, and numerous Mitchell Highway businesses.</p>
-          </div>
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#128202;</span>
-            <h3>System Monitoring &amp; Maintenance</h3>
-            <p>Every system we install comes with a remote monitoring portal. If output drops, we know before you do. We also service all major brands — not just systems we installed. Annual clean &amp; inspection from $195.</p>
-          </div>
-          <div class="sv-service-card">
-            <span class="sv-service-icon">&#128176;</span>
-            <h3>Rebate &amp; Incentive Assistance</h3>
-            <p>The STC process can be confusing. We handle all paperwork — calculation, assignment, and submission. We also advise on NSW feed-in tariffs, Virtual Power Plant opportunities, and interest-free solar finance options.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         GOVERNMENT REBATES
-    ════════════════════════════════════ -->
-    <section class="sv-section" style="background:#f0fdf9; border-top:2px solid #a7f3d0; border-bottom:2px solid #a7f3d0;">
-      <div class="container">
-        <div class="rebate-box reveal">
-          <h2>&#128176; Government rebates available in Orange NSW</h2>
-          <p class="rebate-intro">Solar buyers in Orange and Central West NSW have access to significant government incentives. We handle all the paperwork — you simply receive a lower invoice.</p>
-          <div class="rebate-items">
-            <div class="rebate-item reveal reveal-delay-1">
-              <span class="ri-amount">Federal</span>
-              <div class="ri-head">Small-Scale Technology Certificates (STCs)</div>
-              <p>The federal government's main solar rebate. Orange falls in STC Zone 3. A typical 10kW system currently attracts approximately $3,300 in STCs — deducted from your invoice upfront. We assign the STCs on your behalf so you never have to deal with the process.</p>
-            </div>
-            <div class="rebate-item reveal reveal-delay-2">
-              <span class="ri-amount">NSW</span>
-              <div class="ri-head">NSW Feed-In Tariff &amp; VPP Programs</div>
-              <p>Essential Energy pays a feed-in tariff for excess solar exported to the grid. Rates vary by retailer — currently 4–10c/kWh depending on your plan. SunVolt can advise on the best retailer for your usage profile and help you join Virtual Power Plant programs for additional income.</p>
-            </div>
-            <div class="rebate-item reveal reveal-delay-3">
-              <span class="ri-amount">Finance</span>
-              <div class="ri-head">Interest-Free Solar Finance</div>
-              <p>Through our finance partners, eligible Orange homeowners can access 0% interest finance for up to 5 years. This means most systems are cash-flow positive from month one — your monthly repayment is less than your old power bill. Subject to credit approval.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         TESTIMONIALS
-    ════════════════════════════════════ -->
-    <section class="sv-section sv-testimonials" id="testimonials">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">Customer Reviews</span>
-          <h2>What Orange &amp; Central West families say</h2>
-          <p>89 reviews on Google. Here's a sample from real local customers.</p>
-        </div>
-
-        <div class="sv-testimonials-grid">
-          <div class="sv-testimonial-card">
-            <div class="sv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="quote-text">"We had a 10kW system and Sungrow battery installed on our place on Hill Street in March. First quarterly bill after switchover — $38 credit. Down from $580. The boys from SunVolt were here at 7:30am sharp, done and cleaned up by 3:30pm. Can't recommend them highly enough."</p>
-            <div class="sv-reviewer-row">
-              <div class="sv-reviewer-avatar">KM</div>
-              <div>
-                <div class="sv-reviewer-name">Karen M.</div>
-                <div class="sv-reviewer-job">Homeowner, Orange NSW &bull; 10kW + battery install</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-testimonial-card">
-            <div class="sv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="quote-text">"We run a small winery just off the Mid Western Highway near Cudal. Electricity was killing us — refrigeration, bottling, the lot. SunVolt put a 30kW commercial system on the machinery shed. Payback inside 4 years by their reckoning. Twelve months in and we're tracking ahead of projections. Exceptional work."</p>
-            <div class="sv-reviewer-row">
-              <div class="sv-reviewer-avatar">DP</div>
-              <div>
-                <div class="sv-reviewer-name">David &amp; Philippa R.</div>
-                <div class="sv-reviewer-job">Winery operators, Cudal NSW &bull; 30kW commercial install</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-testimonial-card">
-            <div class="sv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="quote-text">"We're out on Cargo Road — fully off-grid in the future is the plan. Started with a 13.2kW hybrid system and two Powerwalls. SunVolt's designer spent two hours with us going through load analysis. Irrigation pump, cool room, house — all mapped out. Four months in and we've had zero grid draw on sunny days. Brilliant company."</p>
-            <div class="sv-reviewer-row">
-              <div class="sv-reviewer-avatar">TS</div>
-              <div>
-                <div class="sv-reviewer-name">Tom &amp; Sandra H.</div>
-                <div class="sv-reviewer-job">Mixed farming, Cargo NSW &bull; 13.2kW hybrid + 2x Powerwall</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         FAQ
-    ════════════════════════════════════ -->
-    <section class="sv-section" id="faq">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">Common Questions</span>
-          <h2>Frequently asked questions</h2>
-          <p>Straight answers from the SunVolt team — no sales spin.</p>
-        </div>
-
-        <div class="faq-list">
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              How long does a solar installation take in Orange?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              For a standard residential system (6.6kW–13.2kW), the physical installation takes one day. Our crew typically arrives at 7:30am and is packed up by late afternoon. We arrange the Essential Energy meter change and grid connection paperwork in parallel — most systems are approved and generating within 5–7 business days of the install date. Larger commercial systems or battery storage jobs may take 1–2 days.
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              What government rebates are available and how much are they worth?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              The main rebate is the federal STC (Small-Scale Technology Certificate) scheme. Orange falls in STC Zone 3. As a rough guide: a 6.6kW system attracts approximately $2,200 in STCs, a 10kW system around $3,300, and a 13.2kW system around $4,300. These amounts are deducted directly from your invoice — you don't pay them and wait for a rebate. The STC scheme is set to reduce annually until 2030, so the rebate is higher if you install sooner. We also advise on NSW feed-in tariffs and any current state government battery incentive programs.
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              What happens to my solar during a blackout?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              A standard grid-connect solar system (no battery) will shut down automatically during a blackout — this is a safety requirement to protect Essential Energy workers. If you have a compatible battery system (such as a Tesla Powerwall 3 or Sungrow SBH), the battery can island your home during a blackout, keeping lights and essential appliances running. This is a common question from families on rural properties around Orange, Molong, and Cargo where outages do occur. We can recommend the right battery for your backup needs during the assessment.
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              How much can I realistically save on my electricity bill?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              For a typical Orange family spending around $400/month on electricity, a well-sized 10kW north-facing system typically reduces bills by 65–75%. Many of our customers' bills drop to near zero or go into credit in the warmer months. Savings depend on your orientation, shading, household usage profile, and how much power you use during daylight hours. Use our calculator above for a personalised estimate, then book a free on-site assessment for a precise figure. Our average customer across Central West NSW saves between $2,000 and $3,500 per year.
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              Is SunVolt Solar CEC accredited? Do you use subcontractors?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              Yes — SunVolt Solar is fully CEC (Clean Energy Council) accredited. This means our designers and installers meet the highest industry standards and you remain eligible for STC rebates. We do not use subcontractors. Every assessment, design, and installation is completed by our own employed and accredited team based in Orange. This is important to us — it's how we maintain our 4.9-star rating and 10-year workmanship warranty. If there's ever an issue, you call us directly and we come back. Simple as that.
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              Do you service areas outside Orange?
-              <span class="faq-chevron">&#8964;</span>
-            </div>
-            <div class="faq-answer">
-              Yes — we regularly install across the Central West. Our standard service area includes Bathurst, Dubbo, Parkes, Cowra, Forbes, Molong, Blayney, Canowindra, Grenfell, Eugowra, and surrounding areas. For properties beyond our usual range, contact us to check availability — we travel for larger commercial and farm jobs. We're familiar with Essential Energy's requirements for the entire Central West distribution area.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         CONTACT
-    ════════════════════════════════════ -->
-    <section class="sv-section" id="contact" style="background:var(--sv-bg); border-top:2px solid #f5d3a8;">
-      <div class="container">
-        <div class="sv-section-head reveal">
-          <span class="sv-eyebrow">Get in Touch</span>
-          <h2>Book your free on-site assessment</h2>
-          <p>No obligation. We'll visit your property, assess your roof and usage, and give you a detailed written quote within 48 hours.</p>
-        </div>
-
-        <div class="sv-contact-grid">
-          <!-- Form -->
-          <div class="contact-form-card reveal">
-            <h3>Request a free quote</h3>
-            <p class="form-subtitle">Most Orange and Central West enquiries get a call-back within 2 business hours.</p>
-            <form action="#" method="post" onsubmit="handleFormSubmit(event)">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="f-name">Full name *</label>
-                  <input class="form-control" type="text" id="f-name" name="name" placeholder="e.g. Sarah Mitchell" required>
-                </div>
-                <div class="form-group">
-                  <label for="f-phone">Phone *</label>
-                  <input class="form-control" type="tel" id="f-phone" name="phone" placeholder="0400 000 000" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="f-email">Email</label>
-                <input class="form-control" type="email" id="f-email" name="email" placeholder="your@email.com.au">
-              </div>
-              <div class="form-group">
-                <label for="f-address">Property address (suburb at minimum)</label>
-                <input class="form-control" type="text" id="f-address" name="address" placeholder="e.g. Colour Street, Orange NSW">
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="f-system">Interested in</label>
-                  <select class="form-control" id="f-system" name="system">
-                    <option>Residential solar panels</option>
-                    <option>Solar + battery storage</option>
-                    <option>Hybrid system</option>
-                    <option>Commercial solar</option>
-                    <option>Farm / rural solar</option>
-                    <option>System upgrade / repair</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="f-bill">Avg monthly bill</label>
-                  <select class="form-control" id="f-bill" name="bill">
-                    <option>Under $150</option>
-                    <option>$150 – $300</option>
-                    <option selected>$300 – $500</option>
-                    <option>$500 – $800</option>
-                    <option>Over $800</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="f-message">Anything else we should know?</label>
-                <textarea class="form-control" id="f-message" name="message" placeholder="e.g. 3-phase power, pool pump, EV charger, off-grid interest..."></textarea>
-              </div>
-              <button class="btn-sv-primary" type="submit" style="width:100%; justify-content:center; font-size:1rem;">
-                &#9728;&#65039; Send My Quote Request
-              </button>
-            </form>
-            <div id="form-success" style="display:none; margin-top:1rem; background:#f0fdf4; border:1.5px solid #86efac; border-radius:12px; padding:1rem 1.2rem; color:#15803d; font-weight:700; font-size:.95rem;">
-              &#10003; Thanks! We'll be in touch within 2 business hours.
-            </div>
-          </div>
-
-          <!-- Info Panel -->
-          <div class="contact-info-panel">
-            <div class="contact-detail-card reveal">
-              <h4>Contact SunVolt Solar</h4>
-              <div class="contact-detail-row">
-                <span class="contact-detail-icon">&#128222;</span>
-                <div><strong><a href="tel:0400987654" style="color:var(--sv-primary); font-weight:800;">0400 987 654</a></strong><br>Call us Monday–Friday 7:30am–5pm</div>
-              </div>
-              <div class="contact-detail-row">
-                <span class="contact-detail-icon">&#128231;</span>
-                <div><a href="mailto:info@sunvoltsolar.com.au" style="color:var(--sv-primary); font-weight:700;">info@sunvoltsolar.com.au</a><br>Replies within 4 business hours</div>
-              </div>
-              <div class="contact-detail-row">
-                <span class="contact-detail-icon">&#128205;</span>
-                <div>14 Anson Street, Orange NSW 2800<br><span style="font-size:.82rem; color:#a0684a;">Two blocks from Orange Base Hospital</span></div>
-              </div>
-              <div class="contact-detail-row">
-                <span class="contact-detail-icon">&#128336;</span>
-                <div>Mon–Fri: 7:30am – 5:00pm<br>Saturday: 8:00am – 12:00pm<br>Sunday: Closed</div>
-              </div>
-            </div>
-
-            <div class="contact-detail-card reveal">
-              <h4>Service areas</h4>
-              <div class="service-areas-row">
+          <div class="ci-card">
+            <div class="ci-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <strong>Hours</strong>
+              <p>Mon &ndash; Fri: 7:30am &ndash; 5:00pm<br>Saturday: 8:00am &ndash; 12:00pm</p>
+              <div class="areas-row">
                 <span class="area-chip">Orange</span>
                 <span class="area-chip">Bathurst</span>
                 <span class="area-chip">Dubbo</span>
                 <span class="area-chip">Parkes</span>
                 <span class="area-chip">Cowra</span>
                 <span class="area-chip">Forbes</span>
-                <span class="area-chip">Molong</span>
-                <span class="area-chip">Blayney</span>
-                <span class="area-chip">Canowindra</span>
-                <span class="area-chip">Eugowra</span>
-                <span class="area-chip">Grenfell</span>
-                <span class="area-chip">Cudal</span>
-                <span class="area-chip">Cargo</span>
               </div>
             </div>
-
-            <!-- Map Embed -->
-            <div class="map-embed reveal">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3358.843!2d149.0994!3d-33.2839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0d5b2e2a4c9a0b%3A0x1234567890abcdef!2s14%20Anson%20St%2C%20Orange%20NSW%202800!5e0!3m2!1sen!2sau!4v1708000000000!5m2!1sen!2sau"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                title="SunVolt Solar — 14 Anson Street, Orange NSW">
-              </iframe>
-            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Demo CTA -->
-    <section style="padding:3rem 0; text-align:center; background:#f8fafc; border-top:1px solid #e2e8f0;">
-      <div class="container">
-        <h2 style="font-size:clamp(1.5rem,3.5vw,2rem); margin-bottom:.6rem; color:#0f172a;">Want a website like this for your business?</h2>
-        <p style="color:#64748b; margin-bottom:1.4rem; font-size:1rem;">This demo was built by ImproveYourSite. Professional, high-converting websites for Australian small businesses.</p>
-        <a href="/packages.html" style="display:inline-flex; align-items:center; gap:.45rem; background:#5b4dff; color:#fff; font-weight:800; padding:.9rem 2rem; border-radius:12px; font-size:1.05rem; text-decoration:none;">
-          &#9889; See Our Packages &amp; Pricing
-        </a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════ -->
-  <footer class="sv-footer">
-    <div class="container">
-      <div class="sv-footer-grid">
-        <div>
-          <div class="sv-footer-brand"><span>&#9728;</span> SunVolt Solar</div>
-          <p>CEC accredited solar installers serving Orange and Central West NSW since 2016. Locally owned, locally operated — every job is done by our own certified team.</p>
-          <p style="margin:0;">
-            <strong style="color:#e0b87a;">14 Anson Street, Orange NSW 2800</strong><br>
-            <a href="tel:0400987654" style="color:var(--sv-primary); font-weight:700;">0400 987 654</a> &nbsp;&bull;&nbsp;
-            <a href="mailto:info@sunvoltsolar.com.au" style="color:#c0a080;">info@sunvoltsolar.com.au</a>
-          </p>
-        </div>
-        <div>
-          <h4>Services</h4>
-          <ul>
-            <li><a href="#services">Residential Solar</a></li>
-            <li><a href="#services">Battery Storage</a></li>
-            <li><a href="#services">Hybrid Systems</a></li>
-            <li><a href="#services">Commercial Solar</a></li>
-            <li><a href="#services">Farm &amp; Rural Solar</a></li>
-            <li><a href="#services">System Monitoring</a></li>
-            <li><a href="#services">Rebate Assistance</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#calculator">Savings Calculator</a></li>
-            <li><a href="#testimonials">Customer Reviews</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Free Assessment</a></li>
-          </ul>
-          <h4 style="margin-top:1.2rem;">Hours</h4>
-          <ul>
-            <li style="color:#c0a080; font-size:.86rem;">Mon–Fri: 7:30am – 5:00pm</li>
-            <li style="color:#c0a080; font-size:.86rem;">Saturday: 8:00am – 12:00pm</li>
-            <li style="color:#c0a080; font-size:.86rem;">Sunday: Closed</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="sv-footer-bottom">
-        <div>
-          &copy; 2016–2026 SunVolt Solar Pty Ltd &bull; ABN 47 612 983 041 &bull; Orange NSW 2800
-        </div>
-        <div style="display:flex; gap:.7rem; flex-wrap:wrap; align-items:center;">
-          <div class="cec-badge">
-            <span class="cec-icon">&#9728;</span>
-            CEC Accredited Installer
-          </div>
-          <div class="cec-badge">
-            &#9733; 4.9 Google Rating
-          </div>
-        </div>
-        <div style="font-size:.74rem;">
-          Demo by <a href="/packages.html" style="color:var(--sv-primary); font-weight:700;">ImproveYourSite</a>
         </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Sticky Mobile CTA -->
-  <a class="sv-mobile-cta" href="#contact">&#9728;&#65039; Book Free Assessment &mdash; 0400 987 654</a>
+  <section class="section" id="faq" style="background:var(--bg);">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;">
+        <span class="eyebrow">FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            How much does a solar system cost in Orange?
+            <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+          <div class="faq-a">A typical residential system (6.6kW) costs $5,500&ndash;$8,000 after the STC rebate. The rebate is deducted from your invoice by SunVolt &mdash; you never have to claim it yourself. System size and cost vary based on your roof, usage and inverter choice. Your free assessment includes a detailed written quote.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What does CEC accredited mean?
+            <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+          <div class="faq-a">The Clean Energy Council (CEC) accredits solar installers who have passed industry training and adhere to the Australian Standard for solar installations. CEC accreditation is required to access government STC rebates. All SunVolt installers are CEC accredited &mdash; not just the company.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            How long does installation take?
+            <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+          <div class="faq-a">Most standard residential jobs are completed in a single day. Grid connection (via Essential Energy) typically takes 3&ndash;5 business days after installation. From accepting a quote to your system being fully operational is generally 10&ndash;14 business days.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Do you use subcontractors?
+            <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+          <div class="faq-a">Never. Every SunVolt installation is done by our own CEC accredited team. No subcontractors, ever. This means you can hold us accountable for the quality of your install for the full 10-year workmanship warranty period &mdash; you know exactly who put your system on.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ════════════════════════════════════
-       JAVASCRIPT
-  ════════════════════════════════════ -->
-  <!-- ════════════════════════════════════
-       SCROLL-DRIVEN VISUAL EFFECTS
-  ════════════════════════════════════ -->
-  <script>
-  (function () {
-    'use strict';
+</main>
 
-    // ── 1. Scroll Progress Bar ──
-    var scrollBar = document.getElementById('scroll-bar');
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span style="width:22px;height:22px;background:linear-gradient(135deg,var(--orange),var(--amber));border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </span>
+        SunVolt Solar
+      </div>
+      <p>CEC accredited solar installers in Orange NSW since 2016. Serving homes, farms and businesses across Central West NSW. 500+ systems. No subcontractors. Ever.</p>
+      <div class="cec-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        CEC Accredited Installer
+      </div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Residential Solar</a></li>
+        <li><a href="#services">Commercial Solar</a></li>
+        <li><a href="#services">Battery Storage</a></li>
+        <li><a href="#services">Hybrid Systems</a></li>
+        <li><a href="#services">STC Rebates</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:0400987654">0400 987 654</a></li>
+        <li><a href="mailto:info@sunvoltsolar.com.au">info@sunvoltsolar.com.au</a></li>
+        <li>14 Anson Street, Orange NSW 2800</li>
+        <li>Mon&ndash;Fri: 7:30am&ndash;5pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-btm">
+    <span>&copy; 2025 SunVolt Solar &middot; 14 Anson Street, Orange NSW 2800 &middot; CEC Accredited</span>
+    <span>Demo site by <a href="/packages.html">ImproveYourSite</a></span>
+  </div>
+</footer>
 
-    // ── 2. Dawn-to-noon gradient shift ──
-    // Dawn blue: #dbeafe → rgb(219,234,254)
-    // Solar gold: #fef3c7 → rgb(254,243,199)
-    var dawnR = 219, dawnG = 234, dawnB = 254;
-    var noonR = 254, noonG = 243, noonB = 199;
+<a class="mobile-cta" href="tel:0400987654">Call 0400 987 654 &mdash; Free Assessment</a>
 
-    function lerpColor(t) {
-      var r = Math.round(dawnR + (noonR - dawnR) * t);
-      var g = Math.round(dawnG + (noonG - dawnG) * t);
-      var b = Math.round(dawnB + (noonB - dawnB) * t);
-      return 'rgb(' + r + ',' + g + ',' + b + ')';
-    }
+<style>@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(1.35)} }</style>
+<script>
+(function(){
+  window.addEventListener('scroll', function(){
+    var bar = document.getElementById('scroll-bar');
+    var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
 
-    // ── 3. Scroll velocity energy burst ──
-    var lastScrollY = window.scrollY;
-    var lastScrollTime = performance.now();
-    var energyBurstTimer = null;
+  window.toggleFaq = function(el){
+    var item = el.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+    if(!isOpen) item.classList.add('open');
+  };
 
-    // ── 4. Hero parallax ──
-    var heroSection = document.querySelector('.hero-v2');
-    var heroContainer = heroSection ? heroSection.querySelector('.container') : null;
+  window.calcSolar = function(){
+    var bill = parseFloat(document.getElementById('c-bill').value) || 0;
+    var type = document.getElementById('c-type').value;
+    var usage = document.getElementById('c-usage').value;
+    if(!bill || !type || !usage) return;
+    var annual = bill * 12;
+    var offset = usage === 'high' ? 0.85 : usage === 'med' ? 0.65 : 0.45;
+    var saving = Math.round(annual * offset);
+    var size = bill < 150 ? '5kW' : bill < 280 ? '6.6kW' : bill < 450 ? '10kW' : '13.2kW';
+    var cost = bill < 150 ? 5800 : bill < 280 ? 7200 : bill < 450 ? 10500 : 14000;
+    var payback = Math.round(cost / saving * 10) / 10;
+    var co2 = Math.round(saving / 0.30 * 0.82 / 1000 * 10) / 10;
+    document.getElementById('r-size').textContent = size;
+    document.getElementById('r-saving').textContent = '$' + saving.toLocaleString() + '/yr';
+    document.getElementById('r-payback').textContent = payback + ' years';
+    document.getElementById('r-co2').textContent = 'Approx. ' + co2 + ' tonnes CO\u2082 offset per year \u2014 equivalent to planting ' + Math.round(co2 * 45) + ' trees annually.';
+    var res = document.getElementById('calc-result');
+    res.classList.remove('show');
+    void res.offsetWidth;
+    res.classList.add('show');
+  };
 
-    // ── 7. Calculator section parallax ──
-    var calcSection = document.getElementById('calculator');
-
-    // ─── Main rAF loop ───
-    var ticking = false;
-    var currentScrollY = window.scrollY;
-
-    function onScroll() {
-      // Velocity measurement
-      var now = performance.now();
-      var dt = now - lastScrollTime;
-      var dy = Math.abs(window.scrollY - lastScrollY);
-      if (dt > 0) {
-        var velocity = dy / dt; // px/ms
-        if (velocity > 1.5) {
-          document.body.classList.add('energy-burst');
-          clearTimeout(energyBurstTimer);
-          energyBurstTimer = setTimeout(function () {
-            document.body.classList.remove('energy-burst');
-          }, 600);
-        }
-      }
-      lastScrollY = window.scrollY;
-      lastScrollTime = now;
-
-      currentScrollY = window.scrollY;
-      if (!ticking) {
-        requestAnimationFrame(updateEffects);
-        ticking = true;
-      }
-    }
-
-    function updateEffects() {
-      ticking = false;
-      var scrollY = currentScrollY;
-      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      var progress = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-
-      // 1. Progress bar width
-      if (scrollBar) {
-        scrollBar.style.width = (progress * 100).toFixed(2) + '%';
-      }
-
-      // 2. Dawn-to-noon background colour
-      document.documentElement.style.setProperty('--page-bg', lerpColor(progress));
-
-      // 4. Hero parallax — container drifts down at 0.25x
-      if (heroContainer) {
-        heroContainer.style.transform = 'translateY(' + (scrollY * 0.25) + 'px)';
-      }
-      // Hero decorative pseudo-element drift can't be done via JS directly;
-      // instead animate the hero section itself slightly in opposite direction
-      if (heroSection) {
-        heroSection.style.backgroundPositionY = (-scrollY * 0.1) + 'px';
-      }
-
-      // 7. Calculator section parallax background-position-y
-      if (calcSection) {
-        var calcRect = calcSection.getBoundingClientRect();
-        var calcOffset = scrollY + calcRect.top - (document.documentElement.scrollTop === 0 ? 0 : 0);
-        // Use scroll position relative to section centre
-        var sectionScrolled = scrollY - (scrollY + calcRect.top - window.innerHeight / 2);
-        var bgPosY = 50 + sectionScrolled * 0.02;
-        bgPosY = Math.max(0, Math.min(100, bgPosY));
-        calcSection.style.backgroundPositionY = bgPosY + '%';
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // ── 5. KPI count-up on scroll into view ──
-    function parseKpiValue(text) {
-      // Returns { num: Number, prefix: String, suffix: String }
-      text = text.trim();
-      // e.g. "9+", "500+", "4.9★", "25yr"
-      var prefix = '';
-      var suffix = '';
-      var numStr = '';
-      for (var i = 0; i < text.length; i++) {
-        var ch = text[i];
-        if ((ch >= '0' && ch <= '9') || ch === '.') {
-          numStr += ch;
-        } else if (numStr === '') {
-          prefix += ch;
-        } else {
-          suffix += ch;
-        }
-      }
-      return { num: parseFloat(numStr) || 0, prefix: prefix, suffix: suffix };
-    }
-
-    function easeOutQuart(t) {
-      return 1 - Math.pow(1 - t, 4);
-    }
-
-    function animateKpi(el, from, to, prefix, suffix, duration) {
-      var startTime = null;
-      var isInteger = Number.isInteger(to) && Number.isInteger(from);
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        var elapsed = ts - startTime;
-        var t = Math.min(elapsed / duration, 1);
-        var eased = easeOutQuart(t);
-        var current = from + (to - from) * eased;
-        el.textContent = prefix + (isInteger ? Math.round(current) : current.toFixed(1)) + suffix;
-        if (t < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    var kpiObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-        if (el.dataset.counted) return;
-        el.dataset.counted = '1';
-        var parsed = parseKpiValue(el.textContent);
-        animateKpi(el, 0, parsed.num, parsed.prefix, parsed.suffix, 2000);
-        kpiObserver.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.kpi-strip-item .kpi-num').forEach(function (el) {
-      kpiObserver.observe(el);
-    });
-
-    // ── 6. Staggered card reveals ──
-    var cardSelectors = [
-      '.sv-step',
-      '.sv-review-card',
-      '.sv-service-card',
-      '.card',
-      '.step-card',
-      '.sv-testimonial-card'
-    ];
-
-    var cardRevealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-        if (el.dataset.svRevealed) return;
-        el.dataset.svRevealed = '1';
-
-        // Find siblings in same parent to compute stagger index
-        var siblings = Array.from(el.parentElement.children).filter(function (c) {
-          return c.matches(cardSelectors.join(','));
-        });
-        var idx = siblings.indexOf(el);
-        var delay = idx >= 0 ? idx * 90 : 0;
-
-        setTimeout(function () {
-          el.classList.add('sv-revealed');
-        }, delay);
-
-        cardRevealObserver.unobserve(el);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-
-    document.querySelectorAll(cardSelectors.join(',')).forEach(function (el) {
-      cardRevealObserver.observe(el);
-    });
-
-  })();
-  </script>
-
-  <script>
-    // ── CSS variable sync ──
-    document.documentElement.style.setProperty('--sv-primary', '#1d4ed8');
-    document.documentElement.style.setProperty('--sv-bg', '#eff6ff');
-
-    // ── Slider ↔ Number input sync ──
-    const billInput  = document.getElementById('monthly-bill');
-    const billSlider = document.getElementById('bill-slider');
-
-    function updateSliderFill(slider) {
-      const min = +slider.min, max = +slider.max, val = +slider.value;
-      const pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
-      slider.style.setProperty('--slider-pct', pct);
-    }
-
-    billSlider.addEventListener('input', () => {
-      billInput.value = billSlider.value;
-      updateSliderFill(billSlider);
-    });
-    billInput.addEventListener('input', () => {
-      const v = Math.min(1000, Math.max(50, +billInput.value || 280));
-      billSlider.value = v;
-      updateSliderFill(billSlider);
-    });
-    updateSliderFill(billSlider);
-
-    // ── Calculator ──
-    document.getElementById('calc-btn').addEventListener('click', runCalc);
-
-    function runCalc() {
-      const monthlyBill = parseFloat(billInput.value) || 280;
-      const orient      = document.getElementById('roof-orient').value;
-      const people      = document.getElementById('household-size').value;
-
-      const orientFactor = {
-        'North': 1.0, 'North-East': 0.93, 'East/West': 0.85, 'South': 0.70
-      };
-      const sizeByPeople = { '1-2': 6.6, '3-4': 10, '5+': 13.2 };
-
-      const factor      = orientFactor[orient] ?? 1.0;
-      const systemKw    = sizeByPeople[people] ?? 10;
-      const annualBill  = monthlyBill * 12;
-      const annualSavings = annualBill * 0.72 * factor;
-      const grossCost   = systemKw * 950;
-      const stcRebate   = systemKw * 28 * 1.185;
-      const netCost     = grossCost - stcRebate;
-      const payback     = netCost / annualSavings;
-      const co2         = systemKw * 1.35;
-
-      const fmt = (n, prefix='$') => prefix + Math.round(n).toLocaleString('en-AU');
-
-      // Animate numbers counting up
-      animateValue('r-size',    0, systemKw,       600, v => v.toFixed(1) + 'kW');
-      animateValue('r-savings', 0, annualSavings,  700, v => '$' + Math.round(v).toLocaleString('en-AU') + '/yr');
-      animateValue('r-stc',     0, stcRebate,      700, v => '~$' + Math.round(v).toLocaleString('en-AU'));
-      animateValue('r-cost',    0, netCost,        700, v => '$' + Math.round(v).toLocaleString('en-AU'));
-      animateValue('r-payback', 0, payback,        700, v => v.toFixed(1) + ' yrs');
-      animateValue('r-co2',     0, co2,            700, v => v.toFixed(1) + 't CO₂');
-
-      const co2Inline = co2.toFixed(1) + ' tonnes of CO₂ offset per year.';
-      document.getElementById('r-co2-inline').textContent = co2Inline;
-
-      const resultEl = document.getElementById('calc-result');
-      resultEl.classList.add('visible');
-      setTimeout(() => {
-        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 120);
-    }
-
-    function animateValue(id, start, end, duration, formatter) {
-      const el = document.getElementById(id);
-      let startTime = null;
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-        el.textContent = formatter(start + (end - start) * eased);
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    // ── FAQ Accordion ──
-    function toggleFaq(questionEl) {
-      const item = questionEl.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
-
-    // ── Form Submission (demo) ──
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-success').style.display = 'block';
-      e.target.style.display = 'none';
-    }
-
-    // ── Scroll Reveal ──
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // ── Open Now Badge Logic ──
-    (function() {
-      const now = new Date();
-      // Convert to AEST (UTC+10) or AEDT (UTC+11) — rough offset
-      const aest = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      const day  = aest.getDay(); // 0=Sun, 6=Sat
-      const hour = aest.getHours();
-      const min  = aest.getMinutes();
-      const timeNum = hour * 60 + min;
-      const badge = document.querySelector('.open-now-badge');
-      let isOpen = false;
-      if (day >= 1 && day <= 5 && timeNum >= 450 && timeNum < 1020) isOpen = true; // Mon-Fri 7:30-17:00
-      if (day === 6 && timeNum >= 480 && timeNum < 720) isOpen = true; // Sat 8:00-12:00
-      if (!isOpen && badge) {
-        badge.style.background = '#fee2e2';
-        badge.style.borderColor = '#fca5a5';
-        badge.style.color = '#991b1b';
-        badge.querySelector('.dot').style.background = '#ef4444';
-        badge.querySelector('.dot').style.animationName = 'none';
-        badge.childNodes[badge.childNodes.length-1].textContent = ' Closed — Opens Mon 7:30am';
-      }
-    })();
-
-    // ── Smooth scroll for anchor links ──
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          const offset = 80;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
-
-<!-- ═══════════════════════════════════════════
-     3D & Motion Effects — SunVolt Solar
-     Lenis · Granim · GSAP ScrollTrigger · vanilla-tilt
-     ═══════════════════════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
-<script>
-(function() {
-  'use strict';
-
-  /* 1. Lenis smooth scroll */
-  var lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 0.9 });
-  function rafLoop(t) { lenis.raf(t); requestAnimationFrame(rafLoop); }
-  requestAnimationFrame(rafLoop);
-
-  /* 2. GSAP + ScrollTrigger */
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.lagSmoothing(0);
-
-  /* 3. Granim animated solar gradient on hero */
-  var heroEl = document.querySelector('.hero-v2');
-  if (heroEl) {
-    var canvas = document.createElement('canvas');
-    canvas.id = 'sv-granim-canvas';
-    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.5;z-index:0;';
-    heroEl.style.position = 'relative';
-    heroEl.insertBefore(canvas, heroEl.firstChild);
-    new Granim({
-      element: '#sv-granim-canvas',
-      direction: 'diagonal',
-      isPausedWhenNotInView: true,
-      states: {
-        'default-state': {
-          gradients: [
-            ['#eff6ff', '#fff7ed'],
-            ['#dbeafe', '#fef9c3'],
-            ['#fef3c7', '#eff6ff']
-          ],
-          transitionSpeed: 4000
-        }
-      }
-    });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* 4. GSAP stagger on service cards */
-  gsap.utils.toArray('.sv-service-card').forEach(function(card, i) {
-    gsap.fromTo(card,
-      { opacity: 0, y: 40, scale: 0.96 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.08, ease: 'power2.out',
-        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-  /* 5. GSAP stagger on testimonial cards */
-  gsap.utils.toArray('.sv-testimonial-card').forEach(function(card, i) {
-    gsap.fromTo(card,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.55, delay: i * 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-  /* 6. GSAP stagger on result items */
-  gsap.utils.toArray('.result-item').forEach(function(item, i) {
-    gsap.fromTo(item,
-      { opacity: 0, x: i % 2 === 0 ? -30 : 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none none' }
-      }
-    );
-  });
-
-  /* 7. vanilla-tilt on service cards (desktop only) */
-  if (window.matchMedia('(hover: hover)').matches) {
-    VanillaTilt.init(document.querySelectorAll('.sv-service-card'), {
-      max: 8, speed: 500, glare: true, 'max-glare': 0.12, scale: 1.02
+  var form = document.getElementById('contact-form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.innerHTML = '<div style="text-align:center;padding:2rem;"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" style="margin:0 auto 1rem;display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3 style="color:#0f172a;font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">Assessment request received!</h3><p style="color:#64748b;font-size:.9rem;">We\'ll be in touch within one business day to arrange your free on-site assessment. For urgent queries call <a href="tel:0400987654" style="color:#1d4ed8;font-weight:700;">0400 987 654</a>.</p></div>';
     });
   }
-
 })();
 </script>
-
 </body>
 </html>

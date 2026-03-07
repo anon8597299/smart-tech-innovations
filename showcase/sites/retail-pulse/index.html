@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Loft Boutique &mdash; Contemporary Women&rsquo;s Fashion, Orange NSW</title>
+  <title>The Loft Boutique &mdash; Contemporary Women's Fashion, Orange NSW</title>
   <meta name="description" content="The Loft Boutique is Orange NSW's favourite women's fashion destination. Shop Sass &amp; Bide, Seed Heritage, Country Road and more. Free shipping over $150. Visit us at Shop 4, 212 Summer Street.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": ["ClothingStore", "LocalBusiness"],
     "name": "The Loft Boutique",
     "description": "Contemporary women's fashion boutique in Orange NSW stocking Sass & Bide, Seed Heritage, Country Road, Elka Collective, Viktoria & Woods and Cue.",
-    "url": "https://theloftboutique.com.au",
-    "telephone": "(02) 6361 4422",
+    "telephone": "+61263614422",
     "email": "hello@theloftboutique.com.au",
     "foundingDate": "2014",
     "priceRange": "$$",
@@ -37,503 +36,478 @@
       {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:30"},
       {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"16:00"},
       {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"14:00"}
-    ],
-    "sameAs": ["https://www.instagram.com/theloftboutique"]
+    ]
   }
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* Grain overlay on hero */
-    .loft-hero { isolation:isolate; }
-    /* Swiper collections */
-    .swiper-collections { padding:1.5rem 0 3.5rem !important; }
-    .swiper-collections .swiper-slide { width:300px; border-radius:16px; overflow:hidden; box-shadow:0 10px 36px rgba(124,58,237,0.18); }
-    .swiper-collections .loft-collection-card { margin:0; border-radius:0; }
-    .swiper-collections .swiper-pagination-bullet-active { background:#7c3aed; }
-    .loft-hero-typed { font-size:1rem; font-weight:600; color:rgba(255,255,255,0.85); margin:.3rem 0 .8rem; min-height:1.5em; }
-    .typed-cursor { color:#c4b5fd; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --plum: #6d2d8a;
+      --plum-lt: #9333ea;
+      --plum-pale: #faf5ff;
+      --plum-mid: #e9d5ff;
+      --rose: #e11d7a;
+      --slate: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --white: #ffffff;
+      --bg: #fdf6ff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--slate); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--plum), var(--rose)); width: 0%; z-index: 999; transition: width .1s linear; }
+    .demo-banner { background: #1a0a2e; color: #c4b5fd; text-align: center; padding: .5rem 1rem; font-size: .8rem; position: sticky; top: 0; z-index: 200; }
+    .demo-banner a { color: #e879f9; font-weight: 700; text-decoration: underline; margin-left: .4rem; }
+    .site-header { position: sticky; top: 36px; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 62px; gap: 1rem; }
+    .brand { font-size: 1.1rem; font-weight: 900; color: #1a0a2e; display: flex; align-items: center; gap: .5rem; }
+    .brand-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--plum), var(--rose)); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 1.4rem; }
+    .nav-links a { font-size: .86rem; font-weight: 600; color: var(--slate); transition: color .15s; }
+    .nav-links a:hover { color: var(--plum); }
+    .nav-cta { background: var(--plum) !important; color: #fff !important; padding: .42rem 1rem; border-radius: 8px; }
+    .nav-phone { color: var(--plum) !important; font-weight: 700; }
+
+    /* Hero */
+    .hero { background: linear-gradient(150deg, var(--plum-pale) 0%, #fdf2f8 50%, #fff 100%); padding: 4.5rem 0 3.5rem; border-bottom: 1px solid var(--plum-mid); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(109,45,138,.09) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+    .hero-top { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .badge { display: inline-flex; align-items: center; gap: .35rem; padding: .28rem .7rem; border-radius: 999px; font-size: .76rem; font-weight: 700; }
+    .badge-open { background: #dcfce7; border: 1.5px solid #86efac; color: #15803d; }
+    .badge-rating { background: #fff; border: 1.5px solid var(--border); color: var(--slate); }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 2.9rem); font-weight: 900; color: #1a0a2e; line-height: 1.1; margin-bottom: .9rem; }
+    .hero h1 em { color: var(--plum); font-style: normal; }
+    .hero .lead { font-size: 1.03rem; color: var(--slate); max-width: 560px; margin-bottom: 1.5rem; line-height: 1.65; }
+    .ship-strip { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 1.4rem; font-size: .84rem; font-weight: 700; color: var(--plum); }
+    .ship-strip span { display: flex; align-items: center; gap: .3rem; }
+    .ship-strip .dot { color: var(--muted); font-weight: 400; }
+    .cta-row { display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .4rem; background: var(--plum); color: #fff; font-weight: 700; font-size: .97rem; padding: .8rem 1.5rem; border-radius: 10px; border: none; cursor: pointer; text-decoration: none; transition: background .18s, transform .14s; box-shadow: 0 4px 18px rgba(109,45,138,.3); }
+    .btn-primary:hover { background: #5a2175; transform: translateY(-1px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: .4rem; background: transparent; color: var(--plum); font-weight: 700; font-size: .95rem; padding: .76rem 1.4rem; border-radius: 10px; border: 2px solid var(--plum); text-decoration: none; transition: all .18s; }
+    .btn-outline:hover { background: var(--plum); color: #fff; }
+
+    /* Hero info card */
+    .info-card { background: #fff; border: 1.5px solid var(--plum-mid); border-radius: 16px; padding: 1.5rem; box-shadow: 0 8px 28px rgba(109,45,138,.1); }
+    .ic-head { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .ic-head strong { display: block; font-size: .97rem; font-weight: 800; color: #1a0a2e; margin-bottom: .15rem; }
+    .ic-head span { font-size: .82rem; color: var(--muted); }
+    .ic-hours { display: flex; flex-direction: column; gap: .3rem; margin-bottom: 1rem; }
+    .ic-row { display: flex; justify-content: space-between; font-size: .84rem; }
+    .ic-row span:last-child { font-weight: 700; color: #1a0a2e; }
+    .ic-phone { display: flex; align-items: center; justify-content: center; gap: .4rem; background: var(--plum); color: #fff; font-weight: 800; font-size: 1.05rem; padding: .65rem; border-radius: 10px; margin-bottom: 1rem; text-decoration: none; }
+    .ic-brands { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .ic-brand { background: var(--plum-pale); border: 1px solid var(--plum-mid); border-radius: 6px; padding: .18rem .5rem; font-size: .75rem; font-weight: 700; color: var(--plum); }
+
+    /* Marquee */
+    .marquee-wrap { background: var(--plum); overflow: hidden; padding: .65rem 0; }
+    .marquee-track { display: flex; gap: 2.4rem; width: max-content; animation: marquee 32s linear infinite; white-space: nowrap; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.85); }
+    .marquee-item::before { content: '&#183;'; margin-right: 2.4rem; color: rgba(255,255,255,.4); }
+
+    /* Sections */
+    .section { padding: 4rem 0; }
+    .section-alt { background: var(--bg); }
+    .section-head { margin-bottom: 2.2rem; }
+    .eyebrow { display: inline-block; font-size: .73rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--plum); margin-bottom: .5rem; }
+    .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; color: #1a0a2e; line-height: 1.12; margin-bottom: .5rem; }
+    .section-head p { color: var(--muted); font-size: .97rem; max-width: 620px; }
+
+    /* Collections grid */
+    .collections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .ccard { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .ccard:hover { box-shadow: 0 8px 28px rgba(109,45,138,.12); transform: translateY(-2px); }
+    .ccard-img { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .ccard-img::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .ccard-new { position: absolute; top: .6rem; right: .6rem; background: var(--rose); color: #fff; font-size: .7rem; font-weight: 800; padding: .2rem .5rem; border-radius: 6px; }
+    .ccard-body { padding: 1.1rem 1.2rem 1.3rem; }
+    .ccard-body h3 { font-size: .97rem; font-weight: 800; color: #1a0a2e; margin-bottom: .3rem; }
+    .ccard-body p { font-size: .84rem; color: var(--muted); line-height: 1.5; margin-bottom: .8rem; }
+    .ccard-foot { display: flex; justify-content: space-between; align-items: center; }
+    .ccard-price { font-size: .9rem; font-weight: 800; color: var(--plum); }
+    .ccard-link { font-size: .82rem; font-weight: 700; color: var(--plum); display: inline-flex; align-items: center; gap: .2rem; }
+    .ccard-link:hover { text-decoration: underline; }
+
+    /* Collection accent colours */
+    .cc-new .ccard-img { background: linear-gradient(145deg, #fdf4ff, #e9d5ff, #c4b5fd); }
+    .cc-new .ccard-img::before { background: linear-gradient(90deg, var(--plum), var(--rose)); }
+    .cc-work .ccard-img { background: linear-gradient(145deg, #eff6ff, #bfdbfe, #93c5fd); }
+    .cc-work .ccard-img::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+    .cc-casual .ccard-img { background: linear-gradient(145deg, #f0fdf4, #bbf7d0, #86efac); }
+    .cc-casual .ccard-img::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
+    .cc-occasion .ccard-img { background: linear-gradient(145deg, #fff7ed, #fed7aa, #fb923c); }
+    .cc-occasion .ccard-img::before { background: linear-gradient(90deg, #ea580c, #fb923c); }
+    .cc-resort .ccard-img { background: linear-gradient(145deg, #fefce8, #fde68a, #fbbf24); }
+    .cc-resort .ccard-img::before { background: linear-gradient(90deg, #d97706, #fbbf24); }
+    .cc-acc .ccard-img { background: linear-gradient(145deg, #fdf2f8, #fbcfe8, #f9a8d4); }
+    .cc-acc .ccard-img::before { background: linear-gradient(90deg, var(--rose), #f472b6); }
+
+    /* Collection SVG icons */
+    .ccard-icon { color: rgba(255,255,255,.8); }
+
+    /* Why section */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .why-card { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 1.6rem 1.4rem; }
+    .why-card::before { content: ''; display: block; height: 3px; background: linear-gradient(90deg, var(--plum), var(--rose)); margin: -1.6rem -1.4rem 1.3rem; }
+    .why-icon { width: 44px; height: 44px; background: var(--plum-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--plum); margin-bottom: .9rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 800; color: #1a0a2e; margin-bottom: .4rem; }
+    .why-card p { font-size: .87rem; color: var(--muted); line-height: 1.55; }
+
+    /* Reviews */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .rcard { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem 1.3rem; display: flex; flex-direction: column; gap: .8rem; }
+    .rcard-stars { color: #f59e0b; font-size: .95rem; }
+    .rcard blockquote { font-size: .88rem; color: var(--slate); line-height: 1.65; font-style: italic; flex: 1; }
+    .rcard-rev { display: flex; align-items: center; gap: .6rem; }
+    .rev-init { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--plum), var(--rose)); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: .85rem; flex-shrink: 0; }
+    .rcard-rev strong { font-size: .88rem; color: #1a0a2e; display: block; }
+    .rcard-rev span { font-size: .77rem; color: var(--muted); }
+
+    /* Contact section */
+    .contact-layout { display: grid; grid-template-columns: 1fr 340px; gap: 2.4rem; align-items: start; }
+    .form-wrap { background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 2rem 2.2rem; }
+    .form-wrap h3 { font-size: 1.15rem; font-weight: 800; color: #1a0a2e; margin-bottom: .3rem; }
+    .form-wrap .sub { font-size: .87rem; color: var(--muted); margin-bottom: 1.4rem; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-bottom: .8rem; }
+    .fg { margin-bottom: .8rem; }
+    .fg label { display: block; font-size: .79rem; font-weight: 700; color: #1a0a2e; margin-bottom: .3rem; }
+    .fg input, .fg select, .fg textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: .6rem .8rem; font-size: .9rem; font-family: inherit; color: #1a0a2e; outline: none; transition: border-color .15s; background: #fff; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--plum); }
+    .fg textarea { resize: vertical; min-height: 85px; }
+    .btn-submit { width: 100%; background: var(--plum); color: #fff; border: none; border-radius: 10px; padding: .85rem; font-size: .97rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: background .18s; }
+    .btn-submit:hover { background: #5a2175; }
+    .info-panel { display: flex; flex-direction: column; gap: .8rem; }
+    .ip-block { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; }
+    .ip-block h4 { font-size: .83rem; font-weight: 800; color: #1a0a2e; margin-bottom: .4rem; display: flex; align-items: center; gap: .35rem; }
+    .ip-block p, .ip-block a { font-size: .85rem; color: var(--slate); line-height: 1.5; }
+    .ip-block a { color: var(--plum); font-weight: 600; }
+    .ip-hours { display: flex; flex-direction: column; gap: .2rem; }
+    .ip-hours div { display: flex; justify-content: space-between; font-size: .84rem; }
+    .ip-hours div span:last-child { font-weight: 700; color: #1a0a2e; }
+    .ip-est { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); padding: .6rem 0 0; border-top: 1px solid var(--border); margin-top: .4rem; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: .45rem; margin-top: 2rem; }
+    .faq-item { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: .9rem 1.15rem; cursor: pointer; font-weight: 700; font-size: .9rem; color: #1a0a2e; user-select: none; gap: .8rem; }
+    .faq-q:hover { color: var(--plum); }
+    .faq-chevron { width: 20px; height: 20px; border-radius: 50%; background: var(--plum-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .25s, background .2s; color: var(--plum); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--plum); color: #fff; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .25s ease; padding: 0 1.15rem; font-size: .87rem; color: var(--slate); line-height: 1.65; }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 1.15rem 1rem; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+    /* Footer */
+    .footer { background: #1a0a2e; color: #7c6a94; padding: 3rem 0 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.4rem; margin-bottom: 2rem; }
+    .footer-brand { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: .5rem; display: flex; align-items: center; gap: .4rem; }
+    .footer p { font-size: .83rem; line-height: 1.6; margin-bottom: .5rem; }
+    .footer h4 { color: #e2e8f0; font-size: .85rem; font-weight: 800; margin-bottom: .7rem; }
+    .footer a { color: #7c6a94; font-size: .83rem; }
+    .footer a:hover { color: #c4b5fd; }
+    .footer ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; font-size: .76rem; color: #4a3b60; }
+
+    .mobile-cta { display: none; position: fixed; left: .7rem; right: .7rem; bottom: .7rem; background: var(--plum); color: #fff; font-weight: 900; font-size: .97rem; border-radius: 12px; padding: .9rem 1rem; text-align: center; text-decoration: none; z-index: 150; box-shadow: 0 8px 28px rgba(109,45,138,.45); }
+
+    @media (max-width: 1024px) { .hero-inner, .contact-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .collections-grid, .why-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+      .footer-bottom { flex-direction: column; }
+      .mobile-cta { display: block; }
+      body { padding-bottom: 5rem; }
+      .site-header { top: 0; }
+      .demo-banner { position: relative; }
+    }
+    @media (max-width: 600px) { .collections-grid, .why-grid, .reviews-grid { grid-template-columns: 1fr; } .frow { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
 <div id="scroll-bar"></div>
-
 <div class="demo-banner">
   This is a demo site by ImproveYourSite &mdash; showing what your finished site looks like.
   <a href="/packages.html">Get a site like this &rarr;</a>
 </div>
 
-<header class="site-header loft-header">
+<header class="site-header">
   <div class="container nav">
-    <a class="brand loft-brand" href="#">
-      <span>&#128247;</span><span>The Loft Boutique</span>
+    <a class="brand" href="#">
+      <span class="brand-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </span>
+      The Loft Boutique
     </a>
-    <nav class="nav-links loft-nav" aria-label="Main navigation">
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="#collections">Collections</a>
       <a href="#size-guide">Size Guide</a>
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
-      <a href="tel:0263614422" class="nav-phone-link">(02) 6361 4422</a>
+      <a href="#contact" class="nav-cta">Shop &amp; Visit</a>
+      <a href="tel:0263614422" class="nav-phone">(02) 6361 4422</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <!-- HERO -->
-  <section class="loft-hero" id="hero">
-    <div class="hero-bg-gradient" aria-hidden="true"></div>
-    <div class="container loft-hero-inner">
-      <div class="loft-hero-content">
-        <div class="loft-hero-badges">
-          <span class="badge loft-open-badge"><span class="open-pulse"></span>Open today</span>
-          <span class="badge loft-rating-badge">&#9733; 4.9 &middot; 118 Google reviews</span>
+  <section class="hero" id="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-top">
+          <span class="badge badge-open">
+            <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 1.6s infinite;"></span>
+            Open today
+          </span>
+          <span class="badge badge-rating">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="#f59e0b" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            4.9 &middot; 118 Google reviews
+          </span>
         </div>
-        <h1 class="loft-h1">Contemporary fashion<br><span class="loft-h1-accent">for the modern woman</span></h1>
-        <p class="lead loft-lead">Orange NSW&rsquo;s favourite boutique since 2014. We stock Sass&nbsp;&amp;&nbsp;Bide, Seed Heritage, Country Road, Elka Collective and more &mdash; with new arrivals landing every fortnight.</p>
-        <div class="loft-shipping-strip">
-          <span>&#9992;&#65039; Ships Australia-wide</span>
-          <span class="strip-dot">&middot;</span>
+        <h1>Contemporary fashion<br>for <em>the modern woman</em></h1>
+        <p class="lead">Orange NSW's favourite boutique since 2014. We stock Sass&nbsp;&amp;&nbsp;Bide, Seed Heritage, Country Road, Elka Collective and more &mdash; with new arrivals landing every fortnight.</p>
+        <div class="ship-strip">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m0 0h3l3 4v3h-6m0 0a2 2 0 0 1-4 0m4 0a2 2 0 0 0-4 0M7 17a2 2 0 0 1-4 0m4 0a2 2 0 0 0-4 0"/></svg>
+            Ships Australia-wide
+          </span>
+          <span class="dot">&middot;</span>
           <span>Free shipping over $150</span>
-          <span class="strip-dot">&middot;</span>
+          <span class="dot">&middot;</span>
           <span>30-day returns</span>
         </div>
-        <div class="cta loft-hero-cta">
-          <a class="btn btn-primary loft-btn-hero" href="#collections">&#128717; Shop online</a>
-          <a class="btn loft-btn-outline" href="#contact">&#128205; Visit in-store</a>
+        <div class="cta-row">
+          <a href="#collections" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Shop Collections
+          </a>
+          <a href="#contact" class="btn-outline">Visit in-store</a>
         </div>
       </div>
-      <div class="loft-info-card">
-        <div class="loft-ic-header">
+      <div class="info-card reveal d1">
+        <div class="ic-head">
           <strong>Shop 4, 212 Summer Street</strong>
           <span>Orange NSW 2800</span>
         </div>
-        <div class="loft-ic-hours">
-          <div class="loft-ic-row"><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
-          <div class="loft-ic-row"><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
-          <div class="loft-ic-row"><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
+        <div class="ic-hours">
+          <div class="ic-row"><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
+          <div class="ic-row"><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
+          <div class="ic-row"><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
         </div>
-        <a class="loft-ic-phone" href="tel:0263614422">(02) 6361 4422</a>
-        <div class="loft-ic-brands">
-          <span>Sass &amp; Bide</span>
-          <span>Seed Heritage</span>
-          <span>Country Road</span>
-          <span>Elka Collective</span>
-          <span>Viktoria &amp; Woods</span>
-          <span>Cue</span>
+        <a href="tel:0263614422" class="ic-phone">(02) 6361 4422</a>
+        <div class="ic-brands">
+          <span class="ic-brand">Sass &amp; Bide</span>
+          <span class="ic-brand">Seed Heritage</span>
+          <span class="ic-brand">Country Road</span>
+          <span class="ic-brand">Elka Collective</span>
+          <span class="ic-brand">Viktoria &amp; Woods</span>
+          <span class="ic-brand">Cue</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- KPI STRIP -->
-  <section class="loft-kpi-strip" aria-label="Store highlights">
-    <div class="container loft-kpi-inner">
-      <div class="loft-kpi"><strong>10</strong><span>Years in Orange</span></div>
-      <div class="loft-kpi-div" aria-hidden="true"></div>
-      <div class="loft-kpi"><strong>300+</strong><span>Styles in store</span></div>
-      <div class="loft-kpi-div" aria-hidden="true"></div>
-      <div class="loft-kpi"><strong>&#9992;&#65039;</strong><span>Ships Australia-wide</span></div>
-      <div class="loft-kpi-div" aria-hidden="true"></div>
-      <div class="loft-kpi"><strong>&#128081;</strong><span>Personal styling available</span></div>
-    </div>
-  </section>
-
-  <!-- MARQUEE TRUST STRIP -->
-  <div class="loft-marquee-wrap" aria-hidden="true">
-    <div class="loft-marquee-track">
-      <span class="loft-marquee-item">Sass &amp; Bide</span>
-      <span class="loft-marquee-item">Seed Heritage</span>
-      <span class="loft-marquee-item">Country Road</span>
-      <span class="loft-marquee-item">Elka Collective</span>
-      <span class="loft-marquee-item">Viktoria &amp; Woods</span>
-      <span class="loft-marquee-item">Cue</span>
-      <span class="loft-marquee-item">Free Shipping $150+</span>
-      <span class="loft-marquee-item">30-Day Returns</span>
-      <span class="loft-marquee-item">Personal Styling</span>
-      <span class="loft-marquee-item">Ships Australia-Wide</span>
-      <span class="loft-marquee-item">Est. 2014</span>
-      <span class="loft-marquee-item">Orange NSW</span>
-      <span class="loft-marquee-item">Sass &amp; Bide</span>
-      <span class="loft-marquee-item">Seed Heritage</span>
-      <span class="loft-marquee-item">Country Road</span>
-      <span class="loft-marquee-item">Elka Collective</span>
-      <span class="loft-marquee-item">Viktoria &amp; Woods</span>
-      <span class="loft-marquee-item">Cue</span>
-      <span class="loft-marquee-item">Free Shipping $150+</span>
-      <span class="loft-marquee-item">30-Day Returns</span>
-      <span class="loft-marquee-item">Personal Styling</span>
-      <span class="loft-marquee-item">Ships Australia-Wide</span>
-      <span class="loft-marquee-item">Est. 2014</span>
-      <span class="loft-marquee-item">Orange NSW</span>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Sass &amp; Bide</span>
+      <span class="marquee-item">Seed Heritage</span>
+      <span class="marquee-item">Country Road</span>
+      <span class="marquee-item">Elka Collective</span>
+      <span class="marquee-item">Viktoria &amp; Woods</span>
+      <span class="marquee-item">Cue</span>
+      <span class="marquee-item">Free Shipping $150+</span>
+      <span class="marquee-item">30-Day Returns</span>
+      <span class="marquee-item">Personal Styling</span>
+      <span class="marquee-item">Ships Australia-Wide</span>
+      <span class="marquee-item">Est. 2014 Orange NSW</span>
+      <span class="marquee-item">Sass &amp; Bide</span>
+      <span class="marquee-item">Seed Heritage</span>
+      <span class="marquee-item">Country Road</span>
+      <span class="marquee-item">Elka Collective</span>
+      <span class="marquee-item">Viktoria &amp; Woods</span>
+      <span class="marquee-item">Cue</span>
+      <span class="marquee-item">Free Shipping $150+</span>
+      <span class="marquee-item">30-Day Returns</span>
+      <span class="marquee-item">Personal Styling</span>
+      <span class="marquee-item">Ships Australia-Wide</span>
+      <span class="marquee-item">Est. 2014 Orange NSW</span>
     </div>
   </div>
 
   <!-- COLLECTIONS -->
-  <section class="section loft-collections-section" id="collections">
+  <section class="section" id="collections">
     <div class="container">
-      <div class="loft-section-head">
-        <span class="loft-section-label">What we stock</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">What We Stock</span>
         <h2>Shop our collections</h2>
-        <p>Every piece hand-picked by our team. New arrivals every fortnight &mdash; follow us on <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a> to see what&rsquo;s just landed.</p>
+        <p>Every piece hand-picked by our team. New arrivals every fortnight &mdash; follow us on <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" style="color:var(--plum);font-weight:700;">@theloftboutique</a> to see what's just landed.</p>
       </div>
-      <div class="loft-collections-grid">
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fdf4ff 0%,#e9d5ff 60%,#c4b5fd 100%);">
-            <span class="loft-ccard-emoji">&#10024;</span>
-            <span class="loft-ccard-new">Just landed</span>
+      <div class="collections-grid">
+        <article class="ccard cc-new reveal d1">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="ccard-new">Just landed</span>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>New Arrivals</h3>
             <p>Our freshest pieces this fortnight &mdash; dresses, tops, knitwear and accessories. Come in before they sell out.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $59</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $59</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#eff6ff 0%,#bfdbfe 60%,#93c5fd 100%);">
-            <span class="loft-ccard-emoji">&#128188;</span>
+        <article class="ccard cc-work reveal d2">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>Work Wear</h3>
             <p>Polished pieces that go from the boardroom to after-work drinks. Tailored trousers, structured blazers, silk blouses.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $89</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $89</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#f0fdf4 0%,#bbf7d0 60%,#86efac 100%);">
-            <span class="loft-ccard-emoji">&#127807;</span>
+        <article class="ccard cc-casual reveal d3">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>Weekend Casual</h3>
             <p>Easy dressing for farmers markets, coffee catch-ups and lazy Sunday afternoons. Linen, soft knits, wide-leg denim.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $49</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $49</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fff7ed 0%,#fed7aa 60%,#fb923c 100%);">
-            <span class="loft-ccard-emoji">&#127866;</span>
+        <article class="ccard cc-occasion reveal d1">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>Special Occasion</h3>
             <p>Weddings, races, formals and celebrations. Midi dresses, cocktail pieces and anything that deserves a great photo.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $149</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $149</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fefce8 0%,#fde68a 60%,#fbbf24 100%);">
-            <span class="loft-ccard-emoji">&#127802;</span>
+        <article class="ccard cc-resort reveal d2">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>Resort &amp; Holiday</h3>
             <p>Flowy dresses, linen sets and beachy cover-ups for wherever summer takes you. Light, breathable, effortlessly chic.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $69</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $69</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
-        <article class="loft-ccard" tabindex="0">
-          <div class="loft-ccard-img" style="background:linear-gradient(145deg,#fdf2f8 0%,#fbcfe8 60%,#f9a8d4 100%);">
-            <span class="loft-ccard-emoji">&#128141;</span>
+        <article class="ccard cc-acc reveal d3">
+          <div class="ccard-img">
+            <svg class="ccard-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           </div>
-          <div class="loft-ccard-body">
+          <div class="ccard-body">
             <h3>Accessories</h3>
             <p>Bags, jewellery, scarves, belts and hats to complete any outfit. We always have something that pulls the whole look together.</p>
-            <div class="loft-ccard-foot">
-              <span class="loft-price">From $29</span>
-              <a href="#contact" class="loft-card-link">Shop now &rarr;</a>
-            </div>
+            <div class="ccard-foot"><span class="ccard-price">From $29</span><a href="#contact" class="ccard-link">Shop now &rarr;</a></div>
           </div>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- WHY SHOP WITH US -->
-  <section class="section loft-why-section">
+  <!-- WHY THE LOFT -->
+  <section class="section section-alt">
     <div class="container">
-      <div class="loft-section-head">
-        <span class="loft-section-label">Why The Loft</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">Why The Loft</span>
         <h2>Shopping the way it should be</h2>
       </div>
-      <div class="loft-why-grid">
-        <div class="loft-why-card">
-          <div class="loft-why-icon">&#128081;</div>
+      <div class="why-grid">
+        <div class="why-card reveal d1">
+          <div class="why-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
           <h3>Personal styling advice</h3>
-          <p>Our team genuinely loves helping you find what works for your body, your lifestyle and your budget. Book a free 30-minute styling session &mdash; no pressure, just honest advice from people who know fashion.</p>
+          <p>Our team genuinely loves helping you find what works for your body, lifestyle and budget. Book a free 30-minute styling session &mdash; no pressure, just honest advice.</p>
         </div>
-        <div class="loft-why-card">
-          <div class="loft-why-icon">&#128260;</div>
+        <div class="why-card reveal d2">
+          <div class="why-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          </div>
           <h3>30-day returns</h3>
           <p>Changed your mind? No drama. Return any full-price item within 30 days for a store credit or exchange. We make it easy because we want you to love what you buy.</p>
         </div>
-        <div class="loft-why-card">
-          <div class="loft-why-icon">&#9992;&#65039;</div>
+        <div class="why-card reveal d3">
+          <div class="why-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m0 0h3l3 4v3h-6m0 0a2 2 0 0 1-4 0m4 0a2 2 0 0 0-4 0M7 17a2 2 0 0 1-4 0m4 0a2 2 0 0 0-4 0"/></svg>
+          </div>
           <h3>Ships Australia-wide</h3>
-          <p>Can&rsquo;t make it to Orange? We ship across Australia. Orders over $150 ship free. Most metro orders arrive within 2&ndash;3 business days. Tracked via Australia Post.</p>
+          <p>Can't make it to Orange? We ship across Australia &mdash; free over $150. Most metro orders arrive within 2&ndash;3 business days, tracked via Australia Post.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SIZE GUIDE FINDER -->
-  <section class="section loft-size-section" id="size-guide">
+  <!-- REVIEWS -->
+  <section class="section" id="reviews">
     <div class="container">
-      <div class="loft-section-head">
-        <span class="loft-section-label">Find your fit</span>
-        <h2>Size Guide Finder</h2>
-        <p>Not sure what size to order? Answer three quick questions and we&rsquo;ll give you a personalised recommendation.</p>
-      </div>
-      <div class="loft-size-card">
-        <div class="loft-size-form-area">
-          <div class="loft-size-fields">
-            <div class="loft-size-field">
-              <label for="sg-height">Height</label>
-              <div class="loft-size-input-wrap">
-                <input type="number" id="sg-height" placeholder="e.g. 165" min="140" max="200" />
-                <span class="loft-input-unit">cm</span>
-              </div>
-            </div>
-            <div class="loft-size-field">
-              <label for="sg-weight">Weight</label>
-              <div class="loft-size-input-wrap">
-                <input type="number" id="sg-weight" placeholder="e.g. 65" min="40" max="160" />
-                <span class="loft-input-unit">kg</span>
-              </div>
-            </div>
-          </div>
-          <div class="loft-size-field loft-size-full">
-            <label>Body type</label>
-            <div class="loft-body-type-group" role="radiogroup">
-              <label class="loft-bt-btn" for="bt-petite">
-                <input type="radio" name="bodytype" id="bt-petite" value="petite" />
-                <span>Petite <small>Under 162cm</small></span>
-              </label>
-              <label class="loft-bt-btn" for="bt-regular">
-                <input type="radio" name="bodytype" id="bt-regular" value="regular" checked />
-                <span>Regular <small>162&ndash;172cm</small></span>
-              </label>
-              <label class="loft-bt-btn" for="bt-tall">
-                <input type="radio" name="bodytype" id="bt-tall" value="tall" />
-                <span>Tall <small>Over 172cm</small></span>
-              </label>
-            </div>
-          </div>
-          <button class="btn btn-primary loft-btn-size" id="sg-btn" type="button">Find my size &rarr;</button>
-          <div class="loft-size-result" id="sg-result" hidden aria-live="polite">
-            <div class="loft-size-badge" id="sg-result-badge"></div>
-            <p class="loft-size-note" id="sg-result-note"></p>
-            <p class="loft-size-sub">Sizes vary between brands &mdash; our team is happy to help in-store or via <a href="#contact">chat</a>.</p>
-            <button class="loft-size-reset" id="sg-reset" type="button">Try again</button>
-          </div>
-        </div>
-        <div class="loft-size-table-area">
-          <h4>Australian size guide</h4>
-          <p>Approximate measurements for reference:</p>
-          <table class="loft-size-table" aria-label="Size guide measurements">
-            <thead>
-              <tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hips</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>6</td><td>80cm</td><td>62cm</td><td>87cm</td></tr>
-              <tr><td>8</td><td>84cm</td><td>66cm</td><td>91cm</td></tr>
-              <tr><td>10</td><td>88cm</td><td>70cm</td><td>95cm</td></tr>
-              <tr><td>12</td><td>92cm</td><td>74cm</td><td>99cm</td></tr>
-              <tr><td>14</td><td>96cm</td><td>78cm</td><td>103cm</td></tr>
-              <tr><td>16</td><td>100cm</td><td>82cm</td><td>107cm</td></tr>
-            </tbody>
-          </table>
-          <p class="loft-size-table-note">Always measure your body, not your clothes. When between sizes, go up for comfort.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM FEED -->
-  <section class="section loft-feed-section" id="feed">
-    <div class="container">
-      <div class="loft-section-head loft-feed-head">
-        <span class="loft-section-label">@theloftboutique</span>
-        <h2>As seen on our feed</h2>
-        <p>Follow us on Instagram for daily style inspo, new arrivals and behind-the-scenes.<br>DM us to shop any look.</p>
-      </div>
-      <div class="loft-feed-grid">
-
-        <div class="loft-feed-post loft-feed-tilt-l">
-          <div class="loft-feed-img loft-feed-img-1">
-            <span class="loft-feed-em-main">&#128247;</span>
-            <span class="loft-feed-em-float">&#10024;</span>
-          </div>
-          <div class="loft-feed-body">
-            <div class="loft-feed-tags">
-              <span>#sassandbide</span><span>#orangensw</span><span>#ootd</span>
-            </div>
-            <p class="loft-feed-caption">Just landed &mdash; the Sass &amp; Bide Reverie midi in dusty rose &#127800; This one sold out within hours last season. Sizes 8&ndash;14 in store now.</p>
-            <div class="loft-feed-meta">
-              <span>&#10084;&#65039; 214 likes</span>
-              <span>The Loft Boutique</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="loft-feed-post loft-feed-tilt-r">
-          <div class="loft-feed-img loft-feed-img-2">
-            <span class="loft-feed-em-main">&#128188;</span>
-            <span class="loft-feed-em-float">&#9728;&#65039;</span>
-          </div>
-          <div class="loft-feed-body">
-            <div class="loft-feed-tags">
-              <span>#seedheritage</span><span>#workwear</span><span>#theloftboutique</span>
-            </div>
-            <p class="loft-feed-caption">The Seed Heritage linen blazer in cream &mdash; your new work uniform &#129293; Pairs beautifully with the wide-leg trouser (also in store).</p>
-            <div class="loft-feed-meta">
-              <span>&#10084;&#65039; 187 likes</span>
-              <span>The Loft Boutique</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="loft-feed-post loft-feed-tilt-l">
-          <div class="loft-feed-img loft-feed-img-3">
-            <span class="loft-feed-em-main">&#127802;</span>
-            <span class="loft-feed-em-float">&#127754;</span>
-          </div>
-          <div class="loft-feed-body">
-            <div class="loft-feed-tags">
-              <span>#elkacollective</span><span>#resortready</span><span>#summerstyle</span>
-            </div>
-            <p class="loft-feed-caption">Resort ready with Elka Collective &#127796; The Soleil wrap dress in terracotta is everything. Heading somewhere warm? Come see us first.</p>
-            <div class="loft-feed-meta">
-              <span>&#10084;&#65039; 302 likes</span>
-              <span>The Loft Boutique</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="loft-feed-post loft-feed-tilt-r">
-          <div class="loft-feed-img loft-feed-img-4">
-            <span class="loft-feed-em-main">&#127866;</span>
-            <span class="loft-feed-em-float">&#128144;</span>
-          </div>
-          <div class="loft-feed-body">
-            <div class="loft-feed-tags">
-              <span>#viktoriawoods</span><span>#weddingguest</span><span>#specialoccasion</span>
-            </div>
-            <p class="loft-feed-caption">Wedding season is HERE &#128141; Viktoria &amp; Woods have delivered the most incredible formal collection. Book a styling session with us before you buy.</p>
-            <div class="loft-feed-meta">
-              <span>&#10084;&#65039; 389 likes</span>
-              <span>The Loft Boutique</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="loft-feed-cta-row">
-        <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" class="btn loft-btn-insta">
-          &#128247; Follow @theloftboutique on Instagram
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="section loft-reviews-section" id="reviews">
-    <div class="container">
-      <div class="loft-section-head">
-        <span class="loft-section-label">What customers say</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">Customer Reviews</span>
         <h2>Real women, real reviews</h2>
-        <div class="loft-aggregate-row">
-          <span class="loft-agg-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <strong>4.9 out of 5</strong>
-          <span class="loft-agg-count">&middot; 118 Google reviews</span>
-        </div>
+        <p>4.9 out of 5 &mdash; 118 Google reviews</p>
       </div>
-      <div class="loft-reviews-grid">
-
-        <div class="loft-review-card">
-          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="loft-rcard-quote">"I came in to find something for my daughter&rsquo;s wedding and genuinely had no idea where to start. The girls spent nearly an hour with me, pulled pieces I never would have picked myself, and I ended up in the most beautiful Elka Collective midi. I cried in the change room. Cannot recommend The Loft enough."</p>
-          <div class="loft-rcard-reviewer">
-            <div class="loft-rcard-avatar">SH</div>
-            <div>
-              <strong>Sandra H.</strong>
-              <span>Orange NSW &middot; Google review</span>
-            </div>
+      <div class="reviews-grid">
+        <div class="rcard reveal d1">
+          <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"I came in to find something for my daughter's wedding and genuinely had no idea where to start. The girls spent nearly an hour with me, pulled pieces I never would have picked myself, and I ended up in the most beautiful Elka Collective midi. I cried in the change room."</blockquote>
+          <div class="rcard-rev">
+            <div class="rev-init">SH</div>
+            <div><strong>Sandra H.</strong><span>Orange NSW &middot; Google review</span></div>
           </div>
         </div>
-
-        <div class="loft-review-card">
-          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="loft-rcard-quote">"Booked a styling session on a whim and it completely changed how I dress for work. I&rsquo;d been buying the same safe, boring pieces for years. After an hour with Kate I had a whole new wardrobe direction &mdash; I actually look forward to getting dressed in the morning now. Best free hour I&rsquo;ve ever spent."</p>
-          <div class="loft-rcard-reviewer">
-            <div class="loft-rcard-avatar">RB</div>
-            <div>
-              <strong>Rachel B.</strong>
-              <span>Orange NSW &middot; Google review</span>
-            </div>
+        <div class="rcard reveal d2">
+          <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"Booked a styling session on a whim and it completely changed how I dress for work. I'd been buying the same safe, boring pieces for years. After an hour with Kate I had a whole new wardrobe direction &mdash; I actually look forward to getting dressed in the morning now."</blockquote>
+          <div class="rcard-rev">
+            <div class="rev-init">RB</div>
+            <div><strong>Rachel B.</strong><span>Orange NSW &middot; Google review</span></div>
           </div>
         </div>
-
-        <div class="loft-review-card">
-          <div class="loft-rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="loft-rcard-quote">"I&rsquo;ve been shopping at The Loft since they opened on Summer Street and I love that the stock genuinely turns over every fortnight. There&rsquo;s always something new, always something worth trying on. The new Seed Heritage arrivals last month were stunning. Best boutique in the Central West &mdash; full stop."</p>
-          <div class="loft-rcard-reviewer">
-            <div class="loft-rcard-avatar">JM</div>
-            <div>
-              <strong>Julie M.</strong>
-              <span>Bathurst NSW &middot; Google review</span>
-            </div>
+        <div class="rcard reveal d3">
+          <div class="rcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>"I've been shopping at The Loft since they opened on Summer Street. There's always something new, always something worth trying on. The new Seed Heritage arrivals last month were stunning. Best boutique in the Central West &mdash; full stop."</blockquote>
+          <div class="rcard-rev">
+            <div class="rev-init">JM</div>
+            <div><strong>Julie M.</strong><span>Bathurst NSW &middot; Google review</span></div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- CONTACT + FAQ -->
-  <section class="section loft-contact-section" id="contact">
+  <section class="section section-alt" id="contact">
     <div class="container">
-      <div class="loft-section-head">
-        <span class="loft-section-label">Get in touch</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in Touch</span>
         <h2>Let us help you find something</h2>
         <p>Looking for a specific piece, need help with sizing, or want to book a styling session? Just reach out &mdash; we reply within one business day.</p>
       </div>
-      <div class="loft-contact-layout">
-
-        <div class="loft-form-wrap">
-          <form class="loft-form" id="loft-contact-form" novalidate>
-            <div class="loft-form-row">
-              <div class="loft-form-field">
-                <label for="cf-name">Your name</label>
-                <input type="text" id="cf-name" placeholder="Jane Smith" autocomplete="name" required />
-              </div>
-              <div class="loft-form-field">
-                <label for="cf-email">Email address</label>
-                <input type="email" id="cf-email" placeholder="jane@example.com.au" autocomplete="email" required />
-              </div>
+      <div class="contact-layout">
+        <div class="form-wrap reveal">
+          <h3>Send us a message</h3>
+          <p class="sub">We reply to every message. Your details are never shared.</p>
+          <form id="contact-form" novalidate>
+            <div class="frow">
+              <div class="fg"><label for="cf-name">Your name</label><input type="text" id="cf-name" placeholder="Jane Smith" required /></div>
+              <div class="fg"><label for="cf-email">Email address</label><input type="email" id="cf-email" placeholder="jane@example.com.au" required /></div>
             </div>
-            <div class="loft-form-field">
-              <label for="cf-subject">What are you looking for?</label>
-              <select id="cf-subject">
+            <div class="fg">
+              <label for="cf-subj">What are you looking for?</label>
+              <select id="cf-subj">
                 <option value="">Please select&hellip;</option>
                 <option>A specific item or brand</option>
                 <option>Styling session booking</option>
@@ -543,470 +517,151 @@
                 <option>Something else</option>
               </select>
             </div>
-            <div class="loft-form-field">
-              <label for="cf-message">Your message</label>
-              <textarea id="cf-message" rows="4" placeholder="Tell us what you&rsquo;re after and we&rsquo;ll get back to you within one business day..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary loft-btn-submit">Send message &rarr;</button>
-            <p class="loft-form-note">We reply to every message. Your details are never shared.</p>
+            <div class="fg"><label for="cf-msg">Your message</label><textarea id="cf-msg" rows="4" placeholder="Tell us what you're after and we'll get back to you within one business day&hellip;"></textarea></div>
+            <button type="submit" class="btn-submit">Send message &rarr;</button>
           </form>
         </div>
-
-        <div class="loft-info-panel">
-          <div class="loft-ip-block">
-            <h4>&#128205; Find us</h4>
-            <p>Shop 4, 212 Summer Street<br>Orange NSW 2800</p>
-            <a href="https://maps.google.com/?q=212+Summer+Street+Orange+NSW" target="_blank" rel="noopener" class="loft-map-link">Get directions &rarr;</a>
+        <div class="info-panel reveal">
+          <div class="ip-block">
+            <h4>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--plum)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Find us
+            </h4>
+            <p>Shop 4, 212 Summer Street<br>Orange NSW 2800<br><a href="https://maps.google.com/?q=212+Summer+Street+Orange+NSW" target="_blank" rel="noopener">Get directions &rarr;</a></p>
           </div>
-          <div class="loft-ip-block">
-            <h4>&#128336; Trading hours</h4>
-            <div class="loft-ip-hours">
+          <div class="ip-block">
+            <h4>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--plum)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Trading hours
+            </h4>
+            <div class="ip-hours">
               <div><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
               <div><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
               <div><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
             </div>
           </div>
-          <div class="loft-ip-block">
-            <h4>&#128222; Call or email</h4>
-            <p><a href="tel:0263614422">(02) 6361 4422</a><br>
-            <a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></p>
+          <div class="ip-block">
+            <h4>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--plum)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Call or email
+            </h4>
+            <p><a href="tel:0263614422">(02) 6361 4422</a><br><a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></p>
           </div>
-          <div class="loft-ip-block">
-            <h4>&#128247; Instagram</h4>
+          <div class="ip-block">
+            <h4>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--plum)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </h4>
             <p><a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a><br>New arrivals posted every fortnight.</p>
+            <div class="ip-est"><span>Est. 2014 &middot; Orange NSW</span><span>4.9 &#9733; &middot; 118 reviews</span></div>
           </div>
-          <div class="loft-ip-est">
-            <span>Est. 2014 &middot; Orange NSW</span>
-            <span>&#9733; 4.9 &middot; 118 reviews</span>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Do you offer personal styling sessions?
+                <span class="faq-chevron"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </div>
+              <div class="faq-a">Yes, and they're completely free. Our sessions run 30&ndash;45 minutes and are perfect if you have a special event, want to refresh your wardrobe, or just want honest advice on what suits you. Book by calling (02) 6361 4422 &mdash; sessions are popular so book at least a week ahead.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Can I return or exchange items?
+                <span class="faq-chevron"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </div>
+              <div class="faq-a">Yes. We offer a 30-day returns and exchange policy on full-price items. Items must be unworn, unwashed and in original condition with tags attached. Return in-store or via post. Sale items are exchange-only.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Do you ship to Sydney, Melbourne and other cities?
+                <span class="faq-chevron"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </div>
+              <div class="faq-a">Yes &mdash; we ship Australia-wide. Orders over $150 ship free. Standard shipping is $10 for orders under $150. Metro orders typically arrive within 2&ndash;3 business days. You'll receive tracking via Australia Post.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                How often does new stock arrive?
+                <span class="faq-chevron"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </div>
+              <div class="faq-a">New arrivals hit the floor every fortnight, with additional drops mid-season. Follow us on Instagram at <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" style="color:var(--plum);">@theloftboutique</a> &mdash; we post every new delivery as it arrives.</div>
+            </div>
           </div>
         </div>
-
       </div>
-
-      <!-- FAQ -->
-      <div class="loft-faq-section" id="faq">
-        <h3 class="loft-faq-heading">Frequently asked questions</h3>
-        <div class="loft-faq-list">
-
-          <div class="loft-faq-item">
-            <button class="loft-faq-btn" type="button" aria-expanded="false">
-              Do you offer personal styling sessions?
-              <span class="loft-faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="loft-faq-answer" hidden>
-              <p>Yes, and they&rsquo;re completely free. Our styling sessions run 30&ndash;45 minutes and are perfect if you have a special event coming up, want to refresh your wardrobe, or just want honest advice on what suits you. Book by calling <a href="tel:0263614422">(02) 6361 4422</a> or emailing us. Sessions are popular &mdash; we recommend booking at least a week ahead.</p>
-            </div>
-          </div>
-
-          <div class="loft-faq-item">
-            <button class="loft-faq-btn" type="button" aria-expanded="false">
-              Can I return or exchange items?
-              <span class="loft-faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="loft-faq-answer" hidden>
-              <p>Absolutely. We offer a 30-day returns and exchange policy on full-price items. Items must be unworn, unwashed and in original condition with tags attached. Return in-store or via post (postage at your cost for change-of-mind returns). Sale items are exchange-only.</p>
-            </div>
-          </div>
-
-          <div class="loft-faq-item">
-            <button class="loft-faq-btn" type="button" aria-expanded="false">
-              Do you ship to Sydney, Melbourne and other major cities?
-              <span class="loft-faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="loft-faq-answer" hidden>
-              <p>Yes &mdash; we ship Australia-wide, including Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra and everywhere in between. Orders over $150 ship free. Standard shipping is $10 for orders under $150. Metro orders typically arrive within 2&ndash;3 business days. You&rsquo;ll receive tracking as soon as your order is dispatched.</p>
-            </div>
-          </div>
-
-          <div class="loft-faq-item">
-            <button class="loft-faq-btn" type="button" aria-expanded="false">
-              How often does new stock arrive?
-              <span class="loft-faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="loft-faq-answer" hidden>
-              <p>New arrivals hit the floor every fortnight, with additional drops mid-season. The best way to stay across new stock is to follow us on Instagram at <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a> &mdash; we post every new delivery as it arrives.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- GET A SITE LIKE THIS -->
-  <section class="loft-agency-cta">
-    <div class="container">
-      <h2>Want a website like this for your retail business?</h2>
-      <p>This demo was built by ImproveYourSite. We build professional websites for Australian small businesses &mdash; see our packages and pricing below.</p>
-      <a class="btn-get-site" href="/packages.html">&#9889; See Our Packages &amp; Pricing</a>
     </div>
   </section>
 
 </main>
 
-<footer class="loft-footer">
-  <div class="container loft-footer-grid">
-    <div class="loft-footer-brand">
-      <a class="brand loft-brand" href="#">&#128247; The Loft Boutique</a>
-      <p>Contemporary women&rsquo;s fashion in Orange NSW since 2014. Stocking Sass &amp; Bide, Seed Heritage, Country Road, Elka Collective, Viktoria &amp; Woods and Cue.</p>
-      <a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener" class="loft-footer-insta">@theloftboutique</a>
-    </div>
-    <div class="loft-footer-col">
-      <h4>Visit us</h4>
-      <p>Shop 4, 212 Summer Street<br>Orange NSW 2800</p>
-      <p><a href="tel:0263614422">(02) 6361 4422</a><br>
-      <a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></p>
-    </div>
-    <div class="loft-footer-col">
-      <h4>Trading hours</h4>
-      <div class="loft-footer-hours">
-        <div><span>Mon &ndash; Fri</span><span>9:00am &ndash; 5:30pm</span></div>
-        <div><span>Saturday</span><span>9:00am &ndash; 4:00pm</span></div>
-        <div><span>Sunday</span><span>10:00am &ndash; 2:00pm</span></div>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span style="width:22px;height:22px;background:linear-gradient(135deg,var(--plum),var(--rose));border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </span>
+        The Loft Boutique
       </div>
+      <p>Contemporary women's fashion in Orange NSW since 2014. Stocking Sass &amp; Bide, Seed Heritage, Country Road, Elka Collective, Viktoria &amp; Woods and Cue.</p>
+      <p><a href="https://instagram.com/theloftboutique" target="_blank" rel="noopener">@theloftboutique</a></p>
+    </div>
+    <div>
+      <h4>Visit us</h4>
+      <ul>
+        <li>Shop 4, 212 Summer Street</li>
+        <li>Orange NSW 2800</li>
+        <li><a href="tel:0263614422">(02) 6361 4422</a></li>
+        <li><a href="mailto:hello@theloftboutique.com.au">hello@theloftboutique.com.au</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Trading hours</h4>
+      <ul>
+        <li>Mon &ndash; Fri: 9:00am &ndash; 5:30pm</li>
+        <li>Saturday: 9:00am &ndash; 4:00pm</li>
+        <li>Sunday: 10:00am &ndash; 2:00pm</li>
+      </ul>
     </div>
   </div>
-  <div class="loft-footer-bottom">
-    <div class="container">
-      <p>&copy; 2025 The Loft Boutique &middot; Shop 4, 212 Summer Street, Orange NSW 2800 &middot; Est. 2014</p>
-      <p>This is a <strong>demo site</strong> created by <a href="/packages.html">ImproveYourSite</a>.</p>
-    </div>
+  <div class="container footer-bottom">
+    <span>&copy; 2025 The Loft Boutique &middot; Shop 4, 212 Summer Street, Orange NSW 2800 &middot; Est. 2014</span>
+    <span>Demo site by <a href="/packages.html">ImproveYourSite</a></span>
   </div>
 </footer>
 
-<a class="phone-cta loft-mobile-cta" href="#contact">&#128717; Visit us in store</a>
+<a class="mobile-cta" href="#contact">Visit us in-store or shop online</a>
 
+<style>@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(1.35)} }</style>
 <script>
 (function(){
-  // Size Guide Finder
-  var btn = document.getElementById('sg-btn');
-  var resetBtn = document.getElementById('sg-reset');
-  var result = document.getElementById('sg-result');
-  var badge = document.getElementById('sg-result-badge');
-  var note = document.getElementById('sg-result-note');
-
-  btn.addEventListener('click', function(){
-    var h = parseFloat(document.getElementById('sg-height').value);
-    var w = parseFloat(document.getElementById('sg-weight').value);
-    var btEl = document.querySelector('input[name="bodytype"]:checked');
-    var bt = btEl ? btEl.value : 'regular';
-    if(!h || !w || h < 140 || h > 200 || w < 40 || w > 160){
-      alert('Please enter a valid height (140\u2013200cm) and weight (40\u2013160kg).');
-      return;
-    }
-    var bmi = w / Math.pow(h / 100, 2);
-    var sz;
-    if(bmi < 18.5)      sz = '6\u20138';
-    else if(bmi < 21)   sz = '8\u201310';
-    else if(bmi < 23.5) sz = '10\u201312';
-    else if(bmi < 26)   sz = '12\u201314';
-    else                sz = '14\u201316';
-    badge.textContent = 'Your recommended size is ' + sz;
-    var n = '';
-    if(bt === 'petite') n = 'We recommend sizing down for Petite frames \u2014 many of our styles run slightly long.';
-    if(bt === 'tall')   n = 'Consider sizing up for Tall frames \u2014 or ask our team about our online Tall range.';
-    note.textContent = n;
-    note.hidden = !n;
-    result.hidden = false;
-    btn.hidden = true;
-    result.scrollIntoView({behavior:'smooth', block:'nearest'});
+  window.addEventListener('scroll', function(){
+    var bar = document.getElementById('scroll-bar');
+    var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
   });
-
-  resetBtn.addEventListener('click', function(){
-    result.hidden = true;
-    btn.hidden = false;
-    document.getElementById('sg-height').value = '';
-    document.getElementById('sg-weight').value = '';
-    document.getElementById('bt-regular').checked = true;
-  });
-
-  // FAQ accordion
-  document.querySelectorAll('.loft-faq-btn').forEach(function(b){
-    b.addEventListener('click', function(){
-      var item = this.closest('.loft-faq-item');
-      var isOpen = this.getAttribute('aria-expanded') === 'true';
-      document.querySelectorAll('.loft-faq-item').forEach(function(i){
-        i.querySelector('.loft-faq-btn').setAttribute('aria-expanded','false');
-        i.querySelector('.loft-faq-answer').hidden = true;
-        i.querySelector('.loft-faq-icon').textContent = '+';
-      });
-      if(!isOpen){
-        this.setAttribute('aria-expanded','true');
-        item.querySelector('.loft-faq-answer').hidden = false;
-        item.querySelector('.loft-faq-icon').textContent = '\u2212';
-      }
-    });
-  });
-
-  // Scroll reveal
-  var els = document.querySelectorAll('.loft-ccard,.loft-why-card,.loft-review-card,.loft-feed-post,.loft-kpi,.loft-faq-item');
+  window.toggleFaq = function(el){
+    var item = el.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+    if(!isOpen) item.classList.add('open');
+  };
   if('IntersectionObserver' in window){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('revealed'); obs.unobserve(e.target); }
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
-    els.forEach(function(el){ el.classList.add('reveal-ready'); obs.observe(el); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
   } else {
-    els.forEach(function(el){ el.classList.add('revealed'); });
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
   }
-
-  // Contact form
-  document.getElementById('loft-contact-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    var s = this.querySelector('.loft-btn-submit');
-    s.textContent = "Message sent! We\u2019ll be in touch within one business day.";
-    s.disabled = true;
-    s.style.background = '#059669';
-  });
+  var form = document.getElementById('contact-form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.innerHTML = '<div style="text-align:center;padding:2rem;"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#6d2d8a" stroke-width="2" stroke-linecap="round" style="margin:0 auto 1rem;display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3 style="color:#1a0a2e;font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">Message sent!</h3><p style="color:#64748b;font-size:.9rem;">We reply to every message within one business day. For quicker responses, call us on <a href="tel:0263614422" style="color:#6d2d8a;font-weight:700;">(02) 6361 4422</a>.</p></div>';
+    });
+  }
 })();
 </script>
-
-<script>
-(function () {
-  'use strict';
-
-  /* ── 1. Scroll progress bar ── */
-  var scrollBar = document.getElementById('scroll-bar');
-  function updateScrollBar() {
-    var scrollTop = window.scrollY || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    scrollBar.style.width = pct + '%';
-  }
-
-  /* ── 2. Hero parallax ── */
-  var heroInner = document.querySelector('.loft-hero-inner');
-
-  /* ── 4. Scroll velocity header flash ── */
-  var siteHeader = document.querySelector('.site-header.loft-header');
-  var lastScrollY = window.scrollY;
-  var lastScrollTime = performance.now();
-  var velocityFlashTimer = null;
-
-  function applyVelocityFlash(velocity) {
-    if (velocity > 400) {
-      siteHeader.classList.add('velocity-flash');
-      clearTimeout(velocityFlashTimer);
-      velocityFlashTimer = setTimeout(function () {
-        siteHeader.classList.remove('velocity-flash');
-      }, 420);
-    }
-  }
-
-  /* ── 5. Instagram feed tilt on scroll ── */
-  var feedPosts = document.querySelectorAll('.loft-feed-post');
-  var tiltBases = [];
-  feedPosts.forEach(function (post) {
-    if (post.classList.contains('loft-feed-tilt-l')) {
-      tiltBases.push(-1.2);
-    } else {
-      tiltBases.push(1.1);
-    }
-  });
-
-  /* ── 9. Footer parallax ── */
-  var footer = document.querySelector('.loft-footer');
-  var footerBgLayer = null;
-  if (footer) {
-    footerBgLayer = document.createElement('div');
-    footerBgLayer.className = 'loft-footer-bg-layer';
-    footer.insertBefore(footerBgLayer, footer.firstChild);
-  }
-
-  /* ── rAF scroll loop ── */
-  var ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(rafUpdate);
-      ticking = true;
-    }
-  }
-
-  function rafUpdate() {
-    var now = performance.now();
-    var scrollY = window.scrollY || document.documentElement.scrollTop;
-
-    /* Progress bar */
-    updateScrollBar();
-
-    /* Hero parallax */
-    if (heroInner) {
-      heroInner.style.transform = 'translateY(' + (scrollY * 0.28) + 'px)';
-    }
-
-    /* Velocity flash */
-    var dt = now - lastScrollTime;
-    if (dt > 0) {
-      var velocity = Math.abs(scrollY - lastScrollY) / dt * 1000;
-      applyVelocityFlash(velocity);
-    }
-    lastScrollY = scrollY;
-    lastScrollTime = now;
-
-    /* Feed tilt */
-    feedPosts.forEach(function (post, i) {
-      var delta = scrollY * 0.01;
-      var tilt = tiltBases[i] + (tiltBases[i] < 0 ? -delta : delta);
-      /* Only apply tilt when not being hovered */
-      if (!post.matches(':hover')) {
-        post.style.transform = 'rotate(' + tilt + 'deg)';
-      }
-    });
-
-    /* Footer parallax */
-    if (footerBgLayer && footer) {
-      var footerTop = footer.getBoundingClientRect().top + scrollY;
-      var offset = (scrollY - footerTop) * 0.1;
-      footerBgLayer.style.transform = 'translateY(' + offset + 'px)';
-    }
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* ── 3. Collection card reveals with scale + stagger ── */
-  var revealEls = document.querySelectorAll('.loft-ccard, .loft-why-card, .loft-review-card, .loft-feed-post, .loft-kpi, .loft-faq-item');
-
-  /* Remove old reveal-ready/revealed from the earlier script so we take over */
-  revealEls.forEach(function (el) {
-    el.classList.remove('reveal-ready', 'revealed');
-  });
-
-  if ('IntersectionObserver' in window) {
-    /* Group siblings for stagger */
-    function getSiblings(el) {
-      var parent = el.parentElement;
-      if (!parent) return [el];
-      return Array.prototype.slice.call(parent.children).filter(function (c) {
-        return c === el || c.classList.contains(el.classList[0]);
-      });
-    }
-
-    var revealObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          var siblings = getSiblings(el);
-          var idx = siblings.indexOf(el);
-          var delay = idx * 80;
-          setTimeout(function () {
-            el.classList.add('revealed');
-          }, delay);
-          revealObs.unobserve(el);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    revealEls.forEach(function (el) {
-      el.classList.add('reveal-ready');
-      revealObs.observe(el);
-    });
-  } else {
-    revealEls.forEach(function (el) {
-      el.classList.add('revealed');
-    });
-  }
-
-  /* ── 7. Section heading reveal ── */
-  var headings = document.querySelectorAll('.loft-section-head h2');
-  if ('IntersectionObserver' in window) {
-    var h2Obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('h2-revealed');
-          h2Obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
-
-    headings.forEach(function (h) {
-      h.classList.add('h2-reveal-ready');
-      h2Obs.observe(h);
-    });
-  }
-
-  /* ── 8. CTA button shimmer ── */
-  var shimmerBtns = document.querySelectorAll('.btn-get-site, .loft-btn-hero, .btn-primary');
-  shimmerBtns.forEach(function (btn) {
-    btn.classList.add('btn-shimmer');
-  });
-
-  /* Stagger the shimmer animation start so buttons don't all flash simultaneously */
-  shimmerBtns.forEach(function (btn, i) {
-    btn.style.animationDelay = (i * 1.3) + 's';
-  });
-
-  /* ── Initial state ── */
-  updateScrollBar();
-  if (heroInner) {
-    heroInner.style.transform = 'translateY(0)';
-  }
-
-})();
-</script>
-
-
-  <!-- ═══ Retail Pulse — 3D Effects Layer ═══ -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/grained@0.0.2/grained.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script>
-  (function(){
-    /* 1 — Lenis */
-    var lenis = new Lenis({ duration:1.2, smoothWheel:true });
-    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
-    gsap.registerPlugin(ScrollTrigger);
-    lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0);
-
-    /* 2 — grained film grain on hero */
-    var hero = document.querySelector('.loft-hero');
-    if (hero) {
-      hero.id = hero.id || 'loft-hero-grain';
-      if (window.grained) grained('#' + hero.id, { animate:true, patternWidth:100, patternHeight:100, grainOpacity:0.035, grainDensity:1, grainWidth:1, grainHeight:1, speed:0.8 });
-    }
-
-    /* 3 — Typed.js below hero tagline */
-    var heroBadge = document.querySelector('.loft-hero .loft-hero-lead, .loft-hero h1');
-    if (heroBadge) {
-      var typedLine = document.createElement('p');
-      typedLine.className = 'loft-hero-typed';
-      typedLine.innerHTML = '<span id="loft-typed"></span>';
-      heroBadge.parentNode.insertBefore(typedLine, heroBadge.nextSibling);
-      new Typed('#loft-typed', { strings:['New arrivals every week.','Complimentary in-store styling.','Free shipping over $150.','Curated for every body.'],
-        typeSpeed:50, backSpeed:25, backDelay:2600, loop:true });
-    }
-
-    /* 4 — Convert .loft-collections-section cards to Swiper Coverflow */
-    var collectionsGrid = document.querySelector('.loft-collections-grid, .collections-grid');
-    if (collectionsGrid) {
-      var cards = Array.from(collectionsGrid.querySelectorAll('.loft-collection-card, .collection-card'));
-      if (cards.length > 0) {
-        var sw = document.createElement('div'); sw.className = 'swiper swiper-collections';
-        var wr = document.createElement('div'); wr.className = 'swiper-wrapper';
-        cards.forEach(function(c){ var s=document.createElement('div'); s.className='swiper-slide'; s.appendChild(c); wr.appendChild(s); });
-        sw.appendChild(wr);
-        var pg = document.createElement('div'); pg.className='swiper-pagination'; sw.appendChild(pg);
-        collectionsGrid.parentNode.replaceChild(sw, collectionsGrid);
-        new Swiper('.swiper-collections',{ effect:'coverflow', grabCursor:true, centeredSlides:true, slidesPerView:'auto',
-          coverflowEffect:{ rotate:40, stretch:0, depth:130, modifier:1, slideShadows:true },
-          pagination:{ el:'.swiper-collections .swiper-pagination', clickable:true },
-          loop:true, autoplay:{ delay:3400, disableOnInteraction:false }});
-      }
-    }
-
-    /* 5 — GSAP stagger for product/feed sections */
-    gsap.set('.loft-why-item, .loft-review-card, .loft-size-row', { opacity:0, y:40 });
-    gsap.utils.toArray('.loft-why-item, .loft-review-card, .loft-size-row').forEach(function(el,i){
-      gsap.to(el,{ opacity:1, y:0, duration:0.7, ease:'power3.out', delay:i%3*0.1,
-        scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' }});
-    });
-  })();
-  </script>
 </body>
 </html>
