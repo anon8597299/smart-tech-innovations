@@ -3,6 +3,9 @@
 builder/.env
 *.env
 
+# ops.html contains hardcoded API keys — local use only, never push
+ops.html
+
 # macOS
 .DS_Store
 

@@ -245,6 +245,19 @@
       .services-grid, .tgrid, .steps-grid { grid-template-columns: 1fr; }
       .frow { grid-template-columns: 1fr; }
     }
+  
+/* ── Hamburger menu ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.nav-burger span{display:block;width:22px;height:2px;background:#334155;border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-burger{display:flex}
+  .nav-links{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #e2e8f0;padding:1rem 1.25rem;flex-direction:column!important;gap:.25rem!important;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+  .nav-links.open{display:flex!important}
+  .nav-links a{padding:.65rem .75rem!important;border-radius:8px;font-size:.95rem!important;width:100%;box-sizing:border-box}
+}
   </style>
 </head>
 <body>
@@ -271,6 +284,7 @@
       <a href="#contact" class="nav-cta">Free Assessment</a>
       <a href="tel:0400987654" class="nav-phone">0400 987 654</a>
     </nav>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -785,6 +799,23 @@
       form.innerHTML = '<div style="text-align:center;padding:2rem;"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" style="margin:0 auto 1rem;display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3 style="color:#0f172a;font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">Assessment request received!</h3><p style="color:#64748b;font-size:.9rem;">We\'ll be in touch within one business day to arrange your free on-site assessment. For urgent queries call <a href="tel:0400987654" style="color:#1d4ed8;font-weight:700;">0400 987 654</a>.</p></div>';
     });
   }
+})();
+</script>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-burger');
+  var links=document.querySelector('.nav-links');
+  if(!btn||!links)return;
+  btn.addEventListener('click',function(){
+    var open=links.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
 })();
 </script>
 </body>

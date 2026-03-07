@@ -254,7 +254,20 @@ footer{background:#1c0d07;color:rgba(255,255,255,.75);padding:52px 40px 28px}
   .mobile-cta{display:flex}
   body{padding-bottom:56px}
 }
-</style>
+
+/* ── Hamburger menu ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.nav-burger span{display:block;width:22px;height:2px;background:#334155;border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-burger{display:flex}
+  .nav-links{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #e2e8f0;padding:1rem 1.25rem;flex-direction:column!important;gap:.25rem!important;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+  .nav-links.open{display:flex!important}
+  .nav-links a{padding:.65rem .75rem!important;border-radius:8px;font-size:.95rem!important;width:100%;box-sizing:border-box}
+}
+  </style>
 </head>
 <body>
 
@@ -282,6 +295,7 @@ footer{background:#1c0d07;color:rgba(255,255,255,.75);padding:52px 40px 28px}
       <a href="#testimonials">Reviews</a>
       <a href="#enquiry" class="nav-cta">Enquire Now</a>
     </div>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -811,6 +825,23 @@ function submitEnquiry(e){
   e.preventDefault();
   document.getElementById('enq-form-wrap').innerHTML='<div style="background:#fff;border-radius:16px;border:1px solid #e7e0d5;padding:48px 36px;text-align:center;box-shadow:0 4px 24px rgba(120,53,15,.08)"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="var(--gold)" stroke-width="2" style="margin-bottom:16px"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><h3 style="font-family:Playfair Display,serif;color:var(--brown);font-size:1.5rem;margin-bottom:10px">Enquiry Received</h3><p style="color:var(--stone-lt);font-size:.95rem;line-height:1.7">Thank you for reaching out. Our team will contact you within 24 hours to arrange your private estate tour.</p></div>';
 }
+</script>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-burger');
+  var links=document.querySelector('.nav-links');
+  if(!btn||!links)return;
+  btn.addEventListener('click',function(){
+    var open=links.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+})();
 </script>
 </body>
 </html>
