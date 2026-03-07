@@ -608,11 +608,55 @@ let feedItems = [];
 let sse = null;
 let sseConnected = false;
 
+// ── Password gate ──────────────────────────────────────────────────────────
+const DASH_HASH = 'c4e66fd25fae2836d495ef7f28f4ba38be0225054a05875ba2f2d55799372bd0';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function checkPassword() {
+  const val = document.getElementById('gate-input').value;
+  const hash = await sha256(val);
+  if (hash === DASH_HASH) {
+    sessionStorage.setItem('iys_dash_auth', '1');
+    document.getElementById('gate-overlay').remove();
+    loadState();
+    connectSSE();
+    loadCalendar();
+  } else {
+    const inp = document.getElementById('gate-input');
+    inp.style.borderColor = 'var(--red)';
+    inp.value = '';
+    inp.placeholder = 'Incorrect password';
+    setTimeout(() => { inp.style.borderColor = ''; inp.placeholder = 'Enter password'; }, 1800);
+  }
+}
+
 // ── Bootstrap ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  loadState();
-  connectSSE();
-  loadCalendar();
+  if (sessionStorage.getItem('iys_dash_auth') === '1') {
+    loadState();
+    connectSSE();
+    loadCalendar();
+  } else {
+    const overlay = document.createElement('div');
+    overlay.id = 'gate-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    overlay.innerHTML = `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:min(380px,90vw);text-align:center;">
+        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--indigo),var(--mint));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;margin:0 auto 20px;">IYS</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:6px;">Agent Dashboard</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;">ImproveYourSite.com</div>
+        <input id="gate-input" type="password" placeholder="Enter password"
+          style="width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:12px;transition:border-color .15s;"
+          onkeydown="if(event.key==='Enter')checkPassword()">
+        <button onclick="checkPassword()" style="width:100%;padding:12px;background:var(--indigo);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Sign in</button>
+      </div>`;
+    document.body.appendChild(overlay);
+    setTimeout(() => document.getElementById('gate-input')?.focus(), 50);
+  }
 });
 
 // ── API helpers ────────────────────────────────────────────────────────────

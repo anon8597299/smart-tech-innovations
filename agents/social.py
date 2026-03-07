@@ -99,12 +99,12 @@ CONTENT_CALENDAR = {
 
 # ── Australian SMB Instagram hashtags by industry ────────────────────────────
 HASHTAGS = {
-    "web":      "#smallbusiness #australianbusiness #websitedesign "
-                "#digitalmarketing #businessgrowth #seoaustralia #websitetips",
-    "trades":   "#tradie #australiantradie #smallbusiness "
-                "#localbusiness #australianbusiness #businesswebsite",
-    "health":   "#gpaustralia #healthclinic #smallbusiness "
-                "#australianhealthcare #businesswebsite",
+    "web":      "#smallbusinessaustralia #websitedesign #australianbusiness "
+                "#seoaustralia #sydneybusiness #melbournebusiness #businessgrowth",
+    "trades":   "#australiantradie #smallbusinessaustralia #localbusiness "
+                "#brisbanebusiness #sydneybusiness #tradiebusiness",
+    "health":   "#smallbusinessaustralia #australianhealthcare #localbusiness "
+                "#sydneybusiness #websitedesign #digitalmarketing",
 }
 
 
