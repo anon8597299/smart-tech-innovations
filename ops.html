@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ops — ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #5b4dff; --mint: #2dd4bf;
+      --bg: #0d0d12; --surface: #16161e; --surface2: #1e1e2a;
+      --border: #252530; --text: #e2e8f0; --muted: #64748b;
+      --green: #4ade80; --red: #f87171; --amber: #fbbf24;
+      --radius: 12px;
+    }
+    body { font-family: Inter, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; }
+    a { color: var(--mint); text-decoration: none; }
+
+    /* ── Login ── */
+    #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem 2rem; width: 100%; max-width: 380px; text-align: center; }
+    .login-mark { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--indigo), var(--mint)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 16px; margin: 0 auto 1.2rem; }
+    .login-card h1 { font-size: 1.35rem; margin-bottom: .3rem; }
+    .login-card p { color: var(--muted); font-size: .88rem; margin-bottom: 1.6rem; }
+    .field-group { margin-bottom: .75rem; text-align: left; }
+    .field-label { font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: .35rem; display: block; }
+    .field-input {
+      width: 100%; padding: .72rem 1rem; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 10px; color: var(--text); font-size: .95rem; font-family: Inter, sans-serif;
+      transition: border-color .15s; outline: none;
+    }
+    .field-input:focus { border-color: var(--indigo); }
+    .btn-login { width: 100%; padding: .8rem; background: var(--indigo); color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: 700; cursor: pointer; font-family: Inter, sans-serif; margin-top: .25rem; }
+    .btn-login:hover { background: #4c40db; }
+    .login-error { color: var(--red); font-size: .82rem; margin-top: .6rem; display: none; }
+
+    /* ── App shell ── */
+    #app { display: none; }
+
+    /* ── Header ── */
+    .app-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: .9rem 0; position: sticky; top: 0; z-index: 50; }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .header-logo { display: flex; align-items: center; gap: .6rem; }
+    .header-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--indigo), var(--mint)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 11px; flex-shrink: 0; }
+    .header-title { font-weight: 700; font-size: .95rem; }
+    .header-sub { font-size: .75rem; color: var(--muted); }
+    .header-actions { display: flex; align-items: center; gap: .75rem; }
+    .status-dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+    .btn { padding: .45rem .9rem; border-radius: 8px; font-size: .82rem; font-weight: 600; cursor: pointer; border: none; font-family: Inter, sans-serif; transition: opacity .15s; }
+    .btn:hover { opacity: .82; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-primary { background: var(--indigo); color: #fff; }
+    .btn-mint { background: rgba(45,212,191,.15); color: var(--mint); border: 1px solid rgba(45,212,191,.25); }
+
+    /* ── Tabs ── */
+    .tabs { max-width: 1200px; margin: 0 auto; padding: 1.25rem 1.5rem 0; display: flex; gap: .3rem; border-bottom: 1px solid var(--border); }
+    .tab { padding: .55rem 1.1rem; border-radius: 8px 8px 0 0; font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--muted); border: none; background: transparent; font-family: Inter, sans-serif; transition: color .15s, background .15s; }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--indigo); background: rgba(91,77,255,.1); border-bottom: 2px solid var(--indigo); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Layout ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media(max-width:800px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+    /* ── Cards ── */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .card-bar { height: 3px; background: linear-gradient(90deg, var(--indigo), var(--mint)); }
+    .card-body { padding: 1.1rem; }
+    .card-title { font-size: .82rem; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .9rem; }
+
+    /* ── Stat cards ── */
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+    .stat-value { font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-bottom: .25rem; }
+    .stat-label { font-size: .78rem; color: var(--muted); font-weight: 500; }
+    .stat-value.green { color: var(--green); }
+    .stat-value.indigo { color: var(--indigo); }
+    .stat-value.mint { color: var(--mint); }
+
+    /* ── Post cards ── */
+    .post-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: .75rem; }
+    .post-card-bar { height: 3px; }
+    .post-card-bar.posted { background: linear-gradient(90deg, var(--green), var(--mint)); }
+    .post-card-bar.pending { background: linear-gradient(90deg, var(--indigo), var(--mint)); }
+    .post-card-body { padding: 1rem 1.1rem; }
+    .post-headline { font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+    .post-date { font-size: .75rem; color: var(--muted); margin-bottom: .5rem; }
+    .post-caption { font-size: .82rem; color: var(--muted); line-height: 1.6; max-height: 4.8rem; overflow: hidden; }
+    .post-footer { display: flex; align-items: center; justify-content: space-between; margin-top: .75rem; padding-top: .65rem; border-top: 1px solid var(--border); }
+    .badge { display: inline-flex; align-items: center; gap: .3rem; padding: .2rem .65rem; border-radius: 999px; font-size: .72rem; font-weight: 700; }
+    .badge-green { background: rgba(74,222,128,.12); color: var(--green); }
+    .badge-indigo { background: rgba(91,77,255,.15); color: #a5b4fc; }
+    .badge-amber { background: rgba(251,191,36,.12); color: var(--amber); }
+    .slides-count { font-size: .75rem; color: var(--muted); }
+
+    /* ── Chat ── */
+    .chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 200px); min-height: 500px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .chat-header { padding: .9rem 1.1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .chat-header-title { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: .5rem; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .75rem; }
+    .chat-msg { max-width: 78%; padding: .75rem 1rem; border-radius: 14px; font-size: .88rem; line-height: 1.65; }
+    .chat-msg.user { align-self: flex-end; background: var(--indigo); color: #fff; border-radius: 14px 14px 4px 14px; }
+    .chat-msg.assistant { align-self: flex-start; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; }
+    .chat-msg.thinking { align-self: flex-start; background: var(--surface2); color: var(--muted); border: 1px dashed var(--border); border-radius: 14px; font-style: italic; }
+    .chat-action-tag { font-size: .72rem; color: var(--mint); margin-top: .4rem; font-weight: 600; }
+    .chat-input-row { display: flex; gap: .6rem; padding: .9rem 1rem; border-top: 1px solid var(--border); align-items: flex-end; }
+    .chat-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: .88rem; font-family: Inter, sans-serif; padding: .65rem .9rem; resize: none; outline: none; line-height: 1.5; max-height: 120px; overflow-y: auto; transition: border-color .15s; }
+    .chat-input:focus { border-color: var(--indigo); }
+    .chat-suggestions { display: flex; flex-wrap: wrap; gap: .4rem; padding: .4rem 1rem 0; }
+    .chat-chip { background: rgba(91,77,255,.1); border: 1px solid rgba(91,77,255,.2); color: #a5b4fc; border-radius: 20px; padding: .3rem .8rem; font-size: .78rem; cursor: pointer; font-family: Inter, sans-serif; transition: background .15s; }
+    .chat-chip:hover { background: rgba(91,77,255,.2); }
+
+    /* ── Intel cards ── */
+    .intel-section { margin-bottom: 1.25rem; }
+    .intel-title { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .7rem; }
+    .intel-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: .75rem 1rem; margin-bottom: .5rem; font-size: .85rem; line-height: 1.6; }
+    .intel-item .hook { font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+    .intel-item .angle { color: var(--muted); font-size: .82rem; }
+    .intel-item .why { font-size: .75rem; color: var(--mint); margin-top: .35rem; font-weight: 600; }
+    .intel-tag { display: inline-block; background: rgba(251,191,36,.1); color: var(--amber); border-radius: 6px; padding: .15rem .5rem; font-size: .7rem; font-weight: 700; margin-left: .4rem; }
+
+    /* ── Generate panel ── */
+    .gen-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.25rem; }
+    .gen-card-bar { height: 3px; background: linear-gradient(90deg, var(--mint), var(--indigo)); }
+    .gen-card-body { padding: 1.1rem; }
+    .gen-select { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: Inter, sans-serif; font-size: .85rem; padding: .55rem .8rem; width: 100%; outline: none; }
+    .gen-result { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-top: .9rem; font-size: .85rem; line-height: 1.7; display: none; white-space: pre-wrap; max-height: 320px; overflow-y: auto; }
+    .gen-result.visible { display: block; }
+    .gen-actions { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
+
+    /* ── Trigger cards ── */
+    .trigger-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; margin-bottom: 1.25rem; }
+    .trigger-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: .9rem 1rem; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+    .trigger-card:hover { border-color: var(--indigo); box-shadow: 0 0 0 1px rgba(91,77,255,.3); }
+    .trigger-name { font-weight: 700; font-size: .88rem; margin-bottom: .25rem; }
+    .trigger-desc { font-size: .75rem; color: var(--muted); line-height: 1.5; }
+    .trigger-status { font-size: .7rem; margin-top: .5rem; font-weight: 600; }
+
+    /* ── Empty state ── */
+    .empty { text-align: center; padding: 2.5rem; color: var(--muted); font-size: .88rem; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .section-title { font-size: 1rem; font-weight: 700; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+    .key-hint { font-size: .75rem; color: var(--muted); margin-top: .5rem; }
+    .key-hint a { color: var(--indigo); cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<!-- ── Login ───────────────────────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-mark">IYS</div>
+    <h1>Operations</h1>
+    <p>ImproveYourSite.com internal dashboard</p>
+    <div class="field-group">
+      <label class="field-label" for="pw-input">Password</label>
+      <input class="field-input" type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="key-input">Anthropic API key <span style="color:var(--muted);font-weight:400;">(stored in session only)</span></label>
+      <input class="field-input" type="password" id="key-input" placeholder="sk-ant-api03-…" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="pat-input">GitHub PAT <span style="color:var(--muted);font-weight:400;">(to read private files)</span></label>
+      <input class="field-input" type="password" id="pat-input" placeholder="ghp_…" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn-login" onclick="doLogin()">Sign in</button>
+    <div class="login-error" id="login-error">Incorrect password</div>
+  </div>
+</div>
+
+<!-- ── App ────────────────────────────────────────────────────────────── -->
+<div id="app">
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <div class="header-mark">IYS</div>
+        <div>
+          <div class="header-title">Operations</div>
+          <div class="header-sub">improveyoursite.com</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="status-dot-live"></span>
+        <span style="font-size:.75rem;color:var(--muted);">Live</span>
+        <button class="btn btn-ghost" onclick="doLogout()">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="showTab('overview')">Overview</button>
+    <button class="tab" onclick="showTab('social')">Social</button>
+    <button class="tab" onclick="showTab('chat')">Chat</button>
+    <button class="tab" onclick="showTab('intel')">Intel</button>
+  </div>
+
+  <!-- ── Overview ─────────────────────────────────────────────────────── -->
+  <div class="tab-panel active page" id="panel-overview">
+    <div class="three-col" id="stat-row" style="margin-bottom:1.25rem;">
+      <div class="stat-card">
+        <div class="stat-value indigo" id="stat-total">—</div>
+        <div class="stat-label">Posts in queue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green" id="stat-posted">—</div>
+        <div class="stat-label">Published</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value mint" id="stat-pending">—</div>
+        <div class="stat-label">Pending</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="section-header">
+          <span class="section-title">Recent Posts</span>
+          <button class="btn btn-ghost" onclick="showTab('social')">View all</button>
+        </div>
+        <div id="overview-posts"><div class="empty">Loading…</div></div>
+      </div>
+      <div>
+        <div class="section-header">
+          <span class="section-title">Quick Actions</span>
+        </div>
+        <div class="trigger-grid">
+          <div class="trigger-card" onclick="triggerMake()">
+            <div class="trigger-name">Post Now</div>
+            <div class="trigger-desc">Fire Make.com webhook to publish next pending carousel</div>
+            <div class="trigger-status" id="trig-make-status" style="color:var(--muted);">Ready</div>
+          </div>
+          <div class="trigger-card" onclick="showTab('chat'); sendSuggestion('Generate a new carousel post for today')">
+            <div class="trigger-name">Generate Post</div>
+            <div class="trigger-desc">Ask Claude to write a new Instagram carousel</div>
+            <div class="trigger-status" style="color:var(--mint);">Via chat</div>
+          </div>
+          <div class="trigger-card" onclick="showTab('intel'); loadIntel()">
+            <div class="trigger-name">Market Intel</div>
+            <div class="trigger-desc">View competitor analysis and trending content angles</div>
+            <div class="trigger-status" style="color:var(--amber);">From report</div>
+          </div>
+          <div class="trigger-card" onclick="window.open('/admin.html','_blank')">
+            <div class="trigger-name">Site Builder</div>
+            <div class="trigger-desc">Generate and deploy customer websites</div>
+            <div class="trigger-status" style="color:var(--muted);">admin.html</div>
+          </div>
+          <div class="trigger-card" onclick="window.open('/packages.html','_blank')">
+            <div class="trigger-name">Packages</div>
+            <div class="trigger-desc">View the live pricing and Stripe checkout page</div>
+            <div class="trigger-status" style="color:var(--muted);">Live page</div>
+          </div>
+          <div class="trigger-card" onclick="window.open('/our-work.html','_blank')">
+            <div class="trigger-name">Demo Sites</div>
+            <div class="trigger-desc">View all 8 showcase demo sites</div>
+            <div class="trigger-status" style="color:var(--muted);">Portfolio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Social ────────────────────────────────────────────────────────── -->
+  <div class="tab-panel page" id="panel-social">
+
+    <!-- Generate new post -->
+    <div class="gen-card">
+      <div class="gen-card-bar"></div>
+      <div class="gen-card-body">
+        <div class="section-header" style="margin-bottom:.75rem;">
+          <span class="section-title">Generate new post</span>
+          <button class="btn btn-mint" id="gen-btn" onclick="generatePost()">Generate with Claude</button>
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;">
+          <div style="flex:1;min-width:180px;">
+            <label class="field-label" style="margin-bottom:.3rem;display:block;">Theme</label>
+            <select class="gen-select" id="gen-theme">
+              <option value="education">Education — website / SEO tip</option>
+              <option value="showcase">Showcase — feature a demo site</option>
+              <option value="social_proof">Social proof — before / after result</option>
+              <option value="cta">CTA — limited spots / offer</option>
+              <option value="motivation">Motivation — start of week energy</option>
+              <option value="ai_search">AI Search — get found by ChatGPT / Siri</option>
+              <option value="tradie">Tradies — word of mouth has changed</option>
+              <option value="regional">Regional Australia — underserved market</option>
+            </select>
+          </div>
+          <div style="flex:1;min-width:180px;">
+            <label class="field-label" style="margin-bottom:.3rem;display:block;">Industry focus</label>
+            <select class="gen-select" id="gen-industry">
+              <option value="general">General small business</option>
+              <option value="trades">Trades / plumbing / electrical</option>
+              <option value="healthcare">Healthcare / GP clinics</option>
+              <option value="accounting">Accounting / bookkeeping</option>
+              <option value="consulting">Business consulting</option>
+              <option value="retail">Retail / boutique</option>
+              <option value="solar">Solar / energy</option>
+              <option value="hospitality">Hospitality / events</option>
+            </select>
+          </div>
+        </div>
+        <div class="gen-result" id="gen-result"></div>
+        <div class="gen-actions" id="gen-actions" style="display:none;">
+          <button class="btn btn-primary" onclick="saveGeneratedPost()">Save to queue</button>
+          <button class="btn btn-ghost" onclick="generatePost()">Regenerate</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('gen-result').classList.remove('visible');document.getElementById('gen-actions').style.display='none';">Discard</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title">Post queue</span>
+      <button class="btn btn-ghost" onclick="loadQueue()">Refresh</button>
+    </div>
+    <div id="posts-list"><div class="empty">Loading posts…</div></div>
+  </div>
+
+  <!-- ── Chat ──────────────────────────────────────────────────────────── -->
+  <div class="tab-panel page" id="panel-chat">
+    <div class="chat-wrap">
+      <div class="chat-header">
+        <div class="chat-header-title">
+          <div class="header-mark" style="width:24px;height:24px;font-size:9px;border-radius:6px;">IYS</div>
+          Operations Manager
+        </div>
+        <button class="btn btn-ghost" style="font-size:.78rem;" onclick="clearChat()">Clear</button>
+      </div>
+      <div class="chat-suggestions">
+        <span class="chat-chip" onclick="sendSuggestion('What should I post today?')">What to post today?</span>
+        <span class="chat-chip" onclick="sendSuggestion('Write a carousel about why tradies need a website in 2025')">Tradie carousel</span>
+        <span class="chat-chip" onclick="sendSuggestion('Generate 5 Instagram caption ideas for this week')">5 caption ideas</span>
+        <span class="chat-chip" onclick="sendSuggestion('What are the best hashtags for a web agency in Australia?')">Best hashtags</span>
+        <span class="chat-chip" onclick="sendSuggestion('Write a hook for a post about AI search and local businesses')">AI search hook</span>
+        <span class="chat-chip" onclick="sendSuggestion('Review our brand and give me 3 content angles we are missing')">Content gaps</span>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg assistant">
+          Hey James. I'm your IYS operations assistant.<br><br>
+          I know the business, the packages ($3k / $5k / $10k), all 8 demo sites, the social strategy, and the intel reports. Ask me anything — content ideas, captions, strategy, or what to post next.
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="Ask me anything about the business or social content…"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"
+          oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+        <button class="btn btn-primary" onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Intel ─────────────────────────────────────────────────────────── -->
+  <div class="tab-panel page" id="panel-intel">
+    <div class="section-header">
+      <span class="section-title">Market Intelligence</span>
+      <button class="btn btn-ghost" onclick="loadIntel()">Refresh</button>
+    </div>
+    <div id="intel-content"><div class="empty">Loading report…</div></div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ── Config ─────────────────────────────────────────────────────────────────
+const REPO       = 'anon8597299/smart-tech-innovations';
+const MAKE_URL   = 'https://hook.eu1.make.com/vr01w7rwvil859mihhimsgfwi4nkmbic';
+const PW_HASH    = 'c4e66fd25fae2836d495ef7f28f4ba38be0225054a05875ba2f2d55799372bd0';
+const RAW_BASE   = `https://raw.githubusercontent.com/${REPO}/main`;
+
+let chatHistory = [];
+let generatedPost = null;
+let allPosts = [];
+
+// ── Auth ───────────────────────────────────────────────────────────────────
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  const pw  = document.getElementById('pw-input').value;
+  const key = document.getElementById('key-input').value.trim();
+  const pat = document.getElementById('pat-input').value.trim();
+
+  const hash = await sha256(pw);
+  if (hash !== PW_HASH) {
+    const err = document.getElementById('login-error');
+    err.style.display = 'block';
+    err.textContent = 'Incorrect password';
+    document.getElementById('pw-input').value = '';
+    return;
+  }
+  if (key) sessionStorage.setItem('iys_ant_key', key);
+  if (pat) sessionStorage.setItem('iy_pat', pat);
+  sessionStorage.setItem('iys_ops_auth', '1');
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  init();
+}
+
+function doLogout() {
+  sessionStorage.removeItem('iys_ops_auth');
+  location.reload();
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+function init() {
+  loadQueue();
+  loadIntel();
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  const tabs = document.querySelectorAll('.tab');
+  const idx = ['overview','social','chat','intel'].indexOf(name);
+  if (idx >= 0) tabs[idx].classList.add('active');
+}
+
+// ── GitHub data ─────────────────────────────────────────────────────────────
+function pat() { return sessionStorage.getItem('iy_pat') || ''; }
+function antKey() { return sessionStorage.getItem('iys_ant_key') || ''; }
+
+async function fetchRaw(path) {
+  const headers = {};
+  const p = pat();
+  if (p) headers['Authorization'] = `token ${p}`;
+  const r = await fetch(`${RAW_BASE}/${path}`, { headers });
+  if (!r.ok) throw new Error(`${path}: ${r.status}`);
+  return r.json();
+}
+
+async function githubPut(path, content, message) {
+  const p = pat();
+  if (!p) throw new Error('GitHub PAT required to save. Enter it on the login screen.');
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+  // Get current sha
+  let sha = null;
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+      headers: { Authorization: `token ${p}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (r.ok) { const d = await r.json(); sha = d.sha; }
+  } catch {}
+  const body = { message, content: b64 };
+  if (sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${p}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const d = await r.json(); throw new Error(d.message || 'GitHub write failed'); }
+}
+
+// ── Queue ───────────────────────────────────────────────────────────────────
+async function loadQueue() {
+  try {
+    allPosts = await fetchRaw('social/upload_queue.json');
+    renderQueue(allPosts);
+    renderOverview(allPosts);
+  } catch (e) {
+    document.getElementById('posts-list').innerHTML = `<div class="empty">Could not load posts: ${e.message}</div>`;
+  }
+}
+
+function renderQueue(posts) {
+  const el = document.getElementById('posts-list');
+  if (!posts.length) { el.innerHTML = '<div class="empty">No posts in queue yet.</div>'; return; }
+  el.innerHTML = [...posts].reverse().map(postCard).join('');
+}
+
+function renderOverview(posts) {
+  const total   = posts.length;
+  const posted  = posts.filter(p => p.status === 'posted').length;
+  const pending = posts.filter(p => p.status === 'pending').length;
+  document.getElementById('stat-total').textContent  = total;
+  document.getElementById('stat-posted').textContent = posted;
+  document.getElementById('stat-pending').textContent = pending;
+
+  const recent = [...posts].reverse().slice(0, 3);
+  const el = document.getElementById('overview-posts');
+  el.innerHTML = recent.map(postCard).join('') || '<div class="empty">No posts yet.</div>';
+}
+
+function postCard(p) {
+  const cls    = p.status === 'posted' ? 'posted' : 'pending';
+  const badge  = p.status === 'posted'
+    ? '<span class="badge badge-green">Published</span>'
+    : '<span class="badge badge-indigo">Pending</span>';
+  const slides = p.slides ? `<span class="slides-count">${p.slides.length} slides</span>` : '';
+  const cap    = (p.caption || '').replace(/\n{2,}[\s\S]*$/, '').trim();
+  return `
+    <div class="post-card">
+      <div class="post-card-bar ${cls}"></div>
+      <div class="post-card-body">
+        <div class="post-headline">${esc(p.headline || 'Untitled')}</div>
+        <div class="post-date">${esc(p.date || '')}</div>
+        <div class="post-caption">${esc(cap)}</div>
+        <div class="post-footer">${badge}${slides}</div>
+      </div>
+    </div>`;
+}
+
+// ── Make.com trigger ────────────────────────────────────────────────────────
+async function triggerMake() {
+  const status = document.getElementById('trig-make-status');
+  const pending = allPosts.filter(p => p.status === 'pending');
+  if (!pending.length) { status.textContent = 'No pending posts'; status.style.color = 'var(--amber)'; return; }
+
+  status.textContent = 'Triggering…';
+  status.style.color = 'var(--indigo)';
+  try {
+    const next = pending[0];
+    const payload = { caption: next.caption || '', headline: next.headline || '' };
+    if (next.slide_paths) next.slide_paths.forEach((p, i) => { payload[`slide_${i+1}`] = p; });
+    const r = await fetch(MAKE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    if (r.ok) { status.textContent = 'Posted'; status.style.color = 'var(--green)'; }
+    else { status.textContent = `Error ${r.status}`; status.style.color = 'var(--red)'; }
+  } catch (e) {
+    status.textContent = 'Failed: ' + e.message;
+    status.style.color = 'var(--red)';
+  }
+}
+
+// ── Generate post via Claude ────────────────────────────────────────────────
+const GEN_SYSTEM = `You write Instagram carousel content for ImproveYourSite.com, an Australian web agency that builds websites for small businesses.
+
+Business: James Burke runs the agency. Packages: Scan & Fix $3,000 | Complete Build $5,000 | Premium Growth $10,000.
+Key differentiator: automated blog built into every site.
+Audience: Australian small business owners 35–55, time-poor, skeptical of marketing.
+They respond to: specific numbers, local references (e.g. "in Bathurst", "regional NSW"), direct language, content that treats them like intelligent adults.
+They do NOT respond to: corporate speak, buzzwords, excessive hype, obvious AI copy.
+
+Contact: hello@improveyoursite.com | improveyoursite.com
+
+Return ONLY valid JSON (no markdown fences):
+{
+  "headline": "Hook under 8 words",
+  "slides": ["slide 1 text (max 15 words)", "slide 2", "slide 3", "slide 4", "slide 5"],
+  "caption": "Instagram caption 2–4 sentences, conversational, ends with CTA. No hashtags.",
+  "hashtags": "#tag1 #tag2 #tag3 #tag4 #tag5 #tag6 #tag7"
+}
+
+Hashtags: 5–8 max. Must include 2–3 location tags: #smallbusinessaustralia #australianbusiness #sydneybusiness #melbournebusiness #brisbanebusiness #seoaustralia`;
+
+async function generatePost() {
+  const key = antKey();
+  if (!key) { alert('Enter your Anthropic API key on the login screen first.'); return; }
+
+  const theme    = document.getElementById('gen-theme').value;
+  const industry = document.getElementById('gen-industry').value;
+  const btn      = document.getElementById('gen-btn');
+  const res      = document.getElementById('gen-result');
+  const acts     = document.getElementById('gen-actions');
+
+  btn.textContent = 'Generating…';
+  btn.disabled = true;
+  res.classList.remove('visible');
+  acts.style.display = 'none';
+
+  const prompt = `Write a carousel post. Theme: ${theme}. Industry focus: ${industry}. Today is ${new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}.`;
+
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 800, system: GEN_SYSTEM, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error?.message || `API error ${r.status}`);
+
+    let raw = data.content[0].text.trim();
+    if (raw.startsWith('```')) { raw = raw.split('```')[1]; if (raw.startsWith('json')) raw = raw.slice(4); }
+    raw = raw.trim();
+    generatedPost = JSON.parse(raw);
+    generatedPost.caption = generatedPost.caption + '\n\n' + (generatedPost.hashtags || '');
+    delete generatedPost.hashtags;
+
+    res.textContent = `HEADLINE: ${generatedPost.headline}\n\nSLIDES:\n${generatedPost.slides.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\nCAPTION:\n${generatedPost.caption}`;
+    res.classList.add('visible');
+    acts.style.display = 'flex';
+  } catch (e) {
+    res.textContent = 'Error: ' + e.message;
+    res.classList.add('visible');
+  }
+
+  btn.textContent = 'Generate with Claude';
+  btn.disabled = false;
+}
+
+async function saveGeneratedPost() {
+  if (!generatedPost) return;
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    const entry = { date: today, ...generatedPost, status: 'pending' };
+    allPosts.push(entry);
+    await githubPut('social/upload_queue.json', allPosts, `Add generated post: ${generatedPost.headline}`);
+    document.getElementById('gen-result').classList.remove('visible');
+    document.getElementById('gen-actions').style.display = 'none';
+    generatedPost = null;
+    renderQueue(allPosts);
+    renderOverview(allPosts);
+    alert('Post saved to queue.');
+  } catch (e) {
+    alert('Could not save: ' + e.message);
+  }
+}
+
+// ── Chat ────────────────────────────────────────────────────────────────────
+const CHAT_SYSTEM = `You are the IYS (ImproveYourSite.com) operations assistant for James Burke.
+
+Business context:
+- Web agency selling to Australian small businesses
+- Packages: Scan & Fix $3,000 | Complete Build $5,000 | Premium Growth $10,000
+- Key differentiator: every site includes an automated blog
+- 8 demo sites: Healthcare (Hillcrest Clinic), Trades (Bathurst Plumbing), Finance (Pinnacle Financial), Retail (The Loft Boutique), Solar (SunVolt), Hospitality (Stonebridge Estate), Consulting (Apex Strategy), Accounting (Clearview)
+- Instagram posting schedule: 2x per day, morning carousel + afternoon carousel via Make.com
+- Contact: hello@improveyoursite.com | 0432 268 865
+- Target audience: Australian small business owners, tradies, GP clinics, accountants, consultants, retail boutiques
+
+Content strategy:
+- 5–8 hashtags per post, always include location tags
+- No hype, no em dashes, no excessive exclamations
+- Speak like a smart local who genuinely knows business websites
+- Content pillars: website mistakes SMBs make, why local SEO matters, what a converting website looks like, behind the scenes of building sites, Australian small business growth tips
+
+You can help with: Instagram content, captions, post ideas, strategy, business advice, content planning, hashtag research, and anything related to running the agency.
+
+Keep responses concise and actionable. This is a chat panel.`;
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg   = input.value.trim();
+  if (!msg) return;
+  const key = antKey();
+  if (!key) { appendMsg('assistant', 'Anthropic API key not set. Log out and log in again with your key.'); return; }
+
+  input.value = '';
+  input.style.height = 'auto';
+  appendMsg('user', msg);
+  chatHistory.push({ role: 'user', content: msg });
+  showThinking();
+
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: CHAT_SYSTEM, messages: chatHistory.slice(-20) })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error?.message || `API ${r.status}`);
+
+    const reply = data.content[0].text;
+    chatHistory.push({ role: 'assistant', content: reply });
+    removeThinking();
+    appendMsg('assistant', reply);
+  } catch (e) {
+    removeThinking();
+    appendMsg('assistant', 'Error: ' + e.message);
+  }
+}
+
+function sendSuggestion(text) {
+  document.getElementById('chat-input').value = text;
+  showTab('chat');
+  sendChat();
+}
+
+function appendMsg(role, text) {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  div.innerHTML = esc(text).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showThinking() {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.id = 'thinking';
+  div.className = 'chat-msg thinking';
+  div.textContent = 'Thinking…';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+function removeThinking() { document.getElementById('thinking')?.remove(); }
+
+function clearChat() {
+  chatHistory = [];
+  document.getElementById('chat-messages').innerHTML = `<div class="chat-msg assistant">Chat cleared. What do you need?</div>`;
+}
+
+// ── Intel ───────────────────────────────────────────────────────────────────
+async function loadIntel() {
+  const el = document.getElementById('intel-content');
+  try {
+    const report = await fetchRaw('social/intel_report.json');
+    el.innerHTML = renderIntel(report);
+  } catch (e) {
+    el.innerHTML = `<div class="empty">Could not load intel report: ${e.message}</div>`;
+  }
+}
+
+function renderIntel(r) {
+  let html = '';
+
+  if (r.trending_topics?.length) {
+    html += `<div class="intel-section"><div class="intel-title">Trending Topics</div>`;
+    r.trending_topics.forEach(t => { html += `<div class="intel-item">${esc(t)}</div>`; });
+    html += '</div>';
+  }
+
+  if (r.content_gaps?.length) {
+    html += `<div class="intel-section"><div class="intel-title">Content Gaps — what competitors aren't covering</div>`;
+    r.content_gaps.forEach(g => { html += `<div class="intel-item">${esc(g)}</div>`; });
+    html += '</div>';
+  }
+
+  if (r.recommended_angles?.length) {
+    html += `<div class="intel-section"><div class="intel-title">Recommended Content Angles</div>`;
+    r.recommended_angles.forEach(a => {
+      const urgency = a.urgency === 'trending_now' ? '<span class="intel-tag">Trending now</span>' : '';
+      html += `<div class="intel-item">
+        <div class="hook">${esc(a.hook || '')}${urgency}</div>
+        <div class="angle">${esc(a.angle || '')}</div>
+        <div class="why">${esc(a.why_it_wins || '')}</div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  if (r.competitor_themes?.length) {
+    html += `<div class="intel-section"><div class="intel-title">What Competitors Are Posting</div>`;
+    r.competitor_themes.forEach(t => { html += `<div class="intel-item">${esc(t)}</div>`; });
+    html += '</div>';
+  }
+
+  return html || '<div class="empty">No intel data found in report.</div>';
+}
+
+// ── Utils ───────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+
+// ── Startup ─────────────────────────────────────────────────────────────────
+if (sessionStorage.getItem('iys_ops_auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  init();
+} else {
+  // Pre-fill PAT from admin.html session if available
+  const existingPat = sessionStorage.getItem('iy_pat');
+  if (existingPat) document.getElementById('pat-input').value = existingPat;
+  const existingKey = sessionStorage.getItem('iys_ant_key');
+  if (existingKey) document.getElementById('key-input').value = existingKey;
+}
+</script>
+
+</body>
+</html>
