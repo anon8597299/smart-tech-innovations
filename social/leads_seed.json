@@ -925,5 +925,278 @@
     "website": "https://rockhamptoncleaningservices.com.au",
     "phone": "",
     "place_id": "seed_rocky_cleaning"
+  },
+
+  {
+    "business_name": "Hunter Plumbing Services",
+    "industry": "plumber",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunterplumbingservices.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_plumbing_newcastle"
+  },
+  {
+    "business_name": "Watts Electrical Newcastle",
+    "industry": "electrician",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://wattselectrical.com.au",
+    "phone": "",
+    "place_id": "seed_watts_electrical_newcastle"
+  },
+  {
+    "business_name": "Coastline Building Group",
+    "industry": "builder",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://coastlinebuildinggroup.com.au",
+    "phone": "",
+    "place_id": "seed_coastline_building_newcastle"
+  },
+  {
+    "business_name": "Hunter Valley Landscaping",
+    "industry": "landscaper",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://huntervalleylandscaping.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_valley_landscaping"
+  },
+  {
+    "business_name": "Newcastle Auto Specialists",
+    "industry": "mechanic",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://newcastleautospecialists.com.au",
+    "phone": "",
+    "place_id": "seed_newcastle_auto_specialists"
+  },
+  {
+    "business_name": "Hunter Accounting Group",
+    "industry": "accountant",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunteraccountinggroup.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_accounting_newcastle"
+  },
+  {
+    "business_name": "Coastline Physiotherapy",
+    "industry": "physiotherapist",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://coastlinephysiotherapy.com.au",
+    "phone": "",
+    "place_id": "seed_coastline_physio_newcastle"
+  },
+  {
+    "business_name": "Hunter Home Loans",
+    "industry": "mortgage broker",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunterhomeloans.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_home_loans"
+  },
+  {
+    "business_name": "Newcastle Cleaning Co",
+    "industry": "cleaning service",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://newcastlecleaningco.com.au",
+    "phone": "",
+    "place_id": "seed_newcastle_cleaning_co"
+  },
+  {
+    "business_name": "Hunter Solar Energy",
+    "industry": "solar installer",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://huntersolarnergy.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_solar_newcastle"
+  },
+
+  {
+    "business_name": "Illawarra Plumbing Services",
+    "industry": "plumber",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarraplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_plumbing"
+  },
+  {
+    "business_name": "Wollongong Electrical Services",
+    "industry": "electrician",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://wollongongelectricalservices.com.au",
+    "phone": "",
+    "place_id": "seed_wollongong_electrical"
+  },
+  {
+    "business_name": "South Coast Builders",
+    "industry": "builder",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://southcoastbuilders.com.au",
+    "phone": "",
+    "place_id": "seed_south_coast_builders_wollongong"
+  },
+  {
+    "business_name": "Illawarra Landscaping Co",
+    "industry": "landscaper",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarralandscaping.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_landscaping"
+  },
+  {
+    "business_name": "South Coast Auto Care",
+    "industry": "mechanic",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://southcoastautocare.com.au",
+    "phone": "",
+    "place_id": "seed_south_coast_auto_wollongong"
+  },
+  {
+    "business_name": "Illawarra Business Accounting",
+    "industry": "accountant",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarraaccounting.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_accounting"
+  },
+  {
+    "business_name": "Wollongong Physiotherapy Centre",
+    "industry": "physiotherapist",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://wollongongphysiocentre.com.au",
+    "phone": "",
+    "place_id": "seed_wollongong_physio"
+  },
+  {
+    "business_name": "Illawarra Home Loans",
+    "industry": "mortgage broker",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarrahomeloans.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_home_loans"
+  },
+  {
+    "business_name": "Wollongong Cleaning Solutions",
+    "industry": "cleaning service",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://wollongongcleaningsolutions.com.au",
+    "phone": "",
+    "place_id": "seed_wollongong_cleaning"
+  },
+  {
+    "business_name": "South Coast Solar",
+    "industry": "solar installer",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://southcoastsolar.com.au",
+    "phone": "",
+    "place_id": "seed_south_coast_solar_wollongong"
+  },
+
+  {
+    "business_name": "Geelong Plumbing Co",
+    "industry": "plumber",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongplumbingco.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_plumbing_co"
+  },
+  {
+    "business_name": "Geelong Electrical Group",
+    "industry": "electrician",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongelectricalgroup.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_electrical_group"
+  },
+  {
+    "business_name": "Surf Coast Building Services",
+    "industry": "builder",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://surfcoastbuilding.com.au",
+    "phone": "",
+    "place_id": "seed_surf_coast_building_geelong"
+  },
+  {
+    "business_name": "Geelong Landscaping Specialists",
+    "industry": "landscaper",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelonglandscaping.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_landscaping"
+  },
+  {
+    "business_name": "Geelong Auto Care Centre",
+    "industry": "mechanic",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongautocare.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_auto_care"
+  },
+  {
+    "business_name": "Geelong Business Accountants",
+    "industry": "accountant",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongbusinessaccountants.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_business_accountants"
+  },
+  {
+    "business_name": "Geelong Physiotherapy & Sports",
+    "industry": "physiotherapist",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongphysiotherapy.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_physio"
+  },
+  {
+    "business_name": "Geelong Mortgage Advisors",
+    "industry": "mortgage broker",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongmortgageadvisors.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_mortgage"
+  },
+  {
+    "business_name": "Geelong Cleaning Services",
+    "industry": "cleaning service",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongcleaningservices.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_cleaning"
+  },
+  {
+    "business_name": "Geelong Solar Solutions",
+    "industry": "solar installer",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongsolarsolutions.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_solar"
   }
 ]
