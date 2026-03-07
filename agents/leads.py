@@ -27,7 +27,9 @@ Schedule: Daily 10:00 AM AEST (new leads) + Tuesday 11:00 AM (follow-ups)
 
 from __future__ import annotations
 
+import base64
 import html as html_lib
+import imaplib
 import json
 import os
 import random
@@ -37,6 +39,8 @@ import time
 import urllib.parse
 import urllib.request
 from datetime import date, timedelta
+from email import message_from_bytes
+from email.header import decode_header as _decode_header
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -341,7 +345,162 @@ def _generic_issues(industry: str, city: str) -> list[str]:
     return [template.replace("{city}", city)]
 
 
-SEED_FILE = Path(__file__).parent.parent / "social" / "leads_seed.json"
+SEED_FILE     = Path(__file__).parent.parent / "social" / "leads_seed.json"
+CALENDAR_FILE = Path(__file__).parent.parent / "social" / "leads_calendar.json"
+GITHUB_REPO   = "anon8597299/smart-tech-innovations"
+
+
+# ── Calendar helpers ──────────────────────────────────────────────────────────
+
+def _read_calendar() -> list[dict]:
+    if CALENDAR_FILE.exists():
+        try:
+            return json.loads(CALENDAR_FILE.read_text())
+        except Exception:
+            pass
+    return []
+
+
+def _write_calendar(cal_leads: list[dict]):
+    """Write calendar locally and push to GitHub so ops.html picks it up."""
+    CALENDAR_FILE.write_text(json.dumps(cal_leads, indent=2) + "\n")
+    pat = os.environ.get("GITHUB_PAT", "")
+    if not pat:
+        return
+    content_b64 = base64.b64encode(
+        (json.dumps(cal_leads, indent=2) + "\n").encode()
+    ).decode()
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/social/leads_calendar.json"
+    sha = None
+    try:
+        req = urllib.request.Request(api_url, headers={
+            "Authorization": f"token {pat}",
+            "Accept": "application/vnd.github.v3+json",
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            sha = json.loads(resp.read()).get("sha")
+    except Exception:
+        pass
+    body: dict = {"message": "Auto: sync leads calendar from reply check", "content": content_b64}
+    if sha:
+        body["sha"] = sha
+    try:
+        req = urllib.request.Request(
+            api_url,
+            data=json.dumps(body).encode(),
+            headers={
+                "Authorization": f"token {pat}",
+                "Accept": "application/vnd.github.v3+json",
+                "Content-Type": "application/json",
+            },
+            method="PUT",
+        )
+        urllib.request.urlopen(req, timeout=10)
+    except Exception:
+        pass  # Non-critical — file is still written locally
+
+
+# ── Email reply checker ───────────────────────────────────────────────────────
+
+def _decode_subject(raw: str) -> str:
+    parts = _decode_header(raw)
+    out = ""
+    for chunk, enc in parts:
+        if isinstance(chunk, bytes):
+            out += chunk.decode(enc or "utf-8", errors="ignore")
+        else:
+            out += chunk
+    return out
+
+
+def _check_email_replies() -> int:
+    """
+    Connect to hello@improveyoursite.com via IMAP and check for replies
+    from leads in our database. For each match:
+      - Update lead status to 'replied' in SQLite
+      - Add a calendar entry to leads_calendar.json and push to GitHub
+
+    Requires HELLO_EMAIL_USER and HELLO_EMAIL_PASS in .env.
+    hello@improveyoursite.com on Google Workspace → use an App Password.
+    """
+    import sqlite3
+
+    user = os.environ.get("HELLO_EMAIL_USER", "")
+    passwd = os.environ.get("HELLO_EMAIL_PASS", "")
+    if not user or not passwd:
+        return 0
+
+    added = 0
+    try:
+        mail = imaplib.IMAP4_SSL("imap.gmail.com")
+        mail.login(user, passwd)
+        mail.select("INBOX")
+
+        # Only look at unseen (new) emails
+        _, data = mail.search(None, "UNSEEN")
+        msg_ids = data[0].split()
+        if not msg_ids:
+            mail.logout()
+            return 0
+
+        cal_leads = _read_calendar()
+
+        for msg_id in msg_ids:
+            _, msg_data = mail.fetch(msg_id, "(RFC822)")
+            msg = message_from_bytes(msg_data[0][1])
+
+            # Extract sender address
+            from_raw = msg.get("From", "")
+            m = re.search(r"<([^>]+)>", from_raw)
+            sender = m.group(1).lower() if m else from_raw.lower().strip()
+
+            subject = _decode_subject(msg.get("Subject", ""))
+            today = date.today().isoformat()
+
+            # Is this sender a known lead?
+            conn = sqlite3.connect(db.DB_PATH)
+            row = conn.execute(
+                "SELECT id, business_name, industry, city, phone "
+                "FROM leads WHERE LOWER(email)=?",
+                (sender,),
+            ).fetchone()
+
+            if row:
+                lead_id, biz_name, industry, city, phone = row
+                # Update status → replied (only if still in contacted/new state)
+                conn.execute(
+                    "UPDATE leads SET status='replied' WHERE id=? AND status IN ('contacted','new')",
+                    (lead_id,),
+                )
+                conn.commit()
+
+                # Add to calendar (one entry per lead per day)
+                cal_id = f"reply_{lead_id}_{today}"
+                if not any(c.get("id") == cal_id for c in cal_leads):
+                    cal_leads.append({
+                        "id": cal_id,
+                        "date": today,
+                        "business_name": biz_name,
+                        "industry": industry or "",
+                        "city": city or "",
+                        "phone": phone or "",
+                        "email": sender,
+                        "status": "replied",
+                        "notes": f'Replied to outreach email — "{subject[:80]}"',
+                    })
+                    added += 1
+
+            conn.close()
+
+        if added:
+            _write_calendar(cal_leads)
+
+        mail.logout()
+
+    except Exception:
+        pass  # Don't crash the agent if inbox check fails
+
+    return added
 
 
 def _load_seed_targets() -> list[dict]:
@@ -779,6 +938,10 @@ class LeadsAgent(BaseAgent):
 
     def run(self):
         _ensure_leads_table()
+        # Check inbox for replies first — so calendar is fresh before outreach runs
+        new_replies = _check_email_replies()
+        if new_replies:
+            self.log_info(f"{new_replies} new reply/replies found — added to leads calendar")
         self._run_new_outreach()
         self._run_followups()
         self._run_winbacks()
