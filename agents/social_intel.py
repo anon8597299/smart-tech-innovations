@@ -276,7 +276,7 @@ Angles must be contrarian or add genuine value — not generic tips everyone pos
     client = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=800,
+        max_tokens=1500,
         messages=[{"role": "user", "content": prompt}],
     )
     raw = response.content[0].text.strip()
@@ -284,8 +284,11 @@ Angles must be contrarian or add genuine value — not generic tips everyone pos
         raw = raw.split("```")[1]
         if raw.startswith("json"):
             raw = raw[4:]
-
-    result = json.loads(raw.strip())
+    raw = raw.strip()
+    try:
+        result = json.loads(raw)
+    except Exception:
+        return {"gaps": _cached_gaps(), "angles": _cached_angles()}
     return {
         "gaps":   result.get("gaps", []),
         "angles": result.get("angles", []),
