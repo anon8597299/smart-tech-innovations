@@ -1198,5 +1198,733 @@
     "website": "https://geelongsolarsolutions.com.au",
     "phone": "",
     "place_id": "seed_geelong_solar"
+  },
+
+  {
+    "business_name": "Bathurst Real Estate",
+    "industry": "real estate agent",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathurstproperty.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_real_estate"
+  },
+  {
+    "business_name": "Orange Real Estate Co",
+    "industry": "real estate agent",
+    "city": "Orange",
+    "email": "",
+    "website": "https://orangerealestated.com.au",
+    "phone": "",
+    "place_id": "seed_orange_real_estate"
+  },
+  {
+    "business_name": "Hunter Property Group",
+    "industry": "real estate agent",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunterpropertygroup.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_property_newcastle"
+  },
+  {
+    "business_name": "Illawarra Realty",
+    "industry": "real estate agent",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarrarealty.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_realty"
+  },
+  {
+    "business_name": "Geelong Property Advisors",
+    "industry": "real estate agent",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongpropertyadvisors.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_property"
+  },
+  {
+    "business_name": "Sunshine Coast Realty Group",
+    "industry": "real estate agent",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastrealtygroup.com.au",
+    "phone": "",
+    "place_id": "seed_sc_realty_group"
+  },
+  {
+    "business_name": "Toowoomba Property Centre",
+    "industry": "real estate agent",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombapropertycentre.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_property"
+  },
+  {
+    "business_name": "Dubbo Real Estate Agency",
+    "industry": "real estate agent",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://dubborealestateagency.com.au",
+    "phone": "",
+    "place_id": "seed_dubbo_real_estate"
+  },
+  {
+    "business_name": "Penrith Property Group",
+    "industry": "real estate agent",
+    "city": "Penrith",
+    "email": "",
+    "website": "https://penrithpropertygroup.com.au",
+    "phone": "",
+    "place_id": "seed_penrith_property"
+  },
+  {
+    "business_name": "Logan Real Estate Co",
+    "industry": "real estate agent",
+    "city": "Logan",
+    "email": "",
+    "website": "https://loganrealestated.com.au",
+    "phone": "",
+    "place_id": "seed_logan_real_estate"
+  },
+
+  {
+    "business_name": "Bathurst Family Dental",
+    "industry": "dentist",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathurstfamilydental.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_dental"
+  },
+  {
+    "business_name": "Orange Dental Centre",
+    "industry": "dentist",
+    "city": "Orange",
+    "email": "",
+    "website": "https://orangedentalcentre.com.au",
+    "phone": "",
+    "place_id": "seed_orange_dental"
+  },
+  {
+    "business_name": "Newcastle Dental Group",
+    "industry": "dentist",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://newcastledentalgroup.com.au",
+    "phone": "",
+    "place_id": "seed_newcastle_dental"
+  },
+  {
+    "business_name": "Illawarra Dental Care",
+    "industry": "dentist",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarradentalcare.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_dental"
+  },
+  {
+    "business_name": "Geelong Dental Studio",
+    "industry": "dentist",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongdentalstudio.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_dental"
+  },
+  {
+    "business_name": "Sunshine Coast Dental",
+    "industry": "dentist",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastdental.com.au",
+    "phone": "",
+    "place_id": "seed_sc_dental"
+  },
+  {
+    "business_name": "Townsville Family Dental",
+    "industry": "dentist",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://townsvillefamilydental.com.au",
+    "phone": "",
+    "place_id": "seed_townsville_dental"
+  },
+  {
+    "business_name": "Tamworth Dental Practice",
+    "industry": "dentist",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://tamworthdentalpractice.com.au",
+    "phone": "",
+    "place_id": "seed_tamworth_dental"
+  },
+  {
+    "business_name": "Penrith Dental Care",
+    "industry": "dentist",
+    "city": "Penrith",
+    "email": "",
+    "website": "https://penrithdentalcare.com.au",
+    "phone": "",
+    "place_id": "seed_penrith_dental"
+  },
+  {
+    "business_name": "Toowoomba Dental Group",
+    "industry": "dentist",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombadentalgroup.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_dental"
+  },
+
+  {
+    "business_name": "The Corner Cafe Bathurst",
+    "industry": "cafe",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://thecornercafebathurst.com.au",
+    "phone": "",
+    "place_id": "seed_corner_cafe_bathurst"
+  },
+  {
+    "business_name": "Blackboard Espresso Orange",
+    "industry": "cafe",
+    "city": "Orange",
+    "email": "",
+    "website": "https://blackboardespresso.com.au",
+    "phone": "",
+    "place_id": "seed_blackboard_espresso_orange"
+  },
+  {
+    "business_name": "The Grind Newcastle",
+    "industry": "cafe",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://thegrindnewcastle.com.au",
+    "phone": "",
+    "place_id": "seed_grind_newcastle"
+  },
+  {
+    "business_name": "Harbour View Cafe Wollongong",
+    "industry": "cafe",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://harbourviewcafe.com.au",
+    "phone": "",
+    "place_id": "seed_harbour_view_cafe_wollongong"
+  },
+  {
+    "business_name": "Bayside Espresso Geelong",
+    "industry": "cafe",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://baysideespresso.com.au",
+    "phone": "",
+    "place_id": "seed_bayside_espresso_geelong"
+  },
+  {
+    "business_name": "Noosa Coffee House",
+    "industry": "cafe",
+    "city": "Noosa",
+    "email": "",
+    "website": "https://noosacoffeehouse.com.au",
+    "phone": "",
+    "place_id": "seed_noosa_coffee_house"
+  },
+  {
+    "business_name": "The Daily Grind Toowoomba",
+    "industry": "cafe",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://thedailygriindtoowoomba.com.au",
+    "phone": "",
+    "place_id": "seed_daily_grind_toowoomba"
+  },
+  {
+    "business_name": "Riverbank Cafe Wagga Wagga",
+    "industry": "cafe",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://riverbankcafe.com.au",
+    "phone": "",
+    "place_id": "seed_riverbank_cafe_wagga"
+  },
+  {
+    "business_name": "Mountain Grounds Armidale",
+    "industry": "cafe",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://mountaingrounds.com.au",
+    "phone": "",
+    "place_id": "seed_mountain_grounds_armidale"
+  },
+  {
+    "business_name": "The Press Room Dubbo",
+    "industry": "cafe",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://thepressroomdubbo.com.au",
+    "phone": "",
+    "place_id": "seed_press_room_dubbo"
+  },
+
+  {
+    "business_name": "Blush Beauty Bar Newcastle",
+    "industry": "beauty salon",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://blushbeautybar.com.au",
+    "phone": "",
+    "place_id": "seed_blush_beauty_newcastle"
+  },
+  {
+    "business_name": "Glow Beauty Studio Wollongong",
+    "industry": "beauty salon",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://glowbeautystudio.com.au",
+    "phone": "",
+    "place_id": "seed_glow_beauty_wollongong"
+  },
+  {
+    "business_name": "The Beauty Room Geelong",
+    "industry": "beauty salon",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://thebeautyroomgeelong.com.au",
+    "phone": "",
+    "place_id": "seed_beauty_room_geelong"
+  },
+  {
+    "business_name": "Luxe Beauty Lounge Sunshine Coast",
+    "industry": "beauty salon",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://luxebeautylounge.com.au",
+    "phone": "",
+    "place_id": "seed_luxe_beauty_sc"
+  },
+  {
+    "business_name": "Skin Lab Gold Coast",
+    "industry": "beauty salon",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://skinlabgoldcoast.com.au",
+    "phone": "",
+    "place_id": "seed_skin_lab_gc"
+  },
+  {
+    "business_name": "Pure Beauty Toowoomba",
+    "industry": "beauty salon",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://purebeautytoowoomba.com.au",
+    "phone": "",
+    "place_id": "seed_pure_beauty_toowoomba"
+  },
+  {
+    "business_name": "Bathurst Beauty Studio",
+    "industry": "beauty salon",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathurstbeautystudio.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_beauty"
+  },
+  {
+    "business_name": "The Beauty Collective Tamworth",
+    "industry": "beauty salon",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://beautycollectivetamworth.com.au",
+    "phone": "",
+    "place_id": "seed_beauty_collective_tamworth"
+  },
+  {
+    "business_name": "Cairns Beauty Bar",
+    "industry": "beauty salon",
+    "city": "Cairns",
+    "email": "",
+    "website": "https://cairnsbeautybar.com.au",
+    "phone": "",
+    "place_id": "seed_cairns_beauty_bar"
+  },
+  {
+    "business_name": "Townsville Beauty Studio",
+    "industry": "beauty salon",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://townsvillebeautystudio.com.au",
+    "phone": "",
+    "place_id": "seed_townsville_beauty"
+  },
+
+  {
+    "business_name": "Hunter Pest Control",
+    "industry": "pest control",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunterpestcontrol.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_pest_newcastle"
+  },
+  {
+    "business_name": "Illawarra Pest Solutions",
+    "industry": "pest control",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarrapestsolutions.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_pest"
+  },
+  {
+    "business_name": "Geelong Pest Management",
+    "industry": "pest control",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongpestmanagement.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_pest"
+  },
+  {
+    "business_name": "Bathurst Pest Services",
+    "industry": "pest control",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathurstpestservices.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_pest"
+  },
+  {
+    "business_name": "North QLD Pest Control",
+    "industry": "pest control",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://northqldpestcontrol.com.au",
+    "phone": "",
+    "place_id": "seed_north_qld_pest"
+  },
+  {
+    "business_name": "Sunshine Coast Pest Co",
+    "industry": "pest control",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastpestco.com.au",
+    "phone": "",
+    "place_id": "seed_sc_pest_co"
+  },
+  {
+    "business_name": "Gold Coast Pest Solutions",
+    "industry": "pest control",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://goldcoastpestsolutions.com.au",
+    "phone": "",
+    "place_id": "seed_gc_pest_solutions"
+  },
+  {
+    "business_name": "Central West Pest Control",
+    "industry": "pest control",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://centralwestpestcontrol.com.au",
+    "phone": "",
+    "place_id": "seed_central_west_pest"
+  },
+  {
+    "business_name": "Riverina Pest Management",
+    "industry": "pest control",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://riverinapestmanagement.com.au",
+    "phone": "",
+    "place_id": "seed_riverina_pest"
+  },
+  {
+    "business_name": "Toowoomba Pest Control",
+    "industry": "pest control",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombarepestcontrol.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_pest"
+  },
+
+  {
+    "business_name": "Newcastle Chiropractic Centre",
+    "industry": "chiropractor",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://newcastlechiropracticcentre.com.au",
+    "phone": "",
+    "place_id": "seed_newcastle_chiro"
+  },
+  {
+    "business_name": "Illawarra Chiropractic",
+    "industry": "chiropractor",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarrachiropractic.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_chiro"
+  },
+  {
+    "business_name": "Geelong Chiropractic & Wellness",
+    "industry": "chiropractor",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongchiro.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_chiro"
+  },
+  {
+    "business_name": "Sunshine Coast Chiropractic",
+    "industry": "chiropractor",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastchiro.com.au",
+    "phone": "",
+    "place_id": "seed_sc_chiro"
+  },
+  {
+    "business_name": "Gold Coast Chiropractic Centre",
+    "industry": "chiropractor",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://goldcoastchiropractic.com.au",
+    "phone": "",
+    "place_id": "seed_gc_chiro"
+  },
+  {
+    "business_name": "Toowoomba Chiro & Health",
+    "industry": "chiropractor",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombachiro.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_chiro"
+  },
+  {
+    "business_name": "Bathurst Chiropractic",
+    "industry": "chiropractor",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathurstchiropractic.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_chiro"
+  },
+  {
+    "business_name": "New England Chiropractic",
+    "industry": "chiropractor",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://newenglandchiro.com.au",
+    "phone": "",
+    "place_id": "seed_new_england_chiro"
+  },
+  {
+    "business_name": "Townsville Chiropractic Centre",
+    "industry": "chiropractor",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://townsvillechiro.com.au",
+    "phone": "",
+    "place_id": "seed_townsville_chiro"
+  },
+  {
+    "business_name": "Cairns Chiropractic & Sports",
+    "industry": "chiropractor",
+    "city": "Cairns",
+    "email": "",
+    "website": "https://cairnschiro.com.au",
+    "phone": "",
+    "place_id": "seed_cairns_chiro"
+  },
+
+  {
+    "business_name": "Hunter Financial Planning",
+    "industry": "financial planner",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://hunterfinancialplanning.com.au",
+    "phone": "",
+    "place_id": "seed_hunter_financial_planning"
+  },
+  {
+    "business_name": "Illawarra Wealth Advisors",
+    "industry": "financial planner",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://illawarrawealthadvisors.com.au",
+    "phone": "",
+    "place_id": "seed_illawarra_wealth"
+  },
+  {
+    "business_name": "Geelong Financial Group",
+    "industry": "financial planner",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelongfinancialgroup.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_financial"
+  },
+  {
+    "business_name": "Sunshine Coast Wealth Management",
+    "industry": "financial planner",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://scwealthmanagement.com.au",
+    "phone": "",
+    "place_id": "seed_sc_wealth_mgmt"
+  },
+  {
+    "business_name": "Gold Coast Financial Advisors",
+    "industry": "financial planner",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://goldcoastfinancialadvisors.com.au",
+    "phone": "",
+    "place_id": "seed_gc_financial"
+  },
+  {
+    "business_name": "Central West Financial Planning",
+    "industry": "financial planner",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://centralwestfinancialplanning.com.au",
+    "phone": "",
+    "place_id": "seed_cw_financial_bathurst"
+  },
+  {
+    "business_name": "New England Financial Services",
+    "industry": "financial planner",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://newenglandfinancial.com.au",
+    "phone": "",
+    "place_id": "seed_new_england_financial"
+  },
+  {
+    "business_name": "North QLD Wealth Advisors",
+    "industry": "financial planner",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://northqldwealth.com.au",
+    "phone": "",
+    "place_id": "seed_north_qld_wealth"
+  },
+  {
+    "business_name": "Riverina Financial Planning",
+    "industry": "financial planner",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://riverinafinancialplanning.com.au",
+    "phone": "",
+    "place_id": "seed_riverina_financial"
+  },
+  {
+    "business_name": "Toowoomba Wealth Management",
+    "industry": "financial planner",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombawealthmanagement.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_wealth"
+  },
+
+  {
+    "business_name": "The Hair Studio Newcastle",
+    "industry": "hairdresser",
+    "city": "Newcastle",
+    "email": "",
+    "website": "https://thehairnewcastle.com.au",
+    "phone": "",
+    "place_id": "seed_hair_studio_newcastle"
+  },
+  {
+    "business_name": "Cut & Colour Wollongong",
+    "industry": "hairdresser",
+    "city": "Wollongong",
+    "email": "",
+    "website": "https://cutandcolourwollongong.com.au",
+    "phone": "",
+    "place_id": "seed_cut_colour_wollongong"
+  },
+  {
+    "business_name": "Geelong Hair Co",
+    "industry": "hairdresser",
+    "city": "Geelong",
+    "email": "",
+    "website": "https://geelonghairco.com.au",
+    "phone": "",
+    "place_id": "seed_geelong_hair_co"
+  },
+  {
+    "business_name": "Noosa Hair Studio",
+    "industry": "hairdresser",
+    "city": "Noosa",
+    "email": "",
+    "website": "https://noosahair.com.au",
+    "phone": "",
+    "place_id": "seed_noosa_hair"
+  },
+  {
+    "business_name": "Gold Coast Hair Lounge",
+    "industry": "hairdresser",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://goldcoasthairlounge.com.au",
+    "phone": "",
+    "place_id": "seed_gc_hair_lounge"
+  },
+  {
+    "business_name": "Bathurst Hair & Beauty",
+    "industry": "hairdresser",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://bathursthairandbeauty.com.au",
+    "phone": "",
+    "place_id": "seed_bathurst_hair"
+  },
+  {
+    "business_name": "Tamworth Hair Studio",
+    "industry": "hairdresser",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://tamworthhair.com.au",
+    "phone": "",
+    "place_id": "seed_tamworth_hair"
+  },
+  {
+    "business_name": "Townsville Hair & Co",
+    "industry": "hairdresser",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://townsvillehair.com.au",
+    "phone": "",
+    "place_id": "seed_townsville_hair"
+  },
+  {
+    "business_name": "Cairns Hair Studio",
+    "industry": "hairdresser",
+    "city": "Cairns",
+    "email": "",
+    "website": "https://cairnshair.com.au",
+    "phone": "",
+    "place_id": "seed_cairns_hair"
+  },
+  {
+    "business_name": "Sunshine Coast Hair Collective",
+    "industry": "hairdresser",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://schaircollective.com.au",
+    "phone": "",
+    "place_id": "seed_sc_hair_collective"
   }
 ]
