@@ -637,7 +637,7 @@
   if(typed_el){var phrases=['fast, fair, fixed-price','on time, every time','no hidden fees, ever'];var pi=0;var ci=0;var del=false;setInterval(function(){var phrase=phrases[pi];if(!del){typed_el.textContent=phrase.slice(0,++ci);if(ci===phrase.length){del=true;setTimeout(function(){del=false;},2200);}}else{typed_el.textContent=phrase.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}},55);}
 
   /* CountUp KPIs */
-  var kpiObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;kpiObs.unobserve(e.target);var el=e.target;var raw=el.textContent.match(/^[\d,]+/);if(!raw)return;var n=parseInt(raw[0].replace(/,/g,''),10);var suffix=el.textContent.replace(/^[\d,\s]+/,'');if(isNaN(n)||n<2)return;var s=0,dur=1400,start=null;(function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1),eased=1-Math.pow(1-p,4);el.textContent=Math.round(eased*n).toLocaleString()+suffix;if(p<1)requestAnimationFrame(step);})();});},{threshold:0.4});
+  var kpiObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;kpiObs.unobserve(e.target);var el=e.target;var raw=el.textContent.match(/^[\d,]+/);if(!raw)return;var n=parseInt(raw[0].replace(/,/g,''),10);var suffix=el.textContent.replace(/^[\d,]+/,'');if(isNaN(n)||n<2)return;var s=0,dur=1400,start=null;requestAnimationFrame(function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1),eased=1-Math.pow(1-p,4);el.textContent=Math.round(eased*n).toLocaleString()+suffix;if(p<1)requestAnimationFrame(step);});});},{threshold:0.4});
   document.querySelectorAll('.kpi strong,.hp-stat .num').forEach(function(el){kpiObs.observe(el);});
 
   /* Magnetic buttons */

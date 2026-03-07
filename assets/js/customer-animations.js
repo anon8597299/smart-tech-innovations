@@ -33,6 +33,25 @@
     gsap.registerPlugin(ScrollTrigger);
   }
 
+  // ── Typed hero text (looks for .hero h1 strong[data-typed]) ─────────────
+  const typedEl = document.querySelector('.hero h1 strong[data-typed]');
+  if (typedEl) {
+    typedEl.style.display = 'block';
+    typedEl.style.minHeight = '1.1em';
+    const phrases = typedEl.dataset.typed.split('|');
+    let pi = 0, ci = phrases[0].length, del = false;
+    setInterval(function () {
+      const phrase = phrases[pi];
+      if (!del) {
+        typedEl.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) { del = true; setTimeout(() => { del = false; }, 2200); }
+      } else {
+        typedEl.textContent = phrase.slice(0, --ci);
+        if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+      }
+    }, 55);
+  }
+
   // ── Hero animations (run immediately on load) ────────────────────────────
   const heroSection = document.querySelector('.hero');
   if (heroSection) {

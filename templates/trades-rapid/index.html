@@ -30,6 +30,7 @@
     .hero { padding: 5rem 0 2.2rem; }
     .badge { display: inline-block; background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; font-size: .76rem; }
     h1 { font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.05; margin: .85rem 0 .65rem; }
+    h1 strong { color: var(--primary); display: block; min-height: 1.1em; }
     .lead { color: var(--muted); max-width: 760px; }
     .cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
     .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; padding: .7rem 1rem; font-weight: 700; border: 1px solid transparent; }
@@ -107,7 +108,7 @@
   <div class="hero-glow"></div>
       <div class="container">
         <span class="badge">Licensed · Insured · {{SUBURB}}, {{STATE}}</span>
-        <h1>{{HERO_HEADLINE}}</h1>
+        <h1>{{HERO_HEADLINE}}<br><strong data-typed="{{HERO_TYPED_1}}|{{HERO_TYPED_2}}|{{HERO_TYPED_3}}">{{HERO_TYPED_1}}</strong></h1>
         <p class="lead">{{TAGLINE}}</p>
         <div class="cta">
           <a class="btn btn-primary" href="contact.html">📞 Request a Callback</a>
