@@ -223,8 +223,8 @@
     /* ── Demo card grid ── */
     .ow-cards-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.75rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
 
     /* ── Demo card ── */
@@ -249,6 +249,12 @@
       position: relative;
       background: #f1f5f9;
       border-bottom: 1.5px solid #e2e8f0;
+    }
+    .browser-wrap::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #5b4dff, #2dd4bf);
     }
     .browser-chrome {
       display: flex;
@@ -285,7 +291,7 @@
       text-overflow: ellipsis;
     }
     .browser-screen {
-      height: 200px;
+      height: 240px;
       overflow: hidden;
       position: relative;
     }
@@ -467,11 +473,11 @@
 
     /* ── Card body ── */
     .ow-card-body {
-      padding: 1.4rem 1.5rem 1.5rem;
+      padding: 1.2rem 1.25rem 1.35rem;
       display: flex;
       flex-direction: column;
       flex: 1;
-      gap: .9rem;
+      gap: .75rem;
     }
     .ow-card-top {
       display: flex;
@@ -521,8 +527,8 @@
       50% { opacity: .5; transform: scale(1.5); }
     }
 
-    .ow-card-name { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0; }
-    .ow-card-desc { font-size: .92rem; color: #64748b; margin: 0; line-height: 1.55; }
+    .ow-card-name { font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 0; }
+    .ow-card-desc { font-size: .87rem; color: #64748b; margin: 0; line-height: 1.55; }
 
     .ow-card-features {
       display: flex;
@@ -719,17 +725,20 @@
     .ow-cta-btns .btn-cta-ghost:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.06); }
 
     /* ── Responsive ── */
-    @media (max-width: 1100px) {
-      .ow-cards-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 1200px) {
+      .ow-cards-grid { grid-template-columns: repeat(2, 1fr); }
       .ow-included-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 800px) {
       .ow-hero-inner { grid-template-columns: 1fr; }
       .ow-stats-panel { display: none; }
-      .ow-cards-grid { grid-template-columns: 1fr; }
+      .ow-cards-grid { grid-template-columns: 1fr 1fr; }
       .ow-blog-inner { grid-template-columns: 1fr; }
       .ow-cta-inner { grid-template-columns: 1fr; }
       .ow-included-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .ow-cards-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .ow-hero { padding: 7rem 0 2.5rem; }
@@ -791,27 +800,27 @@
       </div>
 
       <div class="ow-stats-panel">
-        <div class="panel-label">What you're getting</div>
+        <div class="panel-label">Every site includes</div>
         <div class="ow-stats-grid">
           <div class="ow-stat">
-            <span class="num">8</span>
-            <span class="label">Live demo sites</span>
+            <span class="num">90+</span>
+            <span class="label">PageSpeed score</span>
           </div>
           <div class="ow-stat">
-            <span class="num">8</span>
-            <span class="label">Industries covered</span>
-          </div>
-          <div class="ow-stat">
-            <span class="num">0</span>
-            <span class="label">Generic templates</span>
+            <span class="num">$0</span>
+            <span class="label">Monthly hosting fee</span>
           </div>
           <div class="ow-stat">
             <span class="num">2–4 wk</span>
             <span class="label">Build turnaround</span>
           </div>
+          <div class="ow-stat">
+            <span class="num">Auto</span>
+            <span class="label">SEO blog included</span>
+          </div>
         </div>
         <div class="ow-panel-footer">
-          All sites include SEO, blog, mobile &amp; analytics.<br>
+          Schema markup, Google Analytics &amp; mobile-perfect on day one.<br>
           <a href="packages.html">Choose your package &rarr;</a>
         </div>
       </div>
@@ -1130,42 +1139,58 @@
       </div>
       <div class="ow-included-grid" id="incl-grid">
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#9889;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
           <h3>Speed Optimised</h3>
           <p>Minified assets, CDN-loaded libraries, lazy-loaded images. Scores 90+ on PageSpeed on launch day.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#128269;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
           <h3>SEO-Ready Structure</h3>
           <p>Schema.org JSON-LD, meta descriptions, OG tags, canonical URLs and heading hierarchy — all set on delivery.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#128241;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
           <h3>Mobile-Perfect</h3>
           <p>Fluid grids, responsive nav, touch-friendly forms. Every breakpoint is tested, not just desktop.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#128221;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
           <h3>Automated Blog</h3>
           <p>Monthly SEO posts published to your site — each one written, formatted and pushed automatically.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#128200;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
           <h3>Analytics Wired In</h3>
           <p>Google Analytics and Tag Manager configured on launch. Track leads, calls and form submissions from day one.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#128274;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
           <h3>Secure Hosting</h3>
           <p>HTTPS on launch, deployed to GitHub Pages CDN — 99.9% uptime with zero monthly hosting fee.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#127919;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
           <h3>Conversion Architecture</h3>
           <p>Hero CTA, trust strip, social proof and contact form all placed where buyers are proven to act.</p>
         </div>
         <div class="ow-incl-card">
-          <div class="ow-incl-icon">&#10024;</div>
+          <div class="ow-incl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
           <h3>3D Interactive Effects</h3>
           <p>Smooth scroll, scroll-triggered reveals, card tilt, animated gradients and typed text — no JS framework needed.</p>
         </div>
