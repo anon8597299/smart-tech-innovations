@@ -51,7 +51,7 @@ import anthropic
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-DAILY_LIMIT     = 10
+DAILY_LIMIT     = 100
 FOLLOW_UP_LIMIT = 20
 BOOKING_URL     = "https://calendly.com/improveyoursite/discovery"
 FROM_NAME       = "James from ImproveYourSite"
@@ -477,6 +477,28 @@ RULES:
 - Body only, no subject line
 """
 
+_SYSTEM_REENGAGE = """\
+You are writing a 3-month re-engagement email for ImproveYourSite, an Australian web agency.
+
+You sent this business a cold email about their website 3 months ago. They never responded.
+You're checking back in — not to chase, but because you genuinely think they're leaving
+leads on the table right now and a quick message is worth sending.
+
+Persona: Straight-talking sales manager — honest, no hard sell, just a real observation.
+
+RULES:
+- MAX 80 words, 2 short paragraphs
+- Briefly mention you got in touch a few months back about a specific issue
+- Core message: this is where things could have changed by now — frame it around what they
+  may be missing (local competitors picking up their Google leads, seasonal traffic, etc.)
+- One concrete, believable example relevant to their industry — nothing exaggerated
+- Remind them the free 20-min health check is still on the table
+- No pressure, no hard sell, no grovelling
+- Australian English, no emojis
+- Sign off: James Burke, ImproveYourSite
+- Body only, no subject line
+"""
+
 
 def _build_prompt(
     business_name: str, industry: str, city: str,
@@ -484,6 +506,18 @@ def _build_prompt(
 ) -> tuple[str, str]:
     """Return (system, prompt) for the given email type."""
     issue = audit_issues[0] if audit_issues else "the website could do more to convert visitors"
+
+    # Derive a natural greeting name — use first name if person-named business,
+    # otherwise address as the business owner or manager
+    greeting = _greeting_name(business_name)
+    # Single capitalised word → likely a person's first name (e.g. "Jake", "Scott")
+    if len(greeting.split()) == 1 and greeting[0].isupper():
+        greeting_instruction = f'Open with "Hi {greeting}"'
+    else:
+        greeting_instruction = (
+            f'Open with "Hi" — then address the email to the business owner or manager. '
+            f'Do NOT use the full business name as the greeting.'
+        )
 
     if follow_up_num == 0:
         system = _SYSTEM
@@ -495,11 +529,16 @@ Specific website issue found: {issue}
 Our booking URL: {BOOKING_URL}
 
 Important context to weave in naturally:
-- Most {industry}s in {city} get most of their work through word of mouth or Google search
+- Most {industry}s in {city} rely on word of mouth or Google search for new work
 - A weak website costs them real jobs — customers search, find a competitor with a better
   site, and never call
-- IYS offers a free 20-min website health check — they get a real report, not a sales pitch
+- IYS offers a free 20-min website health check — they get a real written report, not a sales pitch
 - Pricing is a guide only, James works flexibly with different budgets
+
+Greeting format: {greeting_instruction}
+
+Logic check: Make sure the email makes sense for a {industry} business in {city}.
+The issue mentioned should feel real and specific to their industry.
 
 Write the cold outreach email body. Sound like a real person, not a template."""
 
@@ -523,7 +562,19 @@ Booking URL: {BOOKING_URL}
 
 Write the final follow-up email body."""
 
-    else:  # win-back
+    elif follow_up_num == 98:  # 3-month re-engagement
+        system = _SYSTEM_REENGAGE
+        prompt = f"""\
+Business: {business_name}
+Industry: {industry}
+City: {city}
+Issue spotted 3 months ago: {issue}
+Booking URL: {BOOKING_URL}
+
+Write the re-engagement email body. The message: here's what could have improved
+by now — the door's still open for a free 20-min health check."""
+
+    else:  # win-back (99)
         system = _SYSTEM_WIN_BACK
         prompt = f"""\
 Business: {business_name}
@@ -537,11 +588,37 @@ Write the win-back email body."""
     return system, prompt
 
 
+def _greeting_name(business_name: str) -> str:
+    """
+    Derive a natural opener from the business name.
+    'Wagga City Auto Centre' → 'Wagga City Auto Centre'
+    'Jake's Plumbing' → 'Jake'
+    'Smith & Sons Builders' → 'Smith & Sons'
+    Strips generic suffixes like Pty Ltd, NSW, QLD etc.
+    """
+    if not business_name:
+        return "there"
+    name = business_name.strip()
+    # Remove trailing state/country tags
+    name = re.sub(r'\s*[\|,]\s*(NSW|VIC|QLD|WA|SA|NT|ACT|TAS|Australia).*$', '', name, flags=re.IGNORECASE)
+    # Strip legal suffixes
+    name = re.sub(r'\s+(Pty\.?\s*Ltd\.?|Pty|Ltd|Pty Limited|Limited|& Co\.?|Co\.)$', '', name, flags=re.IGNORECASE).strip()
+    # If name looks like "First Last" (person, not business), extract first name
+    parts = name.split()
+    if len(parts) == 2 and parts[0][0].isupper() and parts[1][0].isupper():
+        # Probably a person's name e.g. "Dan O'Neill" — use first name
+        if not any(c in parts[1] for c in ['&', 'and', 'Co', 'Sons', 'Bros']):
+            return parts[0]
+    return name
+
+
 def _subject(business_name: str, issues: list[str], follow_up: int = 0) -> str:
     if follow_up == 1:
         return f"Re: {business_name} — following up"
     if follow_up == 2:
         return f"Last one from me — {business_name}"
+    if follow_up == 98:  # 3-month re-engagement
+        return f"{business_name} — checked in 3 months ago"
     if follow_up == 99:  # win-back
         return f"{business_name} — worth a quick catch-up?"
     issue = issues[0] if issues else "your website"
@@ -565,22 +642,28 @@ def _ensure_leads_table():
     conn = sqlite3.connect(db.DB_PATH)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS leads (
-            id            INTEGER PRIMARY KEY AUTOINCREMENT,
-            business_name TEXT NOT NULL,
-            industry      TEXT,
-            city          TEXT,
-            email         TEXT,
-            website       TEXT,
-            phone         TEXT,
-            place_id      TEXT UNIQUE,
-            audit_issues  TEXT,
-            status        TEXT DEFAULT 'new',
-            email_count   INTEGER DEFAULT 0,
-            last_emailed  TEXT,
-            notes         TEXT,
-            created_at    TEXT DEFAULT (datetime('now'))
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            business_name     TEXT NOT NULL,
+            industry          TEXT,
+            city              TEXT,
+            email             TEXT,
+            website           TEXT,
+            phone             TEXT,
+            place_id          TEXT UNIQUE,
+            audit_issues      TEXT,
+            status            TEXT DEFAULT 'new',
+            email_count       INTEGER DEFAULT 0,
+            last_emailed      TEXT,
+            notes             TEXT,
+            reengagement_date TEXT,
+            created_at        TEXT DEFAULT (datetime('now'))
         )
     """)
+    # Migrate existing DB: add reengagement_date column if missing
+    try:
+        conn.execute("ALTER TABLE leads ADD COLUMN reengagement_date TEXT")
+    except Exception:
+        pass  # already exists
     conn.commit()
     conn.close()
 
@@ -650,12 +733,42 @@ def _leads_low_interest() -> list[dict]:
 def _update_lead(lead_id: int, email_count: int, status: str):
     import sqlite3
     conn = sqlite3.connect(db.DB_PATH)
-    conn.execute(
-        "UPDATE leads SET email_count=?,last_emailed=?,status=? WHERE id=?",
-        (email_count, date.today().isoformat(), status, lead_id),
-    )
+    # When a lead first goes cold, schedule a 3-month re-engagement
+    if status == "cold" and email_count < 98:
+        reengagement_date = (date.today() + timedelta(days=90)).isoformat()
+        conn.execute(
+            "UPDATE leads SET email_count=?,last_emailed=?,status=?,reengagement_date=? WHERE id=?",
+            (email_count, date.today().isoformat(), status, reengagement_date, lead_id),
+        )
+    else:
+        conn.execute(
+            "UPDATE leads SET email_count=?,last_emailed=?,status=? WHERE id=?",
+            (email_count, date.today().isoformat(), status, lead_id),
+        )
     conn.commit()
     conn.close()
+
+
+def _leads_due_reengagement() -> list[dict]:
+    """Cold leads whose 90-day re-engagement date has arrived."""
+    import sqlite3
+    today = date.today().isoformat()
+    conn = sqlite3.connect(db.DB_PATH)
+    rows = conn.execute(
+        """SELECT id,business_name,industry,city,email,audit_issues
+           FROM leads
+           WHERE status='cold'
+             AND reengagement_date IS NOT NULL
+             AND reengagement_date <= ?
+             AND email_count < 98""",
+        (today,),
+    ).fetchall()
+    conn.close()
+    return [
+        {"id": r[0], "business_name": r[1], "industry": r[2],
+         "city": r[3], "email": r[4], "audit_issues": json.loads(r[5] or "[]")}
+        for r in rows
+    ]
 
 
 # ── Agent ─────────────────────────────────────────────────────────────────────
@@ -669,6 +782,7 @@ class LeadsAgent(BaseAgent):
         self._run_new_outreach()
         self._run_followups()
         self._run_winbacks()
+        self._run_reengagements()
 
     # ── New outreach ──────────────────────────────────────────────────────
 
@@ -785,6 +899,30 @@ class LeadsAgent(BaseAgent):
             sent += 1
             time.sleep(3)
         self.complete_task(tid, preview=f"{sent} win-back email(s) sent")
+
+    # ── 3-month re-engagement ─────────────────────────────────────────────
+
+    def _run_reengagements(self):
+        """Send a 'here's what you missed' email to cold leads at the 90-day mark."""
+        leads = _leads_due_reengagement()
+        if not leads:
+            return
+        tid  = self.create_task("leads", "3-month re-engagement emails")
+        sent = 0
+        for lead in leads:
+            system, prompt = _build_prompt(
+                lead["business_name"], lead["industry"], lead["city"],
+                lead["audit_issues"], follow_up_num=98,
+            )
+            body    = _claude(prompt, system=system)
+            subject = _subject(lead["business_name"], lead["audit_issues"], follow_up=98)
+            self._send(lead["email"], lead["business_name"], subject, body)
+            # email_count=98 flags that re-engagement has been sent — never contact again
+            _update_lead(lead["id"], email_count=98, status="cold")
+            self.log_info(f"3-month re-engagement → {lead['business_name']}")
+            sent += 1
+            time.sleep(3)
+        self.complete_task(tid, preview=f"{sent} re-engagement email(s) sent")
 
     # ── Email sender ──────────────────────────────────────────────────────
 

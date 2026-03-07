@@ -178,5 +178,752 @@
     "website": "https://hancocks.com.au",
     "phone": "",
     "place_id": "seed_hancocks_tamworth"
+  },
+  {
+    "business_name": "Expert Plumbing & Solar Services Bathurst",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://epssb.com.au",
+    "phone": "02 6332 4992",
+    "place_id": "seed_epssb_bathurst"
+  },
+  {
+    "business_name": "Scott Mitchell Plumbing",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://scottmitchellplumbing.com",
+    "phone": "0437 586 279",
+    "place_id": "seed_scott_mitchell_plumbing_bathurst"
+  },
+  {
+    "business_name": "Oakleigh Plumbing",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://oakleighplumbing.com",
+    "phone": "0417 278 084",
+    "place_id": "seed_oakleigh_plumbing_bathurst"
+  },
+  {
+    "business_name": "ARG Plumbing",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://www.argplumbing.com.au",
+    "phone": "0428 294 383",
+    "place_id": "seed_arg_plumbing_bathurst"
+  },
+  {
+    "business_name": "Rake Financial",
+    "industry": "mortgage broker",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://rakefinancial.com.au",
+    "phone": "",
+    "place_id": "seed_rake_financial_bathurst"
+  },
+  {
+    "business_name": "Sparks Finance",
+    "industry": "mortgage broker",
+    "city": "Bathurst",
+    "email": "info@sparksfinance.com.au",
+    "website": "https://www.sparksfinance.com.au",
+    "phone": "",
+    "place_id": "seed_sparks_finance_bathurst"
+  },
+  {
+    "business_name": "Morse Group",
+    "industry": "accountant",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://www.morsegroup.com.au",
+    "phone": "",
+    "place_id": "seed_morse_group_bathurst"
+  },
+  {
+    "business_name": "YBM Accountants",
+    "industry": "accountant",
+    "city": "Orange",
+    "email": "",
+    "website": "https://www.ybm.com.au",
+    "phone": "",
+    "place_id": "seed_ybm_orange"
+  },
+  {
+    "business_name": "Little's Power",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://www.littlespower.com.au",
+    "phone": "0401 800 895",
+    "place_id": "seed_littles_power_orange"
+  },
+  {
+    "business_name": "Daniel Blandford Electrical",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://www.danielblandfordelectrical.com",
+    "phone": "0413 077 156",
+    "place_id": "seed_daniel_blandford_orange"
+  },
+  {
+    "business_name": "Orange City Electrical Services",
+    "industry": "electrician",
+    "city": "Orange",
+    "email": "",
+    "website": "https://www.orangecityelectricalservices.com",
+    "phone": "",
+    "place_id": "seed_orange_city_electrical"
+  },
+  {
+    "business_name": "Dubbo Landscaping",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.dubbolandscaping.com.au",
+    "phone": "02 6882 2619",
+    "place_id": "seed_dubbo_landscaping"
+  },
+  {
+    "business_name": "Spencer's Landscape Construction",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.spencersslcc.au",
+    "phone": "0408 921 871",
+    "place_id": "seed_spencers_landscape_dubbo"
+  },
+  {
+    "business_name": "B & C Yard Improvements",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.bandcyardimprovements.com.au",
+    "phone": "0412 704 110",
+    "place_id": "seed_bandc_yard_dubbo"
+  },
+  {
+    "business_name": "Crowey's Plumbing Services",
+    "industry": "plumber",
+    "city": "Parkes",
+    "email": "",
+    "website": "https://croweysplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_croweys_plumbing_parkes"
+  },
+  {
+    "business_name": "Nortons Business Advisors",
+    "industry": "accountant",
+    "city": "Mudgee",
+    "email": "",
+    "website": "http://www.nortons.com.au",
+    "phone": "",
+    "place_id": "seed_nortons_mudgee"
+  },
+  {
+    "business_name": "Slack-Smith Partners",
+    "industry": "accountant",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://www.slacksmithpartners.com.au",
+    "phone": "02 6761 3461",
+    "place_id": "seed_slack_smith_tamworth"
+  },
+  {
+    "business_name": "Lockhart Business Advisors",
+    "industry": "accountant",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://www.lockharts.com.au",
+    "phone": "",
+    "place_id": "seed_lockharts_tamworth"
+  },
+  {
+    "business_name": "Mechanical World",
+    "industry": "mechanic",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://www.mechanicalworld.com.au",
+    "phone": "02 6925 1040",
+    "place_id": "seed_mechanical_world_wagga"
+  },
+  {
+    "business_name": "Serv Auto Care Services",
+    "industry": "mechanic",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://www.waggawaggaservautocareservices.com.au",
+    "phone": "02 5971 3240",
+    "place_id": "seed_serv_auto_wagga"
+  },
+  {
+    "business_name": "Golden City Physiotherapy",
+    "industry": "physiotherapist",
+    "city": "Bendigo",
+    "email": "",
+    "website": "https://www.goldencityphysio.com.au",
+    "phone": "",
+    "place_id": "seed_golden_city_physio_bendigo"
+  },
+  {
+    "business_name": "3D Physio Health Group",
+    "industry": "physiotherapist",
+    "city": "Bendigo",
+    "email": "",
+    "website": "https://www.3dphysio.com.au",
+    "phone": "",
+    "place_id": "seed_3d_physio_bendigo"
+  },
+  {
+    "business_name": "Ace Allied Health",
+    "industry": "physiotherapist",
+    "city": "Bendigo",
+    "email": "",
+    "website": "https://www.acealliedhealth.com",
+    "phone": "",
+    "place_id": "seed_ace_allied_bendigo"
+  },
+  {
+    "business_name": "Central Victorian Sports Physiotherapy",
+    "industry": "physiotherapist",
+    "city": "Bendigo",
+    "email": "",
+    "website": "https://www.cvsp.com.au",
+    "phone": "03 5443 1255",
+    "place_id": "seed_cvsp_bendigo"
+  },
+  {
+    "business_name": "Parker Plumbing Company",
+    "industry": "plumber",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://www.parkerplumbingcompany.com.au",
+    "phone": "",
+    "place_id": "seed_parker_plumbing_ipswich"
+  },
+  {
+    "business_name": "Don Evans Plumbers",
+    "industry": "plumber",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://donevansplumbers.com.au",
+    "phone": "",
+    "place_id": "seed_don_evans_ipswich"
+  },
+  {
+    "business_name": "Tippings Plumbing Service",
+    "industry": "plumber",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://tippingsplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_tippings_plumbing_ipswich"
+  },
+  {
+    "business_name": "Plumbing Ipswich",
+    "industry": "plumber",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://plumbingipswich.com.au",
+    "phone": "",
+    "place_id": "seed_plumbing_ipswich"
+  },
+  {
+    "business_name": "Serena's Local Cleaning",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.serenaslocalcleaning.com.au",
+    "phone": "0451 832 764",
+    "place_id": "seed_serenas_cleaning_toowoomba"
+  },
+  {
+    "business_name": "Angie's Elite Cleaning Solutions",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.angieselitecleaningsolutions.com.au",
+    "phone": "",
+    "place_id": "seed_angies_cleaning_toowoomba"
+  },
+  {
+    "business_name": "Dust 2 Clean",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.dust2clean.com.au",
+    "phone": "",
+    "place_id": "seed_dust2clean_toowoomba"
+  },
+  {
+    "business_name": "O & D House Wash",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://www.oanddhousewash.com.au",
+    "phone": "0417 733 839",
+    "place_id": "seed_oand_house_wash_toowoomba"
+  },
+  {
+    "business_name": "Tropical Coast Plumbing",
+    "industry": "plumber",
+    "city": "Rockhampton",
+    "email": "",
+    "website": "https://www.tropicalcoastplumbing.com",
+    "phone": "",
+    "place_id": "seed_tropical_coast_plumbing_rocky"
+  },
+  {
+    "business_name": "WES Mackay",
+    "industry": "electrician",
+    "city": "Mackay",
+    "email": "",
+    "website": "https://www.wesmackay.com.au",
+    "phone": "",
+    "place_id": "seed_wes_mackay"
+  },
+  {
+    "business_name": "Rilec Electrical",
+    "industry": "electrician",
+    "city": "Rockhampton",
+    "email": "",
+    "website": "https://rilecelectrical.com.au",
+    "phone": "07 4921 1380",
+    "place_id": "seed_rilec_electrical_rocky"
+  },
+  {
+    "business_name": "Health First Group Rockhampton",
+    "industry": "physiotherapist",
+    "city": "Rockhampton",
+    "email": "rockhampton@healthfirstgroup.com.au",
+    "website": "https://www.healthfirstgroup.com.au",
+    "phone": "07 4928 7747",
+    "place_id": "seed_health_first_rocky"
+  },
+  {
+    "business_name": "Central Solar Services",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://www.centralsolarservices.com.au",
+    "phone": "",
+    "place_id": "seed_central_solar_townsville"
+  },
+  {
+    "business_name": "True North Solar",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "",
+    "website": "https://www.truenorthsolar.com.au",
+    "phone": "",
+    "place_id": "seed_true_north_solar_townsville"
+  },
+  {
+    "business_name": "LMS Electrical",
+    "industry": "electrician",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://lmselectrical.com.au",
+    "phone": "",
+    "place_id": "seed_lms_electrical_ipswich"
+  },
+  {
+    "business_name": "ThermoSpark Electrical",
+    "industry": "electrician",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://www.thermospark.com.au",
+    "phone": "",
+    "place_id": "seed_thermospark_ipswich"
+  },
+  {
+    "business_name": "Ipswich Solar Electrical",
+    "industry": "solar installer",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://ipswichsolarelectrical.com.au",
+    "phone": "",
+    "place_id": "seed_ipswich_solar_electrical"
+  },
+  {
+    "business_name": "Webflow Plumbing",
+    "industry": "plumber",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://webflowplumbing.com",
+    "phone": "0475 862 669",
+    "place_id": "seed_webflow_plumbing_bathurst"
+  },
+  {
+    "business_name": "Jayden Enterprises",
+    "industry": "builder",
+    "city": "Mackay",
+    "email": "",
+    "website": "https://jaydenenterprises.com.au",
+    "phone": "07 4952 6011",
+    "place_id": "seed_jayden_enterprises_mackay"
+  },
+  {
+    "business_name": "Intrust Group",
+    "industry": "builder",
+    "city": "Cairns",
+    "email": "",
+    "website": "https://www.intrustgroup.com.au",
+    "phone": "",
+    "place_id": "seed_intrust_group_cairns"
+  },
+  {
+    "business_name": "G&M Cochrane & Sons",
+    "industry": "mechanic",
+    "city": "Wagga Wagga",
+    "email": "",
+    "website": "https://gmcochraneandsons.com.au",
+    "phone": "02 6925 3605",
+    "place_id": "seed_gm_cochrane_wagga"
+  },
+  {
+    "business_name": "Toowoomba Cleaners Elite",
+    "industry": "cleaning service",
+    "city": "Toowoomba",
+    "email": "",
+    "website": "https://toowoombacleaners.com.au",
+    "phone": "",
+    "place_id": "seed_toowoomba_cleaners_elite"
+  },
+  {
+    "business_name": "Dubbo Soils & Landscaping",
+    "industry": "landscaper",
+    "city": "Dubbo",
+    "email": "",
+    "website": "https://www.dubbosoils.com",
+    "phone": "02 6884 1662",
+    "place_id": "seed_dubbo_soils"
+  },
+  {
+    "business_name": "Business Development Solutions",
+    "industry": "accountant",
+    "city": "Bathurst",
+    "email": "",
+    "website": "http://www.businessdevelopmentsolutions.com.au",
+    "phone": "02 6332 2960",
+    "place_id": "seed_bds_bathurst"
+  },
+  {
+    "business_name": "Brosie Martin Barnett",
+    "industry": "accountant",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://www.bmb.net.au",
+    "phone": "",
+    "place_id": "seed_bmb_tamworth"
+  },
+  {
+    "business_name": "Regional Rural Finance Brokers",
+    "industry": "mortgage broker",
+    "city": "Bathurst",
+    "email": "",
+    "website": "https://regionalruralfinance.com.au",
+    "phone": "0480 093 502",
+    "place_id": "seed_regional_rural_finance_bathurst"
+  },
+  {
+    "business_name": "Solar Power Ipswich",
+    "industry": "solar installer",
+    "city": "Ipswich",
+    "email": "",
+    "website": "https://www.solarpower-ipswich.com.au",
+    "phone": "1300 908 109",
+    "place_id": "seed_solar_power_ipswich"
+  },
+  {
+    "business_name": "Lesside Services",
+    "industry": "solar installer",
+    "city": "Brisbane",
+    "email": "",
+    "website": "https://lesside.com.au",
+    "phone": "07 3394 4133",
+    "place_id": "seed_lesside_brisbane"
+  },
+  {
+    "business_name": "Fusionsolar & Electrical",
+    "industry": "solar installer",
+    "city": "Townsville",
+    "email": "",
+    "website": "http://www.fusionsolar.net",
+    "phone": "07 4774 6139",
+    "place_id": "seed_fusion_solar_townsville"
+  },
+  {
+    "business_name": "Goulburn Plumbing & Gas",
+    "industry": "plumber",
+    "city": "Goulburn",
+    "email": "",
+    "website": "https://goulburnplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_goulburn_plumbing"
+  },
+  {
+    "business_name": "Southern Tablelands Electrical",
+    "industry": "electrician",
+    "city": "Goulburn",
+    "email": "",
+    "website": "https://southerntablandselectrical.com.au",
+    "phone": "",
+    "place_id": "seed_southern_tablelands_electrical"
+  },
+  {
+    "business_name": "Armidale Building Co",
+    "industry": "builder",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://armidalebuilding.com.au",
+    "phone": "",
+    "place_id": "seed_armidale_building_co"
+  },
+  {
+    "business_name": "New England Physiotherapy",
+    "industry": "physiotherapist",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://newenglandphysio.com.au",
+    "phone": "",
+    "place_id": "seed_new_england_physio"
+  },
+  {
+    "business_name": "New England Accountants",
+    "industry": "accountant",
+    "city": "Armidale",
+    "email": "",
+    "website": "https://newenglandaccountants.com.au",
+    "phone": "",
+    "place_id": "seed_new_england_accountants"
+  },
+  {
+    "business_name": "Griffith Business Accounting",
+    "industry": "accountant",
+    "city": "Griffith",
+    "email": "",
+    "website": "https://griffithaccounting.com.au",
+    "phone": "",
+    "place_id": "seed_griffith_accounting"
+  },
+  {
+    "business_name": "Western Riverina Solar",
+    "industry": "solar installer",
+    "city": "Griffith",
+    "email": "",
+    "website": "https://westernriverinasolar.com.au",
+    "phone": "",
+    "place_id": "seed_western_riverina_solar"
+  },
+  {
+    "business_name": "Griffith Earthworks & Landscaping",
+    "industry": "landscaper",
+    "city": "Griffith",
+    "email": "",
+    "website": "https://griffithearthworks.com.au",
+    "phone": "",
+    "place_id": "seed_griffith_earthworks"
+  },
+  {
+    "business_name": "Cowra Auto Care",
+    "industry": "mechanic",
+    "city": "Cowra",
+    "email": "",
+    "website": "https://cowraautocare.com.au",
+    "phone": "",
+    "place_id": "seed_cowra_auto_care"
+  },
+  {
+    "business_name": "Lithgow Plumbing",
+    "industry": "plumber",
+    "city": "Lithgow",
+    "email": "",
+    "website": "https://lithgowplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_lithgow_plumbing"
+  },
+  {
+    "business_name": "Blue Mountains Electrical Services",
+    "industry": "electrician",
+    "city": "Lithgow",
+    "email": "",
+    "website": "https://bluemountainselectricalservices.com.au",
+    "phone": "",
+    "place_id": "seed_blue_mountains_electrical"
+  },
+  {
+    "business_name": "Tamworth Landscaping Co",
+    "industry": "landscaper",
+    "city": "Tamworth",
+    "email": "",
+    "website": "https://tamworthlandscaping.com.au",
+    "phone": "",
+    "place_id": "seed_tamworth_landscaping"
+  },
+  {
+    "business_name": "Inverell Electrical & Air",
+    "industry": "electrician",
+    "city": "Inverell",
+    "email": "",
+    "website": "https://inverellelectrical.com.au",
+    "phone": "",
+    "place_id": "seed_inverell_electrical"
+  },
+  {
+    "business_name": "Coffs Harbour Solar",
+    "industry": "solar installer",
+    "city": "Coffs Harbour",
+    "email": "",
+    "website": "https://coffsharboursolar.com.au",
+    "phone": "",
+    "place_id": "seed_coffs_harbour_solar"
+  },
+  {
+    "business_name": "Sunshine Coast Plumbing Co",
+    "industry": "plumber",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastplumbingco.com.au",
+    "phone": "",
+    "place_id": "seed_sc_plumbing_co"
+  },
+  {
+    "business_name": "Caloundra Electrical Services",
+    "industry": "electrician",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://caloundraelectrical.com.au",
+    "phone": "",
+    "place_id": "seed_caloundra_electrical"
+  },
+  {
+    "business_name": "Sunshine Coast Cleaners",
+    "industry": "cleaning service",
+    "city": "Sunshine Coast",
+    "email": "",
+    "website": "https://sunshinecoastcleaners.com.au",
+    "phone": "",
+    "place_id": "seed_sc_cleaners"
+  },
+  {
+    "business_name": "Noosa Mortgage Advisors",
+    "industry": "mortgage broker",
+    "city": "Noosa",
+    "email": "",
+    "website": "https://noosamortgageadvisors.com.au",
+    "phone": "",
+    "place_id": "seed_noosa_mortgage"
+  },
+  {
+    "business_name": "Gold Coast Physio & Rehab",
+    "industry": "physiotherapist",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://gcphysiorehab.com.au",
+    "phone": "",
+    "place_id": "seed_gc_physio_rehab"
+  },
+  {
+    "business_name": "Gold Coast Mortgage Group",
+    "industry": "mortgage broker",
+    "city": "Gold Coast",
+    "email": "",
+    "website": "https://goldcoastmortgagegroup.com.au",
+    "phone": "",
+    "place_id": "seed_gc_mortgage_group"
+  },
+  {
+    "business_name": "Fraser Coast Plumbing",
+    "industry": "plumber",
+    "city": "Hervey Bay",
+    "email": "",
+    "website": "https://frasercoastplumbing.com.au",
+    "phone": "",
+    "place_id": "seed_fraser_coast_plumbing"
+  },
+  {
+    "business_name": "Hervey Bay Landscaping",
+    "industry": "landscaper",
+    "city": "Hervey Bay",
+    "email": "",
+    "website": "https://herveybaylandscaping.com.au",
+    "phone": "",
+    "place_id": "seed_hervey_bay_landscaping"
+  },
+  {
+    "business_name": "Bundaberg Solar Systems",
+    "industry": "solar installer",
+    "city": "Bundaberg",
+    "email": "",
+    "website": "https://bundabergsolarsystems.com.au",
+    "phone": "",
+    "place_id": "seed_bundaberg_solar"
+  },
+  {
+    "business_name": "Wide Bay Builders",
+    "industry": "builder",
+    "city": "Bundaberg",
+    "email": "",
+    "website": "https://widebaybuilders.com.au",
+    "phone": "",
+    "place_id": "seed_wide_bay_builders"
+  },
+  {
+    "business_name": "Bundaberg Accountants",
+    "industry": "accountant",
+    "city": "Bundaberg",
+    "email": "",
+    "website": "https://bundabergaccountants.com.au",
+    "phone": "",
+    "place_id": "seed_bundaberg_accountants"
+  },
+  {
+    "business_name": "Gladstone Electrical Co",
+    "industry": "electrician",
+    "city": "Gladstone",
+    "email": "",
+    "website": "https://gladstonelectrical.com.au",
+    "phone": "",
+    "place_id": "seed_gladstone_electrical"
+  },
+  {
+    "business_name": "CQ Auto Services",
+    "industry": "mechanic",
+    "city": "Gladstone",
+    "email": "",
+    "website": "https://cqautoservices.com.au",
+    "phone": "",
+    "place_id": "seed_cq_auto_gladstone"
+  },
+  {
+    "business_name": "Gladstone Plumbing Services",
+    "industry": "plumber",
+    "city": "Gladstone",
+    "email": "",
+    "website": "https://gladstone-plumbing.com.au",
+    "phone": "",
+    "place_id": "seed_gladstone_plumbing"
+  },
+  {
+    "business_name": "Mackay Auto Electrics",
+    "industry": "mechanic",
+    "city": "Mackay",
+    "email": "",
+    "website": "https://mackayautoelectrics.com.au",
+    "phone": "",
+    "place_id": "seed_mackay_auto_electrics"
+  },
+  {
+    "business_name": "Rockhampton Cleaning Services",
+    "industry": "cleaning service",
+    "city": "Rockhampton",
+    "email": "",
+    "website": "https://rockhamptoncleaningservices.com.au",
+    "phone": "",
+    "place_id": "seed_rocky_cleaning"
   }
 ]
