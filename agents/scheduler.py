@@ -19,6 +19,7 @@ from agents.ads      import AdsAgent
 from agents.content  import ContentAgent
 from agents.builder  import BuilderAgent
 from agents.analyst  import AnalystAgent
+from agents.leads    import LeadsAgent
 from dashboard       import db
 
 # ── Agent instances (singletons) ─────────────────────────────────────────────
@@ -28,6 +29,7 @@ _ads      = AdsAgent()
 _content  = ContentAgent()
 _builder  = BuilderAgent()
 _analyst  = AnalystAgent()
+_leads    = LeadsAgent()
 
 # Map used by dashboard /api/trigger endpoint
 AGENT_MAP = {
@@ -37,6 +39,7 @@ AGENT_MAP = {
     "content": _content,
     "builder": _builder,
     "analyst": _analyst,
+    "leads":   _leads,
 }
 
 TIMEZONE = "Australia/Sydney"
@@ -105,6 +108,20 @@ def build_scheduler() -> BackgroundScheduler:
         CronTrigger(day_of_week="mon", hour=6, minute=0, timezone=TIMEZONE),
         id="content", name="Auto-blog content",
         misfire_grace_time=600,
+    )
+
+    # Leads — new outreach 10:00 AM daily, follow-ups Tuesday 11:00 AM
+    scheduler.add_job(
+        lambda: _run(_leads),
+        CronTrigger(hour=10, minute=0, timezone=TIMEZONE),
+        id="leads", name="Leads outreach",
+        misfire_grace_time=300,
+    )
+    scheduler.add_job(
+        lambda: _run(_leads),
+        CronTrigger(day_of_week="tue", hour=11, minute=0, timezone=TIMEZONE),
+        id="leads_followup", name="Leads follow-up",
+        misfire_grace_time=300,
     )
 
     # Scheduled tasks — check at 6:00 AM daily and trigger assigned agents
