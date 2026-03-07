@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Silver &amp; Gold Studio — Handmade Jewellery Workshops</title>
+  <meta name="description" content="Small-group silversmithing and stone-setting workshops. 5 classes, max 6 students, all materials included. Keep everything you make.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "name": "Silver & Gold Studio",
+        "description": "Small-group silversmithing and stone-setting workshops. All tools and materials included.",
+        "telephone": "0400 000 000",
+        "email": "hello@silvergoldstudio.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Your Suburb",
+          "addressRegion": "NSW",
+          "addressCountry": "AU"
+        },
+        "openingHours": ["Sa 09:00-17:00", "Su 10:00-17:00"],
+        "priceRange": "$$"
+      },
+      {
+        "@type": "Course",
+        "name": "Silver Band Ring Workshop",
+        "description": "Cut, shape, solder and polish a sterling silver band ring. Beginner-friendly.",
+        "provider": { "@type": "LocalBusiness", "name": "Silver & Gold Studio" },
+        "offers": { "@type": "Offer", "price": "185", "priceCurrency": "AUD" }
+      },
+      {
+        "@type": "Course",
+        "name": "Opal Ring Workshop",
+        "description": "Set a genuine Australian opal into a sterling silver or gold-fill ring.",
+        "provider": { "@type": "LocalBusiness", "name": "Silver & Gold Studio" },
+        "offers": { "@type": "Offer", "price": "295", "priceCurrency": "AUD" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --gold:     #a0780a;
+      --gold-mid: #c49a1a;
+      --gold-lt:  #f5e9c0;
+      --gold-bg:  #fdf9f0;
+      --dark:     #161009;
+      --text:     #1c1710;
+      --muted:    #5c5648;
+      --line:     #e6ddc8;
+      --card:     #fffef9;
+      --white:    #ffffff;
+      --silver:   #6b7785;
+      --radius:   16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gold-bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+
+    /* ── IYS Demo Banner ── */
+    .demo-banner {
+      background: linear-gradient(90deg, #1e1b4b, #312e81);
+      color: #c7d2fe;
+      font-size: .8rem;
+      font-weight: 600;
+      text-align: center;
+      padding: .6rem 1rem;
+      letter-spacing: .02em;
+    }
+    .demo-banner a {
+      color: #a5b4fc;
+      text-decoration: underline;
+      margin-left: .4rem;
+    }
+
+    /* ── Nav ── */
+    .site-header {
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      backdrop-filter: blur(6px);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 0;
+      gap: 1.5rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: .01em;
+      white-space: nowrap;
+    }
+    .brand em { color: var(--gold); font-style: normal; }
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      font-size: .87rem;
+      font-weight: 500;
+    }
+    .nav-links a { color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: #fff;
+      padding: .52rem 1.15rem;
+      border-radius: 9px;
+      font-size: .86rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background .2s;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-cta:hover { background: #7d5d07; }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--dark);
+      color: #fff;
+      padding: 5.5rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 60% 110%, rgba(196,154,26,.15), transparent),
+        radial-gradient(ellipse 40% 40% at 10% 20%, rgba(160,120,10,.08), transparent);
+      pointer-events: none;
+    }
+    /* decorative ring marks */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      border: 60px solid rgba(196,154,26,.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid rgba(196,154,26,.4);
+      background: rgba(196,154,26,.1);
+      color: #e8c55a;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.06;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { color: #e8c55a; font-style: italic; display: block; }
+    .hero-sub {
+      color: rgba(255,255,255,.65);
+      font-size: 1rem;
+      max-width: 460px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      padding: .82rem 1.8rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: .94rem;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #7d5d07; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.28);
+      color: rgba(255,255,255,.82);
+      padding: .82rem 1.8rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: .94rem;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.65); }
+    .hero-trust {
+      display: flex;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: rgba(255,255,255,.5);
+      font-size: .82rem;
+    }
+    .trust-item svg { flex-shrink: 0; }
+    .trust-item strong { color: rgba(255,255,255,.88); font-weight: 600; }
+
+    /* Hero panel */
+    .hero-panel {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(196,154,26,.25);
+      border-radius: 20px;
+      padding: 1.8rem;
+      backdrop-filter: blur(4px);
+    }
+    .hp-label {
+      font-size: .71rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 1.2rem;
+    }
+    .hp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+    .hp-stat {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(196,154,26,.18);
+      border-radius: 12px;
+      padding: .9rem;
+      text-align: center;
+    }
+    .hp-stat .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #e8c55a;
+      line-height: 1;
+      display: block;
+      margin-bottom: .2rem;
+    }
+    .hp-stat .lbl {
+      font-size: .76rem;
+      color: rgba(255,255,255,.5);
+      font-weight: 500;
+    }
+    .hp-footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      text-align: center;
+    }
+    .hp-footer strong { color: #e8c55a; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: linear-gradient(90deg, #8a6508, #c49a1a, #8a6508);
+      padding: 1.4rem 0;
+    }
+    .stats-inner {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat-label { font-size: .77rem; opacity: .8; margin-top: .2rem; font-weight: 500; }
+
+    /* ── Section base ── */
+    .section { padding: 4rem 0; }
+    .section-alt { background: #fff; }
+    .section-dark { background: var(--dark); }
+    .eyebrow {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .45rem;
+    }
+    .section-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.12;
+      margin-bottom: .55rem;
+    }
+    .section-p {
+      color: var(--muted);
+      max-width: 540px;
+      font-size: .96rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── Info boxes ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .info-box {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .info-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-mid));
+    }
+    .info-box:hover { box-shadow: 0 8px 28px rgba(160,120,10,.12); transform: translateY(-2px); }
+    .ibox-icon {
+      width: 44px; height: 44px;
+      background: var(--gold-lt);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .info-box h3 { font-weight: 700; font-size: .97rem; margin-bottom: .35rem; color: var(--text); }
+    .info-box p { color: var(--muted); font-size: .87rem; line-height: 1.6; }
+
+    /* ── Process strip ── */
+    .process-strip {
+      background: var(--gold-lt);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 2.5rem 0;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .process-step { position: relative; }
+    .process-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      right: -0.75rem;
+      width: 1.5rem;
+      height: 1px;
+      background: rgba(160,120,10,.3);
+    }
+    .ps-num {
+      width: 44px; height: 44px;
+      background: var(--gold);
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto .8rem;
+    }
+    .process-step h4 { font-weight: 700; font-size: .9rem; color: var(--text); margin-bottom: .25rem; }
+    .process-step p { font-size: .83rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Requirements ── */
+    .req-head { margin-bottom: 2rem; }
+    .req-head .eyebrow { color: #e8c55a; }
+    .req-head .section-h { color: #fff; }
+    .req-head .section-p { color: rgba(255,255,255,.52); margin-bottom: 0; }
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .8rem;
+    }
+    .req-item {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(196,154,26,.22);
+      border-radius: 14px;
+      padding: 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .85rem;
+      transition: background .2s;
+    }
+    .req-item:hover { background: rgba(196,154,26,.07); }
+    .req-icon {
+      width: 36px; height: 36px;
+      background: rgba(196,154,26,.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .req-item strong { display: block; color: #f0e4b8; font-size: .9rem; margin-bottom: .2rem; font-weight: 600; }
+    .req-item span { color: rgba(255,255,255,.52); font-size: .83rem; line-height: 1.5; }
+
+    /* ── Class cards ── */
+    .classes-section { background: var(--gold-bg); }
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .class-card {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .class-card:hover { box-shadow: 0 12px 44px rgba(160,120,10,.15); transform: translateY(-4px); }
+    .card-accent {
+      height: 4px;
+      background: var(--accent, linear-gradient(90deg, #a0780a, #c49a1a));
+    }
+    .card-header {
+      background: linear-gradient(150deg, #1c1208, #271504);
+      padding: 1.3rem;
+      position: relative;
+    }
+    .card-level {
+      display: inline-block;
+      background: rgba(196,154,26,.25);
+      color: #e8c55a;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .18rem .6rem;
+      border-radius: 6px;
+      margin-bottom: .55rem;
+    }
+    .card-spots {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .22rem .6rem;
+      border-radius: 999px;
+    }
+    .spots-ok  { background: rgba(255,255,255,.1);  color: rgba(255,255,255,.65); }
+    .spots-low { background: rgba(220,60,60,.25); color: #fca5a5; }
+    .card-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; gap: .85rem; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: var(--gold-lt);
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .2rem .65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(160,120,10,.2);
+    }
+    .card-desc { color: var(--muted); font-size: .87rem; line-height: 1.6; flex: 1; }
+    .includes-label {
+      font-size: .71rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: .35rem;
+    }
+    .includes-list { list-style: none; }
+    .includes-list li {
+      font-size: .85rem;
+      color: var(--muted);
+      padding: .12rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: .45rem;
+    }
+    .includes-list li svg { flex-shrink: 0; margin-top: 3px; }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      padding-top: .9rem;
+      margin-top: auto;
+    }
+    .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .price small {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--muted);
+      display: block;
+      margin-top: .1rem;
+    }
+    .book-btn {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: .62rem 1.2rem;
+      font-size: .87rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .14s;
+      white-space: nowrap;
+    }
+    .book-btn:hover { background: #7d5d07; transform: translateY(-1px); }
+
+    /* 5th card spans 2 in a 3-col grid */
+    .class-card.featured { grid-column: span 1; }
+
+    /* ── Testimonials ── */
+    .testimonials-section { background: #fff; }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .testi-card {
+      background: var(--gold-bg);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      color: var(--gold-lt);
+      position: absolute;
+      top: .4rem;
+      left: 1.2rem;
+      line-height: 1;
+    }
+    .testi-text {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      padding-top: .5rem;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .testi-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testi-name { font-weight: 700; font-size: .88rem; }
+    .testi-class { font-size: .78rem; color: var(--muted); }
+    .testi-stars { color: var(--gold-mid); font-size: .8rem; letter-spacing: .1em; margin-bottom: .2rem; }
+
+    /* ── Gift strip ── */
+    .gift-strip {
+      background: linear-gradient(120deg, #1c1208, #2a1a06);
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .gift-strip::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border: 40px solid rgba(196,154,26,.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .gift-copy h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .35rem;
+    }
+    .gift-copy p { color: rgba(255,255,255,.55); font-size: .9rem; max-width: 420px; }
+    .gift-btn {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      padding: .78rem 1.6rem;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s;
+      position: relative;
+      z-index: 1;
+    }
+    .gift-btn:hover { background: #7d5d07; }
+
+    /* Payment row */
+    .payment-row {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      flex-wrap: wrap;
+      margin-top: 1.4rem;
+    }
+    .pay-label { font-size: .82rem; color: var(--muted); margin-right: .2rem; }
+    .pay-badge {
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      padding: .28rem .75rem;
+      font-size: .79rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── FAQ accordion ── */
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; max-width: 760px; }
+    .faq-item {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .faq-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+    }
+    .faq-chevron {
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer-inner {
+      padding: 0 1.3rem 1.1rem;
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      border-top: 1px solid var(--line);
+      padding-top: .9rem;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.38);
+      padding: 2.5rem 0 1.8rem;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .6rem;
+    }
+    .footer-brand em { color: var(--gold-mid); font-style: normal; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.38); line-height: 1.6; }
+    .footer-col h4 {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: .9rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col a { color: rgba(255,255,255,.52); font-size: .87rem; transition: color .2s; }
+    .footer-col a:hover { color: #e8c55a; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 1.4rem;
+      text-align: center;
+      font-size: .8rem;
+    }
+    .footer-bottom a { color: #e8c55a; }
+
+    /* ── Modal ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 22px;
+      padding: 2.2rem;
+      width: 100%;
+      max-width: 500px;
+      max-height: 92vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,.3);
+    }
+    .modal-x {
+      position: absolute;
+      top: 1.1rem; right: 1.1rem;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .modal-x:hover { background: #e2e8f0; }
+    .modal-accent { height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-mid)); border-radius: 2px; margin-bottom: 1.6rem; }
+    .modal h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+      color: var(--text);
+    }
+    .modal-sub { color: var(--gold); font-weight: 600; font-size: .88rem; margin-bottom: 1.6rem; }
+    .fg { margin-bottom: .9rem; }
+    .fg label { display: block; font-size: .8rem; font-weight: 700; color: var(--silver); margin-bottom: .35rem; letter-spacing: .02em; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: .68rem .9rem;
+      font-size: .9rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--gold-bg);
+      color: var(--text);
+      transition: border-color .2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: #fff;
+    }
+    .fg textarea { resize: vertical; min-height: 75px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: .9rem;
+      font-size: .96rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: .5rem;
+      transition: background .2s;
+    }
+    .submit-btn:hover { background: #7d5d07; }
+    .modal-fine {
+      font-size: .77rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: .7rem;
+      line-height: 1.5;
+    }
+    .success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem .5rem;
+    }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: #f0fdf4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .success p { color: var(--muted); font-size: .92rem; line-height: 1.6; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1050px) {
+      .classes-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+      .req-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-panel { display: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .classes-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .req-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .hero-trust { gap: .9rem; }
+      .gift-strip { flex-direction: column; text-align: center; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .stats-inner { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- IYS Demo Banner -->
+<div class="demo-banner">
+  This is a demo site built by ImproveYourSite.com.
+  <a href="https://improveyoursite.com/packages.html" target="_blank">Get a site like this &rarr;</a>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand">Silver <em>&amp;</em> Gold Studio</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#classes">Classes</a>
+      <a href="#prepare">Before You Arrive</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="nav-cta" onclick="openModal('','','','')">Book Now</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="reveal">
+      <div class="hero-eyebrow">Handmade Silver &amp; Gold Workshops</div>
+      <h1>Make something<br><em>you'll wear forever</em></h1>
+      <p class="hero-sub">Small-group workshops in silversmithing and stone setting. Five classes from beginner to advanced. No experience needed — just show up and make something real.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('classes').scrollIntoView({behavior:'smooth'})">Browse Classes</button>
+        <button class="btn-ghost" onclick="document.getElementById('prepare').scrollIntoView({behavior:'smooth'})">What to Expect</button>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span><strong>Max 6</strong> per class</span>
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <span><strong>All tools</strong> &amp; materials included</span>
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span><strong>Keep</strong> everything you make</span>
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span><strong>AfterPay</strong> available</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-panel reveal reveal-delay-2">
+      <div class="hp-label">Workshop overview</div>
+      <div class="hp-grid">
+        <div class="hp-stat"><span class="num">5</span><span class="lbl">Unique workshops</span></div>
+        <div class="hp-stat"><span class="num">6</span><span class="lbl">Max per class</span></div>
+        <div class="hp-stat"><span class="num">2–4h</span><span class="lbl">Per session</span></div>
+        <div class="hp-stat"><span class="num">$185</span><span class="lbl">Starting price</span></div>
+      </div>
+      <div class="hp-footer">All materials included &bull; <strong>Keep your piece</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="container stats-inner">
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Unique workshops</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Max students per class</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Hands-on from minute one</div></div>
+    <div class="stat"><div class="stat-num">2–4hrs</div><div class="stat-label">Duration per session</div></div>
+  </div>
+</div>
+
+<!-- About / Info boxes -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">The Studio</div>
+      <h2 class="section-h">Why students keep coming back</h2>
+      <p class="section-p">We're not a production line. Every class is small by design — so you actually learn the craft, not just watch a demonstration.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-box reveal reveal-delay-1">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Maximum 6 Students</h3>
+        <p>Small classes mean you get hands-on guidance throughout. Your instructor isn't stretched across 20 people — they're focused on you.</p>
+      </div>
+      <div class="info-box reveal reveal-delay-2">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Everything Provided</h3>
+        <p>Sterling silver, gold-fill, all tools, safety gear and finishing supplies are included. Turn up with nothing but yourself and enthusiasm.</p>
+      </div>
+      <div class="info-box reveal reveal-delay-3">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M8 12l3 3 5-5"/></svg>
+        </div>
+        <h3>Take Your Piece Home</h3>
+        <p>You made it, it's yours. Whether it's a bezel ring, a pendant or a pair of studs — you leave wearing something you crafted yourself.</p>
+      </div>
+      <div class="info-box reveal reveal-delay-1">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>Complete Beginners Welcome</h3>
+        <p>Our beginner workshops are built from the ground up for people who have never touched a torch. If you can follow a step, you can do this.</p>
+      </div>
+      <div class="info-box reveal reveal-delay-2">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>Stone Setting Specialists</h3>
+        <p>Stone setting is our thing. From simple bezel settings to opal rings — we teach the techniques most studios won't touch in a workshop format.</p>
+      </div>
+      <div class="info-box reveal reveal-delay-3">
+        <div class="ibox-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <h3>Perfect as a Gift</h3>
+        <p>Gift vouchers available for any class or dollar value. Popular for birthdays, anniversaries, Mother's Day and hen's parties.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process strip -->
+<div class="process-strip">
+  <div class="container">
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="ps-num">1</div>
+        <h4>Book Your Spot</h4>
+        <p>Choose your class and pay online. AfterPay and Zip Pay accepted. Max 6 students per session.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="ps-num">2</div>
+        <h4>Arrive &amp; Set Up</h4>
+        <p>Everything is waiting for you. We'll walk you through safety, tools and your project for the day.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="ps-num">3</div>
+        <h4>Make Your Piece</h4>
+        <p>Hands-on from minute one. Your instructor guides you through every step at your own pace.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="ps-num">4</div>
+        <h4>Leave Wearing It</h4>
+        <p>Polish, admire and take home the piece you made. It's yours, and you made it yourself.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Requirements -->
+<section class="section section-dark" id="prepare">
+  <div class="container">
+    <div class="req-head reveal">
+      <div class="eyebrow">Before You Arrive</div>
+      <h2 class="section-h">What you need to know</h2>
+      <p class="section-p">We work with real metals, open flame and sharp tools. Please read this before your class — it keeps everyone safe and sessions running smoothly.</p>
+    </div>
+    <div class="req-grid">
+      <div class="req-item reveal">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <strong>Enclosed Shoes — No Exceptions</strong>
+          <span>Metal filings, offcuts and hot pieces can fall. No thongs, sandals, heels or open-toe shoes. Sneakers or work boots are perfect.</span>
+        </div>
+      </div>
+      <div class="req-item reveal reveal-delay-1">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <strong>Wear Clothes You Don't Mind Marking</strong>
+          <span>You'll work with solder flux, polishing compounds and metal dust. Natural fibres are better than synthetics near a torch.</span>
+        </div>
+      </div>
+      <div class="req-item reveal reveal-delay-2">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <strong>Tie Back Long Hair</strong>
+          <span>Soldering involves open flame. Long hair must be fully tied back. Loose, baggy sleeves should be rolled up or avoided.</span>
+        </div>
+      </div>
+      <div class="req-item reveal">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <div>
+          <strong>Remove Your Jewellery</strong>
+          <span>Rings, bracelets and dangling jewellery interfere with tools and can be a hazard near flame. Leave them in your bag for the session.</span>
+        </div>
+      </div>
+      <div class="req-item reveal reveal-delay-1">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div>
+          <strong>Eat Beforehand</strong>
+          <span>Sessions run 2–4 hours and you'll be standing and focused the whole time. A proper meal or solid snack before you arrive makes a big difference.</span>
+        </div>
+      </div>
+      <div class="req-item reveal reveal-delay-2">
+        <div class="req-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8c55a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <strong>Common Sense in the Studio</strong>
+          <span>Listen to your instructor. Ask if you're unsure. Don't rush steps that need care — we'd rather slow down than have an accident.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Classes -->
+<section class="section classes-section" id="classes">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">2026 Workshops</div>
+      <h2 class="section-h">Choose your class</h2>
+      <p class="section-p">Five workshops, each producing a different finished piece. Classes book out fast — especially weekends.</p>
+    </div>
+
+    <div class="classes-grid">
+
+      <!-- 1 Silver Band Ring -->
+      <div class="class-card reveal">
+        <div class="card-accent" style="background: linear-gradient(90deg,#8ba0b0,#c0d0dc);"></div>
+        <div class="card-header">
+          <span class="card-level">Beginner</span>
+          <span class="card-spots spots-ok">6 spots</span>
+          <h3>Silver Band Ring</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">Saturday 9:00am</span>
+            <span class="pill">3 hours</span>
+            <span class="pill">925 Sterling Silver</span>
+          </div>
+          <p class="card-desc">Cut, shape, solder and polish a sterling silver band ring from flat sheet. Includes texture options — you choose the look. A classic piece that never dates.</p>
+          <div class="includes-label">What's included</div>
+          <ul class="includes-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sterling silver sheet &amp; solder</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All tools, torch &amp; safety gear</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Filing, sanding &amp; polishing supplies</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your finished ring to wear home</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price">$185 <small>per person</small></div>
+            <button class="book-btn" onclick="openModal('Silver Band Ring','$185','Saturday 9:00am','Beginner')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Gold Studs -->
+      <div class="class-card reveal reveal-delay-1">
+        <div class="card-accent" style="background: linear-gradient(90deg,#c49a1a,#e8c55a);"></div>
+        <div class="card-header">
+          <span class="card-level">Beginner</span>
+          <span class="card-spots spots-low">3 spots left</span>
+          <h3>Gold-Fill Stud Earrings</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">Saturday 1:00pm</span>
+            <span class="pill">2.5 hours</span>
+            <span class="pill">14ct Gold Fill</span>
+          </div>
+          <p class="card-desc">Work with 14ct gold-fill sheet to cut, file and solder a matched pair of custom studs. Choose from a range of shapes and leave with a polished pair ready to wear.</p>
+          <div class="includes-label">What's included</div>
+          <ul class="includes-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Gold-fill sheet &amp; sterling earring posts</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Shape templates to choose from</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All tools &amp; finishing equipment</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your finished earrings to take home</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price">$195 <small>per person</small></div>
+            <button class="book-btn" onclick="openModal('Gold-Fill Stud Earrings','$195','Saturday 1:00pm','Beginner')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Bezel Pendant -->
+      <div class="class-card reveal reveal-delay-2">
+        <div class="card-accent" style="background: linear-gradient(90deg,#6b8fa0,#8db4c8);"></div>
+        <div class="card-header">
+          <span class="card-level">Beginner</span>
+          <span class="card-spots spots-ok">5 spots</span>
+          <h3>Bezel Pendant Workshop</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">Sunday 10:00am</span>
+            <span class="pill">3 hours</span>
+            <span class="pill">925 Sterling Silver</span>
+          </div>
+          <p class="card-desc">Form a fine silver bezel, solder it to a backing plate, then set your chosen semi-precious stone cold. The finished pendant hangs on a sterling chain you also attach in class.</p>
+          <div class="includes-label">What's included</div>
+          <ul class="includes-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fine silver bezel strip &amp; backing sheet</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Choice of semi-precious stone</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sterling silver chain &amp; bail</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your finished pendant necklace</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price">$220 <small>per person</small></div>
+            <button class="book-btn" onclick="openModal('Bezel Pendant Workshop','$220','Sunday 10:00am','Beginner')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Bezel Ring Stone Set -->
+      <div class="class-card reveal">
+        <div class="card-accent" style="background: linear-gradient(90deg,#7b6ea0,#a896cc);"></div>
+        <div class="card-header">
+          <span class="card-level">Intermediate</span>
+          <span class="card-spots spots-ok">4 spots</span>
+          <h3>Bezel Ring — Stone Set</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">Sunday 2:00pm</span>
+            <span class="pill">3.5 hours</span>
+            <span class="pill">925 Sterling Silver</span>
+          </div>
+          <p class="card-desc">Our most popular class. Build a bezel setting from fine silver strip, solder it to a ring band, size it to your finger and set your chosen stone. Some experience preferred but not essential for keen beginners.</p>
+          <div class="includes-label">What's included</div>
+          <ul class="includes-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fine silver bezel wire &amp; sterling band</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Choice of semi-precious stone on day</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All tools, torch &amp; safety gear</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your finished stone-set ring</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price">$250 <small>per person</small></div>
+            <button class="book-btn" onclick="openModal('Bezel Ring — Stone Set','$250','Sunday 2:00pm','Intermediate')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Opal Ring -->
+      <div class="class-card reveal reveal-delay-1">
+        <div class="card-accent" style="background: linear-gradient(90deg,#c49a1a,#9d6b9a,#4a8fa0);"></div>
+        <div class="card-header">
+          <span class="card-level">Advanced</span>
+          <span class="card-spots spots-low">2 spots left</span>
+          <h3>Opal Ring Workshop</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">Wednesday 6:00pm</span>
+            <span class="pill">4 hours</span>
+            <span class="pill">Silver or Gold</span>
+          </div>
+          <p class="card-desc">Work with a genuine Australian opal to create a fine bezel-set ring in sterling silver or gold-fill. Opal setting requires patience and precision. Every opal is unique — your ring will be truly one of a kind.</p>
+          <div class="includes-label">What's included</div>
+          <ul class="includes-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Genuine Australian opal (selected on day)</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sterling silver or gold-fill band &amp; bezel</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All specialist tools &amp; supplies</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0780a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your finished opal ring</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price">$295 <small>per person</small></div>
+            <button class="book-btn" onclick="openModal('Opal Ring Workshop','$295','Wednesday 6:00pm','Advanced')">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Gift strip -->
+    <div class="gift-strip reveal">
+      <div class="gift-copy">
+        <h3>Give the gift of making</h3>
+        <p>Gift vouchers are available for any class or any dollar value. They never expire and can be used for any workshop. Perfect when you're not sure which class they'd prefer.</p>
+      </div>
+      <button class="gift-btn" onclick="openModal('Gift Voucher','','Any class','')">Get a Gift Voucher</button>
+    </div>
+
+    <!-- Payment row -->
+    <div class="payment-row">
+      <span class="pay-label">Payment options:</span>
+      <div class="pay-badge">AfterPay</div>
+      <div class="pay-badge">Zip Pay</div>
+      <div class="pay-badge">Visa / Mastercard</div>
+      <div class="pay-badge">PayPal</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Student Stories</div>
+      <h2 class="section-h">What our students say</h2>
+    </div>
+    <div class="testi-grid" style="margin-top:2rem;">
+      <div class="testi-card reveal">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">"I had never touched any tools before. By the end of the three hours I was wearing a ring I made with my own hands. The instructor was patient and incredibly knowledgeable. Already booked the bezel pendant class."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#8ba0b0;">S</div>
+          <div>
+            <div class="testi-name">Sarah M.</div>
+            <div class="testi-class">Silver Band Ring Workshop</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">"The opal ring class was unlike anything I've done before. The instructor took the time to find me the perfect stone from their collection. I wore it to dinner that night and got compliments all evening."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#7b6ea0;">A</div>
+          <div>
+            <div class="testi-name">Alicia T.</div>
+            <div class="testi-class">Opal Ring Workshop</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">"We booked the studio for a hen's party and it was the best decision. Eight of us, all making gold studs together — absolutely brilliant. Far better than a normal night out and we all left with something to remember it by."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#c49a1a;">J</div>
+          <div>
+            <div class="testi-name">Jessica &amp; group</div>
+            <div class="testi-class">Private Group Booking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Good to Know</div>
+      <h2 class="section-h">Common questions</h2>
+      <p class="section-p">Everything you need to know before you book.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Do I need prior experience?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Not for our beginner classes — the Silver Band Ring, Gold Studs and Bezel Pendant are built for complete newcomers. The Bezel Ring suits people who are confident following detailed steps. The Opal Ring is for those with prior silversmithing experience.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          What's the minimum age?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Students must be 16 or older. Those aged 16–17 require a parent or guardian present in the studio for the full duration of the class.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Can I bring my own design or stone?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes — let us know when booking. We'll advise whether your idea is achievable in the class format. Bring a sketch or photo. For stones, we recommend using our curated selection as we can verify they're suitable for setting.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          What is the cancellation policy?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Full refund or free transfer if you cancel 7+ days before your class. Within 7 days — one free date transfer, no cash refund. Within 48 hours — no refund or transfer, but you're welcome to send someone in your place.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Can I book a private group or hen's party?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes — we love private group bookings. Contact us directly for groups of 6 or more. We can arrange sessions outside our regular timetable and tailor the workshop to your group's skill level.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          How do I use AfterPay or Zip Pay?
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Both options are available at checkout. Simply select AfterPay or Zip Pay as your payment method when booking — no calls or admin needed. All standard terms apply.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Silver <em>&amp;</em> Gold Studio</div>
+        <p class="footer-tagline">Handmade jewellery workshops in silversmithing and stone setting. Small groups. Real skills. Pieces you'll keep forever.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Workshops</h4>
+        <ul>
+          <li><a href="#classes">Silver Band Ring — $185</a></li>
+          <li><a href="#classes">Gold-Fill Studs — $195</a></li>
+          <li><a href="#classes">Bezel Pendant — $220</a></li>
+          <li><a href="#classes">Bezel Ring — $250</a></li>
+          <li><a href="#classes">Opal Ring — $295</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@silvergoldstudio.com.au">hello@silvergoldstudio.com.au</a></li>
+          <li><a href="tel:0400000000">0400 000 000</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#prepare">Before You Arrive</a></li>
+          <li><button style="background:none;border:none;padding:0;cursor:pointer;font-size:.87rem;" class="footer-col a" onclick="openModal('Gift Voucher','','Any class','')"><a>Gift Vouchers</a></button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="yr"></span> Silver &amp; Gold Studio &bull; Handmade Jewellery Workshops &bull;
+      <a href="mailto:hello@silvergoldstudio.com.au">hello@silvergoldstudio.com.au</a> &bull;
+      <a href="tel:0400000000">0400 000 000</a></p>
+      <p style="margin-top:.4rem;font-size:.75rem;">Site by <a href="https://improveyoursite.com" target="_blank">ImproveYourSite.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Booking Modal -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="form-wrap">
+      <div class="modal-accent"></div>
+      <h2>Book Your Spot</h2>
+      <div class="modal-sub" id="modal-sub">Reserve your place in the studio</div>
+      <form action="https://formsubmit.co/hello@silvergoldstudio.com.au" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_subject" value="New Workshop Booking Request">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="">
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="Jane" required></div>
+          <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="jane@email.com" required></div>
+        <div class="fg"><label>Phone</label><input type="tel" name="phone" placeholder="04XX XXX XXX" required></div>
+        <div class="fg">
+          <label>Class</label>
+          <select id="modal-class-select" name="class" required>
+            <option value="">Select a class...</option>
+            <option value="Silver Band Ring — Saturday 9:00am — $185">Silver Band Ring — Sat 9am — $185</option>
+            <option value="Gold-Fill Stud Earrings — Saturday 1:00pm — $195">Gold-Fill Studs — Sat 1pm — $195</option>
+            <option value="Bezel Pendant Workshop — Sunday 10:00am — $220">Bezel Pendant — Sun 10am — $220</option>
+            <option value="Bezel Ring Stone Set — Sunday 2:00pm — $250">Bezel Ring Stone Set — Sun 2pm — $250</option>
+            <option value="Opal Ring Workshop — Wednesday 6:00pm — $295">Opal Ring — Wed 6pm — $295</option>
+            <option value="Gift Voucher">Gift Voucher</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Number of People</label>
+          <select name="people">
+            <option>1 person</option>
+            <option>2 people</option>
+            <option>3 people</option>
+            <option>4 people</option>
+            <option>5 people</option>
+            <option>6 people (private group)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Anything we should know? (optional)</label>
+          <textarea name="notes" placeholder="Allergies, accessibility needs, your own design idea, bringing a stone..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Request Booking</button>
+        <p class="modal-fine">We'll confirm within 24 hours and send a payment link.<br>AfterPay &amp; Zip Pay available at checkout.</p>
+      </form>
+    </div>
+    <div class="success" id="success">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Booking request sent</h3>
+      <p>We'll be in touch within 24 hours to confirm your spot and send payment details.<br>See you in the studio.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* Year */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* Modal */
+  function openModal(name, price, time, level) {
+    var sub = [name, time, price].filter(Boolean).join(' \u2014 ');
+    document.getElementById('modal-sub').textContent = sub || 'Reserve your place in the studio';
+    var sel = document.getElementById('modal-class-select');
+    if (name) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value.toLowerCase().includes(name.toLowerCase().split(' ')[0])) {
+          sel.selectedIndex = i; break;
+        }
+      }
+    }
+    document.getElementById('form-wrap').style.display = 'block';
+    document.getElementById('success').style.display = 'none';
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  }
+
+  /* FAQ accordion */
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* Scroll reveal */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('visible'); });
+  }
+</script>
+</body>
+</html>
