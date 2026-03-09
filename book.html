@@ -13,6 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/style.css">
+  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
   <style>
     .book-wrap { padding: 7rem 0 4rem; min-height: 80vh; }
     .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
@@ -127,23 +129,36 @@
           <h2>Book your free call</h2>
           <p>Choose a session type and pick a time that works for you, or send a quick message below.</p>
 
-          <!-- Google Appointment Scheduling -->
+          <!-- Google Calendar Appointment Scheduling -->
           <div style="display:grid;gap:0.75rem;margin-bottom:0.5rem;">
-            <a href="https://calendar.app.google/ccRGFA3hnTATk9AE6"
-               target="_blank" rel="noopener"
-               style="display:block;width:100%;padding:1rem;background:#5b4dff;color:#fff;font-weight:800;font-size:1.05rem;border-radius:12px;text-align:center;text-decoration:none;transition:background .18s;box-sizing:border-box;"
-               onmouseover="this.style.background='#4c40db'" onmouseout="this.style.background='#5b4dff'">
-              Book a Free 15-Min Discovery Call →
-            </a>
-            <a href="https://calendar.app.google/JBpkpAhhxM1xfoni7"
-               target="_blank" rel="noopener"
-               style="display:block;width:100%;padding:1rem;background:#fff;color:#5b4dff;font-weight:800;font-size:1rem;border:2px solid #5b4dff;border-radius:12px;text-align:center;text-decoration:none;transition:all .18s;box-sizing:border-box;"
-               onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background='#fff'">
-              Book a 30-Min Planning Session →
-            </a>
+            <script>
+            (function() {
+              var target = document.currentScript;
+              window.addEventListener('load', function() {
+                calendar.schedulingButton.load({
+                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0_jVV4h5ZPqECI77AUsDux_rV4AV6qmBFhjzzBp9XIYkWMwJlw4k6g1R_wCm2MZkgda8HT4-nt?gv=true',
+                  color: '#5b4dff',
+                  label: 'Book a Free 15-Min Discovery Call',
+                  target,
+                });
+              });
+            })();
+            </script>
+            <script>
+            (function() {
+              var target = document.currentScript;
+              window.addEventListener('load', function() {
+                calendar.schedulingButton.load({
+                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ181ENyJGt8FMqdJF1CSuT4b_Ymb9Tn9ANog3Xc-_Imdj2-8i7v4G3zOSJj0E0S7AP4SqsZ2Kl3?gv=true',
+                  color: '#2dd4bf',
+                  label: 'Book a 30-Min Planning Session',
+                  target,
+                });
+              });
+            })();
+            </script>
           </div>
-          <p style="font-size:0.78rem;color:#94a3b8;text-align:center;margin-bottom:0;">Opens Google Calendar — pick any available time.</p>
-          <!-- End Google Appointment Scheduling -->
+          <!-- end Google Calendar Appointment Scheduling -->
 
           <div class="divider">or send us a message</div>
 
