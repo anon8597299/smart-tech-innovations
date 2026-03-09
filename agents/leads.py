@@ -57,7 +57,7 @@ import anthropic
 
 DAILY_LIMIT     = 100
 FOLLOW_UP_LIMIT = 20
-BOOKING_URL     = "https://calendly.com/improveyoursite/discovery"
+BOOKING_URL     = "https://improveyoursite.com/book.html"
 FROM_NAME       = "James from ImproveYourSite"
 REPLY_TO        = "hello@improveyoursite.com"
 AGENCY_NAME     = "ImproveYourSite"
@@ -400,6 +400,83 @@ def _write_calendar(cal_leads: list[dict]):
         pass  # Non-critical — file is still written locally
 
 
+# ── Auto-reply: booking intent ───────────────────────────────────────────────
+
+_BOOKING_INTENT_KEYWORDS = [
+    "book", "booking", "schedule", "call", "chat", "catch up", "catch-up",
+    "available", "availability", "when", "time", "slot", "appointment",
+    "interested", "yes", "sure", "happy to", "love to", "keen", "sounds good",
+    "how much", "pricing", "price", "cost", "quote", "package",
+]
+
+_BOOKING_REPLY_TEMPLATE = """\
+Hi {name},
+
+Thanks for getting back to me — really appreciate it.
+
+You can book a time that suits you here (no obligation):
+
+  {booking_url}
+
+I offer a free 15-minute discovery call and a 30-minute planning session. \
+Pick whichever fits best.
+
+If you'd rather I give you a call, just reply with a good time and number and I'll reach out.
+
+Either way, looking forward to it.
+
+James
+ImproveYourSite
+hello@improveyoursite.com
+"""
+
+
+def _maybe_send_booking_reply(
+    to_email: str,
+    biz_name: str,
+    subject: str,
+    body_text: str,
+    gmail_user: str,
+    gmail_pass: str,
+) -> bool:
+    """
+    Send a single auto-reply with the booking link if the email body
+    contains booking intent keywords. Returns True if email was sent.
+    """
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    if not gmail_user or not gmail_pass:
+        return False
+
+    combined = (subject + " " + body_text).lower()
+    if not any(kw in combined for kw in _BOOKING_INTENT_KEYWORDS):
+        return False
+
+    name = biz_name or "there"
+    reply_body = _BOOKING_REPLY_TEMPLATE.format(
+        name=name,
+        booking_url=BOOKING_URL,
+    )
+    reply_subject = f"Re: {subject}" if not subject.lower().startswith("re:") else subject
+
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"]  = reply_subject
+        msg["From"]     = f"{FROM_NAME} <{gmail_user}>"
+        msg["To"]       = f"{biz_name} <{to_email}>"
+        msg["Reply-To"] = REPLY_TO
+        msg.attach(MIMEText(reply_body, "plain"))
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(gmail_user, gmail_pass)
+            server.sendmail(gmail_user, to_email, msg.as_string())
+        return True
+    except Exception:
+        return False
+
+
 # ── Email reply checker ───────────────────────────────────────────────────────
 
 def _decode_subject(raw: str) -> str:
@@ -470,16 +547,34 @@ def _check_email_replies() -> int:
             subject = _decode_subject(msg.get("Subject", ""))
             today = date.today().isoformat()
 
+            # Extract plain-text body for intent analysis
+            body_text = ""
+            if msg.is_multipart():
+                for part in msg.walk():
+                    if part.get_content_type() == "text/plain":
+                        charset = part.get_content_charset() or "utf-8"
+                        try:
+                            body_text = part.get_payload(decode=True).decode(charset, errors="ignore")
+                        except Exception:
+                            pass
+                        break
+            else:
+                charset = msg.get_content_charset() or "utf-8"
+                try:
+                    body_text = msg.get_payload(decode=True).decode(charset, errors="ignore")
+                except Exception:
+                    pass
+
             # Is this sender a known lead?
             conn = sqlite3.connect(db.DB_PATH)
             row = conn.execute(
-                "SELECT id, business_name, industry, city, phone "
+                "SELECT id, business_name, industry, city, phone, status "
                 "FROM leads WHERE LOWER(email)=?",
                 (sender,),
             ).fetchone()
 
             if row:
-                lead_id, biz_name, industry, city, phone = row
+                lead_id, biz_name, industry, city, phone, lead_status = row
                 # Update status → replied (only if still in contacted/new state)
                 conn.execute(
                     "UPDATE leads SET status='replied' WHERE id=? AND status IN ('contacted','new')",
@@ -502,6 +597,11 @@ def _check_email_replies() -> int:
                         "notes": f'Replied to outreach email — "{subject[:80]}"',
                     })
                     added += 1
+
+                # Auto-reply with booking link if this looks like booking intent
+                # Only send once — skip if lead was already beyond 'contacted'/'new'
+                if lead_status in ("contacted", "new"):
+                    _maybe_send_booking_reply(sender, biz_name, subject, body_text, user, passwd)
 
             conn.close()
 
