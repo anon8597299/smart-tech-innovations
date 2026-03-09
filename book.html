@@ -16,6 +16,8 @@
   <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
   <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
   <style>
+    /* Force white text on Google Calendar scheduling buttons */
+    .gc-scheduling-button button, [class*="bookingbtn"], [class*="scheduling"] button { color: #fff !important; }
     .book-wrap { padding: 7rem 0 4rem; min-height: 80vh; }
     .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
     .book-left h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
@@ -150,7 +152,7 @@
               window.addEventListener('load', function() {
                 calendar.schedulingButton.load({
                   url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ181ENyJGt8FMqdJF1CSuT4b_Ymb9Tn9ANog3Xc-_Imdj2-8i7v4G3zOSJj0E0S7AP4SqsZ2Kl3?gv=true',
-                  color: '#2dd4bf',
+                  color: '#1a9e8e',
                   label: 'Book a 30-Min Planning Session',
                   target,
                 });
