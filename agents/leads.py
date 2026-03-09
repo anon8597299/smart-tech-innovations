@@ -84,7 +84,7 @@ AU_CITIES = [
 def _claude(prompt: str, system: str = "", max_tokens: int = 600) -> str:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     kwargs = {
-        "model": "claude-sonnet-4-6",
+        "model": "claude-opus-4-6",
         "max_tokens": max_tokens,
         "messages": [{"role": "user", "content": prompt}],
     }
@@ -420,19 +420,32 @@ def _check_email_replies() -> int:
       - Update lead status to 'replied' in SQLite
       - Add a calendar entry to leads_calendar.json and push to GitHub
 
-    Requires HELLO_EMAIL_USER and HELLO_EMAIL_PASS in .env.
-    hello@improveyoursite.com on Google Workspace → use an App Password.
+    Supports Gmail (App Password) and Microsoft 365 / Outlook accounts.
+    IMAP server is auto-detected from the email address domain.
+
+    Env vars:
+      HELLO_EMAIL_USER / HELLO_EMAIL_PASS  — hello@improveyoursite.com (Gmail)
+      ADMIN_EMAIL_USER / ADMIN_EMAIL_PASS  — admin@improveyoursite.com (Outlook/M365)
     """
     import sqlite3
 
-    user = os.environ.get("HELLO_EMAIL_USER", "")
-    passwd = os.environ.get("HELLO_EMAIL_PASS", "")
+    # Prefer admin@ if configured, fall back to hello@
+    user   = os.environ.get("ADMIN_EMAIL_USER") or os.environ.get("HELLO_EMAIL_USER", "")
+    passwd = os.environ.get("ADMIN_EMAIL_PASS") or os.environ.get("HELLO_EMAIL_PASS", "")
     if not user or not passwd:
         return 0
 
+    # Auto-detect IMAP server
+    domain = user.split("@")[-1].lower()
+    if domain in ("gmail.com",) or "google" in domain:
+        imap_host = "imap.gmail.com"
+    else:
+        # Microsoft 365 / Outlook (covers custom domains on M365 too)
+        imap_host = "outlook.office365.com"
+
     added = 0
     try:
-        mail = imaplib.IMAP4_SSL("imap.gmail.com")
+        mail = imaplib.IMAP4_SSL(imap_host)
         mail.login(user, passwd)
         mail.select("INBOX")
 

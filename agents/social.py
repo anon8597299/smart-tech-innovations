@@ -121,6 +121,19 @@ class SocialAgent(BaseAgent):
         self.log_info(f"Social: {today} ({['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][weekday]}) "
                       f"— theme: {plan['theme']}, slot: {time_slot}")
 
+        # Guard: skip if we already posted this slot today
+        import sqlite3 as _sqlite3
+        _conn = _sqlite3.connect(db.DB_PATH)
+        _already = _conn.execute(
+            "SELECT COUNT(*) FROM events WHERE agent_id='social' AND level='info' "
+            "AND message LIKE '%published%Make.com%' AND timestamp LIKE ?",
+            (f"{today.isoformat()}%",)
+        ).fetchone()[0]
+        _conn.close()
+        if _already >= 2:
+            self.log_info(f"Social: already posted {_already}x today — skipping to avoid duplicates")
+            return
+
         # 1. Competitive intelligence (morning run only — avoid double API calls)
         intel = {}
         if time_slot == "morning":
@@ -334,7 +347,7 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
         client = anthropic.Anthropic(api_key=api_key)
         response = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-opus-4-6",
             max_tokens=1200,
             system=system,
             messages=[{"role": "user", "content": prompt}],

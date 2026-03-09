@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IYS Leads Tracker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:#0d0d12;color:#e2e8f0;font-size:13px}
+.header{background:#16161e;border-bottom:1px solid #252530;padding:20px 32px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#5b4dff,#2dd4bf);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px}
+h1{font-size:18px;font-weight:700}
+.subtitle{font-size:12px;color:#64748b;margin-top:2px}
+.stats{display:flex;gap:24px}
+.stat{text-align:right}
+.stat-num{font-size:22px;font-weight:700;color:#5b4dff}
+.stat-label{font-size:11px;color:#64748b}
+.toolbar{padding:16px 32px;display:flex;gap:12px;align-items:center;background:#13131a;border-bottom:1px solid #252530}
+input{background:#1e1e2a;border:1px solid #252530;border-radius:8px;padding:8px 12px;color:#e2e8f0;font-size:13px;width:280px;outline:none}
+input:focus{border-color:#5b4dff}
+.filter-btn{background:#1e1e2a;border:1px solid #252530;color:#94a3b8;border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.filter-btn.active{background:#5b4dff22;color:#5b4dff;border-color:#5b4dff44}
+.wrapper{padding:24px 32px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th{background:#1e1e2a;padding:10px 12px;text-align:left;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #252530;position:sticky;top:0}
+td{padding:10px 12px;border-bottom:1px solid #1a1a24;vertical-align:middle}
+tr:hover td{background:#16161e}
+a{color:#2dd4bf;text-decoration:none}
+a:hover{text-decoration:underline}
+.total{color:#64748b;font-size:12px}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand">
+    <div class="mark">IYS</div>
+    <div>
+      <h1>Leads Tracker</h1>
+      <div class="subtitle">All outreach — 37 businesses contacted</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">37</div>
+      <div class="stat-label">Total Contacted</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#4ade80">0</div>
+      <div class="stat-label">Replied</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#2dd4bf">0</div>
+      <div class="stat-label">Booked</div>
+    </div>
+  </div>
+</div>
+<div class="toolbar">
+  <input type="text" id="search" placeholder="Search business, city, industry..." onkeyup="filterTable()">
+  <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn" onclick="setFilter('contacted',this)">Contacted</button>
+  <button class="filter-btn" onclick="setFilter('replied',this)">Replied</button>
+  <button class="filter-btn" onclick="setFilter('booked',this)">Booked</button>
+  <button class="filter-btn" onclick="setFilter('cold',this)">Cold</button>
+  <span class="total" id="count">37 records</span>
+</div>
+<div class="wrapper">
+<table id="leads-table">
+<thead>
+<tr>
+  <th>Date</th><th>Business</th><th>Industry</th><th>City</th>
+  <th>Email</th><th>Phone</th><th>Website</th>
+  <th style="min-width:180px">Issue Found</th>
+  <th>Status</th><th>Emails</th><th>Last Emailed</th>
+</tr>
+</thead>
+<tbody>
+
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Bathurst Chiropractic</strong></td>
+      <td>chiropractor</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:enquiries@bathurstchiropractic.com.au">enquiries@bathurstchiropractic.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://bathurstchiropractic.com.au" target="_blank">bathurstchiropractic.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">not built for mobile — probably looks broken on phones</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Illawarra Chiropractic</strong></td>
+      <td>chiropractor</td>
+      <td>Wollongong</td>
+      <td><a href="mailto:info@ndiscovered.com">info@ndiscovered.com</a></td>
+      <td>—</td>
+      <td><a href="https://illawarrachiropractic.com.au" target="_blank">illawarrachiropractic.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Pure Beauty Toowoomba</strong></td>
+      <td>beauty salon</td>
+      <td>Toowoomba</td>
+      <td><a href="mailto:purebeautytoowoomba@gmail.com">purebeautytoowoomba@gmail.com</a></td>
+      <td>—</td>
+      <td><a href="https://purebeautytoowoomba.com.au" target="_blank">purebeautytoowoomba.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Blush Beauty Bar Newcastle</strong></td>
+      <td>beauty salon</td>
+      <td>Newcastle</td>
+      <td><a href="mailto:astigma@astigmatic.com">astigma@astigmatic.com</a></td>
+      <td>—</td>
+      <td><a href="https://blushbeautybar.com.au" target="_blank">blushbeautybar.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Penrith Dental Care</strong></td>
+      <td>dentist</td>
+      <td>Penrith</td>
+      <td><a href="mailto:info@penrithdentalcare.com.au">info@penrithdentalcare.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://penrithdentalcare.com.au" target="_blank">penrithdentalcare.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">very thin content (235 words) — Google ranks sites with real information higher</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Dubbo Real Estate Agency</strong></td>
+      <td>real estate agent</td>
+      <td>Dubbo</td>
+      <td><a href="mailto:rentals@drea.com.au">rentals@drea.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://dubborealestateagency.com.au" target="_blank">dubborealestateagency.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">not built for mobile — probably looks broken on phones</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Geelong Landscaping Specialists</strong></td>
+      <td>landscaper</td>
+      <td>Geelong</td>
+      <td><a href="mailto:info@samw85.sg-host.com">info@samw85.sg-host.com</a></td>
+      <td>—</td>
+      <td><a href="https://geelonglandscaping.com.au" target="_blank">geelonglandscaping.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">not built for mobile — probably looks broken on phones</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Hunter Home Loans</strong></td>
+      <td>mortgage broker</td>
+      <td>Newcastle</td>
+      <td><a href="mailto:mail@hunterbusinessfinance.com.au">mail@hunterbusinessfinance.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://hunterhomeloans.com.au" target="_blank">hunterhomeloans.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no rate comparison tool or borrowing calculator — gives customers a reason to stay on the site</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>New England Physiotherapy</strong></td>
+      <td>physiotherapist</td>
+      <td>Armidale</td>
+      <td><a href="mailto:vasb@arjratynaqculfvb.pbz.nh">vasb@arjratynaqculfvb.pbz.nh</a></td>
+      <td>—</td>
+      <td><a href="https://newenglandphysio.com.au" target="_blank">newenglandphysio.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Fusionsolar & Electrical</strong></td>
+      <td>solar installer</td>
+      <td>Townsville</td>
+      <td><a href="mailto:info@fusionsolar.net">info@fusionsolar.net</a></td>
+      <td>07 4774 6139</td>
+      <td><a href="http://www.fusionsolar.net" target="_blank">www.fusionsolar.net</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">site wouldn't load when we checked — timed out</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Business Development Solutions</strong></td>
+      <td>accountant</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:tony@bdsaccountants.com.au">tony@bdsaccountants.com.au</a></td>
+      <td>02 6332 2960</td>
+      <td><a href="http://www.businessdevelopmentsolutions.com.au" target="_blank">www.businessdevelopmentsolutions.co</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">not built for mobile — probably looks broken on phones</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>G&M Cochrane & Sons</strong></td>
+      <td>mechanic</td>
+      <td>Wagga Wagga</td>
+      <td><a href="mailto:riv4wd@bigpond.net.au">riv4wd@bigpond.net.au</a></td>
+      <td>02 6925 3605</td>
+      <td><a href="https://gmcochraneandsons.com.au" target="_blank">gmcochraneandsons.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no Google review integration on the site — trust signals are missing</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Intrust Group</strong></td>
+      <td>builder</td>
+      <td>Cairns</td>
+      <td><a href="mailto:info@intrustgroup.com.au">info@intrustgroup.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://www.intrustgroup.com.au" target="_blank">www.intrustgroup.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no before/after project photos or case studies — the main thing customers look for</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Webflow Plumbing</strong></td>
+      <td>plumber</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:info@webflowplumbing.com.au">info@webflowplumbing.com.au</a></td>
+      <td>0475 862 669</td>
+      <td><a href="https://webflowplumbing.com" target="_blank">webflowplumbing.com</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Health First Group Rockhampton</strong></td>
+      <td>physiotherapist</td>
+      <td>Rockhampton</td>
+      <td><a href="mailto:rockhampton@healthfirstgroup.com.au">rockhampton@healthfirstgroup.com.au</a></td>
+      <td>07 4928 7747</td>
+      <td><a href="https://www.healthfirstgroup.com.au" target="_blank">www.healthfirstgroup.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no online booking visible — most health patients want to book without calling</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Rilec Electrical</strong></td>
+      <td>electrician</td>
+      <td>Rockhampton</td>
+      <td><a href="mailto:admin@rilecelectrical.com.au">admin@rilecelectrical.com.au</a></td>
+      <td>07 4921 1380</td>
+      <td><a href="https://rilecelectrical.com.au" target="_blank">rilecelectrical.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Tropical Coast Plumbing</strong></td>
+      <td>plumber</td>
+      <td>Rockhampton</td>
+      <td><a href="mailto:info@tropicalcoastplumbing.com">info@tropicalcoastplumbing.com</a></td>
+      <td>—</td>
+      <td><a href="https://www.tropicalcoastplumbing.com" target="_blank">www.tropicalcoastplumbing.com</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Plumbing Ipswich</strong></td>
+      <td>plumber</td>
+      <td>Ipswich</td>
+      <td><a href="mailto:info@plumbingipswich.com.au">info@plumbingipswich.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://plumbingipswich.com.au" target="_blank">plumbingipswich.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">not built for mobile — probably looks broken on phones</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Tippings Plumbing Service</strong></td>
+      <td>plumber</td>
+      <td>Ipswich</td>
+      <td><a href="mailto:tippingsplumbing@hotmail.com">tippingsplumbing@hotmail.com</a></td>
+      <td>—</td>
+      <td><a href="https://tippingsplumbing.com.au" target="_blank">tippingsplumbing.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Don Evans Plumbers</strong></td>
+      <td>plumber</td>
+      <td>Ipswich</td>
+      <td><a href="mailto:admin@donevansplumbers.com.au">admin@donevansplumbers.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://donevansplumbers.com.au" target="_blank">donevansplumbers.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>3D Physio Health Group</strong></td>
+      <td>physiotherapist</td>
+      <td>Bendigo</td>
+      <td><a href="mailto:info@3dphysio.com.au">info@3dphysio.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://www.3dphysio.com.au" target="_blank">www.3dphysio.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">site takes 4.0 seconds to load on mobile — most people leave after 3 seconds</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Nortons Business Advisors</strong></td>
+      <td>accountant</td>
+      <td>Mudgee</td>
+      <td><a href="mailto:hello@nortons.com.au">hello@nortons.com.au</a></td>
+      <td>—</td>
+      <td><a href="http://www.nortons.com.au" target="_blank">www.nortons.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site doesn't explain what types of clients they help — too generic to convert visitors</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Crowey's Plumbing Services</strong></td>
+      <td>plumber</td>
+      <td>Parkes</td>
+      <td><a href="mailto:info@croweysplumbing.com.au">info@croweysplumbing.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://croweysplumbing.com.au" target="_blank">croweysplumbing.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Orange City Electrical Services</strong></td>
+      <td>electrician</td>
+      <td>Orange</td>
+      <td><a href="mailto:phil@orangecityelectricalservices.com">phil@orangecityelectricalservices.com</a></td>
+      <td>—</td>
+      <td><a href="https://www.orangecityelectricalservices.com" target="_blank">www.orangecityelectricalservices.co</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no clear call-to-action — visitors don't know what to do next</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Sparks Finance</strong></td>
+      <td>mortgage broker</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:info@sparksfinance.com.au">info@sparksfinance.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://www.sparksfinance.com.au" target="_blank">www.sparksfinance.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">site takes 3.8 seconds to load on mobile — most people leave after 3 seconds</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Rake Financial</strong></td>
+      <td>mortgage broker</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:addresssally@rakefinancial.com.auconnect">addresssally@rakefinancial.com.auconnect</a></td>
+      <td>—</td>
+      <td><a href="https://rakefinancial.com.au" target="_blank">rakefinancial.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">site takes 7.4 seconds to load on mobile — most people leave after 3 seconds</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>ARG Plumbing</strong></td>
+      <td>plumber</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:guy.a.meekin@gmail.com">guy.a.meekin@gmail.com</a></td>
+      <td>0428 294 383</td>
+      <td><a href="https://www.argplumbing.com.au" target="_blank">www.argplumbing.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">missing structured data — Google can't read the business details properly</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-09</td>
+      <td><strong>Scott Mitchell Plumbing</strong></td>
+      <td>plumber</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:your@email.com">your@email.com</a></td>
+      <td>0437 586 279</td>
+      <td><a href="https://scottmitchellplumbing.com" target="_blank">scottmitchellplumbing.com</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">most plumbers in the area rank for 'emergency plumber' — not their specific suburb</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-09</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>MAC Electrical Services</strong></td>
+      <td>electrician</td>
+      <td>Orange</td>
+      <td><a href="mailto:admin@macelectrical.com.au">admin@macelectrical.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://macelectrical.com.au" target="_blank">macelectrical.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Solar Dimension</strong></td>
+      <td>solar installer</td>
+      <td>Townsville</td>
+      <td><a href="mailto:admin@solardimension.com.au">admin@solardimension.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://solardimension.com.au" target="_blank">solardimension.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>O'Neill Carpentry & Construction</strong></td>
+      <td>builder</td>
+      <td>Albury</td>
+      <td><a href="mailto:dan@oneillcc.com.au">dan@oneillcc.com.au</a></td>
+      <td>—</td>
+      <td><a href="https://oneillcc.com.au" target="_blank">oneillcc.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">no clear contact or enquiry section</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Wolki Construction</strong></td>
+      <td>builder</td>
+      <td>Albury</td>
+      <td><a href="mailto:info@wolkiconstruction.com">info@wolkiconstruction.com</a></td>
+      <td>—</td>
+      <td><a href="https://wolkiconstruction.com" target="_blank">wolkiconstruction.com</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Ladgrove Builder</strong></td>
+      <td>builder</td>
+      <td>Albury</td>
+      <td><a href="mailto:jake@ladgrovebuilder.com">jake@ladgrovebuilder.com</a></td>
+      <td>0432 748 992</td>
+      <td><a href="https://www.ladgrovebuilder.com" target="_blank">www.ladgrovebuilder.com</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Laser Plumbing Bathurst</strong></td>
+      <td>plumber</td>
+      <td>Bathurst</td>
+      <td><a href="mailto:bathurst@laserplumbing.com.au">bathurst@laserplumbing.com.au</a></td>
+      <td>02 6332 4062</td>
+      <td><a href="https://www.laserplumbing.com.au/m/Plumber-Bathurst" target="_blank">www.laserplumbing.com.au/m/Plumber-</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Lonestar Power</strong></td>
+      <td>solar installer</td>
+      <td>Townsville</td>
+      <td><a href="mailto:solar@lonestarwelds.com.au">solar@lonestarwelds.com.au</a></td>
+      <td>07 4751 8008</td>
+      <td><a href="https://www.lonestarpower.com.au" target="_blank">www.lonestarpower.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Physiotherapy Centre Bendigo</strong></td>
+      <td>physiotherapist</td>
+      <td>Bendigo</td>
+      <td><a href="mailto:info@physiotherapycentrebendigo.com.au">info@physiotherapycentrebendigo.com.au</a></td>
+      <td>03 5442 4044</td>
+      <td><a href="https://physiotherapycentrebendigo.com.au" target="_blank">physiotherapycentrebendigo.com.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+    <tr>
+      <td>2026-03-07</td>
+      <td><strong>Wagga City Auto Centre</strong></td>
+      <td>mechanic</td>
+      <td>Wagga Wagga</td>
+      <td><a href="mailto:kandtparkerwaggacityautocentre@hotmail.com">kandtparkerwaggacityautocentre@hotmail.com</a></td>
+      <td>02 69 255 755</td>
+      <td><a href="https://wcac.net.au" target="_blank">wcac.net.au</a></td>
+      <td style="font-size:11px;color:#94a3b8;max-width:220px;">the site could do more to convert visitors into customers</td>
+      <td><span style="background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">CONTACTED</span></td>
+      <td style="text-align:center">1</td>
+      <td>2026-03-07</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<script>
+let activeFilter = 'all';
+function filterTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const rows = document.querySelectorAll('#leads-table tbody tr');
+  let vis = 0;
+  rows.forEach(r => {
+    const text = r.textContent.toLowerCase();
+    const statusCell = r.cells[8].textContent.toLowerCase();
+    const matchSearch = !q || text.includes(q);
+    const matchFilter = activeFilter === 'all' || statusCell.includes(activeFilter);
+    r.style.display = (matchSearch && matchFilter) ? '' : 'none';
+    if (matchSearch && matchFilter) vis++;
+  });
+  document.getElementById('count').textContent = vis + ' records';
+}
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterTable();
+}
+</script>
+</body>
+</html>
