@@ -118,7 +118,7 @@ class AdsAgent(BaseAgent):
             "WHERE segments.date DURING LAST_7_DAYS"
         )
 
-        url = f"https://googleads.googleapis.com/v16/customers/{customer_id}/googleAds:search"
+        url = f"https://googleads.googleapis.com/v19/customers/{customer_id}/googleAds:search"
         req = urllib.request.Request(
             url,
             data=json.dumps({"query": query}).encode(),

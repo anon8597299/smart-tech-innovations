@@ -477,7 +477,10 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
             else:
                 self.log_info("Make.com: scenario is active")
         except Exception as exc:
-            self.log_warn(f"Make.com: could not check/reactivate scenario: {exc}")
+            self.log_warn(
+                f"Make.com: scenario check blocked (Cloudflare 403) — post still sent via webhook. "
+                f"If post doesn't appear on Instagram, toggle scenario ON at make.com"
+            )
 
     def _publish_via_make(self, webhook_url: str, slide_paths: list[Path], caption: str, facebook_caption: str = "") -> bool:
         """
