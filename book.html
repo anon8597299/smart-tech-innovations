@@ -17,8 +17,7 @@
   <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
   <style>
     /* Force white text on Google Calendar scheduling buttons */
-    .gc-scheduling-button button, [class*="bookingbtn"], [class*="scheduling"] button { color: #fff !important; }
-    .book-card button { color: #fff !important; }
+    .book-card button, .book-card button *, .book-card button span { color: #fff !important; }
     .book-wrap { padding: 7rem 0 4rem; min-height: 80vh; }
     .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
     .book-left h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
@@ -234,5 +233,16 @@
   <script src="analytics-config.js"></script>
   <script src="src/js/analytics.js"></script>
   <script src="src/js/main.js"></script>
+  <script>
+    // Force white text on Google Calendar scheduling buttons after they render
+    new MutationObserver(function() {
+      document.querySelectorAll('.book-card button').forEach(function(btn) {
+        btn.style.setProperty('color', '#ffffff', 'important');
+        btn.querySelectorAll('*').forEach(function(el) {
+          el.style.setProperty('color', '#ffffff', 'important');
+        });
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>
