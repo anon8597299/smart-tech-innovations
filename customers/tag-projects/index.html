@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>TAG Projects Co. — Equipment Supply, Slacks Creek QLD | 0478 752 362</title>
-  <meta name="description" content="TAG Projects Co. supplies industrial and commercial equipment to businesses across South East Queensland. Quality products, fast dispatch. Call 0478 752 362.">
+  <title>TAG Projects Co. — Metal Fabrication, Handrails & Balustrades, Slacks Creek QLD | 0478 752 362</title>
+  <meta name="description" content="TAG Projects Co. fabricates custom handrails, balustrades, commercial fit-outs and structural metalwork in mild steel, aluminium and stainless steel. Serving Brisbane, Logan & Gold Coast. Call 0478 752 362.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"LocalBusiness","name":"TAG Projects Co.","telephone":"0478752362","address":{"@type":"PostalAddress","streetAddress":"Unit 2/17 Aranda St","addressLocality":"Slacks Creek","addressRegion":"QLD","postalCode":"4127","addressCountry":"AU"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"06:00","closes":"12:00"}],"areaServed":["Slacks Creek","Logan","Brisbane","Gold Coast","Ipswich","South East Queensland"]}
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"TAG Projects Co.","description":"Custom metal fabrication — handrails, balustrades, commercial fit-outs, hospital and school projects in mild steel, aluminium and stainless steel.","telephone":"0478752362","address":{"@type":"PostalAddress","streetAddress":"Unit 2/17 Aranda St","addressLocality":"Slacks Creek","addressRegion":"QLD","postalCode":"4127","addressCountry":"AU"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"06:00","closes":"12:00"}],"areaServed":["Slacks Creek","Logan","Brisbane","Gold Coast","Ipswich","South East Queensland"]}
   </script>
   <style>
     *,*::before,*::after{box-sizing:border-box;}
@@ -20,151 +20,181 @@
     .container{width:min(1140px,92vw);margin:0 auto;}
 
     :root{
-      --amber:#2563eb;
-      --amber-dark:#1d4ed8;
-      --amber-lt:#eff6ff;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --blue-lt:#eff6ff;
       --charcoal:#050a14;
+      --dark:#0f172a;
       --slate:#334155;
       --muted:#64748b;
       --line:#e2e8f0;
       --bg:#f8fafc;
-      --steel:#1e293b;
       --silver:#94a3b8;
     }
 
     /* ── Scroll progress ── */
-    #scroll-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--amber);z-index:9999;pointer-events:none;}
+    #scroll-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--blue);z-index:9999;pointer-events:none;}
 
     /* ── Nav ── */
-    .site-header{position:sticky;top:0;z-index:200;background:rgba(15,23,42,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.07);}
+    .site-header{position:sticky;top:0;z-index:200;background:rgba(5,10,20,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.07);}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;gap:1rem;}
-    .brand{display:flex;align-items:center;gap:.6rem;}
-    .brand-mark{width:36px;height:36px;background:var(--amber);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .brand-mark svg{width:20px;height:20px;fill:#fff;}
+    .brand{display:flex;align-items:center;gap:.65rem;}
+    .brand-mark{width:38px;height:38px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .brand-mark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
     .brand-text{font-weight:900;font-size:1rem;color:#fff;letter-spacing:-.02em;line-height:1.1;}
-    .brand-text span{display:block;font-size:.65rem;font-weight:600;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;}
-    .nav-links{display:flex;gap:.25rem;align-items:center;}
+    .brand-text span{display:block;font-size:.62rem;font-weight:600;color:var(--silver);letter-spacing:.07em;text-transform:uppercase;margin-top:.1rem;}
+    .nav-links{display:flex;gap:.2rem;align-items:center;}
     .nav-links a{padding:.38rem .72rem;font-size:.82rem;font-weight:600;color:#94a3b8;border-radius:7px;transition:background .15s,color .15s;cursor:pointer;}
     .nav-links a:hover{background:rgba(255,255,255,.07);color:#fff;}
-    .nav-cta{background:var(--amber)!important;color:#fff!important;border-radius:8px!important;padding:.45rem 1.1rem!important;font-weight:800!important;font-size:.82rem!important;white-space:nowrap;}
-    .nav-cta:hover{background:var(--amber-dark)!important;}
+    .nav-cta{background:var(--blue)!important;color:#fff!important;border-radius:8px!important;padding:.45rem 1.1rem!important;font-weight:800!important;font-size:.82rem!important;white-space:nowrap;}
+    .nav-cta:hover{background:var(--blue-dark)!important;}
     .nav-mob{display:none;}
 
     /* ── Hero ── */
-    .hero{background:var(--charcoal);padding:5.5rem 0 4rem;position:relative;overflow:hidden;}
-    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:520px;height:520px;border:70px solid rgba(37,99,235,.08);border-radius:50%;pointer-events:none;}
-    .hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:380px;height:380px;border:60px solid rgba(148,163,184,.05);border-radius:50%;pointer-events:none;}
-    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:100px;padding:.35rem 1rem;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;}
-    .hero-badge svg{width:14px;height:14px;fill:var(--amber);}
-    .hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.035em;margin:0 0 1.25rem;}
-    .hero h1 em{font-style:normal;color:var(--amber);}
-    .hero-sub{font-size:1.1rem;color:#94a3b8;max-width:520px;line-height:1.7;margin:0 0 2.25rem;}
+    .hero{background:var(--charcoal);padding:5.5rem 0 4.5rem;position:relative;overflow:hidden;}
+    .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3.5rem;align-items:center;}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;border:80px solid rgba(37,99,235,.06);border-radius:50%;pointer-events:none;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.25);border-radius:100px;padding:.35rem 1rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:1.4rem;}
+    .hero h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.035em;margin:0 0 1.25rem;}
+    .hero h1 em{font-style:normal;color:#60a5fa;}
+    .hero-sub{font-size:1.05rem;color:#94a3b8;max-width:500px;line-height:1.75;margin:0 0 2.25rem;}
     .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
-    .btn-primary{background:var(--amber);color:#fff;padding:14px 32px;border-radius:9px;font-weight:800;font-size:1rem;letter-spacing:-.01em;transition:all .2s ease;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:.5rem;}
-    .btn-primary:hover{background:var(--amber-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,99,235,.4);}
-    .btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.2);padding:12px 28px;border-radius:9px;font-weight:700;font-size:1rem;transition:all .2s ease;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;}
-    .btn-secondary:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.05);}
-    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-top:3.5rem;overflow:hidden;}
-    .stat{padding:1.25rem 1.5rem;background:rgba(255,255,255,.02);}
-    .stat-num{font-size:1.9rem;font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1;}
-    .stat-num span{color:var(--amber);}
-    .stat-label{font-size:.78rem;color:#64748b;font-weight:600;margin-top:.3rem;text-transform:uppercase;letter-spacing:.05em;}
+    .btn-primary{background:var(--blue);color:#fff;padding:14px 32px;border-radius:9px;font-weight:800;font-size:1rem;letter-spacing:-.01em;transition:all .2s ease;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:.55rem;}
+    .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 26px rgba(37,99,235,.4);}
+    .btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.18);padding:12px 28px;border-radius:9px;font-weight:700;font-size:1rem;transition:all .2s ease;cursor:pointer;display:inline-flex;align-items:center;gap:.55rem;}
+    .btn-secondary:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05);}
+
+    /* Hero visual — material swatches */
+    .hero-visual{display:grid;gap:1rem;}
+    .mat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s;}
+    .mat-card:hover{border-color:rgba(37,99,235,.4);}
+    .mat-swatch{width:44px;height:44px;border-radius:10px;flex-shrink:0;}
+    .mat-swatch.mild{background:linear-gradient(135deg,#475569 0%,#1e293b 100%);}
+    .mat-swatch.alum{background:linear-gradient(135deg,#d1d5db 0%,#9ca3af 100%);}
+    .mat-swatch.ss{background:linear-gradient(135deg,#e2e8f0 0%,#cbd5e1 50%,#94a3b8 100%);box-shadow:0 0 0 1px rgba(255,255,255,.15);}
+    .mat-info strong{display:block;font-size:.9rem;font-weight:800;color:#fff;letter-spacing:-.01em;}
+    .mat-info span{font-size:.78rem;color:#64748b;font-weight:500;}
 
     /* ── Accent bar ── */
-    .accent-bar{height:4px;background:linear-gradient(90deg,#2563eb 0%,#94a3b8 100%);}
+    .accent-bar{height:4px;background:linear-gradient(90deg,#2563eb 0%,#94a3b8 60%,#e2e8f0 100%);}
 
     /* ── Section common ── */
     .section{padding:5rem 0;}
-    .section-dark{background:var(--charcoal);}
+    .section-dark{background:var(--dark);}
     .section-light{background:var(--bg);}
     .section-white{background:#fff;}
-    .eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.75rem;}
-    .section-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-.03em;margin:0 0 .75rem;line-height:1.1;}
-    .section-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.75;}
+    .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+    .eyebrow-light{color:#60a5fa;}
+    .section-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-.03em;margin:0 0 .75rem;line-height:1.1;color:var(--dark);}
     .section-title-light{color:#fff;}
+    .section-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.75;}
     .section-sub-light{color:#94a3b8;}
 
-    /* ── Products / Services ── */
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:3rem;}
-    .product-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2rem;transition:all .2s ease;cursor:default;}
-    .product-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.1);transform:translateY(-2px);border-color:rgba(245,158,11,.25);}
-    .product-icon{width:48px;height:48px;background:var(--amber-lt);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;}
-    .product-icon svg{width:26px;height:26px;stroke:var(--amber);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
-    .product-card h3{font-size:1.1rem;font-weight:800;color:var(--charcoal);letter-spacing:-.02em;margin:0 0 .5rem;}
-    .product-card p{font-size:.9rem;color:var(--muted);line-height:1.65;margin:0;}
+    /* ── Services grid ── */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:3rem;}
+    .service-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2rem;transition:all .2s ease;position:relative;overflow:hidden;}
+    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
+    .service-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px);border-color:rgba(37,99,235,.2);}
+    .service-card:hover::before{transform:scaleX(1);}
+    .service-icon{width:48px;height:48px;background:var(--blue-lt);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;}
+    .service-icon svg{width:24px;height:24px;stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+    .service-card h3{font-size:1.05rem;font-weight:800;color:var(--dark);letter-spacing:-.02em;margin:0 0 .5rem;}
+    .service-card p{font-size:.88rem;color:var(--muted);line-height:1.7;margin:0 0 1rem;}
+    .service-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-lt);border-radius:5px;padding:.2rem .55rem;}
 
-    /* ── Why choose ── */
-    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:1rem;}
-    .why-visual{position:relative;}
-    .why-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:2rem;display:grid;gap:1.25rem;}
+    /* ── Materials ── */
+    .materials-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+    .material-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem;text-align:center;transition:border-color .2s;}
+    .material-card:hover{border-color:rgba(37,99,235,.35);}
+    .material-swatch-lg{width:72px;height:72px;border-radius:50%;margin:0 auto 1.25rem;flex-shrink:0;}
+    .material-swatch-lg.mild{background:linear-gradient(135deg,#64748b 0%,#1e293b 100%);box-shadow:0 4px 16px rgba(0,0,0,.4);}
+    .material-swatch-lg.alum{background:linear-gradient(135deg,#e2e8f0 0%,#9ca3af 100%);box-shadow:0 4px 16px rgba(0,0,0,.3);}
+    .material-swatch-lg.ss{background:linear-gradient(135deg,#f1f5f9 0%,#cbd5e1 40%,#94a3b8 100%);box-shadow:0 4px 20px rgba(148,163,184,.25);}
+    .material-card h3{font-size:1rem;font-weight:800;color:#fff;margin:0 0 .5rem;letter-spacing:-.02em;}
+    .material-card p{font-size:.85rem;color:#64748b;line-height:1.65;margin:0;}
+
+    /* ── Industries ── */
+    .industries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem;margin-top:3rem;}
+    .industry-card{border:1px solid var(--line);border-radius:14px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s;background:#fff;cursor:default;}
+    .industry-card:hover{border-color:rgba(37,99,235,.3);box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-1px);}
+    .ind-icon{width:42px;height:42px;background:var(--blue-lt);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ind-icon svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+    .industry-card h4{font-size:.92rem;font-weight:800;color:var(--dark);margin:0 0 .25rem;letter-spacing:-.01em;}
+    .industry-card p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.6;}
+
+    /* ── Why TAG ── */
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .why-points{display:grid;gap:1.5rem;}
     .why-item{display:flex;gap:1rem;align-items:flex-start;}
-    .why-check{width:28px;height:28px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
-    .why-check svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-    .why-item h4{font-size:.95rem;font-weight:700;color:#fff;margin:0 0 .25rem;letter-spacing:-.01em;}
-    .why-item p{font-size:.85rem;color:#94a3b8;margin:0;line-height:1.6;}
-    .why-list{display:grid;gap:1rem;}
-    .why-meta{background:var(--amber);border-radius:12px;padding:1.5rem 2rem;margin-top:2rem;}
-    .why-meta p{font-size:.95rem;font-weight:700;color:#fff;margin:0;line-height:1.5;}
-
-    /* ── Areas ── */
-    .areas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-top:2rem;}
-    .area-chip{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.65rem 1rem;font-size:.85rem;font-weight:600;color:var(--slate);display:flex;align-items:center;gap:.5rem;transition:all .15s ease;}
-    .area-chip:hover{border-color:var(--amber);color:var(--amber-dark);background:var(--amber-lt);}
-    .area-chip svg{width:14px;height:14px;stroke:var(--amber);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+    .why-num{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;font-weight:900;color:#fff;letter-spacing:-.01em;}
+    .why-item h4{font-size:.95rem;font-weight:700;color:#fff;margin:0 0 .3rem;letter-spacing:-.01em;}
+    .why-item p{font-size:.85rem;color:#64748b;margin:0;line-height:1.65;}
+    .why-callout{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:14px;padding:1.75rem 2rem;margin-top:2rem;}
+    .why-callout p{font-size:.95rem;font-weight:700;color:#93c5fd;margin:0;line-height:1.6;}
+    .why-stats{display:grid;gap:1rem;}
+    .why-stat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.5rem;}
+    .why-stat-num{font-size:2.5rem;font-weight:900;color:#fff;letter-spacing:-.05em;line-height:1;}
+    .why-stat-num span{font-size:1.2rem;color:#60a5fa;}
+    .why-stat-label{font-size:.78rem;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.3rem;}
 
     /* ── Contact ── */
-    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem;}
+    .contact-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start;margin-top:3rem;}
     .contact-details{display:grid;gap:1.25rem;}
     .contact-item{display:flex;gap:1rem;align-items:flex-start;}
-    .contact-icon{width:44px;height:44px;background:rgba(245,158,11,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .contact-icon svg{width:20px;height:20px;stroke:var(--amber);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
-    .contact-item strong{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:.2rem;}
-    .contact-item a,.contact-item span{font-size:.95rem;font-weight:600;color:var(--charcoal);}
-    .contact-item a:hover{color:var(--amber-dark);}
-    .contact-form{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:2rem;}
+    .contact-icon{width:44px;height:44px;background:var(--blue-lt);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .contact-icon svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+    .contact-item strong{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.2rem;}
+    .contact-item a,.contact-item span{font-size:.95rem;font-weight:600;color:var(--dark);}
+    .contact-item a:hover{color:var(--blue);}
+    .hours-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18);border-radius:6px;padding:.28rem .7rem;font-size:.76rem;font-weight:700;color:#16a34a;}
+    .hours-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;}
+    .contact-form{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:2.25rem;}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
     .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
-    .form-group label{font-size:.78rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;}
-    .form-group input,.form-group textarea,.form-group select{padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;font-size:.95rem;color:var(--charcoal);background:#fff;transition:border-color .2s ease;outline:none;}
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.12);}
+    .form-group label{font-size:.74rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;}
+    .form-group input,.form-group textarea,.form-group select{padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;font-size:.95rem;color:var(--dark);background:#fff;transition:border-color .2s;outline:none;}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
     .form-group textarea{resize:vertical;min-height:110px;}
     .form-group select{cursor:pointer;}
-    .btn-submit{background:var(--amber);color:#fff;padding:13px 28px;border-radius:9px;font-weight:800;font-size:1rem;border:none;cursor:pointer;width:100%;transition:all .2s ease;}
-    .btn-submit:hover{background:var(--amber-dark);}
-
-    /* ── Hours badge ── */
-    .hours-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:.3rem .75rem;font-size:.78rem;font-weight:700;color:#16a34a;}
-    .hours-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;}
+    .btn-submit{background:var(--blue);color:#fff;padding:13px 28px;border-radius:9px;font-weight:800;font-size:1rem;border:none;cursor:pointer;width:100%;transition:all .2s ease;}
+    .btn-submit:hover{background:var(--blue-dark);}
 
     /* ── Footer ── */
-    .footer{background:#020617;padding:2.5rem 0;}
+    .footer{background:#020617;padding:2.75rem 0;}
     .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
-    .footer-copy{font-size:.82rem;color:#475569;}
+    .footer-brand{display:flex;align-items:center;gap:.65rem;}
+    .footer-mark{width:30px;height:30px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+    .footer-mark svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .footer-copy{font-size:.8rem;color:#334155;}
     .footer-links{display:flex;gap:1.5rem;}
-    .footer-links a{font-size:.82rem;color:#475569;font-weight:500;transition:color .15s;}
-    .footer-links a:hover{color:var(--amber);}
+    .footer-links a{font-size:.8rem;color:#334155;font-weight:500;transition:color .15s;}
+    .footer-links a:hover{color:var(--blue);}
 
     /* ── Responsive ── */
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr;gap:2.5rem;}
+      .hero-visual{grid-template-columns:1fr 1fr;display:grid;}
+      .materials-wrap{grid-template-columns:1fr;}
+      .why-grid{grid-template-columns:1fr;gap:2rem;}
+    }
     @media(max-width:768px){
       .nav-links{display:none;}
       .nav-mob{display:flex;align-items:center;gap:.5rem;}
-      .hero{padding:3.5rem 0 2.5rem;}
+      .hero{padding:3.5rem 0 3rem;}
       .hero h1{font-size:clamp(2rem,8vw,2.8rem);}
-      .hero-stats{grid-template-columns:1fr 1fr;}
-      .hero-stats .stat:last-child{grid-column:span 2;}
-      .products-grid{grid-template-columns:1fr;}
-      .why-grid{grid-template-columns:1fr;gap:2rem;}
+      .services-grid{grid-template-columns:1fr;}
+      .industries-grid{grid-template-columns:1fr 1fr;}
       .contact-wrap{grid-template-columns:1fr;}
       .form-row{grid-template-columns:1fr;}
       .footer-inner{flex-direction:column;text-align:center;}
     }
     @media(max-width:480px){
-      .hero-actions{flex-direction:column;align-items:flex-start;}
-      .btn-primary,.btn-secondary{width:100%;justify-content:center;}
+      .hero-actions{flex-direction:column;align-items:stretch;}
+      .btn-primary,.btn-secondary{justify-content:center;}
+      .industries-grid{grid-template-columns:1fr;}
+      .hero-visual{grid-template-columns:1fr;}
     }
-    @media(prefers-reduced-motion:reduce){
-      *{transition:none!important;transform:none!important;}
-    }
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;transform:none!important;}}
   </style>
 </head>
 <body>
@@ -181,21 +211,21 @@
         </div>
         <div class="brand-text">
           TAG Projects Co.
-          <span>Equipment Supply — SEQ</span>
+          <span>Metal Fabrication — SEQ</span>
         </div>
       </a>
       <div class="nav-links">
-        <a href="#products">Products</a>
-        <a href="#why">Why TAG</a>
-        <a href="#areas">Areas</a>
+        <a href="#services">Services</a>
+        <a href="#materials">Materials</a>
+        <a href="#industries">Industries</a>
         <a href="#contact">Contact</a>
         <a href="tel:0478752362" class="nav-cta">
-          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.1 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <svg style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.1 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           0478 752 362
         </a>
       </div>
       <div class="nav-mob">
-        <a href="tel:0478752362" class="nav-cta" style="font-size:.8rem!important;padding:.4rem .9rem!important;">Call Now</a>
+        <a href="tel:0478752362" class="nav-cta" style="font-size:.8rem!important;padding:.42rem .9rem!important;">Call Now</a>
       </div>
     </nav>
   </div>
@@ -204,94 +234,213 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">
-      <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-      Equipment Supplier — South East Queensland
-    </div>
-    <h1>Project-Ready<br><em>Equipment Supply</em><br>When You Need It</h1>
-    <p class="hero-sub">TAG Projects Co. supplies industrial and commercial equipment to contractors, builders, and businesses across South East Queensland. Early opening. Fast dispatch. No fuss.</p>
-    <div class="hero-actions">
-      <a href="tel:0478752362" class="btn-primary">
-        <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.1 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Call 0478 752 362
-      </a>
-      <a href="#contact" class="btn-secondary">
-        <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        Get a Quote
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">6<span>am</span></div>
-        <div class="stat-label">Early Open — Mon to Fri</div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <svg style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-1.6-1.6a1 1 0 00-1.4 0l-3 3z"/><path d="M9.5 21a1.5 1.5 0 01-1.06-.44L2.44 14.56A1.5 1.5 0 012.44 12.5l7-7a1.5 1.5 0 012.12 0L17.5 11.44a1.5 1.5 0 010 2.12l-7 7A1.5 1.5 0 019.5 21z"/></svg>
+          Custom Metal Fabrication — Slacks Creek QLD
+        </div>
+        <h1>Fabricated to Spec.<br><em>Built to Last.</em></h1>
+        <p class="hero-sub">TAG Projects Co. delivers precision metalwork for commercial fit-outs, handrails, balustrades, and structural installations across South East Queensland. Mild steel, aluminium, and stainless — designed to spec, fabricated in-house.</p>
+        <div class="hero-actions">
+          <a href="tel:0478752362" class="btn-primary">
+            <svg style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.1 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call 0478 752 362
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <svg style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Request a Quote
+          </a>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-num">SEQ<span>+</span></div>
-        <div class="stat-label">Greater Brisbane & Gold Coast</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">Fast<span>.</span></div>
-        <div class="stat-label">Dispatch & Click & Collect</div>
+      <div>
+        <div class="hero-visual">
+          <div class="mat-card">
+            <div class="mat-swatch mild"></div>
+            <div class="mat-info">
+              <strong>Mild Steel</strong>
+              <span>Structural fabrication, frames & supports</span>
+            </div>
+          </div>
+          <div class="mat-card">
+            <div class="mat-swatch alum"></div>
+            <div class="mat-info">
+              <strong>Aluminium</strong>
+              <span>Lightweight screens, balustrades & trims</span>
+            </div>
+          </div>
+          <div class="mat-card">
+            <div class="mat-swatch ss"></div>
+            <div class="mat-info">
+              <strong>Stainless Steel</strong>
+              <span>Hygiene-grade handrails & commercial finishes</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <div class="accent-bar"></div>
 
-<!-- PRODUCTS -->
-<section class="section section-white" id="products">
+<!-- SERVICES -->
+<section class="section section-white" id="services">
   <div class="container">
-    <p class="eyebrow">What We Supply</p>
-    <h2 class="section-title">Equipment for Every Project</h2>
-    <p class="section-sub">From groundworks to finishing, we keep your crew moving with the right equipment at the right time.</p>
-    <div class="products-grid">
+    <p class="eyebrow">What We Build</p>
+    <h2 class="section-title">Precision Fabrication for Every Application</h2>
+    <p class="section-sub">From architectural handrails to full commercial fit-outs — every job is fabricated in-house to your drawings or our design.</p>
+    <div class="services-grid">
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke-width="1.5"/></svg>
         </div>
-        <h3>Construction &amp; Site Equipment</h3>
-        <p>Formwork, scaffolding accessories, safety barriers, temporary fencing, and general site hardware for builders and subcontractors.</p>
+        <h3>Handrails &amp; Balustrades</h3>
+        <p>Custom handrails and balustrade systems designed to meet Australian standards. Suited to stairs, mezzanines, ramps, decks, and public access areas in any material finish.</p>
+        <span class="service-tag">Mild Steel · Aluminium · Stainless</span>
       </div>
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-1.6-1.6a1 1 0 00-1.4 0l-3 3z"/><path d="M9.5 21a1.5 1.5 0 01-1.06-.44L2.44 14.56A1.5 1.5 0 012.44 12.5l7-7a1.5 1.5 0 012.12 0L17.5 11.44a1.5 1.5 0 010 2.12l-7 7A1.5 1.5 0 019.5 21z"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3>Power Tools &amp; Hand Tools</h3>
-        <p>Leading brands for trades and project professionals. Cordless systems, cutting equipment, fastening tools, and site accessories.</p>
+        <h3>Decorative &amp; Privacy Screens</h3>
+        <p>Laser-cut and fabricated screens for privacy, architectural feature, or security applications. CNC-capable for custom patterns, perforations, and branded designs.</p>
+        <span class="service-tag">Aluminium · Mild Steel · Powder Coat</span>
       </div>
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <h3>Safety &amp; PPE</h3>
-        <p>Workwear, helmets, gloves, hi-vis, eyewear, hearing protection, and full site safety consumables compliant with Australian standards.</p>
+        <h3>Hotel, Club &amp; Restaurant Fit-Outs</h3>
+        <p>Feature balustrades, bar fronts, booth dividers, feature walls, shelving, and structural metalwork for hospitality venues — built to survive high-traffic commercial use.</p>
+        <span class="service-tag">Hospitality · Commercial · Architectural</span>
       </div>
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
-        <h3>Plumbing &amp; Civil Supplies</h3>
-        <p>Pipe fittings, valves, drainage products, geotextiles, and civil infrastructure components for civil contractors and plumbers.</p>
+        <h3>Hospital &amp; Healthcare Fit-Outs</h3>
+        <p>Hygiene-grade stainless steel handrails, grab rails, wall protection, and support structures for hospitals, aged care facilities, and medical centres. Compliant finish, no sharp edges.</p>
+        <span class="service-tag">Stainless Steel · AS/NZS Compliant</span>
       </div>
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
         </div>
-        <h3>Electrical &amp; Lighting</h3>
-        <p>Cable management, conduit, junction boxes, temporary site lighting, and electrical consumables for licensed electricians.</p>
+        <h3>School &amp; Education Fit-Outs</h3>
+        <p>Durable handrail systems, locker frames, shelving, and access structures for primary schools, high schools, and TAFEs. Designed to take a beating and still look good.</p>
+        <span class="service-tag">Education · Durable · Low Maintenance</span>
       </div>
 
-      <div class="product-card">
-        <div class="product-icon">
-          <svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><line x1="12" y1="11" x2="12" y2="21"/><line x1="9" y1="16" x2="23" y2="16"/></svg>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 5.34L3.93 6.75M21 12h-2M5 12H3M19.07 19.07l-1.41-1.41M5.34 18.66l-1.41 1.41M12 21v-2M12 5V3"/></svg>
         </div>
-        <h3>Hardware &amp; Fasteners</h3>
-        <p>Bolts, anchors, adhesives, sealants, straps, brackets, and structural fasteners — the small stuff that holds big projects together.</p>
+        <h3>Custom Structural Fabrication</h3>
+        <p>Frames, brackets, gussets, supports, platforms, and bespoke structural metalwork. Fabricated to your engineering drawings or our in-house design — welded, ground, and finished.</p>
+        <span class="service-tag">Bespoke · To Drawing · In-House Fab</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="section section-dark" id="materials">
+  <div class="container">
+    <p class="eyebrow eyebrow-light">Materials</p>
+    <h2 class="section-title section-title-light">Steel. Aluminium. Stainless.<br>We Work Across All Three.</h2>
+    <p class="section-sub section-sub-light">Every material has its place. We'll advise which suits your project for strength, finish, cost, and long-term performance.</p>
+    <div class="materials-wrap">
+      <div class="material-card">
+        <div class="material-swatch-lg mild"></div>
+        <h3>Mild Steel</h3>
+        <p>The workhorse. Strong, weldable, and cost-effective for structural applications, frames, and fit-out components that will be powder coated or painted. Ideal for most commercial and industrial projects.</p>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch-lg alum"></div>
+        <h3>Aluminium</h3>
+        <p>Lightweight and corrosion-resistant. Preferred for screens, balustrades, architectural trims, and exterior applications where weight and weather resistance matter. Anodised or powder coat finish available.</p>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch-lg ss"></div>
+        <h3>Stainless Steel</h3>
+        <p>Grade 304 and 316 available. The standard for healthcare, commercial kitchens, marine environments, and architectural applications where hygiene, durability, and appearance are non-negotiable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section section-light" id="industries">
+  <div class="container">
+    <p class="eyebrow">Industries We Serve</p>
+    <h2 class="section-title">Built for the Sectors That Demand More</h2>
+    <p class="section-sub">We understand the compliance requirements, timelines, and finish standards each sector expects — and we deliver to them.</p>
+    <div class="industries-grid">
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <h4>Hospitals &amp; Aged Care</h4>
+          <p>Grab rails, corridor handrails, wall protection, and hygiene-grade SS fixtures.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <div>
+          <h4>Schools &amp; Universities</h4>
+          <p>Staircase handrails, mezzanine balustrades, locker frames, and access structures.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <h4>Hotels &amp; Resorts</h4>
+          <p>Feature balustrades, pool fencing, lobby metalwork, and architectural screens.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div>
+          <h4>Restaurants &amp; Bars</h4>
+          <p>Bar fronts, booth dividers, feature walls, shelving systems, and service counters.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <div>
+          <h4>Clubs &amp; Entertainment</h4>
+          <p>Crowd barriers, balcony balustrades, stage structures, and decorative screens.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ind-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <h4>Commercial &amp; Industrial</h4>
+          <p>Structural platforms, mezzanines, safety rails, and bespoke fabrication to drawing.</p>
+        </div>
       </div>
 
     </div>
@@ -299,122 +448,60 @@
 </section>
 
 <!-- WHY TAG -->
-<section class="section section-dark" id="why">
+<section class="section section-dark">
   <div class="container">
-    <p class="eyebrow">Why TAG Projects</p>
-    <h2 class="section-title section-title-light">Built Around How<br>Projects Actually Run</h2>
-    <div class="why-grid">
-      <div>
-        <p class="section-sub section-sub-light" style="margin-bottom:1.75rem;">Most sites start early. So do we. Whether you're in the yard at 6am or need to sort tomorrow's materials today — TAG Projects is set up to handle it.</p>
-        <div class="why-meta">
-          <p>Early open from 6:00 AM — so your crew doesn't wait. Materials ready before the rest of the day starts.</p>
-        </div>
-      </div>
-      <div class="why-panel">
+    <p class="eyebrow eyebrow-light">Why TAG Projects</p>
+    <h2 class="section-title section-title-light">Fabricated In-House.<br>No Shortcuts.</h2>
+    <div class="why-grid" style="margin-top:3rem;">
+      <div class="why-points">
         <div class="why-item">
-          <div class="why-check">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+          <div class="why-num">01</div>
           <div>
-            <h4>6 AM Opening — Monday to Friday</h4>
-            <p>Tradies and project managers can sort supplies before the main run starts. No waiting around.</p>
+            <h4>In-House Fabrication — Full Control</h4>
+            <p>Everything is fabricated at our Slacks Creek workshop. No outsourcing, no waiting on third parties. We control quality, timeline, and finish from start to finish.</p>
           </div>
         </div>
         <div class="why-item">
-          <div class="why-check">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+          <div class="why-num">02</div>
           <div>
-            <h4>Click &amp; Collect — Slacks Creek</h4>
-            <p>Order ahead, collect same day from Unit 2/17 Aranda St. No queues, no delays.</p>
+            <h4>To Drawing or To Design</h4>
+            <p>Bring your engineering drawings and we'll fabricate to spec. No drawings? We'll design, detail, and fabricate for you. Either way, you get exactly what the job needs.</p>
           </div>
         </div>
         <div class="why-item">
-          <div class="why-check">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+          <div class="why-num">03</div>
           <div>
-            <h4>SEQ Coverage</h4>
-            <p>Servicing Brisbane, Logan, Gold Coast, and Ipswich. Delivery options available for larger orders.</p>
+            <h4>Compliance-Ready Finishes</h4>
+            <p>We understand the Australian Standards that apply to handrails, balustrades, and commercial metalwork — and we build to them so you don't have to worry at inspection.</p>
           </div>
         </div>
         <div class="why-item">
-          <div class="why-check">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+          <div class="why-num">04</div>
           <div>
-            <h4>Trade Accounts Welcome</h4>
-            <p>Set up a trade account for streamlined ordering, invoicing, and priority service on repeat orders.</p>
+            <h4>Early Start — 6 AM Opens</h4>
+            <p>Tradespeople and project managers can reach us before the day kicks off. We're set up for the way construction projects actually run.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-check">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div>
-            <h4>Bulk &amp; Project Orders</h4>
-            <p>Planning a large project? Talk to us about bulk pricing, scheduled deliveries, and dedicated supply.</p>
-          </div>
+        <div class="why-callout">
+          <p>Based in Slacks Creek, servicing Brisbane, Logan, Gold Coast, and Ipswich. On-site measure available for commercial and institutional projects.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- AREAS -->
-<section class="section section-light" id="areas">
-  <div class="container">
-    <p class="eyebrow">Service Area</p>
-    <h2 class="section-title">Supplying Across South East Queensland</h2>
-    <p class="section-sub">Based in Slacks Creek, we supply to contractors and businesses across the greater Brisbane, Logan, Gold Coast, and Ipswich regions.</p>
-    <div class="areas-grid">
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Slacks Creek
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Logan City
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Brisbane
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Gold Coast
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Ipswich
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Springwood
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Beenleigh
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Browns Plains
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Loganholme
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Rochedale
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Underwood
-      </div>
-      <div class="area-chip">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        &amp; Surrounding Areas
+      <div class="why-stats">
+        <div class="why-stat-card">
+          <div class="why-stat-num">3<span> Materials</span></div>
+          <div class="why-stat-label">Mild Steel · Aluminium · Stainless</div>
+        </div>
+        <div class="why-stat-card">
+          <div class="why-stat-num">6<span>am</span></div>
+          <div class="why-stat-label">Workshop opens Mon – Fri</div>
+        </div>
+        <div class="why-stat-card">
+          <div class="why-stat-num">SEQ<span>+</span></div>
+          <div class="why-stat-label">Brisbane · Logan · Gold Coast · Ipswich</div>
+        </div>
+        <div class="why-stat-card" style="background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.2);">
+          <div class="why-stat-num" style="font-size:1.1rem;color:#93c5fd;font-weight:700;line-height:1.5;">Custom fabrication built around your drawings, your spec, your timeline.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -424,8 +511,8 @@
 <section class="section section-white" id="contact">
   <div class="container">
     <p class="eyebrow">Get in Touch</p>
-    <h2 class="section-title">Ready to Supply Your Next Project</h2>
-    <p class="section-sub">Call us, visit the yard, or fill in the form below and we'll get back to you fast.</p>
+    <h2 class="section-title">Let's Talk About Your Project</h2>
+    <p class="section-sub">Send us your drawings, scope, or just a description — we'll get back to you with a quote or arrange a site measure.</p>
     <div class="contact-wrap">
       <div>
         <div class="contact-details">
@@ -443,7 +530,7 @@
               <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <strong>Address</strong>
+              <strong>Workshop Address</strong>
               <span>Unit 2/17 Aranda St<br>Slacks Creek QLD 4127</span>
             </div>
           </div>
@@ -452,27 +539,27 @@
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div>
-              <strong>Trading Hours</strong>
-              <div style="display:flex;align-items:center;gap:.5rem;margin-top:.2rem;">
+              <strong>Workshop Hours</strong>
+              <div style="display:flex;align-items:center;gap:.5rem;margin-top:.25rem;flex-wrap:wrap;">
                 <span class="hours-badge"><span class="hours-dot"></span>Mon – Fri</span>
-                <span style="font-size:.9rem;font-weight:600;color:var(--charcoal);">6:00 AM – 12:00 PM</span>
+                <span style="font-size:.9rem;font-weight:700;color:var(--dark);">6:00 AM – 12:00 PM</span>
               </div>
             </div>
           </div>
-          <div class="contact-item" style="margin-top:.5rem;">
+          <div class="contact-item">
             <div class="contact-icon">
-              <svg viewBox="0 0 24 24"><path d="M15 11h.01M11 11h.01M7 11h.01M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
             </div>
             <div>
-              <strong>Trade Accounts</strong>
-              <span>Call to discuss account setup &amp; bulk pricing</span>
+              <strong>Service Area</strong>
+              <span>Brisbane · Logan · Gold Coast · Ipswich</span>
             </div>
           </div>
         </div>
         <div style="margin-top:2rem;">
           <iframe
-            title="TAG Projects Co. location"
-            width="100%" height="220"
+            title="TAG Projects Co. workshop location"
+            width="100%" height="230"
             style="border:0;border-radius:12px;border:1px solid var(--line);"
             loading="lazy"
             allowfullscreen
@@ -482,14 +569,14 @@
         </div>
       </div>
       <div class="contact-form">
-        <h3 style="font-size:1.1rem;font-weight:800;color:var(--charcoal);margin:0 0 1.5rem;letter-spacing:-.02em;">Send an Enquiry</h3>
+        <h3 style="font-size:1.1rem;font-weight:800;color:var(--dark);margin:0 0 1.5rem;letter-spacing:-.02em;">Send a Project Enquiry</h3>
         <form action="https://formsubmit.co/admin@improveyoursite.com" method="POST">
-          <input type="hidden" name="_subject" value="TAG Projects Co. — New Website Enquiry">
+          <input type="hidden" name="_subject" value="TAG Projects Co. — New Project Enquiry">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="https://tagprojects.com.au/thanks">
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Your Name</label>
+              <label for="name">Name</label>
               <input type="text" id="name" name="name" placeholder="John Smith" required>
             </div>
             <div class="form-group">
@@ -502,19 +589,32 @@
             <input type="email" id="email" name="email" placeholder="john@company.com.au" required>
           </div>
           <div class="form-group">
-            <label for="enquiry-type">Enquiry Type</label>
-            <select id="enquiry-type" name="enquiry_type">
-              <option value="">Select one...</option>
-              <option>Product / Stock Enquiry</option>
-              <option>Bulk / Project Order</option>
-              <option>Trade Account Setup</option>
-              <option>Delivery Enquiry</option>
-              <option>General Enquiry</option>
+            <label for="project-type">Project Type</label>
+            <select id="project-type" name="project_type">
+              <option value="">Select...</option>
+              <option>Handrails &amp; Balustrades</option>
+              <option>Decorative / Privacy Screen</option>
+              <option>Hospitality Fit-Out</option>
+              <option>Hospital / Healthcare</option>
+              <option>School / Education</option>
+              <option>Custom Structural Fabrication</option>
+              <option>Other</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us what you need..."></textarea>
+            <label for="material">Preferred Material</label>
+            <select id="material" name="material">
+              <option value="">Not sure yet</option>
+              <option>Mild Steel</option>
+              <option>Aluminium</option>
+              <option>Stainless Steel (304)</option>
+              <option>Stainless Steel (316)</option>
+              <option>Mixed / Advise me</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" placeholder="Describe the project — scope, location, any drawings or dimensions you have..."></textarea>
           </div>
           <button type="submit" class="btn-submit">Send Enquiry</button>
         </form>
@@ -527,10 +627,16 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
-      <p class="footer-copy">© 2026 TAG Projects Co. · Unit 2/17 Aranda St, Slacks Creek QLD 4127 · ABN: — · <a href="tel:0478752362" style="color:#64748b;">0478 752 362</a></p>
+      <div class="footer-brand">
+        <div class="footer-mark">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="footer-copy" style="margin:0;">TAG Projects Co. &nbsp;·&nbsp; Unit 2/17 Aranda St, Slacks Creek QLD 4127 &nbsp;·&nbsp; <a href="tel:0478752362" style="color:#475569;">0478 752 362</a></span>
+      </div>
       <div class="footer-links">
-        <a href="#products">Products</a>
-        <a href="#areas">Areas</a>
+        <a href="#services">Services</a>
+        <a href="#materials">Materials</a>
+        <a href="#industries">Industries</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -538,20 +644,15 @@
 </footer>
 
 <script>
-  // Scroll progress bar
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
     document.getElementById('scroll-bar').style.width = pct + '%';
   }, {passive:true});
 
-  // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-      }
+      if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
     });
   });
 </script>
