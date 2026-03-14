@@ -19,7 +19,7 @@ _local = threading.local()
 def get_conn() -> sqlite3.Connection:
     """Return a thread-local connection (create if needed)."""
     if not getattr(_local, "conn", None):
-        conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
+        conn = sqlite3.connect(str(DB_PATH), check_same_thread=False, timeout=30)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("PRAGMA foreign_keys=ON")
@@ -84,13 +84,18 @@ def init_db():
             );
 
             INSERT OR IGNORE INTO agents (id, name, status) VALUES
-                ('manager',  'Manager',  'idle'),
-                ('social',   'Social',   'idle'),
-                ('ads',      'Ads',      'idle'),
-                ('content',  'Content',  'idle'),
-                ('builder',  'Builder',  'idle'),
-                ('analyst',  'Analyst',  'idle'),
-                ('leads',    'Leads',    'idle');
+                ('manager',          'Manager',          'idle'),
+                ('social',           'Social',           'idle'),
+                ('ads',              'Ads',              'idle'),
+                ('content',          'Content',          'idle'),
+                ('builder',          'Builder',          'idle'),
+                ('analyst',          'Analyst',          'idle'),
+                ('leads',            'Leads',            'idle'),
+                ('instagram',        'Instagram',        'idle'),
+                ('stripe_monitor',   'Stripe Monitor',   'idle'),
+                ('customer_success', 'Customer Success', 'idle'),
+                ('seo_monitor',      'SEO Monitor',      'idle'),
+                ('inbox',            'Inbox',            'idle');
         """)
     _init_scheduled_tasks(get_conn())
 

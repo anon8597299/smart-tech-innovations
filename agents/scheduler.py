@@ -20,26 +20,41 @@ from agents.content  import ContentAgent
 from agents.builder  import BuilderAgent
 from agents.analyst  import AnalystAgent
 from agents.leads    import LeadsAgent
+from agents.instagram.agent       import InstagramAgent
+from agents.stripe_monitor.agent  import StripeMonitorAgent
+from agents.customer_success.agent import CustomerSuccessAgent
+from agents.seo_monitor.agent     import SEOMonitorAgent
+from agents.inbox.agent           import InboxAgent
 from dashboard       import db
 
 # ── Agent instances (singletons) ─────────────────────────────────────────────
-_manager  = ManagerAgent()
-_social   = SocialAgent()
-_ads      = AdsAgent()
-_content  = ContentAgent()
-_builder  = BuilderAgent()
-_analyst  = AnalystAgent()
-_leads    = LeadsAgent()
+_manager          = ManagerAgent()
+_social           = SocialAgent()
+_ads              = AdsAgent()
+_content          = ContentAgent()
+_builder          = BuilderAgent()
+_analyst          = AnalystAgent()
+_leads            = LeadsAgent()
+_instagram        = InstagramAgent()
+_stripe_monitor   = StripeMonitorAgent()
+_customer_success = CustomerSuccessAgent()
+_seo_monitor      = SEOMonitorAgent()
+_inbox            = InboxAgent()
 
 # Map used by dashboard /api/trigger endpoint
 AGENT_MAP = {
-    "manager": _manager,
-    "social":  _social,
-    "ads":     _ads,
-    "content": _content,
-    "builder": _builder,
-    "analyst": _analyst,
-    "leads":   _leads,
+    "manager":          _manager,
+    "social":           _social,
+    "ads":              _ads,
+    "content":          _content,
+    "builder":          _builder,
+    "analyst":          _analyst,
+    "leads":            _leads,
+    "instagram":        _instagram,
+    "stripe_monitor":   _stripe_monitor,
+    "customer_success": _customer_success,
+    "seo_monitor":      _seo_monitor,
+    "inbox":            _inbox,
 }
 
 TIMEZONE = "Australia/Sydney"
@@ -50,6 +65,20 @@ def _run(agent, run_analyst_after: bool = False):
     agent.execute()
     if run_analyst_after:
         _analyst.execute()
+
+
+def _run_with_mode(agent, mode: str):
+    """Execute an agent with a specific RUN_MODE env override."""
+    import os
+    prev = os.environ.get("RUN_MODE", "")
+    os.environ["RUN_MODE"] = mode
+    try:
+        agent.execute()
+    finally:
+        if prev:
+            os.environ["RUN_MODE"] = prev
+        else:
+            os.environ.pop("RUN_MODE", None)
 
 
 def _run_scheduled_tasks():
@@ -110,16 +139,16 @@ def build_scheduler() -> BackgroundScheduler:
         misfire_grace_time=600,
     )
 
-    # Leads — new outreach 10:00 AM daily, follow-ups Tuesday 11:00 AM
+    # Leads — new outreach 9:00 AM daily, follow-ups 2:00 PM daily
     scheduler.add_job(
         lambda: _run(_leads),
-        CronTrigger(hour=10, minute=0, timezone=TIMEZONE),
+        CronTrigger(hour=9, minute=0, timezone=TIMEZONE),
         id="leads", name="Leads outreach",
         misfire_grace_time=300,
     )
     scheduler.add_job(
         lambda: _run(_leads),
-        CronTrigger(day_of_week="tue", hour=11, minute=0, timezone=TIMEZONE),
+        CronTrigger(hour=14, minute=0, timezone=TIMEZONE),
         id="leads_followup", name="Leads follow-up",
         misfire_grace_time=300,
     )
@@ -130,6 +159,86 @@ def build_scheduler() -> BackgroundScheduler:
         CronTrigger(hour=6, minute=0, timezone=TIMEZONE),
         id="scheduled_tasks", name="Scheduled task runner",
         misfire_grace_time=300,
+    )
+
+    # ── Instagram agent ──────────────────────────────────────────────────
+    # Morning story: 8:00 AM
+    scheduler.add_job(
+        lambda: _run(_instagram),
+        CronTrigger(hour=8, minute=0, timezone=TIMEZONE),
+        id="instagram_morning", name="Instagram morning story",
+        misfire_grace_time=300,
+    )
+    # Evening story: 7:00 PM
+    scheduler.add_job(
+        lambda: _run(_instagram),
+        CronTrigger(hour=19, minute=0, timezone=TIMEZONE),
+        id="instagram_evening", name="Instagram evening story",
+        misfire_grace_time=300,
+    )
+    # Insights pull: 9:30 AM
+    scheduler.add_job(
+        lambda: _run_with_mode(_instagram, "insights"),
+        CronTrigger(hour=9, minute=30, timezone=TIMEZONE),
+        id="instagram_insights", name="Instagram insights",
+        misfire_grace_time=300,
+    )
+    # Reels planning: Wednesday 8:00 AM
+    scheduler.add_job(
+        lambda: _run_with_mode(_instagram, "reels"),
+        CronTrigger(day_of_week="wed", hour=8, minute=0, timezone=TIMEZONE),
+        id="instagram_reels", name="Instagram Reels planning",
+        misfire_grace_time=600,
+    )
+
+    # ── Stripe Monitor ───────────────────────────────────────────────────
+    # Every 30 minutes
+    scheduler.add_job(
+        lambda: _run(_stripe_monitor),
+        CronTrigger(minute="*/30", timezone=TIMEZONE),
+        id="stripe_monitor", name="Stripe order monitor",
+        misfire_grace_time=120,
+    )
+
+    # ── Customer Success ─────────────────────────────────────────────────
+    # Lifecycle check: 10:30 AM daily
+    scheduler.add_job(
+        lambda: _run(_customer_success),
+        CronTrigger(hour=10, minute=30, timezone=TIMEZONE),
+        id="customer_success", name="Customer lifecycle check",
+        misfire_grace_time=300,
+    )
+    # Site health audit: Sunday 9:00 AM
+    scheduler.add_job(
+        lambda: _run_with_mode(_customer_success, "health"),
+        CronTrigger(day_of_week="sun", hour=9, minute=0, timezone=TIMEZONE),
+        id="customer_health", name="Customer site health audit",
+        misfire_grace_time=600,
+    )
+
+    # ── SEO Monitor ──────────────────────────────────────────────────────
+    # Daily check: 8:30 AM
+    scheduler.add_job(
+        lambda: _run(_seo_monitor),
+        CronTrigger(hour=8, minute=30, timezone=TIMEZONE),
+        id="seo_monitor", name="SEO daily check",
+        misfire_grace_time=300,
+    )
+    # PageSpeed: Wednesday 9:00 AM
+    scheduler.add_job(
+        lambda: _run_with_mode(_seo_monitor, "pagespeed"),
+        CronTrigger(day_of_week="wed", hour=9, minute=0, timezone=TIMEZONE),
+        id="seo_pagespeed", name="PageSpeed audit",
+        misfire_grace_time=300,
+    )
+
+    # ── Inbox ────────────────────────────────────────────────────────────
+    # Triage: every 30 minutes
+    scheduler.add_job(
+        lambda: _run(_inbox),
+        CronTrigger(minute="*/30", timezone=TIMEZONE),
+        id="inbox", name="Inbox triage",
+        misfire_grace_time=120,
     )
 
     # Update next_run timestamps in DB after schedule is built

@@ -189,6 +189,188 @@ def _extract_text(match) -> str:
     return re.sub(r'\s+', ' ', raw).strip()
 
 
+def _verify_business(name: str, city: str, website: str = "", phone: str = "") -> dict:
+    """
+    Cross-reference a business against Google Places + OpenStreetMap (Nominatim)
+    to confirm it exists, is operational, and the data we have is accurate.
+
+    Returns:
+        {
+            "verified":          bool   — pass this lead through (True) or skip (False)
+            "confidence":        str    — "high" | "medium" | "low" | "unverified"
+            "reason":            str    — why it was rejected (if verified=False)
+            "corrected_website": str    — Maps-sourced website if ours was wrong/missing
+            "corrected_phone":   str    — Maps-sourced phone if ours was missing
+            "maps_source":       str    — "google" | "osm" | "none"
+        }
+
+    Google Places is tried first (requires GOOGLE_PLACES_API_KEY).
+    OSM Nominatim is used as a free no-key fallback.
+    Apple Maps Server API requires a Maps token — add APPLE_MAPS_TOKEN to .env to enable.
+    """
+    result = {
+        "verified": True, "confidence": "unverified",
+        "reason": "", "corrected_website": "",
+        "corrected_phone": "", "maps_source": "none",
+    }
+
+    # ── 1. Google Places API ─────────────────────────────────────────────────
+    api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
+    if api_key:
+        try:
+            query = urllib.parse.quote(f"{name} {city} Australia")
+            search_url = (
+                f"https://maps.googleapis.com/maps/api/place/textsearch/json"
+                f"?query={query}&key={api_key}"
+            )
+            with urllib.request.urlopen(search_url, timeout=10) as resp:
+                data = json.loads(resp.read())
+
+            places = data.get("results", [])
+            if not places:
+                return {**result, "verified": False, "confidence": "low",
+                        "reason": "not found on Google Maps", "maps_source": "google"}
+
+            top = places[0]
+            place_id = top.get("place_id", "")
+
+            # Name similarity check — skip if completely different business
+            found_name  = top.get("name", "").lower()
+            query_words = set(re.sub(r"[^\w\s]", "", name.lower()).split())
+            found_words = set(re.sub(r"[^\w\s]", "", found_name).split())
+            # Remove generic stop words that inflate false matches
+            stops = {"the", "and", "of", "in", "at", "a", "an", "for", "pty", "ltd"}
+            query_words -= stops
+            found_words -= stops
+            overlap = query_words & found_words
+            name_score = len(overlap) / max(len(query_words), 1)
+
+            if name_score < 0.25:
+                return {**result, "verified": False, "confidence": "low",
+                        "maps_source": "google",
+                        "reason": f"Google Maps top result '{top.get('name')}' doesn't match '{name}'"}
+
+            # Get Place Details: business_status, website, phone
+            details_url = (
+                f"https://maps.googleapis.com/maps/api/place/details/json"
+                f"?place_id={place_id}"
+                f"&fields=business_status,website,formatted_phone_number"
+                f"&key={api_key}"
+            )
+            with urllib.request.urlopen(details_url, timeout=10) as resp:
+                detail = json.loads(resp.read()).get("result", {})
+
+            status = detail.get("business_status", "UNKNOWN")
+            if status == "CLOSED_PERMANENTLY":
+                return {**result, "verified": False, "confidence": "high",
+                        "maps_source": "google",
+                        "reason": "permanently closed on Google Maps"}
+
+            maps_web = detail.get("website", "").rstrip("/")
+            maps_phone = detail.get("formatted_phone_number", "")
+
+            # Website domain cross-check
+            corrected_web = ""
+            if maps_web:
+                def _domain(u):
+                    m = re.search(r"(?:https?://)?(?:www\.)?([^/?#]+)", u.lower())
+                    return m.group(1) if m else ""
+                our_dom   = _domain(website)
+                maps_dom  = _domain(maps_web)
+                if our_dom and maps_dom and our_dom != maps_dom:
+                    # Different domains — trust Google Maps; flag corrected website
+                    corrected_web = maps_web
+                elif not our_dom and maps_web:
+                    corrected_web = maps_web
+
+            confidence = "high" if name_score >= 0.6 else "medium"
+            return {
+                "verified":          True,
+                "confidence":        confidence,
+                "reason":            "",
+                "corrected_website": corrected_web,
+                "corrected_phone":   maps_phone if not phone else "",
+                "maps_source":       "google",
+            }
+
+        except Exception:
+            pass  # fall through to OSM
+
+    # ── 2. Apple Maps Server API (optional — requires APPLE_MAPS_TOKEN) ───────
+    # Add APPLE_MAPS_TOKEN to builder/.env to enable.
+    # Token format: JWT from Apple Developer → Maps IDs & Tokens
+    apple_token = os.environ.get("APPLE_MAPS_TOKEN", "")
+    if apple_token:
+        try:
+            query = urllib.parse.quote(f"{name} {city} Australia")
+            apple_url = (
+                f"https://maps-api.apple.com/v1/search?q={query}"
+                f"&resultTypeFilter=Poi&limitToCountries=AU"
+            )
+            req = urllib.request.Request(apple_url, headers={
+                "Authorization": f"Bearer {apple_token}",
+            })
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read())
+
+            places = data.get("results", [])
+            if places:
+                top = places[0]
+                found_name  = top.get("name", "").lower()
+                query_words = set(re.sub(r"[^\w\s]", "", name.lower()).split()) - stops
+                found_words = set(re.sub(r"[^\w\s]", "", found_name).split()) - stops
+                overlap = query_words & found_words
+                name_score = len(overlap) / max(len(query_words), 1)
+                if name_score < 0.25:
+                    return {**result, "verified": False, "confidence": "low",
+                            "maps_source": "apple",
+                            "reason": f"Apple Maps top result '{top.get('name')}' doesn't match '{name}'"}
+                return {**result, "verified": True, "confidence": "medium", "maps_source": "apple"}
+            else:
+                return {**result, "verified": False, "confidence": "low",
+                        "maps_source": "apple", "reason": "not found on Apple Maps"}
+        except Exception:
+            pass
+
+    # ── 3. OpenStreetMap Nominatim (free, no key required) ───────────────────
+    try:
+        query = urllib.parse.quote(f"{name}, {city}, Australia")
+        osm_url = (
+            f"https://nominatim.openstreetmap.org/search"
+            f"?q={query}&format=json&limit=3&addressdetails=1&countrycodes=au"
+        )
+        req = urllib.request.Request(osm_url, headers={
+            "User-Agent": "IYSLeadsAgent/1.0 (hello@improveyoursite.com)"
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            places = json.loads(resp.read())
+
+        if not places:
+            # OSM has lower coverage — treat as unverified rather than rejected
+            return {**result, "verified": True, "confidence": "low",
+                    "maps_source": "osm", "reason": "not on OpenStreetMap (low coverage area)"}
+
+        top = places[0]
+        found_name  = top.get("display_name", "").lower()
+        query_words = set(re.sub(r"[^\w\s]", "", name.lower()).split()) - {"the","and","of","pty","ltd"}
+        found_words = set(re.sub(r"[^\w\s]", "", found_name).split()) - {"the","and","of","pty","ltd"}
+        overlap = query_words & found_words
+        name_score = len(overlap) / max(len(query_words), 1)
+
+        # OSM is less authoritative — only hard-reject clear mismatches
+        if name_score < 0.2:
+            return {**result, "verified": True, "confidence": "low",
+                    "maps_source": "osm", "reason": "low OSM match — proceeding with caution"}
+
+        return {**result, "verified": True, "confidence": "medium", "maps_source": "osm"}
+
+    except Exception:
+        pass
+
+    # No verification source available — proceed but flag as unverified
+    return result
+
+
 def _google_places_search(keyword: str, location: str) -> list[dict]:
     """Use Google Places API if key is set."""
     api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
@@ -208,6 +390,7 @@ def _google_places_search(keyword: str, location: str) -> list[dict]:
                 "industry": keyword, "city": location, "email": "",
             }
             for r in data.get("results", [])[:5]
+            if r.get("name")  # skip results with null/empty names
         ]
     except Exception:
         return []
@@ -261,13 +444,149 @@ def _find_email_on_website(url: str) -> str:
     return ""
 
 
+def _safe_browsing_check(url: str) -> bool:
+    """
+    Returns True if the URL is safe, False if flagged as malware/phishing.
+    Skips check gracefully if no API key or network error.
+    """
+    api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")  # same key covers Safe Browsing
+    if not api_key or not url:
+        return True
+    try:
+        payload = json.dumps({
+            "client": {"clientId": "iys-leads", "clientVersion": "1.0"},
+            "threatInfo": {
+                "threatTypes":      ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE"],
+                "platformTypes":    ["ANY_PLATFORM"],
+                "threatEntryTypes": ["URL"],
+                "threatEntries":    [{"url": url}],
+            },
+        }).encode()
+        req = urllib.request.Request(
+            f"https://safebrowsing.googleapis.com/v4/threatMatches:find?key={api_key}",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read())
+        return len(data.get("matches", [])) == 0  # empty = safe
+    except Exception:
+        return True  # fail open — don't block on network error
+
+
+def _pagespeed_audit(url: str) -> dict:
+    """
+    Run Google PageSpeed Insights (mobile) and return structured issues.
+    Falls back to empty dict if API key missing or request fails.
+    """
+    api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
+    if not api_key or not url:
+        return {}
+    if not url.startswith("http"):
+        url = "https://" + url
+    try:
+        psi_url = (
+            f"https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+            f"?url={urllib.parse.quote(url)}&strategy=mobile&key={api_key}"
+            f"&category=performance&category=seo&category=best-practices"
+        )
+        with urllib.request.urlopen(psi_url, timeout=30) as resp:
+            data = json.loads(resp.read())
+
+        cats    = data.get("lighthouseResult", {}).get("categories", {})
+        audits  = data.get("lighthouseResult", {}).get("audits", {})
+        metrics = audits.get("metrics", {}).get("details", {}).get("items", [{}])[0]
+
+        perf_score = int((cats.get("performance", {}).get("score") or 0) * 100)
+        seo_score  = int((cats.get("seo",         {}).get("score") or 0) * 100)
+        bp_score   = int((cats.get("best-practices", {}).get("score") or 0) * 100)
+
+        # Key timing metrics (in ms)
+        fcp  = (metrics.get("firstContentfulPaint")  or 0) / 1000   # seconds
+        lcp  = (metrics.get("largestContentfulPaint") or 0) / 1000
+        tbt  = (metrics.get("totalBlockingTime")      or 0)          # ms
+        cls  = audits.get("cumulative-layout-shift",  {}).get("displayValue", "")
+
+        # Specific failed audits for issue text
+        failed = []
+        check_audits = {
+            "uses-responsive-images":  "images not optimised for mobile",
+            "render-blocking-resources": "render-blocking scripts slowing the page",
+            "unused-css-rules":        "unused CSS adding load time",
+            "unused-javascript":       "unused JavaScript adding load time",
+            "uses-optimized-images":   "images not compressed",
+            "uses-text-compression":   "text files not compressed (gzip/brotli off)",
+            "meta-description":        "missing meta description — hurts Google ranking",
+            "document-title":          "missing page title tag",
+            "link-text":               "vague link text — hurts SEO",
+            "is-crawlable":            "page is blocking Google crawlers",
+            "structured-data":         "no structured data — Google can't read business details",
+        }
+        for audit_id, label in check_audits.items():
+            a = audits.get(audit_id, {})
+            if a.get("score") is not None and a.get("score") < 0.9:
+                failed.append(label)
+
+        return {
+            "perf_score": perf_score,
+            "seo_score":  seo_score,
+            "bp_score":   bp_score,
+            "fcp":        round(fcp, 1),
+            "lcp":        round(lcp, 1),
+            "tbt":        int(tbt),
+            "cls":        cls,
+            "failed":     failed[:4],  # top issues only
+        }
+    except Exception:
+        return {}
+
+
 def _audit_website(url: str) -> dict:
-    result = {"loads": False, "slow": False, "issues": []}
+    result = {"loads": False, "slow": False, "issues": [], "psi": {}}
     if not url:
         result["issues"].append("no website showing on Google — customers can't find them online")
         return result
     if not url.startswith("http"):
         url = "https://" + url
+
+    # ── PageSpeed Insights (real Core Web Vitals) ────────────────────────────
+    psi = _pagespeed_audit(url)
+    if psi:
+        result["psi"]   = psi
+        result["loads"] = True
+        perf = psi["perf_score"]
+        lcp  = psi["lcp"]
+        seo  = psi["seo_score"]
+
+        if perf < 50:
+            result["slow"] = True
+            result["issues"].append(
+                f"mobile performance score is {perf}/100 on Google's own test — "
+                f"most visitors leave before it finishes loading"
+            )
+        elif perf < 75:
+            result["slow"] = True
+            result["issues"].append(
+                f"site scores {perf}/100 for mobile speed on PageSpeed — "
+                f"loads in {lcp}s on mobile, Google recommends under 2.5s"
+            )
+
+        if seo < 80:
+            result["issues"].append(
+                f"SEO score of {seo}/100 on Google's audit — "
+                "missing signals that help local search ranking"
+            )
+
+        # Surface the most impactful specific failures
+        for issue in psi.get("failed", []):
+            result["issues"].append(issue)
+
+        # If PSI gave us enough issues, return now
+        if len(result["issues"]) >= 2:
+            return result
+
+    # ── HTML fallback audit (when PSI fails or gives few issues) ────────────
     try:
         req = urllib.request.Request(url, headers={
             "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) "
@@ -280,10 +599,10 @@ def _audit_website(url: str) -> dict:
             html_lower = html.lower()
         result["loads"] = True
 
-        if elapsed > 3.5:
+        if not psi and elapsed > 3.5:
             result["slow"] = True
             result["issues"].append(
-                f"site takes {elapsed:.1f} seconds to load on mobile — "
+                f"site takes {elapsed:.1f}s to load on mobile — "
                 "most people leave after 3 seconds"
             )
 
@@ -295,7 +614,7 @@ def _audit_website(url: str) -> dict:
                 "missing structured data — Google can't read the business details properly"
             )
 
-        if not any(k in html_lower for k in ["review", "testimonial", "★", "star", "rating", "google"]):
+        if not any(k in html_lower for k in ["review", "testimonial", "★", "star", "rating"]):
             result["issues"].append("no reviews or social proof visible on the site")
 
         if not any(k in html_lower for k in ["book", "quote", "enquire", "contact", "call now", "get a quote"]):
@@ -306,16 +625,18 @@ def _audit_website(url: str) -> dict:
                 "no local area mentions — Google won't rank it for local searches"
             )
 
-        # Check if it looks like a builder-style template (thin content)
         text_content = re.sub(r'<[^>]+>', ' ', html)
         word_count = len(text_content.split())
         if word_count < 300:
             result["issues"].append(
-                f"very thin content ({word_count} words) — Google ranks sites with real information higher"
+                f"very thin content ({word_count} words) — "
+                "Google ranks sites with real information higher"
             )
 
     except Exception as exc:
-        result["issues"].append(f"site wouldn't load when we checked — {exc}")
+        if not result["loads"]:
+            result["issues"].append(f"site wouldn't load when we checked — {exc}")
+
     return result
 
 
@@ -616,6 +937,156 @@ def _check_email_replies() -> int:
     return added
 
 
+def _check_bounces() -> int:
+    """
+    Scan the outreach Gmail inbox for bounce-backs and delivery failures.
+    Marks the lead as 'bounced' in the DB and logs the bad email address.
+    Also scans hello@ inbox for any misdirected bounce notifications.
+
+    Bounce signals detected:
+      - From: MAILER-DAEMON, postmaster, Mail Delivery Subsystem
+      - Subject: Undeliverable, Delivery failed, Returned mail, Mail delivery failed,
+                 Delivery Status Notification, bounce
+    """
+    import sqlite3
+    import smtplib
+    from email.mime.text import MIMEText
+
+    BOUNCE_SENDERS = ("mailer-daemon", "postmaster", "mail delivery subsystem",
+                      "delivery subsystem", "auto-submitted")
+    BOUNCE_SUBJECTS = ("undeliverable", "delivery failed", "returned mail",
+                       "mail delivery failed", "delivery status notification",
+                       "failure notice", "could not be delivered", "bounced mail",
+                       "bad gateway", "smtp error", "address not found",
+                       "user unknown", "no such user")
+
+    inboxes = []
+    # Outreach Gmail — where sent emails originate
+    if os.environ.get("GMAIL_USER") and os.environ.get("GMAIL_APP_PASS"):
+        inboxes.append((os.environ["GMAIL_USER"], os.environ["GMAIL_APP_PASS"], "imap.gmail.com"))
+    # hello@ inbox as secondary check
+    if os.environ.get("HELLO_EMAIL_USER") and os.environ.get("HELLO_EMAIL_PASS"):
+        user = os.environ["HELLO_EMAIL_USER"]
+        host = "imap.gmail.com" if "gmail" in user else "outlook.office365.com"
+        inboxes.append((user, os.environ["HELLO_EMAIL_PASS"], host))
+
+    bounced_count = 0
+    bad_emails: list[dict] = []
+
+    for imap_user, imap_pass, imap_host in inboxes:
+        try:
+            mail = imaplib.IMAP4_SSL(imap_host)
+            mail.login(imap_user, imap_pass)
+            mail.select("INBOX")
+
+            # Search recent unseen
+            _, data = mail.search(None, "UNSEEN")
+            msg_ids = data[0].split()
+
+            for msg_id in msg_ids:
+                _, msg_data = mail.fetch(msg_id, "(RFC822)")
+                msg = message_from_bytes(msg_data[0][1])
+
+                from_raw = msg.get("From", "").lower()
+                subject  = _decode_subject(msg.get("Subject", "")).lower()
+
+                is_bounce = (
+                    any(s in from_raw for s in BOUNCE_SENDERS) or
+                    any(s in subject   for s in BOUNCE_SUBJECTS)
+                )
+                if not is_bounce:
+                    continue
+
+                # Extract the failed recipient from body
+                body_text = ""
+                if msg.is_multipart():
+                    for part in msg.walk():
+                        ct = part.get_content_type()
+                        if ct in ("text/plain", "message/delivery-status"):
+                            try:
+                                charset = part.get_content_charset() or "utf-8"
+                                body_text += part.get_payload(decode=True).decode(charset, errors="ignore") + "\n"
+                            except Exception:
+                                pass
+                else:
+                    try:
+                        body_text = msg.get_payload(decode=True).decode("utf-8", errors="ignore")
+                    except Exception:
+                        pass
+
+                # Find email addresses in bounce body — the failed recipient
+                found_emails = re.findall(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}", body_text)
+                # Filter out our own domains
+                failed_addrs = [
+                    e for e in found_emails
+                    if "improveyoursite" not in e and "google" not in e and "mailer" not in e
+                ]
+
+                for bad_email in set(failed_addrs):
+                    bad_email = bad_email.lower().strip()
+                    # Mark in DB using shared thread-local connection
+                    with db.transaction() as _conn:
+                        rows_updated = _conn.execute(
+                            "UPDATE leads SET status='bounced' WHERE LOWER(email)=? AND status NOT IN ('bounced','cold')",
+                            (bad_email,),
+                        ).rowcount
+                        if rows_updated:
+                            biz = _conn.execute(
+                                "SELECT business_name FROM leads WHERE LOWER(email)=?", (bad_email,)
+                            ).fetchone()
+                            biz_name = biz[0] if biz else "Unknown"
+                            bad_emails.append({"email": bad_email, "business": biz_name, "reason": subject[:120]})
+                            bounced_count += 1
+                    if rows_updated:
+                        db.event_log("leads", "warn",
+                            f"Bounce detected — {bad_email} ({biz_name}): marked bounced. Subject: {subject[:80]}")
+
+                # Mark the bounce email as seen so we don't re-process
+                mail.store(msg_id, "+FLAGS", "\\Seen")
+
+            mail.logout()
+        except Exception as exc:
+            db.event_log("leads", "warn", f"Bounce check failed for {imap_user}: {exc}")
+
+    # Email James a summary of new bad emails
+    if bad_emails:
+        lines = "\n".join(
+            f"  • {b['email']}  ({b['business']})  —  {b['reason']}"
+            for b in bad_emails
+        )
+        _send_notification_email(
+            to=os.environ.get("HELLO_EMAIL_USER", os.environ.get("GMAIL_USER", "")),
+            subject=f"[IYS Leads] {len(bad_emails)} bounce(s) detected",
+            body=(
+                f"The leads agent detected {len(bad_emails)} bounced/failed email(s):\n\n"
+                f"{lines}\n\n"
+                f"These leads have been marked 'bounced' in the database and will not be contacted again."
+            ),
+        )
+
+    return bounced_count
+
+
+def _send_notification_email(to: str, subject: str, body: str):
+    """Send a plain-text notification email via the outreach Gmail account."""
+    import smtplib
+    from email.mime.text import MIMEText
+    gmail_user = os.environ.get("GMAIL_USER", "")
+    gmail_pass = os.environ.get("GMAIL_APP_PASS", "")
+    if not gmail_user or not gmail_pass or not to:
+        return
+    try:
+        msg = MIMEText(body, "plain")
+        msg["Subject"] = subject
+        msg["From"]    = gmail_user
+        msg["To"]      = to
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
+            s.login(gmail_user, gmail_pass)
+            s.sendmail(gmail_user, [to], msg.as_string())
+    except Exception:
+        pass
+
+
 def _load_seed_targets() -> list[dict]:
     """Load prospects from the manually curated seed file."""
     if not SEED_FILE.exists():
@@ -681,6 +1152,19 @@ RULES:
 - Sign off as: James Burke, ImproveYourSite
 - Body only — NO subject line
 
+GOOGLE RANKING PENALTY RULES (use when PageSpeed scores are provided):
+- Google made Core Web Vitals an official ranking factor in 2021 — this is not a theory,
+  it is documented Google policy. Sites that fail are penalised in search results right now.
+- A performance score under 90 means Google is already ranking them below faster competitors
+  for the same search terms. Under 50 is classified as "poor" by Google — active penalty.
+- LCP (Largest Contentful Paint) over 2.5s = "needs improvement", over 4s = "poor" — Google
+  uses this to decide if a site deserves to be on page 1.
+- Frame it as: their competitors with better scores are taking the calls that should be theirs.
+  Not hypothetical — it is happening every day their site stays at that score.
+- Say the actual score number. "Your site scored 34/100 on Google's own mobile speed test"
+  is far more credible than anything vague.
+- One sentence max on the ranking mechanic — then pivot to: here's what we'd fix on the call.
+
 TONE RULES (critical):
 - Write like a real person dashing off a quick email, NOT a marketing template
 - Vary sentence length — mix short punchy lines with slightly longer ones
@@ -688,10 +1172,10 @@ TONE RULES (critical):
   "leverage", "optimise", "solutions", "pain points", "reach out", "touch base",
   "synergy", "digital presence", "online footprint", "moving forward"
 - No buzzwords, no corporate speak, no AI-flavoured phrasing
-- If you mention the website issue, say it plainly — "your site takes 6 seconds to load"
-  not "your website's load time metrics may be impacting user experience"
-- The goal is: a real person at a real agency who looked at their website and has
-  something honest to say about it. Get them more customers. Save them time.
+- If you mention the website issue, say it plainly — "your site scores 34/100 on mobile"
+  not "your website's performance metrics may be impacting search visibility"
+- The goal is: a real person at a real agency who ran their site through Google's own tool
+  and has something honest and specific to say about it. Get them more customers.
 """
 
 _SYSTEM_FOLLOWUP_1 = """\
@@ -752,19 +1236,21 @@ RULES:
 _SYSTEM_REENGAGE = """\
 You are writing a 3-month re-engagement email for ImproveYourSite, an Australian web agency.
 
-You sent this business a cold email about their website 3 months ago. They never responded.
-You're checking back in — not to chase, but because you genuinely think they're leaving
-leads on the table right now and a quick message is worth sending.
+Three months ago you sent this business a cold email AND a personalised PDF score sheet
+showing their actual Google PageSpeed scores with a breakdown of specific issues.
+They never responded. You're checking back in.
 
-Persona: Straight-talking sales manager — honest, no hard sell, just a real observation.
+Persona: Straight-talking sales manager — honest, zero pressure, just calling it straight.
 
 RULES:
-- MAX 80 words, 2 short paragraphs
-- Briefly mention you got in touch a few months back about a specific issue
-- Core message: this is where things could have changed by now — frame it around what they
-  may be missing (local competitors picking up their Google leads, seasonal traffic, etc.)
-- One concrete, believable example relevant to their industry — nothing exaggerated
-- Remind them the free 20-min health check is still on the table
+- MAX 90 words, 2 short paragraphs
+- Reference that you sent them a website score report 3 months ago with their actual numbers
+- Core message: frame what could have changed by now if they'd acted — be specific to their
+  industry. Phrase it as "we could have had X fixed by now" or "by now you'd likely be seeing..."
+  — not a guilt trip, just an honest observation about the missed window
+- One concrete, believable outcome relevant to their industry (more calls, page 1 ranking,
+  faster load time) — nothing exaggerated
+- Remind them the free 20-min health check is still available whenever timing works
 - No pressure, no hard sell, no grovelling
 - Australian English, no emojis
 - Sign off: James Burke, ImproveYourSite
@@ -774,7 +1260,8 @@ RULES:
 
 def _build_prompt(
     business_name: str, industry: str, city: str,
-    audit_issues: list[str], follow_up_num: int = 0
+    audit_issues: list[str], follow_up_num: int = 0,
+    psi: dict | None = None,
 ) -> tuple[str, str]:
     """Return (system, prompt) for the given email type."""
     issue = audit_issues[0] if audit_issues else "the website could do more to convert visitors"
@@ -793,13 +1280,40 @@ def _build_prompt(
 
     if follow_up_num == 0:
         system = _SYSTEM
+
+        # Build a PSI context block if we have real scores
+        psi_block = ""
+        if psi and psi.get("perf_score") is not None:
+            perf = psi["perf_score"]
+            seo  = psi.get("seo_score", "")
+            lcp  = psi.get("lcp", "")
+            tbt  = psi.get("tbt", "")
+            failed = psi.get("failed", [])
+            psi_block = f"""
+Google PageSpeed audit results (run today, mobile):
+- Performance score: {perf}/100{" — Google flags anything under 50 as poor" if perf < 50 else " — Google flags anything under 90 as needing improvement" if perf < 90 else ""}
+- Largest Contentful Paint (LCP): {lcp}s{" — Google's threshold for 'poor' is 4s, 'needs improvement' is 2.5s" if lcp else ""}
+- Total Blocking Time: {tbt}ms{" — blocks interaction while the page loads" if tbt and int(tbt) > 200 else ""}
+- SEO score: {seo}/100{" — active ranking signals are missing" if seo and int(str(seo)) < 90 else ""}
+{"- Specific failures: " + "; ".join(failed) if failed else ""}
+
+WHY THIS MATTERS FOR THEIR RANKING (use this context — don't quote it verbatim):
+Google's Core Web Vitals (which these scores measure) became an official ranking factor
+in 2021. A score of {perf}/100 means Google is already using this against them in search
+results — their competitors with faster, better-optimised sites are ranking above them
+for the same search terms. This isn't a future risk — it's happening now.
+Google is transparent about this: sites that fail Core Web Vitals get a ranking penalty.
+For a local {industry} in {city}, ranking on page 2 instead of page 1 can mean the
+difference between 0 inbound calls and 10 a week — all from the same search.
+"""
+
         prompt = f"""\
 Business name: {business_name}
 Industry: {industry}
 City: {city}, Australia
 Specific website issue found: {issue}
 Our booking URL: {BOOKING_URL}
-
+{psi_block}
 Important context to weave in naturally:
 - Most {industry}s in {city} rely on word of mouth or Google search for new work
 - A weak website costs them real jobs — customers search, find a competitor with a better
@@ -810,7 +1324,9 @@ Important context to weave in naturally:
 Greeting format: {greeting_instruction}
 
 Logic check: Make sure the email makes sense for a {industry} business in {city}.
-The issue mentioned should feel real and specific to their industry.
+If PageSpeed scores are provided, reference the actual numbers — they are real and were
+run today. Explain plainly why Google is already penalising the site in search results
+based on these scores. Don't use jargon — say it like a mate who checked their site.
 
 Write the cold outreach email body. Sound like a real person, not a template."""
 
@@ -928,14 +1444,23 @@ def _ensure_leads_table():
             last_emailed      TEXT,
             notes             TEXT,
             reengagement_date TEXT,
-            created_at        TEXT DEFAULT (datetime('now'))
+            created_at        TEXT DEFAULT (datetime('now')),
+        maps_verified     INTEGER DEFAULT 0,
+        maps_confidence   TEXT,
+        maps_source       TEXT
         )
     """)
-    # Migrate existing DB: add reengagement_date column if missing
-    try:
-        conn.execute("ALTER TABLE leads ADD COLUMN reengagement_date TEXT")
-    except Exception:
-        pass  # already exists
+    # Migrate existing DB: add columns if missing
+    for col, typedef in [
+        ("reengagement_date", "TEXT"),
+        ("maps_verified",     "INTEGER DEFAULT 0"),
+        ("maps_confidence",   "TEXT"),
+        ("maps_source",       "TEXT"),
+    ]:
+        try:
+            conn.execute(f"ALTER TABLE leads ADD COLUMN {col} {typedef}")
+        except Exception:
+            pass  # already exists
     conn.commit()
     conn.close()
 
@@ -954,13 +1479,17 @@ def _insert_lead(lead: dict) -> int:
     cur = conn.execute(
         """INSERT OR IGNORE INTO leads
            (business_name,industry,city,email,website,phone,place_id,
-            audit_issues,status,email_count,last_emailed)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
+            audit_issues,status,email_count,last_emailed,
+            maps_verified,maps_confidence,maps_source)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (
             lead["business_name"], lead.get("industry",""), lead.get("city",""),
             lead.get("email",""), lead.get("website",""), lead.get("phone",""),
             lead.get("place_id",""), json.dumps(lead.get("audit_issues",[])),
             "contacted", 1, date.today().isoformat(),
+            1 if lead.get("maps_verified") else 0,
+            lead.get("maps_confidence",""),
+            lead.get("maps_source",""),
         ),
     )
     conn.commit()
@@ -1051,10 +1580,17 @@ class LeadsAgent(BaseAgent):
 
     def run(self):
         _ensure_leads_table()
-        # Check inbox for replies first — so calendar is fresh before outreach runs
+        # 1. Bounce detection — mark bad emails before doing anything else
+        bounced = _check_bounces()
+        if bounced:
+            self.log_warn(f"Bounce check: {bounced} failed delivery/bad email(s) marked — James notified")
+
+        # 2. Check inbox for replies
         new_replies = _check_email_replies()
         if new_replies:
             self.log_info(f"{new_replies} new reply/replies found — added to leads calendar")
+
+        # 3. Outreach pipeline
         self._run_new_outreach()
         self._run_followups()
         self._run_winbacks()
@@ -1077,36 +1613,91 @@ class LeadsAgent(BaseAgent):
             if place_id and _lead_exists(place_id):
                 continue
 
-            # Find email — scrape website if needed
+            industry = prospect.get("industry", "business")
+            city     = prospect.get("city", "Australia")
+            name     = (prospect.get("business_name") or prospect.get("name") or "").strip()
+            website  = prospect.get("website", "") or ""
+            phone    = prospect.get("phone", "") or ""
+
+            if not name:
+                continue  # no business name — nothing to send to
+
+            # ── Maps verification — confirm business exists and is operational ──
+            verification = _verify_business(name, city, website=website, phone=phone)
+            if not verification["verified"]:
+                self.log_info(
+                    f"Maps: skipped {name} ({city}) — {verification['reason']} "
+                    f"[{verification['maps_source']}]"
+                )
+                continue
+
+            # Use Maps-corrected data if available (more reliable than scraped data)
+            if verification["corrected_website"]:
+                self.log_info(
+                    f"Maps: corrected website for {name}: "
+                    f"{website or '(none)'} → {verification['corrected_website']}"
+                )
+                website = verification["corrected_website"]
+            if verification["corrected_phone"] and not phone:
+                phone = verification["corrected_phone"]
+
+            # ── Safe Browsing — skip malware/phishing sites ──────────────────
+            if website and not _safe_browsing_check(website):
+                self.log_warn(f"Safe Browsing: flagged {website} ({name}) — skipping")
+                continue
+
+            # ── Find email — scrape website if needed ────────────────────────
             email = prospect.get("email", "").strip()
-            website = prospect.get("website", "")
             if not email and website:
                 email = _find_email_on_website(website)
 
             if not email:
-                self.log_info(f"No email found for {prospect.get('name')} ({prospect.get('city')}) — skipping")
+                self.log_info(
+                    f"No email found for {name} ({city}) "
+                    f"[maps:{verification['confidence']}] — skipping"
+                )
                 continue
 
-            industry = prospect.get("industry", "business")
-            city     = prospect.get("city", "Australia")
-            name     = prospect.get("business_name") or prospect.get("name", "")
             audit    = _audit_website(website)
             issues   = audit["issues"] or _generic_issues(industry, city)
+            psi_data = audit.get("psi") or {}
 
-            system, prompt = _build_prompt(name, industry, city, issues, follow_up_num=0)
+            system, prompt = _build_prompt(name, industry, city, issues,
+                                           follow_up_num=0, psi=psi_data)
             body    = _claude(prompt, system=system)
             subject = _subject(name, issues, follow_up=0)
 
-            self._send(email, name, subject, body)
+            # Build branded score sheet PDF if we have PSI data
+            pdf_bytes = None
+            pdf_name  = None
+            if psi_data:
+                pdf_bytes = self._build_score_sheet(name, website, psi_data, issues)
+                if pdf_bytes:
+                    slug = re.sub(r"[^\w]", "-", name.lower())[:30]
+                    pdf_name = f"website-audit-{slug}.pdf"
+
+            self._send(email, name, subject, body,
+                       pdf_attachment=pdf_bytes, pdf_filename=pdf_name or "website-audit.pdf")
 
             _insert_lead({
-                "business_name": name, "industry": industry, "city": city,
-                "email": email, "website": website,
-                "phone": prospect.get("phone", ""),
-                "place_id": place_id, "audit_issues": issues,
+                "business_name":  name,
+                "industry":       industry,
+                "city":           city,
+                "email":          email,
+                "website":        website,
+                "phone":          phone,
+                "place_id":       place_id,
+                "audit_issues":   issues,
+                "maps_verified":  verification["verified"],
+                "maps_confidence": verification["confidence"],
+                "maps_source":    verification["maps_source"],
             })
 
-            self.log_info(f"Outreach → {name} <{email}> | {issues[0][:60]}")
+            self.log_info(
+                f"Outreach → {name} <{email}> "
+                f"[maps:{verification['confidence']}/{verification['maps_source']}] "
+                f"| {issues[0][:55]}"
+            )
             sent += 1
             time.sleep(3)
 
@@ -1200,12 +1791,485 @@ class LeadsAgent(BaseAgent):
             time.sleep(3)
         self.complete_task(tid, preview=f"{sent} re-engagement email(s) sent")
 
+    # ── Score sheet (PDF attachment) ──────────────────────────────────────
+
+    def _build_score_sheet(
+        self,
+        business_name: str,
+        website: str,
+        psi: dict,
+        issues: list[str],
+    ) -> bytes | None:
+        """
+        Render a branded PDF score sheet using Playwright → HTML → PNG → PDF.
+        Returns raw PDF bytes, or None if Playwright is unavailable.
+
+        Layout:
+          - IYS header bar (indigo + mint gradient)
+          - Business name + website + date
+          - 4 score gauges: Performance, SEO, Best Practices, LCP
+          - Issues list with traffic-light indicators
+          - Footer CTA: "Book your free 20-min audit"
+        """
+        if not psi:
+            return None
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            return None
+
+        perf = psi.get("perf_score", 0)
+        seo  = psi.get("seo_score", 0)
+        bp   = psi.get("bp_score", 0)
+        lcp  = psi.get("lcp", 0.0)
+        tbt  = psi.get("tbt", 0)
+        issues_list = issues[:5]
+
+        def _score_colour(score: int) -> str:
+            if score >= 90: return "#22c55e"   # green
+            if score >= 50: return "#f59e0b"   # amber
+            return "#ef4444"                   # red
+
+        def _lcp_colour(lcp_val: float) -> str:
+            if lcp_val <= 2.5: return "#22c55e"
+            if lcp_val <= 4.0: return "#f59e0b"
+            return "#ef4444"
+
+        def _gauge(label: str, score: int, suffix: str = "/100") -> str:
+            colour = _score_colour(score)
+            pct    = min(score, 100)
+            return f"""
+            <div style="text-align:center;flex:1;min-width:120px;">
+              <svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto 8px;">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="{colour}" stroke-width="10"
+                  stroke-dasharray="{int(2*3.14159*42*pct/100)} {int(2*3.14159*42*(100-pct)/100)}"
+                  stroke-dashoffset="{int(2*3.14159*42*0.25)}"
+                  stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="46" text-anchor="middle"
+                  style="font-family:Inter,sans-serif;font-size:22px;font-weight:900;fill:{colour};">{score}</text>
+                <text x="50" y="62" text-anchor="middle"
+                  style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;fill:#64748b;">{suffix}</text>
+              </svg>
+              <div style="font-family:Inter,sans-serif;font-size:13px;font-weight:700;color:#0f172a;">{label}</div>
+            </div>"""
+
+        def _lcp_gauge() -> str:
+            colour  = _lcp_colour(lcp)
+            display = f"{lcp}s"
+            rating  = "Good" if lcp <= 2.5 else "Needs work" if lcp <= 4.0 else "Poor"
+            return f"""
+            <div style="text-align:center;flex:1;min-width:120px;">
+              <svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto 8px;">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="{colour}" stroke-width="10"
+                  stroke-dasharray="{int(2*3.14159*42*min(lcp/10,1)*100/100)} {int(2*3.14159*42*(1-min(lcp/10,1)))}"
+                  stroke-dashoffset="{int(2*3.14159*42*0.25)}"
+                  stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="46" text-anchor="middle"
+                  style="font-family:Inter,sans-serif;font-size:18px;font-weight:900;fill:{colour};">{display}</text>
+                <text x="50" y="62" text-anchor="middle"
+                  style="font-family:Inter,sans-serif;font-size:10px;font-weight:600;fill:#64748b;">{rating}</text>
+              </svg>
+              <div style="font-family:Inter,sans-serif;font-size:13px;font-weight:700;color:#0f172a;">Page Load (LCP)</div>
+            </div>"""
+
+        # Map each issue to a plain-English fix + business outcome
+        _FIX_MAP = [
+            (
+                ["performance", "speed", "load", "slow", "/100"],
+                "Speed & performance optimisation",
+                "We compress images, remove unused code, and configure caching so the site loads fast on any device.",
+                "Faster sites rank higher, keep visitors on the page longer, and convert more browsers into enquiries. A site that loads in under 2 seconds can see 2–3x more contact form submissions than one that takes 5+ seconds.",
+            ),
+            (
+                ["lcp", "largest contentful paint", "content"],
+                "Core Web Vitals — LCP fix",
+                "We identify and optimise the largest element on each page (usually the hero image or headline block) so it renders immediately.",
+                "Fixing LCP moves the site from Google's 'Poor' category into 'Good', removing the active ranking penalty. More customers find the business on page 1 instead of scrolling past to a competitor.",
+            ),
+            (
+                ["structured data", "schema", "google can't read"],
+                "Structured data & local schema markup",
+                "We add JSON-LD schema markup so Google can clearly read the business name, address, phone, hours, and services.",
+                "Google shows richer search results — star ratings, address, opening hours — directly in search. This increases click-through rates by up to 30% for local searches.",
+            ),
+            (
+                ["mobile", "viewport", "phone", "responsive"],
+                "Mobile-first rebuild",
+                "We rebuild the layout to work properly on all screen sizes — the way 70%+ of local search traffic arrives.",
+                "A site that looks broken on phones loses the majority of potential customers before they've even read a word. Fixing mobile typically doubles the time visitors spend on the site.",
+            ),
+            (
+                ["call-to-action", "cta", "visitors don't know", "no clear"],
+                "Clear calls-to-action on every page",
+                "We add prominent, specific CTAs — 'Call now', 'Get a quote', 'Book online' — in the right places so visitors know exactly what to do next.",
+                "Most websites lose leads not because the visitor wasn't interested, but because there was no obvious next step. A well-placed CTA can increase contact rate by 40–80%.",
+            ),
+            (
+                ["local", "suburb", "area", "nsw", "vic", "qld", "wa", "sa"],
+                "Local SEO — suburb & area targeting",
+                "We add suburb-specific content, location pages, and Google Business Profile optimisation so the site appears for local searches.",
+                "For most local businesses, appearing in the top 3 Google results for their suburb drives 5–10 new enquiries per month from people actively searching for exactly what they offer.",
+            ),
+            (
+                ["review", "testimonial", "social proof", "rating"],
+                "Social proof integration",
+                "We pull in Google reviews, add a testimonials section, and display trust signals that visitors look for before making contact.",
+                "Businesses with visible reviews convert 3–4x more website visitors into enquiries. For service businesses, seeing real reviews from local customers is often the deciding factor.",
+            ),
+            (
+                ["content", "thin", "words", "information"],
+                "Content depth & authority",
+                "We build out service pages with specific, helpful content that answers the questions customers actually search for.",
+                "Google rewards sites with real, useful information. More content depth also means the site ranks for a wider range of search terms — more entry points, more leads.",
+            ),
+            (
+                ["seo", "meta", "title", "description", "crawl", "index"],
+                "Technical SEO & on-page optimisation",
+                "We audit and fix all on-page SEO signals — page titles, meta descriptions, heading structure, internal links, and crawlability.",
+                "Even a technically sound business website loses ranking to competitors who have the SEO basics properly configured. Small fixes compound into significantly more organic traffic over time.",
+            ),
+            (
+                ["security", "https", "browser", "best practices"],
+                "Security & best practices audit",
+                "We resolve any HTTPS issues, fix browser console errors, and update any outdated code that modern browsers flag.",
+                "Visitors who see a security warning in their browser almost always leave immediately — before reading anything. A secure, error-free site builds trust passively, just by loading correctly.",
+            ),
+        ]
+
+        def _match_fix(issue_text: str) -> tuple:
+            text_lower = issue_text.lower()
+            for keywords, fix_title, what_we_do, business_impact in _FIX_MAP:
+                if any(kw in text_lower for kw in keywords):
+                    return fix_title, what_we_do, business_impact
+            # Fallback
+            return (
+                "Website audit & optimisation",
+                "We review and fix the specific issues flagged, optimising each element for speed, search visibility, and conversion.",
+                "A fully optimised website consistently generates more enquiries, ranks higher for local searches, and converts more visitors into paying customers.",
+            )
+
+        def _fix_card(issue_text: str, idx: int) -> str:
+            fix_title, what_we_do, impact = _match_fix(issue_text)
+            return f"""
+            <div style="background:#ffffff;border:1px solid #e8edf2;border-radius:10px;
+              padding:16px 20px;margin-bottom:10px;">
+              <div style="display:flex;align-items:flex-start;gap:14px;">
+                <div style="width:24px;height:24px;border-radius:50%;background:#5b4dff;
+                  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+                  font-size:11px;font-weight:800;color:#ffffff;margin-top:1px;">{idx}</div>
+                <div style="flex:1;">
+                  <div style="font-size:12.5px;font-weight:800;color:#0f172a;
+                    margin-bottom:5px;">{fix_title}</div>
+                  <div style="font-size:11px;font-weight:600;color:#ef4444;
+                    margin-bottom:8px;line-height:1.5;">Issue: {issue_text}</div>
+                  <div style="display:flex;gap:12px;">
+                    <div style="flex:1;background:#f8fafc;border-radius:7px;padding:10px 13px;">
+                      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;
+                        text-transform:uppercase;color:#5b4dff;margin-bottom:5px;">What we fix</div>
+                      <div style="font-size:11.5px;color:#475569;line-height:1.6;">{what_we_do}</div>
+                    </div>
+                    <div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;
+                      border-radius:7px;padding:10px 13px;">
+                      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;
+                        text-transform:uppercase;color:#16a34a;margin-bottom:5px;">Business impact</div>
+                      <div style="font-size:11.5px;color:#15803d;line-height:1.6;">{impact}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>"""
+
+        today   = date.today().strftime("%-d %B %Y")
+        domain  = re.sub(r"https?://(www\.)?", "", website).rstrip("/") if website else "—"
+        gauges  = (
+            _gauge("Performance", perf) +
+            _gauge("SEO", seo) +
+            _gauge("Best Practices", bp) +
+            _lcp_gauge()
+        )
+        # issue_rows no longer used — page 2 uses _fix_card() directly
+
+        def _metric_card(label: str, score_html: str, bar_html: str, rating: str,
+                         rating_colour: str, body: str) -> str:
+            return f"""
+            <div style="width:calc(50% - 8px);box-sizing:border-box;background:#ffffff;
+              border:1px solid #e8edf2;border-radius:10px;padding:16px 18px;">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;
+                margin-bottom:6px;">
+                <div style="font-size:12px;font-weight:700;color:#0f172a;
+                  letter-spacing:-.01em;">{label}</div>
+                <div style="font-size:19px;font-weight:900;
+                  color:{rating_colour};line-height:1;">{score_html}</div>
+              </div>
+              {bar_html}
+              <div style="font-size:11px;font-weight:700;color:{rating_colour};
+                text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">{rating}</div>
+              <div style="font-size:11.5px;color:#64748b;line-height:1.65;">{body}</div>
+            </div>"""
+
+        def _bar(pct: int, colour: str) -> str:
+            return f"""<div style="height:5px;background:#e8edf2;border-radius:3px;margin-bottom:6px;">
+              <div style="height:5px;width:{min(pct,100)}%;background:{colour};
+                border-radius:3px;"></div></div>"""
+
+        def _lcp_bar() -> str:
+            c1 = "#22c55e" if lcp <= 2.5 else "#e8edf2"
+            c2 = "#f59e0b" if 2.5 < lcp <= 4.0 else "#e8edf2"
+            c3 = "#ef4444" if lcp > 4.0 else "#e8edf2"
+            return f"""<div style="display:flex;gap:4px;margin-bottom:4px;">
+              <div style="flex:1;height:5px;border-radius:3px;background:{c1};"></div>
+              <div style="flex:1;height:5px;border-radius:3px;background:{c2};"></div>
+              <div style="flex:1;height:5px;border-radius:3px;background:{c3};"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;
+              font-size:9.5px;font-weight:600;color:#94a3b8;margin-bottom:6px;">
+              <span>&lt;2.5s Good</span><span>2.5–4s Needs work</span><span>&gt;4s Poor</span>
+            </div>"""
+
+        lcp_rating        = "Poor" if lcp > 4 else "Needs Improvement" if lcp > 2.5 else "Good"
+        perf_rating       = "Poor" if perf < 50 else "Needs Improvement" if perf < 90 else "Good"
+        seo_rating        = "Needs Improvement" if seo < 90 else "Good"
+        bp_rating         = "Needs Improvement" if bp < 90 else "Good"
+
+        _perf_note = (
+            "Under 50 is classified as Poor — these sites are actively penalised in search."
+            if perf < 50 else
+            "Under 90 means competitors scoring higher rank above this site for the same searches."
+            if perf < 90 else
+            "Within Google's good range."
+        )
+        _seo_note = (
+            "Missing signals mean Google gets an incomplete picture, limiting how well it ranks the site locally."
+            if seo < 90 else
+            "SEO fundamentals are in place."
+        )
+        _bp_note = (
+            "Issues here can trigger browser security warnings, damaging trust before a visitor even reads the page."
+            if bp < 90 else
+            "Meeting modern technical standards, which supports trust and ranking."
+        )
+
+        card_perf = _metric_card(
+            "Performance", f"{perf}/100", _bar(perf, _score_colour(perf)),
+            perf_rating, _score_colour(perf),
+            f"Google's overall mobile speed score. {_perf_note} "
+            f"Every 0.1s improvement in load time increases conversions by up to 8%."
+        )
+        card_lcp = _metric_card(
+            "LCP — Page Load Speed", f"{lcp}s", _lcp_bar(),
+            lcp_rating, _lcp_colour(lcp),
+            f"How long the main content takes to appear after a visitor opens the page — "
+            f"Google's most heavily weighted speed signal. "
+            f"At {lcp}s this site is in the {lcp_rating} range. "
+            f"53% of mobile visitors leave if a page takes over 3 seconds — "
+            f"each one goes back and clicks a competitor instead."
+        )
+        card_seo = _metric_card(
+            "SEO Score", f"{seo}/100", _bar(seo, _score_colour(seo)),
+            seo_rating, _score_colour(seo),
+            f"Whether Google can fully read and index the site — page titles, meta descriptions, "
+            f"structured data, crawlability. {_seo_note} "
+            f"Gaps compound: a competitor who ticks every box consistently outranks a site that doesn't."
+        )
+        card_bp = _metric_card(
+            "Best Practices", f"{bp}/100", _bar(bp, _score_colour(bp)),
+            bp_rating, _score_colour(bp),
+            f"How securely and correctly the site is built — HTTPS, no browser errors, "
+            f"correct image sizing, privacy-safe scripts. {_bp_note} "
+            f"Low scores compound the impact of a poor Performance or LCP result."
+        )
+
+        html = f"""<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:Inter,sans-serif;">
+<div style="width:680px;margin:0 auto;background:#f1f5f9;padding-bottom:0;">
+
+  <!-- Header -->
+  <div style="background:#0f172a;padding:26px 36px;display:flex;
+    align-items:center;justify-content:space-between;">
+    <div>
+      <span style="font-size:20px;font-weight:900;color:rgba(255,255,255,.92);
+        letter-spacing:-.02em;">Improve<span style="color:#2dd4bf;">YourSite</span></span>
+      <div style="font-size:10.5px;font-weight:600;color:rgba(255,255,255,.35);
+        letter-spacing:.1em;text-transform:uppercase;margin-top:3px;">Website Performance Report</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:rgba(255,255,255,.35);">{today}</div>
+      <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55);
+        margin-top:2px;">{domain}</div>
+    </div>
+  </div>
+  <div style="height:3px;background:linear-gradient(90deg,#5b4dff 0%,#2dd4bf 100%);"></div>
+
+  <!-- Business + summary strip -->
+  <div style="background:#ffffff;padding:20px 36px 18px;
+    border-bottom:1px solid #e8edf2;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:#5b4dff;margin-bottom:4px;">Audited for</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;">
+      <div style="font-size:22px;font-weight:900;color:#0f172a;
+        letter-spacing:-.025em;">{business_name}</div>
+      <div style="font-size:11px;color:#94a3b8;">Google PageSpeed Insights · mobile</div>
+    </div>
+  </div>
+
+  <!-- 4 Score gauges -->
+  <div style="background:#ffffff;padding:20px 36px 22px;border-bottom:1px solid #e8edf2;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:#94a3b8;margin-bottom:16px;">Google Scores</div>
+    <div style="display:flex;justify-content:space-between;gap:12px;">
+      {gauges}
+    </div>
+  </div>
+
+  <!-- Ranking penalty banner -->
+  <div style="margin:14px 36px;background:#fffbeb;border:1px solid #fcd34d;
+    border-left:4px solid #f59e0b;border-radius:8px;padding:14px 18px;">
+    <div style="font-size:12px;font-weight:800;color:#92400e;margin-bottom:4px;">
+      Google Core Web Vitals — Active Ranking Penalty
+    </div>
+    <div style="font-size:12px;color:#78350f;line-height:1.65;">
+      Since 2021, Google uses these scores as a direct ranking factor. A performance score
+      of <strong>{perf}/100</strong> means faster competitors are currently ranked above this
+      site for the same local searches — this is happening now, not a future risk.
+    </div>
+  </div>
+
+  <!-- 4 Metric cards — 2x2 grid -->
+  <div style="margin:0 36px 14px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:#94a3b8;margin-bottom:12px;">What Each Score Means for Your Ranking</div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      {card_perf}
+      {card_lcp}
+      {card_seo}
+      {card_bp}
+    </div>
+  </div>
+
+  <!-- Issues & what we fix — continues below scores -->
+  <div style="background:#f1f5f9;padding-top:0;">
+
+    <!-- Page 2 header -->
+    <div style="background:#0f172a;padding:20px 36px;display:flex;
+      align-items:center;justify-content:space-between;">
+      <span style="font-size:16px;font-weight:900;color:rgba(255,255,255,.9);
+        letter-spacing:-.02em;">Improve<span style="color:#2dd4bf;">YourSite</span></span>
+      <div style="text-align:right;">
+        <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);">{business_name}</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;">Issues &amp; Recommendations</div>
+      </div>
+    </div>
+    <div style="height:3px;background:linear-gradient(90deg,#5b4dff 0%,#2dd4bf 100%);"></div>
+
+    <!-- Intro copy -->
+    <div style="background:#ffffff;padding:20px 36px 16px;border-bottom:1px solid #e8edf2;">
+      <div style="font-size:18px;font-weight:900;color:#0f172a;letter-spacing:-.02em;
+        margin-bottom:6px;">What's holding the site back</div>
+      <div style="font-size:12.5px;color:#64748b;line-height:1.65;max-width:560px;">
+        Below are the specific issues found during the audit, what we'd do to fix each one,
+        and what that fix typically means for a local business in terms of more enquiries,
+        better rankings, and stronger conversions.
+      </div>
+    </div>
+
+    <!-- Fix cards -->
+    <div style="padding:16px 36px 16px;">
+      {"".join(_fix_card(issue, i + 1) for i, issue in enumerate(issues_list))}
+    </div>
+
+    <!-- What a fixed site looks like -->
+    <div style="margin:0 36px 16px;background:#0f172a;border-radius:10px;padding:22px 24px;">
+      <div style="font-size:13px;font-weight:800;color:#ffffff;margin-bottom:12px;
+        letter-spacing:-.01em;">What this looks like once it's done</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:140px;background:rgba(255,255,255,.06);
+          border-radius:8px;padding:12px 14px;">
+          <div style="font-size:20px;font-weight:900;color:#2dd4bf;margin-bottom:4px;">90+</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;">
+            Google performance score — out of the penalty zone and competing for page 1
+          </div>
+        </div>
+        <div style="flex:1;min-width:140px;background:rgba(255,255,255,.06);
+          border-radius:8px;padding:12px 14px;">
+          <div style="font-size:20px;font-weight:900;color:#2dd4bf;margin-bottom:4px;">&lt;2.5s</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;">
+            Page load time — keeps visitors on the page instead of bouncing to a competitor
+          </div>
+        </div>
+        <div style="flex:1;min-width:140px;background:rgba(255,255,255,.06);
+          border-radius:8px;padding:12px 14px;">
+          <div style="font-size:20px;font-weight:900;color:#2dd4bf;margin-bottom:4px;">More calls</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;">
+            Clear CTAs and local SEO turn search traffic into actual enquiries every week
+          </div>
+        </div>
+        <div style="flex:1;min-width:140px;background:rgba(255,255,255,.06);
+          border-radius:8px;padding:12px 14px;">
+          <div style="font-size:20px;font-weight:900;color:#2dd4bf;margin-bottom:4px;">Page 1</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;">
+            Local suburb ranking for the searches customers are already doing right now
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2 footer CTA -->
+    <div style="background:#5b4dff;padding:20px 36px;display:flex;align-items:center;
+      justify-content:space-between;">
+      <div>
+        <div style="font-size:14px;font-weight:800;color:#ffffff;letter-spacing:-.01em;">
+          See exactly what we'd fix — book a free 20-min call
+        </div>
+        <div style="font-size:11.5px;color:rgba(255,255,255,.65);margin-top:3px;">
+          No obligation. You get a written summary of every recommendation.
+        </div>
+      </div>
+      <div style="background:#ffffff;color:#5b4dff;font-size:12px;font-weight:800;
+        padding:10px 20px;border-radius:7px;white-space:nowrap;">
+        improveyoursite.com
+      </div>
+    </div>
+
+  </div><!-- end page 2 -->
+
+</div>
+</body></html>"""
+
+        try:
+            with sync_playwright() as pw:
+                browser = pw.chromium.launch()
+                page    = browser.new_page(viewport={"width": 720, "height": 1080})
+                page.set_content(html, wait_until="networkidle")
+                pdf_bytes = page.pdf(
+                    width="720px",
+                    print_background=True,
+                    margin={"top": "0", "bottom": "0", "left": "0", "right": "0"},
+                )
+                browser.close()
+            return pdf_bytes
+        except Exception:
+            return None
+
     # ── Email sender ──────────────────────────────────────────────────────
 
-    def _send(self, to_email: str, to_name: str, subject: str, body: str):
+    def _send(
+        self,
+        to_email: str,
+        to_name: str,
+        subject: str,
+        body: str,
+        pdf_attachment: bytes | None = None,
+        pdf_filename: str = "website-audit.pdf",
+    ):
         import smtplib
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
+        from email.mime.application import MIMEApplication
 
         gmail_user = os.environ.get("GMAIL_USER", "")
         gmail_pass = os.environ.get("GMAIL_APP_PASS", "")
@@ -1214,12 +2278,17 @@ class LeadsAgent(BaseAgent):
             self.log_warn(f"Email skipped (no Gmail creds) — {to_name} <{to_email}>")
             return
 
-        msg = MIMEMultipart("alternative")
+        msg = MIMEMultipart("mixed")
         msg["Subject"]  = subject
         msg["From"]     = f"{FROM_NAME} <{gmail_user}>"
         msg["To"]       = f"{to_name} <{to_email}>"
         msg["Reply-To"] = REPLY_TO
         msg.attach(MIMEText(body, "plain"))
+
+        if pdf_attachment:
+            part = MIMEApplication(pdf_attachment, Name=pdf_filename)
+            part["Content-Disposition"] = f'attachment; filename="{pdf_filename}"'
+            msg.attach(part)
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(gmail_user, gmail_pass)
