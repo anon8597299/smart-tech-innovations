@@ -241,6 +241,25 @@ def build_scheduler() -> BackgroundScheduler:
         misfire_grace_time=120,
     )
 
+    # ── TAG Projects photo watcher ───────────────────────────────────────
+    # Polls hello@ every 30 minutes for Tim's photos — self-cancels once done
+    import threading as _threading
+    from agents.tag_projects_watcher import run_once as _tag_run_once, WATCH_PASS as _tag_pass
+    _tag_done = {"v": False}
+    def _run_tag_watcher():
+        if _tag_done["v"] or not _tag_pass:
+            return
+        found = _tag_run_once()
+        if found:
+            _tag_done["v"] = True
+            db.event_log("inbox", "info", "TAG Projects: Tim's photos received and published live")
+    scheduler.add_job(
+        _run_tag_watcher,
+        CronTrigger(minute="*/30", timezone=TIMEZONE),
+        id="tag_photo_watcher", name="TAG Projects photo watcher",
+        misfire_grace_time=120,
+    )
+
     # Update next_run timestamps in DB after schedule is built
     _update_next_runs(scheduler)
 
