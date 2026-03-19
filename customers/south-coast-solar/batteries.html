@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Solar Battery Guide — South Coast Solar Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --dark: #080e1a; --navy: #0f172a; --green: #059669; --green2: #10b981;
+      --amber: #f59e0b; --amber2: #fbbf24; --white: #ffffff;
+      --slate: #64748b; --light: #f8fafc; --border: #e2e8f0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; background: var(--white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .demo-banner { background: #5b4dff; color: #fff; text-align: center; padding: 12px 20px; font-size: 14px; font-weight: 600; }
+    .demo-banner a { color: #2dd4bf; text-decoration: none; font-weight: 700; }
+
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(8,14,26,.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+    .nav-logo-text { font-size: 17px; font-weight: 800; color: var(--white); letter-spacing: -.02em; }
+    .nav-logo-text span { color: var(--amber); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .btn-primary { background: var(--amber); color: var(--dark); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--amber2); }
+
+    /* HERO */
+    .hero { background: var(--dark); padding: 72px 24px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,158,11,.1) 0%, transparent 60%); }
+    .hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+    .breadcrumb a { color: rgba(255,255,255,.4); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--amber); }
+    .breadcrumb span { color: rgba(255,255,255,.2); font-size: 13px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.3); color: var(--amber2); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; color: var(--white); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 16px; }
+    .hero h1 span { color: var(--amber); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,.5); line-height: 1.65; margin-bottom: 32px; }
+    .hero-meta { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .hero-meta-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.4); font-size: 13px; font-weight: 500; }
+    .hero-meta-item svg { width: 14px; height: 14px; }
+
+    /* TOC */
+    .toc { background: var(--light); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin: 0 auto 48px; max-width: 800px; }
+    .toc h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+    .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .toc ol li a { color: var(--green); font-size: 14px; font-weight: 500; text-decoration: none; transition: color .2s; }
+    .toc ol li a:hover { color: #047857; }
+
+    /* CONTENT */
+    .content { max-width: 800px; margin: 0 auto; padding: 64px 24px; }
+    .content-section { margin-bottom: 64px; }
+    .content-section:last-child { margin-bottom: 0; }
+    .section-anchor { scroll-margin-top: 88px; }
+
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+    h2.section-heading { font-size: clamp(24px, 3vw, 34px); font-weight: 900; color: var(--navy); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; }
+    h3.sub-heading { font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -.02em; margin: 32px 0 12px; }
+    p.body-text { font-size: 16px; color: #334155; line-height: 1.8; margin-bottom: 16px; }
+    p.body-text:last-child { margin-bottom: 0; }
+
+    /* CALLOUT BOXES */
+    .callout { border-radius: 12px; padding: 24px 28px; margin: 28px 0; }
+    .callout-tip { background: rgba(5,150,105,.08); border-left: 4px solid var(--green); }
+    .callout-warn { background: rgba(245,158,11,.08); border-left: 4px solid var(--amber); }
+    .callout-danger { background: rgba(239,68,68,.08); border-left: 4px solid #ef4444; }
+    .callout-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    .callout-tip .callout-label { color: var(--green); }
+    .callout-warn .callout-label { color: #b45309; }
+    .callout-danger .callout-label { color: #dc2626; }
+    .callout p { font-size: 15px; color: var(--navy); line-height: 1.7; }
+
+    /* BATTERY TYPE CARDS */
+    .battery-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 28px 0; }
+    .battery-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 28px; transition: border-color .2s, box-shadow .2s; }
+    .battery-card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(5,150,105,.1); }
+    .battery-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .battery-card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .battery-card-icon svg { width: 22px; height: 22px; }
+    .battery-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); letter-spacing: -.01em; margin: 0; }
+    .battery-card p { font-size: 14px; color: var(--slate); line-height: 1.65; margin-bottom: 12px; }
+    .battery-card p:last-child { margin-bottom: 0; }
+    .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+    .tag-green { background: rgba(5,150,105,.1); color: var(--green); }
+    .tag-amber { background: rgba(245,158,11,.1); color: #b45309; }
+    .tag-red { background: rgba(239,68,68,.1); color: #dc2626; }
+    .tag-blue { background: rgba(59,130,246,.1); color: #1d4ed8; }
+
+    /* CHARGING STAGES */
+    .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+    .stage { background: var(--dark); border-radius: 12px; padding: 24px 20px; text-align: center; }
+    .stage-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+    .stage h4 { font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+    .stage p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    /* MAINTENANCE CHECKLIST */
+    .checklist { background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 28px; margin: 28px 0; }
+    .checklist h4 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+    .checklist ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .checklist ul li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #334155; line-height: 1.5; }
+    .check-icon { width: 20px; height: 20px; background: rgba(5,150,105,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .check-icon svg { width: 11px; height: 11px; color: var(--green); }
+
+    /* STAT ROW */
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+    .stat-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; }
+    .stat-val { font-size: 36px; font-weight: 900; color: var(--green); letter-spacing: -.04em; line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: var(--slate); font-weight: 500; }
+
+    /* CTA */
+    .cta-box { background: linear-gradient(135deg, #065f46 0%, var(--green) 100%); border-radius: 20px; padding: 48px; text-align: center; margin-top: 64px; }
+    .cta-box h2 { font-size: 28px; font-weight: 900; color: var(--white); letter-spacing: -.03em; margin-bottom: 12px; }
+    .cta-box p { font-size: 16px; color: rgba(255,255,255,.65); margin-bottom: 28px; }
+    .cta-box a { background: var(--white); color: var(--green); padding: 14px 36px; border-radius: 10px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; transition: transform .15s; }
+    .cta-box a:hover { transform: translateY(-2px); }
+
+    /* FOOTER */
+    .footer { background: var(--dark); padding: 32px 24px; text-align: center; }
+    .footer p { font-size: 13px; color: rgba(255,255,255,.25); }
+    .footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .battery-types { grid-template-columns: 1fr; }
+      .stages { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Demo by <strong>ImproveYourSite.com</strong> — <a href="https://improveyoursite.com">Get a site like this →</a>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#080e1a" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2"/></svg>
+      </div>
+      <span class="nav-logo-text">South Coast <span>Solar</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="batteries.html" style="color:#fff;">Batteries</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn-primary">Free Assessment</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="resources.html">Resources</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.6);">Battery Guide</span>
+    </div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+      Complete Battery Guide
+    </div>
+    <h1>Everything You Need to Know About <span>Solar Batteries</span></h1>
+    <p class="hero-sub">From deep cycle basics to lithium-ion — a plain-English guide to battery storage for Australian homes and businesses.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        7 min read
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Updated 2024
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        South Coast Solar Solutions
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<div style="padding: 0 24px;">
+  <div class="toc">
+    <h3>In this guide</h3>
+    <ol>
+      <li><a href="#what-is">What is a deep cycle battery?</a></li>
+      <li><a href="#how-it-works">How batteries store energy</a></li>
+      <li><a href="#charging">The 3 stages of charging</a></li>
+      <li><a href="#types">Battery types compared</a></li>
+      <li><a href="#lifespan">Battery lifespan & what kills them early</a></li>
+      <li><a href="#maintenance">Maintenance checklist</a></li>
+      <li><a href="#sizing">How to size your battery bank</a></li>
+      <li><a href="#monitoring">Monitoring your battery</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- WHAT IS -->
+  <div class="content-section">
+    <div class="section-anchor" id="what-is"></div>
+    <div class="eyebrow">The basics</div>
+    <h2 class="section-heading">What is a deep cycle battery?</h2>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-val">85–95%</div>
+        <div class="stat-label">Charging efficiency of lead-acid batteries</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">5–15 yrs</div>
+        <div class="stat-label">Lifespan of quality deep cycle batteries</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">50%</div>
+        <div class="stat-label">Recommended max depth of discharge</div>
+      </div>
+    </div>
+    <p class="body-text">Deep cycle batteries are the key component in solar energy systems that require electricity storage. Think of a battery as a storage vessel — it holds the power your solar panels produce and releases it when the sun isn't shining.</p>
+    <p class="body-text">A battery bank can provide a relatively constant source of power when the grid is down, or during periods when your solar system isn't producing. While batteries aren't 100% efficient, they're predictable and stable enough for reliable long-term service.</p>
+    <div class="callout callout-tip">
+      <div class="callout-label">Think of it this way</div>
+      <p>Imagine your battery bank as a bucket of energy. Voltage is the pressure, amperage is the flow rate. Just like a bucket with a small hole needs slightly more water poured in than it holds — a battery takes slightly more energy to charge than it stores. The size of the bucket is the amp hour (Ah) capacity of your battery bank.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="content-section">
+    <div class="section-anchor" id="how-it-works"></div>
+    <div class="eyebrow">How it works</div>
+    <h2 class="section-heading">How batteries store energy</h2>
+    <p class="body-text">Battery technology hasn't changed dramatically in 100 years. The standard construction floods lead plates in sulfuric acid. The chemical reaction between the positively charged lead plate and the negatively charged acid is what stores and releases electricity.</p>
+    <p class="body-text">The thickness of the lead plate is closely related to battery lifespan — the positive plate gradually wears away over time due to "positive grid corrosion." Deep cycle batteries use thicker plates, which translates to longer life.</p>
+    <h3 class="sub-heading">Amp-Hour Rating</h3>
+    <p class="body-text">All deep cycle batteries are rated in amp-hours (Ah). This tells you how much power is available when discharged evenly over 20 hours. A 100Ah battery can deliver 5 amps for 20 hours, or 10 amps for 10 hours.</p>
+    <div class="callout callout-warn">
+      <div class="callout-label">Watch out for this</div>
+      <p>Some manufacturers rate batteries at 100 hours instead of 20 to make them look better on paper. Always check the C-rate when comparing battery specs — insist on a 20-hour (C20) rating for accurate comparison.</p>
+    </div>
+  </div>
+
+  <!-- CHARGING -->
+  <div class="content-section">
+    <div class="section-anchor" id="charging"></div>
+    <div class="eyebrow">Charging process</div>
+    <h2 class="section-heading">The 3 stages of charging</h2>
+    <p class="body-text">Every time your batteries charge, they go through three distinct stages. Your charge controller manages this automatically — but understanding what's happening helps you spot problems early.</p>
+    <div class="stages">
+      <div class="stage">
+        <div class="stage-num">Stage 1</div>
+        <h4>Bulk</h4>
+        <p>Maximum current flows in. Takes batteries from empty to ~80–90% charge. The fastest stage.</p>
+      </div>
+      <div class="stage">
+        <div class="stage-num">Stage 2</div>
+        <h4>Absorption</h4>
+        <p>Voltage peaks and stabilises. Current tapers off as internal resistance rises. Finishing the charge.</p>
+      </div>
+      <div class="stage">
+        <div class="stage-num">Stage 3</div>
+        <h4>Float</h4>
+        <p>Voltage drops to a maintenance level. Prevents overcharge and gassing. Keeps batteries topped up.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES -->
+  <div class="content-section">
+    <div class="section-anchor" id="types"></div>
+    <div class="eyebrow">Battery types</div>
+    <h2 class="section-heading">Which battery type is right for you?</h2>
+    <p class="body-text">There are four main battery types used in residential solar. Each has different costs, maintenance requirements, and performance characteristics. Here's the plain-English comparison.</p>
+    <div class="battery-types">
+      <div class="battery-card">
+        <div class="battery-card-header">
+          <div class="battery-card-icon" style="background:rgba(5,150,105,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          </div>
+          <h3>Flooded Lead Acid</h3>
+        </div>
+        <p>The most common battery in solar systems. Longest track record, lowest cost per amp-hour. Requires regular watering, equalising charges and terminal cleaning.</p>
+        <div class="tag-row">
+          <span class="tag tag-green">Lowest cost</span>
+          <span class="tag tag-green">5–15 yr lifespan</span>
+          <span class="tag tag-amber">Needs maintenance</span>
+        </div>
+      </div>
+      <div class="battery-card">
+        <div class="battery-card-header">
+          <div class="battery-card-icon" style="background:rgba(59,130,246,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Sealed AGM</h3>
+        </div>
+        <p>Absorbed Glass Mat batteries are sealed, maintenance-free and can hold 1.5× the amp-hour capacity of a similar flooded battery. Better for enclosed locations. Higher upfront cost.</p>
+        <div class="tag-row">
+          <span class="tag tag-green">Maintenance-free</span>
+          <span class="tag tag-green">High density</span>
+          <span class="tag tag-amber">Higher cost</span>
+        </div>
+      </div>
+      <div class="battery-card">
+        <div class="battery-card-header">
+          <div class="battery-card-icon" style="background:rgba(245,158,11,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Gel Sealed</h3>
+        </div>
+        <p>Uses silica to gel the electrolyte, reducing gassing and spillage. Must be charged slower than flooded or AGM — overcharging causes gas pockets that permanently reduce capacity.</p>
+        <div class="tag-row">
+          <span class="tag tag-green">Low maintenance</span>
+          <span class="tag tag-amber">Slow charge only</span>
+          <span class="tag tag-red">Being phased out</span>
+        </div>
+      </div>
+      <div class="battery-card">
+        <div class="battery-card-header">
+          <div class="battery-card-icon" style="background:rgba(139,92,246,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/></svg>
+          </div>
+          <h3>Lithium-Ion</h3>
+        </div>
+        <p>Smaller, lighter, longer lifespan, better depth of discharge. Think Tesla Powerwall. Higher upfront cost — but over its lifetime, comparable to sealed lead-acid. Price is falling as production scales.</p>
+        <div class="tag-row">
+          <span class="tag tag-blue">Longest lifespan</span>
+          <span class="tag tag-blue">80%+ discharge</span>
+          <span class="tag tag-amber">Highest upfront</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIFESPAN -->
+  <div class="content-section">
+    <div class="section-anchor" id="lifespan"></div>
+    <div class="eyebrow">Lifespan</div>
+    <h2 class="section-heading">What kills batteries early</h2>
+    <p class="body-text">Battery failures are rarely the fault of the batteries themselves. The most common causes of premature failure are preventable with proper setup and maintenance.</p>
+    <div class="checklist">
+      <h4>Common causes of early battery failure</h4>
+      <ul>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Loss of electrolyte due to heat or overcharging</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Chronic undercharging — never reaching 100% state of charge</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Discharging past 50–80% depth regularly</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Using tap water instead of distilled water (flooded batteries)</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Freezing temperatures or excessive heat exposure</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Terminal corrosion left untreated</li>
+        <li><div class="check-icon" style="background:rgba(239,68,68,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>More than 3 parallel battery strings (uneven equalisation)</li>
+      </ul>
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-label">Pro tip</div>
+      <p>Batteries that are protected from temperature extremes, kept clean, and regularly brought to full charge can last 10+ years with minimal intervention. The secret is a proper initial installation — not daily effort.</p>
+    </div>
+  </div>
+
+  <!-- MAINTENANCE -->
+  <div class="content-section">
+    <div class="section-anchor" id="maintenance"></div>
+    <div class="eyebrow">Maintenance</div>
+    <h2 class="section-heading">Simple maintenance checklist</h2>
+    <p class="body-text">For flooded batteries, basic maintenance takes minutes and adds years to battery life. Sealed (AGM, Gel, Lithium) batteries require virtually no user maintenance.</p>
+    <div class="checklist">
+      <h4>Flooded battery maintenance routine</h4>
+      <ul>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Check electrolyte levels every 1–2 months — plates must stay submerged</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Top up with distilled water only — never tap water, never acid</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Wash battery tops twice a year with baking soda solution to remove acid spatter</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Apply petroleum jelly (Vaseline) to terminals to prevent corrosion</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Bring batteries to 100% charge at least every 3 weeks</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Check and tighten all cable connections every 6 months</li>
+      </ul>
+    </div>
+    <div class="callout callout-danger">
+      <div class="callout-label">Safety warning</div>
+      <p>Battery acid is hazardous. Always wear safety glasses when working around batteries. Keep a bottle of baking soda and water solution nearby to neutralise any acid splashes or spills immediately. Don't wear anything you'd mind ruining.</p>
+    </div>
+  </div>
+
+  <!-- SIZING -->
+  <div class="content-section">
+    <div class="section-anchor" id="sizing"></div>
+    <div class="eyebrow">Sizing your system</div>
+    <h2 class="section-heading">How to size your battery bank</h2>
+    <p class="body-text">Getting the size right is the most important decision in a battery-backed solar system. Too small and you'll constantly drain them flat. Too large and they'll never reach a full charge.</p>
+    <h3 class="sub-heading">The 5-day rule</h3>
+    <p class="body-text">As a minimum, size your battery bank to hold 5 days of load. Most home power systems grow over time, so err on the larger side. Important: after 1 year of service, you cannot simply add new batteries to an existing bank — battery voltage response changes with age and mixed banks fail faster.</p>
+    <h3 class="sub-heading">Solar array sizing</h3>
+    <p class="body-text">Your solar array (if it's the primary energy source) should be sized to produce 30% more energy than your average load requires. This compensates for battery losses and below-average charging days. Unlike battery banks, a solar array can be expanded at any time.</p>
+    <div class="callout callout-tip">
+      <div class="callout-label">Weekend home tip</div>
+      <p>If your property sits empty during the week, consider a larger battery bank — you'll have 5+ days of solar charging time with no load. Alternatively, if you have a generator backup, the battery bank can be slightly undersized since you can run the generator to top up when needed.</p>
+    </div>
+    <h3 class="sub-heading">Avoid more than 3 parallel strings</h3>
+    <p class="body-text">The ideal battery bank is a single series of cells. Under no circumstances should you install more than three parallel battery strings — the bank will lose equalisation and weak cells will steal from surrounding cells, accelerating failure across the entire bank.</p>
+  </div>
+
+  <!-- MONITORING -->
+  <div class="content-section">
+    <div class="section-anchor" id="monitoring"></div>
+    <div class="eyebrow">Monitoring</div>
+    <h2 class="section-heading">Know what your battery is doing</h2>
+    <p class="body-text">Would you drive a car with no dashboard? A battery monitor isn't a luxury — it's a necessity. There are three ways to measure battery state of charge, in order of accuracy:</p>
+    <div class="checklist">
+      <h4>State of charge methods</h4>
+      <ul>
+        <li><div class="check-icon" style="background:rgba(245,158,11,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><strong>Voltage meter</strong> — Least accurate. Affected by current flow, temperature and time. Cheap and simple but unreliable for precise readings.</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><strong>Hydrometer</strong> — Most accurate for flooded batteries. Measures electrolyte density cell by cell. Definitive, but only works on flooded (wet) batteries.</li>
+        <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><strong>Amp-hour meter</strong> — Most user-friendly. Tracks all power in and out over time. The only definitive method for sealed batteries. Recommended for all systems.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>Not sure which battery setup is right for you?</h2>
+    <p>We'll assess your energy usage, roof, and budget — and give you a straight recommendation with no obligation.</p>
+    <a href="index.html#contact">Book a Free Assessment</a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>© 2010–2026 South Coast Solar Solutions · Licence #391069c · <a href="tel:0242224155">02 4422 4155</a> · <a href="index.html">Back to main site</a></p>
+</footer>
+
+</body>
+</html>

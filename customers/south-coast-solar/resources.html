@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Solar Resources & Guides — South Coast Solar Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --dark: #080e1a; --navy: #0f172a; --green: #059669; --green2: #10b981;
+      --amber: #f59e0b; --amber2: #fbbf24; --white: #ffffff;
+      --slate: #64748b; --light: #f8fafc; --border: #e2e8f0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; background: var(--white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .demo-banner { background: #5b4dff; color: #fff; text-align: center; padding: 12px 20px; font-size: 14px; font-weight: 600; }
+    .demo-banner a { color: #2dd4bf; text-decoration: none; font-weight: 700; }
+
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(8,14,26,.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+    .nav-logo-text { font-size: 17px; font-weight: 800; color: var(--white); letter-spacing: -.02em; }
+    .nav-logo-text span { color: var(--amber); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .btn-primary { background: var(--amber); color: var(--dark); padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--amber2); }
+
+    /* HERO */
+    .hero { background: var(--dark); padding: 72px 24px 64px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(5,150,105,.1) 0%, transparent 60%); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+    .breadcrumb a { color: rgba(255,255,255,.4); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--amber); }
+    .breadcrumb span { color: rgba(255,255,255,.2); font-size: 13px; }
+    .hero h1 { font-size: clamp(32px, 4vw, 50px); font-weight: 900; color: var(--white); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 16px; }
+    .hero h1 span { color: var(--amber); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,.5); line-height: 1.65; max-width: 560px; }
+
+    /* SECTION */
+    .section { padding: 64px 24px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 22px; font-weight: 900; color: var(--navy); letter-spacing: -.02em; margin-bottom: 4px; }
+    .section-sub { font-size: 14px; color: var(--slate); margin-bottom: 32px; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    /* GUIDE CARDS */
+    .guides-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .guide-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color .2s, box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+    .guide-card:hover { border-color: var(--green); box-shadow: 0 8px 32px rgba(5,150,105,.1); transform: translateY(-3px); }
+    .guide-card-top { padding: 28px 28px 0; }
+    .guide-type-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .pill-green { background: rgba(5,150,105,.1); color: var(--green); }
+    .pill-amber { background: rgba(245,158,11,.1); color: #b45309; }
+    .pill-blue { background: rgba(59,130,246,.1); color: #1d4ed8; }
+    .pill-purple { background: rgba(139,92,246,.1); color: #6d28d9; }
+    .guide-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .guide-card h3 { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -.02em; margin-bottom: 10px; }
+    .guide-card p { font-size: 14px; color: var(--slate); line-height: 1.65; }
+    .guide-card-bottom { padding: 20px 28px 28px; margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .guide-meta { font-size: 12px; color: var(--slate); font-weight: 500; }
+    .guide-link { display: inline-flex; align-items: center; gap: 6px; background: var(--green); color: var(--white); padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .2s, transform .15s; white-space: nowrap; }
+    .guide-link:hover { background: #047857; transform: translateY(-1px); }
+    .guide-link svg { width: 14px; height: 14px; }
+    .guide-link-outline { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+    .guide-link-outline:hover { background: rgba(5,150,105,.08); }
+
+    /* BRAND RESOURCE CARDS */
+    .brand-resources { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .brand-res-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: border-color .2s, box-shadow .2s; }
+    .brand-res-card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(5,150,105,.08); }
+    .brand-res-logo { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; letter-spacing: -.01em; flex-shrink: 0; }
+    .brand-res-card h4 { font-size: 15px; font-weight: 800; color: var(--navy); }
+    .brand-res-card p { font-size: 13px; color: var(--slate); line-height: 1.6; flex: 1; }
+    .brand-res-links { display: flex; flex-direction: column; gap: 8px; }
+    .res-link { display: flex; align-items: center; gap: 8px; color: var(--green); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .2s; }
+    .res-link:hover { color: #047857; }
+    .res-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* CTA */
+    .cta-strip { background: linear-gradient(135deg, #065f46 0%, var(--green) 100%); padding: 64px 24px; text-align: center; }
+    .cta-strip h2 { font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -.03em; margin-bottom: 12px; }
+    .cta-strip p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 28px; }
+    .cta-strip a { background: var(--white); color: var(--green); padding: 14px 36px; border-radius: 10px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; transition: transform .15s; }
+    .cta-strip a:hover { transform: translateY(-2px); }
+
+    .footer { background: var(--dark); padding: 32px 24px; text-align: center; }
+    .footer p { font-size: 13px; color: rgba(255,255,255,.25); }
+    .footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+
+    @media (max-width: 1024px) { .brand-resources { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .guides-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+    @media (max-width: 640px) { .brand-resources { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Demo by <strong>ImproveYourSite.com</strong> — <a href="https://improveyoursite.com">Get a site like this →</a>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#080e1a" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2"/></svg>
+      </div>
+      <span class="nav-logo-text">South Coast <span>Solar</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="resources.html" class="active" style="color:#fff;">Resources</a></li>
+      <li><a href="batteries.html">Batteries</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn-primary">Free Assessment</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.6);">Resources</span>
+    </div>
+    <h1>Solar Guides &<br><span>Resources</span></h1>
+    <p class="hero-sub">Everything you need to make a confident decision about solar — from buying guides to brand brochures. Plain English, no sales pressure.</p>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section class="section" style="background: var(--light);">
+  <div class="section-inner">
+    <div class="section-title">Our guides</div>
+    <div class="section-sub">Written by South Coast Solar Solutions for Australian homeowners and businesses</div>
+    <div class="guides-grid">
+
+      <div class="guide-card">
+        <div class="guide-card-top">
+          <span class="guide-type-pill pill-green">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Guide
+          </span>
+          <div class="guide-icon" style="background:rgba(5,150,105,.1);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Consumer Buying Guide</h3>
+          <p>New to solar? This is your starting point. Everything you need to ask the right questions before you spend a dollar — from system sizing to warranties to choosing a reputable installer.</p>
+        </div>
+        <div class="guide-card-bottom">
+          <span class="guide-meta">7 pages · PDF</span>
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/Consumer%20buying%20guide.pdf" target="_blank" class="guide-link">
+            Download
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-top">
+          <span class="guide-type-pill pill-amber">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            In-Depth Guide
+          </span>
+          <div class="guide-icon" style="background:rgba(245,158,11,.1);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          </div>
+          <h3>All About Solar Batteries</h3>
+          <p>Deep cycle vs lithium, AGM vs flooded, how to size your battery bank, charging stages, maintenance, and what actually kills batteries early. The most complete guide we've produced.</p>
+        </div>
+        <div class="guide-card-bottom">
+          <span class="guide-meta">7 pages · On-site</span>
+          <a href="batteries.html" class="guide-link">
+            Read Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-top">
+          <span class="guide-type-pill pill-blue">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            Checklist
+          </span>
+          <div class="guide-icon" style="background:rgba(59,130,246,.1);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Going Off-Grid: 10 Considerations</h3>
+          <p>Thinking about cutting the cord completely? This guide covers the 10 most important factors before committing — battery sizing, generator backup, load management and more.</p>
+        </div>
+        <div class="guide-card-bottom">
+          <span class="guide-meta">4 pages · PDF</span>
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/going%20off%20grid%20with%20solar.pdf" target="_blank" class="guide-link">
+            Download
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- BRAND RESOURCES -->
+    <div class="section-title">Brand resources</div>
+    <div class="section-sub">Datasheets and brochures from the manufacturers we install</div>
+    <div class="brand-resources">
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#e8f0fe;color:#0066cc;">REC</div>
+        <h4>REC Solar Panels</h4>
+        <p>Alpha Pure-R and TwinPeak series — the panels we recommend most for Australian conditions.</p>
+        <div class="brand-res-links">
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/rec_alpha_pure-r_series.pdf" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Alpha Pure-R Series
+          </a>
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/rec_twinpeak_4_series.pdf" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            TwinPeak 4 Series
+          </a>
+          <a href="https://www.recgroup.com/en" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            REC Group Website
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#e0f0ff;color:#0055a5;">FRN</div>
+        <h4>Fronius Inverters</h4>
+        <p>Industry-leading inverters with remote monitoring. Australia's most serviced inverter brand.</p>
+        <div class="brand-res-links">
+          <a href="https://www.fronius.com/en-au/australia" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Fronius Australia
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#e8ecf8;color:#001446;">SE</div>
+        <h4>SolarEdge</h4>
+        <p>DC-optimised inverters with panel-level monitoring. Best for shaded or complex rooftops.</p>
+        <div class="brand-res-links">
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/SolarEdge-Interactive-Home.pdf" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Interactive Home Guide
+          </a>
+          <a href="https://www.solaredge.com/aus" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            SolarEdge Australia
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#f0f0f0;color:#1a1a1a;">ENP</div>
+        <h4>Enphase</h4>
+        <p>Microinverter technology — each panel operates independently for maximum output and resilience.</p>
+        <div class="brand-res-links">
+          <a href="https://southcoastsolarsolutions.com.au/images/pdf/Enphase-Homeowner-Brochure.pdf" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Homeowner Brochure
+          </a>
+          <a href="https://enphase.com/en-au" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Enphase Australia
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#fdecea;color:#cf010d;">RIN</div>
+        <h4>Rinnai</h4>
+        <p>Solar hot water systems trusted in Australian homes for decades. High efficiency, strong warranty.</p>
+        <div class="brand-res-links">
+          <a href="https://www.rinnai.com.au" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Rinnai Australia
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#e0f0ff;color:#0055a5;">SDN</div>
+        <h4>Sanden</h4>
+        <p>Heat pump hot water — cuts electric hot water costs by up to 80%. Ultra-quiet operation.</p>
+        <div class="brand-res-links">
+          <a href="https://southcoastsolarsolutions.com.au/images/sandon/sanden-brochure.pdf" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Sanden Brochure
+          </a>
+          <a href="https://www.sanden-hot-water.com.au/" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Sanden Website
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#fff7e6;color:#c2610c;">SUN</div>
+        <h4>Sunbather</h4>
+        <p>Australia's largest pool heating specialist since 1974. Solar pool heating and automatic covers.</p>
+        <div class="brand-res-links">
+          <a href="https://sunbather.com.au/" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Sunbather Website
+          </a>
+        </div>
+      </div>
+
+      <div class="brand-res-card">
+        <div class="brand-res-logo" style="background:#e0f0ff;color:#0071ad;">HYW</div>
+        <h4>Hayward Pool</h4>
+        <p>Pool equipment, filters, pumps and chlorinators. Reliable pool technology for Australian conditions.</p>
+        <div class="brand-res-links">
+          <a href="https://au.hayward.com/" target="_blank" class="res-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Hayward Australia
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Ready to go solar?</h2>
+  <p>Book a free, no-obligation assessment. We'll visit your property and give you honest advice.</p>
+  <a href="index.html#contact">Book Free Assessment</a>
+</div>
+
+<footer class="footer">
+  <p>© 2010–2026 South Coast Solar Solutions · Licence #391069c · <a href="tel:0242224155">02 4422 4155</a> · <a href="index.html">Back to main site</a></p>
+</footer>
+
+</body>
+</html>
