@@ -260,6 +260,18 @@ def build_scheduler() -> BackgroundScheduler:
         misfire_grace_time=120,
     )
 
+    # ── South Coast Solar reply watcher ─────────────────────────────────
+    # Polls outreach@ every 30 min for SCS reply — removes demo if negative
+    from agents.scs_reply_watcher import run_once as _scs_run_once
+    def _run_scs_watcher():
+        _scs_run_once()
+    scheduler.add_job(
+        _run_scs_watcher,
+        CronTrigger(minute="*/30", timezone=TIMEZONE),
+        id="scs_reply_watcher", name="SCS reply watcher",
+        misfire_grace_time=120,
+    )
+
     # Update next_run timestamps in DB after schedule is built
     _update_next_runs(scheduler)
 
