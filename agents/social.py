@@ -54,50 +54,50 @@ GRAPH_BASE   = "https://graph.facebook.com/v19.0"
 
 CONTENT_CALENDAR = {
     0: {  # Monday
-        "theme": "stop_scroll",
-        "angle": "Name one fear that every small business owner has about their website. One problem. One truth. No solutions yet — just make them feel it.",
+        "theme": "cost_pain",
+        "angle": "Name one thing Australian small business owners are paying too much for that AI can now do better. Frame it as money they are throwing away. No website focus — think: social media manager, marketing agency, admin staff, Google Ads management, content writers. One cost. One truth. Make them feel the waste.",
         "format": "carousel",
         "caption_tone": "Direct. Like a mate who tells you the hard truth. No fluff.",
         "hook_style": "bold_fear",
     },
     1: {  # Tuesday
-        "theme": "education",
-        "angle": "One specific website mistake that costs small businesses customers. Name the mistake in the headline. Show the consequence. End with the fix.",
+        "theme": "feature_spotlight",
+        "angle": "Pick ONE specific Jarvis feature (lead reply, Instagram content, SEO monitoring, Google Ads checks, email triage, morning digest, blog writing, customer success). Name the business problem it solves in the headline. Show the cost of NOT having it. End with what Jarvis does instead. This is about cutting business costs and streamlining operations, not websites.",
         "format": "carousel",
-        "caption_tone": "Expert mate. Gives the answer first, no teasing.",
+        "caption_tone": "Expert mate. Gives the answer first, no teasing. End caption with 🦞",
         "hook_style": "specific_mistake",
     },
     2: {  # Wednesday
-        "theme": "social_proof",
-        "angle": "A before/after result story. Lead with the outcome number or result. Then reveal the problem. Then the solution. End with proof.",
+        "theme": "comparison",
+        "angle": "Old way vs Jarvis way. Pick one business task: responding to leads, posting on Instagram, monitoring Google Ads, writing weekly content, triaging emails. Old way: manual, expensive, slow. Jarvis way: automated, $5/month, instant. Make the contrast obvious. Lead with the cost comparison.",
         "format": "carousel",
-        "caption_tone": "Storytelling. Real → specific → believable. Not salesy.",
+        "caption_tone": "Storytelling. Contrast-based. Concrete numbers where possible.",
         "hook_style": "result_first",
     },
     3: {  # Thursday
         "theme": "education",
-        "angle": "Something about websites that business owners don't know but should. Counter-intuitive or surprising. Teach it simply.",
+        "angle": "Something business owners are still paying humans to do that AI now handles better, faster and cheaper. Counter-intuitive framing — NOT about websites. Think: social media scheduling, lead follow-up, ad monitoring, email management, content writing. Teach the shift from human-cost to AI-cost simply.",
         "format": "carousel",
-        "caption_tone": "Transparent. Show the craft. Plain English. No jargon.",
+        "caption_tone": "Transparent. Plain English. Show the math. No jargon.",
         "hook_style": "counterintuitive",
     },
     4: {  # Friday
         "theme": "cta",
-        "angle": "One clear reason to book a free call or get a site audit this week. Make the offer obvious. No pressure. Make it easy to say yes.",
+        "angle": "One clear reason to download Jarvis or book a call this week. Frame it as reclaiming time or cutting a specific cost. No pressure. Make it easy to say yes. Link in bio to improveyoursite.com/jarvis.",
         "format": "single_tip",
-        "caption_tone": "Confident and warm. One clear next step.",
+        "caption_tone": "Confident and warm. One clear next step. End with 🦞",
         "hook_style": "soft_offer",
     },
     5: {  # Saturday
         "theme": "stop_scroll",
-        "angle": "A stat or truth about Australian small business websites that stops the weekend scroll. Surprising. Specific. Short.",
+        "angle": "A stat about what Australian small businesses spend on digital marketing, admin staff or marketing agencies — vs what Jarvis costs. Surprising. Specific. Short. Make them stop scrolling and think about their own spend.",
         "format": "single_tip",
         "caption_tone": "Weekend energy. Real and relatable. Quick read.",
         "hook_style": "bold_stat",
     },
     6: {  # Sunday
         "theme": "engagement",
-        "angle": "A question that makes a small business owner think about their online presence. Not rhetorical — a question that makes them actually reflect. Invite DM responses.",
+        "angle": "A question that makes a small business owner reflect on how much time or money they are wasting on something AI could handle. Not about websites — about operations: lead management, content creation, email admin, marketing spend. Make them DM you with their answer.",
         "format": "single_tip",
         "caption_tone": "Thought-provoking. Invites a real answer. Warm.",
         "hook_style": "question",
@@ -106,12 +106,16 @@ CONTENT_CALENDAR = {
 
 # ── Australian SMB Instagram hashtags by industry ────────────────────────────
 HASHTAGS = {
-    "web":      "#smallbusinessaustralia #websitedesign #australianbusiness "
-                "#seoaustralia #websitehelp #businessgrowth #improveyoursite",
+    "web":      "#smallbusinessaustralia #australianbusiness #businessautomation "
+                "#aiforsmallbusiness #businessgrowth #improveyoursite #jarvisai",
+    "ai":       "#aiforsmallbusiness #smallbusinessaustralia #businessautomation "
+                "#australianbusiness #cutcosts #worksmarter #jarvisai #improveyoursite",
     "trades":   "#australiantradie #smallbusinessaustralia #tradiebusiness "
-                "#australianbusiness #websitedesign #businessgrowth",
+                "#aiforsmallbusiness #businessautomation #businessgrowth #jarvisai",
     "health":   "#smallbusinessaustralia #australianhealthcare #australianbusiness "
-                "#websitedesign #digitalmarketing #businessgrowth",
+                "#aiforsmallbusiness #businessautomation #businessgrowth #jarvisai",
+    "ops":      "#businessoperations #smallbusinessaustralia #australianbusiness "
+                "#aitools #businessautomation #worksmarter #jarvisai #improveyoursite",
 }
 
 
@@ -521,43 +525,76 @@ class SocialAgent(BaseAgent):
                 "Use it as slide 1 and build the rest of the carousel around the angle and bullets above."
             )
 
-        system = """You write Instagram carousel content for ImproveYourSite.com (@improveyoursite.au).
-Australian web agency. Builds websites for small businesses nationwide.
+        system = """You write Instagram content for ImproveYourSite.com (@improveyoursite.au).
+We sell AI business solutions to Australian small business owners. The main product is Jarvis.
 
-NEW PRODUCT (launched March 2026): Jarvis — AI staff for small businesses.
-Jarvis installs on any computer, runs 10 automated agents (leads, social, SEO, ads, email), costs $30 download or $50 USB.
-Brand identity on socials: 🦞 = OpenClaw (the AI engine powering Jarvis). 🤖 = Claude AI inside.
-On Jarvis posts, end captions with 🦞 or 🦞🤖 — this signals our AI identity to followers.
-When writing Jarvis-themed content, the target is Australian small business owners (trades, health, finance, retail, hospitality).
-Pain points to reference: missing leads after hours, social media taking too long, Google not finding them, admin drowning them.
+POSITIONING — this is critical:
+We are NOT a web design agency posting about websites. We are a business operations solution.
+The message is: businesses are wasting money and time on things AI can do cheaper and faster.
+Every post should make an owner think "I am overpaying for that" or "I waste hours on that."
+The sell is: stop paying humans to do what AI does better. Buy Jarvis from $30.
 
-THE WINNING POST — model every hook on this energy:
-"Your website is costing you customers"
-It works because: 6 words. Large text. Centres on ONE fear every business owner has. No explanation needed.
+JARVIS FEATURES (one per post — pick the one that fits today's angle):
+1. Lead reply agent — monitors inbox, replies to enquiries within minutes, 24/7
+2. Instagram agent — generates and posts branded carousels + stories twice daily
+3. Google Ads agent — monitors ad performance daily, flags wasted spend
+4. SEO monitor — checks site speed + rankings daily, alerts before penalties hit
+5. Content writer — publishes SEO blog post every Monday automatically
+6. Morning digest — 7am summary of everything that ran overnight
+7. Email triage — sorts and drafts replies to hello@ inbox every 30 minutes
+8. Customer success — weekly client health check, flags at-risk relationships
+9. Stripe monitor — alerts the moment a new payment or order arrives
+10. Site builder — spins up a new client site on demand from config file
+
+BRAND IDENTITY ON SOCIALS:
+🦞 = OpenClaw (the AI engine powering Jarvis — lobster claw = OpenClaw)
+🤖 = Claude AI (the brain inside Jarvis)
+End Jarvis posts with 🦞 or 🦞🤖 — this is our AI identity marker for followers.
+As we grow, followers will associate 🦞 with our AI brand.
+
+TARGET PAIN POINTS (what to hook on — not websites, business operations):
+- "I pay $2,000/month to a social media manager" → Jarvis does it for $5
+- "My marketing agency charges $3,500/month" → Jarvis replaces 80% of what they do
+- "I spend Sunday night catching up on emails" → Jarvis triages them every 30 minutes
+- "We miss leads after 5pm" → Jarvis replies in minutes at midnight
+- "My Google Ads are running and no one's watching" → Jarvis checks every morning
+- "I haven't published a blog post in months" → Jarvis writes one every Monday
+- "I don't know if my clients are happy until they leave" → customer success agent
+- "Running a team of people to do marketing is expensive" → one AI, one install
+
+SERVICES THAT CAN CLOSE THE SALE:
+- Jarvis download: $30 (improveyoursite.com/jarvis)
+- Jarvis USB: $50
+- Managed Plan: $199/month (we run everything for them)
+- Website packages: from $3,000 (improveyoursite.com/packages.html)
+Direct them to link in bio for any of these.
+
+THE WINNING HOOK ENERGY:
+"Your website is costing you customers" — 6 words, one fear, everyone feels it.
+Apply that same energy to business costs: "You're paying a human to do this"
 
 WHAT THE DATA SHOWS WORKS:
 - Carousels with under 10 words on slide 1 get 3x more swipes
 - DM shares are now the strongest Instagram signal — write content people forward to their mate
-- First 3 seconds decide everything. If slide 1 doesn't stop them, nothing else matters.
-- Short captions (under 30 words before hashtags) get more engagement than long ones
-- Posts that name a specific fear outperform tips and advice every time
+- Posts that name a specific cost or waste outperform generic tips every time
+- Short captions (under 30 words before hashtags) outperform long ones
 
 WHAT KILLS ENGAGEMENT (never do these):
 - Hyphens anywhere. Zero hyphens. This is the single biggest AI dead giveaway.
 - City or town names. No Sydney, Melbourne, Brisbane, NSW etc. National audience only.
 - More than 6 words on any slide
 - Starting with "Are you..." or "Did you know..."
-- Corporate language: leverage, synergy, digital presence, online journey
+- Corporate jargon: leverage, synergy, digital presence, streamline, empower
 - Explaining too much — trust the reader to fill the gap
-- Walls of text in the caption
+- Talking about websites when the post is about business operations
 
 RULES:
-1. Slide text: 3 to 6 words. Treat every slide like a billboard on a freeway.
+1. Slide text: 3 to 6 words. Every slide is a billboard on a freeway.
 2. ONE idea per slide. Never two.
 3. No hyphens. Not one.
 4. No city names. Not one.
-5. Caption: 2 sentences + 1 CTA line. That's it. Under 25 words total before hashtags.
-6. Sound like a real person who knows business. Not an agency. Not a robot.
+5. Caption: 2 sentences + 1 CTA line. Under 25 words total before hashtags.
+6. Sound like a real person who runs a business. Not an agency. Not a robot.
 7. The hook style for this post: """ + hook_style
 
         prompt = f"""Today is {day_name}. {time_slot.upper()} post.
