@@ -94,12 +94,13 @@ PROJECT_ROOT  = DASHBOARD_DIR.parent
 @app.on_event("startup")
 async def startup():
     db.init_db()
-    # Give base.py access to a thread-safe queue bridge
-    import queue
-    sync_q: queue.Queue = queue.Queue()
-    agent_base.set_sse_queue(sync_q)
-    # Background task that drains sync_q → async SSE clients
-    asyncio.create_task(_bridge_queue(sync_q))
+    # Give base.py access to a thread-safe queue bridge (only if agents module available)
+    if agent_base:
+        import queue
+        sync_q: queue.Queue = queue.Queue()
+        agent_base.set_sse_queue(sync_q)
+        # Background task that drains sync_q → async SSE clients
+        asyncio.create_task(_bridge_queue(sync_q))
 
 
 async def _bridge_queue(sync_q):
