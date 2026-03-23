@@ -1,0 +1,463 @@
+{
+  "account": "@improveyoursite.au",
+  "posts_remaining": 16,
+  "period": "March 11 to March 31 2026 (includes Jarvis launch March 24)",
+  "rules_applied": [
+    "No hyphens anywhere",
+    "No city or town names",
+    "3-6 words per slide max",
+    "Large centred text style",
+    "Model: Your website is costing you customers",
+    "2 posts per day morning 7:30AM + evening 6:30PM AEST"
+  ],
+  "plan": [
+    {
+      "date": "2026-03-11",
+      "slot": "morning",
+      "theme": "stop_scroll",
+      "headline": "Your website is invisible",
+      "slides": [
+        "Your website is invisible",
+        "Google cannot find it",
+        "Neither can your customers",
+        "3 searches. Not there.",
+        "We fix that. Link in bio."
+      ],
+      "caption": "If your business isn't on page 1 of Google, you don't exist to 92% of searchers. That's not an opinion. That's where people stop looking.\n\nFree SEO check. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark #0a0a0a background. White text centred. Indigo accent bar bottom.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-11",
+      "slot": "evening",
+      "theme": "education",
+      "headline": "3 seconds. That is all.",
+      "slides": [
+        "3 seconds. That is all.",
+        "Your site loads in 7",
+        "Half your visitors left",
+        "Before reading one word",
+        "Speed check. Free. Link in bio."
+      ],
+      "caption": "Mobile users leave if a page takes more than 3 seconds to load. Most small business sites take 7 or more. You're losing customers you never knew you had.\n\nFree speed check at the link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Electric indigo #5b4dff background. White text. Countdown visual concept.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-12",
+      "slot": "morning",
+      "theme": "social_proof",
+      "headline": "37 enquiries. One month.",
+      "slides": [
+        "37 enquiries. One month.",
+        "Same business. New website.",
+        "Before: 3 enquiries a month",
+        "After: 37 and counting",
+        "Same product. Better site."
+      ],
+      "caption": "One of our clients went from 3 website enquiries a month to 37. Same business. Same services. We rebuilt their site so Google could actually find them.\n\nFree audit to see what yours is missing. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark background. Large number 37 as hero element. Mint accent.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-12",
+      "slot": "evening",
+      "theme": "stop_scroll",
+      "headline": "Customers check your site first",
+      "slides": [
+        "Customers check your site first",
+        "Before they call you",
+        "Before they walk in",
+        "What are they finding?",
+        "Find out free. Link in bio."
+      ],
+      "caption": "81% of customers research a business online before buying. If your site looks neglected or loads slowly, they choose someone else. You never even knew they were there.\n\nSee what your customers see. Free audit. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark background. Phone screen concept. Minimal.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-13",
+      "slot": "morning",
+      "theme": "education",
+      "headline": "No mobile site. No chance.",
+      "slides": [
+        "No mobile site. No chance.",
+        "60% of searches are mobile",
+        "Google ranks mobile first",
+        "Desktop only = penalised",
+        "We build mobile first. Always."
+      ],
+      "caption": "Google switched to mobile-first indexing. That means your mobile site is now your main site in Google's eyes. If it's broken or slow on phones, you're invisible.\n\nFree mobile check at the link.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Indigo background. Phone icon. White bold text.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-13",
+      "slot": "evening",
+      "theme": "cta",
+      "headline": "20 minutes. That is all it takes.",
+      "slides": [
+        "20 minutes. That is all it takes.",
+        "Tell us about your business",
+        "We tell you what is broken",
+        "No cost. No obligation.",
+        "Book now. Link in bio."
+      ],
+      "caption": "In 20 minutes we can show you exactly why your site isn't converting and what to do about it. No sales pitch. Just honest feedback.\n\nBook a free call. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark background. Clock or time concept. Mint accent text.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-14",
+      "slot": "morning",
+      "theme": "stop_scroll",
+      "headline": "Your competitor just got a new site",
+      "slides": [
+        "Your competitor just got a new site",
+        "Faster. Cleaner. Mobile ready.",
+        "Same customers. Two choices.",
+        "Who do they call?",
+        "improveyoursite.com"
+      ],
+      "caption": "When a competitor upgrades their site and yours stays the same, you don't just lose rankings. You lose the comparison. Customers notice.\n\nFree site review. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Split screen concept. Dark. Minimal.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-14",
+      "slot": "evening",
+      "theme": "behind_scenes",
+      "headline": "What we actually build",
+      "slides": [
+        "What we actually build",
+        "Not just a pretty site",
+        "One that loads fast",
+        "One Google can find",
+        "One that converts visitors"
+      ],
+      "caption": "A website that looks good but doesn't show up on Google isn't a website. It's a digital business card nobody sees. We build sites that do the work for you.\n\nSee what that looks like. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark background. Behind the scenes design concept. Indigo and mint.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-16",
+      "slot": "morning",
+      "theme": "stop_scroll",
+      "headline": "Word of mouth is slowing down",
+      "slides": [
+        "Word of mouth is slowing down",
+        "It used to be enough",
+        "Now customers Google first",
+        "Then they decide",
+        "Be there when they search."
+      ],
+      "caption": "Referrals still matter. But before that new referral calls you, 7 in 10 will Google you first. What they find decides whether they follow through.\n\nMake sure they find something good. Free audit. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Speech bubble to search bar visual concept.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-16",
+      "slot": "evening",
+      "theme": "education",
+      "headline": "Google reads your site differently",
+      "slides": [
+        "Google reads your site differently",
+        "Not what it looks like",
+        "What it says",
+        "How fast it loads",
+        "Who links to it"
+      ],
+      "caption": "Your website could look amazing and still rank on page 5. Google doesn't see design. It sees structure, speed, and relevance. We build for both.\n\nFree site check. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Indigo. Search engine concept. Minimal text.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-17",
+      "slot": "morning",
+      "theme": "social_proof",
+      "headline": "From 0 to page 1 in 6 weeks",
+      "slides": [
+        "From 0 to page 1 in 6 weeks",
+        "Local tradie. No SEO budget.",
+        "New website. Proper structure.",
+        "Google noticed. Customers called.",
+        "Same product. Different site."
+      ],
+      "caption": "A local tradie had zero Google presence. We built them a fast, structured site and did the basics right. Six weeks later they were on page 1 for their main search term.\n\nSee how we did it. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Growth chart concept. Mint accent.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-17",
+      "slot": "evening",
+      "theme": "engagement",
+      "headline": "When did you last check your site?",
+      "slides": [
+        "When did you last check your site?",
+        "On your phone",
+        "Not your laptop",
+        "Your customers use phones",
+        "Check it. Right now."
+      ],
+      "caption": "Seriously. Open your website on your phone right now. Is it fast? Is it easy to navigate? Can you find your phone number in under 5 seconds?\n\nIf not, DM us. We'll tell you what to fix.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Phone visual. Direct question energy."
+    },
+    {
+      "date": "2026-03-18",
+      "slot": "morning",
+      "theme": "stop_scroll",
+      "headline": "You are paying for ads to a broken site",
+      "slides": [
+        "You are paying for ads to a broken site",
+        "Ads bring them in",
+        "Bad site sends them away",
+        "Money in. Nothing out.",
+        "Fix the site first."
+      ],
+      "caption": "Running Google Ads to a slow or unclear website is like filling a leaking bucket. The spend goes up. The results don't follow. Fix the foundation first.\n\nFree site review before you spend another dollar. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Bucket or drain visual concept. Indigo."
+    },
+    {
+      "date": "2026-03-18",
+      "slot": "evening",
+      "theme": "education",
+      "headline": "One page is all you need",
+      "slides": [
+        "One page is all you need",
+        "Clear headline",
+        "Clear phone number",
+        "Clear reason to call",
+        "Most sites miss all three"
+      ],
+      "caption": "Most small business websites have too many pages and not enough clarity. One focused page that answers three questions converts better than ten pages that confuse.\n\nWe build sites that convert. Free audit. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Clean. Single page concept. Minimal. White on dark.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-19",
+      "slot": "morning",
+      "theme": "stop_scroll",
+      "headline": "Cheap site. Expensive problem.",
+      "slides": [
+        "Cheap site. Expensive problem.",
+        "Free builder. No rankings.",
+        "Template. No structure.",
+        "Customers cannot find you.",
+        "We build it right. Once."
+      ],
+      "caption": "A $500 Wix site looks fine. Until you realise Google can't index it properly, it loads slowly on mobile, and your competitors are all ahead of you.\n\nBuild it right the first time. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Value vs cost visual. Bold numbers."
+    },
+    {
+      "date": "2026-03-19",
+      "slot": "evening",
+      "theme": "cta",
+      "headline": "This week only. Free audit.",
+      "slides": [
+        "This week only. Free audit.",
+        "We check your site",
+        "Speed. SEO. Mobile.",
+        "Tell you exactly what is broken.",
+        "No charge. No pitch. Book now."
+      ],
+      "caption": "This week we're opening 5 free website audit spots. We'll check your speed, SEO, and mobile experience and give you a straight summary of what to fix.\n\nBook yours. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Indigo. Bold CTA. Urgency without desperation."
+    },
+    {
+      "date": "2026-03-20",
+      "slot": "morning",
+      "theme": "social_proof",
+      "headline": "Accountant. 4x more enquiries.",
+      "slides": [
+        "Accountant. 4x more enquiries.",
+        "Old site: slow, hard to find",
+        "New site: built for Google",
+        "Same prices. Same services.",
+        "4x more people calling."
+      ],
+      "caption": "An accounting firm came to us getting 5 enquiries a month from their website. After a rebuild focused on speed and local SEO, they hit 20 in month two.\n\nSame business. Better site. More calls. Free audit. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Number as hero. Mint accent. Clean.",
+      "_used": true
+    },
+    {
+      "date": "2026-03-20",
+      "slot": "evening",
+      "theme": "stop_scroll",
+      "headline": "Your site is your best salesperson",
+      "slides": [
+        "Your site is your best salesperson",
+        "Works 24 hours",
+        "Never takes a day off",
+        "Never has a bad day",
+        "Is yours doing its job?"
+      ],
+      "caption": "Your website works while you sleep, eat, and spend time with your family. Or it doesn't. If it's slow, unclear, or invisible on Google, it's costing you sales around the clock.\n\nFree check. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Clock concept. 24 hour visual."
+    },
+    {
+      "date": "2026-03-21",
+      "slot": "morning",
+      "theme": "education",
+      "headline": "Your contact page is losing leads",
+      "slides": [
+        "Your contact page is losing leads",
+        "Too many fields",
+        "No phone number visible",
+        "No reason to reach out",
+        "Fix it in an afternoon"
+      ],
+      "caption": "Most small business contact pages ask for too much and offer too little. Visitors land there ready to reach out and leave without doing it. Reduce the friction.\n\nFree review of your contact page. Link in bio.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Dark. Form concept. Simplified. Minimal."
+    },
+    {
+      "date": "2026-03-21",
+      "slot": "evening",
+      "theme": "engagement",
+      "headline": "What is stopping customers from calling you?",
+      "slides": [
+        "What is stopping customers from calling you?",
+        "Is it the price?",
+        "Is it the trust?",
+        "Is it that they cannot find you?",
+        "Tell us. We read every DM."
+      ],
+      "caption": "Genuinely asking. What is the one thing you think is holding your business back online right now?\n\nDM us your answer. We will give you an honest response with at least one thing you can do this week.\n\n#smallbusinessaustralia #websitedesign #australianbusiness #seoaustralia #websitehelp #businessgrowth #improveyoursite",
+      "visual_style": "Warm dark background. Question as hero text. Inviting."
+    },
+    {
+      "date": "2026-03-24",
+      "slot": "morning",
+      "theme": "product_launch",
+      "headline": "Your new AI staff member",
+      "slides": [
+        "Meet Jarvis",
+        "Handles your leads",
+        "Posts your socials",
+        "Runs every day",
+        "From $30"
+      ],
+      "caption": "We built an AI that runs on your computer, answers your leads and handles your socials automatically. Jarvis is live now. Link in bio. 🦞🤖",
+      "facebook_caption": "We built something for business owners drowning in admin. Jarvis is a set-and-forget AI assistant that runs on your computer 24/7, answers your leads within minutes, and handles your Instagram automatically. It costs less than a coffee a month in API usage. Live now at the link in our bio. 🦞🤖"
+    },
+    {
+      "date": "2026-03-24",
+      "slot": "evening",
+      "theme": "pain_point",
+      "headline": "Missing calls costs you",
+      "slides": [
+        "Lead comes in",
+        "You are on a job",
+        "They call someone else",
+        "You find out Monday",
+        "Jarvis replies first"
+      ],
+      "caption": "The first business to reply wins 78% of jobs. Jarvis makes sure that is always you, even at 11pm on a Sunday. 🦞",
+      "facebook_caption": "Research shows the first business to reply to a lead wins the job 78% of the time. If you are on a job, in a meeting, or asleep, that lead is gone. Jarvis replies within seconds at any hour. Link in bio. 🦞"
+    },
+    {
+      "date": "2026-03-25",
+      "slot": "morning",
+      "theme": "pain_point",
+      "headline": "Still doing it yourself",
+      "slides": [
+        "Write the Instagram post",
+        "Two hours gone",
+        "Same thing tomorrow",
+        "That is not a business",
+        "That is a second job"
+      ],
+      "caption": "You started the business to do the work, not manage the Instagram. Jarvis posts twice a day, every day. Link in bio. 🦞",
+      "facebook_caption": "Most small business owners spend 2 hours or more per week on social media content. That adds up to over 100 hours a year. Jarvis generates and schedules your posts daily, on-brand and automatically. Link in bio. 🦞"
+    },
+    {
+      "date": "2026-03-26",
+      "slot": "morning",
+      "theme": "pain_point",
+      "headline": "Your competitor just replied",
+      "slides": [
+        "New enquiry arrives",
+        "You are on a job",
+        "They email three others",
+        "First reply wins",
+        "Be first every time"
+      ],
+      "caption": "Speed wins leads. Jarvis monitors your inbox and replies to every new enquiry within minutes, day or night. 🦞🤖",
+      "facebook_caption": "Speed is the single biggest factor in winning leads. If you are busy and cannot reply for a few hours, that lead has already moved on. Jarvis monitors your enquiry inbox and sends a personalised reply within minutes of every new message, around the clock. 🦞🤖"
+    },
+    {
+      "date": "2026-03-27",
+      "slot": "morning",
+      "theme": "education",
+      "headline": "Google cannot find you",
+      "slides": [
+        "Site loads too slow",
+        "Google ranks you lower",
+        "They call your competitor",
+        "You never knew",
+        "Jarvis checks daily"
+      ],
+      "caption": "A slow website costs you Google rankings right now. Jarvis monitors your Core Web Vitals every morning and flags issues before they cost you. 🦞",
+      "facebook_caption": "Most small business websites load too slowly and get penalised by Google as a result. The problem is most owners never know until they stop getting calls. Jarvis monitors your site performance every morning and alerts you if anything needs fixing. 🦞"
+    },
+    {
+      "date": "2026-03-28",
+      "slot": "morning",
+      "theme": "social_proof",
+      "headline": "What runs while you sleep",
+      "slides": [
+        "2am enquiry arrives",
+        "Instant reply sent",
+        "Lead books a call",
+        "You wake up to this",
+        "That is Jarvis"
+      ],
+      "caption": "A lead came in at 2am. Jarvis replied instantly, they booked a call, and a job was confirmed before 9am. 🦞🤖",
+      "facebook_caption": "A website enquiry arrived at 2am. Jarvis sent a personalised reply within two minutes, the lead booked a discovery call, and a job was confirmed by the time the owner sat down for breakfast. This is what it looks like to never miss a lead. 🦞🤖"
+    },
+    {
+      "date": "2026-03-29",
+      "slot": "morning",
+      "theme": "education",
+      "headline": "Admin is not your job",
+      "slides": [
+        "Email triage at 7am",
+        "Social post at 8am",
+        "SEO check at 9am",
+        "Lead replies all day",
+        "Jarvis handles all of it"
+      ],
+      "caption": "10 automated tasks running daily. Your job is the work, not the admin. Jarvis is live. Link in bio. 🦞",
+      "facebook_caption": "Jarvis runs 10 specialist tasks every day without you touching a thing. Morning digest, lead replies, Instagram posts, Google Ads monitoring, SEO health checks, email triage, and more. All running in the background while you do the actual work. Link in bio. 🦞"
+    },
+    {
+      "date": "2026-03-30",
+      "slot": "morning",
+      "theme": "cta",
+      "headline": "The $5 per month hire",
+      "slides": [
+        "Full time admin hire",
+        "$50k per year",
+        "Or Jarvis",
+        "$5 per month",
+        "You do the maths"
+      ],
+      "caption": "Jarvis costs roughly $5 a month in AI usage. No salary, no super, no sick days. Just 10 agents running your business admin daily. 🦞🤖",
+      "facebook_caption": "A full time admin employee costs $50,000 or more per year. Jarvis handles the same repetitive tasks for roughly $5 a month in Anthropic API costs. No payroll, no onboarding, no sick days. It runs every day and reports back to you each morning. Link in bio. 🦞🤖"
+    },
+    {
+      "date": "2026-03-31",
+      "slot": "morning",
+      "theme": "cta",
+      "headline": "10 minutes to set up",
+      "slides": [
+        "Download it",
+        "Run the wizard",
+        "Enter your details",
+        "Jarvis starts running",
+        "From $30"
+      ],
+      "caption": "Jarvis is live at improveyoursite.com/jarvis. Mac or Windows. 10 minutes to set up, then it runs every single day. 🦞",
+      "facebook_caption": "Jarvis is now live. Download it from improveyoursite.com/jarvis, run the installer, complete the 10-minute setup wizard, and Jarvis starts working for your business immediately. It runs every day automatically. Mac and Windows supported. From $30. 🦞"
+    }
+  ]
+}

@@ -54,63 +54,148 @@ GRAPH_BASE   = "https://graph.facebook.com/v19.0"
 
 CONTENT_CALENDAR = {
     0: {  # Monday
-        "theme": "motivation",
-        "angle": "Start of week energy for small business owners. Practical tip they can use today.",
-        "format": "single_tip",
-        "caption_tone": "Direct and energising. Like talking to a mate who runs a business.",
+        "theme": "stop_scroll",
+        "angle": "Name one fear that every small business owner has about their website. One problem. One truth. No solutions yet — just make them feel it.",
+        "format": "carousel",
+        "caption_tone": "Direct. Like a mate who tells you the hard truth. No fluff.",
+        "hook_style": "bold_fear",
     },
     1: {  # Tuesday
         "theme": "education",
-        "angle": "Website or SEO tip that most small businesses get wrong. Specific and actionable.",
+        "angle": "One specific website mistake that costs small businesses customers. Name the mistake in the headline. Show the consequence. End with the fix.",
         "format": "carousel",
-        "caption_tone": "Conversational expert. Not salesy. Give the value first.",
+        "caption_tone": "Expert mate. Gives the answer first, no teasing.",
+        "hook_style": "specific_mistake",
     },
     2: {  # Wednesday
         "theme": "social_proof",
-        "angle": "Result or before/after story. Focus on the outcome for the customer, not the tech.",
+        "angle": "A before/after result story. Lead with the outcome number or result. Then reveal the problem. Then the solution. End with proof.",
         "format": "carousel",
-        "caption_tone": "Storytelling. Real problem → real solution → specific result.",
+        "caption_tone": "Storytelling. Real → specific → believable. Not salesy.",
+        "hook_style": "result_first",
     },
     3: {  # Thursday
-        "theme": "behind_scenes",
-        "angle": "How we build sites / what goes into a website that actually converts. Demystify it.",
+        "theme": "education",
+        "angle": "Something about websites that business owners don't know but should. Counter-intuitive or surprising. Teach it simply.",
         "format": "carousel",
-        "caption_tone": "Transparent and honest. Show the craft. No jargon.",
+        "caption_tone": "Transparent. Show the craft. Plain English. No jargon.",
+        "hook_style": "counterintuitive",
     },
     4: {  # Friday
         "theme": "cta",
-        "angle": "End of week urgency. Limited spots, genuine offer, or a question that makes them reflect.",
+        "angle": "One clear reason to book a free call or get a site audit this week. Make the offer obvious. No pressure. Make it easy to say yes.",
         "format": "single_tip",
-        "caption_tone": "Confident and direct. Clear next step. Not desperate.",
+        "caption_tone": "Confident and warm. One clear next step.",
+        "hook_style": "soft_offer",
     },
     5: {  # Saturday
-        "theme": "inspiration",
-        "angle": "Australian small business story or insight. Something they can relate to on the weekend.",
+        "theme": "stop_scroll",
+        "angle": "A stat or truth about Australian small business websites that stops the weekend scroll. Surprising. Specific. Short.",
         "format": "single_tip",
-        "caption_tone": "Warm and relatable. Weekend vibes but still useful.",
+        "caption_tone": "Weekend energy. Real and relatable. Quick read.",
+        "hook_style": "bold_stat",
     },
     6: {  # Sunday
-        "theme": "planning",
-        "angle": "Question or prompt that makes them think about their business website/growth for the week.",
+        "theme": "engagement",
+        "angle": "A question that makes a small business owner think about their online presence. Not rhetorical — a question that makes them actually reflect. Invite DM responses.",
         "format": "single_tip",
-        "caption_tone": "Thought-provoking. Ask a question rather than tell.",
+        "caption_tone": "Thought-provoking. Invites a real answer. Warm.",
+        "hook_style": "question",
     },
 }
 
 # ── Australian SMB Instagram hashtags by industry ────────────────────────────
 HASHTAGS = {
     "web":      "#smallbusinessaustralia #websitedesign #australianbusiness "
-                "#seoaustralia #sydneybusiness #melbournebusiness #businessgrowth",
-    "trades":   "#australiantradie #smallbusinessaustralia #localbusiness "
-                "#brisbanebusiness #sydneybusiness #tradiebusiness",
-    "health":   "#smallbusinessaustralia #australianhealthcare #localbusiness "
-                "#sydneybusiness #websitedesign #digitalmarketing",
+                "#seoaustralia #websitehelp #businessgrowth #improveyoursite",
+    "trades":   "#australiantradie #smallbusinessaustralia #tradiebusiness "
+                "#australianbusiness #websitedesign #businessgrowth",
+    "health":   "#smallbusinessaustralia #australianhealthcare #australianbusiness "
+                "#websitedesign #digitalmarketing #businessgrowth",
+}
+
+
+STRATEGY_FILE = SOCIAL_DIR / "weekly_strategy.json"
+
+# City/suburb names blocked in brand validation
+_SOCIAL_CITY_NAMES = {
+    "sydney", "melbourne", "brisbane", "perth", "adelaide", "canberra",
+    "darwin", "hobart", "gold coast", "newcastle", "wollongong", "geelong",
+    "townsville", "cairns", "toowoomba", "ballarat", "bendigo", "launceston",
+    "mackay", "rockhampton", "sunshine coast", "nsw", "vic", "qld", "wa",
+    "sa", "tas", "nt", "act",
 }
 
 
 class SocialAgent(BaseAgent):
     agent_id = "social"
     name     = "Social"
+
+    # ── Brand validator ───────────────────────────────────────────────────────
+
+    @staticmethod
+    def _validate_post(post_dict: dict) -> dict:
+        """
+        Validate a generated post dict against IYS brand rules.
+
+        Checks:
+          - Each carousel slide: ≤ 6 words, no hyphens, no city/suburb names
+          - Caption: ≤ 25 words before hashtags, no hyphens
+
+        Returns {"valid": bool, "issues": [list of strings]}
+        """
+        issues = []
+
+        # Validate carousel slides
+        slides = post_dict.get("slides", [])
+        for i, slide in enumerate(slides):
+            text = slide.strip()
+            # Hyphens
+            if "-" in text or "\u2013" in text or "\u2014" in text:
+                issues.append(f"Slide {i + 1} contains a hyphen: \"{text}\"")
+            # Word count
+            word_count = len(text.split())
+            if word_count > 6:
+                issues.append(f"Slide {i + 1} too long ({word_count} words): \"{text}\"")
+            # City names (word-boundary match to avoid false positives like "sa" inside words)
+            import re as _re
+            lower = text.lower()
+            for city in _SOCIAL_CITY_NAMES:
+                pattern = r'\b' + _re.escape(city) + r'\b'
+                if _re.search(pattern, lower):
+                    issues.append(f"Slide {i + 1} contains city/state name '{city}': \"{text}\"")
+                    break
+
+        # Validate caption (check only the part before hashtags)
+        caption = post_dict.get("caption", "")
+        caption_pre_tags = caption.split("\n\n")[0].strip() if "\n\n" in caption else caption.strip()
+        if "-" in caption_pre_tags or "\u2013" in caption_pre_tags or "\u2014" in caption_pre_tags:
+            issues.append("Caption contains a hyphen")
+        cap_words = len(caption_pre_tags.split())
+        if cap_words > 25:
+            issues.append(f"Caption too long before hashtags ({cap_words} words, max 25)")
+
+        return {"valid": len(issues) == 0, "issues": issues}
+
+    # ── Weekly strategy reader ────────────────────────────────────────────────
+
+    def _get_strategy_brief(self, today: date) -> dict | None:
+        """
+        Check social/weekly_strategy.json for today's day plan.
+        Returns the day dict (with carousel + story) if today's date matches, else None.
+        """
+        if not STRATEGY_FILE.exists():
+            return None
+        try:
+            strategy = json.loads(STRATEGY_FILE.read_text())
+            today_str = today.isoformat()
+            days = strategy.get("days", {})
+            for day_name, day_data in days.items():
+                if day_data.get("date") == today_str:
+                    return day_data
+        except Exception as exc:
+            self.log_warn(f"Social: could not read weekly_strategy.json: {exc}")
+        return None
 
     def run(self):
         today     = date.today()
@@ -134,6 +219,23 @@ class SocialAgent(BaseAgent):
             self.log_info(f"Social: already posted {_already}x today — skipping to avoid duplicates")
             return
 
+        # Check for a planned post for today/slot first — use it if available
+        planned_post = self._get_planned_post(today, time_slot)
+        if planned_post:
+            self.log_info(f"Social: using planned post for {today} {time_slot}: {planned_post.get('headline')}")
+            # Override plan theme from the planned post
+            if planned_post.get("theme"):
+                plan = {**plan, "theme": planned_post["theme"]}
+
+        # Check weekly strategy — use it as brief if today's date matches
+        strategy_brief = self._get_strategy_brief(today) if not planned_post else None
+        if strategy_brief:
+            self.log_info(
+                f"Social: weekly_strategy.json found for {today} — "
+                f"pillar: {strategy_brief.get('pillar', '?')}, "
+                f"hook: {strategy_brief.get('carousel', {}).get('hook', '?')}"
+            )
+
         # 1. Competitive intelligence (morning run only — avoid double API calls)
         intel = {}
         if time_slot == "morning":
@@ -144,27 +246,78 @@ class SocialAgent(BaseAgent):
             angles  = len(intel.get("recommended_angles", []))
             self.complete_task(tid, f"{gaps} gaps found · {angles} content angles")
         else:
-            # Evening run: use this morning's report if available
             if REPORT_FILE.exists():
                 try:
                     intel = json.loads(REPORT_FILE.read_text())
                 except Exception:
                     intel = {}
 
-        # 2. Market research (legacy — now supplemented by intel)
+        # 2. Market research
         tid = self.create_task("research", f"Market research: {plan['theme']}")
         trending = self._research_trending(plan, intel)
         self.complete_task(tid, f"Research complete: {len(trending)} insights")
 
-        # 2. Generate post content
+        # 2. Generate post content (use planned post if available, else generate)
         tid = self.create_task("copywriting", f"Writing {plan['format']} copy")
         self.update_progress(tid, 20)
-        recommended = intel.get("recommended_angles", []) if intel else []
-        post = self._generate_post(plan, trending, today, time_slot, recommended)
-        if not post:
-            self.fail_task(tid, "Content generation failed")
-            return
-        self.complete_task(tid, post.get("headline", "Post written"))
+        if planned_post:
+            post = planned_post
+            self.complete_task(tid, post.get("headline", "Planned post loaded"))
+        else:
+            recommended = intel.get("recommended_angles", []) if intel else []
+            post = self._generate_post(
+                plan, trending, today, time_slot, recommended,
+                strategy_brief=strategy_brief,
+            )
+            if not post:
+                self.fail_task(tid, "Content generation failed")
+                return
+            self.complete_task(tid, post.get("headline", "Post written"))
+
+        # 2b. Brand validation — check slides + caption, attempt Claude fix if needed
+        validation = self._validate_post(post)
+        if not validation["valid"]:
+            self.log_warn(
+                f"Social: post failed brand validation "
+                f"({len(validation['issues'])} issue(s)): "
+                + "; ".join(validation["issues"])
+            )
+            api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+            if api_key and not planned_post:
+                try:
+                    import anthropic as _anthropic
+                    _client = _anthropic.Anthropic(api_key=api_key)
+                    issues_text = "\n".join(f"- {iss}" for iss in validation["issues"])
+                    _fix_prompt = (
+                        f"Fix these brand rule violations in the Instagram post below. "
+                        f"Rules: no hyphens anywhere, max 6 words per slide, "
+                        f"no city/state names, caption max 25 words before hashtags.\n\n"
+                        f"Violations:\n{issues_text}\n\n"
+                        f"Original post JSON:\n{json.dumps(post)}\n\n"
+                        f"Return ONLY the corrected JSON with the same keys. No markdown fences."
+                    )
+                    _r = _client.messages.create(
+                        model="claude-opus-4-6",
+                        max_tokens=1200,
+                        messages=[{"role": "user", "content": _fix_prompt}],
+                    )
+                    _raw = _r.content[0].text.strip()
+                    if _raw.startswith("```"):
+                        _raw = _raw.split("```")[1]
+                        if _raw.startswith("json"):
+                            _raw = _raw[4:]
+                    _fixed_post = json.loads(_raw.strip())
+                    _recheck = self._validate_post(_fixed_post)
+                    if _recheck["valid"]:
+                        post = _fixed_post
+                        self.log_info("Social: brand validation fix pass succeeded")
+                    else:
+                        self.log_warn(
+                            "Social: brand validation fix pass still has issues — "
+                            "publishing original"
+                        )
+                except Exception as _fix_exc:
+                    self.log_warn(f"Social: brand validation fix pass failed: {_fix_exc}")
 
         # 3. Generate visual (carousel slides via existing scripts)
         tid = self.create_task("visual", f"Producing visual: {plan['theme']}")
@@ -217,6 +370,37 @@ class SocialAgent(BaseAgent):
             preview_path=str(slide_paths[0]) if slide_paths else None,
             status="delivered",
         )
+
+    # ── Market research ───────────────────────────────────────────────────────
+
+    # ── Planned content calendar ──────────────────────────────────────────────
+
+    def _get_planned_post(self, today: date, time_slot: str) -> dict | None:
+        """
+        Check social/{month}_content_plan.json for a pre-written post matching
+        today's date and time slot. Returns the post dict or None.
+        """
+        month_name = today.strftime('%B').lower()
+        plan_files = [
+            SOCIAL_DIR / f"{month_name}_content_plan.json",
+            SOCIAL_DIR / "march_content_plan.json",  # fallback
+        ]
+        for plan_file in plan_files:
+            if not plan_file.exists():
+                continue
+            try:
+                data = json.loads(plan_file.read_text())
+                today_str = today.isoformat()
+                slot_key  = "morning" if time_slot == "morning" else "evening"
+                for entry in data.get("plan", []):
+                    if entry.get("date") == today_str and entry.get("slot") == slot_key:
+                        # Mark as used
+                        entry["_used"] = True
+                        plan_file.write_text(json.dumps(data, indent=2))
+                        return entry
+            except Exception:
+                pass
+        return None
 
     # ── Market research ───────────────────────────────────────────────────────
 
@@ -287,7 +471,7 @@ class SocialAgent(BaseAgent):
 
     # ── Content generation ────────────────────────────────────────────────────
 
-    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str, recommended_angles: list = None) -> dict | None:
+    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str, recommended_angles: list = None, strategy_brief: dict = None) -> dict | None:
         api_key = os.environ.get("ANTHROPIC_API_KEY", "")
         if not api_key:
             self.log_warn("No ANTHROPIC_API_KEY — using template post")
@@ -309,41 +493,100 @@ class SocialAgent(BaseAgent):
                 else:
                     angles_text += f"- {a}\n"
 
-        system = """You write Instagram content for ImproveYourSite.com, an Australian web agency
-that builds websites for small businesses (tradies, GP clinics, accountants, boutiques, consultants).
+        hook_style = plan.get("hook_style", "bold_fear")
 
-The audience is Australian small business owners, typically 35-55, time-poor, skeptical of marketing fluff.
-They respond to: specific numbers, real examples, direct language, local references (e.g. "in Bathurst",
-"regional NSW"), and content that treats them like intelligent adults.
+        # Build strategy brief block — if available, use it as the primary brief
+        strategy_text = ""
+        if strategy_brief:
+            carousel_brief = strategy_brief.get("carousel", {})
+            strategy_hook    = carousel_brief.get("hook", "")
+            strategy_angle   = carousel_brief.get("angle", "")
+            strategy_bullets = carousel_brief.get("bullets", [])
+            strategy_cta     = carousel_brief.get("cta", "")
+            strategy_text = "\n\nWEEKLY STRATEGY BRIEF (use this as your primary direction):\n"
+            if strategy_hook:
+                strategy_text += f"  Hook to build from: \"{strategy_hook}\"\n"
+            if strategy_angle:
+                strategy_text += f"  Angle: {strategy_angle}\n"
+            if strategy_bullets:
+                strategy_text += "  Key points to cover:\n"
+                for b in strategy_bullets:
+                    strategy_text += f"    - {b}\n"
+            if strategy_cta:
+                strategy_text += f"  CTA direction: {strategy_cta}\n"
+            if strategy_brief.get("pillar"):
+                strategy_text += f"  Content pillar: {strategy_brief['pillar']}\n"
+            strategy_text += (
+                "Work FROM this brief. The hook is pre-validated and strategically chosen. "
+                "Use it as slide 1 and build the rest of the carousel around the angle and bullets above."
+            )
 
-They do NOT respond to: corporate speak, buzzwords like "leverage synergies", excessive exclamation marks,
-obvious AI-sounding copy, or content that's clearly just trying to sell them something.
+        system = """You write Instagram carousel content for ImproveYourSite.com (@improveyoursite.au).
+Australian web agency. Builds websites for small businesses nationwide.
 
-Always write as if you're a smart local who genuinely knows business websites, not a marketer."""
+NEW PRODUCT (launched March 2026): Jarvis — AI staff for small businesses.
+Jarvis installs on any computer, runs 10 automated agents (leads, social, SEO, ads, email), costs $30 download or $50 USB.
+Brand identity on socials: 🦞 = OpenClaw (the AI engine powering Jarvis). 🤖 = Claude AI inside.
+On Jarvis posts, end captions with 🦞 or 🦞🤖 — this signals our AI identity to followers.
+When writing Jarvis-themed content, the target is Australian small business owners (trades, health, finance, retail, hospitality).
+Pain points to reference: missing leads after hours, social media taking too long, Google not finding them, admin drowning them.
 
-        prompt = f"""Today is {day_name}. Create an Instagram post for the {time_slot} slot.
+THE WINNING POST — model every hook on this energy:
+"Your website is costing you customers"
+It works because: 6 words. Large text. Centres on ONE fear every business owner has. No explanation needed.
+
+WHAT THE DATA SHOWS WORKS:
+- Carousels with under 10 words on slide 1 get 3x more swipes
+- DM shares are now the strongest Instagram signal — write content people forward to their mate
+- First 3 seconds decide everything. If slide 1 doesn't stop them, nothing else matters.
+- Short captions (under 30 words before hashtags) get more engagement than long ones
+- Posts that name a specific fear outperform tips and advice every time
+
+WHAT KILLS ENGAGEMENT (never do these):
+- Hyphens anywhere. Zero hyphens. This is the single biggest AI dead giveaway.
+- City or town names. No Sydney, Melbourne, Brisbane, NSW etc. National audience only.
+- More than 6 words on any slide
+- Starting with "Are you..." or "Did you know..."
+- Corporate language: leverage, synergy, digital presence, online journey
+- Explaining too much — trust the reader to fill the gap
+- Walls of text in the caption
+
+RULES:
+1. Slide text: 3 to 6 words. Treat every slide like a billboard on a freeway.
+2. ONE idea per slide. Never two.
+3. No hyphens. Not one.
+4. No city names. Not one.
+5. Caption: 2 sentences + 1 CTA line. That's it. Under 25 words total before hashtags.
+6. Sound like a real person who knows business. Not an agency. Not a robot.
+7. The hook style for this post: """ + hook_style
+
+        prompt = f"""Today is {day_name}. {time_slot.upper()} post.
 
 Theme: {plan['theme']}
-Angle: {plan['angle']}
-Format: {plan['format']}
-Tone: {plan['caption_tone']}
+Direction: {plan['angle']}
 
-Current trending insights (from market research today):
-{research_text}{angles_text}
+What's trending with AU small businesses right now:
+{research_text}{angles_text}{strategy_text}
 
-If a competitive angle above fits today's theme better than a generic post — use it.
-Prioritise angles that competitors are NOT covering.
+Use the trending data to make the hook feel current and relevant.
+If a competitor gap exists — own it on slide 1.
+If a weekly strategy brief is provided above, use it as your primary direction.
 
-Return ONLY valid JSON with these exact keys:
+Return ONLY valid JSON, no markdown fences:
 {{
-  "headline": "The main hook (under 8 words, no punctuation at end)",
-  "slides": ["slide 1 text (under 12 words)", "slide 2", "slide 3", "slide 4", "slide 5"],
-  "caption": "Instagram caption — 2-4 sentences, conversational, ends with a question or CTA. No hashtags — they are added separately.",
-  "facebook_caption": "Facebook version — same message but 3-5 sentences, slightly warmer and more conversational, no hashtags. Facebook readers respond to a bit more context and a direct CTA at the end.",
-  "alt_text": "Image description for accessibility"
-}}
-
-Do not start with 'Are you' or 'Did you know'. Start with a statement or a number."""
+  "headline": "Slide 1 — 3 to 6 words, stops the scroll, names a fear or truth",
+  "slides": [
+    "3-6 words",
+    "3-6 words",
+    "3-6 words",
+    "3-6 words",
+    "CTA — 3-5 words"
+  ],
+  "caption": "Sentence 1: hook that expands slide 1. Sentence 2: one specific insight or proof. Sentence 3: CTA with link in bio.",
+  "facebook_caption": "Same 3 sentences but slightly warmer. Add one more sentence of context. End with direct CTA.",
+  "image_prompt": "DALL-E prompt for a bold, minimal carousel background image: dark background (#0a0a0a or #5b4dff), no text, abstract or conceptual visual that reinforces the theme. Suitable for large white text overlay.",
+  "alt_text": "Accessibility description for screen readers"
+}}"""
 
         client = anthropic.Anthropic(api_key=api_key)
         response = client.messages.create(
@@ -362,51 +605,75 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
         raw = raw.strip()
 
         post = json.loads(raw)
+
+        # Strip any hyphens that slipped through — hard enforcement
+        for field in ("headline", "caption", "facebook_caption"):
+            if post.get(field):
+                post[field] = post[field].replace(" - ", " ").replace("—", "").replace("–", "")
+        post["slides"] = [s.replace(" - ", " ").replace("—", "").replace("–", "") for s in post.get("slides", [])]
+
         # Append hashtags to Instagram caption
         if HASHTAGS["web"] not in post["caption"]:
             post["caption"] += "\n\n" + HASHTAGS["web"]
-        # Ensure facebook_caption exists (fallback to caption without hashtags)
+        # Ensure facebook_caption exists
         if not post.get("facebook_caption"):
             post["facebook_caption"] = post["caption"].split("\n\n" + HASHTAGS["web"])[0]
         return post
 
     def _template_post(self, plan: dict, today: date) -> dict:
-        """Fallback post when no API key is set."""
+        """Fallback post when no API key is set. Matches winning format."""
         templates = {
-            "motivation":   {
-                "headline": "Your website works while you sleep",
-                "slides":   ["Your website works 24/7", "Customers search at 11pm", "Is yours ready?", "improveyoursite.com", "Free audit available"],
-                "caption":  "Most small business owners don't realise their website is losing them customers every day. Not because it's ugly — because it's slow, unclear, or doesn't show up on Google.\n\nWe fix that. Results in 2–4 weeks.\n\n" + HASHTAGS["web"],
-                "alt_text": "Text: Your website works while you sleep",
+            "stop_scroll":  {
+                "headline": "Your website is costing you customers",
+                "slides":   ["Your website is costing you customers", "Not because it looks bad", "Because nobody can find it", "3 seconds. Gone.", "We fix that. Link in bio."],
+                "caption":  "53% of small business websites lose visitors in 3 seconds. Not from bad design. From slow load times and no Google presence.\n\nWe fix both. Free audit at the link in bio.\n\n" + HASHTAGS["web"],
+                "facebook_caption": "53% of small business websites lose visitors in 3 seconds. Not from bad design. From slow load times and no Google presence. We fix both in under 2 weeks. Free audit at the link.",
+                "alt_text": "Your website is costing you customers",
             },
             "education":    {
-                "headline": "3 website mistakes costing you customers",
-                "slides":   ["Slow load time = lost sales", "No clear CTA = confused visitors", "Not mobile-first = 60% gone", "No Google Business = invisible", "We fix all of these"],
-                "caption":  "Checked your website speed lately? Most small business sites take 6+ seconds to load on mobile. Google penalises anything over 3.\n\nFast site = more enquiries. Simple as that.\n\n" + HASHTAGS["web"],
-                "alt_text": "3 website mistakes costing small businesses customers",
+                "headline": "3 seconds. That is all you get.",
+                "slides":   ["3 seconds. That is all you get.", "Slow site = gone", "No mobile = gone", "Not on Google = invisible", "We fix all three. Link in bio."],
+                "caption":  "Your site takes 6 seconds to load. Google's threshold is 3. You're losing half your visitors before they read a word.\n\nFree site speed check. Link in bio.\n\n" + HASHTAGS["web"],
+                "facebook_caption": "Your site takes 6 seconds to load. Google's threshold is 3. You're losing half your visitors before they read a single word. We check and fix this for Australian small businesses. Free audit at the link.",
+                "alt_text": "3 seconds is all you get before visitors leave",
             },
         }
-        base = templates.get(plan["theme"], templates["education"])
-        return base
+        default = templates["education"]
+        return templates.get(plan.get("theme", ""), default) or default
 
     # ── Visual production ─────────────────────────────────────────────────────
 
     def _produce_visual(self, plan: dict, post: dict) -> list[Path]:
         """
-        Runs a carousel make_*.py script and returns the list of slide PNGs it produced
-        (up to 5), sorted by filename for correct slide order.
-        Returns an empty list if no scripts succeed.
+        Visual production pipeline — tries in order:
+          1. ChatGPT DALL-E 3 image generation (if OPENAI_API_KEY set)
+          2. Pillow-only branded slides using the planned slide text (always works)
+          3. Existing make_*.py carousel scripts (last resort — generic content)
+          4. Returns empty list (post queued as text-only)
         """
         TILES_DIR.mkdir(parents=True, exist_ok=True)
 
+        # 1. Try ChatGPT DALL-E 3 for the background image
+        image_prompt = post.get("image_prompt", "")
+        if image_prompt and os.environ.get("OPENAI_API_KEY", ""):
+            dalle_paths = self._generate_dalle_slides(post, plan)
+            if dalle_paths:
+                return dalle_paths
+
+        # 2. If post has actual slides, render with branded Playwright renderer
+        if post.get("slides"):
+            branded_paths = self._generate_branded_slides(post)
+            if branded_paths:
+                return branded_paths
+
+        # 3. Fallback: local make_*.py carousel scripts
         theme_script_map = {
+            "stop_scroll":   "make_tile.py",
             "education":     "make_seo_mistake_carousel.py",
-            "motivation":    "make_tile.py",
             "social_proof":  "make_perf_carousel.py",
             "behind_scenes": "make_ai_seo_carousel.py",
             "cta":           "make_audit_post.py",
-            "inspiration":   "make_llm_carousel.py",
-            "planning":      "make_maps_carousel.py",
+            "engagement":    "make_maps_carousel.py",
         }
 
         preferred = theme_script_map.get(plan["theme"])
@@ -418,21 +685,18 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
 
         for script in scripts:
             try:
-                # Record time before running so we can find new files afterward
-                before = datetime.now().timestamp() - 1  # 1s buffer
+                before = datetime.now().timestamp() - 1
                 result = subprocess.run(
                     [sys.executable, str(script)],
                     capture_output=True, text=True, cwd=str(PROJECT_ROOT),
                     timeout=90,
                 )
                 if result.returncode == 0:
-                    # Collect all PNGs written during this run (by mtime)
                     new_pngs = [
                         p for p in TILES_DIR.glob("*.png")
                         if p.stat().st_mtime >= before
                     ]
                     if new_pngs:
-                        # Sort by name so slide-1, slide-2 … are in order
                         new_pngs.sort(key=lambda p: p.name)
                         self.log_info(
                             f"Social: {script.name} produced {len(new_pngs)} slide(s): "
@@ -442,8 +706,538 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
             except Exception as exc:
                 self.log_warn(f"Script {script.name} failed: {exc}")
 
-        self.log_warn("No carousel scripts succeeded — post will be text-only")
+        self.log_warn("No visual produced — post will be text-only")
         return []
+
+    def _generate_branded_slides(self, post: dict) -> list[Path]:
+        """
+        Render carousel slides using Playwright + Inter font — matches brand identity exactly.
+        Dark/light alternating slides, Inter 900 weight, brand colours, logo bar.
+        Falls back to Pillow if Playwright not available.
+        """
+        slides = post.get("slides", [])
+        if not slides:
+            return []
+
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            self.log_warn("Visual: Playwright not installed — falling back to Pillow")
+            return self._generate_pillow_slides(post)
+
+        import tempfile
+
+        BLUE  = "#5b4dff"
+        MINT  = "#2dd4bf"
+        DARK  = "#0f172a"
+        WHITE = "#ffffff"
+        FONT  = ("<link href='https://fonts.googleapis.com/css2?family=Inter:"
+                 "wght@400;600;700;800;900&display=swap' rel='stylesheet'>")
+
+        theme = post.get("theme", "stop_scroll")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        headline_slug = post.get("headline", "post").lower().replace(" ", "_")[:20]
+
+        # Cover colour rotation: black → white → purple, cycling per post
+        _COVER_SEQUENCE = [DARK, WHITE, BLUE]
+        _rot_file = SOCIAL_DIR / "cover_rotation.json"
+        try:
+            _rot_idx = json.loads(_rot_file.read_text()).get("index", 0) if _rot_file.exists() else 0
+        except Exception:
+            _rot_idx = 0
+        cover_bg       = _COVER_SEQUENCE[_rot_idx % 3]
+        cover_is_light = (cover_bg == WHITE)
+        try:
+            _rot_file.write_text(json.dumps({"index": (_rot_idx + 1) % 3}))
+        except Exception:
+            pass
+
+        def _brand_bar():
+            return (
+                f"<div style='position:absolute;bottom:44px;left:72px;right:72px;"
+                f"display:flex;align-items:center;justify-content:space-between;'>"
+                f"<span style='font-size:18px;font-weight:800;color:rgba(255,255,255,.45);"
+                f"letter-spacing:-.01em;font-family:Inter,sans-serif;'>"
+                f"Improve<span style='color:{MINT};'>YourSite</span></span>"
+                f"<span style='font-size:15px;font-weight:500;color:rgba(255,255,255,.3);"
+                f"font-family:Inter,sans-serif;'>improveyoursite.com</span>"
+                f"</div>"
+            )
+
+        def _brand_bar_light():
+            return (
+                f"<div style='position:absolute;bottom:44px;left:72px;right:72px;"
+                f"display:flex;align-items:center;justify-content:space-between;'>"
+                f"<span style='font-size:18px;font-weight:800;color:rgba(15,23,42,.4);"
+                f"letter-spacing:-.01em;font-family:Inter,sans-serif;'>"
+                f"Improve<span style='color:{BLUE};'>YourSite</span></span>"
+                f"<span style='font-size:15px;font-weight:500;color:rgba(15,23,42,.3);"
+                f"font-family:Inter,sans-serif;'>improveyoursite.com</span>"
+                f"</div>"
+            )
+
+        def _font_size(text: str) -> int:
+            words = len(text.split())
+            if words <= 3:  return 100
+            if words <= 5:  return 88
+            if words <= 7:  return 76
+            return 64
+
+        SAFE_W = "840px"
+
+        def _dots(slide_num: int, total: int, light: bool = False) -> str:
+            """
+            Dot row where the active position is an arrow-shaped pill pointing right.
+            Dark slides: black arrow / white text. Light slides: white arrow / black text.
+            Past dots = filled, future dots = dim. Last slide = filled dot, no arrow.
+            Visual: ● ● [—SWIPE—›] ○ ○
+            """
+            # Arrow is opposite of tile bg; text inside matches tile bg colour
+            # Dark tile  → white arrow  + dark text (#0f172a)
+            # Light tile → dark arrow   + white text (#ffffff)
+            arrow_bg     = "#0f172a"               if light else "#ffffff"
+            arrow_text   = "#ffffff"               if light else "#0f172a"
+            past_dot     = "rgba(15,23,42,.35)"    if light else "rgba(255,255,255,.5)"
+            future_dot   = "rgba(15,23,42,.15)"    if light else "rgba(255,255,255,.22)"
+            last_dot_bg  = "#0f172a"               if light else "#ffffff"
+            is_last      = (slide_num == total - 1)
+
+            items = []
+            for j in range(total):
+                if j == slide_num and not is_last:
+                    # Active non-last: bold arrow pill — contrasts hard with slide bg
+                    items.append(
+                        f"<div style='height:26px;padding:0 44px 0 22px;border-radius:999px;"
+                        f"background:{arrow_bg};"
+                        f"clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%);"
+                        f"display:flex;align-items:center;justify-content:center;'>"
+                        f"<span style='font-family:Inter,sans-serif;font-size:12px;font-weight:900;"
+                        f"letter-spacing:.16em;text-transform:uppercase;color:{arrow_text};'>"
+                        f"swipe</span>"
+                        f"</div>"
+                    )
+                elif j == slide_num and is_last:
+                    # Last slide: filled dot, no arrow
+                    items.append(
+                        f"<div style='width:22px;height:22px;border-radius:50%;"
+                        f"background:{last_dot_bg};'></div>"
+                    )
+                elif j < slide_num:
+                    # Past slides: filled dim dot
+                    items.append(
+                        f"<div style='width:10px;height:10px;border-radius:50%;"
+                        f"background:{past_dot};'></div>"
+                    )
+                else:
+                    # Future slides: empty dim dot
+                    items.append(
+                        f"<div style='width:10px;height:10px;border-radius:50%;"
+                        f"background:{future_dot};'></div>"
+                    )
+            return "".join(items)
+
+        def _swipe_arrow(light: bool = False, last: bool = False) -> str:
+            return ""  # now handled inside _dots
+
+        def _build_dark_slide(text: str, bg: str = DARK, slide_num: int = 0, total: int = 5, last: bool = False) -> str:
+            fs = _font_size(text)
+            return f"""<!DOCTYPE html><html><head><meta charset='UTF-8'>{FONT}</head>
+<body style='margin:0;padding:0;width:1080px;height:1080px;overflow:hidden;background:{bg};'>
+<div style='width:1080px;height:1080px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;box-sizing:border-box;'>
+  <div style='position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,{BLUE} 0%,{MINT} 100%);'></div>
+  <div style='position:absolute;top:-180px;right:-180px;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(91,77,255,.14) 0%,transparent 65%);'></div>
+  <div style='position:absolute;bottom:-140px;left:-100px;width:480px;height:480px;border-radius:50%;
+    background:radial-gradient(circle,rgba(45,212,191,.09) 0%,transparent 65%);'></div>
+  <div style='position:relative;z-index:1;text-align:center;width:{SAFE_W};'>
+    <p style='font-family:Inter,-apple-system,sans-serif;font-size:{fs}px;font-weight:900;
+      line-height:1.15;letter-spacing:-.025em;color:{WHITE};margin:0;
+      word-break:break-word;overflow-wrap:break-word;'>{text}</p>
+  </div>
+  {_swipe_arrow(light=False, last=last)}
+  <div style='position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+    display:flex;gap:9px;align-items:center;'>{_dots(slide_num, total)}</div>
+  {_brand_bar()}
+</div></body></html>"""
+
+        def _build_light_slide(text: str, slide_num: int = 0, total: int = 5, last: bool = False) -> str:
+            fs = _font_size(text)
+            return f"""<!DOCTYPE html><html><head><meta charset='UTF-8'>{FONT}</head>
+<body style='margin:0;padding:0;width:1080px;height:1080px;overflow:hidden;background:#f4f3ff;'>
+<div style='width:1080px;height:1080px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;box-sizing:border-box;'>
+  <div style='position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,{BLUE} 0%,{MINT} 100%);'></div>
+  <div style='position:absolute;top:-180px;right:-180px;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(91,77,255,.07) 0%,transparent 65%);'></div>
+  <div style='position:absolute;bottom:-140px;left:-100px;width:480px;height:480px;border-radius:50%;
+    background:radial-gradient(circle,rgba(45,212,191,.06) 0%,transparent 65%);'></div>
+  <div style='position:relative;z-index:1;text-align:center;width:{SAFE_W};'>
+    <p style='font-family:Inter,-apple-system,sans-serif;font-size:{fs}px;font-weight:900;
+      line-height:1.15;letter-spacing:-.025em;color:{DARK};margin:0;
+      word-break:break-word;overflow-wrap:break-word;'>{text}</p>
+  </div>
+  {_swipe_arrow(light=True, last=last)}
+  <div style='position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+    display:flex;gap:9px;align-items:center;'>{_dots(slide_num, total, light=True)}</div>
+  {_brand_bar_light()}
+</div></body></html>"""
+
+        def _build_case_study_slide(result: str, label: str, slide_num: int = 0, total: int = 5) -> str:
+            """Mint-accented case study slide — shows a before/after result."""
+            return f"""<!DOCTYPE html><html><head><meta charset='UTF-8'>{FONT}</head>
+<body style='margin:0;padding:0;width:1080px;height:1080px;overflow:hidden;background:{DARK};'>
+<div style='width:1080px;height:1080px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;box-sizing:border-box;'>
+  <div style='position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,{BLUE} 0%,{MINT} 100%);'></div>
+  <div style='position:absolute;top:-180px;left:-180px;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(45,212,191,.12) 0%,transparent 65%);'></div>
+  <div style='position:relative;z-index:1;text-align:center;width:{SAFE_W};'>
+    <div style='display:inline-block;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);
+      border-radius:100px;padding:10px 28px;margin-bottom:36px;'>
+      <span style='font-family:Inter,sans-serif;font-size:13px;font-weight:700;
+        letter-spacing:.1em;text-transform:uppercase;color:{MINT};'>Real result</span>
+    </div>
+    <p style='font-family:Inter,-apple-system,sans-serif;font-size:88px;font-weight:900;
+      line-height:1.1;letter-spacing:-.03em;color:{WHITE};margin:0 0 24px;
+      word-break:break-word;overflow-wrap:break-word;'>{result}</p>
+    <p style='font-family:Inter,sans-serif;font-size:28px;font-weight:500;
+      color:rgba(255,255,255,.5);margin:0;letter-spacing:-.01em;'>{label}</p>
+  </div>
+  {_swipe_arrow(light=False, last=False)}
+  <div style='position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+    display:flex;gap:9px;align-items:center;'>{_dots(slide_num, total)}</div>
+  {_brand_bar()}
+</div></body></html>"""
+
+        def _build_cta_slide(text: str, slide_num: int = 0, total: int = 5) -> str:
+            fs = _font_size(text)
+            return f"""<!DOCTYPE html><html><head><meta charset='UTF-8'>{FONT}</head>
+<body style='margin:0;padding:0;width:1080px;height:1080px;overflow:hidden;background:{BLUE};'>
+<div style='width:1080px;height:1080px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;box-sizing:border-box;'>
+  <div style='position:absolute;bottom:-180px;right:-120px;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(45,212,191,.22) 0%,transparent 65%);'></div>
+  <div style='position:absolute;top:-100px;left:-80px;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 65%);'></div>
+  <div style='position:relative;z-index:1;text-align:center;width:{SAFE_W};'>
+    <p style='font-family:Inter,-apple-system,sans-serif;font-size:{fs}px;font-weight:900;
+      line-height:1.15;letter-spacing:-.025em;color:{WHITE};margin:0 0 44px;
+      word-break:break-word;overflow-wrap:break-word;'>{text}</p>
+    <div style='width:56px;height:4px;background:{MINT};border-radius:4px;margin:0 auto 44px;'></div>
+    <div style='display:inline-block;background:{WHITE};padding:18px 40px;border-radius:14px;'>
+      <span style='font-family:Inter,sans-serif;font-size:24px;font-weight:800;
+        color:{BLUE};letter-spacing:-.01em;'>improveyoursite.com</span>
+    </div>
+  </div>
+  <div style='position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+    display:flex;gap:9px;align-items:center;'>{_dots(slide_num, total)}</div>
+  {_brand_bar()}
+</div></body></html>"""
+
+        # Case study data per theme — injected as slide 2
+        CASE_STUDIES = {
+            "stop_scroll":   ("3x more calls",       "after website rebuild"),
+            "education":     ("7s → 1.8s",           "page load after our fix"),
+            "social_proof":  ("37 enquiries",         "in one month, same business"),
+            "cta":           ("Free audit",           "20 mins, no obligation"),
+            "engagement":    ("Page 1 Google",        "in 6 weeks, local tradie"),
+            "behind_scenes": ("$0 ad spend",          "100% organic traffic"),
+        }
+        cs_result, cs_label = CASE_STUDIES.get(theme, ("4x more leads", "after site rebuild"))
+
+        # Build 6 slides: hook + case study + 3 content + CTA
+        raw_slides = slides[:4]  # hook + up to 3 content slides
+        total = len(raw_slides) + 2  # +case study +CTA
+
+        html_pages = []
+        for i, text in enumerate(raw_slides):
+            is_last = False
+            if i == 0:
+                if cover_is_light:
+                    html_pages.append(_build_light_slide(text, slide_num=i, total=total))
+                else:
+                    html_pages.append(_build_dark_slide(text, bg=cover_bg, slide_num=i, total=total))
+            elif i % 2 == 0:
+                html_pages.append(_build_dark_slide(text, slide_num=i, total=total))
+            else:
+                html_pages.append(_build_light_slide(text, slide_num=i, total=total))
+
+        # Case study slide after content slides
+        cs_idx = len(raw_slides)
+        html_pages.append(_build_case_study_slide(cs_result, cs_label, slide_num=cs_idx, total=total))
+
+        # CTA slide last
+        cta_text = slides[-1] if slides else "Free audit. Link in bio."
+        html_pages.append(_build_cta_slide(cta_text, slide_num=total - 1, total=total))
+
+        output_paths = []
+        try:
+            with sync_playwright() as pw:
+                browser = pw.chromium.launch()
+                page = browser.new_page(viewport={"width": 1080, "height": 1080})
+                for i, html in enumerate(html_pages):
+                    with tempfile.NamedTemporaryFile(
+                        suffix=".html", mode="w", delete=False, encoding="utf-8"
+                    ) as f:
+                        f.write(html)
+                        tmp = Path(f.name)
+                    out_path = TILES_DIR / f"carousel_{timestamp}_{headline_slug}_{i+1}.png"
+                    page.goto(f"file://{tmp}", wait_until="networkidle")
+                    page.wait_for_timeout(800)
+                    page.screenshot(path=str(out_path), clip={"x": 0, "y": 0, "width": 1080, "height": 1080})
+                    tmp.unlink()
+                    output_paths.append(out_path)
+                browser.close()
+            self.log_info(f"Social: Playwright rendered {len(output_paths)} branded slides for: {post.get('headline','')}")
+        except Exception as exc:
+            self.log_warn(f"Social: Playwright render failed ({exc}) — falling back to Pillow")
+            return self._generate_pillow_slides(post)
+
+        return output_paths
+
+    def _generate_pillow_slides(self, post: dict) -> list[Path]:
+        """Pillow fallback — used when Playwright is unavailable."""
+        try:
+            from PIL import Image, ImageDraw, ImageFont
+        except ImportError:
+            self.log_warn("Visual: Pillow not installed — run bootstrap.py")
+            return []
+
+        slides = post.get("slides", [])
+        if not slides:
+            return []
+
+        BLUE   = (91, 77, 255)
+        MINT   = (45, 212, 191)
+        DARK   = (15, 23, 42)
+        WHITE  = (255, 255, 255)
+        theme  = post.get("theme", "")
+        bg     = BLUE if theme in ("cta", "social_proof") else DARK
+
+        output_paths = []
+        timestamp    = datetime.now().strftime("%Y%m%d_%H%M%S")
+        slug         = post.get("headline", "post").lower().replace(" ", "_")[:20]
+        total        = min(len(slides), 5)
+
+        for i, slide_text in enumerate(slides[:5]):
+            if i == total - 1:
+                bg_c = BLUE
+            elif i % 2 == 0:
+                bg_c = bg
+            else:
+                bg_c = (248, 247, 255)
+
+            img  = Image.new("RGB", (1080, 1080), bg_c)
+            draw = ImageDraw.Draw(img)
+
+            # Top gradient bar
+            for x in range(1080):
+                t = x / 1080
+                r = int(91 + (45 - 91) * t)
+                g = int(77 + (212 - 77) * t)
+                b = int(255 + (191 - 255) * t)
+                draw.line([(x, 0), (x, 5)], fill=(r, g, b))
+
+            font_size = self._calc_font_size(slide_text)
+            try:
+                font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
+            except Exception:
+                font = ImageFont.load_default()
+
+            text_colour = (15, 23, 42) if bg_c == (248, 247, 255) else WHITE
+            lines    = self._wrap_text(slide_text, font, draw, max_width=880)
+            lh       = font_size + 16
+            y_start  = (1080 - lh * len(lines)) // 2
+            for j, line in enumerate(lines):
+                bbox = draw.textbbox((0, 0), line, font=font)
+                w = bbox[2] - bbox[0]
+                x = (1080 - w) // 2
+                y = y_start + j * lh
+                draw.text((x + 2, y + 2), line, font=font, fill=(0, 0, 0, 120))
+                draw.text((x, y), line, font=font, fill=text_colour)
+
+            # Brand bar bottom
+            try:
+                wm_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 22)
+            except Exception:
+                wm_font = ImageFont.load_default()
+            wm_colour = (15, 23, 42, 100) if bg_c == (248, 247, 255) else (255, 255, 255, 80)
+            draw.text((72, 1040), "ImprovYourSite", font=wm_font, fill=wm_colour)
+            draw.text((800, 1040), "improveyoursite.com", font=wm_font, fill=wm_colour)
+
+            out_path = TILES_DIR / f"carousel_{timestamp}_{slug}_{i+1}.png"
+            img.save(str(out_path), "PNG")
+            output_paths.append(out_path)
+
+        self.log_info(f"Social: Pillow rendered {len(output_paths)} slides")
+        return output_paths
+
+    def _generate_dalle_slides(self, post: dict, plan: dict) -> list[Path]:
+        """
+        Generate carousel slide images using DALL-E 3 via OpenAI API.
+        Produces a branded background + overlays slide text using Pillow.
+        Returns list of PNG paths or empty list on failure.
+        """
+        openai_key = os.environ.get("OPENAI_API_KEY", "")
+        if not openai_key:
+            return []
+
+        try:
+            from PIL import Image, ImageDraw, ImageFont
+            import base64
+            import io
+        except ImportError:
+            self.log_warn("Visual: Pillow not installed — run bootstrap.py")
+            return []
+
+        slides = post.get("slides", [])
+        if not slides:
+            return []
+
+        # Build a single DALL-E background image
+        dalle_prompt = (
+            post.get("image_prompt", "")
+            or f"Abstract dark minimal background for Instagram carousel. "
+               f"Near-black background #0a0a0a. Subtle geometric shapes or gradients in "
+               f"electric indigo #5b4dff and neon mint #2dd4bf. No text. Clean, bold, modern."
+        )
+
+        # Ensure no text in image (DALL-E sometimes adds text)
+        dalle_prompt += " Absolutely no text or letters in the image."
+
+        self.log_info(f"Social: generating DALL-E background...")
+
+        try:
+            payload = json.dumps({
+                "model":   "dall-e-3",
+                "prompt":  dalle_prompt,
+                "n":       1,
+                "size":    "1024x1024",
+                "quality": "standard",
+            }).encode()
+            req = urllib.request.Request(
+                "https://api.openai.com/v1/images/generations",
+                data=payload,
+                method="POST",
+                headers={
+                    "Authorization": f"Bearer {openai_key}",
+                    "Content-Type":  "application/json",
+                },
+            )
+            with urllib.request.urlopen(req, timeout=60) as r:
+                resp = json.loads(r.read())
+            img_url = resp["data"][0]["url"]
+
+            # Download the background image
+            with urllib.request.urlopen(img_url, timeout=30) as r:
+                bg_bytes = r.read()
+            bg_img = Image.open(io.BytesIO(bg_bytes)).convert("RGBA").resize((1080, 1080))
+
+        except Exception as exc:
+            self.log_warn(f"Social: DALL-E generation failed: {exc}")
+            # Use solid brand colour background as fallback
+            bg_img = Image.new("RGBA", (1080, 1080), (10, 10, 10, 255))
+
+        # Overlay slide text on each slide
+        BRAND_COLOURS = {
+            "bg":      (10, 10, 10, 255),
+            "indigo":  (91, 77, 255, 255),
+            "mint":    (45, 212, 191, 255),
+            "white":   (255, 255, 255, 255),
+        }
+
+        output_paths = []
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        for i, slide_text in enumerate(slides[:5]):
+            slide_img = bg_img.copy()
+            draw = ImageDraw.Draw(slide_img)
+
+            # Add brand colour overlay for readability
+            overlay = Image.new("RGBA", (1080, 1080), (10, 10, 10, 180))
+            slide_img = Image.alpha_composite(slide_img, overlay)
+            draw = ImageDraw.Draw(slide_img)
+
+            # Try to load Inter Bold, fall back to default
+            font_size = self._calc_font_size(slide_text)
+            try:
+                font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
+            except Exception:
+                try:
+                    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+                except Exception:
+                    font = ImageFont.load_default()
+
+            # Centre text
+            lines = self._wrap_text(slide_text, font, draw, max_width=900)
+            line_height = font_size + 20
+            total_height = line_height * len(lines)
+            y_start = (1080 - total_height) // 2
+
+            for j, line in enumerate(lines):
+                bbox = draw.textbbox((0, 0), line, font=font)
+                w = bbox[2] - bbox[0]
+                x = (1080 - w) // 2
+                y = y_start + j * line_height
+
+                # Drop shadow
+                draw.text((x + 3, y + 3), line, font=font, fill=(0, 0, 0, 200))
+                # Main text in white
+                draw.text((x, y), line, font=font, fill=BRAND_COLOURS["white"])
+
+            # Add brand accent bar at bottom
+            draw.rectangle([(0, 1020), (1080, 1080)], fill=BRAND_COLOURS["indigo"])
+
+            # Add @improveyoursite.au watermark
+            try:
+                wm_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 28)
+            except Exception:
+                wm_font = ImageFont.load_default()
+            draw.text((540 - 80, 1030), "@improveyoursite.au", font=wm_font, fill=BRAND_COLOURS["white"])
+
+            # Save
+            out_path = TILES_DIR / f"dalle_slide_{timestamp}_{i+1}.png"
+            slide_img.convert("RGB").save(str(out_path), "PNG")
+            output_paths.append(out_path)
+
+        if output_paths:
+            self.log_info(f"Social: DALL-E produced {len(output_paths)} branded slide(s)")
+
+        return output_paths
+
+    @staticmethod
+    def _calc_font_size(text: str) -> int:
+        """Calculate font size based on text length — shorter = bigger."""
+        words = len(text.split())
+        if words <= 3:
+            return 120
+        elif words <= 5:
+            return 100
+        elif words <= 7:
+            return 80
+        return 64
+
+    @staticmethod
+    def _wrap_text(text: str, font, draw, max_width: int) -> list[str]:
+        """Word-wrap text to fit within max_width."""
+        words = text.split()
+        lines, current = [], []
+        for word in words:
+            test = " ".join(current + [word])
+            bbox = draw.textbbox((0, 0), test, font=font)
+            if bbox[2] - bbox[0] <= max_width:
+                current.append(word)
+            else:
+                if current:
+                    lines.append(" ".join(current))
+                current = [word]
+        if current:
+            lines.append(" ".join(current))
+        return lines or [text]
 
     # ── Instagram publishing ──────────────────────────────────────────────────
 
@@ -650,7 +1444,7 @@ Do not start with 'Are you' or 'Did you know'. Start with a statement or a numbe
             with urllib.request.urlopen(req, timeout=20) as r:
                 pass
 
-            return f"https://improveyoursite.com/{dest_path}"
+            return f"https://raw.githubusercontent.com/anon8597299/smart-tech-innovations/main/{dest_path}"
         except Exception as exc:
             self.log_warn(f"Image upload failed: {exc}")
             return None

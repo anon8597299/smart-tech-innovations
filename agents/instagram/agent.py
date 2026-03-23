@@ -50,7 +50,8 @@ QUEUE_FILE   = SOCIAL_DIR / "upload_queue.json"
 STORY_QUEUE  = SOCIAL_DIR / "story_queue.json"
 REELS_DIR    = SOCIAL_DIR / "reels"
 INSIGHTS_LOG = SOCIAL_DIR / "instagram_insights.json"
-GRAPH_BASE   = "https://graph.facebook.com/v19.0"
+GRAPH_BASE    = "https://graph.facebook.com/v19.0"
+STRATEGY_FILE = SOCIAL_DIR / "weekly_strategy.json"
 
 # ── Story content calendar ─────────────────────────────────────────────────────
 STORY_CALENDAR = {
@@ -247,6 +248,27 @@ class InstagramAgent(BaseAgent):
                 # Cloudflare often blocks this — not critical
                 self.log_info(f"Instagram: Make.com scenario check skipped ({exc}) — webhook still live")
 
+    # ── Weekly strategy reader ────────────────────────────────────────────────
+
+    def _get_strategy_story_brief(self, today: date) -> dict | None:
+        """
+        Check social/weekly_strategy.json for today's story plan.
+        Returns the story dict if today's date matches, else None.
+        """
+        if not STRATEGY_FILE.exists():
+            return None
+        try:
+            strategy = json.loads(STRATEGY_FILE.read_text())
+            today_str = today.isoformat()
+            for day_name, day_data in strategy.get("days", {}).items():
+                if day_data.get("date") == today_str:
+                    story = day_data.get("story")
+                    if story:
+                        return story
+        except Exception as exc:
+            self.log_warn(f"Instagram: could not read weekly_strategy.json: {exc}")
+        return None
+
     # ── Story posting ─────────────────────────────────────────────────────────
 
     def _run_story(self):
@@ -257,9 +279,21 @@ class InstagramAgent(BaseAgent):
 
         self.log_info(f"Instagram: story run — {today} {slot} ({plan['type']})")
 
+        # Check weekly strategy for today's story brief
+        story_brief = self._get_strategy_story_brief(today)
+        if story_brief:
+            self.log_info(
+                f"Instagram: using weekly strategy story brief — "
+                f"type: {story_brief.get('type', '?')}, "
+                f"headline: {story_brief.get('headline', '?')}"
+            )
+            # Override the plan type with the strategy's story type
+            if story_brief.get("type"):
+                plan = {**plan, "type": story_brief["type"]}
+
         # Generate story text
         tid = self.create_task("story_copy", f"Writing {plan['type']} story copy")
-        copy = self._generate_story_copy(plan, today, slot)
+        copy = self._generate_story_copy(plan, today, slot, story_brief=story_brief)
         if not copy:
             self.fail_task(tid, "Story copy generation failed")
             return
@@ -305,7 +339,7 @@ class InstagramAgent(BaseAgent):
             status="delivered",
         )
 
-    def _generate_story_copy(self, plan: dict, today: date, slot: str) -> dict | None:
+    def _generate_story_copy(self, plan: dict, today: date, slot: str, story_brief: dict = None) -> dict | None:
         api_key = os.environ.get("ANTHROPIC_API_KEY", "")
         if not api_key:
             return self._template_story(plan, today)
@@ -334,12 +368,31 @@ STRICT RULES — every post must follow these:
 
 The winning formula: Name their FEAR or PROBLEM in 4-6 words. That's it."""
 
+            # Build strategy brief block if available
+            strategy_block = ""
+            if story_brief:
+                s_headline = story_brief.get("headline", "")
+                s_body     = story_brief.get("body", "")
+                s_cta      = story_brief.get("cta", "")
+                strategy_block = "\n\nWEEKLY STRATEGY BRIEF (use as primary direction):\n"
+                if s_headline:
+                    strategy_block += f"  Headline direction: \"{s_headline}\"\n"
+                if s_body:
+                    strategy_block += f"  Body copy direction: {s_body}\n"
+                if s_cta:
+                    strategy_block += f"  CTA direction: {s_cta}\n"
+                strategy_block += (
+                    "Build from this brief. Keep the headline to 3-6 words. "
+                    "No hyphens. No city names."
+                )
+
             prompt = f"""Story type: {plan['type']}
 Brief: {plan['prompt']}
-Slot: {slot}
+Slot: {slot}{strategy_block}
 
 Apply the WINNING FORMULA: name a real business fear in 4-6 words.
 NO city names. NO town names. Universal Australian small business language only.
+If a weekly strategy brief is provided above, use it as your primary direction.
 
 Return ONLY valid JSON:
 {{

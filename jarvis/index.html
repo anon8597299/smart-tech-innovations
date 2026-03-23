@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jarvis — AI staff for Australian small business. Handles your leads, bookings, emails and social media automatically. Plug in and switch on.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://improveyoursite.com/jarvis/">
+  <meta property="og:title" content="Jarvis — AI Staff for Australian Small Business | ImproveYourSite">
+  <meta property="og:description" content="Stop missing leads. Jarvis answers enquiries, books jobs, and posts to social media — automatically. From $30.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://improveyoursite.com/jarvis/">
+  <meta property="og:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
+  <title>Jarvis — AI Staff for Your Business | ImproveYourSite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/style.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WVV297M5');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    /* ── Page-specific styles ── */
+    :root {
+      --indigo: #5b4dff;
+      --mint:   #2dd4bf;
+      --dark:   #0f172a;
+    }
+
+    /* Hero */
+    .jarvis-hero {
+      padding: 7rem 0 4rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1333 60%, #0f2a25 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .jarvis-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(91,77,255,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(91,77,255,.15);
+      border: 1px solid rgba(91,77,255,.3);
+      border-radius: 99px;
+      padding: .35rem 1rem;
+      font-size: .8rem;
+      font-weight: 700;
+      color: #a5b4fc;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: #2dd4bf;
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .jarvis-hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      max-width: 760px;
+      margin: 0 auto .8rem;
+    }
+    .jarvis-hero h1 .grad {
+      background: linear-gradient(90deg, #5b4dff, #2dd4bf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .jarvis-hero .sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #94a3b8;
+      max-width: 580px;
+      margin: 0 auto 2.4rem;
+      line-height: 1.6;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-jarvis-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: linear-gradient(135deg, #5b4dff, #2dd4bf);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: .85rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(91,77,255,.4);
+    }
+    .btn-jarvis-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(91,77,255,.5);
+    }
+    .btn-jarvis-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: transparent;
+      color: #e2e8f0;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: .85rem 1.6rem;
+      border-radius: 12px;
+      border: 1.5px solid rgba(255,255,255,.15);
+      text-decoration: none;
+      transition: border-color .15s, background .15s;
+    }
+    .btn-jarvis-secondary:hover {
+      border-color: rgba(255,255,255,.35);
+      background: rgba(255,255,255,.05);
+    }
+    .hero-meta {
+      margin-top: 2rem;
+      color: #64748b;
+      font-size: .85rem;
+    }
+    .hero-meta span { color: #94a3b8; }
+
+    /* Social proof strip */
+    .proof-strip {
+      background: #fff;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1.2rem 0;
+    }
+    .proof-strip .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .88rem;
+      font-weight: 600;
+      color: #334155;
+    }
+    .proof-item svg { color: #5b4dff; flex-shrink: 0; }
+
+    /* What it does */
+    .what-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+    .what-section .section-label {
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #5b4dff;
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+    .what-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: .8rem;
+    }
+    .what-section .section-sub {
+      text-align: center;
+      color: #55627b;
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+    }
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .task-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.6rem;
+      background: #f8fafc;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .task-card:hover {
+      border-color: #5b4dff;
+      box-shadow: 0 4px 20px rgba(91,77,255,.08);
+    }
+    .task-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .task-icon.indigo { background: rgba(91,77,255,.1); }
+    .task-icon.mint   { background: rgba(45,212,191,.1); }
+    .task-icon.amber  { background: rgba(245,158,11,.1); }
+    .task-icon.green  { background: rgba(34,197,94,.1); }
+    .task-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: .4rem;
+    }
+    .task-card p {
+      font-size: .9rem;
+      color: #55627b;
+      line-height: 1.55;
+    }
+
+    /* How it works */
+    .how-section {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f8f7ff 0%, #eef2ff 60%, #f0fdf9 100%);
+    }
+    .how-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+    .how-section .section-sub {
+      text-align: center;
+      color: #55627b;
+      margin-bottom: 3rem;
+    }
+    .steps-list {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      min-width: 40px;
+      background: linear-gradient(135deg, #5b4dff, #2dd4bf);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .95rem;
+    }
+    .step-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: .25rem;
+    }
+    .step-content p {
+      font-size: .9rem;
+      color: #55627b;
+      line-height: 1.55;
+    }
+    .step-time {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #5b4dff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .15rem .6rem;
+      border-radius: 99px;
+      margin-top: .35rem;
+    }
+
+    /* Pricing */
+    .pricing-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+    .pricing-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+    .pricing-section .section-sub {
+      text-align: center;
+      color: #55627b;
+      margin-bottom: 3rem;
+    }
+    .pricing-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .price-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .price-card:hover {
+      box-shadow: 0 8px 32px rgba(91,77,255,.1);
+    }
+    .price-card.featured {
+      border-color: #5b4dff;
+      box-shadow: 0 0 0 4px rgba(91,77,255,.1), 0 16px 40px rgba(91,77,255,.15);
+    }
+    .price-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #5b4dff, #2dd4bf);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 800;
+      padding: .25rem 1rem;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .price-type {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #5b4dff;
+      margin-bottom: .5rem;
+    }
+    .price-amount {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1;
+      margin-bottom: .2rem;
+    }
+    .price-amount span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .price-desc {
+      font-size: .88rem;
+      color: #55627b;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .price-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      flex: 1;
+    }
+    .price-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .88rem;
+      color: #334155;
+    }
+    .price-features li::before {
+      content: '';
+      width: 16px; height: 16px;
+      min-width: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%235b4dff' opacity='.12'/%3E%3Cpath d='M4.5 8l2.5 2.5 4-5' stroke='%235b4dff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+      margin-top: 1px;
+    }
+    .btn-price {
+      display: block;
+      text-align: center;
+      padding: .8rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-price.primary {
+      background: linear-gradient(135deg, #5b4dff, #2dd4bf);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(91,77,255,.35);
+    }
+    .btn-price.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(91,77,255,.45);
+    }
+    .btn-price.outline {
+      border: 1.5px solid #5b4dff;
+      color: #5b4dff;
+    }
+    .btn-price.outline:hover {
+      background: rgba(91,77,255,.05);
+    }
+    .ongoing-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: .85rem;
+      color: #64748b;
+    }
+
+    /* Comparison table */
+    .compare-section {
+      padding: 5rem 0;
+      background: #f8fafc;
+    }
+    .compare-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .compare-table {
+      max-width: 780px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
+    .compare-table th {
+      padding: 1rem 1.4rem;
+      text-align: left;
+      font-size: .85rem;
+      font-weight: 700;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .compare-table th:nth-child(2) { text-align: center; color: #a5b4fc; }
+    .compare-table th:nth-child(3) { text-align: center; color: #94a3b8; }
+    .compare-table td {
+      padding: .9rem 1.4rem;
+      font-size: .88rem;
+      color: #334155;
+      border-top: 1px solid #f1f5f9;
+    }
+    .compare-table td:nth-child(2),
+    .compare-table td:nth-child(3) { text-align: center; }
+    .compare-table tr:hover td { background: #f8f7ff; }
+    .check { color: #22c55e; font-size: 1.1rem; font-weight: 700; }
+    .cross { color: #ef4444; font-size: 1.1rem; }
+
+    /* FAQ */
+    .faq-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+    .faq-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .faq-list {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 0;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0f172a;
+      font-size: .95rem;
+      gap: 1rem;
+      user-select: none;
+    }
+    .faq-q:hover { color: #5b4dff; }
+    .faq-chevron {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      transition: transform .2s;
+      color: #94a3b8;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: #5b4dff; }
+    .faq-a {
+      display: none;
+      padding: 0 0 1.2rem;
+      font-size: .9rem;
+      color: #55627b;
+      line-height: 1.65;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1333 60%, #0f2a25 100%);
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .8rem;
+    }
+    .final-cta p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .tasks-grid { grid-template-columns: 1fr; }
+      .pricing-row { grid-template-columns: 1fr; }
+      .proof-strip .container { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVV297M5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="/index.html" class="nav__logo">
+      <svg width="26" height="26" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><defs><linearGradient id="nav-bar" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5b4dff"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs><rect x="5" y="32" width="13" height="22" rx="3.5" fill="url(#nav-bar)"/><rect x="23" y="20" width="13" height="34" rx="3.5" fill="url(#nav-bar)"/><rect x="41" y="8" width="13" height="46" rx="3.5" fill="url(#nav-bar)"/></svg>Improve<span class="accent">YourSite</span>
+    </a>
+    <ul class="nav__menu" id="nav-menu">
+      <li><a href="/index.html#services" class="nav__link">Services</a></li>
+      <li><a href="/our-work.html" class="nav__link">Our Work</a></li>
+      <li><a href="/packages.html" class="nav__link">Packages</a></li>
+      <li><a href="/jarvis/" class="nav__link" style="color:#5b4dff;font-weight:700">Jarvis AI</a></li>
+      <li><a href="/index.html#contact" class="nav__link nav__cta">Get Started</a></li>
+    </ul>
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="jarvis-hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      AI Staff · Now Available
+    </div>
+    <h1>Your business, running<br><span class="grad">while you sleep.</span></h1>
+    <p class="sub">Jarvis handles your leads, emails, bookings and social media — automatically. Built for Australian small business owners who are sick of missing jobs.</p>
+    <div class="hero-cta-row">
+      <a href="#pricing" class="btn-jarvis-primary">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Get Jarvis — from $30
+      </a>
+      <a href="#how" class="btn-jarvis-secondary">See how it works</a>
+    </div>
+    <p class="hero-meta">Works on Mac &amp; Windows &nbsp;·&nbsp; <span>10-minute setup</span> &nbsp;·&nbsp; No subscriptions</p>
+  </div>
+</section>
+
+<!-- Proof strip -->
+<div class="proof-strip">
+  <div class="container">
+    <div class="proof-item">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Runs on your own computer
+    </div>
+    <div class="proof-item">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      Your data stays private
+    </div>
+    <div class="proof-item">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Starts at login, runs 24/7
+    </div>
+    <div class="proof-item">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      No ongoing subscription
+    </div>
+  </div>
+</div>
+
+<!-- What it does -->
+<section class="what-section">
+  <div class="container">
+    <p class="section-label">What Jarvis handles</p>
+    <h2>A full-time admin, at a fraction of the cost.</h2>
+    <p class="section-sub">Jarvis runs 10 specialist agents in the background — each one focused on a different part of your business.</p>
+    <div class="tasks-grid">
+      <div class="task-card">
+        <div class="task-icon indigo">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Lead Follow-Up</h3>
+        <p>Monitors your enquiry inbox and replies to new leads within minutes — day or night, weekends included.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-icon mint">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2dd4bf" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </div>
+        <h3>Instagram Content</h3>
+        <p>Generates and posts branded carousels, stories and reels twice a day — on-brand, on schedule.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-icon amber">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3>Google Ads</h3>
+        <p>Monitors your ad performance daily and surfaces optimisation suggestions before money is wasted.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-icon green">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#22c55e" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+        </div>
+        <h3>Blog Content</h3>
+        <p>Writes and publishes SEO-optimised blog posts every Monday — driving organic search traffic automatically.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-icon indigo">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        </div>
+        <h3>Morning Digest</h3>
+        <p>Sends you a daily 7am summary of everything that happened overnight — leads, tasks, and what's coming today.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-icon mint">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2dd4bf" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3>SEO Monitoring</h3>
+        <p>Tracks your Core Web Vitals and Google rankings daily — alerts you before penalties hit your traffic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-section" id="how">
+  <div class="container">
+    <h2>Setup in 10 minutes.</h2>
+    <p class="section-sub">No command line. No developer. Just follow the on-screen wizard and Jarvis is running.</p>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Download &amp; run the installer</h3>
+          <p>One click on the download button. Open the file — Mac or Windows, it runs automatically and installs everything Jarvis needs.</p>
+          <span class="step-time">2 minutes</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Complete the browser wizard</h3>
+          <p>A setup wizard opens in your browser. Enter your business name, email address, and your Anthropic API key (we show you exactly where to get it — takes 2 minutes).</p>
+          <span class="step-time">5 minutes</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Jarvis starts running</h3>
+          <p>That's it. Jarvis launches in the background and starts monitoring your inbox, preparing your first content posts, and checking your website health.</p>
+          <span class="step-time">Instant</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Monitor from the dashboard</h3>
+          <p>Open <strong>localhost:8080</strong> in your browser at any time to see exactly what Jarvis has done, trigger agents manually, and adjust settings.</p>
+          <span class="step-time">Always available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <h2>Simple pricing.</h2>
+    <p class="section-sub">One-time purchase. No subscription. You only pay for your own Anthropic API usage — typically $5–20/month depending on volume.</p>
+    <div class="pricing-row">
+      <div class="price-card">
+        <div class="price-type">Digital Download</div>
+        <div class="price-amount">$30 <span>AUD</span></div>
+        <p class="price-desc">Download and install on your own computer. Perfect if you want to get started immediately.</p>
+        <ul class="price-features">
+          <li>Mac &amp; Windows installer</li>
+          <li>Browser setup wizard</li>
+          <li>All 10 AI agents included</li>
+          <li>Local dashboard at localhost:8080</li>
+          <li>Automatic startup at login</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#download" class="btn-price outline">Download Now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-type">USB Drive</div>
+        <div class="price-amount">$50 <span>AUD</span></div>
+        <p class="price-desc">Pre-loaded USB drive shipped to your door. Plug in, double-click, done — nothing to download.</p>
+        <ul class="price-features">
+          <li>Physical USB shipped in 2–5 days</li>
+          <li>Pre-loaded installer, no internet needed</li>
+          <li>Mac &amp; Windows support</li>
+          <li>All 10 AI agents included</li>
+          <li>Printed quick-start card</li>
+          <li>Priority email support</li>
+        </ul>
+        <a href="mailto:hello@improveyoursite.com?subject=Jarvis USB Order" class="btn-price primary">Order USB Drive</a>
+      </div>
+      <div class="price-card">
+        <div class="price-type">Managed Plan</div>
+        <div class="price-amount">$199 <span>/ mo</span></div>
+        <p class="price-desc">We monitor Jarvis 24/7, handle updates, and make sure everything keeps running perfectly.</p>
+        <ul class="price-features">
+          <li>Everything in USB</li>
+          <li>We monitor &amp; fix issues proactively</li>
+          <li>Monthly agent updates</li>
+          <li>Custom prompt engineering</li>
+          <li>Quarterly strategy call</li>
+          <li>Phone + email, 1-hour response</li>
+        </ul>
+        <a href="mailto:hello@improveyoursite.com?subject=Jarvis Managed Plan" class="btn-price outline">Enquire Now</a>
+      </div>
+    </div>
+    <p class="ongoing-note">API costs run $5–20/month depending on your volume. No other ongoing fees.</p>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="compare-section">
+  <div class="container">
+    <h2>Jarvis vs. typical SaaS tools</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Jarvis</th>
+          <th>Typical SaaS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monthly subscription</td>
+          <td><span class="check">None</span></td>
+          <td><span class="cross">$50–$500/mo</span></td>
+        </tr>
+        <tr>
+          <td>Setup time</td>
+          <td><span class="check">10 minutes</span></td>
+          <td><span class="cross">Days to weeks</span></td>
+        </tr>
+        <tr>
+          <td>Data stays on your machine</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">No</span></td>
+        </tr>
+        <tr>
+          <td>Works without internet (cached)</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">No</span></td>
+        </tr>
+        <tr>
+          <td>Custom to your business</td>
+          <td><span class="check">Yes — wizard-guided</span></td>
+          <td><span class="cross">Template only</span></td>
+        </tr>
+        <tr>
+          <td>Handles leads + content + SEO</td>
+          <td><span class="check">All-in-one</span></td>
+          <td><span class="cross">Separate tools</span></td>
+        </tr>
+        <tr>
+          <td>Technical skills required</td>
+          <td><span class="check">None</span></td>
+          <td><span class="cross">Moderate to high</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do I need any technical skills?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">No. The installer runs automatically and the setup wizard walks you through every step in plain English. If you can install an app, you can set up Jarvis.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What's the Anthropic API key and where do I get it?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">Anthropic is the company that makes Claude — the AI that powers Jarvis. You create a free account at console.anthropic.com, add a small credit (say $20), and copy your API key into the wizard. That's all the AI usage Jarvis will ever need. Typical cost: $5–20/month.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What happens if my computer is turned off?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">Jarvis pauses when your computer is off and resumes automatically when you log back in. For 24/7 operation, we recommend leaving your computer running or upgrading to the Managed Plan where we handle the infrastructure.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is my business data safe?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">Yes. Everything runs on your own computer — your emails, lead data, and business information never leave your machine. The only external call is to the Anthropic API to process AI requests, which is the same level of privacy as using ChatGPT or any cloud AI product.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I connect it to my existing email or Instagram?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">Yes. The setup wizard connects Jarvis to Gmail (for lead monitoring and outreach) and guides you through linking your Instagram business account via Meta's API. Both connections take under 5 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What industries does it work for?
+          <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">Jarvis works best for service businesses: trades (plumbers, electricians, builders), healthcare (clinics, physio, dental), finance (accountants, brokers), hospitality, and retail. Any business that gets leads via email and promotes on Instagram will see immediate results.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="download">
+  <div class="container">
+    <h2>Ready to stop missing jobs?</h2>
+    <p>Download Jarvis today. 10-minute setup. No tech skills needed.</p>
+    <div class="hero-cta-row">
+      <a href="mailto:hello@improveyoursite.com?subject=Jarvis Download Request" class="btn-jarvis-primary">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download Jarvis — $30
+      </a>
+      <a href="mailto:hello@improveyoursite.com?subject=Jarvis USB Order" class="btn-jarvis-secondary">Order USB Drive — $50</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:#475569;">Questions? Email <a href="mailto:hello@improveyoursite.com" style="color:#a5b4fc">hello@improveyoursite.com</a> — we reply same day.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> ImproveYourSite &nbsp;·&nbsp; <a href="/index.html">Home</a> &nbsp;·&nbsp; <a href="/packages.html">Packages</a> &nbsp;·&nbsp; <a href="/jarvis/">Jarvis AI</a> &nbsp;·&nbsp; <a href="mailto:hello@improveyoursite.com">hello@improveyoursite.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/src/js/main.js" defer></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

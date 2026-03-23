@@ -32,7 +32,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import secrets
 
-# Ensure project root on path
+# Ensure dashboard dir + project root on path
+sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import db

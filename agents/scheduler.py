@@ -13,18 +13,19 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
-from agents.manager  import ManagerAgent
-from agents.social   import SocialAgent
-from agents.ads      import AdsAgent
-from agents.content  import ContentAgent
-from agents.builder  import BuilderAgent
-from agents.analyst  import AnalystAgent
-from agents.leads    import LeadsAgent
-from agents.instagram.agent       import InstagramAgent
-from agents.stripe_monitor.agent  import StripeMonitorAgent
+from agents.manager           import ManagerAgent
+from agents.social            import SocialAgent
+from agents.ads               import AdsAgent
+from agents.content           import ContentAgent
+from agents.builder           import BuilderAgent
+from agents.analyst           import AnalystAgent
+from agents.leads             import LeadsAgent
+from agents.content_strategy  import ContentStrategyAgent
+from agents.instagram.agent        import InstagramAgent
+from agents.stripe_monitor.agent   import StripeMonitorAgent
 from agents.customer_success.agent import CustomerSuccessAgent
-from agents.seo_monitor.agent     import SEOMonitorAgent
-from agents.inbox.agent           import InboxAgent
+from agents.seo_monitor.agent      import SEOMonitorAgent
+from agents.inbox.agent            import InboxAgent
 from dashboard       import db
 
 # ── Agent instances (singletons) ─────────────────────────────────────────────
@@ -35,6 +36,7 @@ _content          = ContentAgent()
 _builder          = BuilderAgent()
 _analyst          = AnalystAgent()
 _leads            = LeadsAgent()
+_content_strategy = ContentStrategyAgent()
 _instagram        = InstagramAgent()
 _stripe_monitor   = StripeMonitorAgent()
 _customer_success = CustomerSuccessAgent()
@@ -50,6 +52,7 @@ AGENT_MAP = {
     "builder":          _builder,
     "analyst":          _analyst,
     "leads":            _leads,
+    "content_strategy": _content_strategy,
     "instagram":        _instagram,
     "stripe_monitor":   _stripe_monitor,
     "customer_success": _customer_success,
@@ -159,6 +162,14 @@ def build_scheduler() -> BackgroundScheduler:
         CronTrigger(hour=6, minute=0, timezone=TIMEZONE),
         id="scheduled_tasks", name="Scheduled task runner",
         misfire_grace_time=300,
+    )
+
+    # ── Content Strategy — Sunday 8:00 PM ────────────────────────────────
+    scheduler.add_job(
+        lambda: _run(_content_strategy),
+        CronTrigger(day_of_week="sun", hour=20, minute=0, timezone=TIMEZONE),
+        id="content_strategy", name="Weekly content strategy planner",
+        misfire_grace_time=600,
     )
 
     # ── Instagram agent ──────────────────────────────────────────────────
