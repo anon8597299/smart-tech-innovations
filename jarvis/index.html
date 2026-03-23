@@ -90,7 +90,7 @@
       background-clip: text;
     }
     .jarvis-hero .sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 4vw, 1.2rem);
       color: #94a3b8;
       max-width: 580px;
       margin: 0 auto 2.4rem;
@@ -552,11 +552,80 @@
       margin: 0 auto 2rem;
     }
 
-    /* Responsive */
+    /* ── Responsive ─────────────────────────────── */
+
+    /* Compare table: scrollable on small screens */
+    @media (max-width: 560px) {
+      .compare-section .container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .compare-table { min-width: 420px; }
+    }
+
     @media (max-width: 640px) {
       .tasks-grid { grid-template-columns: 1fr; }
       .pricing-row { grid-template-columns: 1fr; }
-      .proof-strip .container { gap: 1.2rem; }
+      .proof-strip .container { gap: 1rem; flex-wrap: wrap; justify-content: flex-start; }
+      .proof-item { font-size: .84rem; }
+    }
+
+    @media (max-width: 480px) {
+      /* Nav */
+      .nav__logo { font-size: .95rem; }
+
+      /* Hero */
+      .jarvis-hero { padding: 4rem 0 2.5rem; }
+      .jarvis-hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+      .hero-cta-row { flex-direction: column; align-items: stretch; }
+      .btn-jarvis-primary,
+      .btn-jarvis-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: .85rem 1.5rem;
+        box-sizing: border-box;
+      }
+
+      /* Proof strip */
+      .proof-strip { padding: .85rem 0; }
+      .proof-strip .container { gap: .65rem; }
+      .proof-item { font-size: .8rem; }
+
+      /* Section padding */
+      .what-section,
+      .steps-section,
+      .pricing-section,
+      .compare-section,
+      .faq-section { padding: 3rem 0; }
+      .final-cta { padding: 3rem 0; }
+
+      /* Task grid — already 1 col at 640px, just tighten cards */
+      .task-card { padding: 1rem; }
+      .task-icon { width: 36px; height: 36px; min-width: 36px; }
+      .task-card h3 { font-size: .95rem; }
+
+      /* Steps */
+      .step-row { gap: .8rem; }
+      .step-num { width: 34px; height: 34px; min-width: 34px; font-size: .85rem; }
+      .step-content h3 { font-size: .95rem; }
+
+      /* Pricing cards */
+      .price-card { padding: 1.5rem 1.2rem; }
+      .price-amount { font-size: 2.2rem; }
+      .price-badge { font-size: .64rem; padding: .2rem .7rem; white-space: normal; text-align: center; }
+      .btn-price { padding: .75rem 1rem; font-size: .88rem; }
+
+      /* FAQ */
+      .faq-q { gap: .5rem; font-size: .88rem; padding: .85rem 0; }
+      .faq-chevron { width: 18px; height: 18px; min-width: 18px; }
+      .faq-a { font-size: .88rem; }
+
+      /* Final CTA */
+      .final-cta h2 { font-size: 1.6rem; }
+      .final-cta p { font-size: .95rem; }
+    }
+
+    @media (max-width: 380px) {
+      .jarvis-hero h1 { font-size: 1.75rem; }
+      .price-amount { font-size: 2rem; }
+      .task-card h3 { font-size: .9rem; }
     }
   </style>
 </head>
@@ -572,7 +641,6 @@
     <ul class="nav__menu" id="nav-menu">
       <li><a href="/index.html#services" class="nav__link">Services</a></li>
       <li><a href="/our-work.html" class="nav__link">Our Work</a></li>
-      <li><a href="/packages.html" class="nav__link">Packages</a></li>
       <li><a href="/jarvis/" class="nav__link" style="color:#5b4dff;font-weight:700">Jarvis AI</a></li>
       <li><a href="/index.html#contact" class="nav__link nav__cta">Get Started</a></li>
     </ul>

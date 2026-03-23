@@ -733,6 +733,18 @@
       .dash-stats { grid-template-columns: repeat(2, 1fr); }
       .dash-body { grid-template-columns: 1fr; }
     }
+    @media (max-width: 480px) {
+      /* Dashboard — scale up tiny text so it's legible */
+      .dash-stat__label { font-size: .72rem; }
+      .dash-stat__val { font-size: 1.2rem; }
+      .dash-stat__sub { font-size: .7rem; }
+      .dash-agent-name { font-size: .8rem; }
+      .dash-agent-status { font-size: .72rem; }
+      .dash-feed-text strong { font-size: .78rem; }
+      .dash-feed-text span { font-size: .72rem; }
+      .dash-feed-time { font-size: .7rem; }
+      .dash-panel__head { font-size: .76rem; }
+    }
 
     /* ── Pricing section (top 4 cards) ── */
     .pricing-top {
