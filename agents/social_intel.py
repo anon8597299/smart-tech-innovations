@@ -273,26 +273,26 @@ Analyse this and return ONLY valid JSON:
 Provide 3-5 gaps and 4-6 angles. Make them specific to the Australian market.
 Angles must be contrarian or add genuine value — not generic tips everyone posts."""
 
-    client = anthropic.Anthropic(api_key=api_key)
-    response = client.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=1500,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    raw = response.content[0].text.strip()
-    if raw.startswith("```"):
-        raw = raw.split("```")[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-    raw = raw.strip()
     try:
+        client = anthropic.Anthropic(api_key=api_key)
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1500,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        raw = raw.strip()
         result = json.loads(raw)
+        return {
+            "gaps":   result.get("gaps", []),
+            "angles": result.get("angles", []),
+        }
     except Exception:
         return {"gaps": _cached_gaps(), "angles": _cached_angles()}
-    return {
-        "gaps":   result.get("gaps", []),
-        "angles": result.get("angles", []),
-    }
 
 
 # ── Perplexity helper ────────────────────────────────────────────────────────

@@ -22,6 +22,15 @@ from pathlib import Path
 # Ensure project root is on path for all imports
 sys.path.insert(0, str(Path(__file__).parent))
 
+# Load .env first, overriding any system env vars
+try:
+    from dotenv import load_dotenv
+    _env_path = Path(__file__).parent / "builder" / ".env"
+    if _env_path.exists():
+        load_dotenv(str(_env_path), override=True)
+except ImportError:
+    pass
+
 from dashboard import db
 from agents.scheduler import build_scheduler
 
