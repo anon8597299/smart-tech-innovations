@@ -26,9 +26,11 @@ import re
 import sys
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
+from fastapi import FastAPI, HTTPException, Request, Depends
+from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse, Response
 from fastapi.staticfiles import StaticFiles
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+import secrets
 
 # Ensure project root on path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -37,6 +39,43 @@ from dashboard import db
 import agents.base as agent_base
 
 app = FastAPI(title="IYS Agent Dashboard", docs_url=None, redoc_url=None)
+
+# ── Basic Auth ────────────────────────────────────────────────────────────────
+security = HTTPBasic()
+AUTH_ENABLED = os.environ.get("DASHBOARD_AUTH", "true").lower() == "true"
+
+def verify_auth(credentials: HTTPBasicCredentials = Depends(security)):
+    """Basic auth middleware — username: james, password from DASHBOARD_PASSWORD env var"""
+    if not AUTH_ENABLED:
+        return "bypass"
+    correct_username = secrets.compare_digest(credentials.username, "james")
+    correct_password = secrets.compare_digest(
+        credentials.password, 
+        os.environ.get("DASHBOARD_PASSWORD", "changeme123")
+    )
+    if not (correct_username and correct_password):
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect credentials",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username
+
+# Apply auth to all routes except /health
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    if AUTH_ENABLED and not request.url.path.startswith("/health"):
+        try:
+            credentials = await security(request)
+            verify_auth(credentials)
+        except HTTPException:
+            return Response(
+                status_code=401,
+                headers={"WWW-Authenticate": "Basic"},
+                content="Unauthorized"
+            )
+    response = await call_next(request)
+    return response
 
 # ── SSE broadcast queue (shared with agents) ─────────────────────────────────
 _sse_clients: list[asyncio.Queue] = []
@@ -85,6 +124,11 @@ def _blocking_get(q, timeout: float = 0.2):
 
 
 # ── Routes ───────────────────────────────────────────────────────────────────
+
+@app.get("/health")
+async def health():
+    """Health check endpoint (no auth required)"""
+    return {"status": "ok", "service": "IYS Dashboard"}
 
 @app.get("/")
 async def index():
