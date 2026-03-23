@@ -1,12 +1,28 @@
 {
-  "campaign": "Jarvis Feature Launch \u2014 April 2026",
-  "notes": "One feature spotlight per day. Business operations angle \u2014 NOT website focus. Pain points as hooks. \ud83e\udd9e = OpenClaw identity. \ud83e\udd16 = Claude inside.",
+  "campaign": "Jarvis Feature Launch — April 2026",
+  "notes": "One feature spotlight per day. Business operations angle — NOT website focus. Pain points as hooks. 🦞 = OpenClaw identity. 🤖 = Claude inside.",
   "plan": [
+    {
+      "date": "2026-03-24",
+      "slot": "morning",
+      "theme": "teaser_usb_launch",
+      "headline": "Something ships tomorrow",
+      "slides": [
+        "10 AI agents.",
+        "Pre-loaded on a USB.",
+        "Plug in. We walk you through setup.",
+        "Leads. Social. SEO. Email.",
+        "All automated.",
+        "Tomorrow. $250. DM us."
+      ],
+      "caption": "Tomorrow we launch something simple. A USB with 10 AI agents pre-loaded, powered by OpenClaw + Claude. Plug it in. We walk you through your API keys. Then your business runs itself. $250 one-off. Watch this space. 🦾🤖",
+      "facebook_caption": "Tomorrow we're launching the Jarvis USB Drive — a pre-loaded USB with all 10 AI agents ready to go. Powered by OpenClaw and Claude (Anthropic). You plug it in, we personally walk you through API key setup, and from that point Jarvis handles lead replies, Instagram content, Google Ads monitoring, SEO, email triage and more. $250 one-off. No subscriptions. You pay Anthropic directly for usage ($10–30/month). Ships anywhere in Australia. Stay tuned. 🦾🤖"
+    },
     {
       "date": "2026-03-25",
       "slot": "morning",
       "theme": "product_launch_usb",
-      "headline": "Jarvis USB \u2014 $250. Plug in.",
+      "headline": "Jarvis USB — $250. Plug in.",
       "carousel_script": "social/make_jarvis_usb_carousel.py",
       "slides": [
         "Jarvis USB. $250.",
@@ -16,14 +32,30 @@
         "OpenClaw + Claude inside",
         "DM \"USB\" to order"
       ],
-      "caption": "Introducing the Jarvis USB. $250. Plug it in, we walk you through your API keys, and OpenClaw + Claude start running your business. Leads, emails, social, SEO \u2014 automated. DM \"USB\" to order. Ships Australia-wide. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "We just launched the Jarvis USB Drive. $250 one-off. Pre-loaded with all 10 AI agents powered by OpenClaw and Claude. We personally walk you through setting up your Anthropic API keys \u2014 after that, Jarvis runs your business every day. Lead replies, Instagram content, SEO monitoring, email triage and more. You pay Anthropic directly for API usage (typically $10-30/month). No other fees. Ships anywhere in Australia. Link in bio. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Introducing the Jarvis USB. $250. Plug it in, we walk you through your API keys, and OpenClaw + Claude start running your business. Leads, emails, social, SEO — automated. DM \"USB\" to order. Ships Australia-wide. 🦞🤖",
+      "facebook_caption": "We just launched the Jarvis USB Drive. $250 one-off. Pre-loaded with all 10 AI agents powered by OpenClaw and Claude. We personally walk you through setting up your Anthropic API keys — after that, Jarvis runs your business every day. Lead replies, Instagram content, SEO monitoring, email triage and more. You pay Anthropic directly for API usage (typically $10-30/month). No other fees. Ships anywhere in Australia. Link in bio. 🦞🤖"
+    },
+    {
+      "date": "2026-03-26",
+      "slot": "morning",
+      "theme": "usb_agents_breakdown",
+      "headline": "10 agents. One USB.",
+      "slides": [
+        "What's actually on the Jarvis USB?",
+        "Leads agent — replies 24/7",
+        "Social agent — posts daily",
+        "SEO agent — blogs every week",
+        "Ads, Email, Orders + 4 more",
+        "$250. DM \"USB\" to order"
+      ],
+      "caption": "10 AI agents. All pre-loaded. Leads agent replies to every enquiry 24/7. Social agent posts to Instagram daily. SEO agent publishes blog content every week. Ads agent monitors your Google spend every morning. Plus email, orders, customer success and more. $250. DM \"USB\". 🦾🤖",
+      "facebook_caption": "Breaking down what's actually on the Jarvis USB Drive. 10 AI agents, all powered by OpenClaw and Claude:\n\n1. Leads Agent — replies to every enquiry within minutes, around the clock\n2. Social Agent — creates and posts branded Instagram content daily\n3. SEO Agent — writes and publishes blog content weekly\n4. Ads Agent — checks your Google Ads every morning for wasted spend\n5. Email Agent — sorts, labels and drafts replies to your inbox\n6. Content Agent — generates captions, hooks and post ideas\n7. Digest Agent — sends you a business summary every morning at 6am\n8. Customer Success Agent — follows up after jobs\n9. Orders Agent — handles order confirmation workflows\n10. Site Builder Agent — updates your site copy on demand\n\n$250 one-off. Ships AU-wide. DM \"USB\" or visit improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-03-27",
       "slot": "morning",
       "theme": "product_launch_bmp",
-      "headline": "Business Manager Pro \u2014 Mac Mini. $3,000.",
+      "headline": "Business Manager Pro — Mac Mini. $3,000.",
       "carousel_script": "social/make_jarvis_bmp_carousel.py",
       "slides": [
         "Business Manager Pro. $3,000.",
@@ -33,8 +65,72 @@
         "OpenClaw + Claude. Pre-loaded.",
         "DM \"PRO\" for info"
       ],
-      "caption": "Introducing the Jarvis Business Manager Pro. A Mac Mini with OpenClaw and Claude pre-installed, configured, and shipped to your office anywhere in Australia. Plug it in. We set up your API keys remotely. Your business runs itself. $3,000. DM \"PRO\" for more info. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "The Jarvis Business Manager Pro is a Mac Mini with Jarvis fully pre-installed and configured \u2014 powered by OpenClaw and Claude. We ship it anywhere in Australia. You power it on. We remotely walk you through your Anthropic API key setup. After that, all 10 AI agents are running your business daily: lead replies, Instagram content, Google Ads monitoring, email triage, SEO checks and more. You own the hardware. You own the software. Full control, no lock-in. $3,000 one-off. DM \"PRO\" or visit improveyoursite.com/jarvis. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Introducing the Jarvis Business Manager Pro. A Mac Mini with OpenClaw and Claude pre-installed, configured, and shipped to your office anywhere in Australia. Plug it in. We set up your API keys remotely. Your business runs itself. $3,000. DM \"PRO\" for more info. 🦞🤖",
+      "facebook_caption": "The Jarvis Business Manager Pro is a Mac Mini with Jarvis fully pre-installed and configured — powered by OpenClaw and Claude. We ship it anywhere in Australia. You power it on. We remotely walk you through your Anthropic API key setup. After that, all 10 AI agents are running your business daily: lead replies, Instagram content, Google Ads monitoring, email triage, SEO checks and more. You own the hardware. You own the software. Full control, no lock-in. $3,000 one-off. DM \"PRO\" or visit improveyoursite.com/jarvis. 🦞🤖"
+    },
+    {
+      "date": "2026-03-28",
+      "slot": "morning",
+      "theme": "lead_loss_story",
+      "headline": "They called someone else",
+      "slides": [
+        "Lead came in. 6:47pm.",
+        "You were at dinner.",
+        "No reply that night.",
+        "They booked the next business.",
+        "That happens every week.",
+        "Jarvis replies in minutes. Always."
+      ],
+      "caption": "A lead that comes in at 6:47pm doesn't wait until 9am. They call the next number on Google. Jarvis monitors your enquiry inbox and sends a personalised reply within minutes — any hour, any day. You stop losing jobs you never even knew you had. 🦾",
+      "facebook_caption": "This is how leads get lost. Someone searches for your service at 6:47pm. They fill in your contact form. You're at dinner with your family. No reply that evening. By 9am the next morning, they've already booked someone who got back to them faster. Jarvis monitors your inbox around the clock and sends a personalised response within minutes of every new enquiry — day, night, weekends. You stop losing the jobs you never even knew you had. $250 USB or $250 digital download. DM us or visit improveyoursite.com/jarvis 🦾🤖"
+    },
+    {
+      "date": "2026-03-29",
+      "slot": "morning",
+      "theme": "overnight_recap",
+      "headline": "What Jarvis did while you slept",
+      "slides": [
+        "You went to bed at 10pm.",
+        "Jarvis kept working.",
+        "2 leads replied to.",
+        "1 Instagram post published.",
+        "Google Ads checked at 6am.",
+        "Your morning digest: waiting."
+      ],
+      "caption": "While you slept last night, Jarvis replied to 2 leads, published your morning Instagram post, and had your Google Ads report ready at 6am. That's what running 10 AI agents looks like. 🦾🤖",
+      "facebook_caption": "Here's what a normal night looks like when Jarvis is running:\n\n10pm — you go to bed\n11:14pm — new enquiry comes in, Jarvis replies within 3 minutes\n2:08am — scheduled Instagram carousel publishes\n5:59am — Google Ads spend checked, no anomalies\n6:00am — your business digest hits your inbox\n\nYou wake up at 7am to a business that already started the day without you.\n\nJarvis USB — $250. DM \"USB\" or visit improveyoursite.com/jarvis 🦾🤖"
+    },
+    {
+      "date": "2026-03-30",
+      "slot": "morning",
+      "theme": "competition_angle",
+      "headline": "Your competitor is already using AI",
+      "slides": [
+        "Your competitor replies fast.",
+        "Posts every day.",
+        "Ranks on Google.",
+        "They didn't hire more staff.",
+        "They automated.",
+        "So can you. $250."
+      ],
+      "caption": "The tradies and clinics getting more calls aren't working harder. They're replying faster, posting more consistently, and showing up on Google every week. Not with more staff — with AI. Jarvis does all of it for your own API costs. 🦾",
+      "facebook_caption": "The businesses pulling ahead right now aren't hiring more people. They're using AI to reply to every lead within minutes, post to Instagram every day, and have fresh content on Google every single week. Jarvis gives small Australian businesses the same automation that enterprise companies pay thousands a month for — for $250 one-off and your own Anthropic API costs ($10–30/month). DM us or visit improveyoursite.com/jarvis 🦾🤖"
+    },
+    {
+      "date": "2026-03-31",
+      "slot": "morning",
+      "theme": "email_agent",
+      "headline": "Your inbox is a 2-hour problem",
+      "slides": [
+        "Average SMB owner.",
+        "Spends 2 hrs/day on email.",
+        "10 hrs a week.",
+        "40 hrs a month.",
+        "Sorting. Replying. Chasing.",
+        "Jarvis does it. You just review."
+      ],
+      "caption": "2 hours a day on email. That's 40 hours a month — a full work week — just sorting, replying and chasing. Jarvis monitors your inbox, labels everything, drafts replies, and flags only what needs you. You get your week back. 🦾🤖",
+      "facebook_caption": "The average Australian small business owner spends between 1.5 and 2.5 hours per day managing email. That's 10 hours a week. 40 hours a month. A full work week every single month spent sorting, replying, chasing quotes, following up leads and managing suppliers.\n\nJarvis Email Agent monitors your inbox continuously. It labels and categorises every message, drafts replies using context from your business, and surfaces only the things that genuinely need your attention.\n\nYou do a 15-minute review. Jarvis handles the rest.\n\n$250 USB or digital download. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-01",
@@ -48,8 +144,8 @@
         "That happens every day",
         "Jarvis replies in minutes"
       ],
-      "caption": "Every unanswered lead is money walking out the door. Jarvis monitors your inbox and replies to every enquiry within minutes, any hour. \ud83e\udd9e",
-      "facebook_caption": "Every unanswered lead after hours is money you never see. Jarvis monitors your enquiry inbox around the clock and sends a personalised reply within minutes of every new message. No more losing jobs to whoever replied faster. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Every unanswered lead is money walking out the door. Jarvis monitors your inbox and replies to every enquiry within minutes, any hour. 🦞",
+      "facebook_caption": "Every unanswered lead after hours is money you never see. Jarvis monitors your enquiry inbox around the clock and sends a personalised reply within minutes of every new message. No more losing jobs to whoever replied faster. 🦞🤖"
     },
     {
       "date": "2026-04-02",
@@ -63,8 +159,8 @@
         "your own API costs",
         "You do the maths"
       ],
-      "caption": "Jarvis generates and posts branded Instagram content twice a day, every day. On-brand carousels, stories and reels. For your own Anthropic API costs (typically $10-30/mo). \ud83e\udd9e",
-      "facebook_caption": "The average Australian SMB pays $1,500 to $3,000 a month for social media management. Jarvis generates branded carousels, stories and reels daily and posts them at peak times for your audience. The AI cost: $10-30/month in API costs. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Jarvis generates and posts branded Instagram content twice a day, every day. On-brand carousels, stories and reels. For your own Anthropic API costs (typically $10-30/mo). 🦞",
+      "facebook_caption": "The average Australian SMB pays $1,500 to $3,000 a month for social media management. Jarvis generates branded carousels, stories and reels daily and posts them at peak times for your audience. The AI cost: $10-30/month in API costs. 🦞🤖"
     },
     {
       "date": "2026-04-03",
@@ -78,8 +174,8 @@
         "You find out at month end",
         "Jarvis checks every morning"
       ],
-      "caption": "Wasted ad spend compounds daily when no one is watching. Jarvis audits your Google Ads every morning and flags anything burning budget. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "Most small businesses running Google Ads have no one monitoring them daily. Poor performing keywords keep spending, budgets blow out, and you only find out at month end. Jarvis checks your ad account every morning and surfaces anything that needs attention. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Wasted ad spend compounds daily when no one is watching. Jarvis audits your Google Ads every morning and flags anything burning budget. 🦞🤖",
+      "facebook_caption": "Most small businesses running Google Ads have no one monitoring them daily. Poor performing keywords keep spending, budgets blow out, and you only find out at month end. Jarvis checks your ad account every morning and surfaces anything that needs attention. 🦞🤖"
     },
     {
       "date": "2026-04-04",
@@ -93,8 +189,8 @@
         "Two hours gone",
         "Jarvis does this at 6am"
       ],
-      "caption": "Jarvis triages your hello@ inbox every 30 minutes, sorts what matters and drafts replies. You just approve and send. \ud83e\udd9e",
-      "facebook_caption": "The average business owner spends over two hours a day managing email. Sorting, triaging, drafting replies. Jarvis does this automatically every 30 minutes, flags what needs your attention, and drafts the responses. You spend 10 minutes reviewing instead of two hours grinding. \ud83e\udd9e"
+      "caption": "Jarvis triages your hello@ inbox every 30 minutes, sorts what matters and drafts replies. You just approve and send. 🦞",
+      "facebook_caption": "The average business owner spends over two hours a day managing email. Sorting, triaging, drafting replies. Jarvis does this automatically every 30 minutes, flags what needs your attention, and drafts the responses. You spend 10 minutes reviewing instead of two hours grinding. 🦞"
     },
     {
       "date": "2026-04-05",
@@ -108,8 +204,8 @@
         "You are falling behind",
         "Jarvis writes every Monday"
       ],
-      "caption": "Jarvis publishes an SEO-optimised blog post every Monday morning, automatically. Google rewards the consistency. You do nothing. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "Regular blog content is one of the highest-value SEO activities a business can do. Most business owners know this and still never find time to do it. Jarvis writes and publishes a fully researched, SEO-optimised blog post every Monday morning without you lifting a finger. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Jarvis publishes an SEO-optimised blog post every Monday morning, automatically. Google rewards the consistency. You do nothing. 🦞🤖",
+      "facebook_caption": "Regular blog content is one of the highest-value SEO activities a business can do. Most business owners know this and still never find time to do it. Jarvis writes and publishes a fully researched, SEO-optimised blog post every Monday morning without you lifting a finger. 🦞🤖"
     },
     {
       "date": "2026-04-06",
@@ -123,8 +219,8 @@
         "Two posts already live",
         "That is the digest"
       ],
-      "caption": "Jarvis sends you a morning briefing at 7am. Overnight leads, published posts, site health, what is running today. Before your first coffee. \ud83e\udd9e",
-      "facebook_caption": "Every morning at 7am Jarvis delivers a digest of exactly what happened while you were asleep. Leads that were replied to, Instagram content that went live, your site speed scores, and what the agents have planned for today. You start the day already ahead. \ud83e\udd9e"
+      "caption": "Jarvis sends you a morning briefing at 7am. Overnight leads, published posts, site health, what is running today. Before your first coffee. 🦞",
+      "facebook_caption": "Every morning at 7am Jarvis delivers a digest of exactly what happened while you were asleep. Leads that were replied to, Instagram content that went live, your site speed scores, and what the agents have planned for today. You start the day already ahead. 🦞"
     },
     {
       "date": "2026-04-07",
@@ -138,8 +234,8 @@
         "You had no idea",
         "Jarvis catches it first"
       ],
-      "caption": "Jarvis monitors your Core Web Vitals every morning and alerts you before a Google penalty costs you customers. \ud83e\udd9e",
-      "facebook_caption": "Google penalises websites that load slowly, hurting your rankings and reducing calls. Most business owners only notice when the phone goes quiet. Jarvis monitors your site performance daily and sends an alert the moment anything changes so you can fix it before it costs you. \ud83e\udd9e"
+      "caption": "Jarvis monitors your Core Web Vitals every morning and alerts you before a Google penalty costs you customers. 🦞",
+      "facebook_caption": "Google penalises websites that load slowly, hurting your rankings and reducing calls. Most business owners only notice when the phone goes quiet. Jarvis monitors your site performance daily and sends an alert the moment anything changes so you can fix it before it costs you. 🦞"
     },
     {
       "date": "2026-04-08",
@@ -153,8 +249,8 @@
         "Or Jarvis",
         "your own API costs. Same output."
       ],
-      "caption": "Jarvis does the work of a marketing agency for your own Anthropic API costs (typically $10-30/mo). Social content, lead follow-up, SEO monitoring, ad checks. All automated. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "A marketing agency managing your social media, ads, SEO and lead follow-up will charge $3,000 to $5,000 a month. Jarvis does all of those tasks automatically for $10-30/month in API costs in Anthropic API usage. Same output. No account manager fees. No retainer. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Jarvis does the work of a marketing agency for your own Anthropic API costs (typically $10-30/mo). Social content, lead follow-up, SEO monitoring, ad checks. All automated. 🦞🤖",
+      "facebook_caption": "A marketing agency managing your social media, ads, SEO and lead follow-up will charge $3,000 to $5,000 a month. Jarvis does all of those tasks automatically for $10-30/month in API costs in Anthropic API usage. Same output. No account manager fees. No retainer. 🦞🤖"
     },
     {
       "date": "2026-04-09",
@@ -168,8 +264,8 @@
         "Jarvis still running",
         "Nothing falls through the cracks"
       ],
-      "caption": "Jarvis does not take days off. While you are on a job, in a meeting or on a beach, leads are getting replied to and content is going live. \ud83e\udd9e",
-      "facebook_caption": "Jarvis runs every day regardless of where you are. On a job, travelling, or on leave. Leads get replied to within minutes, Instagram posts go live on schedule, and your morning digest arrives at 7am no matter what. Your business keeps running while you focus on the work. \ud83e\udd9e"
+      "caption": "Jarvis does not take days off. While you are on a job, in a meeting or on a beach, leads are getting replied to and content is going live. 🦞",
+      "facebook_caption": "Jarvis runs every day regardless of where you are. On a job, travelling, or on leave. Leads get replied to within minutes, Instagram posts go live on schedule, and your morning digest arrives at 7am no matter what. Your business keeps running while you focus on the work. 🦞"
     },
     {
       "date": "2026-04-10",
@@ -183,8 +279,8 @@
         "No early warning",
         "Jarvis catches it early"
       ],
-      "caption": "Jarvis runs a weekly health check on every active client and flags relationship risks before they become cancellations. \ud83e\udd9e",
-      "facebook_caption": "Most client churn is preventable. The problem is nobody checks in consistently. Jarvis runs a weekly health check on every active client relationship, surfaces warning signs, and prompts you to reach out before a client goes cold. Retention is easier than acquisition. \ud83e\udd9e"
+      "caption": "Jarvis runs a weekly health check on every active client and flags relationship risks before they become cancellations. 🦞",
+      "facebook_caption": "Most client churn is preventable. The problem is nobody checks in consistently. Jarvis runs a weekly health check on every active client relationship, surfaces warning signs, and prompts you to reach out before a client goes cold. Retention is easier than acquisition. 🦞"
     },
     {
       "date": "2026-04-11",
@@ -198,8 +294,24 @@
         "Or one Jarvis install",
         "From $50"
       ],
-      "caption": "Add up what you spend on humans doing tasks Jarvis now handles. The number will surprise you. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "An admin assistant costs $50k to $60k a year. A social media manager $1,500 to $3,000 a month. A marketing retainer $3,000 to $5,000 a month. Jarvis handles the daily execution of all three for $10-30/month in API costs in API costs. One install. No salary. No super. No leave. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Add up what you spend on humans doing tasks Jarvis now handles. The number will surprise you. 🦞🤖",
+      "facebook_caption": "An admin assistant costs $50k to $60k a year. A social media manager $1,500 to $3,000 a month. A marketing retainer $3,000 to $5,000 a month. Jarvis handles the daily execution of all three for $10-30/month in API costs in API costs. One install. No salary. No super. No leave. 🦞🤖"
+    },
+    {
+      "date": "2026-04-12",
+      "slot": "morning",
+      "theme": "objection_setup",
+      "headline": "Is it hard to set up?",
+      "slides": [
+        "We get this question a lot.",
+        "\"Is it hard to set up?\"",
+        "Honest answer: no.",
+        "You fill in your business name.",
+        "We walk you through API keys.",
+        "10 minutes. Then it runs itself."
+      ],
+      "caption": "The most common question we get: \"Is it hard to set up?\" No. You tell Jarvis your business name and industry. We personally walk you through getting your Anthropic API key (5 minutes, no credit card tricks). After that, Jarvis runs itself every day. 🦾🤖",
+      "facebook_caption": "The most common thing that stops people is \"it sounds complicated\". Here's exactly what setup looks like:\n\n1. Download Jarvis (or plug in your USB)\n2. Open the setup wizard\n3. Enter your business name, industry, and what you want automated\n4. We personally walk you through creating your Anthropic API key — this takes about 5 minutes\n5. Jarvis starts running\n\nThat's it. After that, agents run on a schedule automatically. No ongoing setup, no technical maintenance, no IT person needed.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-13",
@@ -213,8 +325,8 @@
         "They expected a reply today",
         "Jarvis alerts you instantly"
       ],
-      "caption": "Jarvis monitors your Stripe account and fires an instant alert the moment a payment or order lands. Never miss a new customer. \ud83e\udd9e",
-      "facebook_caption": "A new customer paying online expects a prompt response. If that payment notification sits unread in your inbox overnight, you have already created a bad first impression. Jarvis monitors your Stripe account and sends an instant alert the moment any payment is received. \ud83e\udd9e"
+      "caption": "Jarvis monitors your Stripe account and fires an instant alert the moment a payment or order lands. Never miss a new customer. 🦞",
+      "facebook_caption": "A new customer paying online expects a prompt response. If that payment notification sits unread in your inbox overnight, you have already created a bad first impression. Jarvis monitors your Stripe account and sends an instant alert the moment any payment is received. 🦞"
     },
     {
       "date": "2026-04-14",
@@ -228,8 +340,8 @@
         "Builds a PDF report",
         "Sends the first email"
       ],
-      "caption": "Jarvis runs a full lead pipeline daily. Finds prospects, audits their sites, builds a score sheet and sends the outreach email. Automatically. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "Jarvis does the entire outbound lead process without you touching it. It finds target businesses, verifies them via Google Maps, checks their site performance, builds a PDF score sheet, and sends a personalised outreach email. Every day. While you are on the tools. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Jarvis runs a full lead pipeline daily. Finds prospects, audits their sites, builds a score sheet and sends the outreach email. Automatically. 🦞🤖",
+      "facebook_caption": "Jarvis does the entire outbound lead process without you touching it. It finds target businesses, verifies them via Google Maps, checks their site performance, builds a PDF score sheet, and sends a personalised outreach email. Every day. While you are on the tools. 🦞🤖"
     },
     {
       "date": "2026-04-15",
@@ -243,8 +355,24 @@
         "See what ran today",
         "Approve and move on"
       ],
-      "caption": "The Jarvis dashboard works on any device. Check what your agents have done, trigger a run or pause the system. From your phone, on a job. \ud83e\udd9e",
-      "facebook_caption": "Jarvis has a full dashboard you can check from any phone or laptop browser. See every task your agents ran today, what leads were replied to, what posts went live, and what is coming tomorrow. You manage the business from anywhere without managing the admin. \ud83e\udd9e"
+      "caption": "The Jarvis dashboard works on any device. Check what your agents have done, trigger a run or pause the system. From your phone, on a job. 🦞",
+      "facebook_caption": "Jarvis has a full dashboard you can check from any phone or laptop browser. See every task your agents ran today, what leads were replied to, what posts went live, and what is coming tomorrow. You manage the business from anywhere without managing the admin. 🦞"
+    },
+    {
+      "date": "2026-04-16",
+      "slot": "morning",
+      "theme": "pricing_value",
+      "headline": "$250 vs $2,000/month",
+      "slides": [
+        "Social media manager: $2,000/mo",
+        "Lead follow-up VA: $1,500/mo",
+        "SEO content writer: $800/mo",
+        "Email manager: $600/mo",
+        "Total: $4,900/mo",
+        "Jarvis: $250 once. Your API costs."
+      ],
+      "caption": "Social media manager. Lead follow-up VA. SEO content writer. Email manager. That's $4,900/month minimum to hire those roles. Jarvis does all of it for $250 one-off and your own Anthropic API costs ($10–30/month). 🦾🤖",
+      "facebook_caption": "Let's run the real numbers.\n\nSocial media manager (posts daily): $1,500–$2,500/month\nVirtual assistant for lead follow-up: $1,200–$2,000/month\nSEO content writer (weekly blogs): $600–$1,200/month\nEmail manager: $500–$800/month\n\nTotal: $3,800–$6,500/month to cover what Jarvis does automatically.\n\nJarvis cost: $250 one-off (digital download or USB). Plus your own Anthropic API usage — typically $10–30/month.\n\nYou own the software. No subscription. No lock-in. Full control.\n\nimproveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-17",
@@ -258,8 +386,40 @@
         "We fix it that day",
         "$199 per month"
       ],
-      "caption": "Our Managed Plan means we monitor Jarvis 24/7, handle updates and tune your agents monthly. You run the business, we run Jarvis. \ud83e\udd9e",
-      "facebook_caption": "If you want all the results without ever touching the settings, our Managed Plan has you covered. We monitor the system, handle every update, do custom prompt engineering for your specific business, and provide phone and email support with a one-hour response time. $199 a month. Link in bio. \ud83e\udd9e"
+      "caption": "Our Managed Plan means we monitor Jarvis 24/7, handle updates and tune your agents monthly. You run the business, we run Jarvis. 🦞",
+      "facebook_caption": "If you want all the results without ever touching the settings, our Managed Plan has you covered. We monitor the system, handle every update, do custom prompt engineering for your specific business, and provide phone and email support with a one-hour response time. $199 a month. Link in bio. 🦞"
+    },
+    {
+      "date": "2026-04-18",
+      "slot": "morning",
+      "theme": "customer_success_agent",
+      "headline": "The job's done. Now what?",
+      "slides": [
+        "Job complete. Invoice sent.",
+        "Most businesses stop there.",
+        "No follow-up. No review ask.",
+        "No repeat booking attempt.",
+        "Jarvis follows up automatically.",
+        "More reviews. More repeat jobs."
+      ],
+      "caption": "Most businesses send the invoice and move on. Jarvis Customer Success Agent follows up after every job — asks for a Google review, checks satisfaction, and sends a rebooking prompt at the right time. More 5-star reviews. More repeat work. 🦾",
+      "facebook_caption": "After a job is complete, most small businesses send the invoice and forget about the customer until they call again. That gap is costing you reviews, repeat business, and referrals.\n\nJarvis Customer Success Agent automatically follows up after every completed job:\n— Sends a personalised thank-you message\n— Asks for a Google review at the right moment\n— Checks satisfaction and flags any issues\n— Sends a rebooking prompt based on your service type\n\nMore 5-star reviews. More repeat jobs. Without lifting a finger.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
+    },
+    {
+      "date": "2026-04-19",
+      "slot": "morning",
+      "theme": "case_study_tradie",
+      "headline": "3 more jobs. Same hours.",
+      "slides": [
+        "Sydney plumber.",
+        "Was missing after-hours leads.",
+        "Set up Jarvis in 10 minutes.",
+        "Leads replied to within minutes.",
+        "3 extra bookings. First week.",
+        "Same hours. More revenue."
+      ],
+      "caption": "A Sydney plumber was losing after-hours leads to competitors who replied faster. Jarvis started replying within minutes — day and night. 3 extra bookings in the first week. Same hours. Same team. Just faster replies. 🦾",
+      "facebook_caption": "A plumber in Sydney was getting leads through his website after 5pm — but by the time he saw them the next morning, the customers had already booked someone else.\n\nHe set up Jarvis in 10 minutes. Jarvis now monitors his enquiry inbox and replies to every message within minutes, including a personalised response with his availability and a quote request.\n\nFirst week: 3 bookings that would have gone elsewhere. Same hours. Same team. Just faster replies.\n\nThat's what Jarvis does for trades businesses.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-20",
@@ -273,8 +433,24 @@
         "First reply wins",
         "Jarvis was first"
       ],
-      "caption": "Tradies lose jobs every day to businesses who replied first. Jarvis replies within minutes at any hour so you are always first. \ud83e\udd9e",
-      "facebook_caption": "Every tradie on a job site knows the feeling. You get off at 5pm, check your phone, and there are two enquiries from the afternoon. You reply, but they have already booked someone else. Jarvis replies within minutes at any hour. You are always the first response. \ud83e\udd9e"
+      "caption": "Tradies lose jobs every day to businesses who replied first. Jarvis replies within minutes at any hour so you are always first. 🦞",
+      "facebook_caption": "Every tradie on a job site knows the feeling. You get off at 5pm, check your phone, and there are two enquiries from the afternoon. You reply, but they have already booked someone else. Jarvis replies within minutes at any hour. You are always the first response. 🦞"
+    },
+    {
+      "date": "2026-04-21",
+      "slot": "morning",
+      "theme": "seo_agent",
+      "headline": "Google needs fresh content. Every week.",
+      "slides": [
+        "Google rewards fresh content.",
+        "Most SMBs post once a year.",
+        "Or never.",
+        "Jarvis writes + publishes weekly.",
+        "Real SEO articles. Your voice.",
+        "While you run your business."
+      ],
+      "caption": "Google's algorithm rewards websites that publish fresh, relevant content consistently. Most small businesses haven't touched their site in months. Jarvis SEO Agent writes and publishes a new article to your site every week — in your voice, for your suburb, targeting your services. 🦾",
+      "facebook_caption": "One of the biggest ranking advantages you can have over local competitors is publishing fresh content consistently. Google notices. Most small business websites go months without a new page or post.\n\nJarvis SEO Agent:\n— Researches keywords for your service + location\n— Writes a full SEO article in your voice every week\n— Publishes it directly to your website\n— No writing. No briefs. No freelancer needed.\n\nOver 12 months that's 52 new pages working for you on Google — compounding every week.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-22",
@@ -288,8 +464,24 @@
         "You are still doing it manually",
         "That gap is growing"
       ],
-      "caption": "The businesses winning in your market right now are using AI to do more with less. Jarvis is how you catch up. From $50. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "Your competitors who adopted AI tools early are now replying to leads faster, posting consistent content, and showing up higher on Google. The gap between AI-powered businesses and manual ones is growing every week. Jarvis is how you close that gap, for $50 and 10 minutes of setup. \ud83e\udd9e\ud83e\udd16"
+      "caption": "The businesses winning in your market right now are using AI to do more with less. Jarvis is how you catch up. From $50. 🦞🤖",
+      "facebook_caption": "Your competitors who adopted AI tools early are now replying to leads faster, posting consistent content, and showing up higher on Google. The gap between AI-powered businesses and manual ones is growing every week. Jarvis is how you close that gap, for $50 and 10 minutes of setup. 🦞🤖"
+    },
+    {
+      "date": "2026-04-23",
+      "slot": "morning",
+      "theme": "digest_agent",
+      "headline": "Your 6am business report",
+      "slides": [
+        "6:00am. Every morning.",
+        "Leads received overnight.",
+        "Instagram reach yesterday.",
+        "Google Ads spend + alerts.",
+        "Top 3 tasks for today.",
+        "In your inbox. Before coffee."
+      ],
+      "caption": "Every morning at 6am, Jarvis sends you a digest: overnight leads, yesterday's Instagram reach, Google Ads spend, and your top 3 priorities for the day. You know exactly what your business did overnight before you even have coffee. 🦾🤖",
+      "facebook_caption": "Every morning at 6am, Jarvis Digest Agent sends you a personalised business summary:\n\n📥 Leads received overnight and status of replies\n📊 Instagram reach and engagement from yesterday\n💰 Google Ads spend and any anomalies to review\n📝 SEO content published this week\n✅ Top 3 action items for today\n\nYou start every day knowing exactly what happened while you were off — no logging into five different platforms, no manual checking.\n\nJust a clear picture of your business. In your inbox. Before 6am.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-24",
@@ -303,8 +495,40 @@
         "Ad checks: automated",
         "From $50"
       ],
-      "caption": "Every task on that list used to cost you hours or thousands per month. Jarvis does all of it for your own API costs. Link in bio. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "Jarvis automates your lead replies, daily Instagram content, SEO monitoring, Google Ads checks, email triage, blog writing and morning digest. Everything your marketing team does daily, automated from one install on your computer. $50 download or $50 USB. Link in bio. \ud83e\udd9e\ud83e\udd16"
+      "caption": "Every task on that list used to cost you hours or thousands per month. Jarvis does all of it for your own API costs. Link in bio. 🦞🤖",
+      "facebook_caption": "Jarvis automates your lead replies, daily Instagram content, SEO monitoring, Google Ads checks, email triage, blog writing and morning digest. Everything your marketing team does daily, automated from one install on your computer. $50 download or $50 USB. Link in bio. 🦞🤖"
+    },
+    {
+      "date": "2026-04-25",
+      "slot": "morning",
+      "theme": "openclaw_explainer",
+      "headline": "What is OpenClaw?",
+      "slides": [
+        "Jarvis runs on two things.",
+        "OpenClaw — the agent engine.",
+        "Claude — the AI brain.",
+        "OpenClaw schedules everything.",
+        "Claude reads, writes, decides.",
+        "Together: your AI business team."
+      ],
+      "caption": "Jarvis is powered by OpenClaw (the agent orchestration engine that schedules and runs all your AI tasks) and Claude by Anthropic (the AI that reads, writes and makes decisions). Two tools. One business that runs itself. 🦾🤖",
+      "facebook_caption": "A lot of people ask: what's actually powering Jarvis?\n\nTwo things:\n\n🦾 OpenClaw — the agent orchestration engine. It runs on your hardware, schedules all 10 agents, manages what runs when, and handles the automation pipelines. Think of it as the operations manager.\n\n🤖 Claude by Anthropic — the AI brain. It reads your emails, writes your content, monitors your ads, and makes intelligent decisions. Think of it as the smart staff member.\n\nWe use both of these same tools to run our own business at ImproveYourSite. When you buy Jarvis, you're getting the exact same setup — configured for your business.\n\nYou get a Claude API key directly from Anthropic. They bill you directly ($10–30/month typically). We don't touch your billing.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
+    },
+    {
+      "date": "2026-04-26",
+      "slot": "morning",
+      "theme": "managed_plan_push",
+      "headline": "Want us to run it for you?",
+      "slides": [
+        "Jarvis runs itself.",
+        "But some businesses want more.",
+        "We manage the whole thing.",
+        "Jarvis. Website. Content.",
+        "One team. $199/month.",
+        "DM \"MANAGED\" for info."
+      ],
+      "caption": "Jarvis runs itself — but some business owners want us to handle everything. Our Managed Plan covers Jarvis operation, website management, and monthly content for $199/month. One team, zero overhead. DM \"MANAGED\" for details. 🦾",
+      "facebook_caption": "Jarvis is built to run itself. But for business owners who want a completely hands-off setup, our Managed Plan has you covered.\n\nFor $199/month we:\n✅ Operate Jarvis on your behalf every day\n✅ Manage and update your website\n✅ Plan and post your monthly content\n✅ Monitor lead flow and flag anything that needs attention\n✅ Send you a monthly performance report\n✅ Act as your dedicated account manager\n\nOne team. Zero overhead. You focus on running your business.\n\nDM \"MANAGED\" or email hello@improveyoursite.com 🦾🤖"
     },
     {
       "date": "2026-04-27",
@@ -318,8 +542,24 @@
         "Checking your ads",
         "DM us which one"
       ],
-      "caption": "Drop the one thing you are still doing manually that you know AI should handle. DM us or comment below. \ud83e\udd9e",
-      "facebook_caption": "We built Jarvis by looking at exactly what small business owners spend their time on that AI can handle better. What are you still doing manually that you wish was automated? Drop it in the comments. We read every reply. \ud83e\udd9e"
+      "caption": "Drop the one thing you are still doing manually that you know AI should handle. DM us or comment below. 🦞",
+      "facebook_caption": "We built Jarvis by looking at exactly what small business owners spend their time on that AI can handle better. What are you still doing manually that you wish was automated? Drop it in the comments. We read every reply. 🦞"
+    },
+    {
+      "date": "2026-04-28",
+      "slot": "morning",
+      "theme": "ads_agent",
+      "headline": "Your Google Ads are bleeding money",
+      "slides": [
+        "Google Ads running.",
+        "No one checking them daily.",
+        "Bad keywords spending up.",
+        "Low quality score draining budget.",
+        "You find out at month end.",
+        "Jarvis checks every morning at 6am."
+      ],
+      "caption": "Google Ads without daily monitoring is a slow leak. Bad keywords, poor quality scores, budget running on the wrong terms — you find out a month later when the bill arrives. Jarvis Ads Agent checks every metric every morning and flags anything burning money. 🦾",
+      "facebook_caption": "Most small businesses running Google Ads check them once a week. Or once a month. Or when the invoice comes in and the number looks wrong.\n\nIn between those check-ins, campaigns quietly bleed money on the wrong keywords, tanked quality scores, and irrelevant search terms.\n\nJarvis Ads Agent runs every morning at 6am:\n— Checks spend vs budget\n— Flags keywords with poor conversion\n— Reviews quality scores and landing page performance\n— Alerts you to anything that needs action that day\n\nYou stop finding out about problems after the damage is done.\n\n$250. improveyoursite.com/jarvis 🦾🤖"
     },
     {
       "date": "2026-04-29",
@@ -333,8 +573,24 @@
         "Ads monitored daily",
         "Cost: under $20"
       ],
-      "caption": "This is what a month of running Jarvis looks like for a typical Australian small business. Consistent, automated, under $20 in total AI costs. \ud83e\udd9e\ud83e\udd16",
-      "facebook_caption": "After 30 days running Jarvis: every enquiry received a reply within minutes, Instagram content posted twice daily, SEO health monitored every morning, Google Ads flagged twice. Total AI usage cost for the month: $14.80. That is the Jarvis business case. Link in bio. \ud83e\udd9e\ud83e\udd16"
+      "caption": "This is what a month of running Jarvis looks like for a typical Australian small business. Consistent, automated, under $20 in total AI costs. 🦞🤖",
+      "facebook_caption": "After 30 days running Jarvis: every enquiry received a reply within minutes, Instagram content posted twice daily, SEO health monitored every morning, Google Ads flagged twice. Total AI usage cost for the month: $14.80. That is the Jarvis business case. Link in bio. 🦞🤖"
+    },
+    {
+      "date": "2026-04-30",
+      "slot": "morning",
+      "theme": "month_review",
+      "headline": "30 days of Jarvis. Here's what happened.",
+      "slides": [
+        "April. Month one for many.",
+        "Leads replied to within minutes.",
+        "Instagram posted every day.",
+        "SEO articles published weekly.",
+        "Google Ads monitored daily.",
+        "Same team. Bigger business."
+      ],
+      "caption": "April done. Leads replied to around the clock. Instagram posted every single day. SEO content published weekly. Google Ads checked every morning. This is what one month with Jarvis looks like. May is next. 🦾🤖",
+      "facebook_caption": "End of April. If you've been running Jarvis through the month, here's a snapshot of what your AI team did:\n\n📥 Every lead enquiry replied to within minutes — day and night\n📸 30 Instagram posts published — carousels, captions, hashtags, scheduled\n📝 4 SEO articles published to your website\n💰 Google Ads checked 30 mornings in a row\n📧 Inbox sorted, labelled and drafted daily\n📊 30 morning business digests delivered at 6am\n\nSame team. Same hours. Just a business that runs 24 hours a day instead of 8.\n\nNot set up yet? Still time. improveyoursite.com/jarvis 🦾🤖"
     }
   ]
 }
