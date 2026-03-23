@@ -35,8 +35,11 @@ import secrets
 # Ensure project root on path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from dashboard import db
-import agents.base as agent_base
+import db
+try:
+    import agents.base as agent_base
+except ImportError:
+    agent_base = None  # Gracefully handle if agents module unavailable
 
 app = FastAPI(title="IYS Agent Dashboard", docs_url=None, redoc_url=None)
 
