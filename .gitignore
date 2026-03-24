@@ -17,3 +17,4 @@ marketing/
 
 # Social data files — push these (queue, intel, leads seed)
 # social/ directory is NOT ignored — only the images above are
+.run.pid
