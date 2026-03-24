@@ -301,7 +301,7 @@ def send_confirmation(n_images: int, pushed: bool) -> None:
 
 def run_once() -> bool:
     """Check inbox once. Returns True if photos were processed."""
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Checking {JAMES_EMAIL} for Tim's reply...")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Checking {WATCH_EMAIL} for Tim's reply...")
     messages = check_inbox()
 
     if not messages:
