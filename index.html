@@ -22,7 +22,7 @@
   <meta property="og:image:alt" content="ImproveYourSite | AI business tools for Australian small businesses">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Run a Smarter Business. No Tech Team Required. | ImproveYourSite">
-  <meta name="twitter:description" content="AI tools for Australian small businesses. 10 agents, $50, 10-minute setup.">
+  <meta name="twitter:description" content="AI tools for Australian small businesses. 10 agents, $250 one-off, 10-minute setup.">
   <meta name="twitter:image" content="https://improveyoursite.com/assets/brand/og-improveyoursite.jpg">
   <title>ImproveYourSite | AI Business Tools &amp; Websites for Australian Small Businesses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -451,8 +451,10 @@
     }
     .how-paths {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 2.5rem;
+      max-width: 640px;
+      margin: 0 auto;
     }
     @media (max-width: 680px) { .how-paths { grid-template-columns: 1fr; } }
     .how-path {
@@ -937,6 +939,167 @@
       .demo-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── Dashboard enhanced tabs & controls ── */
+    .dash-main { display: flex; flex-direction: column; }
+    .dash-tab-panel { display: none; flex: 1; }
+    .dash-tab-panel.active { display: block; }
+    .dash-tab-panel--scroll { overflow-y: auto; max-height: 340px; }
+
+    /* Workload knob (5-bar signal style) */
+    .wl-scale {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 3px;
+      transition: background .1s;
+    }
+    .wl-scale:hover { background: rgba(255,255,255,.04); }
+    .wl-seg { width: 4px; border-radius: 1.5px; background: #2a2a38; transition: background .1s; }
+    .wl-seg:nth-child(1) { height: 6px; }
+    .wl-seg:nth-child(2) { height: 8px; }
+    .wl-seg:nth-child(3) { height: 11px; }
+    .wl-seg:nth-child(4) { height: 13px; }
+    .wl-seg:nth-child(5) { height: 16px; }
+    [data-wl="1"] .wl-seg:nth-child(-n+1),
+    [data-wl="1"] .wl-seg:nth-child(1)  { background: #22c55e; }
+    [data-wl="2"] .wl-seg:nth-child(-n+2) { background: #84cc16; }
+    [data-wl="3"] .wl-seg:nth-child(-n+3) { background: #f59e0b; }
+    [data-wl="4"] .wl-seg:nth-child(-n+4) { background: #f97316; }
+    [data-wl="5"] .wl-seg:nth-child(-n+5) { background: #ef4444; }
+
+    /* Agent ext rows in Agents tab */
+    .dash-agent-ext { border-bottom: 1px solid #1a1a24; }
+    .dash-agent-ext:last-child { border-bottom: none; }
+    .dash-agent-ext__row {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .4rem .8rem;
+      cursor: default;
+    }
+    .dash-agent-ext-name { font-size: .72rem; color: #e2e8f0; font-weight: 600; flex: 1; min-width: 0; }
+    .dash-agent-ext-meta { font-size: .58rem; color: #475569; white-space: nowrap; }
+    .dash-agent-talk {
+      background: transparent;
+      border: 1px solid #2a2a38;
+      color: #5b4dff;
+      font-size: .58rem;
+      font-weight: 700;
+      padding: .15rem .42rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .dash-agent-talk:hover { background: rgba(91,77,255,.12); border-color: #5b4dff; }
+    /* Agent comms panel */
+    .agent-comms {
+      display: none;
+      background: #0a0a12;
+      border-top: 1px solid #1e1e2c;
+      padding: .55rem .8rem .6rem;
+    }
+    .agent-comms.open { display: block; }
+    .acp-label { font-size: .56rem; color: #475569; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .22rem; display: flex; align-items: center; justify-content: space-between; }
+    .acp-label span { color: #5b4dff; cursor: pointer; font-weight: 600; }
+    .acp-prompt {
+      width: 100%; box-sizing: border-box;
+      background: #13131a;
+      border: 1px solid #2a2a38;
+      border-radius: 5px;
+      padding: .32rem .5rem;
+      font-size: .61rem;
+      color: #94a3b8;
+      font-family: 'Inter', monospace;
+      resize: vertical;
+      min-height: 38px;
+      margin-bottom: .38rem;
+    }
+    .acp-prompt:focus { outline: none; border-color: #5b4dff; }
+    .acp-row { display: flex; gap: .35rem; margin-bottom: .3rem; align-items: center; }
+    .acp-msg {
+      flex: 1;
+      background: #13131a;
+      border: 1px solid #2a2a38;
+      border-radius: 5px;
+      padding: .28rem .5rem;
+      font-size: .63rem;
+      color: #94a3b8;
+      font-family: 'Inter', sans-serif;
+    }
+    .acp-msg:focus { outline: none; border-color: #5b4dff; }
+    .acp-send {
+      background: #5b4dff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: .28rem .6rem;
+      font-size: .62rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .acp-drop {
+      border: 1px dashed #2a2a38;
+      border-radius: 5px;
+      padding: .28rem .5rem;
+      text-align: center;
+      font-size: .58rem;
+      color: #334155;
+      cursor: pointer;
+    }
+    .acp-drop:hover { border-color: #5b4dff; color: #5b4dff; }
+
+    /* Settings panel */
+    .dash-settings-inner { padding: .5rem .8rem; }
+    .dash-sgroup { margin-bottom: .8rem; }
+    .dash-sgroup h4 {
+      font-size: .58rem;
+      font-weight: 700;
+      color: #5b4dff;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 .38rem;
+      padding-bottom: .25rem;
+      border-bottom: 1px solid #1a1a24;
+    }
+    .dash-srow { display: flex; align-items: center; justify-content: space-between; padding: .18rem 0; }
+    .dash-srow__label { font-size: .64rem; color: #94a3b8; }
+    .dash-stoggle {
+      width: 22px; height: 12px;
+      background: #5b4dff;
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .dash-stoggle::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px; right: 2px;
+    }
+    .dash-stoggle.off { background: #334155; }
+    .dash-stoggle.off::after { right: auto; left: 2px; }
+    .dash-sselect {
+      background: #13131a;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: .15rem .35rem;
+      font-size: .6rem;
+      color: #94a3b8;
+    }
+    .dash-sbadge {
+      font-size: .58rem; font-weight: 700;
+      padding: .08rem .38rem;
+      border-radius: 99px;
+    }
+    .dash-sbadge.ok { background: rgba(34,197,94,.12); color: #22c55e; }
+    .dash-sbadge.warn { background: rgba(245,158,11,.12); color: #f59e0b; }
+
   </style>
 </head>
 <body>
@@ -990,7 +1153,7 @@
         </div>
         <div class="hero__stats">
           <div class="stat" data-aos="zoom-in" data-aos-delay="480" data-aos-duration="600"><span class="stat__number">10</span><span class="stat__label">AI Agents</span></div>
-          <div class="stat" data-aos="zoom-in" data-aos-delay="540" data-aos-duration="600"><span class="stat__number">From $50</span><span class="stat__label">To Get Started</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="540" data-aos-duration="600"><span class="stat__number">From $250</span><span class="stat__label">One-Off</span></div>
           <div class="stat" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="600"><span class="stat__number">10 min</span><span class="stat__label">Setup Time</span></div>
           <div class="stat" data-aos="zoom-in" data-aos-delay="660" data-aos-duration="600"><span class="stat__number">Mac + Win</span><span class="stat__label">Works On Both</span></div>
         </div>
@@ -1062,8 +1225,8 @@
   <section class="solutions" id="solutions">
     <div class="container">
       <div class="solutions__header" data-aos="fade-up">
-        <h2>Three ways we help</h2>
-        <p>Whether you want AI tools to run your marketing, a new website that converts, or someone to manage everything for you — we have a path that fits.</p>
+        <h2>AI that runs your business every day.</h2>
+        <p>Jarvis puts 10 AI agents to work on your marketing and leads — automatically. No tech team. No agency. Just results before you've had your first coffee.</p>
       </div>
       <div class="solutions-grid">
 
@@ -1159,11 +1322,11 @@
               <div class="logo-dot"></div>
               IYS Jarvis
             </div>
-            <div class="dash-nav-item active">
+            <div class="dash-nav-item active" data-tab="overview">
               <svg fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
               Overview
             </div>
-            <div class="dash-nav-item">
+            <div class="dash-nav-item" data-tab="agents">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
               Agents
             </div>
@@ -1183,7 +1346,7 @@
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
               Social
             </div>
-            <div class="dash-nav-item">
+            <div class="dash-nav-item" data-tab="settings">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
               Settings
             </div>
@@ -1191,126 +1354,414 @@
           <!-- Main panel -->
           <div class="dash-main">
             <div class="dash-topbar">
-              <div class="dash-topbar__title">Overview — Monday 24 March</div>
+              <div class="dash-topbar__title" id="dash-tab-title">Overview — Monday 24 March</div>
               <div class="dash-topbar__status"><div class="sdot"></div>All 10 Agents Running</div>
             </div>
-            <!-- Stat cards -->
-            <div class="dash-stats">
-              <div class="dash-stat">
-                <div class="dash-stat__label">Leads Replied</div>
-                <div class="dash-stat__val">4</div>
-                <div class="dash-stat__sub">+2 overnight</div>
+
+            <!-- ── Overview Tab ── -->
+            <div class="dash-tab-panel active" data-tab="overview">
+              <div class="dash-stats">
+                <div class="dash-stat">
+                  <div class="dash-stat__label">Leads Replied</div>
+                  <div class="dash-stat__val">4</div>
+                  <div class="dash-stat__sub">+2 overnight</div>
+                </div>
+                <div class="dash-stat">
+                  <div class="dash-stat__label">Posts Published</div>
+                  <div class="dash-stat__val">2</div>
+                  <div class="dash-stat__sub">IG carousel + story</div>
+                </div>
+                <div class="dash-stat">
+                  <div class="dash-stat__label">Site Score</div>
+                  <div class="dash-stat__val">97</div>
+                  <div class="dash-stat__sub">Google PageSpeed</div>
+                </div>
+                <div class="dash-stat">
+                  <div class="dash-stat__label">Tasks Run Today</div>
+                  <div class="dash-stat__val">47</div>
+                  <div class="dash-stat__sub">0 errors</div>
+                </div>
               </div>
-              <div class="dash-stat">
-                <div class="dash-stat__label">Posts Published</div>
-                <div class="dash-stat__val">2</div>
-                <div class="dash-stat__sub">IG carousel + story</div>
-              </div>
-              <div class="dash-stat">
-                <div class="dash-stat__label">Site Score</div>
-                <div class="dash-stat__val">97</div>
-                <div class="dash-stat__sub">Google PageSpeed</div>
-              </div>
-              <div class="dash-stat">
-                <div class="dash-stat__label">Tasks Run Today</div>
-                <div class="dash-stat__val">47</div>
-                <div class="dash-stat__sub">0 errors</div>
+              <div class="dash-body">
+                <div class="dash-panel">
+                  <div class="dash-panel__head">Agent Status</div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">Manager</div>
+                    <div class="wl-scale" data-wl="3" title="Workload: 3/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">Digest sent 7:00am</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">Social</div>
+                    <div class="wl-scale" data-wl="3" title="Workload: 3/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">Posted carousel 7:31am</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot indigo"></div>
+                    <div class="dash-agent-name">Leads</div>
+                    <div class="wl-scale" data-wl="4" title="Workload: 4/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status running">Sending outreach...</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">SEO Monitor</div>
+                    <div class="wl-scale" data-wl="2" title="Workload: 2/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">Score 97 — no issues</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">Inbox</div>
+                    <div class="wl-scale" data-wl="2" title="Workload: 2/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">3 emails triaged</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">Ads</div>
+                    <div class="wl-scale" data-wl="2" title="Workload: 2/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">No wasted spend flagged</div>
+                  </div>
+                  <div class="dash-agent-row">
+                    <div class="dash-agent-dot green"></div>
+                    <div class="dash-agent-name">Stripe Monitor</div>
+                    <div class="wl-scale" data-wl="1" title="Workload: 1/5"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                    <div class="dash-agent-status done">1 new order — alerted</div>
+                  </div>
+                </div>
+                <div class="dash-panel">
+                  <div class="dash-panel__head">Live Activity Feed</div>
+                  <div class="dash-feed-item">
+                    <div class="dash-feed-icon lead">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="dash-feed-text">
+                      <strong>Lead reply sent — new enquiry</strong>
+                      <span>Plumbing enquiry via hello@ — personalised reply sent</span>
+                    </div>
+                    <div class="dash-feed-time">2 min ago</div>
+                  </div>
+                  <div class="dash-feed-item">
+                    <div class="dash-feed-icon social">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="#2dd4bf" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </div>
+                    <div class="dash-feed-text">
+                      <strong>Instagram carousel published</strong>
+                      <span>"Your inbox cost you $10k" — 5-slide carousel live</span>
+                    </div>
+                    <div class="dash-feed-time">18 min ago</div>
+                  </div>
+                  <div class="dash-feed-item">
+                    <div class="dash-feed-icon email">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="#22c55e" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="dash-feed-text">
+                      <strong>New order — Stripe payment received</strong>
+                      <span>Complete Build $5,000 — James notified instantly</span>
+                    </div>
+                    <div class="dash-feed-time">41 min ago</div>
+                  </div>
+                  <div class="dash-feed-item">
+                    <div class="dash-feed-icon seo">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <div class="dash-feed-text">
+                      <strong>SEO check passed — score 97</strong>
+                      <span>Core Web Vitals green, no ranking penalties</span>
+                    </div>
+                    <div class="dash-feed-time">1 hr ago</div>
+                  </div>
+                  <div class="dash-feed-item">
+                    <div class="dash-feed-icon lead">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="dash-feed-text">
+                      <strong>Morning digest delivered</strong>
+                      <span>4 leads, 0 errors, 2 posts, 47 tasks — sent 7:00am</span>
+                    </div>
+                    <div class="dash-feed-time">2 hrs ago</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <!-- Agents + feed -->
-            <div class="dash-body">
-              <div class="dash-panel">
-                <div class="dash-panel__head">Agent Status</div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">Manager</div>
-                  <div class="dash-agent-status done">Digest sent 7:00am</div>
+
+            <!-- ── Agents Tab ── -->
+            <div class="dash-tab-panel" data-tab="agents">
+              <div class="dash-panel" style="border-radius:0;border-left:0;border-right:0;border-bottom:0;">
+                <div class="dash-panel__head" style="display:flex;justify-content:space-between;align-items:center;">
+                  Agent Controls
+                  <span style="font-size:.56rem;color:#475569;font-weight:400;text-transform:none;letter-spacing:0;">Knob = workload 1–5 · Talk = direct message</span>
                 </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">Social</div>
-                  <div class="dash-agent-status done">Posted carousel 7:31am</div>
-                </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot indigo"></div>
-                  <div class="dash-agent-name">Leads</div>
-                  <div class="dash-agent-status running">Sending outreach...</div>
-                </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">SEO Monitor</div>
-                  <div class="dash-agent-status done">Score 97 — no issues</div>
-                </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">Inbox</div>
-                  <div class="dash-agent-status done">3 emails triaged</div>
-                </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">Ads</div>
-                  <div class="dash-agent-status done">No wasted spend flagged</div>
-                </div>
-                <div class="dash-agent-row">
-                  <div class="dash-agent-dot green"></div>
-                  <div class="dash-agent-name">Stripe Monitor</div>
-                  <div class="dash-agent-status done">1 new order — alerted</div>
-                </div>
+                <div class="dash-tab-panel--scroll" style="overflow-y:auto;max-height:320px;">
+
+                  <!-- Agent: Manager -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Manager</div>
+                      <div class="wl-scale" data-wl="3" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">3/5</div>
+                      <button class="dash-agent-talk" data-agent="Manager">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Manager">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">You are the Manager agent for [Business Name]. Send a morning digest at 7am summarising leads, tasks, errors and revenue. Tone: professional, concise.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Manager agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a file or click to attach</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Leads -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot indigo"></div>
+                      <div class="dash-agent-ext-name">Leads</div>
+                      <div class="wl-scale" data-wl="4" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">4/5</div>
+                      <button class="dash-agent-talk" data-agent="Leads">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Leads">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">You are the Leads agent. Find 20 local businesses in [suburb] with slow websites. Verify via Google Maps. Email outreach with PDF score sheet. Max 20 per day.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Leads agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a lead list or CSV</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Social -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Social</div>
+                      <div class="wl-scale" data-wl="3" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">3/5</div>
+                      <button class="dash-agent-talk" data-agent="Social">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Social">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">You are the Social agent. Post 1 Instagram carousel daily at 7:30am. Topics rotate: tips, case studies, behind the scenes. Brand: indigo + mint. Tone: punchy, local.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Social agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop brand assets or images</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: SEO Monitor -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">SEO Monitor</div>
+                      <div class="wl-scale" data-wl="2" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">2/5</div>
+                      <button class="dash-agent-talk" data-agent="SEO Monitor">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-SEO Monitor">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Run PageSpeed on [site URL] daily. Alert if score drops below 90. Check Core Web Vitals. Flag ranking penalties. Report to Manager agent.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message SEO Monitor...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a sitemap or URL list</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Inbox -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Inbox</div>
+                      <div class="wl-scale" data-wl="2" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">2/5</div>
+                      <button class="dash-agent-talk" data-agent="Inbox">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Inbox">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Check hello@ inbox every 30 mins. Classify: lead, support, spam, order. Auto-reply to leads within 5 min. Flag urgent items for owner review.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Inbox agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop an email template</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Ads -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Ads</div>
+                      <div class="wl-scale" data-wl="2" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">2/5</div>
+                      <button class="dash-agent-talk" data-agent="Ads">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Ads">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Monitor Google Ads daily. Flag keywords with CPC &gt; $8 and CTR &lt; 2%. Pause ads wasting budget. Generate weekly performance summary.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Ads agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop ad copy or campaign files</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Stripe Monitor -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Stripe Monitor</div>
+                      <div class="wl-scale" data-wl="1" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">1/5</div>
+                      <button class="dash-agent-talk" data-agent="Stripe Monitor">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Stripe Monitor">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Watch Stripe webhook for new payments. On payment: notify owner via email + Telegram. Log order to CSV. Trigger order intake workflow.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Stripe Monitor...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a product/pricing file</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Reviews -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot amber"></div>
+                      <div class="dash-agent-ext-name">Reviews</div>
+                      <div class="wl-scale" data-wl="2" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">2/5</div>
+                      <button class="dash-agent-talk" data-agent="Reviews">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Reviews">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Check Google Business reviews daily. Draft owner reply for any new review. Flag 1–3 star reviews immediately. Send weekly review summary.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Reviews agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop response templates</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Content Writer -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Content Writer</div>
+                      <div class="wl-scale" data-wl="3" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">3/5</div>
+                      <button class="dash-agent-talk" data-agent="Content Writer">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Content Writer">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Write 2 blog posts per week for [Business Name]. Topics from trending keywords in [industry]. SEO-optimised, 800–1200 words. Tone: expert but friendly.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Content Writer...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a brief or keyword list</div>
+                    </div>
+                  </div>
+
+                  <!-- Agent: Analytics -->
+                  <div class="dash-agent-ext">
+                    <div class="dash-agent-ext__row">
+                      <div class="dash-agent-dot green"></div>
+                      <div class="dash-agent-ext-name">Analytics</div>
+                      <div class="wl-scale" data-wl="2" title="Workload"><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div><div class="wl-seg"></div></div>
+                      <div class="dash-agent-ext-meta">2/5</div>
+                      <button class="dash-agent-talk" data-agent="Analytics">Talk</button>
+                    </div>
+                    <div class="agent-comms" id="acp-Analytics">
+                      <div class="acp-label">Current Prompt <span>Save</span></div>
+                      <textarea class="acp-prompt">Pull GA4 weekly. Report: sessions, conversions, top pages, traffic sources. Flag drops &gt;15%. Deliver Monday 8am report to owner email.</textarea>
+                      <div class="acp-row">
+                        <input class="acp-msg" type="text" placeholder="Message Analytics agent...">
+                        <button class="acp-send">Send</button>
+                      </div>
+                      <div class="acp-drop">📎 Drop a GA4 export</div>
+                    </div>
+                  </div>
+
+                </div><!-- end scroll -->
               </div>
-              <div class="dash-panel">
-                <div class="dash-panel__head">Live Activity Feed</div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-icon lead">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+
+            <!-- ── Settings Tab ── -->
+            <div class="dash-tab-panel" data-tab="settings">
+              <div style="overflow-y:auto;max-height:340px;">
+                <div class="dash-settings-inner">
+
+                  <div class="dash-sgroup">
+                    <h4>Business Profile</h4>
+                    <div class="dash-srow">
+                      <span class="dash-srow__label">Business name</span>
+                      <input class="acp-msg" type="text" value="[Your Business]" style="width:120px;font-size:.62rem;">
+                    </div>
+                    <div class="dash-srow">
+                      <span class="dash-srow__label">Industry</span>
+                      <select class="dash-sselect">
+                        <option>Trades & Services</option>
+                        <option>Healthcare</option>
+                        <option>Retail</option>
+                        <option>Hospitality</option>
+                        <option>Finance</option>
+                        <option>Consulting</option>
+                      </select>
+                    </div>
+                    <div class="dash-srow">
+                      <span class="dash-srow__label">Location (suburb)</span>
+                      <input class="acp-msg" type="text" value="Sydney, NSW" style="width:120px;font-size:.62rem;">
+                    </div>
                   </div>
-                  <div class="dash-feed-text">
-                    <strong>Lead reply sent — new enquiry</strong>
-                    <span>Plumbing enquiry via hello@ — personalised reply sent</span>
+
+                  <div class="dash-sgroup">
+                    <h4>Agent Schedules</h4>
+                    <div class="dash-srow"><span class="dash-srow__label">Manager digest</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Leads outreach</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Social auto-post</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">SEO daily check</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Inbox monitor</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Ads monitor</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Content writer</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Reviews watcher</span><div class="dash-stoggle off"></div></div>
                   </div>
-                  <div class="dash-feed-time">2 min ago</div>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-icon social">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="#2dd4bf" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+
+                  <div class="dash-sgroup">
+                    <h4>Notifications</h4>
+                    <div class="dash-srow"><span class="dash-srow__label">Morning digest email</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow">
+                      <span class="dash-srow__label">Digest time</span>
+                      <select class="dash-sselect"><option>7:00am</option><option>6:30am</option><option>8:00am</option></select>
+                    </div>
+                    <div class="dash-srow"><span class="dash-srow__label">Stripe payment alerts</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Error alerts</span><div class="dash-stoggle"></div></div>
+                    <div class="dash-srow"><span class="dash-srow__label">New lead alerts</span><div class="dash-stoggle"></div></div>
                   </div>
-                  <div class="dash-feed-text">
-                    <strong>Instagram carousel published</strong>
-                    <span>"Your inbox cost you $10k" — 5-slide carousel live</span>
+
+                  <div class="dash-sgroup">
+                    <h4>API Keys</h4>
+                    <div class="dash-srow"><span class="dash-srow__label">Anthropic (Claude)</span><span class="dash-sbadge ok">Connected</span></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Google (Places / Ads)</span><span class="dash-sbadge ok">Connected</span></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Meta (Instagram)</span><span class="dash-sbadge warn">Needs token</span></div>
+                    <div class="dash-srow"><span class="dash-srow__label">Stripe</span><span class="dash-sbadge ok">Connected</span></div>
+                    <div class="dash-srow"><span class="dash-srow__label">OpenAI (DALL-E)</span><span class="dash-sbadge warn">Not set</span></div>
                   </div>
-                  <div class="dash-feed-time">18 min ago</div>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-icon email">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="#22c55e" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  </div>
-                  <div class="dash-feed-text">
-                    <strong>New order — Stripe payment received</strong>
-                    <span>Complete Build $5,000 — James notified instantly</span>
-                  </div>
-                  <div class="dash-feed-time">41 min ago</div>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-icon seo">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                  </div>
-                  <div class="dash-feed-text">
-                    <strong>SEO check passed — score 97</strong>
-                    <span>Core Web Vitals green, no ranking penalties</span>
-                  </div>
-                  <div class="dash-feed-time">1 hr ago</div>
-                </div>
-                <div class="dash-feed-item">
-                  <div class="dash-feed-icon lead">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="#5b4dff" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  </div>
-                  <div class="dash-feed-text">
-                    <strong>Morning digest delivered</strong>
-                    <span>4 leads, 0 errors, 2 posts, 47 tasks — sent 7:00am</span>
-                  </div>
-                  <div class="dash-feed-time">2 hrs ago</div>
+
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -1373,44 +1824,12 @@
         </table>
       </div>
       <p style="text-align:center;margin-top:2rem;" data-aos="fade-up" data-aos-delay="200">
-        <a href="jarvis/" class="btn btn--primary">Get Jarvis — From $50</a>
+        <a href="jarvis/" class="btn btn--primary">Get Jarvis — From $250</a>
       </p>
     </div>
   </section>
 
-  <!-- Industries Strip -->
-  <section class="industries" id="industries">
-    <div class="container">
-      <div class="industries__header" data-aos="fade-up">
-        <h2>Built for Australian businesses in:</h2>
-        <p>No matter your industry, if you have customers and a computer, Jarvis works for you.</p>
-      </div>
-      <div class="industries-grid">
-        <div class="industry-tile" data-aos="zoom-in" data-aos-delay="0">
-          <span class="industry-tile__icon">🔧</span>
-          <h3>Trades &amp; Construction</h3>
-        </div>
-        <div class="industry-tile" data-aos="zoom-in" data-aos-delay="80">
-          <span class="industry-tile__icon">🏥</span>
-          <h3>Health &amp; Allied Health</h3>
-        </div>
-        <div class="industry-tile" data-aos="zoom-in" data-aos-delay="160">
-          <span class="industry-tile__icon">📊</span>
-          <h3>Finance &amp; Accounting</h3>
-        </div>
-        <div class="industry-tile" data-aos="zoom-in" data-aos-delay="240">
-          <span class="industry-tile__icon">🛍️</span>
-          <h3>Retail &amp; Hospitality</h3>
-        </div>
-        <div class="industry-tile" data-aos="zoom-in" data-aos-delay="320">
-          <span class="industry-tile__icon">💼</span>
-          <h3>Professional Services</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Demo Sites Section — kept exactly from original -->
+  <!-- Demo Sites Section -->
   <section class="demos">
     <div class="container">
       <div class="demos__header" data-aos="fade-up">
@@ -1813,6 +2232,63 @@
   <script>
     // ── Year ──
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Dashboard tab switching ──
+    const tabTitles = { overview: 'Overview — Monday 24 March', agents: 'Agent Controls', settings: 'Settings' };
+    document.querySelectorAll('.dash-nav-item[data-tab]').forEach(item => {
+      item.addEventListener('click', () => {
+        const tab = item.dataset.tab;
+        document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        document.querySelectorAll('.dash-tab-panel').forEach(p => p.classList.remove('active'));
+        const panel = document.querySelector(`.dash-tab-panel[data-tab="${tab}"]`);
+        if (panel) panel.classList.add('active');
+        const titleEl = document.getElementById('dash-tab-title');
+        if (titleEl) titleEl.textContent = tabTitles[tab] || tab;
+      });
+    });
+
+    // ── Workload knob (click any segment to set 1–5) ──
+    document.querySelectorAll('.wl-scale').forEach(scale => {
+      const segs = scale.querySelectorAll('.wl-seg');
+      const metaEl = scale.nextElementSibling;
+      segs.forEach((seg, idx) => {
+        seg.addEventListener('click', e => {
+          e.stopPropagation();
+          const level = idx + 1;
+          scale.dataset.wl = level;
+          if (metaEl && metaEl.classList.contains('dash-agent-ext-meta')) {
+            metaEl.textContent = level + '/5';
+          }
+          scale.title = 'Workload: ' + level + '/5';
+        });
+      });
+    });
+
+    // ── Agent Talk button — open/close comms panel ──
+    document.querySelectorAll('.dash-agent-talk').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const agentName = btn.dataset.agent;
+        const panelId = 'acp-' + agentName;
+        const panel = document.getElementById(panelId);
+        if (!panel) return;
+        const isOpen = panel.classList.contains('open');
+        // Close all others
+        document.querySelectorAll('.agent-comms').forEach(p => p.classList.remove('open'));
+        document.querySelectorAll('.dash-agent-talk').forEach(b => b.textContent = 'Talk');
+        if (!isOpen) {
+          panel.classList.add('open');
+          btn.textContent = 'Close';
+          panel.querySelector('.acp-msg') && panel.querySelector('.acp-msg').focus();
+        }
+      });
+    });
+
+    // ── Settings toggles ──
+    document.querySelectorAll('.dash-stoggle').forEach(tog => {
+      tog.addEventListener('click', () => tog.classList.toggle('off'));
+    });
 
     // ── Nav toggle ──
     document.getElementById('nav-toggle').addEventListener('click', () => {
