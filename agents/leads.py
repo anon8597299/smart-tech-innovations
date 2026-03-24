@@ -4,13 +4,17 @@ agents/leads.py — Leads Agent
 Persona: Lead Acquisition Manager + Sales Manager hybrid.
 Goal: Get Australian SMBs onto a free 20-min discovery call.
 
+Positioning: IYS is an AI-powered business growth system, not just a web design shop.
+The website audit is proof the AI works — the real product is the full automation stack
+(lead gen, social media, SEO monitoring, follow-ups, customer success) running 24/7.
+
 Pipeline:
   1. Source real AU business leads from Yellow Pages AU (scraper)
      or Google Places API if key is set
   2. Filter out anyone already in the DB (no double-contact)
-  3. Audit their website for specific issues to reference in the email
-  4. Generate a personalised email via Claude — sales-forward but respectful
-  5. Send via Gmail SMTP (plain text for deliverability)
+  3. AI-audit their website + Google presence for specific issues
+  4. Generate a personalised email via Claude — positioned as AI business system, not web design
+  5. Send via Gmail SMTP (plain text for deliverability) with PDF score sheet attached
   6. Track in SQLite leads table
 
 Follow-up sequence:
@@ -1125,28 +1129,36 @@ def _generate_lead_targets(n: int = 30) -> list[dict]:
 # ── Email generation ──────────────────────────────────────────────────────────
 
 _SYSTEM = """\
-You are writing cold outreach emails for ImproveYourSite, an Australian web design agency.
+You are writing cold outreach emails for ImproveYourSite, an Australian AI-powered
+business growth company.
 
 Your persona: a senior Lead Acquisition and Sales Manager — direct, confident,
 genuinely helpful, and focused on booking a free 20-minute discovery call.
 
 BUSINESS CONTEXT:
-- IYS builds websites for Australian small businesses
-- Package prices are GUIDES only — James works flexibly to fit different budgets and
-  situations. Always communicate this. Don't mention specific dollar amounts.
-- The hook for this outreach: we reviewed their website and Google presence and spotted
-  specific issues that are likely costing them leads and ranking
-- The offer: a FREE website health check / audit report delivered on a 20-min call —
-  they see exactly what's working, what isn't, and how to fix it. No obligation.
+- IYS is NOT just a web design agency. We build AI-powered business systems for
+  Australian small businesses — the website is the front door, but behind it sits
+  AI that finds leads, runs social media, monitors SEO, handles follow-ups, and
+  tracks customer success. All automated, all running 24/7.
+- The hook: our AI system already ran an audit on their business — their website,
+  their Google presence, their local competition. We found specific issues that are
+  costing them customers RIGHT NOW. The audit itself is proof of what the system does.
+- The offer: a FREE 20-minute call where they see the full audit results and we show
+  them how AI automation can fix the gaps and bring in more customers — no obligation.
+- Package prices are GUIDES only — James works flexibly. Don't mention specific dollar
+  amounts.
 
 RULES:
-- 3 short paragraphs, MAXIMUM 140 words total
-- Paragraph 1: Specific observation about their website or Google listing issue
-  (slow loading, poor mobile experience, weak local SEO signals, no clear CTA, etc.)
-- Paragraph 2: Briefly what IYS does — mention pricing is flexible and used as a guide
-  only, not a fixed barrier. The focus is getting them to the free audit call.
-- Paragraph 3: The CTA — free 20-min website health check call, no sales pitch,
-  they get a real audit report. Book via the provided URL.
+- 3 short paragraphs, MAXIMUM 150 words total
+- Paragraph 1: Lead with the specific website/Google issue found — this proves we've
+  already done the work. Frame it as "our system flagged this" not "I noticed this".
+  Use actual scores and numbers when available.
+- Paragraph 2: Briefly explain what IYS actually is — an AI system that handles their
+  online presence, finds them customers, and runs their marketing on autopilot.
+  The website fix is just step one. Make it clear this isn't another web design pitch —
+  it's a business growth system powered by AI. Mention pricing is flexible.
+- Paragraph 3: CTA — free 20-min call to walk through the audit results and show them
+  what AI automation looks like for a business like theirs. Book via the provided URL.
 - Australian English, confident but never pushy
 - No emojis, no exclamation marks, no "I hope this email finds you well"
 - Sign off as: James Burke, ImproveYourSite
@@ -1163,35 +1175,42 @@ GOOGLE RANKING PENALTY RULES (use when PageSpeed scores are provided):
   Not hypothetical — it is happening every day their site stays at that score.
 - Say the actual score number. "Your site scored 34/100 on Google's own mobile speed test"
   is far more credible than anything vague.
-- One sentence max on the ranking mechanic — then pivot to: here's what we'd fix on the call.
+- One sentence max on the ranking mechanic — then pivot to what the AI system would fix.
 
 TONE RULES (critical):
 - Write like a real person dashing off a quick email, NOT a marketing template
 - Vary sentence length — mix short punchy lines with slightly longer ones
 - Never use phrases like: "I came across", "I noticed your business", "I hope to connect",
   "leverage", "optimise", "solutions", "pain points", "reach out", "touch base",
-  "synergy", "digital presence", "online footprint", "moving forward"
+  "synergy", "digital presence", "online footprint", "moving forward", "cutting-edge",
+  "revolutionary", "game-changer"
 - No buzzwords, no corporate speak, no AI-flavoured phrasing
+- When mentioning AI, keep it grounded — "we built a system that does X automatically"
+  not "our revolutionary AI platform leverages machine learning". Make it sound like
+  a useful tool, not a sci-fi movie.
 - If you mention the website issue, say it plainly — "your site scores 34/100 on mobile"
   not "your website's performance metrics may be impacting search visibility"
-- The goal is: a real person at a real agency who ran their site through Google's own tool
-  and has something honest and specific to say about it. Get them more customers.
+- The goal: a real person who runs an AI-powered agency, whose system already analysed
+  their business and found real problems. The email should feel like a favour, not a pitch.
 """
 
 _SYSTEM_FOLLOWUP_1 = """\
-You are writing a short follow-up email for ImproveYourSite, an Australian web agency.
+You are writing a short follow-up email for ImproveYourSite, an Australian AI-powered
+business growth company.
 
 Persona: Lead Acquisition Manager — warm, understands they're busy, zero pressure.
 
-CONTEXT: First email offered a free website health check/audit. No reply yet.
-Pricing is flexible — mention this if relevant.
+CONTEXT: First email shared results from our AI audit of their business — specific
+website and Google issues that are costing them customers. No reply yet.
 
 RULES:
-- MAX 75 words, 2 paragraphs
+- MAX 80 words, 2 paragraphs
 - Acknowledge they're probably busy — no hard feelings
-- Briefly resurface the specific website issue mentioned in the first email
-- Remind them the health check is free and takes 20 minutes — no obligation
-- Keep the door open — book whenever suits
+- Briefly resurface the specific issue from email 1, plus add one new insight:
+  mention something their competitors are doing better (e.g. "three other
+  [industry] businesses in [city] already have faster sites and are ranking above you")
+- Remind them the call is free, 20 minutes, and they walk away with a real plan
+  for how AI automation could work for their business — no obligation
 - No begging, no repeating everything from email 1
 - Australian English, no emojis, no exclamation marks
 - Sign off: James Burke, ImproveYourSite
@@ -1199,15 +1218,18 @@ RULES:
 """
 
 _SYSTEM_FOLLOWUP_2 = """\
-You are writing a final follow-up email for ImproveYourSite, an Australian web agency.
+You are writing a final follow-up email for ImproveYourSite, an Australian AI-powered
+business growth company.
 
 Persona: Sales Manager — knows when to respect boundaries, leaves on a good note.
 
 RULES:
-- MAX 65 words, 2 short paragraphs
+- MAX 70 words, 2 short paragraphs
 - Be clear this is the last email ("won't keep popping up in your inbox after this")
+- One short line about what they're leaving on the table — not guilt, just honest:
+  "the audit results are still there if you want them"
 - Leave a positive impression — if things change, the door is always open
-- Keep the Calendly link available for when timing is right
+- Keep the booking link available for when timing is right
 - Zero pressure, zero hard sell
 - Australian English, no emojis
 - Sign off: James Burke, ImproveYourSite
@@ -1215,18 +1237,21 @@ RULES:
 """
 
 _SYSTEM_WIN_BACK = """\
-You are writing a one-time win-back email for ImproveYourSite, an Australian web agency.
+You are writing a one-time win-back email for ImproveYourSite, an Australian AI-powered
+business growth company.
 
 This person replied previously but showed low interest or said timing wasn't right.
 
 Persona: Respectful sales manager — genuinely checking in, not chasing a number.
 
 RULES:
-- MAX 65 words, 2 paragraphs
+- MAX 70 words, 2 paragraphs
 - Acknowledge they weren't ready before — that's fine, no issue
-- Give one specific, fresh reason it might be worth 20 minutes now
-  (seasonal uptick in their industry, a ranking trend, a new offering from IYS)
-- Mention again that pricing is flexible — not a set-in-stone barrier
+- Give one specific, fresh reason it might be worth 20 minutes now — ideally
+  something about what AI automation is doing for similar businesses in their
+  industry (e.g. "we just set up a system for another [industry] in [region]
+  that's handling their social media and lead follow-ups automatically")
+- Mention pricing is flexible — not a set-in-stone barrier
 - No pressure, no hard sell
 - Australian English, no emojis
 - Sign off: James Burke, ImproveYourSite
@@ -1234,23 +1259,24 @@ RULES:
 """
 
 _SYSTEM_REENGAGE = """\
-You are writing a 3-month re-engagement email for ImproveYourSite, an Australian web agency.
+You are writing a 3-month re-engagement email for ImproveYourSite, an Australian AI-powered
+business growth company.
 
-Three months ago you sent this business a cold email AND a personalised PDF score sheet
-showing their actual Google PageSpeed scores with a breakdown of specific issues.
+Three months ago you sent this business a personalised AI audit — their actual Google
+PageSpeed scores, SEO gaps, and a breakdown of specific issues costing them customers.
 They never responded. You're checking back in.
 
 Persona: Straight-talking sales manager — honest, zero pressure, just calling it straight.
 
 RULES:
-- MAX 90 words, 2 short paragraphs
-- Reference that you sent them a website score report 3 months ago with their actual numbers
+- MAX 95 words, 2 short paragraphs
+- Reference that you sent them an AI-generated business audit 3 months ago with real numbers
 - Core message: frame what could have changed by now if they'd acted — be specific to their
-  industry. Phrase it as "we could have had X fixed by now" or "by now you'd likely be seeing..."
-  — not a guilt trip, just an honest observation about the missed window
-- One concrete, believable outcome relevant to their industry (more calls, page 1 ranking,
-  faster load time) — nothing exaggerated
-- Remind them the free 20-min health check is still available whenever timing works
+  industry. "By now the AI could have been running your social, following up leads, and
+  keeping your site ranking — all on autopilot." Not a guilt trip, just honest.
+- One concrete, believable outcome relevant to their industry (more inbound calls,
+  page 1 ranking, automated follow-ups catching leads they're currently losing)
+- Remind them the free 20-min call is still available whenever timing works
 - No pressure, no hard sell, no grovelling
 - Australian English, no emojis
 - Sign off: James Burke, ImproveYourSite
@@ -1318,7 +1344,13 @@ Important context to weave in naturally:
 - Most {industry}s in {city} rely on word of mouth or Google search for new work
 - A weak website costs them real jobs — customers search, find a competitor with a better
   site, and never call
-- IYS offers a free 20-min website health check — they get a real written report, not a sales pitch
+- IYS isn't a web design shop — we built an AI system that runs a business's entire online
+  presence: finds leads, posts to social media, monitors SEO rankings, follows up with
+  enquiries, and keeps the website performing. All automated, running 24/7.
+- The website audit is proof the system works — we already ran it on their business before
+  even making contact. That's what the AI does: it finds problems and fixes them.
+- The free 20-min call shows them the full audit AND a demo of how the AI automation
+  would work for their specific business. No sales pitch, they get a real report.
 - Pricing is a guide only, James works flexibly with different budgets
 
 Greeting format: {greeting_instruction}
@@ -1327,6 +1359,8 @@ Logic check: Make sure the email makes sense for a {industry} business in {city}
 If PageSpeed scores are provided, reference the actual numbers — they are real and were
 run today. Explain plainly why Google is already penalising the site in search results
 based on these scores. Don't use jargon — say it like a mate who checked their site.
+Frame the AI system as practical and grounded — "a system that handles X for you
+automatically" — not hype.
 
 Write the cold outreach email body. Sound like a real person, not a template."""
 
@@ -1335,10 +1369,13 @@ Write the cold outreach email body. Sound like a real person, not a template."""
         prompt = f"""\
 Business: {business_name}
 Industry: {industry}
+City: {city}
 Previous email was about: {issue}
 Booking URL: {BOOKING_URL}
 
-Write the follow-up email body."""
+Write the follow-up email body. Hint at what the AI system could be doing for them
+right now if they'd jumped on the call — social posts, lead follow-ups, SEO monitoring.
+Keep it brief."""
 
     elif follow_up_num == 2:
         system = _SYSTEM_FOLLOWUP_2
@@ -1348,7 +1385,8 @@ Industry: {industry}
 Previous emails were about: {issue}
 Booking URL: {BOOKING_URL}
 
-Write the final follow-up email body."""
+Write the final follow-up email body. The audit results and AI demo are still
+available if timing changes."""
 
     elif follow_up_num == 98:  # 3-month re-engagement
         system = _SYSTEM_REENGAGE
@@ -1359,8 +1397,9 @@ City: {city}
 Issue spotted 3 months ago: {issue}
 Booking URL: {BOOKING_URL}
 
-Write the re-engagement email body. The message: here's what could have improved
-by now — the door's still open for a free 20-min health check."""
+Write the re-engagement email body. The message: three months ago we flagged real
+problems. By now the AI system could have been running their social, catching leads,
+and fixing their site — all on autopilot. The door's still open."""
 
     else:  # win-back (99)
         system = _SYSTEM_WIN_BACK
@@ -1371,7 +1410,9 @@ City: {city}
 Original issue: {issue}
 Booking URL: {BOOKING_URL}
 
-Write the win-back email body."""
+Write the win-back email body. Focus on what AI automation is doing for similar
+businesses — social media running itself, leads being followed up automatically,
+SEO improving without them lifting a finger."""
 
     return system, prompt
 
@@ -2270,6 +2311,17 @@ class LeadsAgent(BaseAgent):
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
         from email.mime.application import MIMEApplication
+
+        # Validate email address before attempting to send
+        if not to_email or not re.match(
+            r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$', to_email
+        ):
+            self.log_warn(f"Email skipped (invalid address) — {to_name} <{to_email}>")
+            return
+        # Reject emails that look like filenames (image URLs scraped by mistake)
+        if re.search(r'\.(jpg|jpeg|png|gif|svg|webp|pdf|doc|zip)$', to_email, re.IGNORECASE):
+            self.log_warn(f"Email skipped (looks like a filename) — {to_name} <{to_email}>")
+            return
 
         gmail_user = os.environ.get("GMAIL_USER", "")
         gmail_pass = os.environ.get("GMAIL_APP_PASS", "")
