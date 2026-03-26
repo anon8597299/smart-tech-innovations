@@ -80,7 +80,7 @@ def check_for_reply() -> dict | None:
     if not GMAIL_PASS:
         return None
     try:
-        mail = imaplib.IMAP4_SSL(IMAP_HOST)
+        mail = imaplib.IMAP4_SSL(IMAP_HOST, timeout=30)
         mail.login(GMAIL_USER, GMAIL_PASS)
         mail.select("INBOX")
 

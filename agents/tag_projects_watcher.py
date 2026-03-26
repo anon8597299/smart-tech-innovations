@@ -95,7 +95,7 @@ def check_inbox() -> list[dict]:
 
     results = []
     try:
-        mail = imaplib.IMAP4_SSL(IMAP_HOST)
+        mail = imaplib.IMAP4_SSL(IMAP_HOST, timeout=30)
         mail.login(WATCH_EMAIL, WATCH_PASS)
         mail.select("INBOX")
 
