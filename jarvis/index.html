@@ -323,9 +323,9 @@
     }
     .pricing-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.25rem;
-      max-width: 1120px;
+      max-width: 1200px;
       margin: 0 auto;
     }
     .price-card {
@@ -560,6 +560,10 @@
       .compare-table { min-width: 420px; }
     }
 
+    @media (max-width: 900px) {
+      .pricing-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 640px) {
       .tasks-grid { grid-template-columns: 1fr; }
       .pricing-row { grid-template-columns: 1fr; }
@@ -791,50 +795,38 @@
 <section class="pricing-section" id="pricing">
   <div class="container">
     <h2>Simple pricing.</h2>
-    <p class="section-sub">One-off purchase or fully managed — your choice. API usage billed directly to your Anthropic account, not us.</p>
+    <p class="section-sub">No tech team. No agency. Just results before you've had your first coffee.</p>
     <div class="pricing-row">
-      <div class="price-card">
-        <div class="price-badge" style="background:#334155;">Digital Edition</div>
-        <div class="price-type">IYS Download</div>
-        <div class="price-amount">$250 <span>AUD</span></div>
-        <p class="price-desc">All 10 AI agents. Install on your computer today.</p>
-        <ul class="price-features">
-          <li>Digital download — instant access</li>
-          <li>Mac &amp; Windows installer</li>
-          <li>We walk you through API key setup</li>
-          <li>All 10 AI agents included</li>
-          <li>Local dashboard at localhost:8080</li>
-          <li>Email support</li>
-        </ul>
-        <a href="mailto:hello@improveyoursite.com?subject=IYS Download Request" class="btn-price primary">Get Download</a>
-      </div>
       <div class="price-card featured">
         <div class="price-badge">Most Popular</div>
-        <div class="price-type">IYS USB</div>
+        <div class="price-type">IYS AI</div>
         <div class="price-amount">$250 <span>AUD</span></div>
-        <p class="price-desc">Same software on a branded USB. Plug and run.</p>
+        <p class="price-desc">AI staff for your business. We get you started — you run it.</p>
         <ul class="price-features">
-          <li>Physical USB shipped in 2–5 days</li>
-          <li>Shipped anywhere in Australia</li>
-          <li>Pre-loaded installer, no internet needed</li>
-          <li>Mac &amp; Windows support</li>
-          <li>All 10 AI agents included</li>
-          <li>Printed quick-start card</li>
+          <li>Leads agent</li>
+          <li>Social agent</li>
+          <li>SEO agent</li>
+          <li>Ads agent</li>
+          <li>Email agent</li>
+          <li>Content, Digest, Orders, Customer Success &amp; Site Builder</li>
+          <li>API key walkthrough included</li>
+          <li>Mac &amp; Windows</li>
         </ul>
-        <a href="mailto:hello@improveyoursite.com?subject=IYS USB Order" class="btn-price outline">Get USB</a>
+        <a href="mailto:hello@improveyoursite.com?subject=IYS AI Order" class="btn-price primary">Get Started</a>
       </div>
       <div class="price-card">
         <div class="price-badge" style="background:#0f172a;">Delivered AU-Wide</div>
         <div class="price-type">Business Manager Pro</div>
         <div class="price-amount">$3,000 <span>AUD</span></div>
-        <p class="price-desc">Mac Mini with IYS AI pre-installed and shipped to any address in Australia. Just power it on.</p>
+        <p class="price-desc">Mac Mini with IYS AI. Plug in and go.</p>
         <ul class="price-features">
-          <li>Mac Mini hardware included</li>
-          <li>IYS AI pre-installed &amp; configured</li>
-          <li>We set up your API keys remotely</li>
-          <li>All 10 AI agents ready to go</li>
-          <li>Shipped anywhere in Australia</li>
-          <li>Priority phone + email support</li>
+          <li>Mac Mini included</li>
+          <li>IYS AI pre-installed</li>
+          <li>Remote API key setup</li>
+          <li>All 10 agents</li>
+          <li>Shipped AU-wide</li>
+          <li>Priority support</li>
+          <li>Just power it on</li>
         </ul>
         <a href="mailto:hello@improveyoursite.com?subject=IYS AI Business Manager Pro" class="btn-price outline">Order Mac Mini</a>
       </div>
@@ -842,16 +834,33 @@
         <div class="price-badge" style="background:#2dd4bf;color:#0f172a;">Done For You</div>
         <div class="price-type">Managed Plan</div>
         <div class="price-amount">$199 <span>/month</span></div>
-        <p class="price-desc">We run everything. You focus on your business — we handle IYS AI, your website, and your content.</p>
+        <p class="price-desc">We run everything for you.</p>
         <ul class="price-features">
-          <li>IYS AI operated for you</li>
-          <li>Website managed &amp; updated</li>
-          <li>Monthly content planned &amp; posted</li>
-          <li>Lead follow-up monitored</li>
-          <li>Monthly reporting</li>
-          <li>Dedicated account manager</li>
+          <li>We run IYS AI daily</li>
+          <li>Website updates</li>
+          <li>Monthly reports</li>
+          <li>Social media managed</li>
+          <li>SEO blog weekly</li>
+          <li>Ads &amp; lead flow monitored</li>
+          <li>One point of contact</li>
         </ul>
         <a href="mailto:hello@improveyoursite.com?subject=IYS AI Managed Plan Enquiry" class="btn-price outline">Enquire Now</a>
+      </div>
+      <div class="price-card">
+        <div class="price-badge" style="background:#334155;">AI-Powered</div>
+        <div class="price-type">Google Ads Management</div>
+        <div class="price-amount">$299 <span>/month</span></div>
+        <p class="price-desc">AI monitors your ads daily — no agency needed.</p>
+        <ul class="price-features">
+          <li>Daily 9AM check-in</li>
+          <li>Keyword breakdown</li>
+          <li>Auto-pause dead keywords</li>
+          <li>Search term mining</li>
+          <li>Week-on-week tracking</li>
+          <li>Budget pacing</li>
+          <li>No % of spend taken</li>
+        </ul>
+        <a href="../google-ads.html" class="btn-price outline">Learn More</a>
       </div>
     </div>
     <p class="ongoing-note">API usage is billed directly to your Anthropic account. Budget around $10–30/month depending on volume.</p>
