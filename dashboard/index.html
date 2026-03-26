@@ -437,15 +437,15 @@
     /* Overview agents grid */
     .agents-overview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-    }
-
-    /* Agents page 2-col */
-    .agents-full-grid {
-      display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 16px;
+    }
+
+    /* Agents page */
+    .agents-full-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 18px;
     }
 
     /* ══════════════════════════════════════════════
@@ -715,12 +715,135 @@
     .danger-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
     /* ══════════════════════════════════════════════
+       API KEY EDITOR (Settings page)
+    ══════════════════════════════════════════════ */
+    .api-key-list { display: flex; flex-direction: column; gap: 10px; }
+    .api-key-row {
+      display: grid; grid-template-columns: 1fr 2fr auto;
+      align-items: center; gap: 12px;
+      padding: 10px 14px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .api-key-name {
+      font-family: 'Courier New', monospace; font-size: 11px;
+      color: var(--text); font-weight: 600;
+    }
+    .api-key-name small { display: block; font-family: inherit; font-size: 10px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .api-key-input {
+      padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); font-size: 12px;
+      font-family: 'Courier New', monospace; width: 100%; outline: none;
+      transition: border-color .15s;
+    }
+    .api-key-input:focus { border-color: var(--indigo); }
+    .api-key-save {
+      padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 700;
+      cursor: pointer; border: 1px solid var(--indigo); background: var(--indigo);
+      color: #fff; font-family: inherit; white-space: nowrap;
+      transition: opacity .15s;
+    }
+    .api-key-save:hover { opacity: .85; }
+    .api-key-save.saved { background: var(--green); border-color: var(--green); }
+    .api-key-set-badge { font-size: 10px; font-weight: 700; color: var(--green); }
+    .api-key-unset-badge { font-size: 10px; font-weight: 700; color: var(--red); }
+
+    /* ══════════════════════════════════════════════
        LEADS PAGE
     ══════════════════════════════════════════════ */
     .leads-stat-big {
       font-size: 64px; font-weight: 800; color: var(--mint); line-height: 1;
       margin: 20px 0 8px;
     }
+
+    /* ══════════════════════════════════════════════
+       OPENCLAW PAGE
+    ══════════════════════════════════════════════ */
+    .oc-stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 12px; margin-bottom: 22px; }
+    .oc-stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+    }
+    .oc-stat-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+    .oc-stat-val   { font-size: 28px; font-weight: 800; color: var(--text); line-height: 1; }
+    .oc-stat-val.pending  { color: var(--amber); }
+    .oc-stat-val.running  { color: var(--indigo); }
+    .oc-stat-val.resolved { color: var(--green); }
+    .oc-stat-val.failed   { color: var(--red); }
+
+    .oc-compose { margin-bottom: 22px; }
+    .oc-compose-row { display: flex; gap: 10px; align-items: flex-end; }
+    .oc-prompt-input {
+      flex: 1; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-size: 13px; font-family: inherit; outline: none;
+      transition: border-color .15s; resize: vertical; min-height: 56px;
+    }
+    .oc-prompt-input:focus { border-color: var(--indigo); }
+    .oc-submit-btn {
+      padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; border: none; background: var(--indigo); color: #fff;
+      font-family: inherit; white-space: nowrap; transition: opacity .15s;
+    }
+    .oc-submit-btn:hover { opacity: .85; }
+    .oc-submit-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .oc-list { display: flex; flex-direction: column; gap: 10px; }
+    .oc-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color .15s;
+    }
+    .oc-card:hover { border-color: rgba(91,77,255,.3); }
+    .oc-card-head {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; cursor: pointer;
+    }
+    .oc-status-dot {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    }
+    .oc-status-dot.pending  { background: var(--amber); }
+    .oc-status-dot.running  { background: var(--indigo); animation: pulse 1.5s infinite; }
+    .oc-status-dot.resolved { background: var(--green); }
+    .oc-status-dot.failed   { background: var(--red); }
+    .oc-status-dot.cancelled{ background: var(--muted); }
+    .oc-meta { flex: 1; min-width: 0; }
+    .oc-prompt-preview {
+      font-size: 13px; font-weight: 600; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .oc-submeta { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .oc-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .oc-badge.pending  { background: rgba(245,158,11,.15);  color: var(--amber); }
+    .oc-badge.running  { background: rgba(91,77,255,.15);   color: #a5b4fc; }
+    .oc-badge.resolved { background: rgba(34,197,94,.15);   color: var(--green); }
+    .oc-badge.failed   { background: rgba(239,68,68,.15);   color: var(--red); }
+    .oc-badge.cancelled{ background: rgba(100,116,139,.15); color: var(--muted); }
+    .oc-badge.high     { background: rgba(239,68,68,.12);   color: #fca5a5; }
+    .oc-badge.normal   { background: rgba(100,116,139,.12); color: var(--muted); }
+    .oc-card-body {
+      display: none; padding: 0 16px 14px; border-top: 1px solid var(--border);
+    }
+    .oc-card-body.open { display: block; }
+    .oc-full-prompt {
+      font-size: 12px; color: var(--muted); padding: 12px 0 8px;
+      border-bottom: 1px dashed var(--border); white-space: pre-wrap; word-break: break-word;
+    }
+    .oc-result {
+      margin-top: 12px; padding: 12px; border-radius: 7px;
+      background: var(--surface2); font-size: 12px; color: var(--text);
+      white-space: pre-wrap; word-break: break-word; line-height: 1.65;
+      max-height: 320px; overflow-y: auto;
+    }
+    .oc-result.error { color: var(--red); background: rgba(239,68,68,.07); }
+    .oc-result-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; margin-top: 12px; }
+    .oc-token-pill {
+      display: inline-block; font-size: 10px; color: var(--muted);
+      background: var(--surface2); border-radius: 4px; padding: 1px 7px;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
 
     /* ══════════════════════════════════════════════
        CONTENT PAGE
@@ -735,6 +858,82 @@
     .content-row:hover { background: var(--surface2); }
     .content-row-title { flex: 1; font-weight: 600; }
     .content-row-meta  { color: var(--muted); font-size: 11px; }
+
+    /* ══════════════════════════════════════════════
+       WORKLOAD DIAL (rotary knob)
+    ══════════════════════════════════════════════ */
+    .wl-dial-row {
+      display: flex; align-items: center; gap: 14px;
+      margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+    }
+    .wl-dial-svg {
+      width: 72px; height: 72px; cursor: pointer; flex-shrink: 0;
+      overflow: visible; transition: filter .2s;
+    }
+    .wl-dial-svg:hover { filter: brightness(1.15); }
+    .wl-dial-svg.hd { animation: hd-pulse 2s ease-in-out infinite; }
+    @keyframes hd-pulse {
+      0%,100% { filter: drop-shadow(0 0 6px rgba(45,212,191,0.45)); }
+      50%      { filter: drop-shadow(0 0 14px rgba(45,212,191,0.9)); }
+    }
+    .wl-dial-info { flex: 1; min-width: 0; }
+    .wl-dial-label {
+      font-size: 11px; font-weight: 800; color: var(--text);
+      text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px;
+    }
+    .wl-dial-label.hd { color: var(--mint); }
+    .wl-dial-desc { font-size: 10px; color: var(--muted); line-height: 1.5; white-space: pre-line; }
+    .wl-dial-desc.hd { color: rgba(45,212,191,0.75); }
+    .btn-talk {
+      padding: 7px 14px; border-radius: 7px; flex-shrink: 0;
+      font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); font-family: inherit;
+      transition: background .12s, color .12s, border-color .12s; white-space: nowrap;
+    }
+    .btn-talk:hover, .btn-talk.open { background: rgba(91,77,255,.15); color: #a5b4fc; border-color: var(--indigo); }
+
+    /* ══════════════════════════════════════════════
+       AGENT COMMS (Talk panel)
+    ══════════════════════════════════════════════ */
+    .agent-comms {
+      display: none; margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+      animation: fadeIn .18s ease;
+    }
+    .agent-comms.open { display: block; }
+    .comms-prompt-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+    .agent-comms-prompt {
+      width: 100%; padding: 7px 10px; border-radius: 7px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--muted); font-family: inherit; font-size: 11px;
+      resize: vertical; min-height: 44px; outline: none; margin-bottom: 8px;
+      transition: border-color .15s, color .15s;
+    }
+    .agent-comms-prompt:focus { border-color: var(--indigo); color: var(--text); }
+    .comms-input-row { display: flex; gap: 6px; }
+    .agent-comms-input {
+      flex: 1; padding: 7px 10px; border-radius: 7px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); font-family: inherit; font-size: 12px; outline: none;
+      transition: border-color .15s;
+    }
+    .agent-comms-input:focus { border-color: var(--indigo); }
+    .agent-comms-send {
+      padding: 7px 14px; border-radius: 7px;
+      background: var(--indigo); color: #fff; border: none;
+      font-family: inherit; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: opacity .12s;
+    }
+    .agent-comms-send:hover { opacity: .85; }
+    .comms-response {
+      margin-top: 8px; font-size: 11px; color: var(--muted);
+      min-height: 18px; line-height: 1.6;
+    }
+    .comms-response.has-reply {
+      color: var(--text); background: var(--surface2);
+      border-radius: 6px; padding: 8px 10px;
+      border-left: 2px solid var(--indigo);
+    }
 
     /* ══════════════════════════════════════════════
        PASSWORD GATE
@@ -772,6 +971,120 @@
       transition: opacity 0.15s;
     }
     .gate-btn:hover { opacity: 0.88; }
+
+    /* ══════════════════════════════════════════════
+       SECURITY PAGE
+    ══════════════════════════════════════════════ */
+    .sec-score-row {
+      display: flex; gap: 16px; margin-bottom: 20px; align-items: stretch;
+    }
+    .sec-score-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-width: 180px;
+    }
+    .sec-score-label { font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+    .sec-score-num {
+      font-size: 56px; font-weight: 800; line-height: 1;
+      background: linear-gradient(135deg, #22c55e, #2dd4bf);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sec-score-num.warn { background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .sec-score-num.danger { background: linear-gradient(135deg, #ef4444, #b91c1c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .sec-score-sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .sec-sev-row {
+      flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .sec-sev-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 18px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .sec-sev-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .sec-sev-dot.critical { background: #ef4444; box-shadow: 0 0 8px #ef444480; }
+    .sec-sev-dot.high     { background: #f59e0b; box-shadow: 0 0 8px #f59e0b60; }
+    .sec-sev-dot.medium   { background: #f97316; }
+    .sec-sev-dot.low      { background: #22c55e; }
+    .sec-sev-label { font-size: 12px; color: var(--muted); flex: 1; }
+    .sec-sev-val   { font-size: 22px; font-weight: 800; }
+    .sec-sev-val.critical { color: #ef4444; }
+    .sec-sev-val.high     { color: #f59e0b; }
+    .sec-sev-val.medium   { color: #f97316; }
+    .sec-sev-val.low      { color: #22c55e; }
+
+    .sec-actions-row {
+      display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .sec-btn {
+      padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; border: none; font-family: inherit; transition: opacity .15s;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .sec-btn:hover { opacity: .85; }
+    .sec-btn.primary { background: linear-gradient(135deg, var(--indigo), #7c3aed); color: #fff; }
+    .sec-btn.danger  { background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; }
+    .sec-btn.ghost   { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .sec-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    .sec-pentest-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; margin-bottom: 20px;
+    }
+    .sec-pentest-label {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px;
+    }
+    .sec-pentest-row { display: flex; gap: 10px; align-items: center; }
+    .sec-pentest-select {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      border-radius: 6px; padding: 8px 12px; font-size: 13px; font-family: inherit;
+      outline: none; flex: 1; max-width: 260px;
+    }
+
+    .sec-findings-list { display: flex; flex-direction: column; gap: 8px; }
+    .sec-finding {
+      background: var(--surface); border-left: 3px solid var(--border);
+      border-radius: 0 8px 8px 0; padding: 12px 14px; cursor: pointer;
+      transition: background .12s;
+    }
+    .sec-finding:hover { background: var(--surface2); }
+    .sec-finding.critical { border-left-color: #ef4444; }
+    .sec-finding.high     { border-left-color: #f59e0b; }
+    .sec-finding.medium   { border-left-color: #f97316; }
+    .sec-finding.low      { border-left-color: #22c55e; }
+    .sec-finding-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .sec-finding-badge {
+      font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 4px;
+    }
+    .sec-finding-badge.critical { background: #ef444420; color: #ef4444; }
+    .sec-finding-badge.high     { background: #f59e0b20; color: #f59e0b; }
+    .sec-finding-badge.medium   { background: #f9731620; color: #f97316; }
+    .sec-finding-badge.low      { background: #22c55e20; color: #22c55e; }
+    .sec-finding-title { font-size: 13px; font-weight: 600; }
+    .sec-finding-loc   { font-size: 11px; color: var(--muted); font-family: monospace; }
+    .sec-finding-body  { display: none; padding-top: 10px; border-top: 1px solid var(--border); margin-top: 8px; }
+    .sec-finding-body.open { display: block; }
+    .sec-finding-detail { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .sec-finding-fix {
+      font-size: 12px; background: #22c55e15; border: 1px solid #22c55e30;
+      border-radius: 6px; padding: 8px 10px; color: #22c55e;
+      font-family: monospace; white-space: pre-wrap; word-break: break-word;
+    }
+    .sec-pentest-output {
+      background: #0a0a0f; border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; font-size: 12px; font-family: monospace; color: #94a3b8;
+      max-height: 500px; overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+      margin-top: 14px; display: none;
+    }
+    .sec-pentest-output.visible { display: block; }
+    .sec-filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .sec-last-scan { font-size: 11px; color: var(--muted); }
+
   </style>
 </head>
 <body>
@@ -822,6 +1135,14 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       <span class="sb-nav-label">Skills</span>
     </div>
+    <div class="sb-nav-item" data-page="security" onclick="navTo('security',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span class="sb-nav-label">Security</span>
+    </div>
+    <div class="sb-nav-item" data-page="openclaw" onclick="navTo('openclaw',this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l2 2 4-4"/><path d="M12 6v2"/><path d="M12 16v2"/><path d="M6 12H8"/><path d="M16 12h2"/></svg>
+      <span class="sb-nav-label">OpenClaw</span>
+    </div>
     <div class="sb-nav-item" data-page="settings" onclick="navTo('settings',this)">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
       <span class="sb-nav-label">Settings</span>
@@ -865,7 +1186,7 @@
       <button id="pause-btn" class="btn btn-secondary btn-sm" onclick="togglePause()">Pause All</button>
       <a href="http://127.0.0.1:18789/#token=882a773bf154b46dcc2f1dcb02bdccde8fb9125d1737a57f" target="_blank" class="btn-jarvis">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        Jarvis
+        IYS AI
       </a>
     </div>
   </header>
@@ -1096,6 +1417,144 @@
       </div>
     </div>
 
+    <!-- ══ PAGE: OPENCLAW ══ -->
+    <!-- ══ PAGE: SECURITY ══ -->
+    <div class="page" id="page-security">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">Security Manager</div>
+          <div class="section-sub" id="sec-last-scan-sub">Pen tester + vulnerability scanner — powered by OpenClaw</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="loadSecurity()">↺ Refresh</button>
+      </div>
+
+      <!-- Score + severity counts -->
+      <div class="sec-score-row">
+        <div class="sec-score-card">
+          <div class="sec-score-label">Security Score</div>
+          <div class="sec-score-num" id="sec-score">—</div>
+          <div class="sec-score-sub" id="sec-score-sub">Run a scan to get your score</div>
+        </div>
+        <div class="sec-sev-row">
+          <div class="sec-sev-card">
+            <div class="sec-sev-dot critical"></div>
+            <div class="sec-sev-label">Critical</div>
+            <div class="sec-sev-val critical" id="sec-n-critical">—</div>
+          </div>
+          <div class="sec-sev-card">
+            <div class="sec-sev-dot high"></div>
+            <div class="sec-sev-label">High</div>
+            <div class="sec-sev-val high" id="sec-n-high">—</div>
+          </div>
+          <div class="sec-sev-card">
+            <div class="sec-sev-dot medium"></div>
+            <div class="sec-sev-label">Medium</div>
+            <div class="sec-sev-val medium" id="sec-n-medium">—</div>
+          </div>
+          <div class="sec-sev-card">
+            <div class="sec-sev-dot low"></div>
+            <div class="sec-sev-label">Low</div>
+            <div class="sec-sev-val low" id="sec-n-low">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="sec-actions-row">
+        <button class="sec-btn primary" id="sec-scan-btn" onclick="secRunScan()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Run Full Scan
+        </button>
+        <button class="sec-btn ghost" onclick="secFilter(null,this)" id="sec-f-all">All</button>
+        <button class="sec-btn ghost" onclick="secFilter('critical',this)">Critical</button>
+        <button class="sec-btn ghost" onclick="secFilter('high',this)">High</button>
+        <button class="sec-btn ghost" onclick="secFilter('medium',this)">Medium</button>
+        <button class="sec-btn ghost" onclick="secFilter('low',this)">Low</button>
+      </div>
+
+      <!-- Findings list -->
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;">
+        Findings <span id="sec-findings-count" style="font-weight:400;color:var(--muted);font-size:12px;"></span>
+      </div>
+      <div class="sec-findings-list" id="sec-findings-list">
+        <div class="empty-state">No scan data yet — click Run Full Scan</div>
+      </div>
+
+      <!-- Deep pen test section -->
+      <div class="sec-pentest-card" style="margin-top:24px;">
+        <div class="sec-pentest-label">Deep Pen Test via OpenClaw</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">
+          Escalates to Claude Code CLI — reads every critical file, tests all endpoints, returns a full OWASP audit with exact line numbers and fixes.
+        </div>
+        <div class="sec-pentest-row">
+          <select class="sec-pentest-select" id="sec-pentest-target">
+            <option value="full">Full system audit</option>
+            <option value="dashboard">Dashboard API only</option>
+            <option value="agents">Agent code only</option>
+            <option value="secrets">Secret / credential exposure</option>
+            <option value="network">Network + endpoint exposure</option>
+          </select>
+          <button class="sec-btn danger" id="sec-pentest-btn" onclick="secRunPentest()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Launch Pen Test
+          </button>
+        </div>
+        <div class="sec-pentest-output" id="sec-pentest-output"></div>
+      </div>
+    </div>
+
+    <div class="page" id="page-openclaw">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">OpenClaw</div>
+          <div class="section-sub">Autonomous problem-solver — agents escalate hard tasks here</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="loadOpenClaw()">↺ Refresh</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="oc-stats-row" id="oc-stats-row">
+        <div class="oc-stat-card"><div class="oc-stat-label">Pending</div><div class="oc-stat-val pending" id="oc-n-pending">—</div></div>
+        <div class="oc-stat-card"><div class="oc-stat-label">Running</div><div class="oc-stat-val running" id="oc-n-running">—</div></div>
+        <div class="oc-stat-card"><div class="oc-stat-label">Resolved</div><div class="oc-stat-val resolved" id="oc-n-resolved">—</div></div>
+        <div class="oc-stat-card"><div class="oc-stat-label">Failed</div><div class="oc-stat-val failed" id="oc-n-failed">—</div></div>
+        <div class="oc-stat-card"><div class="oc-stat-label">Today</div><div class="oc-stat-val" id="oc-n-today">—</div></div>
+      </div>
+
+      <!-- Manual task composer -->
+      <div class="oc-compose card" style="padding:18px;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">
+          Submit a Task to OpenClaw
+        </div>
+        <div class="oc-compose-row">
+          <textarea class="oc-prompt-input" id="oc-manual-prompt"
+            placeholder="e.g. Find the email address for Burke's Bakery at 45 Queen St, Bathurst NSW and return it as JSON {&quot;email&quot;: &quot;...&quot;, &quot;confidence&quot;: &quot;high/med/low&quot;}"></textarea>
+          <button class="oc-submit-btn" id="oc-submit-btn" onclick="submitOcTask()">
+            Run with OpenClaw
+          </button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px;">
+          Runs non-interactively via <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-size:10px;">claude -p "prompt"</code>
+          in the workspace. Falls back to Anthropic API (Opus 4.6) if CLI unavailable.
+        </div>
+      </div>
+
+      <!-- Escalation list -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;margin-top:6px;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);">Escalation Queue</div>
+        <div style="display:flex;gap:8px;">
+          <button class="filter-tab active" onclick="ocFilter(null,this)">All</button>
+          <button class="filter-tab" onclick="ocFilter('pending',this)">Pending</button>
+          <button class="filter-tab" onclick="ocFilter('running',this)">Running</button>
+          <button class="filter-tab" onclick="ocFilter('resolved',this)">Resolved</button>
+          <button class="filter-tab" onclick="ocFilter('failed',this)">Failed</button>
+        </div>
+      </div>
+      <div class="oc-list" id="oc-list">
+        <div class="empty-state">Loading escalations…</div>
+      </div>
+    </div>
+
     <!-- ══ PAGE: SETTINGS ══ -->
     <div class="page" id="page-settings">
       <div class="section-header" style="margin-bottom:24px;">
@@ -1114,6 +1573,19 @@
             </thead>
             <tbody id="env-tbody"></tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">API Keys &amp; Credentials</div>
+        <div class="card" style="padding:16px;">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">
+            Update API keys stored in <code style="font-size:11px;background:var(--surface2);padding:1px 5px;border-radius:3px;">builder/.env</code>.
+            Values are written to disk and take effect immediately. Leave blank to keep the current value.
+          </p>
+          <div class="api-key-list" id="api-key-list">
+            <div style="color:var(--muted);font-size:12px;padding:8px;">Open Settings to load keys…</div>
+          </div>
         </div>
       </div>
 
@@ -1170,6 +1642,8 @@ const DASH_HASH = 'c4e66fd25fae2836d495ef7f28f4ba38be0225054a05875ba2f2d55799372
 
 // Disabled agents
 const _disabledAgents = new Set(JSON.parse(localStorage.getItem('disabledAgents') || '[]'));
+const _wlState       = JSON.parse(localStorage.getItem('wlState') || '{}');
+const _agentPrompts  = JSON.parse(localStorage.getItem('agentPrompts') || '{}');
 
 // ════════════════════════════════════════════
 // THEME
@@ -1208,7 +1682,8 @@ if (window.innerWidth < 900) document.body.classList.add('sb-collapsed');
 const PAGE_TITLES = {
   overview: 'Overview', agents: 'Agents', tasks: 'Tasks',
   activity: 'Activity', calendar: 'Calendar', leads: 'Leads',
-  content: 'Content', skills: 'Skills', settings: 'Settings'
+  content: 'Content', skills: 'Skills', settings: 'Settings', openclaw: 'OpenClaw',
+  security: 'Security Manager'
 };
 
 function navTo(page, el) {
@@ -1223,11 +1698,13 @@ function navTo(page, el) {
   if (page === 'calendar') loadCalendar();
   if (page === 'skills') renderSkills();
   if (page === 'settings') renderSettings();
+  if (page === 'openclaw') loadOpenClaw();
   if (page === 'agents') renderAgentsFull();
   if (page === 'tasks') renderTasksTable();
   if (page === 'activity') { renderActivityFeed(); populateAgentFilter(); }
   if (page === 'leads') renderLeadsPage();
   if (page === 'content') renderContentPage();
+  if (page === 'security') loadSecurity();
 }
 
 // ════════════════════════════════════════════
@@ -1254,6 +1731,10 @@ async function checkPassword() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const urlToken = new URLSearchParams(location.search).get('token');
+  if (urlToken === 'improveyoursite2025') {
+    localStorage.setItem('iys_dash_auth', '1');
+  }
   if (localStorage.getItem('iys_dash_auth') === '1') {
     init();
   } else {
@@ -1283,8 +1764,14 @@ function init() {
 // ════════════════════════════════════════════
 // API
 // ════════════════════════════════════════════
+const _authHeader = 'Basic ' + btoa('james:improveyoursite2025');
+
 async function api(path, method = 'GET', body = null) {
-  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': _authHeader },
+    credentials: 'include',
+  };
   if (body) opts.body = JSON.stringify(body);
   const r = await fetch(path, opts);
   if (!r.ok) throw new Error(`${method} ${path} → ${r.status}`);
@@ -1327,7 +1814,7 @@ async function loadAgentsQuiet() {
 // ════════════════════════════════════════════
 function connectSSE() {
   if (sse) sse.close();
-  sse = new EventSource('/api/stream');
+  sse = new EventSource('/api/stream?token=improveyoursite2025');
   sse.onopen = () => {
     sseConnected = true;
     const dot = document.getElementById('sse-dot');
@@ -1443,6 +1930,7 @@ function agentMiniCard(a) {
   const dotClass = statusDotClass(a.status);
   const enabled  = !_disabledAgents.has(a.id);
   const errBadge = a.error_count > 0 ? `<span class="err-badge">${a.error_count} err</span>` : '';
+  const wl = _wlState[a.id] || 3;
   return `
     <div class="agent-card${enabled ? '' : ' disabled'}">
       <div class="agent-card-stripe"></div>
@@ -1466,6 +1954,23 @@ function agentMiniCard(a) {
             <div class="toggle-track ${enabled?'on':''}"><div class="toggle-knob"></div></div>
           </div>
         </div>
+        <div class="wl-dial-row">
+          ${wlDialSvg(a.id, wl)}
+          <div class="wl-dial-info">
+            <div class="wl-dial-label${wl===5?' hd':''}" id="wll-${a.id}">${DIAL_LABELS[wl-1]}</div>
+            <div class="wl-dial-desc${wl===5?' hd':''}" id="wld-${a.id}">${DIAL_DESCS[wl-1]}</div>
+          </div>
+          <button class="btn-talk" id="talk-${a.id}" onclick="toggleTalk('${a.id}')">Talk</button>
+        </div>
+        <div class="agent-comms" id="comms-${a.id}">
+          <div class="comms-prompt-label">System Prompt <span class="api-key-set-badge" id="saved-${a.id}" style="display:none;margin-left:6px;">✓ Saved</span></div>
+          <textarea class="agent-comms-prompt" id="prompt-${a.id}" placeholder="Persona / instructions for ${esc(a.name)}…" oninput="saveAgentPrompt('${a.id}',this)">${esc(_agentPrompts[a.id]||'')}</textarea>
+          <div class="comms-input-row">
+            <input class="agent-comms-input" type="text" placeholder="Message ${esc(a.name)}…" onkeydown="if(event.key==='Enter')sendComms('${a.id}',this)">
+            <button class="agent-comms-send" onclick="sendComms('${a.id}',this.previousElementSibling)">Send</button>
+          </div>
+          <div class="comms-response" id="comms-resp-${a.id}"></div>
+        </div>
       </div>
     </div>`;
 }
@@ -1484,6 +1989,7 @@ function agentFullCard(a) {
   const dotClass = statusDotClass(a.status);
   const enabled  = !_disabledAgents.has(a.id);
   const statusBadgeCls = {running:'badge-indigo',idle:'badge-gray',error:'badge-red',paused:'badge-amber'}[a.status]||'badge-gray';
+  const wl = _wlState[a.id] || 3;
   return `
     <div class="agent-card${enabled ? '' : ' disabled'}">
       <div class="agent-card-stripe"></div>
@@ -1512,6 +2018,23 @@ function agentFullCard(a) {
             <span style="font-size:11px;color:${enabled?'var(--green)':'var(--red)'};">${enabled?'ON':'OFF'}</span>
           </div>
         </div>
+        <div class="wl-dial-row">
+          ${wlDialSvg(a.id, wl)}
+          <div class="wl-dial-info">
+            <div class="wl-dial-label${wl===5?' hd':''}" id="wll-${a.id}">${DIAL_LABELS[wl-1]}</div>
+            <div class="wl-dial-desc${wl===5?' hd':''}" id="wld-${a.id}">${DIAL_DESCS[wl-1]}</div>
+          </div>
+          <button class="btn-talk" id="talk-${a.id}" onclick="toggleTalk('${a.id}')">Talk</button>
+        </div>
+        <div class="agent-comms" id="comms-${a.id}">
+          <div class="comms-prompt-label">System Prompt <span class="api-key-set-badge" id="saved-${a.id}" style="display:none;margin-left:6px;">✓ Saved</span></div>
+          <textarea class="agent-comms-prompt" id="prompt-${a.id}" placeholder="Persona / instructions for ${esc(a.name)}…" oninput="saveAgentPrompt('${a.id}',this)">${esc(_agentPrompts[a.id]||'')}</textarea>
+          <div class="comms-input-row">
+            <input class="agent-comms-input" type="text" placeholder="Message ${esc(a.name)}…" onkeydown="if(event.key==='Enter')sendComms('${a.id}',this)">
+            <button class="agent-comms-send" onclick="sendComms('${a.id}',this.previousElementSibling)">Send</button>
+          </div>
+          <div class="comms-response" id="comms-resp-${a.id}"></div>
+        </div>
       </div>
     </div>`;
 }
@@ -1533,6 +2056,155 @@ function openLogPanel(agentId, agentName) {
 
 function closeLogPanel() {
   document.getElementById('log-panel').classList.remove('open');
+}
+
+// ════════════════════════════════════════════
+// WORKLOAD ROTARY DIAL
+// ════════════════════════════════════════════
+// Precomputed tick positions on a 300° arc (7-o'clock to 5-o'clock, clockwise over top)
+// Center (40,40), radius 30. SVG angles: L1=120°, L2=195°, L3=270°, L4=345°, L5=60°
+const DIAL_PTS    = [{x:25,y:66},{x:11,y:32},{x:40,y:10},{x:69,y:32},{x:55,y:66}];
+const DIAL_ARCS   = [0,0,0,1,1]; // large-arc-flag per level (>180° needs 1)
+const DIAL_COLORS = ['#64748b','#818cf8','#5b4dff','#f59e0b','#2dd4bf'];
+const DIAL_LABELS = ['Idle','Low','Standard','High','Hyperdrive'];
+const DIAL_DESCS  = [
+  'Agent resting.\nNo tasks queued.',
+  'Light tasks only.\nToken-aware.',
+  'Normal operation.\nBalanced performance.',
+  'Priority mode.\nFull token budget.',
+  'Unlimited · OpenClaw + Claude Code\nNo token cap. Last resort:\nasks human for help.'
+];
+// SVG angles for click → nearest tick (0°=right, clockwise, y-down)
+const DIAL_ANGLES = [120, 195, 270, 345, 60];
+
+function wlDialSvg(agentId, level) {
+  const lv  = Math.max(1, Math.min(5, level));
+  const col = DIAL_COLORS[lv - 1];
+  const tp  = DIAL_PTS[lv - 1];
+  const la  = DIAL_ARCS[lv - 1];
+  const isHD = lv === 5;
+
+  // Track: full 300° arc from L1(25,66) to L5(55,66), clockwise over top
+  const track = `M 25 66 A 30 30 0 1 1 55 66`;
+  // Fill: arc from L1 to current tick
+  const fill = lv === 1
+    ? ''  // at L1, just the dot below
+    : `M 25 66 A 30 30 0 ${la} 1 ${tp.x} ${tp.y}`;
+
+  // Tick dots
+  const ticks = DIAL_PTS.map((p, i) => {
+    const active = i < lv;
+    const isCur  = i === lv - 1;
+    return `<circle cx="${p.x}" cy="${p.y}" r="${isCur ? 5 : 2.5}"
+      fill="${active ? DIAL_COLORS[i] : '#334155'}"
+      stroke="${isCur ? col : 'none'}" stroke-width="${isCur ? 2 : 0}"
+      opacity="${active ? 1 : 0.5}"/>`;
+  }).join('');
+
+  // Center label
+  const centerText = lv === 5 ? 'HD' : String(lv);
+
+  return `<svg class="wl-dial-svg${isHD ? ' hd' : ''}" viewBox="0 0 80 80"
+    id="dial-${agentId}" onclick="wlDialClick(event,'${agentId}')" title="Click to set workload level">
+    <!-- Track -->
+    <path d="${track}" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+    <!-- Fill arc -->
+    ${fill ? `<path d="${fill}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round"/>` : ''}
+    <!-- Tick dots -->
+    ${ticks}
+    <!-- L1 dot always colored if active -->
+    <!-- Center -->
+    <text x="40" y="44" text-anchor="middle" dominant-baseline="middle"
+      font-family="Inter,sans-serif" font-size="${lv===5?'11':'14'}" font-weight="900"
+      fill="${col}">${centerText}</text>
+  </svg>`;
+}
+
+function wlDialClick(evt, agentId) {
+  const svg = evt.currentTarget;
+  const rect = svg.getBoundingClientRect();
+  const svgSize = 80;
+  const scaleX = svgSize / rect.width;
+  const scaleY = svgSize / rect.height;
+  const sx = (evt.clientX - rect.left) * scaleX;
+  const sy = (evt.clientY - rect.top)  * scaleY;
+  const dx = sx - 40, dy = sy - 40; // SVG y-down, no flip needed
+  const clickAngle = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
+
+  let best = 0, bestDist = 9999;
+  DIAL_ANGLES.forEach((ta, i) => {
+    let d = Math.abs(clickAngle - ta);
+    if (d > 180) d = 360 - d; // shortest arc
+    if (d < bestDist) { bestDist = d; best = i + 1; }
+  });
+  setWlLevel(agentId, best);
+}
+
+function setWlLevel(agentId, level) {
+  _wlState[agentId] = level;
+  localStorage.setItem('wlState', JSON.stringify(_wlState));
+  const isHD = level === 5;
+
+  // Re-render all dial SVGs for this agent
+  document.querySelectorAll(`#dial-${agentId}`).forEach(el => {
+    el.outerHTML = wlDialSvg(agentId, level);
+  });
+  // Update label + desc
+  document.querySelectorAll(`#wll-${agentId}`).forEach(el => {
+    el.textContent = DIAL_LABELS[level - 1];
+    el.className = 'wl-dial-label' + (isHD ? ' hd' : '');
+  });
+  document.querySelectorAll(`#wld-${agentId}`).forEach(el => {
+    el.textContent = DIAL_DESCS[level - 1];
+    el.className = 'wl-dial-desc' + (isHD ? ' hd' : '');
+  });
+}
+
+// ════════════════════════════════════════════
+// TALK / COMMS PANEL
+// ════════════════════════════════════════════
+let _promptSaveTimers = {};
+function saveAgentPrompt(agentId, textarea) {
+  _agentPrompts[agentId] = textarea.value;
+  clearTimeout(_promptSaveTimers[agentId]);
+  _promptSaveTimers[agentId] = setTimeout(() => {
+    localStorage.setItem('agentPrompts', JSON.stringify(_agentPrompts));
+    const ind = document.getElementById('saved-' + agentId);
+    if (ind) {
+      ind.style.display = 'inline';
+      clearTimeout(ind._hideTimer);
+      ind._hideTimer = setTimeout(() => { ind.style.display = 'none'; }, 2000);
+    }
+  }, 600);
+}
+
+function toggleTalk(agentId) {
+  const panel = document.getElementById('comms-' + agentId);
+  if (!panel) return;
+  const isOpen = panel.classList.contains('open');
+  // Close all open comms panels
+  document.querySelectorAll('.agent-comms.open').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.btn-talk.open').forEach(b => { b.classList.remove('open'); b.textContent = 'Talk'; });
+  if (!isOpen) {
+    panel.classList.add('open');
+    const btn = document.getElementById('talk-' + agentId);
+    if (btn) { btn.classList.add('open'); btn.textContent = 'Close'; }
+    panel.querySelector('.agent-comms-input')?.focus();
+  }
+}
+
+async function sendComms(agentId, inputEl) {
+  const msg = inputEl.value.trim();
+  if (!msg) return;
+  const respEl = document.getElementById('comms-resp-' + agentId);
+  if (respEl) { respEl.className = 'comms-response'; respEl.textContent = 'Sending…'; }
+  inputEl.value = '';
+  try {
+    const res = await api('/api/trigger', 'POST', { agent_id: agentId, message: msg });
+    if (respEl) { respEl.className = 'comms-response has-reply'; respEl.textContent = res.message || '✓ Agent triggered.'; }
+  } catch(err) {
+    if (respEl) { respEl.className = 'comms-response has-reply'; respEl.textContent = '⚠ ' + err.message; }
+  }
 }
 
 // ════════════════════════════════════════════
@@ -1742,7 +2414,181 @@ function renderSettings() {
       <td><span class="env-set">✓ SET</span></td>
       <td style="font-size:12px;color:var(--muted);">${esc(v.desc)}</td>
     </tr>`).join('');
+  loadEnvEditor();
 }
+
+async function loadEnvEditor() {
+  const list = document.getElementById('api-key-list');
+  if (!list) return;
+  list.innerHTML = '<div style="color:var(--muted);font-size:12px;padding:8px;">Loading…</div>';
+  try {
+    const data = await api('/api/env');
+    list.innerHTML = data.map(v => `
+      <div class="api-key-row" id="akrow-${esc(v.key)}">
+        <div class="api-key-name">
+          ${esc(v.key)}
+          <small>${esc(v.desc || '')}</small>
+        </div>
+        <input class="api-key-input" id="aki-${esc(v.key)}"
+          type="password" autocomplete="off"
+          placeholder="${v.set ? '••••••••••••  (set — enter new value to update)' : 'Not set — paste value here'}"
+          value="">
+        <button class="api-key-save" id="aksave-${esc(v.key)}"
+          onclick="saveEnvVar('${esc(v.key)}',this)">
+          ${v.set ? 'Update' : 'Save'}
+        </button>
+      </div>`).join('');
+  } catch(e) {
+    list.innerHTML = `<div style="color:var(--red);font-size:12px;padding:8px;">⚠ Could not load keys: ${esc(e.message)}</div>`;
+  }
+}
+
+async function saveEnvVar(key, btn) {
+  const input = document.getElementById('aki-' + key);
+  if (!input) return;
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const origText = btn.textContent;
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  try {
+    await api('/api/env', 'PATCH', { key, value: val });
+    btn.textContent = '✓ Saved';
+    btn.classList.add('saved');
+    input.value = '';
+    input.placeholder = '••••••••••••  (set — enter new value to update)';
+    setTimeout(() => { btn.textContent = 'Update'; btn.classList.remove('saved'); btn.disabled = false; }, 2500);
+  } catch(e) {
+    btn.textContent = '⚠ Failed';
+    setTimeout(() => { btn.textContent = origText; btn.disabled = false; }, 2000);
+  }
+}
+
+// ════════════════════════════════════════════
+// OPENCLAW PAGE
+// ════════════════════════════════════════════
+let _ocFilter = null;
+
+async function loadOpenClaw() {
+  // Load stats
+  try {
+    const stats = await api('/api/escalations/stats');
+    document.getElementById('oc-n-pending').textContent  = stats.pending  || 0;
+    document.getElementById('oc-n-running').textContent  = stats.running  || 0;
+    document.getElementById('oc-n-resolved').textContent = stats.resolved || 0;
+    document.getElementById('oc-n-failed').textContent   = stats.failed   || 0;
+    document.getElementById('oc-n-today').textContent    = stats.today    || 0;
+  } catch {}
+
+  // Load escalation list
+  const list = document.getElementById('oc-list');
+  if (!list) return;
+  list.innerHTML = '<div class="empty-state">Loading…</div>';
+  try {
+    const url = '/api/escalations?limit=60' + (_ocFilter ? '&status=' + _ocFilter : '');
+    const rows = await api(url);
+    if (!rows.length) {
+      list.innerHTML = '<div class="empty-state">No escalations yet. Agents will add tasks here automatically when they hit hard problems.</div>';
+      return;
+    }
+    list.innerHTML = rows.map(r => ocCard(r)).join('');
+  } catch(e) {
+    list.innerHTML = `<div class="empty-state">Error: ${esc(e.message)}</div>`;
+  }
+}
+
+function ocFilter(status, el) {
+  _ocFilter = status;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  loadOpenClaw();
+}
+
+function ocCard(r) {
+  const st   = r.status || 'pending';
+  const ago  = relTime(r.created_at);
+  const dur  = r.resolved_at
+    ? Math.round((new Date(r.resolved_at) - new Date(r.created_at)) / 1000) + 's'
+    : '';
+  const pri  = r.priority || 'normal';
+  const toks = r.tokens_used ? `<span class="oc-token-pill">${r.tokens_used.toLocaleString()} tokens</span>` : '';
+  const model = r.model_used ? `<span class="oc-token-pill">${esc(r.model_used)}</span>` : '';
+
+  const result = r.result_text
+    ? `<div class="oc-result-label">Result${dur ? ' · ' + dur : ''} ${toks} ${model}</div>
+       <div class="oc-result">${esc(r.result_text)}</div>`
+    : r.error
+    ? `<div class="oc-result-label">Error</div><div class="oc-result error">${esc(r.error)}</div>`
+    : '';
+
+  const cancelBtn = st === 'pending'
+    ? `<button class="btn btn-danger btn-sm" style="margin-left:auto;" onclick="cancelOcTask(${r.id},event)">Cancel</button>`
+    : '';
+
+  return `<div class="oc-card" id="oc-card-${r.id}">
+    <div class="oc-card-head" onclick="ocToggle(${r.id})">
+      <div class="oc-status-dot ${st}"></div>
+      <div class="oc-meta">
+        <div class="oc-prompt-preview">${esc(r.prompt)}</div>
+        <div class="oc-submeta">
+          <span class="oc-badge ${st}">${st}</span>
+          ${pri !== 'normal' ? `<span class="oc-badge ${pri}">${pri}</span>` : ''}
+          <span>Agent: <strong>${esc(r.agent_id)}</strong></span>
+          <span>${ago}</span>
+        </div>
+      </div>
+      ${cancelBtn}
+    </div>
+    <div class="oc-card-body" id="oc-body-${r.id}">
+      <div class="oc-full-prompt">${esc(r.prompt)}</div>
+      ${result}
+    </div>
+  </div>`;
+}
+
+function ocToggle(id) {
+  const body = document.getElementById('oc-body-' + id);
+  if (body) body.classList.toggle('open');
+}
+
+async function submitOcTask() {
+  const input = document.getElementById('oc-manual-prompt');
+  const btn   = document.getElementById('oc-submit-btn');
+  const prompt = input.value.trim();
+  if (!prompt) { input.focus(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  try {
+    const r = await api('/api/escalations', 'POST', { prompt });
+    input.value = '';
+    btn.textContent = `✓ Queued #${r.esc_id}`;
+    setTimeout(() => {
+      btn.textContent = 'Run with OpenClaw';
+      btn.disabled = false;
+    }, 2000);
+    // Refresh list after brief delay
+    setTimeout(loadOpenClaw, 500);
+  } catch(e) {
+    btn.textContent = '⚠ Failed';
+    setTimeout(() => { btn.textContent = 'Run with OpenClaw'; btn.disabled = false; }, 2000);
+  }
+}
+
+async function cancelOcTask(id, evt) {
+  evt.stopPropagation();
+  try {
+    await api('/api/escalations/' + id, 'DELETE');
+    loadOpenClaw();
+  } catch {}
+}
+
+// Poll every 5s while OpenClaw page is open AND there are active escalations
+setInterval(() => {
+  if (currentPage !== 'openclaw') return;
+  const active = document.querySelector('.oc-status-dot.running, .oc-status-dot.pending');
+  if (active) loadOpenClaw();
+}, 5000);
 
 // ════════════════════════════════════════════
 // CALENDAR (full preserved logic)
@@ -2013,6 +2859,202 @@ function setEl(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val;
 }
+
+// ════════════════════════════════════════════
+// SECURITY PAGE
+// ════════════════════════════════════════════
+
+let _secAllFindings = [];
+let _secActiveSevFilter = null;
+let _secPentestPollTimer = null;
+
+async function loadSecurity() {
+  try {
+    const report = await apiFetch('/api/security/report');
+    _renderSecReport(report);
+  } catch(e) {
+    document.getElementById('sec-findings-list').innerHTML =
+      '<div class="empty-state">Could not load security report — run a scan first</div>';
+  }
+}
+
+function _renderSecReport(report) {
+  const score = report.score;
+  const scoreEl = document.getElementById('sec-score');
+  if (scoreEl) {
+    scoreEl.textContent = score != null ? score : '—';
+    scoreEl.className = 'sec-score-num' +
+      (score == null ? '' : score >= 80 ? '' : score >= 50 ? ' warn' : ' danger');
+  }
+  const sev = report.by_severity || {};
+  setEl('sec-n-critical', sev.critical ?? '—');
+  setEl('sec-n-high',     sev.high     ?? '—');
+  setEl('sec-n-medium',   sev.medium   ?? '—');
+  setEl('sec-n-low',      sev.low      ?? '—');
+
+  if (score != null) {
+    const grade = score >= 90 ? 'Excellent' : score >= 75 ? 'Good' :
+                  score >= 50 ? 'Needs work' : 'Critical issues';
+    setEl('sec-score-sub', `${grade} — ${report.total ?? 0} finding(s)`);
+  }
+
+  if (report.date) {
+    const d = new Date(report.date);
+    setEl('sec-last-scan-sub', `Last scan: ${d.toLocaleString('en-AU')}`);
+  }
+
+  _secAllFindings = report.findings || [];
+  _renderSecFindings(_secAllFindings);
+
+  // Show last pen test output if available
+  const pt = report.last_pentest;
+  if (pt && pt.output) {
+    const out = document.getElementById('sec-pentest-output');
+    if (out) {
+      out.textContent = pt.output;
+      out.classList.add('visible');
+      const d = new Date(pt.date);
+      out.style.borderTop = '1px solid #ef444440';
+      out.insertAdjacentHTML('afterbegin',
+        `<div style="color:#ef4444;font-weight:700;margin-bottom:10px;font-family:inherit;">` +
+        `OpenClaw Pen Test — ${pt.target} — ${d.toLocaleString('en-AU')}</div>`);
+    }
+  }
+}
+
+function _renderSecFindings(findings) {
+  const el = document.getElementById('sec-findings-list');
+  if (!el) return;
+  const filtered = _secActiveSevFilter
+    ? findings.filter(f => f.severity === _secActiveSevFilter)
+    : findings;
+
+  setEl('sec-findings-count', filtered.length ? `(${filtered.length})` : '');
+
+  if (!filtered.length) {
+    el.innerHTML = _secActiveSevFilter
+      ? `<div class="empty-state">No ${_secActiveSevFilter} findings</div>`
+      : '<div class="empty-state" style="color:var(--green);">✓ Clean — no findings on last scan</div>';
+    return;
+  }
+
+  // Sort: critical → high → medium → low
+  const order = { critical: 0, high: 1, medium: 2, low: 3 };
+  filtered.sort((a, b) => (order[a.severity] ?? 9) - (order[b.severity] ?? 9));
+
+  el.innerHTML = filtered.map((f, i) => {
+    const sev  = f.severity || 'low';
+    const cat  = (f.category || '').replace(/_/g, ' ');
+    return `
+    <div class="sec-finding ${sev}" onclick="secToggleFinding(this)">
+      <div class="sec-finding-top">
+        <span class="sec-finding-badge ${sev}">${sev}</span>
+        <span class="sec-finding-title">${esc(f.title || 'Unknown')}</span>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span class="sec-finding-loc">${esc(f.location || '')}</span>
+        ${cat ? `<span style="font-size:10px;color:var(--muted);background:var(--surface2);padding:1px 6px;border-radius:4px;">${esc(cat)}</span>` : ''}
+      </div>
+      <div class="sec-finding-body">
+        <div class="sec-finding-detail"><strong>Detail:</strong> ${esc(f.detail || '')}</div>
+        <div class="sec-finding-fix"><strong>Fix:</strong> ${esc(f.fix || '')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function secToggleFinding(el) {
+  const body = el.querySelector('.sec-finding-body');
+  if (body) body.classList.toggle('open');
+}
+
+function secFilter(sev, btn) {
+  _secActiveSevFilter = sev;
+  document.querySelectorAll('.sec-actions-row .sec-btn.ghost').forEach(b => {
+    b.style.borderColor = '';
+    b.style.color = '';
+  });
+  if (btn) { btn.style.borderColor = 'var(--indigo)'; btn.style.color = 'var(--indigo)'; }
+  _renderSecFindings(_secAllFindings);
+}
+
+async function secRunScan() {
+  const btn = document.getElementById('sec-scan-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Scanning…'; }
+  try {
+    await apiFetch('/api/security/scan', { method: 'POST' });
+    // Poll for completion — agent logs when done
+    let polls = 0;
+    const poll = async () => {
+      polls++;
+      const report = await apiFetch('/api/security/report').catch(() => null);
+      if (report && report.date) {
+        const scanTime = new Date(report.date).getTime();
+        const now = Date.now();
+        if (now - scanTime < 120000) { // updated in last 2 minutes
+          _renderSecReport(report);
+          if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Run Full Scan'; }
+          return;
+        }
+      }
+      if (polls < 30) setTimeout(poll, 4000);
+      else if (btn) { btn.disabled = false; btn.textContent = 'Run Full Scan'; }
+    };
+    setTimeout(poll, 5000);
+  } catch(e) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Run Full Scan'; }
+  }
+}
+
+async function secRunPentest() {
+  const btn    = document.getElementById('sec-pentest-btn');
+  const target = document.getElementById('sec-pentest-target')?.value || 'full';
+  const out    = document.getElementById('sec-pentest-output');
+
+  if (btn) { btn.disabled = true; btn.textContent = '⚡ Pen test running…'; }
+  if (out) {
+    out.classList.add('visible');
+    out.textContent = `OpenClaw pen test started — target: ${target}\n\nThis runs Claude Code CLI with full read access to the codebase.\nResults will appear here when complete (typically 2–5 minutes)…`;
+  }
+
+  try {
+    await apiFetch('/api/security/pentest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ target }),
+    });
+
+    // Poll until the pen test result appears in the report
+    let polls = 0;
+    const poll = async () => {
+      polls++;
+      const report = await apiFetch('/api/security/report').catch(() => null);
+      if (report?.last_pentest?.output) {
+        const pt = report.last_pentest;
+        if (out) {
+          out.textContent = '';
+          out.insertAdjacentHTML('afterbegin',
+            `<div style="color:#ef4444;font-weight:700;margin-bottom:10px;font-family:inherit;">` +
+            `OpenClaw Pen Test — ${pt.target} — ${new Date(pt.date).toLocaleString('en-AU')}</div>` +
+            `<pre style="white-space:pre-wrap;word-break:break-word;">${esc(pt.output)}</pre>`);
+        }
+        if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Launch Pen Test'; }
+        return;
+      }
+      if (polls < 75) setTimeout(poll, 4000);
+      else if (btn) { btn.disabled = false; btn.textContent = 'Launch Pen Test'; }
+    };
+    setTimeout(poll, 6000);
+  } catch(e) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Launch Pen Test'; }
+    if (out) out.textContent = `Error: ${e.message}`;
+  }
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 </script>
 </body>
 </html>
