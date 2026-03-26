@@ -405,7 +405,7 @@ class ContentStrategyAgent(BaseAgent):
         pillar_map: dict,
         intel_context: str,
         performance_context: str,
-    ) -> dict | None:
+    ) -> Optional[dict]:
 
         days_block = "\n".join(
             f'  "{day}": date={day_dates[day]}, pillar={pillar_map[day]}'

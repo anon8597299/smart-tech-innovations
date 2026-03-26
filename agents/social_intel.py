@@ -297,7 +297,7 @@ Angles must be contrarian or add genuine value — not generic tips everyone pos
 
 # ── Perplexity helper ────────────────────────────────────────────────────────
 
-def _perplexity_search(key: str, query: str) -> dict | None:
+def _perplexity_search(key: str, query: str) -> Optional[dict]:
     try:
         payload = json.dumps({
             "model":    "sonar",

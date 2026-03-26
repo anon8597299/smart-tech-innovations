@@ -181,7 +181,7 @@ _CAT_COLOURS = {
 _DARK_CATS  = {"handrail", "hospitality", "screen", "school", "custom"}
 
 
-def _build_card_html(idx: int, img_path: str | None, card: dict) -> str:
+def _build_card_html(idx: int, img_path: Optional[str], card: dict) -> str:
     cat   = card["cat"]
     label = card["label"]
     title = card["title"]

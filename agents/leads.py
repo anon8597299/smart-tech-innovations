@@ -1287,7 +1287,7 @@ RULES:
 def _build_prompt(
     business_name: str, industry: str, city: str,
     audit_issues: list[str], follow_up_num: int = 0,
-    psi: dict | None = None,
+    psi: Optional[dict] = None,
 ) -> tuple[str, str]:
     """Return (system, prompt) for the given email type."""
     issue = audit_issues[0] if audit_issues else "the website could do more to convert visitors"

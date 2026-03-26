@@ -15,7 +15,7 @@ from apscheduler.triggers.cron import CronTrigger
 
 from agents.manager           import ManagerAgent
 from agents.social            import SocialAgent
-from agents.ads               import AdsAgent
+from agents.ads               import AdsAgent, run_all_clients as _run_all_ads_clients
 from agents.content           import ContentAgent
 from agents.builder           import BuilderAgent
 from agents.analyst           import AnalystAgent
@@ -26,6 +26,8 @@ from agents.stripe_monitor.agent   import StripeMonitorAgent
 from agents.customer_success.agent import CustomerSuccessAgent
 from agents.seo_monitor.agent      import SEOMonitorAgent
 from agents.inbox.agent            import InboxAgent
+from agents.facebook_ads           import FacebookAdsAgent
+from agents.security               import SecurityAgent
 from dashboard       import db
 
 # ── Agent instances (singletons) ─────────────────────────────────────────────
@@ -42,6 +44,8 @@ _stripe_monitor   = StripeMonitorAgent()
 _customer_success = CustomerSuccessAgent()
 _seo_monitor      = SEOMonitorAgent()
 _inbox            = InboxAgent()
+_facebook_ads     = FacebookAdsAgent()
+_security         = SecurityAgent()
 
 # Map used by dashboard /api/trigger endpoint
 AGENT_MAP = {
@@ -58,6 +62,8 @@ AGENT_MAP = {
     "customer_success": _customer_success,
     "seo_monitor":      _seo_monitor,
     "inbox":            _inbox,
+    "facebook_ads":     _facebook_ads,
+    "security":         _security,
 }
 
 TIMEZONE = "Australia/Sydney"
@@ -126,11 +132,19 @@ def build_scheduler() -> BackgroundScheduler:
         misfire_grace_time=300,
     )
 
-    # Ads — daily 9:00 AM
+    # Ads — daily 9:00 AM (owner account + all active client accounts)
     scheduler.add_job(
-        lambda: _run(_ads),
+        _run_all_ads_clients,
         CronTrigger(hour=9, minute=0, timezone=TIMEZONE),
         id="ads", name="Google Ads report",
+        misfire_grace_time=300,
+    )
+
+    # Facebook Ads — daily 9:15 AM
+    scheduler.add_job(
+        lambda: _run(_facebook_ads),
+        CronTrigger(hour=9, minute=15, timezone=TIMEZONE),
+        id="facebook_ads", name="Facebook Ads report",
         misfire_grace_time=300,
     )
 
@@ -161,6 +175,14 @@ def build_scheduler() -> BackgroundScheduler:
         _run_scheduled_tasks,
         CronTrigger(hour=6, minute=0, timezone=TIMEZONE),
         id="scheduled_tasks", name="Scheduled task runner",
+        misfire_grace_time=300,
+    )
+
+    # Security Manager — 6:00 AM daily scan
+    scheduler.add_job(
+        lambda: _run(_security),
+        CronTrigger(hour=6, minute=5, timezone=TIMEZONE),
+        id="security", name="Security Manager daily scan",
         misfire_grace_time=300,
     )
 

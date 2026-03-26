@@ -62,14 +62,14 @@ CONTENT_CALENDAR = {
     },
     1: {  # Tuesday
         "theme": "feature_spotlight",
-        "angle": "Pick ONE specific Jarvis feature (lead reply, Instagram content, SEO monitoring, Google Ads checks, email triage, morning digest, blog writing, customer success). Name the business problem it solves in the headline. Show the cost of NOT having it. End with what Jarvis does instead. This is about cutting business costs and streamlining operations, not websites.",
+        "angle": "Pick ONE specific IYS AI feature (lead reply, Instagram content, SEO monitoring, Google Ads checks, email triage, morning digest, blog writing, customer success). Name the business problem it solves in the headline. Show the cost of NOT having it. End with what IYS AI does instead. This is about cutting business costs and streamlining operations, not websites.",
         "format": "carousel",
         "caption_tone": "Expert mate. Gives the answer first, no teasing. End caption with 🦞",
         "hook_style": "specific_mistake",
     },
     2: {  # Wednesday
         "theme": "comparison",
-        "angle": "Old way vs Jarvis way. Pick one business task: responding to leads, posting on Instagram, monitoring Google Ads, writing weekly content, triaging emails. Old way: manual, expensive, slow. Jarvis way: automated, $5/month, instant. Make the contrast obvious. Lead with the cost comparison.",
+        "angle": "Old way vs IYS AI way. Pick one business task: responding to leads, posting on Instagram, monitoring Google Ads, writing weekly content, triaging emails. Old way: manual, expensive, slow. IYS AI way: automated, $5/month, instant. Make the contrast obvious. Lead with the cost comparison.",
         "format": "carousel",
         "caption_tone": "Storytelling. Contrast-based. Concrete numbers where possible.",
         "hook_style": "result_first",
@@ -83,14 +83,14 @@ CONTENT_CALENDAR = {
     },
     4: {  # Friday
         "theme": "cta",
-        "angle": "One clear reason to download Jarvis or book a call this week. Frame it as reclaiming time or cutting a specific cost. No pressure. Make it easy to say yes. Link in bio to improveyoursite.com/jarvis.",
+        "angle": "One clear reason to download IYS AI or book a call this week. Frame it as reclaiming time or cutting a specific cost. No pressure. Make it easy to say yes. Link in bio to improveyoursite.com/jarvis.",
         "format": "single_tip",
         "caption_tone": "Confident and warm. One clear next step. End with 🦞",
         "hook_style": "soft_offer",
     },
     5: {  # Saturday
         "theme": "stop_scroll",
-        "angle": "A stat about what Australian small businesses spend on digital marketing, admin staff or marketing agencies — vs what Jarvis costs. Surprising. Specific. Short. Make them stop scrolling and think about their own spend.",
+        "angle": "A stat about what Australian small businesses spend on digital marketing, admin staff or marketing agencies — vs what IYS AI costs. Surprising. Specific. Short. Make them stop scrolling and think about their own spend.",
         "format": "single_tip",
         "caption_tone": "Weekend energy. Real and relatable. Quick read.",
         "hook_style": "bold_stat",
@@ -107,15 +107,15 @@ CONTENT_CALENDAR = {
 # ── Australian SMB Instagram hashtags by industry ────────────────────────────
 HASHTAGS = {
     "web":      "#smallbusinessaustralia #australianbusiness #businessautomation "
-                "#aiforsmallbusiness #businessgrowth #improveyoursite #jarvisai",
+                "#aiforsmallbusiness #businessgrowth #improveyoursite #iysai",
     "ai":       "#aiforsmallbusiness #smallbusinessaustralia #businessautomation "
-                "#australianbusiness #cutcosts #worksmarter #jarvisai #improveyoursite",
+                "#australianbusiness #cutcosts #worksmarter #iysai #improveyoursite",
     "trades":   "#australiantradie #smallbusinessaustralia #tradiebusiness "
-                "#aiforsmallbusiness #businessautomation #businessgrowth #jarvisai",
+                "#aiforsmallbusiness #businessautomation #businessgrowth #iysai",
     "health":   "#smallbusinessaustralia #australianhealthcare #australianbusiness "
-                "#aiforsmallbusiness #businessautomation #businessgrowth #jarvisai",
+                "#aiforsmallbusiness #businessautomation #businessgrowth #iysai",
     "ops":      "#businessoperations #smallbusinessaustralia #australianbusiness "
-                "#aitools #businessautomation #worksmarter #jarvisai #improveyoursite",
+                "#aitools #businessautomation #worksmarter #iysai #improveyoursite",
 }
 
 
@@ -183,7 +183,7 @@ class SocialAgent(BaseAgent):
 
     # ── Weekly strategy reader ────────────────────────────────────────────────
 
-    def _get_strategy_brief(self, today: date) -> dict | None:
+    def _get_strategy_brief(self, today: date) -> Optional[dict]:
         """
         Check social/weekly_strategy.json for today's day plan.
         Returns the day dict (with carousel + story) if today's date matches, else None.
@@ -379,7 +379,7 @@ class SocialAgent(BaseAgent):
 
     # ── Planned content calendar ──────────────────────────────────────────────
 
-    def _get_planned_post(self, today: date, time_slot: str) -> dict | None:
+    def _get_planned_post(self, today: date, time_slot: str) -> Optional[dict]:
         """
         Check social/{month}_content_plan.json for a pre-written post matching
         today's date and time slot. Returns the post dict or None.
@@ -475,7 +475,7 @@ class SocialAgent(BaseAgent):
 
     # ── Content generation ────────────────────────────────────────────────────
 
-    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str, recommended_angles: list = None, strategy_brief: dict = None) -> dict | None:
+    def _generate_post(self, plan: dict, trending: list[str], today: date, time_slot: str, recommended_angles: list = None, strategy_brief: dict = None) -> Optional[dict]:
         api_key = os.environ.get("ANTHROPIC_API_KEY", "")
         if not api_key:
             self.log_warn("No ANTHROPIC_API_KEY — using template post")
@@ -526,13 +526,13 @@ class SocialAgent(BaseAgent):
             )
 
         system = """You write Instagram content for ImproveYourSite.com (@improveyoursite.au).
-We sell AI business solutions to Australian small business owners. The main product is Jarvis.
+We sell AI business solutions to Australian small business owners. The main product is IYS AI.
 
 POSITIONING — this is critical:
 We are NOT a web design agency posting about websites. We are a business operations solution.
 The message is: businesses are wasting money and time on things AI can do cheaper and faster.
 Every post should make an owner think "I am overpaying for that" or "I waste hours on that."
-The sell is: stop paying humans to do what AI does better. Buy Jarvis from $30.
+The sell is: stop paying humans to do what AI does better. Buy IYS AI from $30.
 
 JARVIS FEATURES (one per post — pick the one that fits today's angle):
 1. Lead reply agent — monitors inbox, replies to enquiries within minutes, 24/7
@@ -547,24 +547,24 @@ JARVIS FEATURES (one per post — pick the one that fits today's angle):
 10. Site builder — spins up a new client site on demand from config file
 
 BRAND IDENTITY ON SOCIALS:
-🦞 = OpenClaw (the AI engine powering Jarvis — lobster claw = OpenClaw)
-🤖 = Claude AI (the brain inside Jarvis)
-End Jarvis posts with 🦞 or 🦞🤖 — this is our AI identity marker for followers.
+🦞 = OpenClaw (the AI engine powering IYS AI — lobster claw = OpenClaw)
+🤖 = Claude AI (the brain inside IYS AI)
+End IYS AI posts with 🦞 or 🦞🤖 — this is our AI identity marker for followers.
 As we grow, followers will associate 🦞 with our AI brand.
 
 TARGET PAIN POINTS (what to hook on — not websites, business operations):
-- "I pay $2,000/month to a social media manager" → Jarvis does it for $5
-- "My marketing agency charges $3,500/month" → Jarvis replaces 80% of what they do
-- "I spend Sunday night catching up on emails" → Jarvis triages them every 30 minutes
-- "We miss leads after 5pm" → Jarvis replies in minutes at midnight
-- "My Google Ads are running and no one's watching" → Jarvis checks every morning
-- "I haven't published a blog post in months" → Jarvis writes one every Monday
+- "I pay $2,000/month to a social media manager" → IYS AI does it for $5
+- "My marketing agency charges $3,500/month" → IYS AI replaces 80% of what they do
+- "I spend Sunday night catching up on emails" → IYS AI triages them every 30 minutes
+- "We miss leads after 5pm" → IYS AI replies in minutes at midnight
+- "My Google Ads are running and no one's watching" → IYS AI checks every morning
+- "I haven't published a blog post in months" → IYS AI writes one every Monday
 - "I don't know if my clients are happy until they leave" → customer success agent
 - "Running a team of people to do marketing is expensive" → one AI, one install
 
 SERVICES THAT CAN CLOSE THE SALE:
-- Jarvis download: $30 (improveyoursite.com/jarvis)
-- Jarvis USB: $50
+- IYS AI download: $30 (improveyoursite.com/jarvis)
+- IYS AI USB: $50
 - Managed Plan: $199/month (we run everything for them)
 - Website packages: from $3,000 (improveyoursite.com/packages.html)
 Direct them to link in bio for any of these.
@@ -1389,7 +1389,7 @@ Return ONLY valid JSON, no markdown fences:
 
     def _publish_to_instagram(
         self, token: str, account_id: str, image_path: Path, caption: str
-    ) -> str | None:
+    ) -> Optional[str]:
         """
         Publish a single image post to Instagram via Graph API.
         Requires the image to be at a public URL.
@@ -1436,7 +1436,7 @@ Return ONLY valid JSON, no markdown fences:
             self.log_error(f"Instagram publish failed: {exc}")
             return None
 
-    def _upload_image_to_repo(self, image_path: Path) -> str | None:
+    def _upload_image_to_repo(self, image_path: Path) -> Optional[str]:
         """Push the image PNG to social/posts/ in the repo via GitHub API."""
         pat = os.environ.get("GITHUB_PAT", "")
         if not pat:

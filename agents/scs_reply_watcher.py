@@ -72,7 +72,7 @@ def _get_body(msg) -> str:
     return body
 
 
-def check_for_reply() -> dict | None:
+def check_for_reply() -> Optional[dict]:
     """
     Check inbox for a reply from SCS. Returns dict with subject/body if found,
     None otherwise.

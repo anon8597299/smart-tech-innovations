@@ -117,7 +117,7 @@ class BaseAgent:
                 pass
         return task_id
 
-    def update_progress(self, task_id: int, progress: int, preview: str | None = None):
+    def update_progress(self, task_id: int, progress: int, preview: Optional[str] = None):
         db.task_update_progress(task_id, progress, preview)
         if _sse_queue:
             try:
@@ -129,7 +129,7 @@ class BaseAgent:
             except Exception:
                 pass
 
-    def complete_task(self, task_id: int, preview: str | None = None):
+    def complete_task(self, task_id: int, preview: Optional[str] = None):
         db.task_complete(task_id, preview)
         if _sse_queue:
             try:
@@ -154,7 +154,57 @@ class BaseAgent:
 
     # ── Email ────────────────────────────────────────────────────────────────
 
-    def send_email(self, subject: str, body: str, html: str | None = None):
+    # ── OpenClaw Escalation ───────────────────────────────────────────────────
+
+    def escalate_to_openclaw(
+        self,
+        prompt: str,
+        context: Optional[dict] = None,
+        task_id: Optional[int] = None,
+        sync: bool = True,
+        priority: str = "normal",
+        timeout: int = 180,
+        allowed_tools: list[str] | None = None,
+    ) -> "dict | int":
+        """
+        Hand off a hard problem to OpenClaw (Claude Code + Anthropic API).
+
+        sync=True  → blocks until done, returns {"success": bool, "output": str, "esc_id": int}
+        sync=False → queues in background, returns escalation_id (int)
+
+        Example:
+            result = self.escalate_to_openclaw(
+                "Find the contact email for Sunrise Bakery, 45 Queen St, Bathurst NSW",
+                context={"business": biz_dict},
+                task_id=tid,
+            )
+            if result["success"]:
+                email = result["output"].strip()
+        """
+        from agents.openclaw import escalate_sync, escalate_async
+        short = prompt[:80] + ("…" if len(prompt) > 80 else "")
+        self.log_warn(f"[OpenClaw] Escalating: {short}")
+        if sync:
+            result = escalate_sync(
+                self.agent_id, prompt, context, task_id, priority, timeout, allowed_tools
+            )
+            status = "resolved" if result.get("success") else "failed"
+            self.log_info(f"[OpenClaw] #{result.get('esc_id')} {status} — {result.get('output','')[:60]}")
+            return result
+        else:
+            esc_id = escalate_async(
+                self.agent_id, prompt, context, task_id, priority, timeout, allowed_tools
+            )
+            self.log_info(f"[OpenClaw] Queued escalation #{esc_id} (async)")
+            return esc_id
+
+    def check_escalation(self, esc_id: int) -> "dict | None":
+        """Check status/result of a previously queued async escalation."""
+        return db.escalation_get(esc_id)
+
+    # ── Email ────────────────────────────────────────────────────────────────
+
+    def send_email(self, subject: str, body: str, html: Optional[str] = None):
         """Send an email to James via Gmail SMTP."""
         if not GMAIL_USER or not GMAIL_PASS:
             self.log("warn", "Email skipped — GMAIL_USER / GMAIL_APP_PASS not set in .env")
